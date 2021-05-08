@@ -1,0 +1,156 @@
+--- 
+title: "An Open Geomatics Textbook"
+author: "UBC"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo:  ubc-geomatics-textbook/book
+url: 'https\://github.com/ubc-geomatics-textbook/book/'
+description: "Advancing teaching and learning in geomatics at UBC"
+---
+
+# Preface {-}
+
+This is the very first part of the book, which will eventually include the textbook's introduction. For now, here's some useful info for you:
+
+## Contacts 
+
+Paul Pickell, paul.pickell@ubc.ca    
+Evan Thornberry, evan.thornberry@ubc.ca    
+Francois du Toit, fdutoit@mail.ubc.ca
+
+## Project Wiki
+
+[github.com/ubc-geomatics-textbook/docs/wiki](https://github.com/ubc-geomatics-textbook/docs/wiki)
+
+## Style Guide
+### Audience
+1.	Audience is undergraduate of graduate student studying GIS, geomatics, and remote sensing with no prior knowledge in these subject areas (i.e., introductory).
+2.	Assume only first year-level knowledge (or equivalent concurrent learning) of mathematics, science (biology, chemistry, physics), and geography.
+3.	Assume a multicultural reader who is not necessarily familiar with Canadian geography and history.
+
+### General Style
+1.	Word spellings should follow *The Oxford Canadian Dictionary (2 ed.)*.
+2.	Every chapter begins with 1-3 paragraphs of introductory text. The introductory text should be for general interest and not introduce any important terms that will be defined later in the chapter. The last sentence of this introductory text should summarize what students will learn.
+3.	Posing questions to readers is encouraged in all sections. For example, “Have you ever wondered…?” “How do you think X relates to Y?”
+4.	At every opportunity, authors should highlight Canadian examples of technology and science in geomatics. Examples of geomatics applications are highly encouraged in the Canadian context. For example, the following list of environmental management problems that are important to Canada should be discussed whenever possible:
+    -	Northern communities
+    -	First Nations
+    -	Climate change
+    -	Boreal forest
+    -	Endangered wildlife
+    -	Freshwater management and ecosystems
+    -	Fisheries
+    -	Glaciers/ice monitoring
+    -	Environmental justice
+    -	Resource extraction
+    
+### Learning Objectives
+1.	Every chapter will have a numbered list of learning objectives that follow the introductory text.
+2.	There should be no period at the end of each listed learning objective.
+
+### Summary
+1.	All learning objectives should be addressed in the summary section.
+2.	The summary section should never introduce any new concepts, terms, or definitions and should never reference figures, tables, or equations.
+
+### Key Terms
+1.	Every chapter will have an alphabetical, but unnumbered list of key terms.
+2.	At first mention in the chapter text, key terms should be boldened and defined.
+
+### Headings and Labels
+1.	Chapter titles should use title-case and are numbered.
+2.	Chapter sub-titles are also numbered and in title-case. Sub-titles should go no lower than level 3 heading (i.e., 1.2.3).
+3.	Level 4 headings are not numbered, all letters are capitalized, and should only be used in special call-out boxes:
+    - LEARNING OBJECTIVES
+    - REMEMBER THIS?
+    - YOUR TURN!
+    - CASE STUDY
+
+### Formulae
+1.	Do not format formulae using Microsoft Word or LaTeX. Instead, formulae should be formatted with [RMarkdown](https://bookdown.org/yihui/rmarkdown/markdown-syntax.html).
+2.	Coordinates and Greek letters should always be formatted as formulae with RMarkdown.
+
+### Units
+1.	Standard International (SI) units should be used for the following:
+    -	Length = meter (m)
+    -	Time = second (s)
+    -	Amount of substance = mole (mole)
+    -	Electric current = ampere (A)
+    -	Temperature = Kelvin (K)
+    -	Luminous intensity = candela (cd)
+    -	Mass = Kilogram (kg)
+2.	Angle degrees are preferred over radians (rad) when referencing geographic position.
+3.	Rates should be expressed with a dot operator and negative exponent rather than a divisor (e.g., m·s-1 or W·m-2).
+
+### Numbers
+1.	Scientific notation is the preferred way to represent large and small numbers and should use the × operator (not dot or asterisk) and be formatted as a formula (see Formulae): 1 × 102.
+2.	Scientific notation should be limited to four significant figures (e.g., 1.234 × 100) except for specific numbers where the precision is important or meaningful like the speed of light (2.99792458 × 108 m·s-1) or Planck’s constant (6.62607004 × 10-34 J·s-1).
+3.	Constants (like above) and other physical variables should use [common notations](https://en.wikipedia.org/wiki/List_of_common_physics_notations) (e.g., c for speed of light and h for Planck’s constant) and be formatted as formulae (see Formulae).
+
+### Dates and times
+1.	The Gregorian calendar should be adopted for recent dates. In these cases, use Common Era (C.E.) to indicate dates after 0 A.D. and Before Common Era (B.C.E.) for dates before 0 A.D.
+    -	For specific recent dates, use the format “20 February 2021” and omit C.E.
+    -	If many dates need to be summarized in a table, use the format “DD-MM-YYYY”
+2.	Times should be specified in either Local Standard Time (LST) or Coordinated Universal Time (UTC) using a 24-hour clock:
+    -	00:00 = 12 A.M. midnight LST
+    -	12:00 = 12 P.M. noon LST
+    -	23:00 = 11 P.M. LST
+3.	For non-recent dates or when referring to geologic time scales, use the following:
+    -	Thousands of years before present = kilo annum (ka)
+    -	Millions of years before present = mega annum (Ma)
+    -	Billions of years = giga annum (Ga)
+
+### Tables
+1.	Tables are numbered in the order that they appear in text and begin with the number of the chapter:
+    -	Table 1 in Chapter 1  = 1.1
+2.	A short, descriptive caption should be written for a table.
+3.	Tables should only include information that is discussed or referenced in the chapter text.
+4.	Every table must be referenced in the chapter text.
+
+### Code blocks
+1.	Avoid code blocks in chapter text. Instead, try to place code blocks in TRY THIS! or CASE STUDY sections.
+2.	Only R code blocks should be embedded using [RMarkdown](https://bookdown.org/yihui/rmarkdown/r-code.html).
+
+### Abbreviations
+1.	Abbreviations are shortened form of a word or phrase and should be punctuated with periods:
+    -	e.g.
+    -	Dr.
+    -	Ph.D.
+
+### Initialisms
+1.	Initialisms are the first letters of several words and should always be defined at first use in the chapter text regardless if the initialism is introduced and defined in an earlier chapter.
+2.	Do not introduce initialisms in figure or table captions or table text.
+3.	Except for the specific cases in this style guide, do not punctuate initialisms with periods:
+    -	AVHRR
+    -	NDVI
+
+### Acronyms
+1.	Acronyms are combinations of the first letters of several words and are pronounced as words. Acronyms should never be punctuated with periods.
+2.	Many satellites and remote sensing systems have acronyms that vary capitalization.
+3.	Following are some preferred acronyms:
+    -	Light Detection and Ranging = LiDAR
+    -	Radio Detection and Ranging = RADAR
+    -	Moderate Resolution Imaging Spectroradiometer = MODIS
+
+### Punctuation
+1.	Use serial comma (Oxford comma) in lists: Yukon, Northwest Territories, and Nunavut.
+2.	Use italics for internal dialogue or when you infer what the reader might be thinking:
+    - “At this point, you might be wondering, *why am I reading this sentence?*”
+3.	Avoid the use of semi-colons.
+4.	Use and punctuate common Latin abbreviations with periods:
+    -	“For example” = exempli gratia (e.g.)
+    -	“That is” = is est (i.e.)
+    -	“And other similar things” = et cetera (etc.)
+5.	Avoid phrases in parentheses () or brackets []. Instead, place the phrase in a proper sentence.
+6.	Use single spaces between sentences.
+7.	Use double quotation marks for direct quotes, but avoid reproducing verbatim large texts. Paraphrasing with proper citation is preferred to direct quotation.
+8.	Bullet points are preferred over long lists in sentences.
+
+### Citations
+1.	Style should follow American Psychological Association (APA) format.
+2.	In-text references are encouraged where necessary, especially in case studies.
+3.	References and Recommended Readings section is placed at end of each chapter. Where possible, Recommended Readings should be populated with Open Educational Resources.
+

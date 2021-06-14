@@ -1,0 +1,178 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(igraph)
+library(networkD3)
+```
+
+
+# Network Analysis
+
+Networks are abstract structures used to represent patterns of relationships among sets of various "things" @ajorlouIntroductionNetworkModels2018. Such structures can be used to represent social connections, spatial patterns, ecological relationships, etc. In GIS, the elements that compose geospatial networks are geolocated. Network analysis encompasses a series of techniques used to interpret information from those networks. This chapter introduces foundational concepts for building, analyzing and interpreting spatial networks.
+
+## 8.1	Introduction to graph theory
+Graphs are the abstract language of networks @systemsinnovationGraphTheoryOverview2015. Graph theory is the area of mathematics that study graphs. By abstracting networks into graphs, one is able to measure different kinds of indicators that represents information about relationships that exist within a certain system. This is especially useful to assess the state of complex adaptive systems such as societies, cities, ecosystems, etc. All graphs are composed of two parts: nodes and edges.
+
+### 8.1.1	Nodes
+A node (or vertex) may represent any thing that can be connected with other things. For example, it can represent people in social networks, street intersections in road networks, or chemical compounds in molecular networks, among others.
+
+### 8.1.2	Edges
+Edges, on the other hand, represent how vertices are interconnected to each other. So it may represent the vertices' social connections, street segments, molecular bindings, etc.
+
+```{r pressure, echo=FALSE}
+data <- data.frame(
+  from=c("A", "B", "D", "C", "D", "E", "B", "C", "D", "K", "A", "M"),
+  to=c("B", "F", "A", "C", "A", "B", "Z", "A", "C", "A", "B", "K")
+)
+
+simpleNetwork(data, linkDistance=200)
+```
+
+## 8.2	Connectivity and order
+There are two major types of connections within the graphs: directed or undirected. Connections are 
+
+### 8.2.1	Direct
+### 8.2.2	Undirect
+### 8.2.3	Order
+
+## 8.3	Network topologies
+Topology is
+
+### 8.3.2	Lines
+### 8.3.3	Rings
+### 8.3.4	Meshes
+### 8.3.5	Stars
+### 8.3.6	Trees
+### 8.3.7	Buses
+### 8.3.8	Fully connected
+
+## 8.4 Spatial Network Analysis
+### 8.4.1	Physical versus logical topology
+### 8.4.2	Network tracing
+### 8.4.3	Linear referencing
+
+### 8.5	Routing
+### 8.5.1	Least cost paths
+### 8.5.2	Least cost corridors
+
+## 8.6	Network Centrality
+### 8.6.1	Degree centrality
+### 8.6.2	Closeness centrality
+### 8.6.3	Betweenness centrality
+
+
+**Lorem ipsum dolor sit amet**, _consectetur adipiscing elit._ Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
+
+:::: {.box-content .learning-objectives-content}
+
+::: {.box-title .learning-objectives-top}
+#### Learning Objectives {-}
+:::
+
+1. Objective one
+2. Objective two
+3. Objective three
+
+::::
+
+### Key Terms {-}
+
+Ipsum lorem, Phasellus, sollicitudin, finibus
+
+## First Section Header
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
+
+![Figure caption text is also alt text.](images/01-image.png){.center}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
+
+:::: {.box-content .your-turn-content}
+
+::: {.box-title .your-turn-top}
+#### Your turn! {-}
+:::
+
+<iframe width=100% height=800px src='https://paulpickell.ca/scenejs-test/' frameBorder="0" >
+  <p>Your browser does not support iframes</p>
+</iframe>
+
+::::
+
+## Second Section Header
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
+
+:::: {.box-content .case-study-content}
+
+::: {.box-title .case-study-top}
+#### Case Study {-}
+:::
+
+#### Case study title max of forty characters {#box-text -}
+
+<p id="box-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent non magna non nunc auctor eleifend. Etiam fringilla fermentum nisl at volutpat. Duis sodales lorem interdum, posuere neque sollicitudin, malesuada nisl. Sed laoreet commodo dui et cursus. Curabitur vel porta mauris. In lacinia ac ex ac varius. Nullam at vulputate ligula. Nunc sed faucibus urna, eget placerat sapien. Fusce ut lorem a ante congue consequat et sed tortor. Integer neque urna, vehicula at aliquam non, luctus non mi. Pellentesque et massa vehicula, cursus erat id, aliquet sapien. Sed rhoncus vehicula risus, vel aliquam eros porta eget. Etiam maximus, massa in pretium semper, est libero feugiat ipsum, quis tempor nunc libero in nibh. Nunc sollicitudin mattis metus ut rutrum. Donec urna purus, sodales id nibh in, ultricies tincidunt nibh. Proin porta accumsan aliquet.</p>
+
+<p id="box-text">Cras convallis erat ante, ut tristique est tempor elementum. Nam mollis, ipsum at vehicula vestibulum, est magna finibus nisl, et laoreet metus massa et ipsum. Proin eget eros ac odio euismod volutpat et ac diam. Cras viverra ut libero vel pulvinar. Duis nisi magna, sagittis id ligula ac, efficitur commodo eros. Nulla tincidunt id nulla in lobortis. Sed non mi eu mi fermentum cursus. In elit velit, semper sed gravida at, imperdiet sed nibh. Aliquam quis massa malesuada, venenatis nunc sed, malesuada nulla. Vestibulum malesuada purus ut ex ullamcorper, ut blandit lacus lobortis. Curabitur scelerisque velit justo, quis porttitor purus efficitur ut. Phasellus nec arcu vestibulum, consequat ante id, elementum velit. Proin arcu tortor, cursus vitae sem id, congue semper urna. Integer tempus in est eu consequat. Donec sodales, quam vel finibus faucibus, leo ante dictum quam, id tempus ligula dolor quis erat. Curabitur non elementum sem. Mauris placerat fermentum orci non lacinia. Ut imperdiet dui lectus, ac malesuada felis euismod sed. Nulla non volutpat dui, in suscipit turpis.</p>
+
+<p id="box-text">Case studies should have at least one image or map (no more than 2 total) and the written length should be around 300 words (shown above). Any references to external literature should by hyperlinked with the Digitial Object Identifier (DOI) permanent URL and [entered into the bibliography](https://bookdown.org/yihui/bookdown/citations.html){target="_blank"}. Avoid linking to external resources without a DOI and permanent URL. Contact Paul or try using the Leaflet package in R if you want to add an interactive web map.</p>
+
+::::
+
+## Third Section Header
+
+[This is how we link to something. {target="_blank"} ensures that this link opens in a new window rather than navigating away from the textbook.](https://google.com){target="_blank"}
+
+:::: {.box-content .your-turn-content}
+
+::: {.box-title .your-turn-top}
+#### Your turn! {-}
+:::
+
+<p id="box-text">Ask the reader to undertake some activity or exercise. Have them explore data, an interactive tool, a web map. Avoid referencing, relying on, or using external URLs. If it can be built, coded, or hosted by us, then it should be.</p>
+
+<iframe width=100% height=800px src='http://paulpickell.ca/raster-calculator/low-pass-filter.html' frameBorder="0" >
+  <p>Your browser does not support iframes</p>
+</iframe>
+
+::::
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
+
+:::: {.box-content .call-out-content}
+
+::: {.box-title .call-out-top}
+#### Call out {-}
+:::
+
+<p id="box-text">
+This is a call out. Put some important concept or fact in here.
+</p>
+
+::::
+
+## Summary
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
+
+### Reflection Questions {-}
+
+1. Explain ipsum lorem.
+2. Define ipsum lorem.
+3. What is the role of ispum lorem?
+4. How does ipsum lorem work?
+
+### Practice Questions {-}
+
+2. Given ipsum, solve for lorem.
+3. Draw ipsum lorem.
+
+`r if (knitr::is_html_output()) '
+## Recommended Readings {-}
+'`
+
+Ensure all inline citations are properly referenced here.
+
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'htmlwidgets', 'webshot', 'DT',
+  'miniUI', 'tufte', 'servr', 'citr', 'rticles'
+), 'packages.bib')

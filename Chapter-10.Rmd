@@ -2,7 +2,6 @@
 # Chapter 10 Spatial Estimation {-}
 
 
-
 :::: {.box-content .learning-objectives-content}
 
 ::: {.box-title .learning-objectives-top}
@@ -16,27 +15,148 @@
 
 ::::
 
+### Key Terms {-}
+
+sampling, spatial autocorrelation, krigging, interpolation, spatial regression
+
 ## 10.1 Introduction{-}
 
-Like any other data, spatial data will only make true sense if we could perform some level of spatial analysis with it.Spatial analysis will allow to understand where and what is occurring in the area of your interest. The major inherent limitations that a spatial data carry is the unobserved location within a study area.
+Like any other data, spatial data will only make true sense if it can represent the entire population of the interest with flexibility in  level of spatial analysis that can be performed from it. A representative sample will allow us to make unbiased and more accurate inferences of certain attribute of the population. While, spatial analysis will allow to understand where and what is occurring in the area of our interest.Two kind of limitation are inherent in a spatial data:
 
-While needing to account for additional variables about a location may be intimidating, many spatial statistic processes are quite similar to basic statistical methods. For example, interpolation and spatial regression can help you estimate or predict the value of a variable in a sample location. Similarly, spatial autocorrelation measures the degree of similarity between sample locations just like typical autocorrelation is done.
+1. There is a high chance that any information regarding an attribute may be present as a duplicate due to spatial autocorrelation.
+
+2. On the other hand, a spatial data can carry the unobserved location within a study area. 
+
+To overcome this limitation, one should come up with proper sampling strategies to ensure that the given sample is representative, big enough and doesnot contain any redundant information. While the need to account for additional variables about a location may be intimidating, many spatial statistic processes are out there to help with basic prediction and estimation of the information in an unobserved location. For example, interpolation and spatial regression can help you estimate or predict the value of a variable in a sample location. Similarly, spatial autocorrelation measures the degree of similarity between sample locations just like typical autocorrelation is done.
 
 ## 10.2 Sampling{-}
 
+Sampling consists of selecting some part of a population to observe so that one may estimate something about the whole population. Thus, to estimate the amount of lichen available as food for caribou in Alaska, a biologist collects lichen from selected small plots within the study area. Based on the dry weight of these specif mens, the available biomass for the whole region is estimated. Similarly, to estimate
+the amount of recoverable oil in a region, a few (highly expensive) sample holes are drilled. The situation is similar in a national opinion survey, in which only a sample of the people in the population is contacted, and the opinions in the sample are used to estimate the proportions with the various opinions in the whole population. To estimate the prevalence of a rare disease, the sample might consist
+of a number of medical institutions, each of which has records of patients treated.To estimate the abundance of a rare and endangered bird species, the abundance of birds in the population is estimated based on the pattern of detections from a sample of sites in the study region. In a study of risk behaviors associated with the transmission of the human immunodeficiency virus (HIV), a sample of injecting
+drug users is obtained by following social links from one member of the population
+to another.
+
 ***10.1.1 Simple random***
 
+```{r,echo=FALSE,warning=FALSE}
+m <- matrix(c(1:400), nrow=20, ncol=20)
+df <- expand.grid(x=1:ncol(m),y=1:nrow(m))
+df$val <- m[as.matrix(df[c('y','x')])]
 
+library(ggplot2)
+library(scales)
+
+ggplot(df, aes(x=x, y=y, label=val)) + 
+  geom_tile(fill='transparent', colour = 'black') + 
+  scale_y_reverse() +
+  theme_classic() +
+  theme(axis.text  = element_blank(),
+        panel.grid = element_blank(),
+        axis.line  = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+
+
+```
+
+:::: {.box-content .case-study-content}
+
+::: {.box-title .case-study-top}
+#### Case Study {-}
+:::
+
+#### Case study title max of forty characters {#box-text -}
+
+<p id="box-text">
+</p>
+
+<p id="box-text">
+</p>
+
+<p id="box-text">
+</p>
+:::
 ***10.1.2 Stratified random*** 
 
+:::: {.box-content .case-study-content}
+
+::: {.box-title .case-study-top}
+#### Case Study {-}
+:::
+
+#### Case study title max of forty characters {#box-text -}
+
+<p id="box-text">
+</p>
+
+<p id="box-text">
+</p>
+
+<p id="box-text">
+</p>
+:::
 
 ***10.1.3 Systematic***  
 
+:::: {.box-content .case-study-content}
+
+::: {.box-title .case-study-top}
+#### Case Study {-}
+:::
+
+#### Case study title max of forty characters {#box-text -}
+
+<p id="box-text">
+</p>
+
+<p id="box-text">
+</p>
+
+<p id="box-text">
+</p>
+:::
 
 ***10.1.4 Cluster*** 
 
+:::: {.box-content .case-study-content}
 
-***10.1.5 Adapative*** 
+::: {.box-title .case-study-top}
+#### Case Study {-}
+:::
+
+#### Case study title max of forty characters {#box-text -}
+
+<p id="box-text">
+</p>
+
+<p id="box-text">
+</p>
+
+<p id="box-text">
+</p>
+:::
+
+***10.1.5 Adaptive*** 
+
+:::: {.box-content .case-study-content}
+
+::: {.box-title .case-study-top}
+#### Case Study {-}
+:::
+
+#### Case study title max of forty characters {#box-text -}
+
+<p id="box-text">
+</p>
+
+<p id="box-text">
+</p>
+
+<p id="box-text">
+</p>
+:::
+
 
 ## 10.2 Spatial autocorrelation {-}
 

@@ -31,54 +31,126 @@ To overcome this limitation, one should come up with proper sampling strategies 
 
 ## 10.2 Sampling{-}
 
-Sampling consists of selecting some part of a population to observe so that one may estimate something about the whole population. Thus, to estimate the amount of lichen available as food for caribou in Alaska, a biologist collects lichen from selected small plots within the study area. Based on the dry weight of these specif mens, the available biomass for the whole region is estimated. Similarly, to estimate
-the amount of recoverable oil in a region, a few (highly expensive) sample holes are drilled. The situation is similar in a national opinion survey, in which only a sample of the people in the population is contacted, and the opinions in the sample are used to estimate the proportions with the various opinions in the whole population. To estimate the prevalence of a rare disease, the sample might consist
-of a number of medical institutions, each of which has records of patients treated.To estimate the abundance of a rare and endangered bird species, the abundance of birds in the population is estimated based on the pattern of detections from a sample of sites in the study region. In a study of risk behaviors associated with the transmission of the human immunodeficiency virus (HIV), a sample of injecting
-drug users is obtained by following social links from one member of the population
-to another.
+Sampling can be defined as the process of selecting some part of a population in order to make an inference, and estimate some parameters about the whole population. For example, to estimate the amount of biomass of trees in Malcom knapp forest,BC, scientist collects the data on tree size, and height from randomly distributed 20 small plots acrtoss the forest. Based on some equations and using the tree data on height and size from 20 plots, biomass of entire Malcom knapp forest can be estimated. Similarly, to estimate the amount of recoverable oil in a region, a few (highly expensive) sample holes are drilled. The situation is similar in a national opinion survey, in which only a sample of the people in the population is contacted, and the opinions in the sample are used to estimate the proportions with the various opinions in the whole population (example adapted from Thompson, 2009). Before getting into details about different types of sampling. Lets get familiar with some sampling key terms and their definitions.
+
+Sampling shouldnot be confused with observational study.In observational study one has no control over the sample while in sampling one can deliberately select samples which prevent research bias.Sampling accounts on how data can be collected out of every possibilities under the control of investigator. 
+
+
+:::: {.box-content .learning-objectives-content}
+
+::: {.box-title .learning-objectives-top}
+#### Key terms and Definations {-}
+::: 
+**Sampling design**
+The procedure by which the sample of units is selected from the population is called the sampling design. 
+
+**Sampling unit**
+The smallest entity within a population from which the information about population is drawn is known as sampling unit. For example, in a survey of potential internet user over entire BC , sampling unit can be the certain number of household in each city across BC. 
+
+::::
 
 ***10.1.1 Simple random***
 
-```{r,echo=FALSE,warning=FALSE}
-m <- matrix(c(1:400), nrow=20, ncol=20)
-df <- expand.grid(x=1:ncol(m),y=1:nrow(m))
-df$val <- m[as.matrix(df[c('y','x')])]
+In simple random sampling, each sampling unit within a given population has equal probability of being selected in a sample. A simple random sample of 60 units from a population of 625 units is given in figure 10.1. Notice, there is no clear pattern on how sample are being selected, this justify the random part of the simple random sampling. 
 
+When an investigator make a sequence of selection from a population, at each step new and distinct set of sampling units are being selected in the sample, each having equal probability of being selected at each step.
+For example, when you take another sample of 60 in figure 10.2, you see different sampling units being selected from what we obtained in figure 10.1., this represent the probability of each sampling being equal to get into the sample taken.
+
+:::: {.box-content .case-study-content}
+
+::: {.box-title .case-study-top}
+#### Case Study {-}
+:::
+
+#### Case study title max of forty characters {#box-text -}
+
+<p id="box-text">
+</p>
+
+<p id="box-text">
+</p>
+
+<p id="box-text">
+</p>
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(plotly)
 library(ggplot2)
 library(scales)
-
-ggplot(df, aes(x=x, y=y, label=val)) + 
-  geom_tile(fill='transparent', colour = 'black') + 
+m <- matrix(c(1:625), nrow=25, ncol=25)
+df <- expand.grid(x=1:ncol(m),y=1:nrow(m))
+df$val <- m[as.matrix(df[c('y','x')])]
+n <- df[sample(nrow(df), 60, replace = FALSE, prob = NULL),]
+p<-ggplot(n,aes(x=x, y=y, label=val)) + 
+  geom_tile(data=df, fill='transparent', colour = 'black') + 
+  geom_tile(data=n,fill='black')+
   scale_y_reverse() +
-  theme_classic() +
+  theme_classic() + 
   theme(axis.text  = element_blank(),
         panel.grid = element_blank(),
         axis.line  = element_blank(),
         axis.ticks = element_blank(),
         axis.title = element_blank())
-
-
+p
 ```
 
-:::: {.box-content .case-study-content}
+**Figure 10.1.** \ref{fig:figs} Simple random sample of 60 units from a population of 625 units.
+##################################################################
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(plotly)
+library(ggplot2)
+library(scales)
+m <- matrix(c(1:625), nrow=25, ncol=25)
+df <- expand.grid(x=1:ncol(m),y=1:nrow(m))
+df$val <- m[as.matrix(df[c('y','x')])]
+n <- df[sample(nrow(df), 60, replace = FALSE, prob = NULL),]
+p<-ggplot(alpha=0.002) + 
+  geom_tile(data=df,aes(x= x, y=y,fill=val,alpha=0.002, colour = 'black')) + 
+  geom_tile(data=n,aes(x=x, y=y,fill=val,colr="black"))+
+  geom_point(dat=n, aes(x=x,y=y))+
+  #scale_y_reverse() +
+  theme_classic() + 
+  theme(axis.text  = element_blank(),
+        panel.grid = element_blank(),
+        axis.line  = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+ggplotly(p, alpha=0.002)
+```
 
-::: {.box-title .case-study-top}
-#### Case Study {-}
+######################################
+```{r, echo=FALSE,warning=FALSE}
+library(plotly)
+library(ggplot2)
+library(scales)
+m <- matrix(c(1:625), nrow=25, ncol=25)
+df2 <- expand.grid(x=1:ncol(m),y=1:nrow(m))
+df2$val <- m[as.matrix(df[c('y','x')])]
+n <- df2[sample(nrow(df2), 60, replace = FALSE, prob = NULL),]
+
+p<-ggplot(n,aes(x=x, y=y, label=val)) + 
+  geom_tile(data=df2, fill='transparent', colour = 'black') + 
+  geom_tile(data=n,fill='black')+
+  scale_y_reverse() +
+  theme_classic() + 
+  theme(axis.text  = element_blank(),
+        panel.grid = element_blank(),
+        axis.line  = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+p
+```
+
+**Figure 10.2.** \ref{fig:figs} Another simple random sample of 60 units.
+
 :::
 
-#### Case study title max of forty characters {#box-text -}
-
-<p id="box-text">
-</p>
-
-<p id="box-text">
-</p>
-
-<p id="box-text">
-</p>
-:::
 ***10.1.2 Stratified random*** 
 
+When a population under study is not homogeneous across the entire study area and consist of some sort of gradient, stratified random sampline method is used. In stratified sampling, the population is partitioned into regions or strata, and a sample is selected by some design within each stratum.The principle of stratification is to partition the population in such a way that the units within a stratum are as similar as possible. Then, even though one stratum may differ markedly from another, a stratified sample with the desired number of units from each stratum in the population will tend to be “representative” of the population as a whole.
+
+For example, a geographical region can be stratified into similar areas by means of some known variable such as elevation gradient, soil moisture, and soil nutrient status.The stratification of a study region despite of its size can help to spread the sample over the entire study area.
+
 :::: {.box-content .case-study-content}
 
 ::: {.box-title .case-study-top}
@@ -95,6 +167,68 @@ ggplot(df, aes(x=x, y=y, label=val)) +
 
 <p id="box-text">
 </p>
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(plotly)
+library(ggplot2)
+library(scales)
+m <- matrix(c(1:400), nrow=20, ncol=20)
+df3 <- expand.grid(x=1:ncol(m),y=1:nrow(m))
+df3$val <- m[as.matrix(df3[c('y','x')])]
+n <- df3[sample(nrow(df3), 40, replace = FALSE, prob = NULL),]
+p<-ggplot(n,aes(x=x, y=y, label=val)) + 
+  geom_tile(data=df3, fill='transparent', colour = 'black') + 
+  geom_tile(data=n,fill='black')+
+  geom_rect(aes(xmin =0.5,xmax = 10.5,ymin = 0.5, ymax = 20.5),
+    fill = 'pink',alpha=0.02,color = "black",size = 2)+
+  geom_rect(aes(xmin =10.5,xmax = 20.5,ymin = 0.5, ymax = 5.5),
+    fill = 'skyblue',alpha=0.02,color = "black",size = 2)+
+  geom_rect(aes(xmin =10.5,xmax = 20.5,ymin = 5.5, ymax = 20.5),
+    fill = 'lightgrey',alpha=0.02,color = "black",size = 2)+
+  scale_y_reverse() +
+  theme_classic() + 
+  theme(axis.text  = element_blank(),
+        panel.grid = element_blank(),
+        axis.line  = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+p
+```
+
+**Figure 10.3.** \ref{fig:figs} Stratified random sample within unequal strata within a study area.
+
+
+```{r, echo=FALSE,warning=FALSE}
+library(plotly)
+library(ggplot2)
+library(scales)
+m <- matrix(c(1:400), nrow=20, ncol=20)
+df <- expand.grid(x=1:ncol(m),y=1:nrow(m))
+df$val <- m[as.matrix(df[c('y','x')])]
+n <- df[sample(nrow(df), 40, replace = FALSE, prob = NULL),]
+p<-ggplot(n,aes(x=x, y=y, label=val)) + 
+  geom_tile(data=df, fill='transparent', colour = 'black') + 
+  geom_tile(data=n,fill='black')+
+  geom_rect(aes(xmin =0.5,xmax = 10.5,ymin = 0.5, ymax = 10.5),
+    fill = 'pink',alpha=0.02,color = "black",size = 2)+
+  geom_rect(aes(xmin =0.5,xmax = 10.5,ymin = 10.5, ymax = 20.5),
+    fill = 'skyblue',alpha=0.02,color = "black",size = 2)+
+  geom_rect(aes(xmin =10.5,xmax = 20.5,ymin = 10.5, ymax = 20.5),
+    fill = 'lightgrey',alpha=0.02,color = "black",size = 2)+
+  geom_rect(aes(xmin =10.5,xmax = 20.5,ymin = 0.5, ymax = 10.5),
+    fill = 'brown',alpha=0.02,color = "black",size = 2)+
+  
+  scale_y_reverse() +
+  theme_classic() + 
+  theme(axis.text  = element_blank(),
+        panel.grid = element_blank(),
+        axis.line  = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+p
+
+```
+**Figure 10.4.** \ref{fig:figs} Stratified random sample from equal strata within a study area.
 :::
 
 ***10.1.3 Systematic***  
@@ -115,6 +249,66 @@ ggplot(df, aes(x=x, y=y, label=val)) +
 
 <p id="box-text">
 </p>
+
+```{r, echo=FALSE,warning=FALSE,message=FALSE}
+library(ggplot2)
+library(scales)
+library(dplyr)
+m <- matrix(c(1:400), nrow=20, ncol=20)
+
+# Create row indicator
+df <- expand.grid(x=1:ncol(m),y=1:nrow(m))
+df$val <- m[as.matrix(df[c('y','x')])]
+row_odd <- seq_len(nrow(df)) %% 2 
+col_odd<- seq_len(ncol(df)) %% 2
+data_row_odd <- df[row_odd == 0,] 
+data_col_odd <- df[col_odd == 0,]
+# Subset odd rows
+
+p<-ggplot(data_col_odd,aes(x=x, y=y, label=val)) + 
+  geom_tile(data=df, fill='transparent', colour = 'black') + 
+  geom_rect(data=data_col_odd,aes(xmin = x, ymin = y, xmax = x + 0.3, ymax = y + 0.6),fill='black')+
+  scale_y_reverse() +
+  theme_classic() + 
+  theme(axis.text  = element_blank(),
+        panel.grid = element_blank(),
+        axis.line  = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+p
+
+
+
+```
+**Figure 10.5.** \ref{fig:figs} Sample every second observation in the row 
+
+```{r, echo=FALSE,warning=FALSE}
+library(ggplot2)
+library(scales)
+library(dplyr)
+m <- matrix(c(1:400), nrow=20, ncol=20)
+
+# Create row indicator
+df <- expand.grid(x=1:ncol(m),y=1:nrow(m))
+df$val <- m[as.matrix(df[c('y','x')])]
+row_odd <- seq_len(nrow(df)) %% 2 
+data_row_odd <- df[row_odd == 0,] 
+# Subset odd rows
+
+p<-ggplot(data_row_odd,aes(x=x, y=y, label=val)) + 
+  geom_tile(data=df, fill='transparent', colour = 'black') + 
+  geom_rect(data=data_row_odd,aes(xmin = x, ymin = y, xmax = x + 0.3, ymax = y + 0.6),fill='black')+
+  scale_y_reverse() +
+  theme_classic() + 
+  theme(axis.text  = element_blank(),
+        panel.grid = element_blank(),
+        axis.line  = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+p
+
+```
+**Figure 10.6.** \ref{fig:figs} Sample all the observation in every second column 
 :::
 
 ***10.1.4 Cluster*** 
@@ -135,6 +329,34 @@ ggplot(df, aes(x=x, y=y, label=val)) +
 
 <p id="box-text">
 </p>
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(plotly)
+library(ggplot2)
+library(scales)
+m <- matrix(c(1:400), nrow=20, ncol=20)
+df <- expand.grid(x=1:ncol(m),y=1:nrow(m))
+df$val <- m[as.matrix(df[c('y','x')])]
+p<-ggplot(df,aes(x=x, y=y,label=val)) + 
+  geom_tile(data=df, fill='transparent', colour = 'black') +
+  geom_rect(aes(xmin = 0.5,xmax = 3.5,ymin = 14.5, ymax = 20.5),
+    fill = 'lightgrey',alpha=0.02,color = "black",size = 2)+
+  geom_rect(aes(xmin = 5.5,xmax = 7.5,ymin = 5.5, ymax = 7.5),
+    fill = 'lightgrey',alpha=0.02,color = "black",size = 2)+
+  geom_rect(aes(xmin = 12.5,xmax = 14.5,ymin = 12.5, ymax = 14.5),
+    fill = 'lightgrey',alpha=0.02,color = "black",size = 2)+
+  geom_rect(aes(xmin = 15.5,xmax = 20.5,ymin = 0.5, ymax = 5.5),
+    fill = 'lightgrey',alpha=0.02,color = "black",size = 2)+
+  scale_y_reverse() +
+  theme_classic() + 
+  theme(axis.text  = element_blank(),
+        panel.grid = element_blank(),
+        axis.line  = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+p 
+```
+**Figure 10.7.** \ref{fig:figs} Cluster of plots selcted from entire study area
 :::
 
 ***10.1.5 Adaptive*** 

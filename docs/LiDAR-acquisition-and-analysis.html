@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 LiDAR Acquisition and Analysis | An Open Geomatics Textbook</title>
+  <meta name="description" content="Advancing teaching and learning in geomatics at UBC" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 LiDAR Acquisition and Analysis | An Open Geomatics Textbook" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/ubc-geomatics-textbook/book/" />
+  
+  <meta property="og:description" content="Advancing teaching and learning in geomatics at UBC" />
+  <meta name="github-repo" content="ubc-geomatics-textbook/book" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 LiDAR Acquisition and Analysis | An Open Geomatics Textbook" />
+  
+  <meta name="twitter:description" content="Advancing teaching and learning in geomatics at UBC" />
+  
+
+<meta name="author" content="UBC" />
+
+
+<meta name="date" content="2021-06-30" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="mapping-data.html"/>
+
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">An Open Geomatics Textbook</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#contacts"><i class="fa fa-check"></i><b>0.1</b> Contacts</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#project-wiki"><i class="fa fa-check"></i><b>0.2</b> Project Wiki</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#style-guide"><i class="fa fa-check"></i><b>0.3</b> Style Guide</a>
+<ul>
+<li class="chapter" data-level="0.3.1" data-path="index.html"><a href="index.html#audience"><i class="fa fa-check"></i><b>0.3.1</b> Audience</a></li>
+<li class="chapter" data-level="0.3.2" data-path="index.html"><a href="index.html#general-style"><i class="fa fa-check"></i><b>0.3.2</b> General Style</a></li>
+<li class="chapter" data-level="0.3.3" data-path="index.html"><a href="index.html#learning-objectives"><i class="fa fa-check"></i><b>0.3.3</b> Learning Objectives</a></li>
+<li class="chapter" data-level="0.3.4" data-path="index.html"><a href="index.html#summary"><i class="fa fa-check"></i><b>0.3.4</b> Summary</a></li>
+<li class="chapter" data-level="0.3.5" data-path="index.html"><a href="index.html#key-terms"><i class="fa fa-check"></i><b>0.3.5</b> Key Terms</a></li>
+<li class="chapter" data-level="0.3.6" data-path="index.html"><a href="index.html#headings-and-labels"><i class="fa fa-check"></i><b>0.3.6</b> Headings and Labels</a></li>
+<li class="chapter" data-level="0.3.7" data-path="index.html"><a href="index.html#formulae"><i class="fa fa-check"></i><b>0.3.7</b> Formulae</a></li>
+<li class="chapter" data-level="0.3.8" data-path="index.html"><a href="index.html#units"><i class="fa fa-check"></i><b>0.3.8</b> Units</a></li>
+<li class="chapter" data-level="0.3.9" data-path="index.html"><a href="index.html#numbers"><i class="fa fa-check"></i><b>0.3.9</b> Numbers</a></li>
+<li class="chapter" data-level="0.3.10" data-path="index.html"><a href="index.html#dates-and-times"><i class="fa fa-check"></i><b>0.3.10</b> Dates and times</a></li>
+<li class="chapter" data-level="0.3.11" data-path="index.html"><a href="index.html#tables"><i class="fa fa-check"></i><b>0.3.11</b> Tables</a></li>
+<li class="chapter" data-level="0.3.12" data-path="index.html"><a href="index.html#code-blocks"><i class="fa fa-check"></i><b>0.3.12</b> Code blocks</a></li>
+<li class="chapter" data-level="0.3.13" data-path="index.html"><a href="index.html#abbreviations"><i class="fa fa-check"></i><b>0.3.13</b> Abbreviations</a></li>
+<li class="chapter" data-level="0.3.14" data-path="index.html"><a href="index.html#initialisms"><i class="fa fa-check"></i><b>0.3.14</b> Initialisms</a></li>
+<li class="chapter" data-level="0.3.15" data-path="index.html"><a href="index.html#acronyms"><i class="fa fa-check"></i><b>0.3.15</b> Acronyms</a></li>
+<li class="chapter" data-level="0.3.16" data-path="index.html"><a href="index.html#punctuation"><i class="fa fa-check"></i><b>0.3.16</b> Punctuation</a></li>
+<li class="chapter" data-level="0.3.17" data-path="index.html"><a href="index.html#citations"><i class="fa fa-check"></i><b>0.3.17</b> Citations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="chapter-template.html"><a href="chapter-template.html"><i class="fa fa-check"></i><b>1</b> Chapter Template</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#key-terms-1"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="1.1" data-path="chapter-template.html"><a href="chapter-template.html#first-section-header"><i class="fa fa-check"></i><b>1.1</b> First Section Header</a></li>
+<li class="chapter" data-level="1.2" data-path="chapter-template.html"><a href="chapter-template.html#second-section-header"><i class="fa fa-check"></i><b>1.2</b> Second Section Header</a></li>
+<li class="chapter" data-level="1.3" data-path="chapter-template.html"><a href="chapter-template.html#third-section-header"><i class="fa fa-check"></i><b>1.3</b> Third Section Header</a></li>
+<li class="chapter" data-level="1.4" data-path="chapter-template.html"><a href="chapter-template.html#summary-1"><i class="fa fa-check"></i><b>1.4</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#reflection-questions"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#practice-questions"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#recommended-readings"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="mapping-data.html"><a href="mapping-data.html"><i class="fa fa-check"></i><b>2</b> Mapping Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#key-terms-2"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="2.1" data-path="mapping-data.html"><a href="mapping-data.html#introduction-to-geodesy"><i class="fa fa-check"></i><b>2.1</b> Introduction to geodesy</a></li>
+<li class="chapter" data-level="2.2" data-path="mapping-data.html"><a href="mapping-data.html#models-of-earth"><i class="fa fa-check"></i><b>2.2</b> Models of Earth</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="mapping-data.html"><a href="mapping-data.html#geodetic-vertical-datums"><i class="fa fa-check"></i><b>2.2.1</b> Geodetic vertical datums</a></li>
+<li class="chapter" data-level="2.2.2" data-path="mapping-data.html"><a href="mapping-data.html#tidal-vertical-datums"><i class="fa fa-check"></i><b>2.2.2</b> Tidal Vertical Datums</a></li>
+<li class="chapter" data-level="2.2.3" data-path="mapping-data.html"><a href="mapping-data.html#gravimetric-vertical-datums"><i class="fa fa-check"></i><b>2.2.3</b> Gravimetric Vertical Datums</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="mapping-data.html"><a href="mapping-data.html#referencing-location"><i class="fa fa-check"></i><b>2.3</b> Referencing Location</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="mapping-data.html"><a href="mapping-data.html#cartesian-coordinate-systems"><i class="fa fa-check"></i><b>2.3.1</b> Cartesian Coordinate Systems</a></li>
+<li class="chapter" data-level="2.3.2" data-path="mapping-data.html"><a href="mapping-data.html#celestial-coordinate-systems"><i class="fa fa-check"></i><b>2.3.2</b> Celestial Coordinate Systems</a></li>
+<li class="chapter" data-level="2.3.3" data-path="mapping-data.html"><a href="mapping-data.html#geographic-coordinate-systems"><i class="fa fa-check"></i><b>2.3.3</b> Geographic Coordinate Systems</a></li>
+<li class="chapter" data-level="2.3.4" data-path="mapping-data.html"><a href="mapping-data.html#projected-coordinate-systems"><i class="fa fa-check"></i><b>2.3.4</b> Projected Coordinate Systems</a></li>
+<li class="chapter" data-level="2.3.5" data-path="mapping-data.html"><a href="mapping-data.html#measuring-map-projection-distortion"><i class="fa fa-check"></i><b>2.3.5</b> Measuring map projection distortion</a></li>
+<li class="chapter" data-level="2.3.6" data-path="mapping-data.html"><a href="mapping-data.html#map-projections-for-environmental-management"><i class="fa fa-check"></i><b>2.3.6</b> Map projections for environmental management</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="mapping-data.html"><a href="mapping-data.html#summary-2"><i class="fa fa-check"></i><b>2.4</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#reflection-questions-1"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#practice-questions-1"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#recommended-readings-1"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html"><i class="fa fa-check"></i><b>3</b> LiDAR Acquisition and Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#key-terms-3"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="3.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#what-is-lidar"><i class="fa fa-check"></i><b>3.1</b> What is LiDAR?</a></li>
+<li class="chapter" data-level="3.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#components-of-lidar-systems"><i class="fa fa-check"></i><b>3.2</b> Components of LiDAR Systems</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#platform"><i class="fa fa-check"></i><b>3.2.1</b> Platform</a></li>
+<li class="chapter" data-level="3.2.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#lasers"><i class="fa fa-check"></i><b>3.2.2</b> Lasers</a></li>
+<li class="chapter" data-level="3.2.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#clocks"><i class="fa fa-check"></i><b>3.2.3</b> Clocks</a></li>
+<li class="chapter" data-level="3.2.4" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#global-navigation-satellite-systems"><i class="fa fa-check"></i><b>3.2.4</b> Global Navigation Satellite Systems</a></li>
+<li class="chapter" data-level="3.2.5" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#inertial-measurement-unit-imu"><i class="fa fa-check"></i><b>3.2.5</b> Inertial Measurement Unit (IMU)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#types-of-lidar"><i class="fa fa-check"></i><b>3.3</b> Types of LiDAR</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#discrete-return"><i class="fa fa-check"></i><b>3.3.1</b> Discrete Return</a></li>
+<li class="chapter" data-level="3.3.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#full-waveform"><i class="fa fa-check"></i><b>3.3.2</b> Full Waveform</a></li>
+<li class="chapter" data-level="3.3.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#multispectral"><i class="fa fa-check"></i><b>3.3.3</b> Multispectral</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#lidar-derivatives-and-analysis"><i class="fa fa-check"></i><b>3.4</b> LiDAR Derivatives and Analysis</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#bare-earth-elevation"><i class="fa fa-check"></i><b>3.4.1</b> Bare Earth Elevation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#summary-3"><i class="fa fa-check"></i><b>3.5</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#reflection-questions-2"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#practice-questions-2"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#recommended-readings-2"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">An Open Geomatics Textbook</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="LiDAR-acquisition-and-analysis" class="section level1" number="3">
+<h1><span class="header-section-number">Chapter 3</span> LiDAR Acquisition and Analysis</h1>
+<p><strong>Bold Text</strong>, <em>Italicized Text</em> Regular Text.</p>
+<div class="box-content learning-objectives-content">
+<div id="learning-objectives-3" class="section level4 unnumbered box-title learning-objectives-top">
+<h4>Learning Objectives</h4>
+</div>
+<ol style="list-style-type: decimal">
+<li>Understand <em>how</em> LiDAR works</li>
+<li>Understand <em>what</em> we can do with LiDAR data</li>
+<li>Understand the basic processing steps required to use LiDAR data in a forestry context</li>
+</ol>
+</div>
+<div id="key-terms-3" class="section level3 unnumbered">
+<h3>Key Terms</h3>
+<p>LiDAR, ALS, Surface Models, LiDAR Metrics, Area-Based Approach, Individual Tree Detection</p>
+</div>
+<div id="what-is-lidar" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> What is LiDAR?</h2>
+<p>LiDAR is an active remote sensing technology</p>
+<ul>
+<li>Alternate names</li>
+<li>How it works
+<ul>
+<li>Basic components</li>
+</ul></li>
+<li>Multipe types of LiDAR</li>
+<li>Brief history in forestry / what can we do with LiDAR</li>
+</ul>
+<p>The most common file format for LiDAR files is called the LAS file format (.las). This file format was originally designed for 3-dimensional point cloud data, and is a free alternative to proprietary systems or a generic ASCII file interchange system. The main benefits of this file format are that it is relatively quick, can be used by any system, and stores information specific to the nature of LiDAR data wihtout being overly complex (:<a href="https://www.asprs.org/divisions-committees/lidar-division/laser-las-file-format-exchange-activities" class="uri">https://www.asprs.org/divisions-committees/lidar-division/laser-las-file-format-exchange-activities</a>).</p>
+<div class="figure">
+<img src="images/15-Concept_of_LiDAR.png" class="center" alt="" />
+<p class="caption">Figure X Concept of LiDAR.</p>
+</div>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.</p>
+<div class="box-content your-turn-content">
+<div id="your-turn-3" class="section level4 unnumbered box-title your-turn-top">
+<h4>Your turn!</h4>
+</div>
+<iframe width="100%" height="800px" src="https://paulpickell.ca/scenejs-test/" frameBorder="0">
+<p>
+Your browser does not support iframes
+</p>
+</iframe>
+</div>
+<div class="figure">
+<img src="images/15-LiDAR_System.png" class="center" alt="" />
+<p class="caption">Figure X LiDAR System.</p>
+</div>
+</div>
+<div id="components-of-lidar-systems" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Components of LiDAR Systems</h2>
+<div id="platform" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Platform</h3>
+<ul>
+<li><p>LiDAR units can be attached to a variety of platforms. Traditionally, LiDAR units were mounted on airplanes and helicopters, as units were large and cumbersome [Figure X for actual scanner].</p></li>
+<li><p>Cars:
+<img src="images/15-Mobile_LiDAR.jpg" class="center" alt="Figure X Mobile LiDAR System." /></p></li>
+<li><p>Drone: As technology has improved and laser units have gotten smaller, we can mount LiDAR units to drones (also known as…)
+<img src="images/15-LiDAR_on_Drone_2.jpg" class="center" alt="Figure X Drone mounted LiDAR." /></p></li>
+<li><p>MLS/backpack</p></li>
+<li><p>Satellite based
+<img src="images/15-GEDI.jpg" class="center" alt="Figure X GEDI." /></p></li>
+</ul>
+</div>
+<div id="lasers" class="section level3" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Lasers</h3>
+<ul>
+<li>Typical wavelengths (eye safe, NIR vs green)</li>
+<li>Power</li>
+</ul>
+<div class="figure">
+<img src="images/15-LiDAR_Unit.jpg" class="center" alt="" />
+<p class="caption">Figure X LiDAR Unit.</p>
+</div>
+</div>
+<div id="clocks" class="section level3" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Clocks</h3>
+<ul>
+<li>???</li>
+</ul>
+</div>
+<div id="global-navigation-satellite-systems" class="section level3" number="3.2.4">
+<h3><span class="header-section-number">3.2.4</span> Global Navigation Satellite Systems</h3>
+<ul>
+<li>Require us to know our position exactly!</li>
+<li>Callback to GNSS?</li>
+<li></li>
+</ul>
+<div class="figure">
+<img src="images/15-XYZ_coordinates.jpg" class="center" alt="" />
+<p class="caption">Figure X XYZ Coordinates.</p>
+</div>
+</div>
+<div id="inertial-measurement-unit-imu" class="section level3" number="3.2.5">
+<h3><span class="header-section-number">3.2.5</span> Inertial Measurement Unit (IMU)</h3>
+<ul>
+<li>Mentioned elswhere? What is it - focus on image that discusses pitch/roll/yaw</li>
+</ul>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.</p>
+</div>
+</div>
+<div id="types-of-lidar" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Types of LiDAR</h2>
+<div class="figure">
+<img src="images/15-LiDAR_Discrete_Full_Waveform.png" class="center" alt="" />
+<p class="caption">Figure X LiDAR Discrete vs Full Waveform.</p>
+</div>
+<div id="discrete-return" class="section level3" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Discrete Return</h3>
+</div>
+<div id="full-waveform" class="section level3" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Full Waveform</h3>
+</div>
+<div id="multispectral" class="section level3" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Multispectral</h3>
+<p><a href="https://google.com" target="_blank">This is how we link to something. {target="_blank"} ensures that this link opens in a new window rather than navigating away from the textbook.</a></p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.</p>
+<div class="box-content call-out-content">
+<div id="call-out-1" class="section level4 unnumbered box-title call-out-top">
+<h4>Call out</h4>
+</div>
+<p id="box-text">
+This is a call out. Put some important concept or fact in here.
+</p>
+</div>
+</div>
+</div>
+<div id="lidar-derivatives-and-analysis" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> LiDAR Derivatives and Analysis</h2>
+<ul>
+<li>What can we do with LiDAR derivatives, why are they important</li>
+</ul>
+<div id="bare-earth-elevation" class="section level3" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Bare Earth Elevation</h3>
+<ul>
+<li>What is a DEM
+### Canopy Height Model</li>
+<li>What is a CHM
+### Canopy Surface Model</li>
+<li>CHM vs DSM?
+### Grid Metrics</li>
+<li>What are these used for
+### Tree Segmentation
+-How and why would we want too do this</li>
+</ul>
+<div class="figure">
+<img src="images/Processing_Flowchart.png" class="center" alt="" />
+<p class="caption">Figure X Processing Flowchart.</p>
+</div>
+<div class="box-content case-study-content">
+<div id="case-study-2" class="section level4 unnumbered box-title case-study-top">
+<h4>Case Study</h4>
+</div>
+<div id="box-text" class="section level4 unnumbered">
+<h4>Creating LiDAR Metrics from a Raw Point Cloud</h4>
+<p id="box-text">
+For this case study, we will be using a clipped .las file from the 2018 open LiDAR dataset of City of Vancouver and UBC Endowment Lands in British Columbia (we randomly selected a 200 x 200 meter portion of the ‘4840E_54550N’ tile, see below for the link where you can download the data), and the <code>lidR</code> package in R. The script to process this data is included HERE [where to include script?], and you can use the <code>lidR</code> book [link] to get a more in depth understanding of the functions we apply below.
+</p>
+<p id="box-text">
+The first step when looking at LiDAR data is to inspect it; we recommend using the free software CloudCompare (link below), or the <code>plot()</code> function in the <code>lidR</code> package. Once we have a sense of our data, we can clean and filter the data, using <code>classify_noise()</code> and the ‘-drop’ switch to get rid of the noise in our dataset [include image showing noisy vs. clean data?]. Our cleaned dataset can then be used to create a DEM; first we can <code>classify_ground()</code>, followed by using the <code>grid_terrain()</code> function [call back to previous chapter] – this is an essential step that could require quite a bit of tweaking depending on what you want to use the DEM for! In our case, the DEM is used to <em>normalize</em> the point cloud. Normalization removes the effect of terrain on above ground measurements, allowing comparisons of vegetation heights. [insert image of DEM and CHM]. The normalized point cloud is used to create our CHM (created using <code>grid_canopy()</code>). It is at this point that we can analyze the point cloud in a variety of ways. We can use an area-based approach (ABA) to create metrics at the grid level (<code>grid_metrics()</code>), or we can derive metrics at the individual tree scale. In order to do this we need to first segment the trees (<code>segment_trees()</code>) before creating metrics (<code>tree_metrics()</code>). Below we can see an example of a segmented point cloud.
+</p>
+<p id="box-text">
+Case studies should have at least one image or map (no more than 2 total) and the written length should be around 300 words (shown above). Any references to external literature should by hyperlinked with the Digitial Object Identifier (DOI) permanent URL and <a href="https://bookdown.org/yihui/bookdown/citations.html" target="_blank">entered into the bibliography</a>. Avoid linking to external resources without a DOI and permanent URL. Contact Paul or try using the Leaflet package in R if you want to add an interactive web map.
+</p>
+</div>
+</div>
+<div class="box-content your-turn-content">
+<div id="your-turn-4" class="section level4 unnumbered box-title your-turn-top">
+<h4>Your turn!</h4>
+</div>
+<p id="box-text">
+Explore some of the LiDAR derivatives that we produced in the case study above
+</p>
+<p id="box-text">
+<p>Interactive map of rasters:</p>
+<ul>
+<li><p>DEM</p></li>
+<li><p>CHM</p></li>
+<li><p>and some grid metrics - e.g. mean and p99?</p>
+</p></li>
+</ul>
+<p id="box-text">
+Screenshot vs. interactive point cloud - data size concerns
+</p>
+<p id="box-text">
+Necessity of being able to rotate point cloud? Relatively little gain for trouble of small area.
+</p>
+</p>
+<iframe width="100%" height="800px" src="http://paulpickell.ca/raster-calculator/low-pass-filter.html" frameBorder="0">
+<p>
+Your browser does not support iframes
+</p>
+</iframe>
+</div>
+</div>
+</div>
+<div id="summary-3" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Summary</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.</p>
+<div id="reflection-questions-2" class="section level3 unnumbered">
+<h3>Reflection Questions</h3>
+<ol style="list-style-type: decimal">
+<li>Explain ipsum lorem.</li>
+<li>Define ipsum lorem.</li>
+<li>What is the role of ispum lorem?</li>
+<li>How does ipsum lorem work?</li>
+</ol>
+</div>
+<div id="practice-questions-2" class="section level3 unnumbered">
+<h3>Practice Questions</h3>
+<ol start="2" style="list-style-type: decimal">
+<li>Given ipsum, solve for lorem.</li>
+<li>Draw ipsum lorem.</li>
+</ol>
+</div>
+</div>
+<div id="recommended-readings-2" class="section level2 unnumbered">
+<h2>Recommended Readings</h2>
+<p>Ensure all inline citations are properly referenced here.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="mapping-data.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Mapping Data | An Open Geomatics Textbook</title>
+  <meta name="description" content="Advancing teaching and learning in geomatics at UBC" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Mapping Data | An Open Geomatics Textbook" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/ubc-geomatics-textbook/book/" />
+  
+  <meta property="og:description" content="Advancing teaching and learning in geomatics at UBC" />
+  <meta name="github-repo" content="ubc-geomatics-textbook/book" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Mapping Data | An Open Geomatics Textbook" />
+  
+  <meta name="twitter:description" content="Advancing teaching and learning in geomatics at UBC" />
+  
+
+<meta name="author" content="UBC" />
+
+
+<meta name="date" content="2021-06-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="chapter-template.html"/>
+<link rel="next" href="LiDAR-acquisition-and-analysis.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">An Open Geomatics Textbook</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#contacts"><i class="fa fa-check"></i><b>0.1</b> Contacts</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#project-wiki"><i class="fa fa-check"></i><b>0.2</b> Project Wiki</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#style-guide"><i class="fa fa-check"></i><b>0.3</b> Style Guide</a>
+<ul>
+<li class="chapter" data-level="0.3.1" data-path="index.html"><a href="index.html#audience"><i class="fa fa-check"></i><b>0.3.1</b> Audience</a></li>
+<li class="chapter" data-level="0.3.2" data-path="index.html"><a href="index.html#general-style"><i class="fa fa-check"></i><b>0.3.2</b> General Style</a></li>
+<li class="chapter" data-level="0.3.3" data-path="index.html"><a href="index.html#learning-objectives"><i class="fa fa-check"></i><b>0.3.3</b> Learning Objectives</a></li>
+<li class="chapter" data-level="0.3.4" data-path="index.html"><a href="index.html#summary"><i class="fa fa-check"></i><b>0.3.4</b> Summary</a></li>
+<li class="chapter" data-level="0.3.5" data-path="index.html"><a href="index.html#key-terms"><i class="fa fa-check"></i><b>0.3.5</b> Key Terms</a></li>
+<li class="chapter" data-level="0.3.6" data-path="index.html"><a href="index.html#headings-and-labels"><i class="fa fa-check"></i><b>0.3.6</b> Headings and Labels</a></li>
+<li class="chapter" data-level="0.3.7" data-path="index.html"><a href="index.html#formulae"><i class="fa fa-check"></i><b>0.3.7</b> Formulae</a></li>
+<li class="chapter" data-level="0.3.8" data-path="index.html"><a href="index.html#units"><i class="fa fa-check"></i><b>0.3.8</b> Units</a></li>
+<li class="chapter" data-level="0.3.9" data-path="index.html"><a href="index.html#numbers"><i class="fa fa-check"></i><b>0.3.9</b> Numbers</a></li>
+<li class="chapter" data-level="0.3.10" data-path="index.html"><a href="index.html#dates-and-times"><i class="fa fa-check"></i><b>0.3.10</b> Dates and times</a></li>
+<li class="chapter" data-level="0.3.11" data-path="index.html"><a href="index.html#tables"><i class="fa fa-check"></i><b>0.3.11</b> Tables</a></li>
+<li class="chapter" data-level="0.3.12" data-path="index.html"><a href="index.html#code-blocks"><i class="fa fa-check"></i><b>0.3.12</b> Code blocks</a></li>
+<li class="chapter" data-level="0.3.13" data-path="index.html"><a href="index.html#abbreviations"><i class="fa fa-check"></i><b>0.3.13</b> Abbreviations</a></li>
+<li class="chapter" data-level="0.3.14" data-path="index.html"><a href="index.html#initialisms"><i class="fa fa-check"></i><b>0.3.14</b> Initialisms</a></li>
+<li class="chapter" data-level="0.3.15" data-path="index.html"><a href="index.html#acronyms"><i class="fa fa-check"></i><b>0.3.15</b> Acronyms</a></li>
+<li class="chapter" data-level="0.3.16" data-path="index.html"><a href="index.html#punctuation"><i class="fa fa-check"></i><b>0.3.16</b> Punctuation</a></li>
+<li class="chapter" data-level="0.3.17" data-path="index.html"><a href="index.html#citations"><i class="fa fa-check"></i><b>0.3.17</b> Citations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="chapter-template.html"><a href="chapter-template.html"><i class="fa fa-check"></i><b>1</b> Chapter Template</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#key-terms-1"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="1.1" data-path="chapter-template.html"><a href="chapter-template.html#first-section-header"><i class="fa fa-check"></i><b>1.1</b> First Section Header</a></li>
+<li class="chapter" data-level="1.2" data-path="chapter-template.html"><a href="chapter-template.html#second-section-header"><i class="fa fa-check"></i><b>1.2</b> Second Section Header</a></li>
+<li class="chapter" data-level="1.3" data-path="chapter-template.html"><a href="chapter-template.html#third-section-header"><i class="fa fa-check"></i><b>1.3</b> Third Section Header</a></li>
+<li class="chapter" data-level="1.4" data-path="chapter-template.html"><a href="chapter-template.html#summary-1"><i class="fa fa-check"></i><b>1.4</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#reflection-questions"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#practice-questions"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#recommended-readings"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="mapping-data.html"><a href="mapping-data.html"><i class="fa fa-check"></i><b>2</b> Mapping Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#key-terms-2"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="2.1" data-path="mapping-data.html"><a href="mapping-data.html#introduction-to-geodesy"><i class="fa fa-check"></i><b>2.1</b> Introduction to geodesy</a></li>
+<li class="chapter" data-level="2.2" data-path="mapping-data.html"><a href="mapping-data.html#models-of-earth"><i class="fa fa-check"></i><b>2.2</b> Models of Earth</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="mapping-data.html"><a href="mapping-data.html#geodetic-vertical-datums"><i class="fa fa-check"></i><b>2.2.1</b> Geodetic vertical datums</a></li>
+<li class="chapter" data-level="2.2.2" data-path="mapping-data.html"><a href="mapping-data.html#tidal-vertical-datums"><i class="fa fa-check"></i><b>2.2.2</b> Tidal Vertical Datums</a></li>
+<li class="chapter" data-level="2.2.3" data-path="mapping-data.html"><a href="mapping-data.html#gravimetric-vertical-datums"><i class="fa fa-check"></i><b>2.2.3</b> Gravimetric Vertical Datums</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="mapping-data.html"><a href="mapping-data.html#referencing-location"><i class="fa fa-check"></i><b>2.3</b> Referencing Location</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="mapping-data.html"><a href="mapping-data.html#cartesian-coordinate-systems"><i class="fa fa-check"></i><b>2.3.1</b> Cartesian Coordinate Systems</a></li>
+<li class="chapter" data-level="2.3.2" data-path="mapping-data.html"><a href="mapping-data.html#celestial-coordinate-systems"><i class="fa fa-check"></i><b>2.3.2</b> Celestial Coordinate Systems</a></li>
+<li class="chapter" data-level="2.3.3" data-path="mapping-data.html"><a href="mapping-data.html#geographic-coordinate-systems"><i class="fa fa-check"></i><b>2.3.3</b> Geographic Coordinate Systems</a></li>
+<li class="chapter" data-level="2.3.4" data-path="mapping-data.html"><a href="mapping-data.html#projected-coordinate-systems"><i class="fa fa-check"></i><b>2.3.4</b> Projected Coordinate Systems</a></li>
+<li class="chapter" data-level="2.3.5" data-path="mapping-data.html"><a href="mapping-data.html#measuring-map-projection-distortion"><i class="fa fa-check"></i><b>2.3.5</b> Measuring map projection distortion</a></li>
+<li class="chapter" data-level="2.3.6" data-path="mapping-data.html"><a href="mapping-data.html#map-projections-for-environmental-management"><i class="fa fa-check"></i><b>2.3.6</b> Map projections for environmental management</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="mapping-data.html"><a href="mapping-data.html#summary-2"><i class="fa fa-check"></i><b>2.4</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#reflection-questions-1"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#practice-questions-1"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#recommended-readings-1"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html"><i class="fa fa-check"></i><b>3</b> LiDAR Acquisition and Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#key-terms-3"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="3.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#what-is-lidar"><i class="fa fa-check"></i><b>3.1</b> What is LiDAR?</a></li>
+<li class="chapter" data-level="3.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#components-of-lidar-systems"><i class="fa fa-check"></i><b>3.2</b> Components of LiDAR Systems</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#platform"><i class="fa fa-check"></i><b>3.2.1</b> Platform</a></li>
+<li class="chapter" data-level="3.2.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#lasers"><i class="fa fa-check"></i><b>3.2.2</b> Lasers</a></li>
+<li class="chapter" data-level="3.2.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#clocks"><i class="fa fa-check"></i><b>3.2.3</b> Clocks</a></li>
+<li class="chapter" data-level="3.2.4" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#global-navigation-satellite-systems"><i class="fa fa-check"></i><b>3.2.4</b> Global Navigation Satellite Systems</a></li>
+<li class="chapter" data-level="3.2.5" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#inertial-measurement-unit-imu"><i class="fa fa-check"></i><b>3.2.5</b> Inertial Measurement Unit (IMU)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#types-of-lidar"><i class="fa fa-check"></i><b>3.3</b> Types of LiDAR</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#discrete-return"><i class="fa fa-check"></i><b>3.3.1</b> Discrete Return</a></li>
+<li class="chapter" data-level="3.3.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#full-waveform"><i class="fa fa-check"></i><b>3.3.2</b> Full Waveform</a></li>
+<li class="chapter" data-level="3.3.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#multispectral"><i class="fa fa-check"></i><b>3.3.3</b> Multispectral</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#lidar-derivatives"><i class="fa fa-check"></i><b>3.4</b> LiDAR Derivatives</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#bare-earth-elevation"><i class="fa fa-check"></i><b>3.4.1</b> Bare Earth Elevation</a></li>
+<li class="chapter" data-level="3.4.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#canopy-height-model"><i class="fa fa-check"></i><b>3.4.2</b> Canopy Height MOdel</a></li>
+<li class="chapter" data-level="3.4.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#canopy-surface-model"><i class="fa fa-check"></i><b>3.4.3</b> Canopy Surface Model</a></li>
+<li class="chapter" data-level="3.4.4" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#grid-metrics"><i class="fa fa-check"></i><b>3.4.4</b> Grid Metrics</a></li>
+<li class="chapter" data-level="3.4.5" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#tree-segmentation"><i class="fa fa-check"></i><b>3.4.5</b> Tree Segmentation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#summary-3"><i class="fa fa-check"></i><b>3.5</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#reflection-questions-2"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#practice-questions-2"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#recommended-readings-2"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">An Open Geomatics Textbook</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="mapping-data" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Mapping Data</h1>
+<p>You probably already accept that the Earth is “round” and not “flat.” You have probably held and touched a globe at some point in your life. But have you ever wondered how we describe location and measure something as large as the Earth? In this chapter, we will explore fundamental concepts for how we measure the Earth and orient ourselves with coordinate systems.</p>
+<div class="box-content learning-objectives-content">
+<div id="learning-objectives-2" class="section level4 unnumbered box-title learning-objectives-top">
+<h4>Learning Objectives</h4>
+</div>
+<ol style="list-style-type: decimal">
+<li>Understand the models of Earth’s figure and shape</li>
+<li>Describe different vertical datums and how they are used to reference height</li>
+<li>Understand the difference between cartesian, celestial, geographic, and projected coordinate systems</li>
+<li>Recognize the differences among major types of map projections</li>
+<li>Explore how projected coordinate systems distort and represent the world around us</li>
+</ol>
+</div>
+<div id="key-terms-2" class="section level3 unnumbered">
+<h3>Key Terms</h3>
+<p>Antipode, Great Circle, Small Circle, Geodesy, Vertical Datum, Horizontal Datum, Deflection of the Vertical, Ellipsoid, Spheroid, Geoid, Elevation, Orthometric Height, Geoid Height, Geodetic Height, Coordinate System, Celestial Coordinate System, Cartesian Coordinate System, Geographic Coordinate System, Projected Coordinate System, Map Projection, Tissot’s Indicatrix</p>
+</div>
+<div id="introduction-to-geodesy" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Introduction to geodesy</h2>
+<p><strong>Geodesy</strong> is the fascinating science of measuring the shape, orientation, and gravity of Earth. Naturally, some of the questions that come to mind when thinking about such a grand topic are <em>I thought the shape of Earth is a sphere?</em> and <em>How do we orient ourselves on Earth?</em> and <em>What does gravity have to do with mapping location?</em></p>
+<p>All of these questions stem from need to represent <strong>location</strong>. For our purposes, location is the position of something relative to something else. In order to actually describe a location on Earth, we first need to know the size and shape of Earth. Some of the first estimations of Earth’s size and shape were made by Eratosthenes, a Greek mathematician from the second and third centuries B.C. Eratosthenes was responsible for many concepts we use in our everyday lives:</p>
+<ul>
+<li>Conceiving the first spherical model of Earth</li>
+<li>The first accurate measure of Earth’s circumference</li>
+<li>Calculating the tilt of Earth’s axis</li>
+<li>Calculating the distance of Earth to the Sun</li>
+<li>Invention of the leap day</li>
+</ul>
+<p>Eratosthenes accurately calculated the circumference of Earth by noticing how the Sun shone directly down the bottom of a well in Syene (modern Egypt) at noon on the summer solstice. He later made a second observation at Alexandria at noon on the summer solstice with a pole and noticed a shadow. He measured the angle of the shadow and inferred the circumference of Earth, which was already known to be spherical. The calculation goes something like this:</p>
+<p>[insert circumference calculation here]</p>
+<p>Pretty simple, right? Turns out, Eratosthenes was off by only 75 km or less than 0.2% in his calculation! The actual North-South circumference of Earth is about 40,075 km. His calculation worked because the Sun’s rays are nearly parallel when they strike Earth. So if you observe the Sun at the same time in two locations on Earth on the North-South axis, you will notice the Sun has a different elevation above the horizon, which means different lengths of shadows will be cast on the ground. This is also a way to prove that the Earth is in fact round because a flat Earth would have equally-sized shadows everywhere at any given time of day.</p>
+</div>
+<div id="models-of-earth" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Models of Earth</h2>
+<p>Here is a simple thought experiment to consider. Suppose you are trying to measure your own height. You probably have not given much thought about how to technically do this because it seems intuitive: place a measuring tape at the bottom of your feet and mark the measurement at the top of your head. If we break this down, there are some important rules to follow (Figure 2.2):</p>
+<ol style="list-style-type: decimal">
+<li>The measuring tape must originate somewhere. In other words, we need to define a reference point or surface of zero height (i.e., the ground).</li>
+<li>The measuring tape must be a straight line and originate at a 90-degree angle, perpendicular to the ground.</li>
+<li>The measurement must terminate at a point along an imaginary line that is tangential to your head, and yes, that line must be perpendicular to the measuring tape and also parallel with the ground.</li>
+</ol>
+<p><img src="images/02-height.png" class="center" alt="Figure 2.2 Diagram for measuring height above a datum" />
+<br/></p>
+<p>Whenever you measure your height, the ground is easy to define. It is whatever point you are standing on. This starting point it also known as a <strong>datum</strong>. A datum is simply a reference point, set of points, or a surface from which distances can be measured. It does not matter if you are below sea level, atop Mount Everest, or on the 30th floor of a skyscraper. You will always get an accurate and repeatable measure of your height using a datum that is defined directly below your feet. But what about measuring the height of terrain on Earth? Whenever we measure the height of Earth’s terrain above some reference surface, we are measuring <strong>elevation</strong>.</p>
+<p>The same rules above apply when we measure elevation. In order for elevation measurements to be comparable across the world, we need to define a reference surface, a datum, for the entire planet. There are actually several ways that we can model the shape of Earth in order to produce a datum. Models of Earth’s shape are often referred to as either vertical datums (the plural of datum) if you are referencing elevation or horizontal datums if you are referencing location. A <strong>vertical datum</strong> is a 3D surface model that is used to reference heights or elevations for the Earth. A simple question like <em>How high is Mount Logan in Yukon, Canada?</em> is complicated by the need for a reference surface and the fact that Earth’s shape is irregular. In this section, we will review three types of vertical datums:</p>
+<ul>
+<li>Geodetic - based on geometry</li>
+<li>Tidal - based on sea level</li>
+<li>Gravimetric - based on gravity</li>
+</ul>
+<div class="box-content call-out-content">
+<div id="remember-this" class="section level4 unnumbered box-title call-out-top">
+<h4>Remember this?</h4>
+</div>
+<p id="box-text">
+Models are abstractions of reality and help us understand and communicate complex ideas.
+</p>
+</div>
+<div id="geodetic-vertical-datums" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Geodetic vertical datums</h3>
+<p>A <strong>geodetic vertical datum</strong> is one that describes the Earth’s shape in the simplest possible terms using standard geometry. Despite what a globe might lead you to believe, the Earth is not perfectly spherical, but it is close to being spherical. In fact, the radius of Earth varies by no more than 22 km or 0.35%, hardly anything you would ever notice if you were holding it in your hand. That small difference is, however, significant enough to lead to mapping inaccuracies at the local level if a spherical model of Earth was adopted (Figure 2.3). Instead, we frequently describe Earth’s shape as an oblate ellipsoid, which is essentially a sphere that has been flattened, and we define this ellipsoid with a semimajor and semiminor axis. Sometimes you will see the term <em>spheroid</em> used, which just means “sphere-like” and is interchangeable with the term <em>ellipsoid</em>.</p>
+<p><img src="images/02-geodetic-datum.png" class="center" alt="Figure 2.3 Spherical geodetic datum" />
+<br/></p>
+<p>There are many different ellipsoids that have been defined and are currently in use as datums. The most commonly used ellipsoid is called the World Geodetic System of 1984 or usually abbreviated as WGS 1984 or WGS 84. In fact, there are hundreds of ellipsoids that have been defined over recent centuries to model the shape of the Earth. The reason for so many other ellipsoids is due in part to technological advances that have improved the accuracy and precision of surveying as well as estimation of the ellipsoidal parameters. Many of these ellipsoids are not <em>geocentric</em>, that is, not originating from the center of mass of Earth. These datums are known as <strong>regional datums</strong>, which still describe the dimensions that approximate the shape of Earth, but are instead oriented so that the surface of the ellipsoid is congruent with a particular regional surface of Earth. For example, the European Datum 1950, the South American Datum 1969, the North American Datum 1983, and the Australian Geodetic Datum 1966 conform well to their respective continents, even better than WGS 1984 in most cases, but poorly anywhere else in the world.</p>
+<p><img src="images/02-sphere-ellipsoid.png" class="center" alt="Figure 2.4 Sphere versus ellipsoid" />
+<br/></p>
+<p>Figure 2.4 greatly exaggerates the flattening of the ellipsoid to illustrate the above points. In reality, the sphere is flattened using a flattening factor calculated as <span class="math inline">\(f=(CA-CG)/CA\)</span> and defined exactly as <span class="math inline">\(f=298.257223560\)</span> for WGS 1984. Thus, the semiminor axis (i.e., rotational axis) for the WGS 1984 ellipsoid (meters) is</p>
+<p><span class="math display">\[
+CG=CA-(CA×\frac{1}{f})=6378137-(6378137×\frac{1}{298.257223560})=6356752.3
+\]</span>
+where <span class="math inline">\(G\)</span> is the North Pole and <span class="math inline">\(A\)</span> is a point on the Equator. The sphere, of course, is much simpler where <span class="math inline">\(radius=CB=CA=6378137\)</span>.</p>
+</div>
+<div id="tidal-vertical-datums" class="section level3" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Tidal Vertical Datums</h3>
+<p>A <strong>tidal vertical datum</strong> is likely one that you are familiar with. The premise of a tidal vertical datum is to use mean sea level as a reference surface, above which are positive elevations and below are negative elevations. This has a lot of advantages, like it is intuitive and oceans cover more than 70% of the planet’s surface so much of Earth’s land mass is near an ocean. However, the disadvantages are that sea level changes over time with tides and also with climate change. The not-so-obvious problem with a tidal vertical datum is that the sea level is actually not constant around the planet not only due to tides, but also temperature, air pressure, and gravity. In other words, mean sea level measured at a gauge station in Halifax on the Atlantic Ocean will not be the same distance from the center of Earth as mean sea level measured at Victoria on the Pacific Ocean (Figure 2.5). The primary challenge with a tidal vertical datum is extending it away from the coastline through a network of survey points using a process known as levelling, and even still, it is only meaningful during the epoch in which the mean sea level was measured at a number of tidal gauge stations.</p>
+<p><img src="images/02-tidal-datum.png" class="center" alt="Figure 2.5 Conceptual tidal datum for Canada" />
+<br/></p>
+</div>
+<div id="gravimetric-vertical-datums" class="section level3" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Gravimetric Vertical Datums</h3>
+<p>The <strong>geoid</strong> is a physical approximation of the figure of Earth. The shape represents Earth’s surface with calmed oceans in the absence of other influences such as winds and tides. It is computed using gravity measurements of Earth’s surface and is best thought of as the surface or shape that the oceans would take under the influence of Earth’s gravity and rotation alone. In other words, the geoid represents the shape Earth would take if the oceans covered the entire planet. More specifically, the geoid is a <strong>gravimetric</strong> model of Earth’s shape that is defined as an equipotential surface from a constant gravity potential value. Due to the distribution of mass on Earth, gravity is not constant across the planet’s surface. As a result, the surface of Earth’s oceans is not smooth like a sphere, but instead undulates depending on where gravity forces water to remain at rest. You can think of Earth’s gravitational field as a series of parallel lines extending outwards from the center of mass of Earth into space. Any of these lines that you choose is an equipotential surface where the force of gravity is constant. Keep in mind that the force of gravity is stronger nearer the center of mass of Earth and weaker as you move away from it. Thus, the geoid is an arbitrary equipotential gravity surface that is chosen to roughly coincide with present-day mean sea level.</p>
+<p>When you measure the height of something relative to a gravimetric vertical datum like the geoid, you must level your instrument. Levelling forms a vertical line that is orthogonal or perpendicular to the geoid, known as a <strong>plumb line</strong>. It is incredibly easy to visualize a plumb line. Simply tie a rock to the end of a string and hold the string with your outstretched arm. The length of the straightened string traces a plumb line to the center of mass of Earth, wherever you are. Because gravity changes with location on Earth and all plumb lines are converging on a singular point, plumb lines are never parallel. This phenomenon has important implications for comparing observations on the the ground with a geodetic model of Earth like an ellipsoid. In other words, the plumb line that you traced with your string is pointing to the center of mass of the geoid, but the center of the ellipsoid is often in a slightly different direction. This difference is known as the <strong>deflection of the vertical</strong> and is measured as the angular difference between the centre of the geoid and the centre of a reference ellipsoid. Like other measurements of geodetic location (i.e., latitude and longitude), the deflection of the vertical is comprised of two angles: <span class="math inline">\(ξ\)</span> (xi) representing the north-south angular difference and <span class="math inline">\(η\)</span> (eta) representing the east-west angular difference.</p>
+<div class="box-content case-study-content">
+<div id="case-study-1" class="section level4 unnumbered box-title case-study-top">
+<h4>Case Study</h4>
+</div>
+<div id="box-text" class="section level4 unnumbered">
+<h4>Case study title max of forty characters</h4>
+<p id="box-text">
+The Canadian Geodetic Vertical Datum of 2013 (CGVD2013) is the current gravimetric vertical datum used in Canada to reference heights. It is defined with a potential gravity value of 62,636,856.0 <span class="math inline">\(m^2\)</span> <span class="math inline">\(s^-2\)</span>. The pervious vertical datum in Canada - the Canadian Geodetic Vertical Datum of 1928 (CGVD28) - was actually a tidal vertical datum that corresponded to mean sea level measured at Yarmouth, Halifax, Pointe-au-Père, Vancouver and Prince-Rupert, and a height in Rouses Point in New York. It turns out that Halifax referenced to CGVD2013 is 64 centimeters <em>below</em> Halifax referenced to CGVD28!
+</p>
+<p id="box-text">
+For reference, CGVD2013 is 17 centimeters below mean sea level measured in Vancouver at the Pacific Ocean, 39 centimeters above mean sea level in Halifax at the Atlantic Ocean, and 36 centimeters above mean sea level in Tuktoyaktuk at the Arctic Ocean. The older CGDV28 did not have any survey benchmarks in the far north of Canada and, with the advent of more reliable satellite-based measurements, was modernized in 2015 to CGVD2013. The United States currently uses the North American Vertical Datum of 1988 (NAVD88), which was never adopted by Canada, but the United States will be modernizing their vertical datum by adopting a gravimetric model with the same gravity potential value as Canada as early as 2025.
+</p>
+</div>
+</div>
+<p>It should be evident by now that the reference surface that you choose as a vertical datum will determine the measured elevation of Earth’s terrain. Additionally, We frequently need to convert elevations between geodetic and gravimetric vertical datums. For example, when you use a Global Positioning Service (GPS) receiver, you are provided with an elevation that is relative to the WGS 1984 ellipsoid (more on that in <a href="">Chapter 4</a>). The difference in height between an ellipsoid and the geoid is referred to as <strong>geoid height (N)</strong> while the difference in height between an ellipsoid and Earth’s surface is referred to as <strong>geodetic or ellipsoidal height (h)</strong>. The difference in height between the geoid and the Earth’s surface is called <strong>orthometric height (H)</strong> (Figure 2.6), and is given as:</p>
+<p><span class="math display">\[
+H = h - N
+\]</span></p>
+<p><img src="images/02-H-h-N.png" class="center" alt="Figure 2.6 Orthometric Height (H) is the ellipsoidal height (h) less the geoid height (N)" />
+<br/></p>
+<p>To illustrate the concept of a gravimetric datum, suppose we constructed a large, straight tunnel through the physical Earth that was tangential to the ellipsoid. If we allowed the oceans to flow freely through this tunnel, your experiences might convince you that water would flow from one end to the other. But in fact, this tunnel is so large, that the gravity field is changing. So the water would actually come to rest at the surface of the geoid or gravimetric model, as shown in Figure 2.7 below.</p>
+<p><img src="images/02-geoid-tunnel.png" class="center" alt="Figure 2.7 Thought experiment showing where water would be at rest within a tunnel through the geoid due to the equipotential force of gravity (g)" />
+<br/></p>
+</div>
+</div>
+<div id="referencing-location" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Referencing Location</h2>
+<div id="cartesian-coordinate-systems" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Cartesian Coordinate Systems</h3>
+<p>Now that we have explored how to reference heights to vertical datums, we will now turn to considering how to reference location on Earth. Before we we jump to the three dimensional case of Earth, consider how you would map your room and identify your location within that room. Assuming you are in a rectangular room, you could easily pick a corner and first measure the distances between the four corners of the room, giving you the dimensions. You could then proceed to measure your distance to any two walls and quite easily define your position within the room relative to the first corner that you picked. This is an example of a <strong>coordinate system</strong> that provides reference for the relative locations of anything contained within the extent of the coordinate system (i.e., the four corners of your room).</p>
+<p>Fundamentally, a coordinate system is defined by a common unit of measurement (e.g., meters, feets, degrees), an orientation defining the direction that measurements positive or negative, and an <strong>origin</strong>, which is an arbitrary point where the measurements begin at zero. On a one dimensional line, you can define any other location on the line as a measured distance from the origin at <span class="math inline">\([0]\)</span>. On two dimensional maps, like your room, we have two axes that are perpendicular from which we can define any location with measured distances from the origin <span class="math inline">\([0,0]\)</span>. We can also extend this to the three dimensional Earth, which simply requires another axis to define the origin at <span class="math inline">\([0,0,0]\)</span>. All of these cases are referred to as <strong>Cartesian coordinate systems</strong>, so-named after French philosopher Descartes (also known for the phrase, “I think, therefore I am”) who first described the two dimensional case in 1637 in <em>La Géometrie</em>.</p>
+</div>
+<div id="celestial-coordinate-systems" class="section level3" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Celestial Coordinate Systems</h3>
+<p>You might be wondering, <em>How do we reference locations on Earth?</em> Before the technological era of geoids, astronomical observations provided the basis for the earliest coordinate systems. The ancient civilizations of Greece, Egypt, and Babylon all recognized the use of celestial coordinate systems for defining the location of stars, planets, and other celestial bodies in the sky. Recall that Eratosthenes, a Greek mathematician living about 2300 years ago, had already worked out the spherical shape of Earth. A celestial coordinate system simply extends the spherical shape of the Earth outward into space to locate objects using angular measurements. It is a <em>geocentric</em> coordinate system, that is based on an origin at the center of Earth with an orientation following the rotational axis of Earth (i.e., spinning around the semiminor, North-South axis). This is also known as an equatorial coordinate system, because it is oriented relative to the Equator of Earth. The equatorial coordinate system is the reason why you can navigate by Polaris, the North Star, which would appear nearly directly overhead if you were standing at the North Pole. Even though Earth is not perfectly spherical, astronomical observations have been reliably used for millennia to transit the irregular oceans and terrain of Earth.</p>
+</div>
+<div id="geographic-coordinate-systems" class="section level3" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> Geographic Coordinate Systems</h3>
+<p>Geocentric coordinate systems are essential for global navigation and mapping. In the modern era, we use <strong>geographic coordinate systems</strong> (sometimes abbreviated GCS) that are oriented to the rotational axis of Earth, much like the equatorial coordinate system. The origin of a geographic coordinate system is the center of Earth and the units of measurement are degrees of <strong>longitude</strong> and degrees of <strong>latitude</strong>. Degrees of latitude (denoted by lambda, <span class="math inline">\(λ\)</span>) measure the angle from the equitorial plane North (+) or South (-), while degrees of longitude (denoted by phi, <span class="math inline">\(φ\)</span>) measure the angle from the polar plane East (+) or West (-). Thus, geographic coordinate systems use angular units of measurement. Any combination of latitude and longitude gives coordinates <span class="math inline">\([λ,φ]\)</span> on a sphere or ellipsoid. Positive values of latitude put you in the Northern Hemisphere, while negative values of longitude put you in the Western Hemisphere. Constant lines of latitude, known as <strong>parallels</strong> because they are always parallel to one another, and lines of longitude, known as <strong>meridians</strong>, form a grid that fits over a sphere or ellipsoid called a <strong>graticule</strong>.</p>
+<p>For most of your life, you have probably believed that there is a singular combination of capital-L Latitude and Longitude values that absolutely define some location on Earth in perpetuity. This is perhaps the most profound geographic lie that we were taught as young school children. In fact, there are as many “types” of latitude as there are geographic coordinate systems. By now, you should be able to recognize the difference between <em>geocentric latitude</em> that is referenced to a sphere and <em>geodetic latitude</em> that is referenced to an ellipsoid. The main difference is that geocentric latitude is the angle relative to the centre of the sphere at the equatorial plane and geodetic latitude is the angle relative to the equatorial plane (i.e., not necessarily the centre). Figure 2.8 illustrates how the same angle can put you in two very different places depending on the geographic coordinate system you are using.</p>
+<p><img src="images/02-geocentric-geodetic-latitude.png" class="center" alt="Figure 2.8 Geocentric versus geodetic latitude" />
+<br/></p>
+<p><span class="math inline">\(CS\)</span> represents the line connecting the centre of a spherical geographic coordinate system to the surface of the sphere at a geocentric latitude <span class="math inline">\(φ′=45°\)</span> and <span class="math inline">\(DE\)</span> represents the line connecting the equatorial plane to the surface of the ellipsoid at a geodetic latitude <span class="math inline">\(φ=45°\)</span>. Notably, <span class="math inline">\(CS\)</span> is parallel to <span class="math inline">\(DE\)</span> and <span class="math inline">\(CS\)</span> intersects with the surface of the sphere at a 90° angle and <span class="math inline">\(DE\)</span> intersects the surface of the ellipsoid at a 90° angle.</p>
+<p>A coordinate system that is referenced to an ellipsoid is known as a <strong>horizontal datum</strong>. For example, the World Geodetic System of 1984 (WGS 1984) is a <em>geodetic</em> datum that has a geographic coordinate system referenced to it. So the origin of WGS 1984 is also the origin of the GCS from which latitude and longitude measurements are derived. So if you measured your latitude and longitude using the WGS 1984 horizontal datum, you would be placed somewhere on the ellipsoid also defined by WGS 1984. It is important to note, however, that the same exact <em>geocentric latitude</em> and longitude measures would place you somewhere else on a sphere. Other factors such as plate tectonics, glaciation, and ocean tides cause the Earth’s surface to be in constant motion underneath any fixed horizontal datum. For example, Europe has drifted about 60 meters from North America since Eratosthenes first calculated the circumference of Earth. Therefore, any “type” of latitude or longitude is only useful during a particular epoch of time.</p>
+<p>If you mapped the Earth as an ellipsoid in a three dimensional Cartesian coordinate system, you could describe location using three coordinates <span class="math inline">\([x,y,z]\)</span>, with <span class="math inline">\([0,0,0]\)</span> being the center of Earth. However, we do not often express mapped coordinates of Earth using Cartesian coordinates. Instead of referring to the North Pole at <span class="math inline">\([0,0,6356752.3]\)</span> meters (the polar radius of Earth) we usually refer to it with a single coordinate, 90° N. Why? The North and South Poles are the only points on Earth that can be defined with a single coordinate because they coincide with the orientation of a geographic coordinate system. Imagine placing a protractor at a 90° angle relative to a table. If you rotate it along that perpendicular axis, one arm of the protector would spin in a 360° circle, but the other arm of the protractor would always point up or down at 90° in the same direction. For all other locations on Earth, a pair of <span class="math inline">\([λ,φ]\)</span> coordinates are needed to define location. With space-based global navigation systems it is more common to combine coordinates in both horizontal and vertical datums together. For example, <span class="math inline">\([λ,φ]\)</span> expresses your location relative to the horizontal datum while <span class="math inline">\([λ,φ,h]\)</span> expresses your ellipsoidal height (h) at a location and <span class="math inline">\([λ,φ,H]\)</span> expresses your orthometric height (H) at a location.</p>
+</div>
+<div id="projected-coordinate-systems" class="section level3" number="2.3.4">
+<h3><span class="header-section-number">2.3.4</span> Projected Coordinate Systems</h3>
+<p>Despite everything covered so far in this chapter, we very rarely see or display geographic data in 3-dimensions. In fact, most geographic data you will likely encounter will be either 1- or 2-dimensional (more on that in Chapter 3). Geographic coordinate systems are incredibly important for understanding how geographic data are fundamentally “attached” to the Earth. However, geographic coordinate systems are not suitable for creating maps, those 2-dimensional spatial models that can be easily displayed on your computer screen or printed on a sheet of paper. Instead, cartographers rely on <strong>projected coordinate systems</strong> that flatten a 3-dimensional geographic coordinate system to a 2-dimensional map. Really, these projected coordinate systems involve transformations called <strong>map projections</strong> that convert 3-dimensional coordinate space into 2-dimensional coordinate space, which means the map units are linear such as meters. Whenever we move from a geographic to a projected coordinate system, we lose information, and distortion results.</p>
+<p>Cartographers have wrestled with how to project Earth onto a printed page for millennia. The fundamental mathematics for map projections were first comprehensively described by Claudius Ptolemy around 150 C.E. Ptolemy’s work <em>Geography</em> was one of the earliest treatises on cartography and map making that included an atlas of regional maps of Europe, Africa, and Asia. Ptolemy’s work built on and came several centuries following Eratosthenes and earlier Greek geocentric observations by Plato and Aristotle. Ptolemy observed that a globe was the best way to represent the intervals and proportions of Earth’s surface without distortion. However, globes are not very useful for looking at regions in detail and you can only see part of a globe at any given time. Thus, a mathematical language is needed to translate a geographic coordinate system to a planar or projected coordinate system. <em>Geography</em> was lost to antiquity before it was rediscovered, copied, and translated centuries later, first by Muslim cartographers in the 9th century C.E. and later by Italian cartographers in the 15th century C.E. during the Renaissance, which gave rise to the many types of map projections that we see today.</p>
+<p>Because all map projections result in distortion from the loss of the third spatial dimension, it is useful to think about map projections in terms of what they preserve. There are four main characteristics that can be distorted or preserved, which give rise to the primary types of map projections that are in use for environmental management applications:</p>
+<ul>
+<li><strong>Conformal</strong> projections preserve shape and angles</li>
+<li><strong>Equal-area or equivalent</strong> projections preserve area</li>
+<li><strong>Azimuthal</strong> projections preserve direction</li>
+<li><strong>Equidistant</strong> projections preserve scale and distances</li>
+</ul>
+<p>Some map projections can preserve several of these characteristics at once, but only a globe can simultaneously preserve area, direction, distance, and shape. Any map projection will have inherent trade-offs representing these characteristics accurately. It is beyond the scope of this textbook to discuss all map projections. Instead, we will focus on several key examples of map projections that are commonly used for environmental management applications. For a more comprehensive discussion of map projections generally, the reader is referred to <em>Map Projections: A Working Manual</em> by John Snyder (1987). In the next section, we look at how map projection distortation can be measured.</p>
+</div>
+<div id="measuring-map-projection-distortion" class="section level3" number="2.3.5">
+<h3><span class="header-section-number">2.3.5</span> Measuring map projection distortion</h3>
+<p><strong>Tissot’s Indicatrix</strong> is often used to visualize distortion from map projections, named after Nicholas Auguste Tissot. The metric is relatively simple: Tissot’s Indicatrix is a perfect circle on the surface of a 3-dimensional globe, but will form an ellipse whenever projected to a 2-dimensional coordinate system. For this reason, Tissot’s Indicatrix is sometimes referred to as Tissot’s Ellipse. Since ellipses can vary along two axes, Tissot’s Indicatrix can represent areal, angular, and linear map distortions both longitudinally and latitudinally at any location in the map. This is very handy, because we can place Tissot’s Indiciatrices (the plural of indicatrix) at different locations and examine how distortion changes throughout the map projection.</p>
+<p>So how do we use this tool? The quotient between a line projected onto a map <span class="math inline">\(a\)</span> and the same line on a globe <span class="math inline">\(a&#39;\)</span> is <span class="math inline">\(\frac{a}{a&#39;}=1\)</span> when there is no distortion on that axis of the ellipse. This quotient is also called a scale factor because it is showing how the map scale is modified locally by a map projection. Figure 2.9 below shows an example of a reference indicatrix that is a perfect circle on a globe with axes <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>.</p>
+<p><img src="images/02-reference-indicatrix.png" class="center" alt="Figure 2.9 Reference Tissot Indicatrix" />
+<br/></p>
+<p>Let us assume that <span class="math inline">\(a = b = 1\)</span>. Then, the reference indicatrix has the following properties: <span class="math inline">\(a=b\)</span>, <span class="math inline">\(a×b=1\)</span>, and <span class="math inline">\(Area=πab=π^2\)</span>. If <span class="math inline">\(\frac{a&#39;}{a&#39;}&gt;1\)</span>, then we can conclude that the the projection is <em>expanding</em> the distance along the <span class="math inline">\(a\)</span> line. If <span class="math inline">\(\frac{a&#39;}{a&#39;}&lt;1\)</span>, then we can conclude that the projection is <em>compressing</em> the distance along the line <span class="math inline">\(a\)</span>. For example, suppose <span class="math inline">\(a=2\)</span> and <span class="math inline">\(b=0.5\)</span>, then we have modified the scale of the indicatrix along both axes, but the areal solution is the same as the reference indicatrix shown as the red dashed circle in Figure 2.10 below.</p>
+<p><img src="images/02-equivalent-indicatrix.png" class="center" alt="Figure 2.10 Equivalent Tissot Indicatrix" />
+<br/></p>
+<p>The indicatrix above in Figure 2.X is an example of an <em>equivalent</em> indicatrix, which has the following properties: <span class="math inline">\(a&gt;b\)</span>, <span class="math inline">\(a×b=1\)</span>, and <span class="math inline">\(Area=πab=π^2\)</span>.</p>
+<p>If <span class="math inline">\(\frac{a}{a&#39;}×\frac{b}{b&#39;}&gt;1\)</span>, then we can conclude that the projection is <em>inflating</em> the area. If <span class="math inline">\(\frac{a}{a&#39;}×\frac{b}{b&#39;}&lt;1\)</span>, then we can conclude that the projection is <em>deflating</em> the area. Consequently, whenever the quotients of both axes are equivalent (i.e., <span class="math inline">\(\frac{a}{a&#39;}=\frac{b}{b&#39;}\)</span>), Tissot’s Indicatrix forms a perfect circle and the ellipse is conformal with angles true to the globe. For example, suppose <span class="math inline">\(a=b=2\)</span>, then we have modified the scale of the indicatrix along both axes, but with the same factor. This results in a <em>conformal</em> indicatrix that is not equivalent, shown in Figure 2.11 below.</p>
+<p><img src="images/02-conformal-indicatrix.png" class="center" alt="Figure 2.11 Conformal Tissot Indicatrix" />
+<br/></p>
+<p>This conformal indicatrix has the following properties: <span class="math inline">\(a=b\)</span>, but <span class="math inline">\(a×b≠1\)</span>, and therefore <span class="math inline">\(Area=πab=4π^2\)</span>. As you can see, whenever <span class="math inline">\(a×b=1\)</span> the indicatrix is equivalent (equal-area) and whenever <span class="math inline">\(a=b\)</span> the indicatrix is conformal.</p>
+</div>
+<div id="map-projections-for-environmental-management" class="section level3" number="2.3.6">
+<h3><span class="header-section-number">2.3.6</span> Map projections for environmental management</h3>
+<div id="mercator" class="section level4" number="2.3.6.1">
+<h4><span class="header-section-number">2.3.6.1</span> Mercator</h4>
+<p>Mercator is a cylindrical map projection that represents meridians and parallels as straight lines. The cylindrical surface is oriented such that the rotational axis of Earth runs through the openings of the cylinder and the Equator represents the tangent where the cylinder meets the Earth’s surface. Scale along the tangent is true because the translation from the spherical Earth to the cylindrical surface is one-to-one at the tangent, so this is also the location on the projection where there is no distortion. This has the effect of accurately representing the shape and angles on the map (i.e., conformal), but greatly distorts area as you move away from the Equator. In fact, the North and South Poles are represented as 2-dimensional lines at the top and bottom edges of the map instead of 1-dimensional points. Although scale and area change as you move North or South along a meridian, scale and area are equivalent along any parallel, but not necessarily true to a globe. In other words, you can compare area or scale anywhere along a parallel, but only at the Equator is the area and scale true to the globe.</p>
+<p>The Mercator map projection is perhaps the most pervasive and reproduced projection around us (Figure 2.12). Because angles are preserved, you can easily and accurately navigate long distances across Earth, and this was exactly the purpose that Gerardus Mercator envisioned when he first identified the projection for sea-faring Europeans in 1569. You may also recognize the Mercator projection from web mapping applications like Google Maps, which use it because it ensures that North-South roads intersect at right angles with East-West roads.</p>
+<p><img src="images/02-Mercator-map.png" class="center" alt="Figure 2.12 Mercator map projection with Tissot’s Indicatrices in red" />
+<br/></p>
+</div>
+<div id="universal-transverse-mercator-utm" class="section level4" number="2.3.6.2">
+<h4><span class="header-section-number">2.3.6.2</span> Universal Transverse Mercator (UTM)</h4>
+<p>Universal Transverse Mercator (UTM) is very similar to a Mercator projection except that the cylinder is rotated or transverse by 90° so that the opening of the cylinder is perpendicular to the rotational axis of Earth. This has the effect of moving the tangent from the Equator to any Meridian. In fact, you can rotate the cylinder at any angle you want where 0° is a true Mercator, 90° is a transverse Mercator, and any other angle is considered an oblique Mercator. UTM is actually a system of 60 different transverse Mercator projections that are defined to represent 6° Longitudinal intervals of Earth’s surface (60 zones x 6° = 360°). Each projection is defined as a zone, which is also divided into North and South zones depending whether you are in the Northern or Southern Hemisphere. Canada spans 15 UTM zones from Zone 7 North in the Yukon to Zone 22 North covering Newfoundland. Figure 2.13 below shows a map of UTM Zone 13 over Saskatchewan.</p>
+<p><img src="images/02-UTM-13N-map.png" class="center" alt="Figure 2.13 Universal Transverse Mercator Zone 13 map projection with Tissot’s Indicatrices in red" />
+<br/></p>
+<p>Besides defining the orientation of the cylinder, we can also specify its size or diameter. When the diameter of the cylinder is equivalent to the diameter of Earth at the Equator, a single tangent line is formed. If the diameter of the cylinder is smaller than Earth’s diameter at the Equator, then the cylinder has two lines that contact Earth’s surface, known as <strong>secants</strong>. The purpose for having two secants is that the projection distortion can be more evenly distributed across the map. In the case of UTM, a scale factor of 0.9996 is applied to shrink the transverse cylinder slightly, forming two secants that are 360 km apart East-West. In between the two secants lies the <strong>central meridian</strong>, which is used to define the origin for the projected coordinate system. Notice in Figure 2.X how Tissot’s Indicatrices are near perfect circles along the central meridian of the map. It is important to realize that the secants are parallel to each other and the central meridian, which means the secants are not meridians on Earth and form what are called <strong>small circles</strong>, a line that does not divide Earth into two equal portions.</p>
+<p>[Figure 2.14. Close-up of a single UTM zone showing the central meridian and secants]</p>
+<p>UTM uses a unique coordinate system that deserves some explanation. Just like with latitude and longitude coordinates <span class="math inline">\([λ,φ]\)</span>, an arbitrary origin needs to be defined so that we know where we are in relation to the origin on the map. For projected coordinate systems like UTM that use linear units of measure such as meters, the origin is defined as the intersection of the central meridian and the Equator. Simple enough, right? There is one catch: UTM does not use any negative coordinates by convention. Thus, the origin of the coordinate system for each zone must be moved so that coordinates West of the central meridian and South of the Equator are positive. To do this, a constant value is added to all East-West coordinates (known as <strong>Eastings</strong>) and all North-South coordinates (known as <strong>Northings</strong>) to create what are known as <strong>False Eastings</strong> and <strong>False Northings</strong>, respectively. A value of 500,000 m is added to all Eastings so that the western limit of the zone is located at 0 m, the central meridian is located at 500,000 m, and the eastern limit of the zone is located at 1,000,000 m. A value of 10,000,000 m is added to all Northings in the Southern Hemisphere so that the Equator is at 10,000,000 m and 0 m is near the South Pole for all southern UTM zones. You might recognize the importance of the 10,000,000 m value because this represents approximately one-quarter of the Earth’s North-South circumference.</p>
+<p>[Figure 2.15. Showing a UTM zone with the central meridian and annotated by false eastings/northings]</p>
+</div>
+<div id="sinusoidal" class="section level4" number="2.3.6.3">
+<h4><span class="header-section-number">2.3.6.3</span> Sinusoidal</h4>
+<p>Sinusoidal is a <em>pseudocylindrical</em> map projection, so-named because these projections approximate a true cylindrical projection except that Meridians are curved instead of straight like with Mercator or UTM. Because Meridians are curved, Sinusoidal maps represent the North and South Poles as single points instead of lines as is the case with Mercator. Thus, Sinusoidal maps are not conformal and distort shape, but they are in fact equal-area (Figure 2.16). Equal-area map projections like Sinusoidal are important for accurately accounting for land cover and other global mapping efforts. Therefore, it is common to find global datasets distributed in a Sinusoidal map projection.</p>
+<p><img src="images/02-Sinusoidal-map.png" class="center" alt="Figure 2.16 Sinusoidal map projection with Tissot’s Indicatrices in red" />
+<br/></p>
+</div>
+<div id="albers" class="section level4" number="2.3.6.4">
+<h4><span class="header-section-number">2.3.6.4</span> Albers</h4>
+<p>Albers is another example of an equivalent map projection, but unlike Sinusoidal, an Albers projection uses a cone as a projection surface instead of a pseudocylinder. Like the cylindrical case, the cone can be sized and oriented in any way, but the cone of an Albers projection is typically oriented so that the vertex of the cone aligns with the rotational axis of Earth. The base of the cone has a diameter that usually results in two secants, known as <strong>standard parallels</strong> on an Albers map. Thus, Albers projections tend to distort latitudinally as you move North-South away from the standard parallels, but even more so as you move toward the base of the cone (Figure 2.17). Besides being an equal-area projection, Albers is a good choice for mapping regions because shape and scale are mostly preserved near the standard parallels. For example, the province of British Columbia has adopted a modified Albers projection that situates the standard parallels at 50° N and 58.5° N, which are near the northern and southern latitudinal limits of the province. This narrow band of latitude between the standard parallels ensures that there is relatively little distortion in shape and scale within the province, which is comparable to UTM. However, British Columbia is a longitudinally wide province, spanning 6 of Canada’s 15 total UTM zones, so Albers has a distinct advantage of being able to show the entire province with little distortion. For the same reasons, you will often find Canada-wide data distributed in an Albers projection.</p>
+<p><img src="images/02-BC-Albers-map.png" class="center" alt="Figure 2.17 BC Environment Albers map projection with Tissot’s Indicatrices in red" />
+<br/></p>
+</div>
+<div id="azimuthal" class="section level4" number="2.3.6.5">
+<h4><span class="header-section-number">2.3.6.5</span> Azimuthal</h4>
+<p>Azimuthal projections use a flat circular plane to project the Earth onto a map. This plane is usually oriented so that it is tangent at a single point, usually the North or South Pole. In the case of a polar azimuthal projection, meridians radiate outward as straight lines from the pole to the edge of the circular plane and the parallels are represented as concentric circles. As a result, distortion increases as you move away from the centre point of the map with the outer edge of the plane representing an <strong>antipode</strong> or an opposite point on Earth. The primary benefit of azimuthal projections is that they preserve direction and distance between the centre point and any other point in the map (Figure 2.18). The shortest geographic distance between the centre point and any other point creates a line known as a <strong>great circle</strong>, which divides the Earth into two equal portions. So another benefit of an Azimuthal project is that great circles can be mapped as straight lines. Azimuthal projections are commonly used when distance and direction are important, such as weather RADAR stations or air traffic control towers. It is important to realize that the centre point for an azimuthal projection can be any point on Earth and the equidistant property can be exploited for a number of applications.</p>
+<p><img src="images/02-Azimuthal-map.png" class="center" alt="Figure 2.18 North Pole Azimuthal map projection with Tissot’s Indicatrices in red" />
+<br/></p>
+</div>
+<div class="box-content your-turn-content">
+<div id="your-turn-2" class="section level4 unnumbered box-title your-turn-top">
+<h4>Your turn!</h4>
+</div>
+<p id="box-text">
+Add projection explorer transition tool here.
+<br>
+<select id="projection-menu"></select>
+</p>
+<div id="map">
+
+</div>
+<div class="centered-box-content">
+<button id="pause">
+Pause
+</button>
+</div>
+<p id="box-text">
+</p>
+</div>
+</div>
+</div>
+<div id="summary-2" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Summary</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.</p>
+<div id="reflection-questions-1" class="section level3 unnumbered">
+<h3>Reflection Questions</h3>
+<ol style="list-style-type: decimal">
+<li>Explain ipsum lorem.</li>
+<li>Define ipsum lorem.</li>
+<li>What is the role of ispum lorem?</li>
+<li>How does ipsum lorem work?</li>
+</ol>
+</div>
+<div id="practice-questions-1" class="section level3 unnumbered">
+<h3>Practice Questions</h3>
+<ol start="2" style="list-style-type: decimal">
+<li>Given ipsum, solve for lorem.</li>
+<li>Draw ipsum lorem.</li>
+</ol>
+</div>
+</div>
+<div id="recommended-readings-1" class="section level2 unnumbered">
+<h2>Recommended Readings</h2>
+<p>Ensure all inline citations are properly referenced here.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chapter-template.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="LiDAR-acquisition-and-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

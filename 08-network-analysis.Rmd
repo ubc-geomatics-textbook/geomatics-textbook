@@ -29,11 +29,6 @@ Networks are abstract structures used to represent patterns of relationships amo
 ### Key Terms {-}
 Network analysis, Spatial networks, Graph theory
 
-### Major Gaps {-}
-* How to apply spatial network analysis for real-world problems?
-* How to use network centrality measures to analyze spatial centrality?
-* How to exemplify network topologies with other kinds of networks rather than computers?
-
 ## Introduction to graph theory
 Graphs are the abstract language of networks [@systemsinnovationGraphTheoryOverview2015]. Graph theory is the area of mathematics that study graphs. By abstracting networks into graphs, one is able to measure different kinds of indicators that represents information about relationships that exist within a certain system. This is especially useful to assess the state of complex adaptive systems such as societies, cities, ecosystems, etc. All graphs are composed of two parts: nodes and edges.
 
@@ -43,7 +38,6 @@ A node (or vertex) may represent any thing that can be connected with other thin
 ### Edges
 Edges, on the other hand, represent how vertices are interconnected to each other. So it may represent the vertices' social connections, street segments, molecular bindings, etc. The graph below represents rapid and frequent transit lines in Metro Vancouver. Each node represents a transit line and the edges represents connections between those lines.
 
-<p class="codeblock-label">Graph representing Metro Vancouver rapid and frequent transit network</p>
 ```{r pressure, echo=FALSE}
 data <- data.frame(
   from=c("Expo Line", "99-B Line", "R4", "Canada Line", "R4", "Millenium Line", "Millenium Line", "Seabus", "Seabus", "Seabus", "Expo Line", "R4", "West Coast Express", "West Coast Express", "R5", "R5", "West Coast Express", "Millenium Line", "West Coast Express",  "West Coast Express"),
@@ -52,8 +46,10 @@ data <- data.frame(
 
 simpleNetwork(data, charge=-500, linkDistance=50, fontSize=10)
 ```
+<p class="codeblock-label">Graph representing Metro Vancouver rapid and frequent transit network</p>
 
-![Rapid and frequent transit network in Metro Vancouver. Source: [City of Pitt Meadows](https://www.pittmeadows.ca/sites/default/files/docs/23-07-2019_2-47-50_pm.jpg).](images/metro_vancouver_transit_network.jpeg){.center}
+
+![Rapid and frequent transit network in Metro Vancouver. Source: City of Pitt Meadows](https://www.pittmeadows.ca/sites/default/files/docs/23-07-2019_2-47-50_pm.jpg).(images/metro_vancouver_transit_network.jpeg){.center}
 
 
 ## Connectivity and order
@@ -68,30 +64,37 @@ On the other hand, in an undirected graph, connections are represented as simple
 ## Network topologies
 Topology is the study of how network elements are arranged. The same elements arranged in different ways can change the network structure and dynamics. A very common example is the arrangement of computer networks [@wikibooksCommunicationNetworksNetwork2018].
 
+### Physical versus logical topology
+
 ### Lines
 Nodes are arranged in series where every node has no more than two connections.
+(Example: Skytrain transit line)
 
 ### Rings
 Every node has no mode than two connections and the "first" and "last" nodes are connected to each other forming a circle.
+(Example: Stanley park seawall trail)
 
 ### Meshes
 Every node is connected to more than one node.
+(Example: Tree canopy)
 
 ### Stars
 Two or more nodes arranged around a central node.
+(Example: Courtyard apartment)
 
 ### Trees
 Nodes are structured from a root node arranged into a number of smaller nodes.
+(Example: Boat marinas)
 
 ### Buses
 Nodes are structured with one connection around a central path.
-
+(Example: Building-street connections)
+ 
 ### Fully connected
 Every node is connected to every other node.
+(Example: Soccer field visibility)
 
 ## Spatial Network Analysis
-
-### Physical versus logical topology
 
 ### Network tracing
 
@@ -133,10 +136,3 @@ How likely a node is to be passed through when going from every node to every ot
 
 ::::
 
-## References {-}
-```{r include=FALSE}
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'stringr', 'rmarkdown', 'htmlwidgets', 'webshot', 'DT',
-  'miniUI', 'tufte', 'servr', 'citr', 'rticles'
-), 'packages.bib')
-```

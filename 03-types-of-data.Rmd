@@ -1,6 +1,6 @@
-# Chapter Title {#types-of-data}
+# Types of Data {#types-of-data}
 
-**Ducks**, This chapter is about ducks
+**Data Types**, Any entity we wish to represent in a Geographic Information System can be described with three pieces of information What, When, and Where?  In the previous chapter, we introduced how to represent the where on the earth an entity occurs inside a GIS.  In this chapter we will introduce how we can describe what an entity is and when it occurs.  Then we will cover how we use spatial data models to link the what and when to the where using spatial data models.  Then we will wrap up by introducing some of the specific file types we use in GIS to represent spatial data.
 
 :::: {.box-content .learning-objectives-content}
 
@@ -8,21 +8,20 @@
 #### Learning Objectives {-}
 ::: 
 
-1. Objective one
-2. Objective two
-3. Objective three
+1. Learn about the various scales we use to measure data
+2. Learn about spatial data models and how they work
+3. Learn about the different file types we use in GIS
 
 ::::
 
 ### Key Terms {-}
 
-Quack
+Attribute, Qualitative, Quantitative, Vector, Raster
 
 
+## Attribute Data
 
-## Measurement Scales
-
-Qualitative vs. Quantitative
+Spatial data is the foundation of Geographic Information Science, but spatial coordinates are meaningless unless they are linked with descriptive information about the location.  Any non-spatial data relating to a spatial entity is known as an attribute.  This non-spatial data can broadly be classified as either qualitative or quantitative.  Data that is strictly descriptive and lacks any numeric quantity is qualitative.  Data with numerical values that are separated by some meaningful interval is quantitative.  The types of analysis we can conduct with qualitative data is more limited than quantitative data, but that does not necessarily mean quantitative is "better" than qualitative.
 
 ![From my lectures.  IDK the original source, but it'd be easy enough to just "recreate" my own.](images/03-scales.png){.center}
 
@@ -30,112 +29,114 @@ Qualitative vs. Quantitative
 
 ### Nominal
 
-Just a name/category, no ranking or direction.
-* Plant species
-* Zoning category
-* Language spoken at home
+Quantitative data that just consists of a name/category with no ranking or direction is known as Nominal data.  One category is not more or less, better or worse than another, they are just different.  A good example would be flower types (see fig).  Other examples would be zoning categories, colors, flavors of ice cream, place names, etc.  The only arithmetic operations we can do with nominal data are checking for equality (True/False), count occurrences, and calculate the mode (most frequent occurrence).  
+
+
+![My own images, can update text/font/styling as necessary](images/03-flowers-nominal.png){.center}
+
+![My own images, can update text/font/styling as necessary](images/03-nominal-opperations.png){.center}
+
+![My own images, can update text/font/styling as necessary](images/03-nominal-counts.png){.center}
+
+
 
 ### Ordinal
 
-More than a name, some sort of ranking, but no numerical scale/meaning, you cant take differences, 
-* Relative sizes (short, medium, tall)
-* Relative ages (young/old)
-* Spice level
+Quantitative that has some sort of ranking, but no numerical scale associated with that ranking is known as Ordinal.  A good example would be relative sizes (see fig).  We can see Yarrow is taller than her sister Shamsa, so we can rank these dogs by height.  However, we haven't measured their heights, so we don't know how much taller Yarrow is than Shamsa.  Some other good examples of Ordinal data include  spice levels (mild, medium, hot), residential zoning density (low, medium, high), and survey responses.  With ordinal data, we can do all operations we can do with nominal data, plus a few more.  We can check the order/rank (greater than, less than) and in some circumstances we can calculate the median (see figure).
+
+
+![My own images, can update text/font/styling as necessary](images/03-dogs-ordinal.png){.center}
+
+![My own images, can update text/font/styling as necessary](images/03-ordinal-operatons.png){.center}
 
 ### Graded membership
- ... necessary?  I've not heard of?
+ ... necessary?  Related to ambiguity, is this the right place to talk about it??
+
+## Quantitative
+
+### Interval
+Numeric data on a fixed scale but with an arbitrary zero point is known as interval data.  A good example of this type of data is temperature in degrees Celsius.  
+* Time (3PM)
+* Dates (2021)
+* Temperature (Celsius/Fahrenheit)
+  * 20 ˚C is not “twice as warm” as 10 ˚
+
+### Log-Interval
+ ... necessary?  
+
+### Ratio
+Numeric data with an absolute zero point (no negative value).  A good example of this type of data is population (see figure).  Other examples are, temperature (in Kelvin), precipitation, height, income, rental cost.
 
 
+### Extensive Ratio
+### Cyclical Ratio
+### Derived Ratio
+I think all these can just be lumped in with Ratio Above^
 
-### 3.1.4 Interval
-### 3.1.5 Log-Interval
-### 3.1.6 Extensive Ratio
-### 3.1.7 Cyclical Ratio
-### 3.1.8 Derived Ratio
-### 3.1.9 Counts
-#### 3.1.10  Absolute
+### Counts
+ .... this is more an operation?  Can be done to any data type?  I don't think it merits its own section.
+#### Absolute
+????
 
-3.2 Types of numbers
-3.2.1 Bits
-3.2.2 Byte
-3.2.3 Integer
-3.2.4 Floating-point
-3.3 Spatial data models
-3.4 Vector data
-3.4.1 Points
-3.4.2 Lines
-3.4.3 Polygons
-3.5 Raster data
-3.5.1 Cell data
-3.5.2 Digital numbers
-3.6 Triangulated Irregular Networks
-3.7 Common file types
-3.7.1 Shapefile (.shp)
-3.7.2 Geodatabase (.gdb)
-3.7.3 LAS (.las)
-3.7.4 Comma Separated Values (.csv)
-3.7.5 GPS data (.gpx)
-3.7.6 Keyhole Markup Language (.kml)
-3.7.7 ASCII images (.asc)
-3.7.8 ENVI-format images (.dat)
-3.7.9 GeoTiff images (.tif)
+## How is Data Represented in a Computer
+This might be better for the start of the chapter?
+### Bits & Bytes
+Bits are singluar pieces of information, representing 1's and 0's.  A circut is either on or off.  The next step up from that, is the byte.  "The byte is a unit of digital information that most commonly consists of eight bits. Historically, the byte was the number of bits used to encode a single character of text in a computer and for this reason it is the smallest addressable unit of memory in many computer architectures." - copy pasta from Wikipedia
+
+### Types of Numbers
+Integer vs. Floating-point  Discreet vs. Continuous
+
+### Other types of information
+Text, Boolean, Dates
+
+## Spatial data models
+### Vector data
+#### Points
+#### Lines
+#### Polygons
+#### Attributes
+
+### Raster data
+#### Cell data
+#### Digital numbers
+
+### Triangulated Irregular Networks
+Are these worth more than a passing mention?
 
 
-## First Section Header
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa. 
-
-![Figure caption text is also alt text.](images/01-image.png){.center}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
-
-:::: {.box-content .your-turn-content}
-
-::: {.box-title .your-turn-top}
-#### Your turn! {-}
-:::
-
-<iframe width=100% height=800px src='https://paulpickell.ca/scenejs-test/' frameBorder="0" >
-  <p>Your browser does not support iframes</p>
-</iframe>
-
-::::
-
-## Second Section Header
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa. 
-
-:::: {.box-content .case-study-content}
-
-::: {.box-title .case-study-top}
 #### Case Study {-}
 :::
 
-#### Case study title max of forty characters {#box-text -}
+#### Police Involved Deaths in Canada {#box-text -}
 
-<p id="box-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent non magna non nunc auctor eleifend. Etiam fringilla fermentum nisl at volutpat. Duis sodales lorem interdum, posuere neque sollicitudin, malesuada nisl. Sed laoreet commodo dui et cursus. Curabitur vel porta mauris. In lacinia ac ex ac varius. Nullam at vulputate ligula. Nunc sed faucibus urna, eget placerat sapien. Fusce ut lorem a ante congue consequat et sed tortor. Integer neque urna, vehicula at aliquam non, luctus non mi. Pellentesque et massa vehicula, cursus erat id, aliquet sapien. Sed rhoncus vehicula risus, vel aliquam eros porta eget. Etiam maximus, massa in pretium semper, est libero feugiat ipsum, quis tempor nunc libero in nibh. Nunc sollicitudin mattis metus ut rutrum. Donec urna purus, sodales id nibh in, ultricies tincidunt nibh. Proin porta accumsan aliquet.</p>
+<p id="box-text">I'll fill this in later. Here is a <a href="https://github.com/PoliceInvolvedDeathsInCanada">link</a> to the github org where I'll be hosting the data.  I'll give an interactive map & a brief discussion the data types used (nominal) ratio (police involved death rate and how they can be used together.  I think this is a good example of how qualitative data and descriptor can be very useful.  But its also super depressing.</p>
 
-<p id="box-text">Cras convallis erat ante, ut tristique est tempor elementum. Nam mollis, ipsum at vehicula vestibulum, est magna finibus nisl, et laoreet metus massa et ipsum. Proin eget eros ac odio euismod volutpat et ac diam. Cras viverra ut libero vel pulvinar. Duis nisi magna, sagittis id ligula ac, efficitur commodo eros. Nulla tincidunt id nulla in lobortis. Sed non mi eu mi fermentum cursus. In elit velit, semper sed gravida at, imperdiet sed nibh. Aliquam quis massa malesuada, venenatis nunc sed, malesuada nulla. Vestibulum malesuada purus ut ex ullamcorper, ut blandit lacus lobortis. Curabitur scelerisque velit justo, quis porttitor purus efficitur ut. Phasellus nec arcu vestibulum, consequat ante id, elementum velit. Proin arcu tortor, cursus vitae sem id, congue semper urna. Integer tempus in est eu consequat. Donec sodales, quam vel finibus faucibus, leo ante dictum quam, id tempus ligula dolor quis erat. Curabitur non elementum sem. Mauris placerat fermentum orci non lacinia. Ut imperdiet dui lectus, ac malesuada felis euismod sed. Nulla non volutpat dui, in suscipit turpis.</p>
+
+<iframe width=100% height=800px src='images/03-PoliceViolenceIncidents_BC.html' frameBorder="0" >
+  <p>Your browser does not support iframes</p>
+</iframe>
 
 <p id="box-text">Case studies should have at least one image or map (no more than 2 total) and the written length should be around 300 words (shown above). Any references to external literature should by hyperlinked with the Digitial Object Identifier (DOI) permanent URL and [entered into the bibliography](https://bookdown.org/yihui/bookdown/citations.html){target="_blank"}. Avoid linking to external resources without a DOI and permanent URL. Contact Paul or try using the Leaflet package in R if you want to add an interactive web map.</p>
 
 ::::
 
-## Third Section Header
-
-[This is how we link to something. {target="_blank"} ensures that this link opens in a new window rather than navigating away from the textbook.](https://google.com){target="_blank"}
-
+## Common file types
+### Shapefile (.shp)
+### Geodatabase (.gdb)
+### LAS (.las)
+### Comma Separated Values (.csv)
+### GPS data (.gpx)
+### Keyhole Markup Language (.kml)
+### ASCII images (.asc)
+### ENVI-format images (.dat)
+### GeoTiff images (.tif)
 :::: {.box-content .your-turn-content}
 
 ::: {.box-title .your-turn-top}
 #### Your turn! {-}
 :::
 
-<p id="box-text">Ask the reader to undertake some activity or exercise. Have them explore data, an interactive tool, a web map. Avoid referencing, relying on, or using external URLs. If it can be built, coded, or hosted by us, then it should be.</p>
-
-<iframe width=100% height=800px src='http://paulpickell.ca/raster-calculator/low-pass-filter.html' frameBorder="0" >
-  <p>Your browser does not support iframes</p>
-</iframe>
+<p id="box-text">I'll do some exercise building on the case study.</p>
 
 ::::
 

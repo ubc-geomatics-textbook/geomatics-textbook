@@ -1,6 +1,6 @@
 # Types of Data {#types-of-data}
 
-**Data Types**, Any entity we wish to represent in a Geographic Information System can be described with three pieces of information What, When, and Where?  In the previous chapter, we introduced how to represent the where on the earth an entity occurs inside a GIS.  In this chapter we will introduce how we can describe what an entity is and when it occurs.  Then we will cover how we use spatial data models to link the what and when to the where using spatial data models.  Then we will wrap up by introducing some of the specific file types we use in GIS to represent spatial data.
+**Data Types**, Any entity we wish to represent in a Geographic Information System can be described with three pieces of information What, When, and Where?  In the previous chapter, we introduced how to represent the where on the earth an entity occurs inside a GIS.  In this chapter we will introduce how we can describe what an entity is or when it occurs.  Then we will cover how we use spatial data models to link the what and when to the where using spatial data models.  Then we will wrap up by introducing some of the specific file types we use in GIS to represent spatial data.
 
 :::: {.box-content .learning-objectives-content}
 
@@ -19,6 +19,8 @@
 Attribute, Qualitative, Quantitative, Vector, Raster
 
 
+
+
 ## Attribute Data
 
 Spatial data is the foundation of Geographic Information Science, but spatial coordinates are meaningless unless they are linked with descriptive information about the location.  Any non-spatial data relating to a spatial entity is known as an attribute.  This non-spatial data can broadly be classified as either qualitative or quantitative.  Data that is strictly descriptive and lacks any numeric quantity is qualitative.  Data with numerical values that are separated by some meaningful interval is quantitative.  The types of analysis we can conduct with qualitative data is more limited than quantitative data, but that does not necessarily mean quantitative is "better" than qualitative.
@@ -29,7 +31,7 @@ Spatial data is the foundation of Geographic Information Science, but spatial co
 
 ### Nominal
 
-Quantitative data that just consists of a name/category with no ranking or direction is known as Nominal data.  One category is not more or less, better or worse than another, they are just different.  A good example would be flower types (see fig).  Other examples would be zoning categories, colors, flavors of ice cream, place names, etc.  The only arithmetic operations we can do with nominal data are checking for equality (True/False), count occurrences, and calculate the mode (most frequent occurrence).  
+Qualitative data that just consists of a name/category with no ranking or direction is known as Nominal data.  One category is not more or less, better or worse than another, they are just different.  A good example would be flower types (see fig).  Other examples would be zoning categories, colors, flavors of ice cream, place names, etc.  The only arithmetic operations we can do with nominal data are checking for equality (True/False), count occurrences, and calculate the mode (most frequent occurrence).  
 
 
 ![My own images, can update text/font/styling as necessary](images/03-flowers-nominal.png){.center}
@@ -42,7 +44,7 @@ Quantitative data that just consists of a name/category with no ranking or direc
 
 ### Ordinal
 
-Quantitative that has some sort of ranking, but no numerical scale associated with that ranking is known as Ordinal.  A good example would be relative sizes (see fig).  We can see Yarrow is taller than her sister Shamsa, so we can rank these dogs by height.  However, we haven't measured their heights, so we don't know how much taller Yarrow is than Shamsa.  Some other good examples of Ordinal data include  spice levels (mild, medium, hot), residential zoning density (low, medium, high), and survey responses.  With ordinal data, we can do all operations we can do with nominal data, plus a few more.  We can check the order/rank (greater than, less than) and in some circumstances we can calculate the median (see figure).
+Qualitative that has some sort of ranking, but no numerical scale associated with that ranking is known as Ordinal.  A good example would be relative sizes (see fig).  We can see Yarrow is taller than her sister Shamsa, so we can rank these dogs by height.  However, we haven't measured their heights, so we don't know how much taller Yarrow is than Shamsa.  Some other good examples of Ordinal data include  spice levels (mild, medium, hot), residential zoning density (low, medium, high), and survey responses.  With ordinal data, we can do all operations we can do with nominal data, plus a few more.  We can check the order/rank (greater than, less than) and in some circumstances we can calculate the median (see figure).
 
 
 ![My own images, can update text/font/styling as necessary](images/03-dogs-ordinal.png){.center}
@@ -52,10 +54,9 @@ Quantitative that has some sort of ranking, but no numerical scale associated wi
 ### Graded membership
  ... necessary?  Related to ambiguity, is this the right place to talk about it??
 
-## Quantitative
 
 ### Interval
-Numeric data on a fixed scale but with an arbitrary zero point is known as interval data.  A good example of this type of data is temperature in degrees Celsius.  
+Quantitative data on a fixed scale but with an arbitrary zero point is known as interval data.  A good example of this type of data is temperature in degrees Celsius.  
 * Time (3PM)
 * Dates (2021)
 * Temperature (Celsius/Fahrenheit)
@@ -65,7 +66,7 @@ Numeric data on a fixed scale but with an arbitrary zero point is known as inter
  ... necessary?  
 
 ### Ratio
-Numeric data with an absolute zero point (no negative value).  A good example of this type of data is population (see figure).  Other examples are, temperature (in Kelvin), precipitation, height, income, rental cost.
+Quantitative data with an absolute zero point (no negative value).  A good example of this type of data is population (see figure).  Other examples are, temperature (in Kelvin), precipitation, height, income, rental cost.
 
 
 ### Extensive Ratio
@@ -78,25 +79,71 @@ I think all these can just be lumped in with Ratio Above^
 #### Absolute
 ????
 
-## How is Data Represented in a Computer
-This might be better for the start of the chapter?
-### Bits & Bytes
-Bits are singluar pieces of information, representing 1's and 0's.  A circut is either on or off.  The next step up from that, is the byte.  "The byte is a unit of digital information that most commonly consists of eight bits. Historically, the byte was the number of bits used to encode a single character of text in a computer and for this reason it is the smallest addressable unit of memory in many computer architectures." - copy pasta from Wikipedia
-
-### Types of Numbers
-Integer vs. Floating-point  Discreet vs. Continuous
-
-### Other types of information
-Text, Boolean, Dates
 
 ## Spatial data models
 ### Vector data
+
+Vectors use points, lines, and polygons to represent objects
+Data attributes are stored in a separate database table and linked using simple identification numbers
+ 
+ 
+ 
+
 #### Points
+Points are “zero-dimensional”:
+They don’t have length, width, or height in the system
+Points have an (𝒙,𝒚) coordinate pair describing their location
+
+
 #### Lines
+Lines are one-dimensional:
+They have length, but no width or height
+Lines have at least two points, a beginning point and an end point
+Lines may also have any number of middle points, called vertices
+
+
 #### Polygons
-#### Attributes
+Polygons are two-dimensional:
+They may have length and width
+Polygons have at least three points
+The beginning and end points must be the same 
+Polygons have straight or curved line segments, sometimes called “edges”
+
+#### Tabular Data (Attributes)
+Information about a point, line, or area
+Only one data type per column
+Data type limits what kind and how much information 
+Text
+Numeric: Float/Double, Long/Short Integer
+Object 
+One entry per cell
+Rows are distinct
+Null values possible
 
 ### Raster data
+Space represented with a grid of equally sized pixels/grid cells.
+A single value is assigned to each cell
+In GIS, rasters are most commonly encountered as:
+Satellite imagery
+Drone imagery
+Elevation models
+Bathymetric models
+Scanned maps
+
+Numeric data value assigned to each grid cell at each location, corresponding to the entity being modelled. 
+Typically used to represent surfaces, since every grid cell is assigned a data value.
+
+
+Multiple layers can be combined
+Each layer represents a different field
+Raster Math:
+Layers can be combined with expressions get new information
+A = Average July Temperature
+B = Average January Temperature
+C = A – B
+Average Temperature Range
+
+
 #### Cell data
 #### Digital numbers
 
@@ -119,6 +166,20 @@ Are these worth more than a passing mention?
 <p id="box-text">Case studies should have at least one image or map (no more than 2 total) and the written length should be around 300 words (shown above). Any references to external literature should by hyperlinked with the Digitial Object Identifier (DOI) permanent URL and [entered into the bibliography](https://bookdown.org/yihui/bookdown/citations.html){target="_blank"}. Avoid linking to external resources without a DOI and permanent URL. Contact Paul or try using the Leaflet package in R if you want to add an interactive web map.</p>
 
 ::::
+
+
+## How is Data Represented in a Computer
+Before we talk about the different types of data, lets briefly discuss how information is represented inside a computer, the
+
+### Bits & Bytes
+Bits are singluar pieces of information, representing 1's and 0's.  A circut is either on or off.  The next step up from that, is the byte.  "The byte is a unit of digital information that most commonly consists of eight bits. Historically, the byte was the number of bits used to encode a single character of text in a computer and for this reason it is the smallest addressable unit of memory in many computer architectures." - copy pasta from Wikipedia
+
+### Types of Numbers
+Integer vs. Floating-point  Discreet vs. Continuous
+
+### Other types of information
+Text, Boolean, Dates
+
 
 ## Common file types
 ### Shapefile (.shp)

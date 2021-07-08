@@ -25,6 +25,8 @@ Attribute, Qualitative, Quantitative, Vector, Raster
 
 Spatial data is the foundation of Geographic Information Science, but spatial coordinates are meaningless unless they are linked with descriptive information about the location.  Any non-spatial data relating to a spatial entity is known as an attribute.  This non-spatial data can broadly be classified as either qualitative or quantitative.  Data that is strictly descriptive and lacks any numeric quantity is qualitative.  Data with numerical values that are separated by some meaningful interval is quantitative.  The types of analysis we can conduct with qualitative data is more limited than quantitative data, but that does not necessarily mean quantitative is "better" than qualitative.
 
+Should I have subsections to introduce quantitative vs. qualitative?
+
 ![From my lectures.  IDK the original source, but it'd be easy enough to just "recreate" my own.](images/03-scales.png){.center}
 
 ![From my lectures.  IDK the original source, but it'd be easy enough to just "recreate" my own.](images/03-operations.png){.center}
@@ -38,7 +40,6 @@ Qualitative data that just consists of a name/category with no ranking or direct
 
 ![My own images, can update text/font/styling as necessary](images/03-nominal-opperations.png){.center}
 
-![My own images, can update text/font/styling as necessary](images/03-nominal-counts.png){.center}
 
 
 
@@ -61,17 +62,22 @@ Quantitative data on a fixed scale but with an arbitrary zero point is known as 
 * Dates (2021)
 * Temperature (Celsius/Fahrenheit)
   * 20 ˚C is not “twice as warm” as 10 ˚
+    * 293.15 ˚K vs as 283.15 ˚K
+    * 200 ˚K is "twice as warm" as 100 ˚K
 
-### Log-Interval
- ... necessary?  
+Might be better to introduce ratio first?
+
+![My own images, can update text/font/styling as necessary.  Very rough draft](images/03-interval-temperature.png){.center}
+
+Log-Interval was listed - is it necessary?  I don't think it needs its own section?
 
 ### Ratio
-Quantitative data with an absolute zero point (no negative value).  A good example of this type of data is population (see figure).  Other examples are, temperature (in Kelvin), precipitation, height, income, rental cost.
+Quantitative data with an absolute zero point (no negative value).  A good example of this type of data is population (see figure).  A population of 200 is 2x a population of 100.  Other examples are, temperature (in Kelvin), precipitation, height, income, rental cost.  With ratio data we can do any kind of arithmetic operation.  Add/subtract, multiply/divide, along with calculating measures of central tendency (mean, median).  
+
+(Figure idea) - population map or simple chart with stick figures highlighting population counts.
 
 
-### Extensive Ratio
-### Cyclical Ratio
-### Derived Ratio
+What are these: Extensive Ratio, Cyclical Ratio, Derived Ratio (normalization?)
 I think all these can just be lumped in with Ratio Above^
 
 ### Counts
@@ -86,7 +92,8 @@ I think all these can just be lumped in with Ratio Above^
 Vectors use points, lines, and polygons to represent objects
 Data attributes are stored in a separate database table and linked using simple identification numbers
  
- 
+
+![https://www.oercommons.org/courses/introduction-to-geospatial-concepts/view - might be easier to recreate our own if the logo is an issue?](images/03-vector-example.png){.center}
  
 
 #### Points
@@ -94,6 +101,7 @@ Points are “zero-dimensional”:
 They don’t have length, width, or height in the system
 Points have an (𝒙,𝒚) coordinate pair describing their location
 
+![My own images, can update text/font/styling as necessary.  Very rough draft](images/03-vector-points.png){.center}
 
 #### Lines
 Lines are one-dimensional:
@@ -120,6 +128,9 @@ One entry per cell
 Rows are distinct
 Null values possible
 
+
+![https://www.oercommons.org/courses/introduction-to-geospatial-concepts/view - might be easier to recreate our own if the logo is an issue?](images/03-vector-attributes.png){.center}
+
 ### Raster data
 Space represented with a grid of equally sized pixels/grid cells.
 A single value is assigned to each cell
@@ -143,6 +154,9 @@ B = Average January Temperature
 C = A – B
 Average Temperature Range
 
+![https://www.oercommons.org/courses/introduction-to-geospatial-concepts/view - I think this one is pretty good, I use it in my lecture notes.](images/03-raster-example.png){.center}
+
+![https://www.oercommons.org/courses/introduction-to-geospatial-concepts/view - I think this one is pretty good, I use it in my lecture notes.](images/03-raster-resolution.png){.center}
 
 #### Cell data
 #### Digital numbers
@@ -184,6 +198,8 @@ Text, Boolean, Dates
 ## Common file types
 ### Shapefile (.shp)
 ### Geodatabase (.gdb)
+This isn't really a file type?  Might this go better in chapter 5?
+
 ### LAS (.las)
 ### Comma Separated Values (.csv)
 ### GPS data (.gpx)

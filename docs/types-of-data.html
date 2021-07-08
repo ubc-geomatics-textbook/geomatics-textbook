@@ -24,7 +24,7 @@
 <meta name="author" content="UBC" />
 
 
-<meta name="date" content="2021-07-07" />
+<meta name="date" content="2021-07-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -120,12 +120,8 @@
 <li class="chapter" data-level="2.1.2" data-path="types-of-data.html"><a href="types-of-data.html#ordinal"><i class="fa fa-check"></i><b>2.1.2</b> Ordinal</a></li>
 <li class="chapter" data-level="2.1.3" data-path="types-of-data.html"><a href="types-of-data.html#graded-membership"><i class="fa fa-check"></i><b>2.1.3</b> Graded membership</a></li>
 <li class="chapter" data-level="2.1.4" data-path="types-of-data.html"><a href="types-of-data.html#interval"><i class="fa fa-check"></i><b>2.1.4</b> Interval</a></li>
-<li class="chapter" data-level="2.1.5" data-path="types-of-data.html"><a href="types-of-data.html#log-interval"><i class="fa fa-check"></i><b>2.1.5</b> Log-Interval</a></li>
-<li class="chapter" data-level="2.1.6" data-path="types-of-data.html"><a href="types-of-data.html#ratio"><i class="fa fa-check"></i><b>2.1.6</b> Ratio</a></li>
-<li class="chapter" data-level="2.1.7" data-path="types-of-data.html"><a href="types-of-data.html#extensive-ratio"><i class="fa fa-check"></i><b>2.1.7</b> Extensive Ratio</a></li>
-<li class="chapter" data-level="2.1.8" data-path="types-of-data.html"><a href="types-of-data.html#cyclical-ratio"><i class="fa fa-check"></i><b>2.1.8</b> Cyclical Ratio</a></li>
-<li class="chapter" data-level="2.1.9" data-path="types-of-data.html"><a href="types-of-data.html#derived-ratio"><i class="fa fa-check"></i><b>2.1.9</b> Derived Ratio</a></li>
-<li class="chapter" data-level="2.1.10" data-path="types-of-data.html"><a href="types-of-data.html#counts"><i class="fa fa-check"></i><b>2.1.10</b> Counts</a></li>
+<li class="chapter" data-level="2.1.5" data-path="types-of-data.html"><a href="types-of-data.html#ratio"><i class="fa fa-check"></i><b>2.1.5</b> Ratio</a></li>
+<li class="chapter" data-level="2.1.6" data-path="types-of-data.html"><a href="types-of-data.html#counts"><i class="fa fa-check"></i><b>2.1.6</b> Counts</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="types-of-data.html"><a href="types-of-data.html#spatial-data-models"><i class="fa fa-check"></i><b>2.2</b> Spatial data models</a>
 <ul>
@@ -211,6 +207,7 @@
 <div id="attribute-data" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Attribute Data</h2>
 <p>Spatial data is the foundation of Geographic Information Science, but spatial coordinates are meaningless unless they are linked with descriptive information about the location. Any non-spatial data relating to a spatial entity is known as an attribute. This non-spatial data can broadly be classified as either qualitative or quantitative. Data that is strictly descriptive and lacks any numeric quantity is qualitative. Data with numerical values that are separated by some meaningful interval is quantitative. The types of analysis we can conduct with qualitative data is more limited than quantitative data, but that does not necessarily mean quantitative is “better” than qualitative.</p>
+<p>Should I have subsections to introduce quantitative vs. qualitative?</p>
 <div class="figure">
 <img src="images/03-scales.png" class="center" alt="" />
 <p class="caption">From my lectures. IDK the original source, but it’d be easy enough to just “recreate” my own.</p>
@@ -228,10 +225,6 @@
 </div>
 <div class="figure">
 <img src="images/03-nominal-opperations.png" class="center" alt="" />
-<p class="caption">My own images, can update text/font/styling as necessary</p>
-</div>
-<div class="figure">
-<img src="images/03-nominal-counts.png" class="center" alt="" />
 <p class="caption">My own images, can update text/font/styling as necessary</p>
 </div>
 </div>
@@ -257,28 +250,25 @@
 * Time (3PM)
 * Dates (2021)
 * Temperature (Celsius/Fahrenheit)
-* 20 ˚C is not “twice as warm” as 10 ˚</p>
+* 20 ˚C is not “twice as warm” as 10 ˚
+* 293.15 ˚K vs as 283.15 ˚K
+* 200 ˚K is “twice as warm” as 100 ˚K</p>
+<p>Might be better to introduce ratio first?</p>
+<div class="figure">
+<img src="images/03-interval-temperature.png" class="center" alt="" />
+<p class="caption">My own images, can update text/font/styling as necessary. Very rough draft</p>
 </div>
-<div id="log-interval" class="section level3" number="2.1.5">
-<h3><span class="header-section-number">2.1.5</span> Log-Interval</h3>
-<p>… necessary?</p>
+<p>Log-Interval was listed - is it necessary? I don’t think it needs its own section?</p>
 </div>
-<div id="ratio" class="section level3" number="2.1.6">
-<h3><span class="header-section-number">2.1.6</span> Ratio</h3>
-<p>Quantitative data with an absolute zero point (no negative value). A good example of this type of data is population (see figure). Other examples are, temperature (in Kelvin), precipitation, height, income, rental cost.</p>
+<div id="ratio" class="section level3" number="2.1.5">
+<h3><span class="header-section-number">2.1.5</span> Ratio</h3>
+<p>Quantitative data with an absolute zero point (no negative value). A good example of this type of data is population (see figure). A population of 200 is 2x a population of 100. Other examples are, temperature (in Kelvin), precipitation, height, income, rental cost. With ratio data we can do any kind of arithmetic operation. Add/subtract, multiply/divide, along with calculating measures of central tendency (mean, median).</p>
+<p>(Figure idea) - population map or simple chart with stick figures highlighting population counts.</p>
+<p>What are these: Extensive Ratio, Cyclical Ratio, Derived Ratio (normalization?)
+I think all these can just be lumped in with Ratio Above^</p>
 </div>
-<div id="extensive-ratio" class="section level3" number="2.1.7">
-<h3><span class="header-section-number">2.1.7</span> Extensive Ratio</h3>
-</div>
-<div id="cyclical-ratio" class="section level3" number="2.1.8">
-<h3><span class="header-section-number">2.1.8</span> Cyclical Ratio</h3>
-</div>
-<div id="derived-ratio" class="section level3" number="2.1.9">
-<h3><span class="header-section-number">2.1.9</span> Derived Ratio</h3>
-<p>I think all these can just be lumped in with Ratio Above^</p>
-</div>
-<div id="counts" class="section level3" number="2.1.10">
-<h3><span class="header-section-number">2.1.10</span> Counts</h3>
+<div id="counts" class="section level3" number="2.1.6">
+<h3><span class="header-section-number">2.1.6</span> Counts</h3>
 <p>…. this is more an operation? Can be done to any data type? I don’t think it merits its own section.
 #### Absolute
 ????</p>
@@ -290,11 +280,19 @@
 <h3><span class="header-section-number">2.2.1</span> Vector data</h3>
 <p>Vectors use points, lines, and polygons to represent objects
 Data attributes are stored in a separate database table and linked using simple identification numbers</p>
+<div class="figure">
+<img src="images/03-vector-example.png" class="center" alt="" />
+<p class="caption"><a href="https://www.oercommons.org/courses/introduction-to-geospatial-concepts/view" class="uri">https://www.oercommons.org/courses/introduction-to-geospatial-concepts/view</a> - might be easier to recreate our own if the logo is an issue?</p>
+</div>
 <div id="points" class="section level4" number="2.2.1.1">
 <h4><span class="header-section-number">2.2.1.1</span> Points</h4>
 <p>Points are “zero-dimensional”:
 They don’t have length, width, or height in the system
 Points have an (𝒙,𝒚) coordinate pair describing their location</p>
+<div class="figure">
+<img src="images/03-vector-points.png" class="center" alt="" />
+<p class="caption">My own images, can update text/font/styling as necessary. Very rough draft</p>
+</div>
 </div>
 <div id="lines" class="section level4" number="2.2.1.2">
 <h4><span class="header-section-number">2.2.1.2</span> Lines</h4>
@@ -322,6 +320,10 @@ Object
 One entry per cell
 Rows are distinct
 Null values possible</p>
+<div class="figure">
+<img src="images/03-vector-attributes.png" class="center" alt="" />
+<p class="caption"><a href="https://www.oercommons.org/courses/introduction-to-geospatial-concepts/view" class="uri">https://www.oercommons.org/courses/introduction-to-geospatial-concepts/view</a> - might be easier to recreate our own if the logo is an issue?</p>
+</div>
 </div>
 </div>
 <div id="raster-data" class="section level3" number="2.2.2">
@@ -344,6 +346,14 @@ A = Average July Temperature
 B = Average January Temperature
 C = A – B
 Average Temperature Range</p>
+<div class="figure">
+<img src="images/03-raster-example.png" class="center" alt="" />
+<p class="caption"><a href="https://www.oercommons.org/courses/introduction-to-geospatial-concepts/view" class="uri">https://www.oercommons.org/courses/introduction-to-geospatial-concepts/view</a> - I think this one is pretty good, I use it in my lecture notes.</p>
+</div>
+<div class="figure">
+<img src="images/03-raster-resolution.png" class="center" alt="" />
+<p class="caption"><a href="https://www.oercommons.org/courses/introduction-to-geospatial-concepts/view" class="uri">https://www.oercommons.org/courses/introduction-to-geospatial-concepts/view</a> - I think this one is pretty good, I use it in my lecture notes.</p>
+</div>
 <div id="cell-data" class="section level4" number="2.2.2.1">
 <h4><span class="header-section-number">2.2.2.1</span> Cell data</h4>
 </div>
@@ -398,6 +408,7 @@ Case studies should have at least one image or map (no more than 2 total) and th
 </div>
 <div id="geodatabase-.gdb" class="section level3" number="2.4.2">
 <h3><span class="header-section-number">2.4.2</span> Geodatabase (.gdb)</h3>
+<p>This isn’t really a file type? Might this go better in chapter 5?</p>
 </div>
 <div id="las-.las" class="section level3" number="2.4.3">
 <h3><span class="header-section-number">2.4.3</span> LAS (.las)</h3>

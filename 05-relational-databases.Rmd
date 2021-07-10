@@ -1,0 +1,544 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include=FALSE}
+library("dplyr")
+library("rgdal")
+library("leaflet")
+library("xtable")
+library("plyr")
+```
+
+# Relational Databases {#relational-databases}
+
+You have almost certainly used a relational database in some form during your life, probably without even realizing it. Relational databases are foundational for information management in a GIS. In this chapter, we will look at the formal construction of relational databases, how they are used across a wide range of fields, and how we can use them to analyze spatial and aspatial information for environmental management.
+
+:::: {.box-content .learning-objectives-content}
+
+::: {.box-title .learning-objectives-top}
+#### Learning Objectives {-}
+::: 
+
+1. Identify the purpose of Relational Database Management Systems in GIS
+2. Describe the formal elements of relational databases
+3. Practice applying relational algebra and boolean operators to relations
+4. Recognize the uses of different keys for joining and relating information
+5. Understand how to query relational databases in order to extract or produce new information
+
+::::
+
+### Key Terms {-}
+
+Relational Database Management Systems, Tables, Relations, Rows, Tuples, Records, Columns, Attributes, Items, Structured Query Language, Boolean Operator, Relational Algebra, Entity-Relationship Model, Cartesian Product, Schema, Operand, Unary, Binary, Georelational Data Model, Domain
+
+## Relational database management systems
+
+Suppose you have collected some data about some trees. You might have organized these data into a table, where each row represents a different plot, and each column represents some quantitative or qualitative measure about each record. How do you *manage* these data in order to extract useful information from your trees? This is where Relational Database Management Systems can help. A **Relational Database Management System (RDBMS)** is a software that allows the user to interact with tabular data. The basic services provided by a RDBMS include storing, querying, and manipulating relational databases. We say the databases are *relational* because they are based on a relational model first developed by Edgar Codd in the 1970s at IBM. The relational model for database management is distinguished from non-relational models by the fact that data are stored in highly structured tables instead of some other format like documents. This distinction is important, because the vast majority of GIS software utilize the relational model for database management.
+
+## Relational databases
+
+Within a RDBMS, we find **relational databases**, which are highly structured tables comprised of rows and columns. In fact, a table in a relational database is called a **relation**, a row is a **tuple**, and a column is an **attribute**. Relational databases are a great way to store simple data structures that can be organized into a relation with tuples and attributes. When we say that a table or relation is "structured", we are referring to the fact that the data are organized according to a database **schema**, which is a set of constraints that ensure data integrity and consistency. For example, our set of trees likely all contain the same types of information and this can be easily organized into a relation. Suppose we measured the height, diameter at breast height (DBH), and species of each tree, then our relation would look like Figure 5.1.
+
+![Figure 5.1 ipsum](images/05-01-tabular-data-spatial-data.png){.center}
+
+As you can see from the example above, there are two components to geospatial data: the tabular data containing tuples and attributes and the spatial data that contain the coordinate pairs for a projected or geographic coordinate system. This structure is known generically as the **georelational data model**. Many formats of geospatial data conform to the georelational data model, which stores a relation of tuples and attributes separately from another relation containing the geometry and coordinates. These two tables are then dynamically related to one another in a RDBMS using GIS software. You will almost never interact or see the relation that stores the geometry and coordinates of features contained in a relational database. Instead, the GIS software manages those files in the background for the purpose of displaying a set of features on a map, and you primarily interact with the tabular data stored in the relation of tuples and attributes.
+
+The schema for the very simple example above would include the constraint and expectation that when we retrieve the height of a particular tree from the relation, it will be returned to us as an integer number and not a date. This logic is extended to all attributes so that types of values are never mixed and values are never unexpectedly changed by any database operation. That is to say, we can and often do intentionally change values in a relation, but any new values must conform to the database schema for a particular attribute, which may also be constrained by a range and type of potential values, known as an attribute **domain**.
+
+More formally, a relation $R$ is a *subset* of two sets, $A$ (tuples) and $B$ (attributes). The product of these sets $A×B$ is called the **Cartesian product**. In the same way that Cartesian coordinates are ordered pairs of values from two axes, the Cartesian product of two sets gives us an ordered pair of elements $(a,b)$ from sets $A$ and $B$, where $a$ is an element in the set $A$, written as $a∈A$, and $b$ is an element of set $B$, written as $b∈B$. Therefore, $R$ is both the Cartesian product as well as any subset of $A×B$.
+
+There are a few rules to be followed for organizing data into a relation:
+
+1. Each tuple must share the same attributes as all the other tuples;
+2. Each attribute has a unique name and is of the same *type* of data (i.e., integer, floating-point decimal, text, date, boolean, etc.);
+3. The order of tuples and attributes can be rearranged without changing the meaning or integrity of the data; and
+4. Each tuple is unique (i.e., no duplicate observations).
+
+If any of the above rules are broken, then $R≠A×B$ and you are just looking at a plain-old table instead of a relation. In this way, relational databases are comprised of relations that are highly structured by a schema, which allows the user to query, retrieve, update, and delete data using a RDBMS. 
+
+### Relational algebra operators
+
+One of the fundamental jobs of a RDBMS is to apply relational algebra operations to relations stored in a relational database. Remember that we defined a relation as $R=A×B$ and that any subset of $A×B$ is also a relation $S$ or $T$. This transitive property of relations is an important feature that allows us to apply a formal, algebraic language. In other words, relational algebra operations take one relation as input and produce a new relation as an output without modifying the input relation. This new output relation can then be used as an input to another operation because it is also a relation. Both the input and output relations are objects known as **operands** that are operated on by mathematical operators.
+
+### Selection
+
+**Selection** is the simplest operation to understand and is probably the most-used in day-to-day GIS work. It does exactly what it sounds like, it retrieves a subset of a relation given some **predicate** or condition. For example, we could select all tree IDs from our relation in Figure 5.1 that have a height greater than 20 m. This would yield tree 5. Formally, selection is expressed as $σ_{predicate}(R)$ and the example above would be written as $σ_{height>20}(R)$, which evaluates to the following:
+
+```{r, echo=FALSE}
+ID <- 1:5
+height <- c(14,18,16,25,20)
+dbh <- c(26.8,30.5,28.7,36.0,34.6)
+species <- c("Western Hemlock","Western Hemlock","Western Hemlock","Douglas-Fir","Douglas-Fir")
+R <- data.frame(ID=ID,Height=height,DBH=dbh,Species=species)
+names(R) <- c("ID","Height (m)", "DBH (cm)", "Species")
+```
+
+```{r, echo=FALSE}
+knitr::kable(
+  R[which(R$`Height (m)`>20),], booktabs = TRUE, row.names = FALSE
+)
+```
+
+### Projection
+
+If selection is understood to operate on attributes to return tuples, then **projection** is an operation on tuples to return attributes. For example, suppose we are only interested in the height and DBH attributes for the trees. We would use projection to return this new subset of the relation. Formally, projection is expressed as $Π_{predicate}(R)$. Both projection and selection are referred to as **unary** operators because they only require a single relation as input. The example above would be expressed using the attributes that we want to preserve, so $Π_{height,dbh}(R)$, which evaluates to the following:
+
+```{r, echo=FALSE}
+knitr::kable(
+  R[,c(-1,-4)], booktabs = TRUE, row.names = FALSE
+)
+```
+
+At this point, it is important to emphasize the case of $Π_{species}(R)$, which evaluates to:
+
+```{r, echo=FALSE}
+spu <- unique(R$Species)
+Tr <- data.frame(Species=spu)
+knitr::kable(
+  Tr, booktabs = TRUE, row.names = FALSE
+)
+```
+
+Recall that the output of a relational algebra operation is also a relation. Remember the rule that a relation cannot have any repeating tuples? Well, in the case of a 1-dimensional relation where we only have one attribute and several tuples, any duplicate values for the tuples must be eliminated, leaving us with only the two unique values "Douglas-Fir" and "Western Hemlock" when we project $R$ over $Species$. You should recognize now that this property of projection can be useful for identifying the unique values of any attribute, which is frequently needed when sorting through a relational database.
+
+### Rename
+
+**Rename** is an operator that allows us to assign a variable name to a relational algebra expression. This has the benefit of making it simpler to track or reuse previous operations in complex relational database algebra. For example, let $S = σ_{height>20}(R)$, then $Π_{species}(S)$ evaluates to:
+
+```{r, echo=FALSE}
+knitr::kable(
+  data.frame(Species=R[which(R$`Height (m)`>20),4]), booktabs = TRUE, row.names = FALSE
+)
+```
+
+### Union
+
+Next we will introduce **binary** operators, that is, they take two relations as input. **Union** is one such operator that effectively appends one relation to another. The important rule for union is that both input relations must share the same attributes. Formally, union is expressed as $S∪T$ where $S$ and $T$ are the two input relations. You can think of union as simply concatenating the tuples of the two relations together. In other words, the tuples of $S$ are appended to the tuples of $T$ to generate a new output relation. For example, suppose that we make two subsets of our relation $R$ of trees:
+
+$$
+S = σ_{height>20}(R)
+$$
+
+$$
+T = σ_{height≥20}(R)
+$$
+
+Then we can union these two relations back into our original relation $R$ as $S∪T$, which evaluates to:
+
+```{r, echo=FALSE}
+knitr::kable(
+  R, booktabs = TRUE, row.names = FALSE
+)
+```
+
+Formally, this would all be expressed as $σ_{height>20}(R)∪σ_{height≥20}(R)$, which in this case is also just equivalent to $R$. You should see that the result of union is an inclusion of all tuples, so semantically a union can be read as "the tuples in relation S plus the tuples in relation T". 
+
+### Intersection
+
+On the other hand, suppose that we want to define a new relation based on restricting the set of tuples that are in two different relations. This is known as **intersection** and is formally expressed as $S∩T$. Suppose we have two relations defined by subsetting height by < 25 m and > 15 m:
+
+$$S = σ_{height<25}(R)$$
+
+```{r, echo=FALSE}
+knitr::kable(
+  R[which(R$`Height (m)`<25),], booktabs = TRUE, row.names = FALSE
+)
+```
+
+$$T = σ_{height>15}(R)$$
+```{r, echo=FALSE}
+knitr::kable(
+  R[which(R$`Height (m)`>15),], booktabs = TRUE, row.names = FALSE
+)
+```
+
+There are 3 tuples that appear in both of these relations, so the intersection $S∩T$ would evaluate to:
+
+$$S∩T$$
+
+```{r, echo=FALSE}
+knitr::kable(
+  R[c(2,3,5),], booktabs = TRUE, row.names = FALSE
+)
+```
+
+### Set Difference
+
+**Set difference** returns the tuples that are unique in one relation relative to another relation. Formally, difference is expressed as $S-T$, and just like mathematical subtraction, the order of relations in the difference is important and non-commutative. For example, $σ_{height<25}(R)-σ_{height>15}(R)$ evaluates to:
+
+```{r, echo=FALSE}
+knitr::kable(
+  R[1,], booktabs = TRUE, row.names = FALSE
+)
+```
+
+and $σ_{height>15}(R)-σ_{height<25}(R)$ evaluates to:
+
+```{r, echo=FALSE}
+knitr::kable(
+  R[4,], booktabs = TRUE, row.names = FALSE
+)
+```
+
+Semantically, you would read the difference $S-T$ as "the tuples in relation S minus the tuples in relation T". 
+
+### Cartesian Product
+
+So far, we have seen the cases of mathematical addition (union) and subtraction (difference), but we can also apply multiplication and division. Multiplication of two relations is simply known as the **Cartesian product**. In the same way that a set of tuples and attributes can be multiplied to create a relation $R=A×B$, we can also multiply two relations together. For example, if $S = Π_{height,dbh}(σ_{height<20}(R))$ evaluates to:
+
+```{r, echo=FALSE}
+Sr <- R[1:3,2:3]
+knitr::kable(
+  Sr, booktabs = TRUE, row.names = FALSE
+)
+```
+
+and $T = Π_{ID,Species}(σ_{dbh>34}(R))$ evaluates to:
+
+```{r, echo=FALSE}
+Tr <- R[4:5,c(1,4)]
+knitr::kable(
+  Tr, booktabs = TRUE, row.names = FALSE
+)
+```
+
+then the Cartesian product of $S×T$ evaluates to:
+
+```{r, echo=FALSE}
+i <- rep(R[4:5,1],3)
+h <- rep(R[1:3,2],2)
+d <- rep(R[1:3,3],2)
+s <- rep(R[4:5,4],3)
+df <- data.frame(i,h,d,s)
+names(df) <- c("ID","Height (m)","DBH (cm)","Species")
+knitr::kable(
+  df, booktabs = TRUE, row.names = FALSE
+)
+```
+
+### Divide
+
+Finally, **divide** is an operation of division between two relations and you can think of it semantically as "". Formally, divide is expressed as $S÷T=U$. Like the Cartesian product and the set difference, divide is non-commutative, so the order of $S$ and $T$ changes the value of $U$. For the next example involving division, we will introduce a new relation $S$, which is not a subset of $R$. Suppose, in addition to $R$, we have cataloged information about different tree species, some of which are in $R$ (these data are a small sample of a [full list of tree species codes](https://www.for.gov.bc.ca/hfp/publications/00026/fs708-14-appendix_d.htm#ad_02) commonly used in British Columbia, Canada):
+
+```{r, echo=FALSE}
+co <- c("AT","BB","CW","E","FD","HW","YC")
+sp <- c("Trembling Aspen","Balsam Fir","Western Red Cedar","Birch","Douglas-Fir","Western Hemlock","Yellow Cedar")
+S <- data.frame(Code=co,Species=sp)
+knitr::kable(
+  S, booktabs = TRUE, row.names = FALSE
+)
+```
+
+Suppose we want to answer the question, _What are all the species codes that are present in our plot?_ We can answer this question by first projecting $Species$ over $R$ to give relation $T=Π_{species}(R)$:
+
+```{r, echo=FALSE}
+Pt <- data.frame(Species=unique(R$Species))
+knitr::kable(
+  Pt, booktabs = TRUE, row.names = FALSE
+)
+```
+
+Then, dividing $S$ by $T$, $S÷T=U$, can be formally expanded to:
+
+$$
+Π_{code}(S) - Π_{code}((Π_{code}(S) × T) - S)
+$$
+
+We can read the first term $Π_{code}(S)$ as the projection of the attributes of $S$ that are not in $T$. In our case, there is only one attribute in $S$ not in $T$, which is $Code$, so $Π_{code}(S)$ evaluates to:
+
+```{r, echo=FALSE}
+Ps <- data.frame(Code=unique(S$Code))
+knitr::kable(
+  Ps, booktabs = TRUE, row.names = FALSE
+)
+```
+
+Then, $Π_{code}(S)×T$ is the Cartesian product of the previous projection and $T$, which yields a relation of all the combinations of $T$ with the attributes in $S$ that are not in $T$:
+
+```{r, echo=FALSE}
+Ct <- expand.grid(Ps$Code,Pt$Species)
+names(Ct) <- c("Code","Species")
+knitr::kable(
+  Ct, booktabs = TRUE, row.names = FALSE
+)
+```
+
+Next, we take the set difference between the Cartesian product above and $S$, $(Π_{code(S)×T)-S$, which has the effect of removing the tuples already observed in $S$. This leaves us with a relation that has all the "incorrect" code-species combinations:
+
+```{r, echo=FALSE}
+Ds <- Ct[paste0(Ct$Code,Ct$Species)%in%setdiff(paste0(Ct$Code,Ct$Species),paste0(S$Code,S$Species)),]
+knitr::kable(
+  Ds, booktabs = TRUE, row.names = FALSE
+)
+```
+
+Next, we project $Code$, which again is the only attribute in $S$ not in $T$, from the set difference above $Π_{code}((Π_{code}(S) × T) - S)$, which yields:
+
+```{r, echo=FALSE}
+PDs <- data.frame(Code=unique(Ds$Code))
+knitr::kable(
+  PDs, booktabs = TRUE, row.names = FALSE
+)
+```
+
+And finally, we take the set difference between $Π_{code}(S)$ and the projection above to obtain the code for the trees in our plot:
+
+```{r, echo=FALSE}
+U <- data.frame(Code=S[S$Species%in%setdiff(Pt$Species,PDs$Code),1])
+knitr::kable(
+  U, booktabs = TRUE, row.names = FALSE
+)
+```
+
+You can think of relational division as the inverse of a Cartesian product. However, just like division, the Cartesian product itself is non-commutative because the Cartesian product is a set of _ordered_ pairs. If $S$ contains a tuple that is not in $T$, then the Cartesian product of $S×T$ has a different order than would be the case if both $S$ and $T$ were identical. As an example, $S×T$ evaluates to:
+
+```{r, echo=FALSE}
+C.ut <- data.frame(do.call(expand.grid, lapply(list(U$Code,Pt$Species), unique)))
+names(C.ut) <- c("Code","Species")
+knitr::kable(
+  C.ut, booktabs = TRUE, row.names = FALSE
+)
+```
+
+and $T×S$ evaluates to:
+
+```{r, echo=FALSE}
+C.tu <- data.frame(do.call(expand.grid, lapply(list(Pt$Species,U$Code), unique)))
+names(C.tu) <- c("Species","Code")
+knitr::kable(
+  C.tu, booktabs = TRUE, row.names = FALSE
+)
+```
+
+Therefore, we cannot simply rewrite $S÷T=U$ as $U×T=S$, but we could express $U÷S=T$, which evaluates to $T$:
+
+```{r, echo=FALSE}
+knitr::kable(
+  Pt, booktabs = TRUE, row.names = FALSE
+)
+```
+
+Relational division is also known as a join-like operation, because in the process of the division, the attributes and tuples of two different relations are combined through the Cartesian product. In the next section, we will explore how to join different relations without undertaking Cartesian product or division.
+
+## Joining relations
+
+More often than not, information is stored in separate relations, even if that information is about the same features like lakes, forests, or cities. Remember that a relation cannot have any duplicate tuples. This rule encourages the efficient storage and retrieval of information because information can be dynamically related as needed. For example, consider the overwhelming amount of information that is collected during a census. During the last census in 2016, there were over 14 million households in Canada. Can you imagine wielding a relation with 14 million tuples? These households can be segmented geographically by province, metropolitan areas, municipalities, and census subdivisions as well as by scioeconomic themes such as Indigenous peoples, age, sex, education, income, labour, housing, language, and others. Thus, those 14 million households can be divided up into many smaller relations, which can be accessed and summarized thematically. 
+
+Similarly, forest and vegetation inventories often record hundreds of attributes for individual points or polygons.
+
+Perhaps you can start to see the value of using relations for managing information at massive scales.
+
+### Primary and foreign keys
+
+
+
+### Candidate and super keys
+
+
+
+### Inner and outer joins
+
+### Cardinality of joins
+
+## Querying databases
+
+### Structured Query Language (SQL)
+
+### Boolean operators for querying
+
+#### TITLE HERE {#box-text -}
+
+#### Introduction {-}
+
+Vegetation diversity in urban landscapes is important to support urban forest biodiversity and residents’ mental health. The aim of this case study is to link together socioeconomical data and vegetation information to identify areas to prioritize intervention in the City of Vancouver. [The Canadian Index of Multiple Deprivation (CIMD)](https://www150.statcan.gc.ca/n1/pub/45-20-0001/452000012019001-eng.htm) data has four dimensions of population vulnerability scores and we will aggregate these scores to obtain an overall vulnerability score for each dissemination area (DA) in Vancouver. We will compute the vegetation diversity score using [street trees data](https://opendata.vancouver.ca/explore/dataset/street-trees/) and vegetation type cover richness data^[Obtained from reclassifying [Land Cover Classification 2014 - 2m Raster](http://www.metrovancouver.org/data) to one vegetation class and five vegetation classes and counted the number of vegetation type cover classes using the `Zonal Histogram` Tool.] and then use query to identify priority areas.
+
+#### Join {-}
+
+The raw CIMD tabular data includes the DA code and the corresponding vulnerability scores (table 1). In order to visualize these scores on a map, we will need to relate these scores to spatial data that include the information about the DA polygons and the coordinate pairs associated with each DA. Hence, a polygon shapefile of the DAs in Vancouver^[Extracted by clipping the [Canada-wide dissemination areas boundary](https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm) to the [City of Vancouver's municipality boundary](https://opendata.vancouver.ca/explore/dataset/city-boundary).] is obtained, and its attributes are shown in Table 2.
+
+```{r, echo=FALSE}
+CIMD <- read.csv("data/05/bc_CIMD_scores.csv")
+colnames(CIMD) <- c("PRCDDA", "Province","DA population", "Ethno-cultural composition quintiles", "Ethno-cultural composition scores", "Situational vulnerability quintiles", "Situational vulnerability scores", "Economic dependency quintiles", "Economic dependency scores", "Residential instability quintiles", "Residential instability scores")
+knitr::kable(
+  head(CIMD), booktabs = TRUE,
+  caption = 'An excerpt of the CIMD data table.'
+)
+```
+
+```{r, include=FALSE}
+VancouverDA <- readOGR(dsn = "data/05", layer = "VancouverDA")
+```
+
+```{r, echo=FALSE}
+knitr::kable(
+  head(VancouverDA@data), booktabs = TRUE,
+  caption = 'An excerpt of the Vancouver DA polygon shapefile attributes.'
+)
+```
+
+The tabular data of the CIMD scores are related to the DAs polygon by the DA code. The cardinality of the relationship between these two tables is on-to-one as each DA is described by one set of the CIMD scores. To link the CIMD scores to the Vancouver DA polygons, we would use the `PRCDDA` attribute in the CIMD table as the foreign key to perform a join on the `DAUID` attribute in the Vancouver DA polygon table. Now that the CIMD scores are joined to the Vancouver DA polygon attribute table, we can create choropleth maps to display the vulnerability scores of the DAs (Figure 1).
+
+```{r, include=FALSE}
+
+DA_CIMD <- readOGR(dsn = "data/05", layer = "VancouverDA_CIMD")
+
+DA_CIMD@data <- DA_CIMD@data %>%
+  mutate_if(is.numeric,round, digits = 3)
+
+DA_CIMD_proj <- spTransform(DA_CIMD, "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
+
+pal <- colorNumeric(palette = "YlOrRd", domain = range(DA_CIMD@data$Situatio_1))
+
+labels <- sprintf(
+  "<strong>DAUID </strong> %s<br/><strong>Situational Vulnerabiltiy Score </strong> %g",
+  DA_CIMD@data$DAUID, DA_CIMD@data$Situatio_1
+) %>% lapply(htmltools::HTML)
+
+m <- leaflet(DA_CIMD_proj) %>%
+  addProviderTiles("CartoDB.Positron")%>%
+  setView(lat = 49.255, lng = -123.153, zoom = 12) %>%
+  addPolygons(fillColor = pal(DA_CIMD@data$Situatio_1), 
+              weight = 0.6, 
+              opacity = 1,
+              color = "#c2c2c2",
+              dashArray = NULL,
+              fillOpacity = 0.8,
+              highlight = highlightOptions(
+                weight = 1.8, 
+                color = "#6e6e6e",
+                dashArray = NULL,
+                fillOpacity = 0.7,
+                bringToFront = TRUE),
+              label = labels,
+              labelOptions = labelOptions(
+                style = list("font-weight" = "normal", padding = "3px 8px"), textsize = "12px", direction = "auto"
+              )) %>%
+  addLegend(pal = pal, values = ~DA_CIMD@data$Situatio_1, opacity = 0.7, 
+            title = "Situational Vulnerabiltiy Score",
+            position = "bottomleft")
+```
+
+```{r, echo=FALSE, out.width = '100%', fig.align = 'center', fig.cap = 'Figure 1. An example of choropleth map displaying the situational vulnerability scores in the City of Vancouver at DA level. Higher score represents the DA has higher situational vulnerable population (e.g., population lacking a high school diploma, low-income population).'}
+
+m
+
+```
+
+#### Calculation
+
+Suppose we would like to examine the overall vulnerability score for each DA, we could perform a computation using the `Calculate Field` tool. We would name a new field (e.x. aggregate_score), set the data type to double (to allow negative values and values with decimal places), and then enter the mathematical expression to specify the calculation to sum the four dimensions of CIMD scores and divide it by four to obtain an averaged vulnerability score for each DA. Using similar steps, we could apply a min-max normalization to transform this overall vulnerability score to a range between 0 and 1 to allow for a quick interpretation of the score. The formula is as follows: $\frac{(value - value_{min})}{(value_{max} - value_{min})}$. *Tips: To obtain the minimum and maximum values, you can click on the name of the attribute to sort values in ascending/ descending order or right click to open the statistics summary of the attribute.*
+
+Using what you have learned, join the street tree data and the vegetation type cover richness data to the Vancouver DA attribute table and to compute a vegetation diversity score. The street trees data shows the number of unique street tree species at a DA. Make sure you apply a min-max normalization to obtain the street tree diversity score. The vegetation diversity score can be computed by averaging the normalized scores of the two vegetation data.
+
+```{r, include=FALSE}
+calculated <- readOGR(dsn = "data/05", layer = "Results")
+calculated.full <- head(calculated@data[,c(1, 14, 15, 17, 16, 18, 21)])
+colnames(calculated.full) <- c("DAUID","Aggregated scores", "Normalized aggregated scores", "Species count", "Street tree diversity", "Vegetation richness", "Vegetation diversity scores")
+calculated.full <- calculated.full %>%
+  mutate_if(is.numeric,round, digits = 3)
+```
+
+```{r, echo=FALSE}
+knitr::kable(
+  calculated.full, booktabs = TRUE,
+  caption = 'An excerpt of the attribute table after the joins and calculations.'
+)
+```
+
+```{r, include=FALSE}
+full.results <- readOGR(dsn = "data/05", layer = "Results")
+full.results_proj <- spTransform(full.results, "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
+full.results_proj$norm_aggre <- round(full.results_proj$norm_aggre, 2)
+full.results_proj$veg_div_sc <- round(full.results_proj$veg_div_sc, 2)
+pal1 <- colorNumeric(palette = "Greens", domain = range(full.results_proj@data$veg_div_sc))
+
+labels <- sprintf(
+  "<strong>DAUID </strong>%s<br/> <strong>Vegetation Diversity Score </strong>%g<br/><strong>Normalized Aggregated Vulnerabiltiy Score </strong>%g",
+  full.results_proj$DAUID, full.results_proj$veg_div_sc, full.results_proj$norm_aggre
+) %>% lapply(htmltools::HTML)
+
+m1 <- leaflet(full.results_proj) %>%
+  addProviderTiles("CartoDB.Positron")%>%
+  setView(lat = 49.255, lng = -123.1533, zoom = 12) %>%
+  addPolygons(fillColor = ~pal1(full.results_proj$veg_div_sc),
+              weight = 0.6,
+              opacity = 1,
+              color = "#ffffff",
+              dashArray = NULL,
+              fillOpacity = 0.7,
+              highlight = highlightOptions(
+                weight = 1.8, 
+                color = "#7d7d7d",
+                dashArray = NULL,
+                fillOpacity = 0.7,
+                bringToFront = TRUE),
+              label = labels,
+              labelOptions = labelOptions(
+                style = list("font-weight" = "normal", padding = "3px 8px"),
+                textsize = "12px", direction = "auto")) %>%
+  addLegend(pal = pal1, values = ~full.results_proj$veg_div_sc, opacity = 0.7, 
+            title = "Vegetation Diversity Score",
+            position = "bottomleft")
+```
+
+The map below shows the vegetation diversity score at the DA level in Vancouver. The vegetation diversity score and the normalized aggregated vulnerability score are linked to each DA and can be viewed as you hover o-ver the DA.
+```{r, echo=FALSE, out.width = '100%', fig.align = 'center'}
+m1
+```
+
+#### Query  
+
+Areas with a higher proportion of vulnerable populations and less variety of vegetation to support resident’s mental wellbeing are more in need for intervention. Supposed we define the priority area as DAs with a normalized aggregated vulnerability score greater than or equal to 0.5 and a vegetation diversity score less than 0.5. We could use the `Select By Attributes` tool to identify these priority areas by entering the appropriate query expression.
+
+```{r, include=FALSE}
+query.results <- calculated@data[calculated@data$norm_aggre >= 0.5 & calculated@data$veg_div_sc < 0.5,]
+query.results <- query.results[,c(1,15,16,18,21)]
+colnames(query.results) <- c("DAUID", "Normalized aggregated scores", "Street tree diversity", "Vegetation richness", "Vegetation diversity scores")
+query.results <- query.results %>%
+  mutate_if(is.numeric,round, digits = 3)
+```
+
+```{r, echo=FALSE}
+knitr::kable(
+  query.results, booktabs = TRUE,
+  caption = 'Query result shows five records matched the priority area requirements.'
+)
+```
+
+:::: {.box-content .call-out-content}
+
+::: {.box-title .call-out-top}
+#### Remember this? {-}
+:::
+
+<p id="box-text">Models are abstractions of reality and help us understand and communicate complex ideas.</p>
+
+::::
+
+## Summary
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
+
+### Reflection Questions {-}
+
+1. Explain ipsum lorem.
+2. Define ipsum lorem.
+3. What is the role of ispum lorem?
+4. How does ipsum lorem work?
+
+### Practice Questions {-}
+
+2. Given ipsum, solve for lorem.
+3. Draw ipsum lorem.
+
+## Recommended Readings {-}
+
+Ensure all inline citations are properly referenced here.
+
+```{r include=FALSE}
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'htmlwidgets', 'webshot', 'DT',
+  'miniUI', 'tufte', 'servr', 'citr', 'rticles'
+), 'packages.bib')
+```

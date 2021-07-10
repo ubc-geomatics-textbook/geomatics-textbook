@@ -8,6 +8,7 @@ library("rgdal")
 library("leaflet")
 library("xtable")
 library("plyr")
+library("dplyr")
 ```
 
 # Relational Databases {#relational-databases}
@@ -30,7 +31,7 @@ You have almost certainly used a relational database in some form during your li
 
 ### Key Terms {-}
 
-Relational Database Management Systems, Tables, Relations, Rows, Tuples, Records, Columns, Attributes, Items, Structured Query Language, Boolean Operator, Relational Algebra, Entity-Relationship Model, Cartesian Product, Schema, Operand, Unary, Binary, Georelational Data Model, Domain
+Relational Database Management Systems, Tables, Relations, Rows, Tuples, Records, Columns, Attributes, Items, Structured Query Language, Boolean Operator, Relational Algebra, Entity-Relationship Model, Cartesian Product, Schema, Unary, Binary, Georelational Data Model, Domain
 
 ## Relational database management systems
 
@@ -57,13 +58,13 @@ There are a few rules to be followed for organizing data into a relation:
 
 If any of the above rules are broken, then $R≠A×B$ and you are just looking at a plain-old table instead of a relation. In this way, relational databases are comprised of relations that are highly structured by a schema, which allows the user to query, retrieve, update, and delete data using a RDBMS. 
 
-### Relational algebra operators
+## Relational algebra operators
 
-One of the fundamental jobs of a RDBMS is to apply relational algebra operations to relations stored in a relational database. Remember that we defined a relation as $R=A×B$ and that any subset of $A×B$ is also a relation $S$ or $T$. This transitive property of relations is an important feature that allows us to apply a formal, algebraic language. In other words, relational algebra operations take one relation as input and produce a new relation as an output without modifying the input relation. This new output relation can then be used as an input to another operation because it is also a relation. Both the input and output relations are objects known as **operands** that are operated on by mathematical operators.
+One of the fundamental jobs of a RDBMS is to apply relational algebra operations to relations stored in a relational database. Remember that we defined a relation as $R=A×B$ and that any subset of $A×B$ is also a relation. This transitive property of relations combined with the fact that relations are just sets allows us to apply set algebra. In other words, relational algebra operations take one relation as input and produce a new relation as an output without modifying the input relation. This new output relation can then be used as an input to another operation because it is also a relation.
 
 ### Selection
 
-**Selection** is the simplest operation to understand and is probably the most-used in day-to-day GIS work. It does exactly what it sounds like, it retrieves a subset of a relation given some **predicate** or condition. For example, we could select all tree IDs from our relation in Figure 5.1 that have a height greater than 20 m. This would yield tree 5. Formally, selection is expressed as $σ_{predicate}(R)$ and the example above would be written as $σ_{height>20}(R)$, which evaluates to the following:
+**Selection** is the simplest operation to understand and is probably the most-used in day-to-day GIS work. It does exactly what it sounds like, it retrieves a subset of a relation given some predicate or condition. For example, we could select all tree IDs from our relation $R$ in Figure 5.1 that have a height greater than 20 m. This would yield tree ID=5. Formally, selection is expressed as $σ_{predicate}(R)$ and the example above would be written as $σ_{height>20}(R)$, which evaluates to the following:
 
 ```{r, echo=FALSE}
 ID <- 1:5
@@ -72,9 +73,6 @@ dbh <- c(26.8,30.5,28.7,36.0,34.6)
 species <- c("Western Hemlock","Western Hemlock","Western Hemlock","Douglas-Fir","Douglas-Fir")
 R <- data.frame(ID=ID,Height=height,DBH=dbh,Species=species)
 names(R) <- c("ID","Height (m)", "DBH (cm)", "Species")
-```
-
-```{r, echo=FALSE}
 knitr::kable(
   R[which(R$`Height (m)`>20),], booktabs = TRUE, row.names = FALSE
 )
@@ -100,7 +98,7 @@ knitr::kable(
 )
 ```
 
-Recall that the output of a relational algebra operation is also a relation. Remember the rule that a relation cannot have any repeating tuples? Well, in the case of a 1-dimensional relation where we only have one attribute and several tuples, any duplicate values for the tuples must be eliminated, leaving us with only the two unique values "Douglas-Fir" and "Western Hemlock" when we project $R$ over $Species$. You should recognize now that this property of projection can be useful for identifying the unique values of any attribute, which is frequently needed when sorting through a relational database.
+Recall that the output of a relational algebra operation is also a relation. Remember the rule that a relation cannot have any duplicate tuples? Well, in the case of a 1-dimensional relation where we only have one attribute and several tuples, any duplicate values for the tuples must be eliminated, leaving us with only the two unique values "Douglas-Fir" and "Western Hemlock" when we project $R$ over $Species$. You should recognize now that this property of projection can be useful for identifying the unique values of any attribute, which is frequently needed when sorting through a relational database.
 
 ### Rename
 
@@ -112,9 +110,9 @@ knitr::kable(
 )
 ```
 
-### Union
+### Set Union
 
-Next we will introduce **binary** operators, that is, they take two relations as input. **Union** is one such operator that effectively appends one relation to another. The important rule for union is that both input relations must share the same attributes. Formally, union is expressed as $S∪T$ where $S$ and $T$ are the two input relations. You can think of union as simply concatenating the tuples of the two relations together. In other words, the tuples of $S$ are appended to the tuples of $T$ to generate a new output relation. For example, suppose that we make two subsets of our relation $R$ of trees:
+Next we will introduce **binary** operators, that is, they take two relations as input. **Set Union** is one such operator that effectively appends one relation to another. The important rule for union is that both input relations must share the same number and type of attributes or "union compatible". Formally, set union is expressed as $S∪T$ where $S$ and $T$ are the two input relations. You can think of set union as simply concatenating the tuples of the two relations together. In other words, the tuples of $S$ are appended to the tuples of $T$ to generate a new output relation. For example, suppose that we make two subsets of our relation $R$ of trees:
 
 $$
 S = σ_{height>20}(R)
@@ -132,11 +130,11 @@ knitr::kable(
 )
 ```
 
-Formally, this would all be expressed as $σ_{height>20}(R)∪σ_{height≥20}(R)$, which in this case is also just equivalent to $R$. You should see that the result of union is an inclusion of all tuples, so semantically a union can be read as "the tuples in relation S plus the tuples in relation T". 
+Formally, this would all be expressed as $σ_{height>20}(R)∪σ_{height≥20}(R)$ or $S∪T$, which in this case is also just equivalent to $R$. You should see that the result of union is an inclusion of all tuples, so semantically a union can be read as "the tuples in relation S _or_ the tuples in relation T". 
 
-### Intersection
+### Set Intersection
 
-On the other hand, suppose that we want to define a new relation based on restricting the set of tuples that are in two different relations. This is known as **intersection** and is formally expressed as $S∩T$. Suppose we have two relations defined by subsetting height by < 25 m and > 15 m:
+On the other hand, suppose that we want to define a new relation based on restricting the set of tuples that are in two different relations. This is known as **set intersection** and is formally expressed as $S∩T$. Just like union, intersection also requires that the two relations be union compatible. Suppose we have two relations defined by subsetting height by < 25 m and > 15 m:
 
 $$S = σ_{height<25}(R)$$
 
@@ -156,6 +154,7 @@ knitr::kable(
 There are 3 tuples that appear in both of these relations, so the intersection $S∩T$ would evaluate to:
 
 $$S∩T$$
+Semantically, set intersection is read as "the tuples in relation S _and_ the tuples in relation T". 
 
 ```{r, echo=FALSE}
 knitr::kable(
@@ -165,7 +164,7 @@ knitr::kable(
 
 ### Set Difference
 
-**Set difference** returns the tuples that are unique in one relation relative to another relation. Formally, difference is expressed as $S-T$, and just like mathematical subtraction, the order of relations in the difference is important and non-commutative. For example, $σ_{height<25}(R)-σ_{height>15}(R)$ evaluates to:
+**Set difference** returns the tuples that are unique in one relation relative to another relation, but both relations must be union compatible. Formally, difference is expressed as $S-T$, and just like mathematical subtraction, the order of relations in the difference is important and non-commutative. For example, $σ_{height<25}(R)-σ_{height>15}(R)$ evaluates to:
 
 ```{r, echo=FALSE}
 knitr::kable(
@@ -185,7 +184,7 @@ Semantically, you would read the difference $S-T$ as "the tuples in relation S m
 
 ### Cartesian Product
 
-So far, we have seen the cases of mathematical addition (union) and subtraction (difference), but we can also apply multiplication and division. Multiplication of two relations is simply known as the **Cartesian product**. In the same way that a set of tuples and attributes can be multiplied to create a relation $R=A×B$, we can also multiply two relations together. For example, if $S = Π_{height,dbh}(σ_{height<20}(R))$ evaluates to:
+So far, we have seen the cases of mathematical addition (union) and subtraction (difference), but we can also apply multiplication and division. Multiplication of two relations is simply known as the **Cartesian product**. In the same way that a set of tuples and attributes can be multiplied to create a relation $R=A×B$, we can also multiply two relations together and they do not need to be union compatible. For example, if $S = Π_{height,dbh}(σ_{height<20}(R))$ evaluates to:
 
 ```{r, echo=FALSE}
 Sr <- R[1:3,2:3]
@@ -219,7 +218,7 @@ knitr::kable(
 
 ### Divide
 
-Finally, **divide** is an operation of division between two relations and you can think of it semantically as "". Formally, divide is expressed as $S÷T=U$. Like the Cartesian product and the set difference, divide is non-commutative, so the order of $S$ and $T$ changes the value of $U$. For the next example involving division, we will introduce a new relation $S$, which is not a subset of $R$. Suppose, in addition to $R$, we have cataloged information about different tree species, some of which are in $R$ (these data are a small sample of a [full list of tree species codes](https://www.for.gov.bc.ca/hfp/publications/00026/fs708-14-appendix_d.htm#ad_02) commonly used in British Columbia, Canada):
+Finally, **divide** is an operation of division between two relations and you can think of it semantically as "". Formally, divide is expressed as $S÷T=U$. Like the Cartesian product and set difference, divide is non-commutative, so the order of $S$ and $T$ changes the value of $U$. For the next example involving division, we will introduce a new relation $S$, which is not a subset of $R$. Suppose, in addition to $R$, we have cataloged information about different tree species, some of which are in $R$ (these data are a small sample of a [full list of tree species codes](https://www.for.gov.bc.ca/hfp/publications/00026/fs708-14-appendix_d.htm#ad_02) commonly used in British Columbia, Canada):
 
 ```{r, echo=FALSE}
 co <- c("AT","BB","CW","E","FD","HW","YC")
@@ -323,21 +322,94 @@ Relational division is also known as a join-like operation, because in the proce
 
 ## Joining relations
 
-More often than not, information is stored in separate relations, even if that information is about the same features like lakes, forests, or cities. Remember that a relation cannot have any duplicate tuples. This rule encourages the efficient storage and retrieval of information because information can be dynamically related as needed. For example, consider the overwhelming amount of information that is collected during a census. During the last census in 2016, there were over 14 million households in Canada. Can you imagine wielding a relation with 14 million tuples? These households can be segmented geographically by province, metropolitan areas, municipalities, and census subdivisions as well as by scioeconomic themes such as Indigenous peoples, age, sex, education, income, labour, housing, language, and others. Thus, those 14 million households can be divided up into many smaller relations, which can be accessed and summarized thematically. 
+More often than not, information is stored in separate relations, even if that information is about the same features like lakes, forests, or cities. Remember that a relation cannot have any duplicate tuples. This rule encourages the efficient storage and retrieval of information because information can be dynamically related as needed. For example, consider the overwhelming amount of information that is collected during a census. During the last census in 2016, there were over 14 million households in Canada. Can you imagine wielding a relation with 14 million tuples? These households can be segmented geographically by province, metropolitan areas, municipalities, and census subdivisions as well as by scioeconomic themes such as Indigenous peoples, age, sex, education, income, labour, housing, language, and others. Thus, those 14 million households can be divided up into many smaller relations, which can be accessed and summarized geographically and thematically. Since these relations represent different geographies or themes on the same set (i.e., households), we need to be more specific about how exactly two relations are combined. For this reason, we have joins. 
 
-Similarly, forest and vegetation inventories often record hundreds of attributes for individual points or polygons.
+### Keys
 
-Perhaps you can start to see the value of using relations for managing information at massive scales.
+Like the Cartesian product, joins are always binary operations, requiring two relations as input. While the Cartesian product combines relations by ordering all pairs of the elements from the two relations, we need a different method for correctly linking the tuples in relation $R$ that correspond to the tuples of $S$. To do this, we rely on a common attribute called a **key**, which acts as an address between two relations. A **primary key** serves the purpose to identify the unique tuples in a relation and so it can be used to link other attribute information to those tuples. In a GIS, anytime that you create, copy or modify features such as points, lines or polygons, the newly created data layer (within the relational database) will be **indexed** with a primary key that starts at 1 or 0 and counts to the number of features (tuples) $n$ or $n-1$. While the primary key identifies the unique tuples in relation $R$, another key called the **foreign key**, serves to locate the same tuples in the other relation $S$. In other words, a join is defined by a common attribute or set of attributes that are shared between two relations.
+ 
+### Natural Join
 
-### Primary and foreign keys
+A **natural join ** restrictively joins two relations based on a set of common attributes. In this way, natural join is similar to a set intersection in that we are only combining tuples that share an attribute value and any tuples that do not share an attribute value in the other relation are dropped from the output. However, a natural join does not require that two relations be union compatible like a set intersection. Instead, the only requirement is that at least one attribute is shared between the two relations and has the same domain. Formally, natural join is expressed as $R⋈S$. and is sometimes referred to as an inner join. As an example, consider our previous example relations $R$ and $S$:
 
+$$R$$
 
+```{r, echo=FALSE}
+ID <- 1:5
+height <- c(14,18,16,25,20)
+dbh <- c(26.8,30.5,28.7,36.0,34.6)
+species <- c("Western Hemlock","Western Hemlock","Western Hemlock","Douglas-Fir","Douglas-Fir")
+R <- data.frame(ID=ID,Height=height,DBH=dbh,Species=species)
+names(R) <- c("ID","Height (m)", "DBH (cm)", "Species")
+knitr::kable(
+  R, booktabs = TRUE, row.names = FALSE
+)
+```
 
-### Candidate and super keys
+$$S$$
 
+```{r, echo=FALSE}
+co <- c("AT","BB","CW","E","FD","HW","YC")
+sp <- c("Trembling Aspen","Balsam Fir","Western Red Cedar","Birch","Douglas-Fir","Western Hemlock","Yellow Cedar")
+S <- data.frame(Code=co,Species=sp)
+knitr::kable(
+  S, booktabs = TRUE, row.names = FALSE
+)
+```
 
+The natural join $R⋈S$ evaluates to:
 
-### Inner and outer joins
+```{r, echo=FALSE}
+knitr::kable(
+  inner_join(R,S), booktabs = TRUE, row.names = FALSE
+)
+```
+
+## Outer Join
+
+An **outer join** joins all the tuples of two relations based on a common attribute. The result is similar to a set union, except the input relations do not need to be union compatible. Formally, an outer join or sometimes called a full join is expressed as $R⟗S$, which  evaluates to:
+
+```{r, echo=FALSE}
+knitr::kable(
+  full_join(R,S), booktabs = TRUE, row.names = FALSE
+)
+```
+
+### Right and Left Outer Join
+
+Sometimes, it may be desirable to join attributes or tuples from one relation, but not the other. For these cases, we can use either **right outer join** or **left outer join**. Formally, right outer join is expressed as $R⋉S$ and evaluates to:
+
+```{r, echo=FALSE}
+knitr::kable(
+  right_join(R,S), booktabs = TRUE, row.names = FALSE
+)
+```
+
+Formally, left outer join is expressed as $R⋊S$ and evaluates to:
+
+```{r, echo=FALSE}
+knitr::kable(
+  left_join(R,S), booktabs = TRUE, row.names = FALSE
+)
+```
+
+### Theta Join
+
+We can also join relations conditionally and without sharing a common attribute, which is known as a **theta join** and expressed as $R⋈_θS$. To understand how a theta join works, it is useful to recognize that $R⋈_θS=σ_{θ}(R×S)$. As you can see, a theta join is simply a selection of a Cartesian product where theta $θ$ is the predicate. For example, $R⋈_{height>19}S$ evaluates to:
+
+```{r, echo=FALSE}
+knitr::kable(
+  inner_join(R[which(R$Height>19),],S), booktabs = TRUE, row.names = FALSE
+)
+```
+
+Theta join can be applied oute joins as well. For example, a full outer join $R_{height>19}⟗SS$ evaluates to:
+
+```{r, echo=FALSE}
+knitr::kable(
+  full_join(R[which(R$Height>19),],S), booktabs = TRUE, row.names = FALSE
+)
+```
 
 ### Cardinality of joins
 

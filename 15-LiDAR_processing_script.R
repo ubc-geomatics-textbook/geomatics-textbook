@@ -144,4 +144,28 @@ plot(prediction, col = height.colors(50)) # some plotting
 ##########################################################################################################
 
 
+### Helping Tristan ##
+
+terra::writeRaster(hmean, "C:\\Users\\fdutoit.stu\\Documents\\hmean1.tif", format="GTiff", overwrite=TRUE)
+
+terra::writeRaster(mraster, "C:\\Users\\fdutoit.stu\\Documents\\metric_stack.tif", overwrite=TRUE)
+
+writeRaster(mraster, "C:\\Users\\fdutoit.stu\\Documents\\metric_stack.grd", overwrite=TRUE)
+
+test1 <- raster("C:\\Users\\fdutoit.stu\\Documents\\hmean1.tif")
+test2 <- raster("C:\\Users\\fdutoit.stu\\Documents\\hmean.tif")
+test3 <- raster("C:\\Users\\fdutoit.stu\\Documents\\hmean.gri")
+
+
+mraster <- terra::rast(metrics)
+#--- perform stratification using k-means ---#
+kmeans <- strat_kmeans(mraster = mraster, nstrata = 4)
+plot(kmeans)
+#--- 'mindist' between samples defaults to 100 ---#
+existing <- sample_srs(sraster = kmeans,
+                       n = 75,
+                       plot = TRUE)
+aHELS <- sample_aHELS(mraster = mraster, existing = existing, nQuant = 5, threshold = 0.9, plot = TRUE)
+COOBS <- calculate_COOBS(mraster = mraster, existing = existing, cores = 4, plot = TRUE)
+
 

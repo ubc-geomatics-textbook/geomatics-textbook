@@ -31,7 +31,7 @@ You have almost certainly used a relational database in some form during your li
 
 ### Key Terms {-}
 
-Relational Database Management Systems, Tables, Relations, Rows, Tuples, Records, Columns, Attributes, Items, Structured Query Language, Boolean Operator, Relational Algebra, Entity-Relationship Model, Cartesian Product, Schema, Unary, Binary, Georelational Data Model, Domain
+Relational Database Management Systems, Tables, Relations, Rows, Tuples, Records, Columns, Attributes, Items, Structured Query Language, Boolean Logic, Relational Algebra, Entity-Relationship Model, Cartesian Product, Schema, Unary, Binary, Georelational Data Model, Domain
 
 ## Relational database management systems
 
@@ -47,18 +47,21 @@ As you can see from the example above, there are two components to geospatial da
 
 The schema for the very simple example above would include the constraint and expectation that when we retrieve the height of a particular tree from the relation, it will be returned to us as an integer number and not a date. This logic is extended to all attributes so that types of values are never mixed and values are never unexpectedly changed by any database operation. That is to say, we can and often do intentionally change values in a relation, but any new values must conform to the database schema for a particular attribute, which may also be constrained by a range and type of potential values, known as an attribute **domain**.
 
-More formally, a relation $R$ is a *subset* of two sets, $A$ (tuples) and $B$ (attributes). The product of these sets $A×B$ is called the **Cartesian product**. In the same way that Cartesian coordinates are ordered pairs of values from two axes, the Cartesian product of two sets gives us an ordered pair of elements $(a,b)$ from sets $A$ and $B$, where $a$ is an element in the set $A$, written as $a∈A$, and $b$ is an element of set $B$, written as $b∈B$. Therefore, $R$ is both the Cartesian product as well as any subset of $A×B$.
+More formally, a relation $R$ is a _subset_ of two sets, $A$ (tuples) and $B$ (attributes). The product of these sets $A×B$ is called the **Cartesian product**. In the same way that Cartesian coordinates are ordered pairs of values from two axes, the Cartesian product of two sets gives us an ordered pair of elements $(a,b)$ from sets $A$ and $B$, where $a$ is an element in the set $A$, written as $a∈A$, and $b$ is an element of set $B$, written as $b∈B$. Therefore, $R$ is both the Cartesian product as well as any subset of $A×B$.
 
-There are a few rules to be followed for organizing data into a relation:
+![Figure 5.2 Cartesian product A×B of A (tuples) and B (attributes). Image by Quartl, CC BY-SA 3.0.](images/05-02-cartesian-product.png){.center}
+
+There are some important rules to be followed for organizing data into a relation:
 
 1. Each tuple must share the same attributes as all the other tuples;
-2. Each attribute has a unique name and is of the same *type* of data (i.e., integer, floating-point decimal, text, date, boolean, etc.);
-3. The order of tuples and attributes can be rearranged without changing the meaning or integrity of the data; and
-4. Each tuple is unique (i.e., no duplicate observations).
+2. Each attribute has a unique name and is of the same _type_ of data (i.e., integer, floating-point decimal, text, date, boolean, etc.);
+3. The order of tuples and attributes can be rearranged without changing the meaning or integrity of the data;
+4. Each value of an element in a relation (i.e., combination of tuple and attribute) is _logically_ accessible; and 
+5. Each tuple is unique (i.e., no duplicate observations).
 
-If any of the above rules are broken, then $R≠A×B$ and you are just looking at a plain-old table instead of a relation. In this way, relational databases are comprised of relations that are highly structured by a schema, which allows the user to query, retrieve, update, and delete data using a RDBMS. 
+If any of the above rules are broken, then $R≠A×B$ and you are just looking at a plain-old table instead of a relation. In fact, Codd described a total of 13 rules for a RDBMS, but since this chapter is only a cursory introduction of RDBMS for GIS, you only need to be familiar with the five rules above. In this way, relational databases are comprised of relations that are highly structured by a schema, which allows the user to query, retrieve, update, and delete data using a RDBMS. At this point, you should understand that relational databases are highly structured so that we can apply logical expressions and languages to interact with the information contained within and between the relations. In the next two sections, we will look at how to apply two branches of mathematical logic to relations in order to extract useful information.
 
-## Relational algebra operators
+## Relational algebra
 
 One of the fundamental jobs of a RDBMS is to apply relational algebra operations to relations stored in a relational database. Remember that we defined a relation as $R=A×B$ and that any subset of $A×B$ is also a relation. This transitive property of relations combined with the fact that relations are just sets allows us to apply set algebra. In other words, relational algebra operations take one relation as input and produce a new relation as an output without modifying the input relation. This new output relation can then be used as an input to another operation because it is also a relation.
 
@@ -164,7 +167,7 @@ knitr::kable(
 
 ### Set Difference
 
-**Set difference** returns the tuples that are unique in one relation relative to another relation, but both relations must be union compatible. Formally, difference is expressed as $S-T$, and just like mathematical subtraction, the order of relations in the difference is important and non-commutative. For example, $σ_{height<25}(R)-σ_{height>15}(R)$ evaluates to:
+**Set difference** returns the tuples that are unique in one relation relative to another relation, but both relations must be union compatible. Formally, difference is expressed as $S-T$, and just like mathematical subtraction, the order of relations in the set difference is important and non-commutative. For example, $σ_{height<25}(R)-σ_{height>15}(R)$ evaluates to:
 
 ```{r, echo=FALSE}
 knitr::kable(
@@ -180,11 +183,11 @@ knitr::kable(
 )
 ```
 
-Semantically, you would read the difference $S-T$ as "the tuples in relation S minus the tuples in relation T". 
+Semantically, you would read the difference $S-T$ as "the tuples in relation $S$ minus any of the same tuples in relation $T$". 
 
 ### Cartesian Product
 
-So far, we have seen the cases of mathematical addition (union) and subtraction (difference), but we can also apply multiplication and division. Multiplication of two relations is simply known as the **Cartesian product**. In the same way that a set of tuples and attributes can be multiplied to create a relation $R=A×B$, we can also multiply two relations together and they do not need to be union compatible. For example, if $S = Π_{height,dbh}(σ_{height<20}(R))$ evaluates to:
+So far, we have seen the cases of mathematical addition (set union) and subtraction (set difference), but we can also apply multiplication and division. Multiplication of two relations is simply known as the **Cartesian product**. In the same way that a set of tuples and attributes can be multiplied to create a relation $R=A×B$, we can also multiply two relations together and they do not need to be union compatible. For example, if $S = Π_{height,dbh}(σ_{height<20}(R))$ evaluates to:
 
 ```{r, echo=FALSE}
 Sr <- R[1:3,2:3]
@@ -216,9 +219,11 @@ knitr::kable(
 )
 ```
 
-### Divide
+### Set Divison
 
-Finally, **divide** is an operation of division between two relations and you can think of it semantically as "". Formally, divide is expressed as $S÷T=U$. Like the Cartesian product and set difference, divide is non-commutative, so the order of $S$ and $T$ changes the value of $U$. For the next example involving division, we will introduce a new relation $S$, which is not a subset of $R$. Suppose, in addition to $R$, we have cataloged information about different tree species, some of which are in $R$ (these data are a small sample of a [full list of tree species codes](https://www.for.gov.bc.ca/hfp/publications/00026/fs708-14-appendix_d.htm#ad_02) commonly used in British Columbia, Canada):
+Finally, **set division** is an operation of division between two relations, and you can think of it semantically as, "all the values of an attribute in $R$ that are found with the tuples of $S$." Set division is expressed as $S÷T=U$ and like the Cartesian product and set difference, set division is non-commutative, so the order of $S$ and $T$ changes the value of $U$. 
+
+For the next example of set division, we will introduce a new relation $S$, which is not a subset of $R$. Suppose, in addition to $R$, we have cataloged information about different tree species, some of which are in $R$ (these data are a small sample of a [full list of tree species codes](https://www.for.gov.bc.ca/hfp/publications/00026/fs708-14-appendix_d.htm#ad_02) commonly used in British Columbia, Canada):
 
 ```{r, echo=FALSE}
 co <- c("AT","BB","CW","E","FD","HW","YC")
@@ -229,7 +234,7 @@ knitr::kable(
 )
 ```
 
-Suppose we want to answer the question, _What are all the species codes that are present in our plot?_ We can answer this question by first projecting $Species$ over $R$ to give relation $T=Π_{species}(R)$:
+Suppose we want to answer the question, _What are all the species codes that are present in our plot of trees?_ We can answer this question by first projecting $Species$ over $R$ to give relation $T=Π_{species}(R)$:
 
 ```{r, echo=FALSE}
 Pt <- data.frame(Species=unique(R$Species))
@@ -244,7 +249,7 @@ $$
 Π_{code}(S) - Π_{code}((Π_{code}(S) × T) - S)
 $$
 
-We can read the first term $Π_{code}(S)$ as the projection of the attributes of $S$ that are not in $T$. In our case, there is only one attribute in $S$ not in $T$, which is $Code$, so $Π_{code}(S)$ evaluates to:
+We read the first term $Π_{code}(S)$ as "the projection of the attributes of $S$ that are not in $T$". In our case, there is only one attribute in $S$ not in $T$, which is $Code$, so $Π_{code}(S)$ evaluates to:
 
 ```{r, echo=FALSE}
 Ps <- data.frame(Code=unique(S$Code))
@@ -290,7 +295,7 @@ knitr::kable(
 )
 ```
 
-You can think of relational division as the inverse of a Cartesian product. However, just like division, the Cartesian product itself is non-commutative because the Cartesian product is a set of _ordered_ pairs. If $S$ contains a tuple that is not in $T$, then the Cartesian product of $S×T$ has a different order than would be the case if both $S$ and $T$ were identical. As an example, $S×T$ evaluates to:
+You can think of set division as the inverse of a Cartesian product. However, just like division, the Cartesian product itself is non-commutative because it is a set of _ordered_ pairs. If $S$ contains a tuple that is not in $T$, then the Cartesian product of $S×T$ has a different order than would be the case if both $S$ and $T$ were identical. As an example, $S×T$ evaluates to:
 
 ```{r, echo=FALSE}
 C.ut <- data.frame(do.call(expand.grid, lapply(list(U$Code,Pt$Species), unique)))
@@ -318,19 +323,152 @@ knitr::kable(
 )
 ```
 
-Relational division is also known as a join-like operation, because in the process of the division, the attributes and tuples of two different relations are combined through the Cartesian product. In the next section, we will explore how to join different relations without undertaking Cartesian product or division.
+We have now considered the eight primary relational algebra operators (selection, projection, rename, set union, set intersection, set difference, Cartesian product, and set division) that can be applied to relations in a RDBMS. In the next section, we will look at another set of logical operators known as Boolean algebra, which give rise to logical languages for interacting with a RDBMS.
+
+## Boolean algebra
+
+Whenever we create and solve an arithmetic or relational algebra expression, we usually focus on the _value_ of the output. In other words, $1+1$ evaluates to a value of $2$. But we often need to evaluate the _truth_ of a statement. For example, $1+1=2$ is a $true$ statement and $1+1=1$ is a $false$ statement. **Boolean algebra** seeks to express mathematical expressions in terms of _truth values_. Boolean truth values are usually expressed as $true$ or $false$, but it is also common in computer programming languages and GIS to see these encoded with values of $1$ for $true$ and $0$ for $false$. Attributes can also take on Boolean values of $true$ or $false$ as a data type. Boolean algebra uses equality and conditional operators, which we will consider next.
+
+### Equality operators
+
+You are probably already familiar with the basic equality operators used in Boolean algebra:
+- $=$ "exactly equal to" (usually expressed with $==$)
+- $>$ "greater than"
+- $≥$ "greater than or equal to" (usually expressed with $>=$)
+- $<$ "less than"
+- $≤$ "less than or equal to" (usually expressed with $<=$)
+- $≠$ "not equal to" (usually expressed with $!=$ or $<>$)
+
+All of the equality operators above evaluate to logical $true$ or $false$ values. They are quite elementary, so we will not go into much detail except to show that these equality operators are the basis for forming more complex Boolean expressions. Basic arithmetic expressions can also be applied to Boolean truth values and it can be helpful to rewrite Boolean values with values of $1$ and $0$:
+
+$true+true=2$
+$true+false=1$
+$false+false=0$
+$true-true=0$
+$true÷false=undefined$
+$false÷true=0$
+$true×true=1=true$
+$5×false=0=false$
+
+Multiplication of Boolean values is a special case where the expression will always result in a Boolean value. That is, multiplying any combination of $1$ and $0$ will always return $1$ or $0$. In other words, the domain of the input $[0,1]$ is equivalent to the domain of the output $[0,1]$, which is a property that is frequently exploited in GIS in order to concatenate more complex expressions. For example, the statement $true×(1+2=3)×(4>3)$ can be rewritten as $1×1×1$ and evaluates to $true$, while $true×(1+2=3)×(4<3)$ can be rewritten as $1×1×0$ and evaluates to $false$. 
+
+Below are some examples of using equality operators and what they evaluate to:
+
+$true=false$ can be rewritten as $1=0$, which is $false$.
+$true>false$ can be rewritten as $1>0$, which is $true$.
+$true≠false$ is $true$.
+$1+1=1$ is $false$.
+$2+3=4+1$ is $true$.
+
+Next, we will look at how to apply arithmetic and equality expressions to relations and evaluate them in Boolean terms. We have already seen how predicates allow us to do set selection with relational algebra. For example, we know that q evaluates to:
+
+```{r, echo=FALSE}
+knitr::kable(
+  R[which(R$`Height (m)`>15),], booktabs = TRUE, row.names = FALSE
+)
+```
+
+If we were to break this down in Boolean terms, the statement $height>15$ applied to $R$ returns the following Boolean values for each tuple:
+
+```{r, echo=FALSE}
+Rtf <- R
+Rtf$Boolean <- R$`Height (m)`>15
+knitr::kable(
+  Rtf, booktabs = TRUE, row.names = FALSE
+)
+```
+
+For another example, consider that $(height>15)×(species=WesternHemlock)$ evaluates to:
+
+```{r, echo=FALSE}
+Rtf$Boolean <- (R$`Height (m)`>15 & R$Species=="Western Hemlock")
+knitr::kable(
+  Rtf, booktabs = TRUE, row.names = FALSE
+)
+```
+
+We can also evaluate the equivalency between two attributes such as $height=dbh$, which evaluates to:
+
+```{r, echo=FALSE}
+Rtf$Boolean <- R$`Height (m)`==R$`DBH (cm)`
+knitr::kable(
+  Rtf, booktabs = TRUE, row.names = FALSE
+)
+```
+
+### Conditional operators
+
+Now that we have a good understanding of equivalency operators, let us turn to consider conditional operators, which are also known as Boolean operators. Boolean operators are, in some ways, similar to some arithmetic operators except that they are based on natural language. There are three primary Boolean operators: $AND$, $OR$, $XOR$, and $NOT$. These operators are commonly used for database queries and with search engines, and indeed they form an important basis for query languages that are used to interact with an RDBMS. 
+
+Consider the statement $(height>15)AND(species=WesternHemlock)$. This statement is equivalent to $(height>15)×(species=WesternHemlock)$ and evaluates to exactly what what we saw earlier:
+
+```{r, echo=FALSE}
+Rtf$Boolean <- (R$`Height (m)`>15 & R$Species=="Western Hemlock")
+knitr::kable(
+  Rtf, booktabs = TRUE, row.names = FALSE
+)
+```
+
+Figure 5.3 illustrates what is going on here, we are only returning the tuples that evaluate $true$ for both statements. Hence, Boolean $AND$ is equivalent to multiplying two Boolean truth values together. You should also recognize that a Boolean $AND$ is equivalent to what a set intersection $A∩B$ acheives between two relations.
+
+![Figure 5.3 Boolean AND](images/05-03-boolean-and.png){.center}
+
+If we do not want to be so restrictive, we could use Boolean $OR$ such as $(height>15)OR(species=WesternHemlock)$, which evaluates to:
+
+```{r, echo=FALSE}
+Rtf$Boolean <- (R$`Height (m)`>15 | R$Species=="Western Hemlock")
+knitr::kable(
+  Rtf, booktabs = TRUE, row.names = FALSE
+)
+```
+
+Figure 5.4 illustrates the case of the Boolean $OR$. As you can see, it returns everything where either of the statements evaluate to $true$, regardless if the other statement is $false$. You should also recognize that a Boolean $OR$ is equivalent to what a set union $A∪B$ achieves between two relations. 
+
+![Figure 5.4 Boolean OR](images/05-04-boolean-or.png){.center}
+
+Suppose we want to identify all the trees that are greater than 15 m, but not Western Hemlock. In this case, we would use the expression $(height>15)NOT(species=WesternHemlock)$, which evaluates to:
+
+```{r, echo=FALSE}
+Rtf$Boolean <- (R$`Height (m)`>15 & !R$Species=="Western Hemlock")
+knitr::kable(
+  Rtf, booktabs = TRUE, row.names = FALSE
+)
+```
+
+Figure 5.5 illustrates how Boolean $NOT$ essentially negates or inverts the statement that follows. In this case, instead of returning the Western Hemlock tuples, $NOT(species=WesternHemlock)$ returns "everything except" Western Hemlock, which is also equivalent to $species≠WesternHemlock$.
+
+![Figure 5.5 Boolean NOT](images/05-05-boolean-not.png){.center}
+
+Finally, the case of Boolean $XOR$ returns any tuples that are not $true$ for both statements, but are $true$ individually. This is known as the "e**X**clusive **OR**" because we are only returning the tuples that are exclusive based on both statements. For example, $(height>15)XOR(species=WesternHemlock)$ evaluates to:
+
+```{r, echo=FALSE}
+Rtf$Boolean <- (R$`Height (m)`>15 | R$Species=="Western Hemlock") & !(R$Species=="Western Hemlock"&R$`Height (m)`>15)
+knitr::kable(
+  Rtf, booktabs = TRUE, row.names = FALSE
+)
+```
+
+Figure 5.6 illustrates how Boolean $XOR$ excludes all the tuples that evaluate to $true$ for both statements. In the example above, tuples ID=2 and ID=3 are excluded because both of the statements for height and species are $true$. 
+
+![Figure 5.6 Boolean XOR](images/05-06-boolean-xor.png){.center}
+
+### Query languages
+
+
 
 ## Joining relations
 
-More often than not, information is stored in separate relations, even if that information is about the same features like lakes, forests, or cities. Remember that a relation cannot have any duplicate tuples. This rule encourages the efficient storage and retrieval of information because information can be dynamically related as needed. For example, consider the overwhelming amount of information that is collected during a census. During the last census in 2016, there were over 14 million households in Canada. Can you imagine wielding a relation with 14 million tuples? These households can be segmented geographically by province, metropolitan areas, municipalities, and census subdivisions as well as by scioeconomic themes such as Indigenous peoples, age, sex, education, income, labour, housing, language, and others. Thus, those 14 million households can be divided up into many smaller relations, which can be accessed and summarized geographically and thematically. Since these relations represent different geographies or themes on the same set (i.e., households), we need to be more specific about how exactly two relations are combined. For this reason, we have joins. 
+More often than not, information is stored in separate relations, even if that information is about the same features like lakes, forests, or cities. Remember that a relation cannot have any duplicate tuples. This rule encourages the efficient storage and retrieval of information because information can be dynamically related as needed. For example, consider the overwhelming amount of information that is collected during a census. During the last census in 2016, there were over 14 million households in Canada. Can you imagine wielding a relation with 14 million tuples? These households can be segmented geographically by province, metropolitan areas, municipalities, and census subdivisions as well as by socioeconomic themes such as Indigenous peoples, age, sex, education, income, labour, housing, language, and others. Thus, those 14 million households can be divided up into many smaller relations, which can be accessed and summarized geographically and thematically. Since these relations represent different geographies or themes on the same set (i.e., households), we need to be more specific about how exactly two relations get combined if, for example, we want to combine themes with geographies. For this reason, we have joins. 
 
 ### Keys
 
-Like the Cartesian product, joins are always binary operations, requiring two relations as input. While the Cartesian product combines relations by ordering all pairs of the elements from the two relations, we need a different method for correctly linking the tuples in relation $R$ that correspond to the tuples of $S$. To do this, we rely on a common attribute called a **key**, which acts as an address between two relations. A **primary key** serves the purpose to identify the unique tuples in a relation and so it can be used to link other attribute information to those tuples. In a GIS, anytime that you create, copy or modify features such as points, lines or polygons, the newly created data layer (within the relational database) will be **indexed** with a primary key that starts at 1 or 0 and counts to the number of features (tuples) $n$ or $n-1$. While the primary key identifies the unique tuples in relation $R$, another key called the **foreign key**, serves to locate the same tuples in the other relation $S$. In other words, a join is defined by a common attribute or set of attributes that are shared between two relations.
- 
+Like the Cartesian product, joins are always binary operations, requiring two relations as input. While the Cartesian product combines relations by ordering all pairs of the elements from the two relations, we need a different method for correctly linking the tuples in relation $R$ that correspond to the tuples of $S$. To do this, we rely on a common attribute called a **key**, which acts as an address between two relations. A **primary key** serves the purpose to identify the unique tuples in a relation and so it can be used to link other attribute information to those tuples. In a GIS, anytime that you create, copy or modify features such as points, lines or polygons, the newly created data layer (within the relational database) will be indexed with a primary key that counts from 1 to the number of features (tuples) $n$ or from 0 to $n-1$. For example, $ID$ in our relation $R$ serves as the primary key. There are other attributes in $R$ that also uniquely identify all the tuples, but why do you think $Height$ or $DBH$ would be a poor operational choice as a primary key for a large field campaign?
+
+While the primary key identifies the unique tuples in relation $R$, another key called the **foreign key**, serves to locate the same tuples in another relation $S$. In other words, a join is defined by a common attribute that is shared between two relations, the primary key in $R$ and the foreign key in $S$. For example, $Species$ is a foreign key in $R$ and a primary key in $S$. The case of joining two relations using a set of attributes instead of a single attribute requires a **composite key**. For example, suppose we have a spatial dataset of all the municipalities across Canada. Some of these municipalities will share the same name, though they are in different provinces. Richmond is a city in British Columbia, Ontario, and Quebec. If we need to join census data to these spatial features, we would need to use a composite key comprised of $CityName$ and $ProvinceName$.
+
 ### Natural Join
 
-A **natural join ** restrictively joins two relations based on a set of common attributes. In this way, natural join is similar to a set intersection in that we are only combining tuples that share an attribute value and any tuples that do not share an attribute value in the other relation are dropped from the output. However, a natural join does not require that two relations be union compatible like a set intersection. Instead, the only requirement is that at least one attribute is shared between the two relations and has the same domain. Formally, natural join is expressed as $R⋈S$. and is sometimes referred to as an inner join. As an example, consider our previous example relations $R$ and $S$:
+A **natural join ** restrictively joins two relations based on a set of common attributes. In this way, natural join is similar to a set intersection in that we are only combining tuples that share an attribute value and any tuples that do not share an attribute value in the other relation are dropped from the output. However, a natural join does not require that two relations be union compatible like a set intersection. Instead, the only requirement is that at least one attribute is shared between the two relations and has the same domain. Formally, natural join is expressed as $R⋈S$. and is sometimes referred to as an inner join. As an example, consider our example relations $R$ and $S$:
 
 $$R$$
 
@@ -403,21 +541,11 @@ knitr::kable(
 )
 ```
 
-Theta join can be applied oute joins as well. For example, a full outer join $R_{height>19}⟗SS$ evaluates to:
+### Cardinality of Joins
 
-```{r, echo=FALSE}
-knitr::kable(
-  full_join(R[which(R$Height>19),],S), booktabs = TRUE, row.names = FALSE
-)
-```
+Depending on the schema of the two relations being joined, the number of tuples joined from one relation to another can vary and is known as **cardinality**. In the simplest case, one tuple in $R$ is related to one tuple in $S$, and this cardinality is known as **one-to-one** usually expressed as 1:1. The natural join example above, $R⋈S$, is an example of **one-to-many** (1:M) or **many-to-one** (M:1) cardinality because one species tuple found in $S$ corresponds to many species tuples in $R$. Finally, **many-to-many** (M:M) cardinality describes the case where there are multiple tuples in $R$ that correspond to multiple tuples in $S$. An example of a many-to-many relationship might be many species of trees in $R$ that correspond to many forest stands in $S$. In other words, a forest stand might be comprised of many species and any particular species might be found in many forest stands. Figure 5.2 illustrates how cardinality might emerge depending on the relational schema and problem at hand.
 
-### Cardinality of joins
-
-## Querying databases
-
-### Structured Query Language (SQL)
-
-### Boolean operators for querying
+![Figure 5.4 Cardinality of joins.](images/05-04-cardinality-joins.png){.center}
 
 #### TITLE HERE {#box-text -}
 

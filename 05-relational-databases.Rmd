@@ -49,7 +49,7 @@ The schema for the very simple example above would include the constraint and ex
 
 More formally, a relation $R$ is a _subset_ of two sets, $A$ (tuples) and $B$ (attributes). The product of these sets $A×B$ is called the **Cartesian product**. In the same way that Cartesian coordinates are ordered pairs of values from two axes, the Cartesian product of two sets gives us an ordered pair of elements $(a,b)$ from sets $A$ and $B$, where $a$ is an element in the set $A$, written as $a∈A$, and $b$ is an element of set $B$, written as $b∈B$. Therefore, $R$ is both the Cartesian product as well as any subset of $A×B$.
 
-![Figure 5.2 Cartesian product A×B of A (tuples) and B (attributes). Image by Quartl, CC BY-SA 3.0.](images/05-02-cartesian-product.png){.center}
+![Figure 5.2 Cartesian product A×B of A (tuples) and B (attributes). Image by [Quartl](https://en.wikipedia.org/wiki/Cartesian_product#/media/File:Cartesian_Product_qtl1.svg), CC BY-SA 3.0.](images/05-02-cartesian-product.png){.center}
 
 There are some important rules to be followed for organizing data into a relation:
 
@@ -156,14 +156,13 @@ knitr::kable(
 
 There are 3 tuples that appear in both of these relations, so the intersection $S∩T$ would evaluate to:
 
-$$S∩T$$
-Semantically, set intersection is read as "the tuples in relation S _and_ the tuples in relation T". 
-
 ```{r, echo=FALSE}
 knitr::kable(
   R[c(2,3,5),], booktabs = TRUE, row.names = FALSE
 )
 ```
+
+Semantically, set intersection is read as "the tuples in relation S _and_ the tuples in relation T". 
 
 ### Set Difference
 
@@ -183,7 +182,7 @@ knitr::kable(
 )
 ```
 
-Semantically, you would read the difference $S-T$ as "the tuples in relation $S$ minus any of the same tuples in relation $T$". 
+Semantically, you would read the set difference $S-T$ as "the tuples in relation $S$ minus any of the same tuples in relation $T$". 
 
 ### Cartesian Product
 
@@ -437,7 +436,7 @@ knitr::kable(
 
 Figure 5.5 illustrates how Boolean $NOT$ essentially negates or inverts the statement that follows. In this case, instead of returning the Western Hemlock tuples, $NOT(species=WesternHemlock)$ returns "everything except" Western Hemlock, which is also equivalent to $species≠WesternHemlock$.
 
-![Figure 5.5 Boolean A NOT B returns the area shaded blue.](images/05-05-boolean-not.png){.center}
+![Figure 5.5 Boolean $A NOT B$ returns the area shaded blue.](images/05-05-boolean-not.png){.center}
 
 Finally, the case of Boolean $XOR$ returns any tuples that are not $true$ for both statements, but are $true$ individually. This is known as the "e**X**clusive **OR**" because we are only returning the tuples that are exclusive based on both statements. For example, $(height>15)XOR(species=WesternHemlock)$ evaluates to:
 

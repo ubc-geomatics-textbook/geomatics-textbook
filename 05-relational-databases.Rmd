@@ -22,8 +22,8 @@ You have almost certainly used a relational database in some form during your li
 ::: 
 
 1. Identify the purpose of Relational Database Management Systems in GIS
-2. Describe the formal elements of relational databases
-3. Practice applying relational algebra and boolean operators to relations
+2. Describe the elements of relational databases
+3. Practice applying relational algebra and Boolean logic to relations
 4. Recognize the uses of different keys for joining and relating information
 5. Understand how to query relational databases in order to extract or produce new information
 
@@ -409,9 +409,9 @@ knitr::kable(
 )
 ```
 
-Figure 5.3 illustrates what is going on here, we are only returning the tuples that evaluate $true$ for both statements. Hence, Boolean $AND$ is equivalent to multiplying two Boolean truth values together. You should also recognize that a Boolean $AND$ is equivalent to what a set intersection $A∩B$ acheives between two relations.
+Figure 5.3 illustrates what is going on here, we are only returning the tuples that evaluate $true$ for both statements. Hence, Boolean $AND$ is equivalent to multiplying two Boolean truth values together. You should also recognize that a Boolean $AND$ is equivalent to what a set intersection $A∩B$ achieves between two relations.
 
-![Figure 5.3 Boolean AND](images/05-03-boolean-and.png){.center}
+![Figure 5.3 Boolean A AND B returns the area shaded blue.](images/05-03-boolean-and.png){.center}
 
 If we do not want to be so restrictive, we could use Boolean $OR$ such as $(height>15)OR(species=WesternHemlock)$, which evaluates to:
 
@@ -424,7 +424,7 @@ knitr::kable(
 
 Figure 5.4 illustrates the case of the Boolean $OR$. As you can see, it returns everything where either of the statements evaluate to $true$, regardless if the other statement is $false$. You should also recognize that a Boolean $OR$ is equivalent to what a set union $A∪B$ achieves between two relations. 
 
-![Figure 5.4 Boolean OR](images/05-04-boolean-or.png){.center}
+![Figure 5.4 Boolean A OR B returns the area shaded blue.](images/05-04-boolean-or.png){.center}
 
 Suppose we want to identify all the trees that are greater than 15 m, but not Western Hemlock. In this case, we would use the expression $(height>15)NOT(species=WesternHemlock)$, which evaluates to:
 
@@ -437,7 +437,7 @@ knitr::kable(
 
 Figure 5.5 illustrates how Boolean $NOT$ essentially negates or inverts the statement that follows. In this case, instead of returning the Western Hemlock tuples, $NOT(species=WesternHemlock)$ returns "everything except" Western Hemlock, which is also equivalent to $species≠WesternHemlock$.
 
-![Figure 5.5 Boolean NOT](images/05-05-boolean-not.png){.center}
+![Figure 5.5 Boolean A NOT B returns the area shaded blue.](images/05-05-boolean-not.png){.center}
 
 Finally, the case of Boolean $XOR$ returns any tuples that are not $true$ for both statements, but are $true$ individually. This is known as the "e**X**clusive **OR**" because we are only returning the tuples that are exclusive based on both statements. For example, $(height>15)XOR(species=WesternHemlock)$ evaluates to:
 
@@ -450,11 +450,7 @@ knitr::kable(
 
 Figure 5.6 illustrates how Boolean $XOR$ excludes all the tuples that evaluate to $true$ for both statements. In the example above, tuples ID=2 and ID=3 are excluded because both of the statements for height and species are $true$. 
 
-![Figure 5.6 Boolean XOR](images/05-06-boolean-xor.png){.center}
-
-### Query languages
-
-
+![Figure 5.6 Boolean A XOR B returns the area shaded blue.](images/05-06-boolean-xor.png){.center}
 
 ## Joining relations
 
@@ -543,9 +539,73 @@ knitr::kable(
 
 ### Cardinality of Joins
 
-Depending on the schema of the two relations being joined, the number of tuples joined from one relation to another can vary and is known as **cardinality**. In the simplest case, one tuple in $R$ is related to one tuple in $S$, and this cardinality is known as **one-to-one** usually expressed as 1:1. The natural join example above, $R⋈S$, is an example of **one-to-many** (1:M) or **many-to-one** (M:1) cardinality because one species tuple found in $S$ corresponds to many species tuples in $R$. Finally, **many-to-many** (M:M) cardinality describes the case where there are multiple tuples in $R$ that correspond to multiple tuples in $S$. An example of a many-to-many relationship might be many species of trees in $R$ that correspond to many forest stands in $S$. In other words, a forest stand might be comprised of many species and any particular species might be found in many forest stands. Figure 5.2 illustrates how cardinality might emerge depending on the relational schema and problem at hand.
+Depending on the schema of the two relations being joined, the number of tuples joined from one relation to another can vary and is known as **cardinality**. In the simplest case, one tuple in $R$ is joined to one tuple in $S$, and this cardinality is known as **one-to-one** usually expressed as 1:1. The natural join example above, $R⋈S$, is an example of **one-to-many** (1:M) or **many-to-one** (M:1) cardinality because one species tuple found in $S$ corresponds to many species tuples in $R$. Finally, **many-to-many** (M:M) cardinality describes the case where there are multiple tuples in $R$ that correspond to multiple tuples in $S$. An example of a many-to-many relationship might be many species of trees in $R$ that correspond to many forest stands in $S$. In other words, a forest stand might be comprised of many species and any particular species might be found in many forest stands. Figure 5.7 illustrates how cardinality might emerge depending on the relational schema and problem at hand.
 
-![Figure 5.4 Cardinality of joins.](images/05-04-cardinality-joins.png){.center}
+![Figure 5.7 Cardinality of joins.](images/05-07-join-cardinality.png){.center}
+
+### Structured Query Language
+
+Throughout this chapter, we have seen the various ways that relations are manipulated through relational algebra, Boolean logic, and joins. Since a GIS relies on a RDBMS to interact with data, especially data in the attribute table, geomatics professionals literally need a language to programmatically execute relational algebra, joins, and the other functions of a RDBMS within the GIS software. Such languages are known as query languages, each with its own syntax and use. By far, the most commonly used query language for RDBMS in GIS and across other systems is **Structured Query Language** abbreviated **SQL* and pronounced "sequel". SQL has five primary language elements:
+1. Clauses state an action or operation;
+2. Expressions evaluate to a value;
+3. Predicates evaluate an expression using equivalency and Boolean operators;
+4. Queries apply set selection on a predicate; and
+5. Statements are the combination of all the elements above
+
+SQL has numerous keywords, which are the actions that comprise a clause. It is beyond the scope of this textbook to describe all of them, but most of the SQL keywords are implemented within GIS software in other ways. For example, you would rarely need to programmatically `ADD` an attribute to a relation. Instead, you might click an "Add field" button within the GIS software you are using. Similarly, you might never programmatically `UPDATE` the value for a tuple because most GIS software will allow you to simply double-click a cell in the table and change the value. The primary action that is nearly always performed programmatically with proper SQL syntax is applying a query, which is what we will focus on for this section.
+
+SQL queries are fundamental for implementing set selection $σ_{predicate}$ and they look like this:
+
+```
+SELECT attributes
+FROM relation
+WHERE predicate;
+```
+
+The entire form above is a statement, which is enclosed by a semi-colon at the end. The statement is comprised of three clauses using the keywords: `SELECT`,`FROM`, and `WHERE`. The `SELECT attributes` clause defines which attributes of the relation will be returned. You should recognize that this is the equivalent of applying a set projection $Π_{attributes}$ to the entire set selection statement. You can specify attributes by name (e.g., `SELECT Species`), but it is more common to return all of the attributes of the relation with an asterisk like `SELECT *`. The `FROM relation` clause defines which relation the selection is performed on. Keeping in mind that a RDBMS is comprised of many relations and at any given time you may have several different data sources open in your GIS software, the `FROM` keyword helps to clarify exactly which relation contains the attributes defined by the `SELECT` clause. Finally, the `WHERE predicate` clause defines the predicate that will be evaluated for the set selection, and this is where the magic happens. Although this is the formal syntax for a SQL query, most GIS software will usually only require the user to define the predicate, so next we will look at how to construct different SQL queries on our relation $R$.
+
+Suppose we want to select the trees that are greater than 15 m, like in our previous equivalency example of $σ_{height>15}(R)$. The SQL statement looks like this `SELECT * FROM R WHERE height > 15;`. If we only want to return the species for tree heights greater than 15 m, then the SQL statement looks like this `SELECT Species FROM R WHERE height > 15;` and evaluates to:
+
+```{r, echo=FALSE}
+knitr::kable(
+  data.frame(Species=R[which(R$`Height (m)`>15),4]), booktabs = TRUE, row.names = FALSE
+)
+```
+
+The above SQL statement would be an example of $Π_{species}(σ_{height>15}(R))$. In SQL, the multiplication symbol has the arithmetic meaning and cannot be used to concatenate two predicates. For this reason, we have the Boolean operators for evaluating multiple predicates. For example, $(height>15)×(species=WesternHemlock)$ would be written in SQL as `SELECT * FROM R WHERE height > 15 AND species="Western Hemlock";`. Our previous example of using Boolean $NOT$ in SQL would be written as `SELECT * FROM R WHERE NOT species="Western Hemlock";`. These are all relatively simple examples, but it common to create more complicated queries that use several Boolean operators. Note here how the species value in the expression above is in quotation marks `"Western Hemlock"` because the data type of the species attribute is a _string_. By contrast, the height value in the previous expression is simply an _integer number_. It is important to emphasize at this point that the only equivalency operator that can be used with string data type attributes is $=$. In other words, `"Western Hemlock">"Douglas-Fir"` is illogical, cannot be evaluated, and will return an error. 
+
+If you combine two or more Boolean operators into one statement, then they are evaluated in SQL according to the following precedence:
+1. Anything enclosed within parentheses `()`
+2. `NOT`
+3. `AND`
+3. `OR`
+For example, `SELECT * FROM R WHERE dbh < 30 AND species="Douglas-Fir" OR species="Western Hemlock";` would evaluate to:
+
+```{r, echo=FALSE}
+knitr::kable(
+  R[which(R$`DBH (cm)`<30 & R$Species=="Douglas-Fir" | R$Species=="Western Hemlock"),], booktabs = TRUE, row.names = FALSE
+)
+```
+
+But if we want the `OR` to be evaluated before the `AND`, then we need to use parentheses like `SELECT * FROM R WHERE dbh < 30 AND (species="Douglas-Fir" OR species="Western Hemlock");`, which evaluates to:
+
+```{r, echo=FALSE}
+knitr::kable(
+  R[which(R$`DBH (cm)`<30 & (R$Species=="Douglas-Fir" | R$Species=="Western Hemlock")),], booktabs = TRUE, row.names = FALSE
+)
+```
+
+You may notice the case of $XOR$ conspicuously missing from the order above and this is because SQL does not natively implement the $XOR$ operator. If you want to evaluate the exclusive OR example used in the previous section, $(height>15)XOR(species=WesternHemlock)$, then you would construct a SQL statement like this `SELECT * FROM R WHERE (height > 15 OR species="Western Hemlock") AND NOT (species="Western Hemlock" AND height > 15);`. As you can see, SQL queries can quickly get complex and involve many Boolean operators, so it is important to understand operator precedence and whenever in doubt, you can always use parentheses to override any precedence rules. You should also recognize that there are many ways to write complex statements to achieve your desired selection and you should always prefer the simplest statement possible.
+
+Finally, a very common query that involves returning all tuples that match an attribute value in a list of values can be applied using the `IN` operator in SQL. For example, suppose we want to select all conifer tree species (codes: BB, CW, FD, HW, and YC) from $S$ below:
+
+```{r, echo=FALSE}
+knitr::kable(
+  S, booktabs = TRUE, row.names = FALSE
+)
+```
+
+Your natural reaction to this problem might be to write a long SQL statement like `SELECT * FROM S WHERE code="BB" OR code="CW" OR code="FD" OR code="HW" OR code="YC";`. This is perfectly fine, but you can write this more economically with `IN` such as `SELECT * FROM S WHERE code IN("BB","CW","FD","HW","YC");`. Be aware that a common mistake is to write a long predicate using `OR` like `code="BB" OR "CW" OR "FD" OR "HW" OR "YC"`, but this is incorrect syntax in SQL. Remember that each side of an `OR` or `AND` operator is an _expression_ that evaluates to a Boolean truth value. So `code="BB" OR "CW"` will return an error because `"CW"` alone cannot be evaluated to a Boolean truth value.
 
 #### TITLE HERE {#box-text -}
 
@@ -577,7 +637,7 @@ knitr::kable(
 )
 ```
 
-The tabular data of the CIMD scores are related to the DAs polygon by the DA code. The cardinality of the relationship between these two tables is on-to-one as each DA is described by one set of the CIMD scores. To link the CIMD scores to the Vancouver DA polygons, we would use the `PRCDDA` attribute in the CIMD table as the foreign key to perform a join on the `DAUID` attribute in the Vancouver DA polygon table. Now that the CIMD scores are joined to the Vancouver DA polygon attribute table, we can create choropleth maps to display the vulnerability scores of the DAs (Figure 1).
+The tabular data of the CIMD scores are related to the DAs polygon by the DA code. The cardinality of the relationship between these two tables is one-to-one as each DA is described by one set of the CIMD scores. To join the CIMD scores to the Vancouver DA polygons, we would use the `PRCDDA` attribute in the CIMD table as the foreign key to perform a join on the `DAUID` attribute in the Vancouver DA polygon relation. Now that the CIMD scores are joined to the Vancouver DA polygon attribute table, we can create choropleth maps to display the vulnerability scores of the DAs (Figure 5.8).
 
 ```{r, include=FALSE}
 
@@ -619,7 +679,7 @@ m <- leaflet(DA_CIMD_proj) %>%
             position = "bottomleft")
 ```
 
-```{r, echo=FALSE, out.width = '100%', fig.align = 'center', fig.cap = 'Figure 1. An example of choropleth map displaying the situational vulnerability scores in the City of Vancouver at DA level. Higher score represents the DA has higher situational vulnerable population (e.g., population lacking a high school diploma, low-income population).'}
+```{r, echo=FALSE, out.width = '100%', fig.align = 'center', fig.cap = 'Figure 5.8. An example of choropleth map displaying the situational vulnerability scores in the City of Vancouver at DA level. Higher score represents the DA has higher situational vulnerable population (e.g., population lacking a high school diploma, low-income population).'}
 
 m
 
@@ -627,7 +687,7 @@ m
 
 #### Calculation
 
-Suppose we would like to examine the overall vulnerability score for each DA, we could perform a computation using the `Calculate Field` tool. We would name a new field (e.x. aggregate_score), set the data type to double (to allow negative values and values with decimal places), and then enter the mathematical expression to specify the calculation to sum the four dimensions of CIMD scores and divide it by four to obtain an averaged vulnerability score for each DA. Using similar steps, we could apply a min-max normalization to transform this overall vulnerability score to a range between 0 and 1 to allow for a quick interpretation of the score. The formula is as follows: $\frac{(value - value_{min})}{(value_{max} - value_{min})}$. *Tips: To obtain the minimum and maximum values, you can click on the name of the attribute to sort values in ascending/ descending order or right click to open the statistics summary of the attribute.*
+Suppose we would like to calculate the overall vulnerability score for each DA. We would first name a new field (e.g., "aggregate_score"), set the data type to double (to allow negative values and values with decimal places), and then enter the mathematical expression to specify the calculation to sum the four dimensions of CIMD scores and divide it by four to obtain an averaged vulnerability score for each DA. Using similar steps, we could apply a min-max normalization to transform this overall vulnerability score to a range between 0 and 1 to allow for a quick interpretation of the score. The formula is as follows: $\frac{(X - X_{min})}{(X_{max} - X_{min})}$.
 
 Using what you have learned, join the street tree data and the vegetation type cover richness data to the Vancouver DA attribute table and to compute a vegetation diversity score. The street trees data shows the number of unique street tree species at a DA. Make sure you apply a min-max normalization to obtain the street tree diversity score. The vegetation diversity score can be computed by averaging the normalized scores of the two vegetation data.
 
@@ -682,7 +742,8 @@ m1 <- leaflet(full.results_proj) %>%
             position = "bottomleft")
 ```
 
-The map below shows the vegetation diversity score at the DA level in Vancouver. The vegetation diversity score and the normalized aggregated vulnerability score are linked to each DA and can be viewed as you hover o-ver the DA.
+Figure 5.9 shows a map of the vegetation diversity score at the DA level in Vancouver. The vegetation diversity score and the normalized aggregated vulnerability score are linked to each DA and can be viewed as you hover o-ver the DA.
+
 ```{r, echo=FALSE, out.width = '100%', fig.align = 'center'}
 m1
 ```

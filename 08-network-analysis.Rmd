@@ -1,0 +1,138 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(igraph)
+library(networkD3)
+```
+
+
+# Network Analysis
+
+Networks are abstract structures used to represent patterns of relationships among sets of various "things" [@ajorlouIntroductionNetworkModels2018]. Such structures can be used to represent social connections, spatial patterns, ecological relationships, etc. In GIS, the elements that compose geospatial networks are geolocated -- in other words: they have latitude and longitude values attached to them. Network analysis encompasses a series of techniques used to interpret information from those networks. This chapter introduces basic concepts for building, analyzing and applying spatial networks to real-world problems.
+
+
+:::: {.box-content .learning-objectives-content}
+
+::: {.box-title .learning-objectives-top}
+
+#### Learning Objectives {-}
+
+:::
+<p id="box-text">By the end of the chapter, students will be able:</p>
+
+
+1. To understand what networks are and to identify the elements that compose them;
+1. To categorize different types of networks according to their topologies;
+1. To create spatial networks and learn how to apply them in various applications;
+1. To extract relevant information from spatial networks about the relationship between their elements, such as routes, distances and centralities.
+:::
+
+### Key Terms {-}
+Network analysis, Spatial networks, Graph theory
+
+## Introduction to graph theory
+Graphs are the abstract language of networks [@systemsinnovationGraphTheoryOverview2015]. Graph theory is the area of mathematics that study graphs. By abstracting networks into graphs, one is able to measure different kinds of indicators that represents information about relationships that exist within a certain system. This is especially useful to assess the state of complex adaptive systems such as societies, cities, ecosystems, etc. All graphs are composed of two parts: nodes and edges.
+
+### Nodes
+A node (or vertex) may represent any thing that can be connected with other things. For example, it can represent people in social networks, street intersections in road networks, or chemical compounds in molecular networks, among others.
+
+### Edges
+Edges, on the other hand, represent how vertices are interconnected to each other. So it may represent the vertices' social connections, street segments, molecular bindings, etc. The graph below represents rapid and frequent transit lines in Metro Vancouver. Each node represents a transit line and the edges represents connections between those lines.
+
+```{r pressure, echo=FALSE}
+data <- data.frame(
+  from=c("Expo Line", "99-B Line", "R4", "Canada Line", "R4", "Millenium Line", "Millenium Line", "Seabus", "Seabus", "Seabus", "Expo Line", "R4", "West Coast Express", "West Coast Express", "R5", "R5", "West Coast Express", "Millenium Line", "West Coast Express",  "West Coast Express"),
+  to=c("99-B Line", "Canada Line", "Canada Line", "Expo Line", "Expo Line", "Expo Line", "99-B Line", "Canada Line", "Expo Line", "R2", "R1", "99-B Line", "Expo Line", "Millenium Line", "Expo Line", "Canada Line", "R3", "R3", "Seabus", "Canada Line")
+)
+
+simpleNetwork(data, charge=-500, linkDistance=50, fontSize=10)
+```
+<p class="codeblock-label">Graph representing Metro Vancouver rapid and frequent transit network</p>
+
+
+![Rapid and frequent transit network in Metro Vancouver. Source: City of Pitt Meadows](https://www.pittmeadows.ca/sites/default/files/docs/23-07-2019_2-47-50_pm.jpg).(images/metro_vancouver_transit_network.jpeg){.center}
+
+
+## Connectivity and order
+There are two major types of connections within the graphs: directed and undirected. Connections are directed when they have a specific node of origin and destination. 
+
+### Direct
+Directed graphs are networks where the order of elements change relationships between them. We represent directed connections with an arrow. For example, in the case of the transit network we could use a directed graph to represent the path one has to take in order to shift from one line to another.
+
+### Undirect
+On the other hand, in an undirected graph, connections are represented as simple lines instead of arrows. The order of elements does not matter.
+
+## Network topologies
+Topology is the study of how network elements are arranged. The same elements arranged in different ways can change the network structure and dynamics. A very common example is the arrangement of computer networks [@wikibooksCommunicationNetworksNetwork2018].
+
+### Physical versus logical topology
+
+### Lines
+Nodes are arranged in series where every node has no more than two connections.
+(Example: Skytrain transit line)
+
+### Rings
+Every node has no mode than two connections and the "first" and "last" nodes are connected to each other forming a circle.
+(Example: Stanley park seawall trail)
+
+### Meshes
+Every node is connected to more than one node.
+(Example: Tree canopy)
+
+### Stars
+Two or more nodes arranged around a central node.
+(Example: Courtyard apartment)
+
+### Trees
+Nodes are structured from a root node arranged into a number of smaller nodes.
+(Example: Boat marinas)
+
+### Buses
+Nodes are structured with one connection around a central path.
+(Example: Building-street connections)
+ 
+### Fully connected
+Every node is connected to every other node.
+(Example: Soccer field visibility)
+
+## Spatial Network Analysis
+
+### Network tracing
+
+### Linear referencing
+[@ramsey23LinearReferencing2012].
+
+### Routing
+[@systemsinnovationNetworkDiffusionContagion2015].
+
+### Least cost paths
+
+### Least cost corridors
+
+## Network Centrality
+[@ajorlouIntroductionNetworkModels2018].
+
+### Degree centrality
+The number of connections of each node.
+
+### Closeness centrality
+How close the node is to every other node of the graph in logical distance.
+
+### Betweenness centrality
+How likely a node is to be passed through when going from every node to every other node of the graph.
+
+:::: {.box-content .case-study-content}
+
+::: {.box-title .case-study-top}
+#### Case Study {-}
+:::
+
+#### Central and peripheral green spaces in Vancouver? {#box-text -}
+[@mantegnaUBCChangingClimate2021]
+<p id="box-text"></p>
+
+<p id="box-text"></p>
+
+<p id="box-text"></p>
+
+::::
+

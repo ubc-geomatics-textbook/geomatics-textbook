@@ -1,0 +1,348 @@
+# Raster Analysis and Terrain Modelling {#raster-analysis-and-terrain-modelling}
+
+**Lorem ipsum dolor sit amet**, _consectetur adipiscing elit._ Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
+
+:::: {.box-content .learning-objectives-content}
+
+::: {.box-title .learning-objectives-top}
+#### Learning Objectives {-}
+::: 
+
+1. Objective one
+2. Objective two
+3. Objective three
+
+::::
+
+### Key Terms {-}
+
+Ipsum lorem, Phasellus, sollicitudin, finibus
+
+## Raster analysis
+
+### Base data
+
+### Derived data
+
+### Classified data
+
+### Combined data
+
+## Digital vertical models
+
+```{r, echo=FALSE}
+x <- raster(nrow=3,ncol=3,vals=1:9,crs="+proj=utm +zone=10 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",xmn=0,xmx=300,ymn=0,ymx=300)
+writeRaster(x,"saddle.tif",overwrite=T,format='GTiff',datatype='INT1U')
+```
+
+### Digital Elevation Models (DEM)
+
+### Digital Terrain Models (DTM)
+
+### Digital Surface Models (DSM)
+
+## Raster functions
+
+### Local
+
+### Focal
+
+### Global
+
+### Zonal
+
+## Derivatives of elevation models
+
+### Slope
+
+### Aspect
+
+### Hillshade
+
+### Curvature
+
+###	Contour
+
+### Topographic position indices
+
+## Hydrology work"flows"
+
+### Sinks, peaks, and saddles oh my!
+
+![Figure 9.X Sink](images/09-00-sink.png){.center}
+![Figure 9.X Sink](images/09-00-peak.png){.center}
+![Figure 9.X Sink](images/09-00-saddle.png){.center}
+
+
+### Flow direction
+
+### Flow accumulation
+
+### Flow length
+
+### Stream delineation
+
+###	Stream order
+
+###	Pour points
+
+###	Watershed delineation
+
+## Case Study: Topographic Indices for Wetland Mapping {-}
+
+Author: Ramon Melser
+
+```{r setup, include=FALSE}
+library(leaflet)
+library(raster)
+library(htmlwidgets)
+library(rgdal)
+library(sp)
+library(sf)
+library(leafem)
+library(geojsonio)
+library(DiagrammeR)
+library(topoDistance)
+knitr::opts_chunk$set(fig.width = 12, fig.height = 8) #make the interactive maps bigger/smaller across the document
+```
+
+#### Topographic Indices {-}
+
+Natural processes on a landscape can be interpreted by analyzing its topography. DEMs can be used to create a wide range of topographic indices, which may be used to inform on landscape geomorphology, hydrology and biological processes in a study area (Mattivi et al., 2019). To demonstrate the applications of topographic indices, and attempt was made to predict the distribution of wetlands across a study area in the Fort St. John Timber Supply Area, in North-eastern British Columbia, Canada (see Figure 1).
+
+```{r map, echo=FALSE, include=FALSE}
+#load files
+ROI_1 <- st_read("data/09/Chowade_ROI.shp")
+ROI_2 <- st_read("data/09/FSJTSA.shp")
+#create leaflet
+m = leaflet() %>%
+  addProviderTiles("Esri.WorldImagery") %>% #http://leaflet-extras.github.io/leaflet-providers/preview/
+  addScaleBar(position = c("topleft")) %>%
+  addFeatures(ROI_1, group = "Chowade Basin", fill = FALSE, color = "red")%>%
+  addFeatures(ROI_2, group = "Fort St. John TSA", fill = FALSE)%>%
+  addLayersControl(overlayGroups = c("Chowade Basin", "Fort St. John TSA"), position = c("bottomleft"), options = layersControlOptions(collapsed = TRUE))
+m
+```
+
+```{r map1, echo=FALSE, fig.cap="Figure 1: The Fort St. John Timber Supply Area & Chowade Watershed Management Basin, British Columbia, Canada (Government of British Columbia, 2011a & 2011b)"}
+m
+```
+
+The use of topographic indices was employed alongside spectral indices to perform landcover classification. For the successful prediction of wetland landscape classes, a particularly promising topographic index is Topographic Wetness Index (TWI). In brief, high TWI values indicate areas with high water accumulation and low slope, whilst low TWI values indicate areas that are well drained and on steep slopes. There are several GIS platforms that provide users with TWI tools, yet not all are the same. A particular tool used in this case study was the SAGA Wetness Index tool: relative to 'regular' TWI calculations, System for Automated Geoscientific Analyses (SAGA) Wetness modifies the calculation of the contributing catchment area to a cells 'wetness', and consequently produces a more realistic prediction of soil moisture potential (Mattivi et al., 2019).The equations for SAGA Wetness ($WI_S$) (equation 1), and for it's unique computation of catchment area ($SCA_M$) (equation 2) are shown below (Böhner & Selige, 2006). Both are functions of slope angle $\beta$, and $SCA_{max}$ is defined as drainage area per unit contour width ($m^2$*$m^{-1}$) . SAGA Wetness across the study site is shown in Figure 2. 
+
+$$
+\tag{Equation 1} 
+WI_S = ln (\frac{SCA_M}{tan\beta})
+$$
+
+$$
+\tag{Equation 2}
+SCA_M = SCA_{max} (\frac{1}{15})^{\beta exp(15^{\beta})}
+$$
+
+![Figure 9.X SAGA Wetness Index across the Chowade Watershed (Government of British Columbia, 2011b)](images/09-00-SAGA-Wetness.png){.center}
+
+In addition to SAGA Wetness, another useful index that was included in the Case Study was the Multi-Resolution Valley Bottom Flatness (MRVBF) index. Introduced by Gallant & Dowling in 2003, this index identifies hillslopes and valley bottoms, and characterizes hydrological and geomorphic dynamics. This index serves to identify areas that are likely to be occupied by water, and has been used widely in remote sensing studies (Huang et al., 2017). MRVBF is derived from flatness and lowness characteristics, and is computed using slope and ranked elevation, see figure 3 (Gallant & Dowling, 2003). Note that this is a simplification of the computational process, and Gallant & Dowling (2003) may be consulted for a more in-depth breakdown of the 18 equations involved in computing MRVBF. See figure 4 for MRVBF across the study site. 
+
+```{r diagram, echo=FALSE, out.width = '75%', fig.cap="Figure 3:Multi-Resolution Valley Bottom Flatness (MRVBF) Computational Components (Gallant & Dowling, 2003"}
+
+DiagrammeR::grViz("digraph {
+  graph [layout = dot, rankdir = TB]
+  node [shape = rectangle]        
+  rec1 [label = 'Component 1. Slope']
+  rec2 [label = 'Component 2. Elevation Percentile']
+  rec3 [label =  'Component 3. Nonlinear Transformation']
+  rec4 [label = 'MRVBF']
+  # edge definitions with the node IDs
+  rec1 -> rec2 -> rec3 -> rec4
+  }", 
+  height = 500)
+```
+
+![Figure 9.X Multi-resolution Valley Bottom Flatness (MRVBF) across the Chowade Watershed (Government of British Columbia, 2011b)](images/09-00-MRVBF.png)
+
+Figures 5 and 6 below demonstrate the relationship between Elevation and MRVBF through a comparison of cross sections from both layers. As is shown by the cross-sections of MRVBF and the DEM, high MRVBF values are directly correlated with low slope and elevation areas in the DEM.
+
+```{r MRVBF/DEM profile, echo=FALSE, warning=FALSE, out.width = '75%', fig.cap="Figure 5: Cross Section where elevation is expressed through Multi-Resolution Valley Bottom Flatness (MRVBF). High values represent valley bottoms, and low values represent steep slopes. "}
+MRVBF <- raster("data/09/MRVBF.tif")
+DEM <- raster("data/09/DEM.tif")
+Line <- geojson_read("data/09/Line.geojson", what = "sp")
+MRVBF_Profile <- topoProfile(MRVBF, Line, pts = 400, type = "base", singlePlot = FALSE, rows = NULL, cols = NULL, limits = NULL, legendx = "bottomright")
+title(ylab = "                               (mrvbf)") # manually manipulate the axis title to include units. The axis titles are auto-generated by the function, so this is the only way I found to edit them. 
+```
+
+```{r DEM Profile, echo=FALSE, warning=FALSE, out.width = '75%', fig.cap="Figure 6: Elevation Cross Section."}
+DEM_Profile <- topoProfile(DEM, Line, pts = 400, type = "base", singlePlot = FALSE, rows = NULL, cols = NULL, limits = NULL, legendx = "bottomright")
+title(ylab = "                         (m)") #manualy manipulate the axis title to include units. The axis titles are auto-generated by the function, so this is the only way I found to edit them.
+```
+
+#### DEM Derivatives & Classification {-}
+
+To exemplify the potential of topographic indices, SAGA Wetness, MRVBF, Slope and Aspect are combined with spectral information from satellite imagery in a classification algorithm. Using these layers, predictive mapping of three simple land cover classes - Alpine, Forested, and Wetland - was performed in the Chowade Watershed Management basin (Government of British Columbia, 2011b). The interactive map below allows for navigation of the classified map, as well as the input layers. An exploration of the input layers and prediction raster make it apparent how certain values in the input layers informed the prediction of wetlands, ie: low slope values, high SAGA Wetness values and valley bottoms in MRVBF. The overall accuracy from this particular classification is 84.4%, showing the value of layer derivatives in classification exercises.
+
+A more complex version of this study, at a more 'challenging' study site in the Fort St. John Timber Supply Area is available **HERE** (insert MGEM page hyperlink).
+
+```{r files 1, echo = FALSE, include=FALSE}
+#Load files
+r1 <- raster("data/09/Aspect.tif")
+r2 <- raster("data/09/MRVBF.tif")
+r3 <- raster("data/09/NDVI.tif")
+r4 <- raster("data/09/NDWI.tif")
+r5 <- raster("data/09/SAGA_Wetness.tif")
+r6 <- raster("data/09/Slope.tif")
+r7 <- as.factor(raster("data/09/Prediction_Raster.tif"))
+ROI_1 <- st_read("data/09/Chowade_ROI.shp")
+```
+
+```{r files 2, echo = FALSE, include=FALSE}
+#Set colors and legend titles
+pal1 <- colorNumeric(c("#f07f0a", "#a02837", "#1b587c", "#4e8542", "#604878"), values(r1), na.color = "transparent")
+pal2 <- colorNumeric(c("#0C2C84", "#41B6C4", "#FFFFCC"), values(r2), na.color = "transparent")
+pal3 <- colorNumeric(c("#e5f5e0", "#a1d99b", "#1b7837"), values(r3), na.color = "transparent")
+pal4 <- colorNumeric(c("#6e462c", "#9c8448", "#cccc66", "#9cab68", "#306466"), values(r4), na.color = "transparent")
+pal5 <- colorNumeric(c("#c7eae5", "#5ab4ac", "#01665e"), values(r5), na.color = "transparent")
+pal6 <- colorNumeric(c("#fee090", "#fc8d59", "#d73027"), values(r6), na.color = "transparent")
+pal7 <- colorFactor(c("#fc8d59", "#238443", "#d9f0a3"), values(r7), na.color = "transparent")
+```
+
+```{r files 3, echo = FALSE, include=FALSE}
+#Create labels for classified raster
+labels1 = c("Alpine", "Upland", "Wetland")
+
+#Run the leaflet
+m = leaflet() %>%
+  addProviderTiles("Esri.WorldImagery") %>% #http://leaflet-extras.github.io/leaflet-providers/preview/
+  addScaleBar(position = c("topleft")) %>%
+  addRasterImage(r1, colors = pal1, group = "Aspect", opacity = 1, maxBytes = "Inf") %>%
+  addRasterImage(r2, colors = pal2, group = "MRVBF", opacity = 1, maxBytes = "Inf") %>%
+  addRasterImage(r3, colors = pal3 ,group = "NDVI(Spectral)", opacity = 1, maxBytes = "Inf") %>%
+  addRasterImage(r4, colors = pal4, group = "NDWI(Spectral)", opacity = 1, maxBytes = "Inf") %>%
+  addRasterImage(r5, colors = pal5, group = "SAGA Wetness", opacity = 1, maxBytes = "Inf") %>%
+  addRasterImage(r6, colors = pal6, group = "Slope", opacity = 1, maxBytes = "Inf") %>%
+  addRasterImage(r7, colors = pal7, group = "Prediction Raster", opacity = 1, maxBytes = "Inf") %>%
+  addFeatures(ROI_1, group = "Study Area Boundary", fill = FALSE, color = "red")%>%
+  addLegend(pal = pal1, values = values(r1), group = "Aspect", opacity = 1, title = "Aspect")%>%
+  addLegend(pal = pal2, values = values(r2), group = "MRVBF", opacity = 1, title = "MRVBF")%>%
+  addLegend(pal = pal3, values = values(r3), group = "NDVI(Spectral)", opacity = 1, title = "NDVI")%>%
+  addLegend(pal = pal4, values = values(r4), group = "NDWI(Spectral)", opacity = 1,  title = "NDWI")%>%
+  addLegend(pal = pal5, values = values(r5), group = "SAGA Wetness", opacity = 1, title = "SAGA Wetness")%>%
+  addLegend(pal = pal6, values = values(r6), group = "Slope", opacity = 1, title = "Slope")%>%
+  addLegend(pal = pal7, values = values(r7), group = "Prediction Raster", opacity = 1, title = "Chowade Land Cover Realms", labFormat = function(type, cuts, p){paste0(labels1)})%>%
+  addLayersControl(overlayGroups = c("Aspect", "MRVBF", "NDVI(Spectral)", "NDWI(Spectral)", "SAGA Wetness", "Slope", "Prediction Raster"), position = c("bottomleft"), options = layersControlOptions(collapsed = TRUE))
+```
+
+```{r map 2, echo=FALSE, fig.cap="Figure 7: Input Layers and Prediction Raster"}
+m
+```
+
+#### References {-}
+
+*Böhner, J., & Selige, T. (2006). Spatial prediction of soil attributes using terrain analysis and climate regionalisation.*
+
+*Gallant, J. C., & Dowling, T. I. (2003). A multiresolution index of valley bottom flatness for mapping depositional areas. Water Resources Research, 39(12), 1347-n/a. https://doi.org/10.1029/2002WR001426*
+
+*Government of British Columbia. (2011a). FADM - Timber Supply Area (TSA) [Data set].
+Government of British Columbia. https://catalogue.data.gov.bc.ca/dataset/fadm-timber-supply-area-tsa.*
+
+*Government of British Columbia. (2011b). OGC Water management Basins [Data set].
+Government of British Columbia. https://catalogue.data.gov.bc.ca/dataset/ogc-watermanagement-basins.*
+
+*Huang, C., Nguyen, B. D., Zhang, S., Cao, S., & Wagner, W. (2017). A comparison of terrain indices toward their ability in assisting surface water mapping from sentinel-1 data. ISPRS International Journal of Geo-Information, 6(5), 140. https://doi.org/10.3390/ijgi6050140*
+
+*Mattivi, P., Franci, F., Lambertini, A., & Bitelli, G. (2019). TWI computation: A comparison of different open source GISs. Open Geospatial Data, Software and Standards, 4(1), 1-12. https://doi.org/10.1186/s40965-019-0066-y*
+
+*Meles, M. B., Younger, S. E., Jackson, C. R., Du, E., & Drover, D. (2020). Wetness index based on landscape position and topography (WILT): Modifying TWI to reflect landscape position. Journal of Environmental Management, 255(C), 109863-109863. https://doi.org/10.1016/j.jenvman.2019.109863*
+
+## Geovisualization
+
+###	Viewsheds
+
+###	Extrusion
+
+###	Exaggeration
+
+###	Lighting and shadowing
+
+###	Symbologies for relief
+
+![Figure caption text is also alt text.](images/01-image.png){.center}
+
+:::: {.box-content .your-turn-content}
+
+::: {.box-title .your-turn-top}
+#### Your turn! {-}
+:::
+
+<iframe width=100% height=800px src='https://paulpickell.ca/scenejs-test/' frameBorder="0" >
+  <p>Your browser does not support iframes</p>
+</iframe>
+
+::::
+
+
+
+
+
+
+
+
+## Third Section Header
+
+[This is how we link to something. {target="_blank"} ensures that this link opens in a new window rather than navigating away from the textbook.](https://google.com){target="_blank"}
+
+:::: {.box-content .your-turn-content}
+
+::: {.box-title .your-turn-top}
+#### Your turn! {-}
+:::
+
+<p id="box-text">Ask the reader to undertake some activity or exercise. Have them explore data, an interactive tool, a web map. Avoid referencing, relying on, or using external URLs. If it can be built, coded, or hosted by us, then it should be.</p>
+
+<iframe width=100% height=800px src='http://paulpickell.ca/raster-calculator/low-pass-filter.html' frameBorder="0" >
+  <p>Your browser does not support iframes</p>
+</iframe>
+
+::::
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
+
+:::: {.box-content .call-out-content}
+
+::: {.box-title .call-out-top}
+#### Call out {-}
+:::
+
+<p id="box-text">
+This is a call out. Put some important concept or fact in here.
+</p>
+
+::::
+
+## Summary
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
+
+### Reflection Questions {-}
+
+1. Explain ipsum lorem.
+2. Define ipsum lorem.
+3. What is the role of ispum lorem?
+4. How does ipsum lorem work?
+
+### Practice Questions {-}
+
+2. Given ipsum, solve for lorem.
+3. Draw ipsum lorem.
+
+`r if (knitr::is_html_output()) '
+## Recommended Readings {-}
+'`
+
+Ensure all inline citations are properly referenced here.
+
+```{r include=FALSE}
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'htmlwidgets', 'webshot', 'DT',
+  'miniUI', 'tufte', 'servr', 'citr', 'rticles'
+), 'packages.bib')
+```

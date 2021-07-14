@@ -16,19 +16,19 @@ LiDAR, ALS, Surface Models, LiDAR Metrics, Area-Based Approach, Individual Tree 
 
 ## What is LiDAR?
 
-LiDAR is an active remote sensing technology that uses a laser scanner and time of flight principles to collect 3 dimensional (3D) data. A LiDAR system is made up of three components; a laser-scanning device, and accurate global navigation satellite system (GNSS), and an inertial measurement unit (IMU). The GNSS receiver allows the position of the laser to be determined in space, while the IMU records the orientation of the laser (i.e. roll, pitch, and yaw). When discussing LiDAR in an airborne context, we can also call it airborne laser scanning (ALS).
+LiDAR is an active remote sensing technology that uses a laser scanner and time of flight principles to collect 3 dimensional (3D) data. A LiDAR system is made up of three components; a laser-scanning device, and accurate global navigation satellite system (GNSS), and an inertial measurement unit (IMU). The GNSS receiver allows the position of the laser to be determined in space, while the IMU records the orientation of the laser (i.e. roll, pitch, and yaw). Figure 15.1 shows all of the necessary components of a LiDAR system. When discussing LiDAR in an airborne context, we can also call it airborne laser scanning (ALS).
+
+![Figure 15.1 Overview of the components of a LiDAR System.](images/15-LiDAR_System.png){width="50%"}
 
 ### How does it Work?
 
-Typical LiDAR systems use the time of flight method to produce 3D data. A laser ranging instrument produces a short, intense pulse of light from the instrument to a target being measured. Some of this energy is then reflected back to the instrument, where it is recorded (as seen in Figure 15.1). Since the speed of light, and the location of the laser ranging instrument is known, we can calculate the position of the target by timing how long it takes between the the pulse being emitted and received. If we shoot many pulses of light towards a target, we can create a 3D point cloud of our target (see Figure 15.8 as an example of a forest scene).
+Typical LiDAR systems use the time of flight method to produce 3D data. A laser ranging instrument produces a short, intense pulse of light from the instrument to a target being measured. Some of this energy is then reflected back to the instrument, where it is recorded (as seen in Figure 15.2). Since the speed of light, and the location of the laser ranging instrument is known, we can calculate the position of the target by timing how long it takes between the the pulse being emitted and received. If we shoot many pulses of light towards a target, we can create a 3D point cloud of our target (see Figure 15.8 as an example of a forest scene). Modern LiDAR systems can shoot hundreds of thousands of pulses per second, which is why LiDAR scenes can contain millions of points.
 
-![Figure 15.1 Concept of LiDAR.](images/15-Concept_of_LiDAR.png){.center}
+![Figure 15.2 Concept of LiDAR.](images/15-Concept_of_LiDAR.png){.center}
 
-When thinking about a LiDAR dataset, there are several parameters to take note of. It is important to know what the technical specifications of the data collection parameters were (for example, what was is the point density?), and how the data was collected (what plaform was used). A LiDAR dataset includes several pieces of information for each 3D point. X,Y,Z location data is included, as well as information about how the data was collected. In many cases, this includes things like return number, scan angle, gps time, classification, and intensity. We will discuss these concepts in more detail below.
+When thinking about a LiDAR dataset, there are several parameters to take note of. It is important to know what the technical specifications of the data collection parameters were (for example, what was is the point density?), and how the data was collected (what plaform was used?). A LiDAR dataset includes several pieces of information for each 3D point. X,Y,Z location data is included, as well as a GPS time stamp for each point. Additional information such as return number, scan angle, gps time, classification, and intensity are also part of the file. We will discuss these concepts in more detail below.
 
-The most common file format for LiDAR files is called the LAS file format (.las). This file format was originally designed for 3-dimensional point cloud data, and is a free alternative to proprietary systems or a generic ASCII file interchange system. The main benefits of this file format are that it is relatively quick, can be used by any system, and stores information specific to the nature of LiDAR data without being overly complex. More information regarding the file type specifications can be found [here](https://www.asprs.org/divisions-committees/lidar-division/laser-las-file-format-exchange-activities).
-
-![Figure 15.2 LiDAR System.](images/15-LiDAR_System.png){width="50%"}
+The most common file format for LiDAR files is called the LAS file format (.las). This file format was originally designed for 3-dimensional point cloud data, and is a free alternative to proprietary systems or a generic ASCII file interchange system. The main benefits of this file format are that it is relatively quick, can be used by any system, and stores information specific to the nature of LiDAR data without being overly complex. More information regarding the file type specifications can be found [here](https://www.asprs.org/divisions-committees/lidar-division/laser-las-file-format-exchange-activities){target="_blank"}.
 
 ## LiDAR History and Use
 
@@ -46,7 +46,7 @@ Early LiDAR point densities were low (1 - 5 p/m^2^), which limited researchers t
 
 -   Include HIGH POINT DENSITY vs LOW POINT DENSITY
 
-## Components of LiDAR Systems
+## Components of a LiDAR System
 
 ### Lasers
 
@@ -70,7 +70,7 @@ Early LiDAR point densities were low (1 - 5 p/m^2^), which limited researchers t
 
 -   return number, gps time, classification, and intensity!
 
-![Figure 15.3 LiDAR Unit.](images/15-LiDAR_Unit.jpg){width="50%"}
+![Figure 15.3 An example of a LiDAR Unit.](images/15-LiDAR_Unit.jpg){width="50%"}
 
 ### Position and Orientation
 
@@ -82,7 +82,7 @@ Early LiDAR point densities were low (1 - 5 p/m^2^), which limited researchers t
 
     -   On board GPS and GPS reference stations on the ground are used to post process the data in order to be as accurate as possible
 
-![Figure 15.4 XYZ Coordinates.](images/15-XYZ_coordinates.jpg){width="75%"}
+![Figure 15.4 An on board GPS is required to for providing an accurate location of the LiDAR scanner.](images/15-XYZ_coordinates.jpg){width="75%"}
 
 -   **Inertial Measurement Unit (IMU)**
 

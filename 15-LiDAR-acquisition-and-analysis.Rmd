@@ -1,7 +1,7 @@
 ---
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 # LiDAR Acquisition and Analysis {#LiDAR-acquisition-and-analysis}
@@ -42,17 +42,14 @@ The most common file format for LiDAR files is called the LAS file format (`.las
 
 LiDAR for forestry and ecology can be used to monitor vegetation structure, stream properties, and topography among other uses. Early LiDAR point densities were low (1 - 5 p/m^2^), which limited researchers to area based measurements of forest volume and biomass in the 1980s (CITE NELSON 2013). These limitations were primarily due to the LiDAR sensor, as well as data storage difficulties. Technological improvements such as increased pulse rates and smaller footprints (leading to increased point density), and increased storage capacity have allowed researchers to look as individual trees as well as whole forests (CITE Jakubowski 2013). Point cloud densities of 1000 p/m^2^ are now entirely feasible.
 
--   Any other technological improvements - specifically pulse rates, storage? [see proposal]
-
-    -   White et al - LiDAR citation, Open source textbook for ITD?
+-   *Any other technological improvements - specifically pulse rates, storage? [see proposal]*
+-   *White et al - LiDAR citation, Open source textbook for ITD?*
 
 ![Figure 15.X A cross section of a high density point cloud (A, X p/m^2^), and a lower density point cloud (B, 1 p/m^2^)](images/15-high_low_point_density.png)
 
-Unlike passive remote sensing technologies, LiDAR has the advantage of being able penetrate forest canopies. This means that we are able to characterize forest structure, as well as detect the ground.
+Unlike passive remote sensing technologies, LiDAR has the advantage of being able penetrate forest canopies; this means that we are able to detect the ground. LiDAR can be used to map and examine man-made and natural environments, as the data is extremely precise. It can be used in hazard assessment, forestry, agriculture, wet area mapping, and geologic mapping. In this chapter, we will discuss it's use primarily in a forestry context, where it can be used for volume and biomass estimation, as well as individual tree crown analyses. 
 
--   What are people currently doing with the technology?
-
-    -   Area based approaches for volume, biomass estimation, individual tree crown work (such as?), wet area mapping,
+- *MORE?* 
 
 ## Components of a LiDAR System
 
@@ -102,32 +99,31 @@ Unlike passive remote sensing technologies, LiDAR has the advantage of being abl
 
 ### Platform
 
-LiDAR units can be attached to a variety of platforms. Traditionally, LiDAR units for forestry research were mounted on airplanes and helicopters, as units were large and cumbersome [Figure 15.3], however ground based units such as terrestrial laser scanning (TLS), and mobile laser scanning (MLS) have also been developed. These units tend to have a very high point density, and TLS is often used in modeling tree architecture.
+LiDAR units can be attached to a variety of platforms. Traditionally, LiDAR units for forestry research were mounted on airplanes and helicopters, as units were large and cumbersome [Figure 15.X], however ground based units such as terrestrial laser scanning (TLS), and mobile laser scanning (MLS) have also been developed. These units tend to have a very high point density, and TLS is often used in modeling tree architecture.
 
 -   **Airplanes and Helicopters**
 
-Airplanes and helicopters were the standard platforms for data collection as laser scanning units in the past were large and required a platform big enough to carry them.
+Airplanes and helicopters are still the most common platforms for LiDAR data collection. This is due to their ability to collect large amounts of data in one acquisition. LiDAR units that are designed for airplanes are more powerful than those designed for drones, leading to increased penetration in forests, even though the flight height is significantly increased. Data storage issues can also be mitigated as the platform is not as sensitive to weight restrictions when compared to drones. With increased pulse rates, data acquisitions can also be dense enough to do individual tree crown work. Typical point densities range from 5-200 p/m^2^.
 
 -   **Drone**
 
-As laser units have decreased in size, we have been able to mount LiDAR units to smaller platforms. Drones (also known as...)
+As laser units have decreased in size, we have been able to mount LiDAR units to smaller platforms. Drones (also known as unmanned aerial vehicles (UAV) or remotely piloted aerial systems (RPAS)) are extremely convenient to collect high density point clouds over small areas. They typically fly relatively close to the forest (e.g. 50m above the trees) and fly a predined flight route so ensure evenly spaced data collection. Typical point densities range from hundreds to thousands of points per meter squared. A major limitation of drones is currently battery life, as acquisition campaigns are limited by how long the drone can fly for (approximately 20 minutes). This means that collecting large amounts of data is difficult in remote locations.  
 
 ![Figure 15.6 Drone mounted LiDAR.](images/15-LiDAR_on_Drone_2.jpg){width="75%"}
 
 -   **Mobile Laser Scanning**
 
-Mobile Laser Scanning (MLS) includes: people, backpacks, cars...
+Mobile Laser Scanning (MLS) includes people (sometimes called 'backpack LiDAR') and moving vehicles. This version of LiDAR have been used by transportation and engineering companies to precisely map things like road or building conditions, and as the units have reduced in size there has been and increase in interest for use in forestry. Current MLS units such as Figure 15.X.2 can be carried around by the user in a forest easily. [Specs from Spencer for GeoSLAM]. Typical point densities are in the hundreds to thousands of points per meter squared. This is highly dependent on what the MLS is mounted to! 
 
 -   **Terrestrial Laser Scanning**
 
-Terrestrial Laser Scanning (TLS) is a static system..
+Terrestrial Laser Scanning (TLS) is a static system. These units are used by engineers for surveying, and are used by foresters to precisely measure trees. This information can be used to build Quantitative structure models (QSM), to precisely estimate tree parameters. Unlike the other platforms mentioned here, TLS is not necessarily a fast data collection technique. Due to occlusion, the TLS instrument needs to be placed in multiple positions around a plot to be able to fully visualize the trees, which means that a plot can take [cite how long a plot can take] to survey! Typical point densities are in the thousands of points per meter squared.
 
 -   **Satellite**
 
-    -   ICESat
-
-    -   GEDI
-
+The last platform that LiDAR units are used for is on satellites. The two major satellite LiDAR systems are ICESat, and GEDI. 
+    -   ICESat **FIND MORE REFERENCES**
+   
 ![Figure 15.7 LiDAR Platforms 1:SOURCE, 2:SOURCE, 3:SOURCE, 4:SOURCE.](images/15-LiDAR_Platforms.png){width="75%"}
 
 ## Types of LiDAR
@@ -193,8 +189,6 @@ Multiple types of LiDAR exist; it's important to know which one you are working 
 
 ![Figure 15.11 Maximum cell heights in an area-based approach.](images/15-las_hmax_2D.png){.center}
 
-![Figure 15.12 Example of all the metrics you can produce... replace this with a leaflet map in 'your turn' section below](images/15-las_metrics_2D.png){.center}
-
 ### Tree Segmentation
 
 -How and why would we want too do this
@@ -205,7 +199,7 @@ Multiple types of LiDAR exist; it's important to know which one you are working 
 
 ### Software and Analysis Tools
 
-As LiDAR acquisition becomes cheaper, more tools are becoming available to do analysis. In this chapter, we use [lidR](https://cran.r-project.org/web/packages/lidR/){target="_blank"}; a free and open source R package that can be used for the entire process of analyzing a point cloud. Several other options exist, such as [A Shiny-based Application for Extracting Forest Information from LiDAR data](https://github.com/carlos-alberto-silva/weblidar-treetop) (also in R), the [Digital-Forestry-Toolbox](http://mparkan.github.io/Digital-Forestry-Toolbox/) which is available for MATLAB, or [FUSION](http://forsys.cfr.washington.edu/fusion/fusion_overview.html), a software developed by the USDA Forest Service. Paid software is also frequently used in LiDAR processing (examples include [ArcGIS Pro](https://pro.arcgis.com/en/pro-app/latest/help/data/las-dataset/use-lidar-in-arcgis-pro.htm), and [LAStools](https://rapidlasso.com/lastools/)), although the cost can be prohibitive. Finally, the open source software [CloudCompare](https://www.danielgm.net/cc/) can be incredibly useful for both viewing and manually clipping/editing point clouds.
+As LiDAR acquisition becomes cheaper, more tools are becoming available to do analysis. In this chapter, we use [lidR](https://cran.r-project.org/web/packages/lidR/){target="_blank"}; a free and open source R package that can be used for the entire process of analyzing a point cloud. Several other options exist, such as [A Shiny-based Application for Extracting Forest Information from LiDAR data](https://github.com/carlos-alberto-silva/weblidar-treetop){target="_blank"} (also in R), the [Digital-Forestry-Toolbox](http://mparkan.github.io/Digital-Forestry-Toolbox/){target="_blank"} which is available for MATLAB, or [FUSION](http://forsys.cfr.washington.edu/fusion/fusion_overview.html){target="_blank"}, a software developed by the USDA Forest Service. Paid software is also frequently used in LiDAR processing (examples include [ArcGIS Pro](https://pro.arcgis.com/en/pro-app/latest/help/data/las-dataset/use-lidar-in-arcgis-pro.htm){target="_blank"}, and [LAStools](https://rapidlasso.com/lastools/){target="_blank"}), although the cost can be prohibitive. Finally, the open source software [CloudCompare](https://www.danielgm.net/cc/){target="_blank"} can be incredibly useful for both viewing and manually clipping/editing point clouds.
 
 ::: {.box-content .case-study-content}
 ::: {.box-title .case-study-top}
@@ -216,15 +210,23 @@ As LiDAR acquisition becomes cheaper, more tools are becoming available to do an
 
 <p id="box-text">
 
-For this case study, we will be using a clipped .las file from the 2018 open LiDAR dataset of City of Vancouver and UBC Endowment Lands in British Columbia (we randomly selected a 200 x 200 meter portion of the '4840E_54550N' tile, see below for the link where you can download the data), and the `lidR` package in R. The script to process this data is included HERE [where to include script?], and you can use the `lidR` book [link] to get a more in depth understanding of the functions we apply below.
+For this case study, we will be using a clipped .las file from the 2018 open [LiDAR dataset](https://opendata.vancouver.ca/explore/dataset/lidar-2018/information/){target="_blank"} of the City of Vancouver and UBC Endowment Lands in British Columbia (we randomly selected a 200 x 200 meter portion of the '4840E_54550N' tile using CloudCompare), and the `lidR` package in R. The script to process this data is included HERE [where to include script?], and you can use the `lidR` [book](https://jean-romain.github.io/lidRbook/){target="_blank"} to get a more in depth understanding of the functions we apply below.
 
 </p>
 
 <p id="box-text">
 
-The first step when looking at LiDAR data is to inspect it; we recommend using the free software CloudCompare (link below), or the `plot()` function in the `lidR` package. Once we have a sense of our data, we can clean and filter the data, using `classify_noise()` and the '-drop' switch to get rid of the noise in our dataset [include image showing noisy vs. clean data?]. Our cleaned dataset can then be used to create a DEM; first we can `classify_ground()`, followed by using the `grid_terrain()` function [call back to previous chapter] -- this is an essential step that could require quite a bit of tweaking depending on what you want to use the DEM for! In our case, the DEM is used to *normalize* the point cloud. Normalization removes the effect of terrain on above ground measurements, allowing comparisons of vegetation heights. [insert image of DEM and CHM]. The normalized point cloud is used to create our CHM (created using `grid_canopy()`). It is at this point that we can analyze the point cloud in a variety of ways. We can use an area-based approach (ABA) to create metrics at the grid level (`grid_metrics()`), or we can derive metrics at the individual tree scale. In order to do this we need to first segment the trees (`segment_trees()`) before creating metrics (`tree_metrics()`). Below we can see an example of a segmented point cloud.
+The first step when looking at LiDAR data is to inspect it; we recommend using the free software CloudCompare, or the `plot()` function in the `lidR` package. Once we have a sense of our data, we can clean and filter the data, using `classify_noise()` and the '-drop' switch to get rid of the noise in our dataset.Our cleaned dataset can then be used to create a DEM; first we can `classify_ground()`, followed by using the `grid_terrain()` function [call back to previous chapter] -- this is an essential step that could require quite a bit of tweaking depending on what you want to use the DEM for! In our case, the DEM is used to *normalize* the point cloud. Normalization removes the effect of terrain on above ground measurements, allowing comparisons of vegetation heights.
 
-INCLUDE IMAGE OF SEGMENTED TREES!
+![Figure 15.X A normalized point cloud](images/15-las_normalize.png){width="50%"}
+</p>
+
+<p id="box-text">
+
+The normalized point cloud is used to create our CHM (created using `grid_canopy()`). It is at this point that we can analyze the point cloud in a variety of ways. We can use an area-based approach (ABA) to create metrics at the grid level (`grid_metrics()`), or we can derive metrics at the individual tree scale. In order to do this we need to first segment the trees (`segment_trees()`) before creating metrics (`tree_metrics()`). Below we can see an example of a segmented point cloud.
+
+
+![Figure 15.X A segmented point cloud](images/15-las_segmented.png){width="50%"}
 
 </p>
 
@@ -260,7 +262,7 @@ Interactive map of rasters:
 
 <p id="box-text">
 
-Necessity of being able to rotate point cloud? Relatively little gain for trouble of small area.
+![Figure 15.X Example of all the metrics you can produce... replace this with a leaflet map in 'your turn' section below](images/15-las_metrics_2D.png){.center}
 
 </p>
 :::

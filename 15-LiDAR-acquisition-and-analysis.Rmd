@@ -1,3 +1,9 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+
 # LiDAR Acquisition and Analysis {#LiDAR-acquisition-and-analysis}
 
 ::: {.box-content .learning-objectives-content}
@@ -5,9 +11,9 @@
 #### Learning Objectives {.unnumbered}
 :::
 
-1.  Understand *how* LiDAR works
-2.  Understand *what* we can do with LiDAR data
-3.  Understand the basic processing steps required to use LiDAR data in a forestry and ecology context
+1.  Understand how LiDAR works
+2.  Understand what we can do with LiDAR data, and what products we can produce
+3.  Understand the basic processing steps required to use LiDAR data for forestry and ecological analysis
 :::
 
 ### Key Terms {.unnumbered}
@@ -22,29 +28,31 @@ LiDAR is an active remote sensing technology that uses a laser scanner and time 
 
 ### How does it Work?
 
-Typical LiDAR systems use the time of flight method to produce 3D data. A laser ranging instrument produces a short, intense pulse of light from the instrument to a target being measured. Some of this energy is then reflected back to the instrument, where it is recorded (as seen in Figure 15.2). Since the speed of light, and the location of the laser ranging instrument is known, we can calculate the position of the target by timing how long it takes between the the pulse being emitted and received. If we shoot many pulses of light towards a target, we can create a 3D point cloud of our target (see Figure 15.8 as an example of a forest scene). Modern LiDAR systems can shoot hundreds of thousands of pulses per second, which is why LiDAR scenes can contain millions of points.
+Typical LiDAR systems use the time of flight method to produce 3D data. A laser ranging instrument produces a short, intense pulse of light from the instrument to a target being measured. Some of this energy is then reflected back to the instrument, where it is recorded (as seen in Figure 15.2). Since the speed of light, and the location of the laser ranging instrument is known, we can calculate the position of the target by timing how long it takes between the the pulse being emitted and received. If we shoot many pulses of light towards a target, we can create a 3D point cloud of our target (see Figure 15.8 as an example of a forest scene). Modern LiDAR systems can shoot hundreds of thousands of pulses per second, which is why LiDAR scenes can contain millions of points, and be several gigabytes large (Figure 15.3).
 
 ![Figure 15.2 Concept of LiDAR.](images/15-Concept_of_LiDAR.png){.center}
 
-When thinking about a LiDAR dataset, there are several parameters to take note of. It is important to know what the technical specifications of the data collection parameters were (for example, what was is the point density?), and how the data was collected (what plaform was used?). A LiDAR dataset includes several pieces of information for each 3D point. X,Y,Z location data is included, as well as a GPS time stamp for each point. Additional information such as return number, scan angle, gps time, classification, and intensity are also part of the file. We will discuss these concepts in more detail below.
+When thinking about a LiDAR dataset, there are several parameters to take note of. It is important to know what the technical specifications of the data collection parameters were (for example, what was is the point density?), and how the data was collected (what plaform was used?). A LiDAR dataset includes several pieces of information for each 3D point. `X,Y,Z` location data is included, as well as a GPS time stamp for each point (`gpstime`). Additional information such as `return number`, `scan angle`, `classification`, and `intensity` are also part of the file. We will discuss these concepts in more detail below.
 
-The most common file format for LiDAR files is called the LAS file format (.las). This file format was originally designed for 3-dimensional point cloud data, and is a free alternative to proprietary systems or a generic ASCII file interchange system. The main benefits of this file format are that it is relatively quick, can be used by any system, and stores information specific to the nature of LiDAR data without being overly complex. More information regarding the file type specifications can be found [here](https://www.asprs.org/divisions-committees/lidar-division/laser-las-file-format-exchange-activities){target="_blank"}.
+The most common file format for LiDAR files is called the LAS file format (`.las`). This file format was originally designed for 3-dimensional point cloud data, and is a free alternative to proprietary systems or a generic ASCII file interchange system. The main benefits of this file format are that it is relatively quick, can be used by any system, and stores information specific to the nature of LiDAR data without being overly complex. More information regarding the file type specifications can be found [here](https://www.asprs.org/divisions-committees/lidar-division/laser-las-file-format-exchange-activities){target="_blank"}.
+
+![Figure 15.3 An example of a typical LiDAR point cloud.](images/15-las_denoise.png){width="90%"}
 
 ## LiDAR History and Use
 
-Early LiDAR point densities were low (1 - 5 p/m^2^), which limited researchers to area based measurements of forest volume and biomass in the 1980s (CITE NELSON 2013). Technological improvements have meant that individual tree crown level analysis is becoming possible (CITE Jakubowski 2013).
+LiDAR for forestry and ecology can be used to monitor vegetation structure, stream properties, and topography among other uses. Early LiDAR point densities were low (1 - 5 p/m^2^), which limited researchers to area based measurements of forest volume and biomass in the 1980s (CITE NELSON 2013). These limitations were primarily due to the LiDAR sensor, as well as data storage difficulties. Technological improvements such as increased pulse rates and smaller footprints (leading to increased point density), and increased storage capacity have allowed researchers to look as individual trees as well as whole forests (CITE Jakubowski 2013). Point cloud densities of 1000 p/m^2^ are now entirely feasible.
 
--   What kind of technological improvements - specifically pulse rates, storage? [see proposal]
+-   Any other technological improvements - specifically pulse rates, storage? [see proposal]
 
     -   White et al - LiDAR citation, Open source textbook for ITD?
 
--   what can we do with LiDAR, what are people currently doing with the technology?
+![Figure 15.X A cross section of a high density point cloud (A, X p/m^2^), and a lower density point cloud (B, 1 p/m^2^)](images/15-high_low_point_density.png)
+
+Unlike passive remote sensing technologies, LiDAR has the advantage of being able penetrate forest canopies. This means that we are able to characterize forest structure, as well as detect the ground.
+
+-   What are people currently doing with the technology?
 
     -   Area based approaches for volume, biomass estimation, individual tree crown work (such as?), wet area mapping,
-
--   Vertical Characterization!
-
--   Include HIGH POINT DENSITY vs LOW POINT DENSITY
 
 ## Components of a LiDAR System
 
@@ -58,77 +66,81 @@ Early LiDAR point densities were low (1 - 5 p/m^2^), which limited researchers t
 
 -   Beam divergence - important to take into account. Think about a dinner plate compared to a bicycle wheel. A beam that has low divergence (dinner plate) will be able to distinguish more objects than a high divergence beam (bicycle wheel).
 
--   small vs large footprint
+-   small vs large footprint \^ same as above.. terminology important
 
--   Target interaction - 7:45 in video 1
+-   Target interaction - 7:45 in video 1 (affects return)
 
 -   Scanning types - zig-zag, rotating mirror line, push broom (call back to RS chapter from Paul) - video 2, 2:08
 
 -   **Technical Specifications of lasers**
 
--   Pulse frequency, scan rate, scan angle
+-   Pulse frequency, scan rate, scan angle, return number, gps time, classification, and intensity!
 
--   return number, gps time, classification, and intensity!
-
-![Figure 15.3 An example of a LiDAR Unit.](images/15-LiDAR_Unit.jpg){width="50%"}
+![Figure 15.4 An example of a LiDAR Unit.](images/15-LiDAR_Unit.jpg){width="50%"}
 
 ### Position and Orientation
 
 -   **Global Navigation Satellite Systems**
 
-    -   Require us to know our position exactly!
+    -   We need to know our position exactly. We can do this by using an on board GPS, as well as post processing using local GPS reference stations to improve accuracy...
 
-    -   Callback to GNSS?
+    -   Callback to GNSS from a previous chapter
 
-    -   On board GPS and GPS reference stations on the ground are used to post process the data in order to be as accurate as possible
-
-![Figure 15.4 An on board GPS is required to for providing an accurate location of the LiDAR scanner.](images/15-XYZ_coordinates.jpg){width="75%"}
+![Figure 15.5 An on board GPS is required to for providing an accurate location of the LiDAR scanner.](images/15-XYZ_coordinates.jpg){width="75%"}
 
 -   **Inertial Measurement Unit (IMU)**
 
     -   An inertial measurement unit (IMU) consists of gyroscopes and accelerometers measures the attitude and acceleration of the aircraft along the X, Y, Z axis. This data is combined with the GNSS data to provide a precise location of the scanner in space.
 
-    -   Mentioned elswhere? What is it - focus on image that discusses pitch/roll/yaw
+    -   Refer to image 15.1 showing pitch/roll/yaw
 
 -   **Clocks**
 
     -   The LiDAR point data needs to be synched with the positioning data in order to know where the point is in space. To do this, a very accurate GPS clock is used to time stamp the laser scanning data (7:30 video 2).
 
-    -   Accurate clocks are imperative for producing accurate point clouds. One nanosecond corresponds to a 30 cm travel distance A - (video 1)
+    -   Accurate clocks are imperative for producing accurate point clouds. One nanosecond corresponds to a 30 cm travel distance A - (video 1), also image below of different discrete vs full wave form LiDAR.
 
 ### Platform
 
 LiDAR units can be attached to a variety of platforms. Traditionally, LiDAR units for forestry research were mounted on airplanes and helicopters, as units were large and cumbersome [Figure 15.3], however ground based units such as terrestrial laser scanning (TLS), and mobile laser scanning (MLS) have also been developed. These units tend to have a very high point density, and TLS is often used in modeling tree architecture.
 
--   Plane vs helicopter - what is normal
+-   **Airplanes and Helicopters**
 
--   Drone: As technology has improved and laser units have gotten smaller, we can mount LiDAR units to drones (also known as...)
+Airplanes and helicopters were the standard platforms for data collection as laser scanning units in the past were large and required a platform big enough to carry them.
 
-![Figure 15.5 Drone mounted LiDAR.](images/15-LiDAR_on_Drone_2.jpg){width="75%"}
+-   **Drone**
 
--   MLS/backpack
+As laser units have decreased in size, we have been able to mount LiDAR units to smaller platforms. Drones (also known as...)
 
--   Satellite based:
+![Figure 15.6 Drone mounted LiDAR.](images/15-LiDAR_on_Drone_2.jpg){width="75%"}
+
+-   **Mobile Laser Scanning**
+
+Mobile Laser Scanning (MLS) includes: people, backpacks, cars...
+
+-   **Terrestrial Laser Scanning**
+
+Terrestrial Laser Scanning (TLS) is a static system..
+
+-   **Satellite**
 
     -   ICESat
 
     -   GEDI
 
-![Figure 15.6 LiDAR Platforms 1:SOURCE, 2:SOURCE, 3:SOURCE, 4:SOURCE.](images/15-LiDAR_Platforms.png){width="75%"}
-
--   Cars: Don't need figure..
-
--   TLS
+![Figure 15.7 LiDAR Platforms 1:SOURCE, 2:SOURCE, 3:SOURCE, 4:SOURCE.](images/15-LiDAR_Platforms.png){width="75%"}
 
 ## Types of LiDAR
 
 ### Discrete Return
 
-Discrete return LiDAR = more common. Include figure of a cross-section!
+Discrete return LiDAR = most common. Include figure of a cross-section!
 
 ### Full Waveform
 
-Issue of data storage - now becoming a viable alternative. Look at Figure 15.7 for example
+Issue of data storage - now becoming a viable alternative. Look at Figure 15.8 for example
+
+![Figure 15.8 LiDAR Discrete vs Full Waveform.](images/15-LiDAR_Discrete_Full_Waveform.png){width="60%"}
 
 ### Multispectral
 
@@ -140,10 +152,6 @@ Issue of data storage - now becoming a viable alternative. Look at Figure 15.7 f
 
 -   New
 -   NCC slides
-
-![Figure 15.7 LiDAR Discrete vs Full Waveform.](images/15-LiDAR_Discrete_Full_Waveform.png){width="60%"}
-
-[This is how we link to something. {target="\_blank"} ensures that this link opens in a new window rather than navigating away from the textbook.](https://google.com){target="_blank"}
 
 ::: {.box-content .call-out-content}
 ::: {.box-title .call-out-top}
@@ -159,12 +167,9 @@ Multiple types of LiDAR exist; it's important to know which one you are working 
 
 ## LiDAR Derivatives and Analysis
 
--   What can we do with LiDAR derivatives, why are they important...
--   What is the use for LiDAR in forestry and ecology - examples from NCC LiDAR Lecture
--   How do we go from raw cloud to these derivatives - incorporate case study
+-   What can we do with LiDAR derivatives, why are they important... tie in with LiDAR history (examples from NCC LiDAR Lecture)
+-   How do we go from raw cloud to these derivatives - incorporate case study?
 -   LiDAR metrics = descriptive statistics from the point cloud over a unit area. How we define that unit is decides what kind of analysis we are able to do, and what kind of inferences are possible.
-
-![Figure 15.8 typical LiDAR point cloud.](images/15-las_denoise.png){width="90%"}
 
 ### Bare Earth Elevation
 
@@ -172,25 +177,23 @@ Multiple types of LiDAR exist; it's important to know which one you are working 
 
 ![Figure 15.9 DEM.](images/15-las_dem.png){.center}
 
-### Canopy Height Model
+### Digital Surface Model and Canopy Height Models
 
 -   What is a CHM
 
 ![Figure 15.10 CHM.](images/15-las_CHM_2D.png){.center}
 
-### Canopy Surface Model
-
 -   CHM vs DSM? ... basically the same thing just includes everything...
 
 ### Area Based Approach vs. Individual Tree Crown Approach
 
--   Include short blurb about the two funamental types of approach here? \#\#\# Grid Metrics
+-   Include short blurb about the two fundamental types of approach here? ...Grid Metrics
 
 -   What are these used for
 
 ![Figure 15.11 Maximum cell heights in an area-based approach.](images/15-las_hmax_2D.png){.center}
 
-![Figure 15.12 Example of all the metrics you can produce... replace with leaflet map in 'your turn' section](images/15-las_metrics_2D.png){.center}
+![Figure 15.12 Example of all the metrics you can produce... replace this with a leaflet map in 'your turn' section below](images/15-las_metrics_2D.png){.center}
 
 ### Tree Segmentation
 
@@ -202,15 +205,7 @@ Multiple types of LiDAR exist; it's important to know which one you are working 
 
 ### Software and Analysis Tools
 
--   We use lidR for this section.. Can use XYZ
-
-    -   LasTools
-
-    -   FUSION
-
-    -   ArcGIS Pro
-
-    -   CloudCompare
+As LiDAR acquisition becomes cheaper, more tools are becoming available to do analysis. In this chapter, we use [lidR](https://cran.r-project.org/web/packages/lidR/){target="_blank"}; a free and open source R package that can be used for the entire process of analyzing a point cloud. Several other options exist, such as [A Shiny-based Application for Extracting Forest Information from LiDAR data](https://github.com/carlos-alberto-silva/weblidar-treetop) (also in R), the [Digital-Forestry-Toolbox](http://mparkan.github.io/Digital-Forestry-Toolbox/) which is available for MATLAB, or [FUSION](http://forsys.cfr.washington.edu/fusion/fusion_overview.html), a software developed by the USDA Forest Service. Paid software is also frequently used in LiDAR processing (examples include [ArcGIS Pro](https://pro.arcgis.com/en/pro-app/latest/help/data/las-dataset/use-lidar-in-arcgis-pro.htm), and [LAStools](https://rapidlasso.com/lastools/)), although the cost can be prohibitive. Finally, the open source software [CloudCompare](https://www.danielgm.net/cc/) can be incredibly useful for both viewing and manually clipping/editing point clouds.
 
 ::: {.box-content .case-study-content}
 ::: {.box-title .case-study-top}
@@ -261,10 +256,6 @@ Interactive map of rasters:
 
 -   and some grid metrics - e.g. mean and p99?
 
-    </p>
-
-<p id="box-text">
-
 </p>
 
 <p id="box-text">
@@ -272,12 +263,6 @@ Interactive map of rasters:
 Necessity of being able to rotate point cloud? Relatively little gain for trouble of small area.
 
 </p>
-
-Your browser does not support iframes
-
-</p>
-
-</iframe>
 :::
 
 ## Summary

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 LiDAR Acquisition and Analysis | An Open Geomatics Textbook</title>
+  <title>Chapter 3 LiDAR Acquisition and Analysis | An Open Geomatics Textbook</title>
   <meta name="description" content="Advancing teaching and learning in geomatics at UBC" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 LiDAR Acquisition and Analysis | An Open Geomatics Textbook" />
+  <meta property="og:title" content="Chapter 3 LiDAR Acquisition and Analysis | An Open Geomatics Textbook" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/ubc-geomatics-textbook/book/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="ubc-geomatics-textbook/book" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 LiDAR Acquisition and Analysis | An Open Geomatics Textbook" />
+  <meta name="twitter:title" content="Chapter 3 LiDAR Acquisition and Analysis | An Open Geomatics Textbook" />
   
   <meta name="twitter:description" content="Advancing teaching and learning in geomatics at UBC" />
   
@@ -24,14 +24,14 @@
 <meta name="author" content="UBC" />
 
 
-<meta name="date" content="2021-07-13" />
+<meta name="date" content="2021-07-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="mapping-data.html"/>
+<link rel="prev" href="network-analysis.html"/>
 
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -124,37 +124,75 @@
 </ul></li>
 <li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#recommended-readings"><i class="fa fa-check"></i>Recommended Readings</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html"><i class="fa fa-check"></i><b>2</b> LiDAR Acquisition and Analysis</a>
+<li class="chapter" data-level="2" data-path="network-analysis.html"><a href="network-analysis.html"><i class="fa fa-check"></i><b>2</b> Network Analysis</a>
 <ul>
-<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#key-terms-2"><i class="fa fa-check"></i>Key Terms</a></li>
-<li class="chapter" data-level="2.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#what-is-lidar"><i class="fa fa-check"></i><b>2.1</b> What is LiDAR?</a>
+<li class="chapter" data-level="" data-path="network-analysis.html"><a href="network-analysis.html#key-terms-2"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="2.1" data-path="network-analysis.html"><a href="network-analysis.html#introduction-to-graph-theory"><i class="fa fa-check"></i><b>2.1</b> Introduction to graph theory</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#how-does-it-work"><i class="fa fa-check"></i><b>2.1.1</b> How does it Work?</a></li>
+<li class="chapter" data-level="2.1.1" data-path="network-analysis.html"><a href="network-analysis.html#nodes"><i class="fa fa-check"></i><b>2.1.1</b> Nodes</a></li>
+<li class="chapter" data-level="2.1.2" data-path="network-analysis.html"><a href="network-analysis.html#edges"><i class="fa fa-check"></i><b>2.1.2</b> Edges</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#lidar-history-and-use"><i class="fa fa-check"></i><b>2.2</b> LiDAR History and Use</a></li>
-<li class="chapter" data-level="2.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#components-of-lidar-systems"><i class="fa fa-check"></i><b>2.3</b> Components of LiDAR Systems</a>
+<li class="chapter" data-level="2.2" data-path="network-analysis.html"><a href="network-analysis.html#connectivity-and-order"><i class="fa fa-check"></i><b>2.2</b> Connectivity and order</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#lasers"><i class="fa fa-check"></i><b>2.3.1</b> Lasers</a></li>
-<li class="chapter" data-level="2.3.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#position-and-orientation"><i class="fa fa-check"></i><b>2.3.2</b> Position and Orientation</a></li>
-<li class="chapter" data-level="2.3.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#platform"><i class="fa fa-check"></i><b>2.3.3</b> Platform</a></li>
+<li class="chapter" data-level="2.2.1" data-path="network-analysis.html"><a href="network-analysis.html#direct"><i class="fa fa-check"></i><b>2.2.1</b> Direct</a></li>
+<li class="chapter" data-level="2.2.2" data-path="network-analysis.html"><a href="network-analysis.html#undirect"><i class="fa fa-check"></i><b>2.2.2</b> Undirect</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#types-of-lidar"><i class="fa fa-check"></i><b>2.4</b> Types of LiDAR</a>
+<li class="chapter" data-level="2.3" data-path="network-analysis.html"><a href="network-analysis.html#network-topologies"><i class="fa fa-check"></i><b>2.3</b> Network topologies</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#discrete-return"><i class="fa fa-check"></i><b>2.4.1</b> Discrete Return</a></li>
-<li class="chapter" data-level="2.4.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#full-waveform"><i class="fa fa-check"></i><b>2.4.2</b> Full Waveform</a></li>
-<li class="chapter" data-level="2.4.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#multispectral"><i class="fa fa-check"></i><b>2.4.3</b> Multispectral</a></li>
-<li class="chapter" data-level="2.4.4" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#single-photon-lidar"><i class="fa fa-check"></i><b>2.4.4</b> Single Photon Lidar</a></li>
+<li class="chapter" data-level="2.3.1" data-path="network-analysis.html"><a href="network-analysis.html#physical-versus-logical-topology"><i class="fa fa-check"></i><b>2.3.1</b> Physical versus logical topology</a></li>
+<li class="chapter" data-level="2.3.2" data-path="network-analysis.html"><a href="network-analysis.html#lines"><i class="fa fa-check"></i><b>2.3.2</b> Lines</a></li>
+<li class="chapter" data-level="2.3.3" data-path="network-analysis.html"><a href="network-analysis.html#rings"><i class="fa fa-check"></i><b>2.3.3</b> Rings</a></li>
+<li class="chapter" data-level="2.3.4" data-path="network-analysis.html"><a href="network-analysis.html#meshes"><i class="fa fa-check"></i><b>2.3.4</b> Meshes</a></li>
+<li class="chapter" data-level="2.3.5" data-path="network-analysis.html"><a href="network-analysis.html#stars"><i class="fa fa-check"></i><b>2.3.5</b> Stars</a></li>
+<li class="chapter" data-level="2.3.6" data-path="network-analysis.html"><a href="network-analysis.html#trees"><i class="fa fa-check"></i><b>2.3.6</b> Trees</a></li>
+<li class="chapter" data-level="2.3.7" data-path="network-analysis.html"><a href="network-analysis.html#buses"><i class="fa fa-check"></i><b>2.3.7</b> Buses</a></li>
+<li class="chapter" data-level="2.3.8" data-path="network-analysis.html"><a href="network-analysis.html#fully-connected"><i class="fa fa-check"></i><b>2.3.8</b> Fully connected</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#lidar-derivatives-and-analysis"><i class="fa fa-check"></i><b>2.5</b> LiDAR Derivatives and Analysis</a>
+<li class="chapter" data-level="2.4" data-path="network-analysis.html"><a href="network-analysis.html#spatial-network-analysis"><i class="fa fa-check"></i><b>2.4</b> Spatial Network Analysis</a>
 <ul>
-<li class="chapter" data-level="2.5.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#bare-earth-elevation"><i class="fa fa-check"></i><b>2.5.1</b> Bare Earth Elevation</a></li>
-<li class="chapter" data-level="2.5.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#canopy-height-model"><i class="fa fa-check"></i><b>2.5.2</b> Canopy Height Model</a></li>
-<li class="chapter" data-level="2.5.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#canopy-surface-model"><i class="fa fa-check"></i><b>2.5.3</b> Canopy Surface Model</a></li>
-<li class="chapter" data-level="2.5.4" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#area-based-approach-vs.-individual-tree-crown-approach"><i class="fa fa-check"></i><b>2.5.4</b> Area Based Approach vs. Individual Tree Crown Approach</a></li>
-<li class="chapter" data-level="2.5.5" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#tree-segmentation"><i class="fa fa-check"></i><b>2.5.5</b> Tree Segmentation</a></li>
-<li class="chapter" data-level="2.5.6" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#software-and-analysis-tools"><i class="fa fa-check"></i><b>2.5.6</b> Software and Analysis Tools</a></li>
+<li class="chapter" data-level="2.4.1" data-path="network-analysis.html"><a href="network-analysis.html#network-tracing"><i class="fa fa-check"></i><b>2.4.1</b> Network tracing</a></li>
+<li class="chapter" data-level="2.4.2" data-path="network-analysis.html"><a href="network-analysis.html#linear-referencing"><i class="fa fa-check"></i><b>2.4.2</b> Linear referencing</a></li>
+<li class="chapter" data-level="2.4.3" data-path="network-analysis.html"><a href="network-analysis.html#routing"><i class="fa fa-check"></i><b>2.4.3</b> Routing</a></li>
+<li class="chapter" data-level="2.4.4" data-path="network-analysis.html"><a href="network-analysis.html#least-cost-paths"><i class="fa fa-check"></i><b>2.4.4</b> Least cost paths</a></li>
+<li class="chapter" data-level="2.4.5" data-path="network-analysis.html"><a href="network-analysis.html#least-cost-corridors"><i class="fa fa-check"></i><b>2.4.5</b> Least cost corridors</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#summary-2"><i class="fa fa-check"></i><b>2.6</b> Summary</a>
+<li class="chapter" data-level="2.5" data-path="network-analysis.html"><a href="network-analysis.html#network-centrality"><i class="fa fa-check"></i><b>2.5</b> Network Centrality</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="network-analysis.html"><a href="network-analysis.html#degree-centrality"><i class="fa fa-check"></i><b>2.5.1</b> Degree centrality</a></li>
+<li class="chapter" data-level="2.5.2" data-path="network-analysis.html"><a href="network-analysis.html#closeness-centrality"><i class="fa fa-check"></i><b>2.5.2</b> Closeness centrality</a></li>
+<li class="chapter" data-level="2.5.3" data-path="network-analysis.html"><a href="network-analysis.html#betweenness-centrality"><i class="fa fa-check"></i><b>2.5.3</b> Betweenness centrality</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html"><i class="fa fa-check"></i><b>3</b> LiDAR Acquisition and Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#key-terms-3"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="3.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#what-is-lidar"><i class="fa fa-check"></i><b>3.1</b> What is LiDAR?</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#how-does-it-work"><i class="fa fa-check"></i><b>3.1.1</b> How Does it Work?</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#lidar-history-and-use"><i class="fa fa-check"></i><b>3.2</b> LiDAR History and Use</a></li>
+<li class="chapter" data-level="3.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#components-of-a-lidar-system"><i class="fa fa-check"></i><b>3.3</b> Components of a LiDAR System</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#lasers"><i class="fa fa-check"></i><b>3.3.1</b> Lasers</a></li>
+<li class="chapter" data-level="3.3.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#position-and-orientation"><i class="fa fa-check"></i><b>3.3.2</b> Position and Orientation</a></li>
+<li class="chapter" data-level="3.3.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#platform"><i class="fa fa-check"></i><b>3.3.3</b> Platform</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#types-of-lidar"><i class="fa fa-check"></i><b>3.4</b> Types of LiDAR</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#discrete-return"><i class="fa fa-check"></i><b>3.4.1</b> Discrete Return</a></li>
+<li class="chapter" data-level="3.4.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#full-waveform"><i class="fa fa-check"></i><b>3.4.2</b> Full Waveform</a></li>
+<li class="chapter" data-level="3.4.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#multispectral"><i class="fa fa-check"></i><b>3.4.3</b> Multispectral</a></li>
+<li class="chapter" data-level="3.4.4" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#single-photon-lidar"><i class="fa fa-check"></i><b>3.4.4</b> Single Photon Lidar</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#lidar-derivatives-and-analysis"><i class="fa fa-check"></i><b>3.5</b> LiDAR Derivatives and Analysis</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#bare-earth-elevation"><i class="fa fa-check"></i><b>3.5.1</b> Bare Earth Elevation</a></li>
+<li class="chapter" data-level="3.5.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#digital-surface-model-and-canopy-height-models"><i class="fa fa-check"></i><b>3.5.2</b> Digital Surface Model and Canopy Height Models</a></li>
+<li class="chapter" data-level="3.5.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#area-based-approach-vs.-individual-tree-crown-approach"><i class="fa fa-check"></i><b>3.5.3</b> Area Based Approach vs. Individual Tree Crown Approach</a></li>
+<li class="chapter" data-level="3.5.4" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#tree-segmentation"><i class="fa fa-check"></i><b>3.5.4</b> Tree Segmentation</a></li>
+<li class="chapter" data-level="3.5.5" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#software-and-analysis-tools"><i class="fa fa-check"></i><b>3.5.5</b> Software and Analysis Tools</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#summary-2"><i class="fa fa-check"></i><b>3.6</b> Summary</a>
 <ul>
 <li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#reflection-questions-1"><i class="fa fa-check"></i>Reflection Questions</a></li>
 <li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#practice-questions-1"><i class="fa fa-check"></i>Practice Questions</a></li>
@@ -180,160 +218,157 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="LiDAR-acquisition-and-analysis" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> LiDAR Acquisition and Analysis</h1>
+<div id="LiDAR-acquisition-and-analysis" class="section level1" number="3">
+<h1><span class="header-section-number">Chapter 3</span> LiDAR Acquisition and Analysis</h1>
 <div class="box-content learning-objectives-content">
-<div id="learning-objectives-2" class="section level4 unnumbered box-title learning-objectives-top">
+<div id="learning-objectives-3" class="section level4 unnumbered box-title learning-objectives-top">
 <h4>Learning Objectives</h4>
 </div>
 <ol style="list-style-type: decimal">
-<li>Understand <em>how</em> LiDAR works</li>
-<li>Understand <em>what</em> we can do with LiDAR data</li>
-<li>Understand the basic processing steps required to use LiDAR data in a forestry and ecology context</li>
+<li>Understand what LiDAR is and how it works</li>
+<li>Understand what we can do with LiDAR data, and what products we can produce</li>
+<li>Understand the basic processing steps required to use LiDAR data for forestry and ecological analysis</li>
 </ol>
 </div>
-<div id="key-terms-2" class="section level3 unnumbered">
+<div id="key-terms-3" class="section level3 unnumbered">
 <h3>Key Terms</h3>
-<p>LiDAR, ALS, Surface Models, LiDAR Metrics, Area-Based Approach, Individual Tree Detection</p>
+<p>Light Detection and Ranging (LiDAR), Surface Models, LiDAR Metrics, Area-Based Approach (ABA), Individual Tree Crown (ITC) Detection</p>
 </div>
-<div id="what-is-lidar" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> What is LiDAR?</h2>
-<p>LiDAR is an active remote sensing technology that uses a laser scanner and time of flight principles to collect 3 dimensional (3D) data. A LiDAR system is made up of three components; a laser-scanning device, and accurate global navigation satellite system (GNSS), and an inertial measurement unit (IMU). The GNSS receiver allows the position of the laser to be determined in space, while the IMU records the orientation of the laser (i.e. roll, pitch, and yaw). When discussing LiDAR in an airborne context, we can also call it airborne laser scanning (ALS).</p>
-<div id="how-does-it-work" class="section level3" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> How does it Work?</h3>
-<p>Typical LiDAR systems use the time of flight method to produce 3D data. A laser ranging instrument produces a short, intense pulse of light from the instrument to a target being measured. Some of this energy is then reflected back to the instrument, where it is recorded (as seen in Figure 15.1). Since the speed of light, and the location of the laser ranging instrument is known, we can calculate the position of the target by timing how long it takes between the the pulse being emitted and received. If we shoot many pulses of light towards a target, we can create a 3D point cloud of our target (see Figure 15.8 as an example of a forest scene).</p>
-<div class="figure">
-<img src="images/15-Concept_of_LiDAR.png" class="center" alt="" />
-<p class="caption">Figure 15.1 Concept of LiDAR.</p>
-</div>
-<p>When thinking about a LiDAR dataset, there are several parameters to take note of. It is important to know what the technical specifications of the data collection parameters were (for example, what was is the point density?), and how the data was collected (what plaform was used). A LiDAR dataset includes several pieces of information for each 3D point. X,Y,Z location data is included, as well as information about how the data was collected. In many cases, this includes things like return number, scan angle, gps time, classification, and intensity. We will discuss these concepts in more detail below.</p>
-<p>The most common file format for LiDAR files is called the LAS file format (.las). This file format was originally designed for 3-dimensional point cloud data, and is a free alternative to proprietary systems or a generic ASCII file interchange system. The main benefits of this file format are that it is relatively quick, can be used by any system, and stores information specific to the nature of LiDAR data without being overly complex. More information regarding the file type specifications can be found <a href="https://www.asprs.org/divisions-committees/lidar-division/laser-las-file-format-exchange-activities">here</a>.</p>
+<div id="what-is-lidar" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> What is LiDAR?</h2>
+<p>LiDAR is an active remote sensing technology that uses a laser scanner and time of flight principles to collect 3 dimensional (3D) data. A LiDAR system is made up of three components; a laser-scanning device, and accurate global navigation satellite system (GNSS), and an inertial measurement unit (IMU). The GNSS receiver allows the position of the laser to be determined in space, while the IMU records the orientation of the laser (i.e. roll, pitch, and yaw). Figure 15.1 shows all of the necessary components of a LiDAR system. When discussing LiDAR in an airborne context, we can also call it airborne laser scanning (ALS).</p>
 <div class="figure">
 <img src="images/15-LiDAR_System.png" style="width:50.0%" alt="" />
-<p class="caption">Figure 15.2 LiDAR System.</p>
+<p class="caption">Figure 15.1 Overview of the components of a LiDAR System.</p>
+</div>
+<div id="how-does-it-work" class="section level3" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> How Does it Work?</h3>
+<p>Typical LiDAR systems use the time of flight method to produce 3D data. A laser ranging instrument produces a short, intense pulse of light from the instrument to a target being measured. Some of this energy is then reflected back to the instrument, where it is recorded (as seen in Figure 15.2). Since the speed of light, and the location of the laser ranging instrument is known, we can calculate the position of the target by timing how long it takes between the the pulse being emitted and received. If we shoot many pulses of light towards a target, we can create a 3D point cloud of our target (see Figure 15.8 as an example of a forest scene). Modern LiDAR systems can shoot hundreds of thousands of pulses per second, which means LiDAR point clouds can contain millions of points, and be several gigabytes large (Figure 15.3).</p>
+<div class="figure">
+<img src="images/15-Concept_of_LiDAR.png" class="center" alt="" />
+<p class="caption">Figure 15.2 Concept of LiDAR.</p>
+</div>
+<p>Since a LiDAR point cloud is a file containing the three dimensional location of points representing objects on the Earth’s surface, there are several parameters to take note of. It is important to know what the technical specifications of the data collection parameters were (for example, what was is the point density?), and how the data was collected (what plaform was used?). A LiDAR dataset includes several pieces of information for each 3D point. <code>X,Y,Z</code> location data is included, as well as a GPS time stamp for each point (<code>gpstime</code>). Additional information such as <code>return number</code>, <code>scan angle</code>, <code>classification</code>, and <code>intensity</code> are also part of the file. We will discuss these concepts in more detail below.</p>
+<p>The most common file format for LiDAR files is called the LAS file format (<code>.las</code>). This file format was originally designed for 3-dimensional point cloud data, and is a free alternative to proprietary systems or a generic ASCII file interchange system. The main benefits of this file format are that it is relatively quick, can be used by any system, and stores information specific to the nature of LiDAR data without being overly complex. More information regarding the file type specifications can be found <a href="https://www.asprs.org/divisions-committees/lidar-division/laser-las-file-format-exchange-activities" target="_blank">here</a>.</p>
+<div class="figure">
+<img src="images/15-las_denoise.png" style="width:90.0%" alt="" />
+<p class="caption">Figure 15.3 An example of a typical LiDAR point cloud containing 3.14 million points at approximately 80 p/m<sup>2</sup>.</p>
 </div>
 </div>
 </div>
-<div id="lidar-history-and-use" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> LiDAR History and Use</h2>
-<p>Early LiDAR point densities were low (1 - 5 p/m<sup>2</sup>), which limited researchers to area based measurements of forest volume and biomass in the 1980s (CITE NELSON 2013). Technological improvements have meant that individual tree crown level analysis is becoming possible (CITE Jakubowski 2013).</p>
+<div id="lidar-history-and-use" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> LiDAR History and Use</h2>
+<p>LiDAR for forestry and ecology can be used to monitor vegetation structure, stream properties, and topography among other uses. Early LiDAR point densities were low (1 - 5 p/m<sup>2</sup>), which limited researchers to area based measurements of forest volume and biomass in the 1980s (CITE NELSON 2013). These limitations were primarily due to the LiDAR sensor, as well as data storage difficulties. Technological improvements such as increased pulse rates and smaller footprints (leading to increased point density), and increased storage capacity have allowed researchers to look as individual trees as well as whole forests (CITE Jakubowski 2013). ALS point cloud densities of 1000 p/m<sup>2</sup> are now entirely feasible.</p>
 <ul>
-<li>What kind of technological improvements - specifically pulse rates, storage? [see proposal]</li>
+<li><em>White et al - LiDAR citation, Open source textbook for ITD?</em></li>
 </ul>
-<p>– White et al - LiDAR citation, Open source textbook for ITD?</p>
+<div class="figure">
+<img src="images/15-high_low_point_density.png" alt="" />
+<p class="caption">Figure 15.X A cross section of a high density point cloud (A, X p/m<sup>2</sup>), and a lower density point cloud (B, 1 p/m<sup>2</sup>)</p>
+</div>
+<p>Unlike passive remote sensing technologies, LiDAR has the advantage of being able penetrate forest canopies; this means that we are able to detect the ground. LiDAR can be used to map and examine man-made and natural environments, as the data is extremely precise. It can be used in hazard assessment, forestry, agriculture, wet area mapping, and geologic mapping. In this chapter, we will discuss it’s use primarily in a forestry context, where it can be used for volume and biomass estimation, as well as individual tree crown analyses.</p>
 <ul>
-<li><p>what can we do with LiDAR, what are people currently doing with the technology?
-– Area based approaches for volume, biomass estimation, individual tree crown work (such as?), wet area mapping,</p></li>
-<li><p>Vertical Characterization!</p></li>
-<li><p>Include HIGH POINT DENSITY vs LOW POINT DENSITY</p></li>
+<li><em>MORE?</em></li>
 </ul>
 </div>
-<div id="components-of-lidar-systems" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Components of LiDAR Systems</h2>
-<div id="lasers" class="section level3" number="2.3.1">
-<h3><span class="header-section-number">2.3.1</span> Lasers</h3>
+<div id="components-of-a-lidar-system" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Components of a LiDAR System</h2>
+<div id="lasers" class="section level3" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Lasers</h3>
 <ul>
-<li>4:10 - video 1</li>
-<li>Typical wavelengths (eye safe, NIR vs green for bathymetric)</li>
-<li>Power</li>
-<li>Beam divergence - important to take into account. Think about a dinner plate compared to a bicycle wheel. A beam that has low divergence (dinner plate) will be able to distinguish more objects than a high divergence beam (bicycle wheel).
-– small vs large footprint</li>
-<li>Target interaction - 7:45 in video 1</li>
-<li>Scanning types - zig-zag, rotating mirror line, push broom (call back to RS chapter from Paul) - video 2, 2:08</li>
-<li><strong>Technical Specifications of lasers</strong></li>
-<li>Pulse frequency, scan rate, scan angle</li>
-<li>return number, gps time, classification, and intensity!</li>
+<li><p>4:10 - video 1</p></li>
+<li><p>Typical wavelengths (eye safe, NIR vs green for bathymetric)</p></li>
+<li><p>Power</p></li>
+<li><p>Beam divergence - important to take into account. Think about a dinner plate compared to a bicycle wheel. A beam that has low divergence (dinner plate) will be able to distinguish more objects than a high divergence beam (bicycle wheel).</p></li>
+<li><p>small vs large footprint ^ same as above.. terminology important</p></li>
+<li><p>Target interaction - 7:45 in video 1 (affects return)</p></li>
+<li><p>Scanning types - zig-zag, rotating mirror line, push broom (call back to RS chapter from Paul) - video 2, 2:08</p></li>
+<li><p><strong>Technical Specifications of lasers</strong></p></li>
+<li><p>Pulse frequency, scan rate, scan angle, return number, gps time, classification, and intensity!</p></li>
 </ul>
 <div class="figure">
 <img src="images/15-LiDAR_Unit.jpg" style="width:50.0%" alt="" />
-<p class="caption">Figure 15.3 LiDAR Unit.</p>
+<p class="caption">Figure 15.4 An example of a LiDAR Unit.</p>
 </div>
 </div>
-<div id="position-and-orientation" class="section level3" number="2.3.2">
-<h3><span class="header-section-number">2.3.2</span> Position and Orientation</h3>
+<div id="position-and-orientation" class="section level3" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Position and Orientation</h3>
 <ul>
 <li><p><strong>Global Navigation Satellite Systems</strong></p>
-<ul>
-<li><p>Require us to know our position exactly!</p></li>
-<li><p>Callback to GNSS?</p></li>
-<li><p>On board GPS and GPS reference stations on the ground are used to post process the data in order to be as accurate as possible</p></li>
-</ul></li>
+<p>In order for us to use the calculation from Figure 15.2, we need to know the exact position of the scanner in space. For airborne and mobile platforms, we can can do this by using an on board global positioning system (GPS), as well as post processing using local GPS reference station. This helps us to improve accuracy by not comparing our position to a known local position in order to ensure our location is known as accurately as possible. GPS concepts are covered further in Chapter X.</p></li>
 </ul>
 <div class="figure">
 <img src="images/15-XYZ_coordinates.jpg" style="width:75.0%" alt="" />
-<p class="caption">Figure 15.4 XYZ Coordinates.</p>
+<p class="caption">Figure 15.5 An on board GPS is required to for providing an accurate location of the LiDAR scanner.</p>
 </div>
 <ul>
 <li><p><strong>Inertial Measurement Unit (IMU)</strong></p>
-<ul>
-<li><p>An inertial measurement unit (IMU) consists of gyroscopes and accelerometers measures the attitude and acceleration of the aircraft along the X, Y, Z axis. This data is combined with the GNSS data to provide a precise location of the scanner in space.</p></li>
-<li><p>Mentioned elswhere? What is it - focus on image that discusses pitch/roll/yaw</p></li>
-</ul></li>
+<p>An inertial measurement unit (IMU) consists of gyroscopes and accelerometers and measures the attitude and acceleration of the aircraft along the X, Y, Z axis. This data is combined with the GNSS data to provide a precise location of the scanner in space. This information becomes very important for airborne platforms where wind conditions can cause the orientation of the scanner to change subtly. We refer to the orientation of the platform in space by using the terms pitch, roll, and yaw, to describe which was the scanner is facing (see Figure 15.1).</p></li>
 <li><p><strong>Clocks</strong></p>
-<ul>
-<li><p>The LiDAR point data needs to be synched with the positioning data in order to know where the point is in space. To do this, a very accurate GPS clock is used to time stamp the laser scanning data (7:30 video 2).</p></li>
-<li><p>Accurate clocks are imperative for producing accurate point clouds. One nanosecond corresponds to a 30 cm travel distance A - (video 1)</p></li>
-</ul></li>
+<p>LiDAR point data needs to be synched with positioning data in order to know exactly where the point is in space. To do this, a very accurate GPS clock is used to time stamp the laser scanning data (7:30 video 2). Accurate clocks are imperative for producing accurate point clouds; one nanosecond (i.e. one billionth of a second) corresponds to a 30 cm travel distance (as seen in Figure 15.X)! (video 1)</p></li>
 </ul>
 </div>
-<div id="platform" class="section level3" number="2.3.3">
-<h3><span class="header-section-number">2.3.3</span> Platform</h3>
-<p>LiDAR units can be attached to a variety of platforms. Traditionally, LiDAR units for forestry research were mounted on airplanes and helicopters, as units were large and cumbersome [Figure 15.3], however ground based units such as terrestrial laser scanning (TLS), and mobile laser scanning (MLS) have also been developed. These units tend to have a very high point density, and TLS is often used in modeling tree architecture.</p>
+<div id="platform" class="section level3" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Platform</h3>
+<p>LiDAR units can be attached to a variety of platforms. Traditionally, LiDAR units for forestry research were mounted on airplanes and helicopters, as units were large and cumbersome [Figure 15.X], however ground based units such as terrestrial laser scanning (TLS), and mobile laser scanning (MLS) have also been developed. These units tend to have a very high point density, and TLS is often used in modeling tree architecture.</p>
 <ul>
-<li><p>Plane vs helicopter - what is normal</p></li>
-<li><p>Drone: As technology has improved and laser units have gotten smaller, we can mount LiDAR units to drones (also known as…)</p></li>
+<li><strong>Airplanes and Helicopters</strong></li>
 </ul>
+<p>Airplanes and helicopters are still the most common platforms for LiDAR data collection. This is due to their ability to collect large amounts of data in one acquisition. LiDAR units that are designed for airplanes are more powerful than those designed for drones, leading to increased penetration in forests, even though the flight height is significantly increased. Data storage issues can also be mitigated as the platform is not as sensitive to weight restrictions when compared to drones. With increased pulse rates, data acquisitions can also be dense enough to do individual tree crown work. Typical point densities range from 5-200 p/m<sup>2</sup>.</p>
+<ul>
+<li><strong>Drone</strong></li>
+</ul>
+<p>As laser units have decreased in size, we have been able to mount LiDAR units to smaller platforms. Drones (also known as unmanned aerial vehicles (UAV) or remotely piloted aerial systems (RPAS)) are extremely convenient to collect high density point clouds over small areas. They typically fly relatively close to the forest (e.g. 50m above the trees) and fly a predined flight route so ensure evenly spaced data collection. Typical point densities range from hundreds to thousands of points per meter squared. A major limitation of drones is currently battery life, as acquisition campaigns are limited by how long the drone can fly for (approximately 20 minutes). This means that collecting large amounts of data is difficult in remote locations.</p>
 <div class="figure">
 <img src="images/15-LiDAR_on_Drone_2.jpg" style="width:75.0%" alt="" />
-<p class="caption">Figure 15.5 Drone mounted LiDAR.</p>
+<p class="caption">Figure 15.6 Drone mounted LiDAR.</p>
 </div>
 <ul>
-<li><p>MLS/backpack</p></li>
-<li><p>Satellite based:</p>
-<ul>
-<li><p>ICESat</p></li>
-<li><p>GEDI</p></li>
-</ul></li>
+<li><strong>Mobile Laser Scanning</strong></li>
 </ul>
+<p>Mobile Laser Scanning (MLS) includes people (sometimes called ‘backpack LiDAR’) and moving vehicles. This version of LiDAR have been used by transportation and engineering companies to precisely map things like road or building conditions, and as the units have reduced in size there has been and increase in interest for use in forestry. Current MLS units such as Figure 15.X.2 can be carried around by the user in a forest easily. [Specs from Spencer for GeoSLAM]. Typical point densities are in the hundreds to thousands of points per meter squared. This is highly dependent on what the MLS is mounted to!</p>
+<ul>
+<li><strong>Terrestrial Laser Scanning</strong></li>
+</ul>
+<p>Terrestrial Laser Scanning (TLS) is a static system. These units are used by engineers for surveying, and are used by foresters to precisely measure trees. This information can be used to build Quantitative structure models (QSM), to precisely estimate tree parameters. Unlike the other platforms mentioned here, TLS is not necessarily a fast data collection technique. Due to occlusion, the TLS instrument needs to be placed in multiple positions around a plot to be able to fully visualize the trees, which means that a plot can take [cite how long a plot can take] to survey! Typical point densities are in the thousands of points per meter squared.</p>
+<ul>
+<li><strong>Satellite</strong></li>
+</ul>
+<p>The last platform that LiDAR units are used for is on satellites. The two major satellite LiDAR systems are ICESat, and GEDI. - ICESat <strong>FIND MORE REFERENCES</strong></p>
 <div class="figure">
 <img src="images/15-LiDAR_Platforms.png" style="width:75.0%" alt="" />
-<p class="caption">Figure 15.6 LiDAR Platforms 1:SOURCE, 2:SOURCE, 3:SOURCE, 4:SOURCE.</p>
-</div>
-<ul>
-<li><p>Cars: Don’t need figure..</p></li>
-<li><p>TLS</p></li>
-</ul>
+<p class="caption">Figure 15.7 LiDAR Platforms 1:SOURCE, 2:SOURCE, 3:SOURCE, 4:SOURCE.</p>
 </div>
 </div>
-<div id="types-of-lidar" class="section level2" number="2.4">
-<h2><span class="header-section-number">2.4</span> Types of LiDAR</h2>
-<div id="discrete-return" class="section level3" number="2.4.1">
-<h3><span class="header-section-number">2.4.1</span> Discrete Return</h3>
-<p>Discrete return LiDAR = more common. Include figure of a cross-section!</p>
 </div>
-<div id="full-waveform" class="section level3" number="2.4.2">
-<h3><span class="header-section-number">2.4.2</span> Full Waveform</h3>
-<p>Issue of data storage - now becoming a viable alternative. Look at Figure 15.7 for example</p>
+<div id="types-of-lidar" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Types of LiDAR</h2>
+<div id="discrete-return" class="section level3" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Discrete Return</h3>
+<p>Discrete return LiDAR = most common. Include figure of a cross-section! 1:10 in video 3 - energy detected from the return has to meet a certain threshold to become a return Classified returns by the arrival sequence - e.g. 1st return = high canopy, or ground if there is no vegetation</p>
 </div>
-<div id="multispectral" class="section level3" number="2.4.3">
-<h3><span class="header-section-number">2.4.3</span> Multispectral</h3>
+<div id="full-waveform" class="section level3" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Full Waveform</h3>
+<p>Issue of data storage - now becoming a viable alternative. Look at Figure 15.8 for example 3:00 video 3 - record complete signal at high sampling rates for further processing</p>
+<div class="figure">
+<img src="images/15-LiDAR_Discrete_Full_Waveform.png" style="width:60.0%" alt="" />
+<p class="caption">Figure 15.8 LiDAR Discrete vs Full Waveform.</p>
+</div>
+</div>
+<div id="multispectral" class="section level3" number="3.4.3">
+<h3><span class="header-section-number">3.4.3</span> Multispectral</h3>
 <ul>
 <li>New.. Titan Optech system?</li>
 <li>What use could this have</li>
 <li>NCC slides</li>
 </ul>
 </div>
-<div id="single-photon-lidar" class="section level3" number="2.4.4">
-<h3><span class="header-section-number">2.4.4</span> Single Photon Lidar</h3>
+<div id="single-photon-lidar" class="section level3" number="3.4.4">
+<h3><span class="header-section-number">3.4.4</span> Single Photon Lidar</h3>
 <ul>
 <li>New</li>
 <li>NCC slides</li>
 </ul>
-<div class="figure">
-<img src="images/15-LiDAR_Discrete_Full_Waveform.png" style="width:60.0%" alt="" />
-<p class="caption">Figure 15.7 LiDAR Discrete vs Full Waveform.</p>
-</div>
-<p><a href="https://google.com" target="_blank">This is how we link to something. {target=“_blank”} ensures that this link opens in a new window rather than navigating away from the textbook.</a></p>
 <div class="box-content call-out-content">
 <div id="call-out" class="section level4 unnumbered box-title call-out-top">
 <h4>Call out</h4>
@@ -344,62 +379,48 @@
 </div>
 </div>
 </div>
-<div id="lidar-derivatives-and-analysis" class="section level2" number="2.5">
-<h2><span class="header-section-number">2.5</span> LiDAR Derivatives and Analysis</h2>
+<div id="lidar-derivatives-and-analysis" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> LiDAR Derivatives and Analysis</h2>
+<p>LiDAR point clouds require post processing to be useful.</p>
+<p>Point classification is important</p>
 <ul>
-<li>What can we do with LiDAR derivatives, why are they important…</li>
-<li>What is the use for LiDAR in forestry and ecology - examples from NCC LiDAR Lecture</li>
-<li>How do we go from raw cloud to these derivatives - incorporate case study</li>
+<li>What can we do with LiDAR derivatives, why are they important… tie in with LiDAR history (examples from NCC LiDAR Lecture)</li>
+<li>How do we go from raw cloud to these derivatives - incorporate case study?</li>
 <li>LiDAR metrics = descriptive statistics from the point cloud over a unit area. How we define that unit is decides what kind of analysis we are able to do, and what kind of inferences are possible.</li>
 </ul>
-<div class="figure">
-<img src="images/15-las_denoise.png" style="width:90.0%" alt="" />
-<p class="caption">Figure 15.8 typical LiDAR point cloud.</p>
-</div>
-<div id="bare-earth-elevation" class="section level3" number="2.5.1">
-<h3><span class="header-section-number">2.5.1</span> Bare Earth Elevation</h3>
-<ul>
-<li>What is a DEM</li>
-</ul>
+<div id="bare-earth-elevation" class="section level3" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Bare Earth Elevation</h3>
+<p>Digital elevataion models (DEMs) represent the Earth’s surface.<br />
+- What is a DEM - also known as digital terrain model - To create DEMs, we need to Rasterization vs TIN - call back to previous topic?</p>
 <div class="figure">
 <img src="images/15-las_DEM.png" class="center" alt="" />
 <p class="caption">Figure 15.9 DEM.</p>
 </div>
 </div>
-<div id="canopy-height-model" class="section level3" number="2.5.2">
-<h3><span class="header-section-number">2.5.2</span> Canopy Height Model</h3>
-<ul>
-<li>What is a CHM</li>
-</ul>
+<div id="digital-surface-model-and-canopy-height-models" class="section level3" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> Digital Surface Model and Canopy Height Models</h3>
+<p>Digital surface models (DSMs) - What is a CHM</p>
 <div class="figure">
 <img src="images/15-las_CHM_2D.png" class="center" alt="" />
 <p class="caption">Figure 15.10 CHM.</p>
 </div>
-</div>
-<div id="canopy-surface-model" class="section level3" number="2.5.3">
-<h3><span class="header-section-number">2.5.3</span> Canopy Surface Model</h3>
 <ul>
 <li>CHM vs DSM? … basically the same thing just includes everything…</li>
 </ul>
 </div>
-<div id="area-based-approach-vs.-individual-tree-crown-approach" class="section level3" number="2.5.4">
-<h3><span class="header-section-number">2.5.4</span> Area Based Approach vs. Individual Tree Crown Approach</h3>
+<div id="area-based-approach-vs.-individual-tree-crown-approach" class="section level3" number="3.5.3">
+<h3><span class="header-section-number">3.5.3</span> Area Based Approach vs. Individual Tree Crown Approach</h3>
 <ul>
-<li><p>Include short blurb about the two funamental types of approach here?
-### Grid Metrics</p></li>
+<li><p>Include short blurb about the two fundamental types of approach here? …Grid Metrics</p></li>
 <li><p>What are these used for</p></li>
 </ul>
 <div class="figure">
 <img src="images/15-las_hmax_2D.png" class="center" alt="" />
 <p class="caption">Figure 15.11 Maximum cell heights in an area-based approach.</p>
 </div>
-<div class="figure">
-<img src="images/15-las_metrics_2D.png" class="center" alt="" />
-<p class="caption">Figure 15.12 Example of all the metrics you can produce… replace with leaflet map in ‘your turn’ section</p>
 </div>
-</div>
-<div id="tree-segmentation" class="section level3" number="2.5.5">
-<h3><span class="header-section-number">2.5.5</span> Tree Segmentation</h3>
+<div id="tree-segmentation" class="section level3" number="3.5.4">
+<h3><span class="header-section-number">3.5.4</span> Tree Segmentation</h3>
 <p>-How and why would we want too do this</p>
 <div class="figure">
 <img src="images/15-Processing_Flowchart.png" class="center" alt="" />
@@ -410,30 +431,34 @@
 <p class="caption">Figure 15.14 Example of tree tops detected by algorithm.</p>
 </div>
 </div>
-<div id="software-and-analysis-tools" class="section level3" number="2.5.6">
-<h3><span class="header-section-number">2.5.6</span> Software and Analysis Tools</h3>
-<ul>
-<li>We use lidR for this section.. Can use XYZ
-– LasTools
-– FUSION
-– ArcGIS Pro
-– CloudCompare</li>
-</ul>
+<div id="software-and-analysis-tools" class="section level3" number="3.5.5">
+<h3><span class="header-section-number">3.5.5</span> Software and Analysis Tools</h3>
+<p>As LiDAR acquisition becomes cheaper, more tools are becoming available to do analysis. In this chapter, we use <a href="https://cran.r-project.org/web/packages/lidR/" target="_blank">lidR</a>; a free and open source R package that can be used for the entire process of analyzing a point cloud. Several other options exist, such as <a href="https://github.com/carlos-alberto-silva/weblidar-treetop" target="_blank">A Shiny-based Application for Extracting Forest Information from LiDAR data</a> (also in R), the <a href="http://mparkan.github.io/Digital-Forestry-Toolbox/" target="_blank">Digital-Forestry-Toolbox</a> which is available for MATLAB, or <a href="http://forsys.cfr.washington.edu/fusion/fusion_overview.html" target="_blank">FUSION</a>, a software developed by the USDA Forest Service. Paid software is also frequently used in LiDAR processing (examples include <a href="https://pro.arcgis.com/en/pro-app/latest/help/data/las-dataset/use-lidar-in-arcgis-pro.htm" target="_blank">ArcGIS Pro</a>, and <a href="https://rapidlasso.com/lastools/" target="_blank">LAStools</a>), although the cost can be prohibitive. Finally, the open source software <a href="https://www.danielgm.net/cc/" target="_blank">CloudCompare</a> can be incredibly useful for both viewing and manually clipping/editing point clouds.</p>
 <div class="box-content case-study-content">
-<div id="case-study-1" class="section level4 unnumbered box-title case-study-top">
+<div id="case-study-2" class="section level4 unnumbered box-title case-study-top">
 <h4>Case Study</h4>
 </div>
 <div id="box-text" class="section level4 unnumbered">
 <h4>Creating LiDAR Metrics from a Raw Point Cloud</h4>
 <p id="box-text">
-<p>For this case study, we will be using a clipped .las file from the 2018 open LiDAR dataset of City of Vancouver and UBC Endowment Lands in British Columbia (we randomly selected a 200 x 200 meter portion of the ‘4840E_54550N’ tile, see below for the link where you can download the data), and the <code>lidR</code> package in R. The script to process this data is included HERE [where to include script?], and you can use the <code>lidR</code> book [link] to get a more in depth understanding of the functions we apply below.</p>
+<p>For this case study, we will be using a clipped .las file from the 2018 open <a href="https://opendata.vancouver.ca/explore/dataset/lidar-2018/information/" target="_blank">LiDAR dataset</a> of the City of Vancouver and UBC Endowment Lands in British Columbia (we randomly selected a 200 x 200 meter portion of the ‘4840E_54550N’ tile using CloudCompare), and the <code>lidR</code> package in R. The script to process this data is included HERE [where to include script?], and you can use the <code>lidR</code> <a href="https://jean-romain.github.io/lidRbook/" target="_blank">book</a> to get a more in depth understanding of the functions we apply below.</p>
 </p>
 <p id="box-text">
-<p>The first step when looking at LiDAR data is to inspect it; we recommend using the free software CloudCompare (link below), or the <code>plot()</code> function in the <code>lidR</code> package. Once we have a sense of our data, we can clean and filter the data, using <code>classify_noise()</code> and the ‘-drop’ switch to get rid of the noise in our dataset [include image showing noisy vs. clean data?]. Our cleaned dataset can then be used to create a DEM; first we can <code>classify_ground()</code>, followed by using the <code>grid_terrain()</code> function [call back to previous chapter] – this is an essential step that could require quite a bit of tweaking depending on what you want to use the DEM for! In our case, the DEM is used to <em>normalize</em> the point cloud. Normalization removes the effect of terrain on above ground measurements, allowing comparisons of vegetation heights. [insert image of DEM and CHM]. The normalized point cloud is used to create our CHM (created using <code>grid_canopy()</code>). It is at this point that we can analyze the point cloud in a variety of ways. We can use an area-based approach (ABA) to create metrics at the grid level (<code>grid_metrics()</code>), or we can derive metrics at the individual tree scale. In order to do this we need to first segment the trees (<code>segment_trees()</code>) before creating metrics (<code>tree_metrics()</code>). Below we can see an example of a segmented point cloud.</p>
-<p>INCLUDE IMAGE OF SEGMENTED TREES!</p>
+<p>The first step when looking at LiDAR data is to inspect it; we recommend using the free software CloudCompare, or the <code>plot()</code> function in the <code>lidR</code> package. Once we have a sense of our data, we can clean and filter the data, using <code>classify_noise()</code> and the ‘-drop’ switch to get rid of the noise in our dataset. Our cleaned dataset can then be used to create a DEM; first we need to classify ground points (<code>classify_ground()</code>), followed by using the <code>grid_terrain()</code> function in order to rasterize our new ground points. This is an essential step that could require quite a bit of tweaking depending on what you want to use the DEM for! In our case, the DEM is used to <em>normalize</em> the point cloud. Normalization removes the effect of terrain on above ground measurements, allowing comparisons of vegetation heights (as can see in the very uniform point cloud in Figure 15.X).</p>
+<div class="figure">
+<img src="images/15-las_normalize.png" style="width:50.0%" alt="" />
+<p class="caption">Figure 15.X A normalized point cloud</p>
+</div>
 </p>
 <p id="box-text">
-<p>Case studies should have at least one image or map (no more than 2 total) and the written length should be around 300 words (shown above). Any references to external literature should by hyperlinked with the Digitial Object Identifier (DOI) permanent URL and <a href="https://bookdown.org/yihui/bookdown/citations.html" target="_blank">entered into the bibliography</a>. Avoid linking to external resources without a DOI and permanent URL. Contact Paul or try using the Leaflet package in R if you want to add an interactive web map.</p>
+<p>The normalized point cloud is used to create our CHM (created using <code>grid_canopy()</code>). It is at this point that we can analyze the point cloud in a variety of ways. We can use an area-based approach (ABA) to create metrics at the grid level (<code>grid_metrics()</code>), or we can derive metrics at the individual tree scale. In order to do this we need to first segment the trees (<code>segment_trees()</code>) before creating metrics (<code>tree_metrics()</code>). Below we can see an example of a segmented point cloud.</p>
+<div class="figure">
+<img src="images/15-las_segmented.png" style="width:50.0%" alt="" />
+<p class="caption">Figure 15.X A segmented point cloud</p>
+</div>
+</p>
+<p id="box-text">
+<p>Creating metrics at these two scales are the fundamental way in which we currently think about analysing forests using LiDAR. Each tells us different things about the forest, so it is important to take scale into account when choosing what kind of analysis you want to do. Below we can see a Leaflet map of some area based metrics created for this point cloud!</p>
 </p>
 </div>
 </div>
@@ -442,44 +467,42 @@
 <h4>Your turn!</h4>
 </div>
 <p id="box-text">
-<p>Explore some of the LiDAR derivatives that we produced in the case study above</p>
+<p>Explore some of the LiDAR derivatives that we produced in the case study above. We can see how the maximum height (zmax) differs from the mean height (zmean) and areas where the standar deviations of heights are very different from one another.</p>
 </p>
 <p id="box-text">
 <p>Interactive map of rasters:</p>
 <ul>
-<li><p>DEM</p></li>
-<li><p>CHM</p></li>
-<li><p>and some grid metrics - e.g. mean and p99?</p>
-</p></li>
+<li><p>zmean</p></li>
+<li><p>zmax</p></li>
+<li><p>zsd</p></li>
 </ul>
-<p id="box-text">
 </p>
 <p id="box-text">
-<p>Necessity of being able to rotate point cloud? Relatively little gain for trouble of small area.</p>
+<div class="figure">
+<img src="images/15-las_metrics_2D.png" class="center" alt="" />
+<p class="caption">Figure 15.X Example of all the metrics you can produce… replace this with a leaflet map in ‘your turn’ section below</p>
+</div>
 </p>
-<p>Your browser does not support iframes</p>
-</p>
-</iframe>
 </div>
 </div>
 </div>
-<div id="summary-2" class="section level2" number="2.6">
-<h2><span class="header-section-number">2.6</span> Summary</h2>
+<div id="summary-2" class="section level2" number="3.6">
+<h2><span class="header-section-number">3.6</span> Summary</h2>
 <p>LiDAR! Requires 3 components. Important for vertical characterization of the forest. Can produce useful rasters</p>
 <div id="reflection-questions-1" class="section level3 unnumbered">
 <h3>Reflection Questions</h3>
 <ol style="list-style-type: decimal">
-<li>Explain ipsum lorem.</li>
-<li>Define ipsum lorem.</li>
-<li>What is the role of ispum lorem?</li>
-<li>How does ipsum lorem work?</li>
+<li>What are the three main components of a LiDAR system?</li>
+<li>Why is LiDAR so useful for forestry operations compared to other remote sensing technologies?</li>
+<li>?</li>
 </ol>
 </div>
 <div id="practice-questions-1" class="section level3 unnumbered">
 <h3>Practice Questions</h3>
-<ol start="2" style="list-style-type: decimal">
-<li>Given ipsum, solve for lorem.</li>
-<li>Draw ipsum lorem.</li>
+<ol style="list-style-type: decimal">
+<li>Define the equation that tells us how far a pulse has traveled?</li>
+<li>What is meant by the term ‘discrete return?’</li>
+<li>How is a DEM created? What steps are needed?</li>
 </ol>
 <p>## Recommended Readings {-}</p>
 <p>Ensure all inline citations are properly referenced here.</p>
@@ -492,7 +515,7 @@
           </div>
         </div>
       </div>
-<a href="mapping-data.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="network-analysis.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>

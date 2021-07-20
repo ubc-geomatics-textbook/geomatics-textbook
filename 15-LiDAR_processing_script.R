@@ -4,7 +4,9 @@
 
 # AIM: To create a basic workflow that can be used by students in conjunction with the lidR book (https://jean-romain.github.io/lidRbook/) to:
 # Clean a point cloud, produce grid metrics (ABA), segment individual trees,and produce ITD metrics
-# Additional information about the lidR package and functions can be found here: https://cran.r-project.org/web/packages/lidR/lidR.pdf
+# Additional information about the lidR package and functions can be found
+# Here: https://cran.r-project.org/web/packages/lidR/lidR.pdf and
+# Here: https://github.com/Jean-Romain/lidR
 
 # This LiDAR data can be downloaded from: https://opendata.vancouver.ca/explore/dataset/lidar-2018/information/
 # Click on the 'map' tab and select a tile to download. In this script, I used tile '4840E_54550N'

@@ -42,8 +42,6 @@ The most common file format for LiDAR files is called the LAS file format (`.las
 
 LiDAR for forestry and ecology can be used to monitor vegetation structure, stream properties, and topography among other uses. Early LiDAR point densities were low (1 - 5 p/m^2^), which limited researchers to area based measurements of forest volume and biomass in the 1980s (CITE NELSON 2013). These limitations were primarily due to the LiDAR sensor, as well as data storage difficulties. Technological improvements such as increased pulse rates and smaller footprints (leading to increased point density), and increased storage capacity have allowed researchers to look as individual trees as well as whole forests (CITE Jakubowski 2013). ALS point cloud densities of 1000 p/m^2^ are now entirely feasible.
 
--   *White et al - LiDAR citation, Open source textbook for ITD?*
-
 ![Figure 15.X A cross section of a high density point cloud (A, X p/m^2^), and a lower density point cloud (B, 1 p/m^2^)](images/15-high_low_point_density.png)
 
 Unlike passive remote sensing technologies, LiDAR has the advantage of being able penetrate forest canopies; this means that we are able to detect the ground. LiDAR can be used to map and examine man-made and natural environments, as the data is extremely precise. It can be used in hazard assessment, forestry, agriculture, wet area mapping, and geologic mapping. In this chapter, we will discuss it's use primarily in a forestry context, where it can be used for volume and biomass estimation, as well as individual tree crown analyses.
@@ -54,23 +52,14 @@ Unlike passive remote sensing technologies, LiDAR has the advantage of being abl
 
 ### Lasers
 
--   4:10 - video 1
-
--   Typical wavelengths (eye safe, NIR vs green for bathymetric)
-
--   Power
-
--   Beam divergence - important to take into account. Think about a dinner plate compared to a bicycle wheel. A beam that has low divergence (dinner plate) will be able to distinguish more objects than a high divergence beam (bicycle wheel).
-
--   small vs large footprint \^ same as above.. terminology important
-
--   Target interaction - 7:45 in video 1 (affects return)
-
--   Scanning types - zig-zag, rotating mirror line, push broom (call back to RS chapter from Paul) - video 2, 2:08
+Lasers are a very important component of LiDAR systems. Here we will discuss some basic concepts, as well as the technical parameters that are important when interpreting LiDAR data. LiDAR lasers are typically beams of near-infrared light (e.g. 1064 nm)(4:10 - video 1), as these wavelengths are considered eye safe. Green wavelengths can be used for bathymetric LiDAR (i.e. water penetrating LiDAR), but are not commonly used on land (video 1). Beam divergence refers to how wide the light beam becomes, and can be used to differentiate LiDAR instruments. Small-footprint LiDAR describes beam diameters intercepting the suface at <1m, while large-footprint
+intercepts the surface at around 5-25m (FIND CITATION).Small-footprint LiDAR is primarily what is used commercially, and has high accuracy and the ability to produce high sampling densities. All LiDAR sensors emit pulses at a certain rate; in the early 2000's 80 000 pulses/second was common; now we can emit up to 260 000 pulses/second. As you can imagine, this leads to a large increase in pulse density! Similar to satellite sensors (call back to X chapter;Paul), LiDAR sensors scan in a variety of ways. Zig-zag, rotation mirror line, and push broom scanners are the most common (video 2, 2:08). *Finally, power is important to take into account because...*. This means that each LiDAR flight has the potential to be rather unique, and all of the factors listed above need to be taken into account when doing analysis, as these factors affect how the pulse interacts with the target (if you would like to see more on this specifically, see HERE - 7:45 in video 1 (affects return)).
 
 -   **Technical Specifications of lasers**
 
--   Pulse frequency, scan rate, scan angle, return number, gps time, classification, and intensity!
+    Several technical aspects of lasers are recorded by the instrument (and usually provided as a flight summary or flight specifications by vendors), while some of it can also be found in the `las` file. We can usually find information that impacts the entire flight in the flight specifications, such as flight height, scan rate, and beam divergence. These aspects shouldn't change for the entire duration of the flight. In contrast, information located in the `las` file affects individual points. Here we can find information such as scan angle, return number, and intensity. 
+
+- Table for what each refers to? 
 
 ![Figure 15.4 An example of a LiDAR Unit.](images/15-LiDAR_Unit.jpg){width="50%"}
 
@@ -78,7 +67,7 @@ Unlike passive remote sensing technologies, LiDAR has the advantage of being abl
 
 -   **Global Navigation Satellite Systems**
 
-    In order for us to use the calculation from Figure 15.2, we need to know the exact position of the scanner in space. For airborne and mobile platforms, we can can do this by using an on board global positioning system (GPS), as well as post processing using local GPS reference station. This helps us to improve accuracy by not comparing our position to a known local position in order to ensure our location is known as accurately as possible. GPS concepts are covered further in Chapter X.
+    In order for us to use the calculation from Figure 15.2, we need to know the exact position of the scanner in space. For airborne and mobile platforms, we can can do this by using an on board global positioning system (GPS), as well as post processing using local GPS reference station. This helps us to improve accuracy by not comparing our position to a known local position in order to ensure our location is known as accurately as possible. GPS concepts are covered further in Chapter 4.
 
 ![Figure 15.5 An on board GPS is required to for providing an accurate location of the LiDAR scanner.](images/15-XYZ_coordinates.jpg){width="75%"}
 
@@ -138,7 +127,7 @@ Issue of data storage - now becoming a viable alternative. Look at Figure 15.8 f
 
 ### Single Photon Lidar
 
--   New
+-   New - requires less power. 
 -   NCC slides
 
 ::: {.box-content .call-out-content}
@@ -148,7 +137,7 @@ Issue of data storage - now becoming a viable alternative. Look at Figure 15.8 f
 
 <p id="box-text">
 
-Multiple types of LiDAR exist; it's important to know which one you are working with!
+Specifications for LiDAR data acquisitions is highly variable. It is important to know what type of LiDAR you are using, and to understand the technical specifications before diving into your analysis!
 
 </p>
 :::
@@ -157,7 +146,7 @@ Multiple types of LiDAR exist; it's important to know which one you are working 
 
 LiDAR point clouds require post processing to be useful.
 
-Point classification is important
+Point classification is important!
 
 -   What can we do with LiDAR derivatives, why are they important... tie in with LiDAR history (examples from NCC LiDAR Lecture)
 -   How do we go from raw cloud to these derivatives - incorporate case study?
@@ -180,9 +169,7 @@ Digital surface models (DSMs) - What is a CHM
 
 ### Area Based Approach vs. Individual Tree Crown Approach
 
--   Include short blurb about the two fundamental types of approach here? ...Grid Metrics
-
--   What are these used for
+LiDAR analysis in forestry uses two broad approaches, an area-based approach (ABA), or an individual tree detection approach (ITD). The ITD approach locates individual trees and allows the estimation of individual tree heights and crown area. From this, other metrics such as stem diameter, number of stems, basal area and stem volume can be derived (Hyyppä and Inkinen 1999). In contrast, the main goal of an ABA is to generate wall-to-wall estimates of inventory attributes, such as mean height, dominant height, mean diameter, stem number, basal area, and volume of the stands (Næsset 2002). 
 
 ![Figure 15.11 Maximum cell heights in an area-based approach.](images/15-las_hmax_2D.png){.center}
 
@@ -318,6 +305,8 @@ LiDAR! Requires 3 components. Important for vertical characterization of the for
 3.  How is a DEM created? What steps are needed?
 
 `r if (knitr::is_html_output()) ' ## Recommended Readings {-} '`
+
+"A best practices guide for generating forest inventory attributes from airborne laser scanning data using an area-based approach. Information Report FI-X-010"
 
 Ensure all inline citations are properly referenced here.
 

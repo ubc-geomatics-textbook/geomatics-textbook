@@ -154,6 +154,10 @@ plot(metrics, col = height.colors(50))
 # It is also possible to create single RasterLayers, for example we can create mean height, or max height rasters
 hmean <- grid_metrics(nlas, func = ~mean(Z), res = 10)
 hmax <- grid_metrics(nlas, func = ~max(Z), res = 10)
+hsd <- grid_metrics(nlas, func = ~sd(Z), res = 10)
+
+# If you want to write the raster somewhere, you can use the code below
+#writeRaster(hmean, "FILEPATH\\hmean.tif", format="GTiff")
 
 # View the plot of the metric
 plot(hmean, bg = "white", col = col)

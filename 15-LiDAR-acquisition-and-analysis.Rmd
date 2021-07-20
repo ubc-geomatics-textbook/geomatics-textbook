@@ -234,35 +234,72 @@ Creating metrics at these two scales are the fundamental way in which we current
 </p>
 :::
 
-::: {.box-content .your-turn-content}
-::: {.box-title .your-turn-top}
-#### Your turn! {.unnumbered}
-:::
+### Your Turn!
 
-<p id="box-text">
+Explore some of the LiDAR derivatives that we produced in the case study above. We can see how the maximum height (zmax) differs from the mean height (zmean) and areas where the standard deviations of heights are very different from one another.
 
-Explore some of the LiDAR derivatives that we produced in the case study above. We can see how the maximum height (zmax) differs from the mean height (zmean) and areas where the standar deviations of heights are very different from one another.
+```{r map, echo=FALSE, warning=FALSE, include =FALSE}
 
-</p>
+knitr::opts_chunk$set(fig.width = 12, fig.height = 8) #make the interactive maps bigger/smaller across the document
 
-<p id="box-text">
+# Load library
+library(leaflet)
+library(raster)
+library(sf)
+library(sp)
 
-Interactive map of rasters:
+# Load files
+r_hmean <- raster(here::here("data", "hmean.tif"))
+r_hmax <- raster(here::here("data", "hmax.tif"))
+r_hsd <- raster(here::here("data", "hsd.tif"))
 
--   zmean
+# Set colors and legend titles
+pal1 <- colorNumeric(c("#fee090", "#fc8d59", "#d73027"), values(r_hmean),
+                    na.color = "transparent")
 
--   zmax
+pal2 <- colorNumeric(c("#FFFFCC", "#41B6C4", "#0C2C84"), values(r_hmax),
+                    na.color = "transparent")
 
--   zsd
+pal3 <- colorNumeric(c("#e5f5e0", "#a1d99b", "#1b7837"), values(r_hsd),
+                     na.color = "transparent")
 
-</p>
+# Add projection information
+crs(r_hmean) <- "+proj=utm +zone=10 +datum=NAD83 +units=m"
+crs(r_hmax) <- "+proj=utm +zone=10 +datum=NAD83 +units=m"
+crs(r_hsd) <- "+proj=utm +zone=10 +datum=NAD83 +units=m"
 
-<p id="box-text">
+#create leaflet
+m = leaflet() %>%
+  addProviderTiles("Esri.WorldImagery") %>% #http://leaflet-extras.github.io/leaflet-providers/preview/
+  addScaleBar(position = c("topleft")) %>%
 
-![Figure 15.X Example of all the metrics you can produce... replace this with a leaflet map in 'your turn' section below](images/15-las_metrics_2D.png){.center}
+  addRasterImage(r_hmean, colors = pal1, group = "Mean Height", opacity = 1, maxBytes = "Inf")%>%
+  addRasterImage(r_hmax, colors = pal2, group = "Maximum Height", opacity = 1, maxBytes = "Inf")%>%
+  addRasterImage(r_hsd, colors = pal3, group = "Standard Deviation of Height", opacity = 1, maxBytes = "Inf")%>%
+  
+  addLegend(pal = pal1, values = values(r_hmean), group = "Mean Height",
+            opacity = 1,
+            title = "Mean")%>%
+  
+  addLegend(pal = pal2, values = values(r_hmax), group = "Maximum Height",
+            opacity = 1,
+            title = "Maximum")%>%
+  
+  addLegend(pal = pal3, values = values(r_hsd), group = "Standard Deviation of Height",
+            opacity = 1,
+            title = "Standard Deviation")%>%
 
-</p>
-:::
+  addLayersControl(overlayGroups = c("Mean Height", "Maximum Height", "Standard Deviation of Height"),
+                   position = c("bottomleft"),
+                   options = layersControlOptions(collapsed = TRUE))
+  
+```
+
+```{r map 2, echo=FALSE, fig.cap="Figure 15.X: Different layers to explore..."}
+m
+
+```
+
 
 ## Summary
 

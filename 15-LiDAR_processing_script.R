@@ -15,6 +15,7 @@
 
 library(lidR)
 library(rgl)
+library(raster)
 
 ##########################################################################################################
 # Initial Data - load and explore (section 1/2 of lidR book)
@@ -94,7 +95,7 @@ nlas <- normalize_height(las_classified, knnidw())
 # Make sure we drop all of the points below 0!
 nlas <- filter_poi(nlas, Z >= 0)
 
-# If we compare this plot to 'las' or even 'las denoise' we should see that it is a lot more uniform
+# If we compare this plot to 'las' or even 'las_denoise' we should see that it is a lot more uniform
 plot(nlas, bg = "white", axis = T)
 
 ##########################################################################################################

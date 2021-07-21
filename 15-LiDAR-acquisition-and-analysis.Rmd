@@ -223,7 +223,7 @@ Creating metrics at these two scales are the fundamental way in which we current
 
 ### Your Turn!
 
-Explore some of the LiDAR derivatives that we produced in the case study above. We can see how the maximum height (zmax) differs from the mean height (zmean) and areas where the standard deviations of heights are very different from one another.
+Explore some of the LiDAR derivatives that we produced in the case study above. We can see how the pattern for maximum height (zmax) follows the mean height (zmean) quite closely. and areas where the standard deviations of heights are very different from one another. In addition, we can see that the 15th percentil of heights (zq15) also broadly follows this pattern. However, we can see that the standard deviation of heights in the tall areas are quite variable, and that very little ground is visible in our tile (as pzabove2 is very high almost everywhere)
 
 ```{r map, echo=FALSE, warning=FALSE, include =FALSE}
 
@@ -236,24 +236,30 @@ library(sf)
 library(sp)
 
 # Load files
-r_hmean <- raster(here::here("data", "hmean.tif"))
-r_hmax <- raster(here::here("data", "hmax.tif"))
-r_hsd <- raster(here::here("data", "hsd.tif"))
+r_hmean <- raster(here::here("data", "hmean_large.tif")) #mean height
+r_hmax <- raster(here::here("data", "hmax_large.tif")) #max height
+r_hsd <- raster(here::here("data", "hsd_large.tif")) #standard deviation
+r_hzq15 <- raster(here::here("data", "hzq15_large.tif")) #height of 15th percentile of points 
+r_hpabove2 <- raster(here::here("data", "hpzabove2_large.tif")) #percent of points above 2 meters
 
 # Set colors and legend titles
-pal1 <- colorNumeric(c("#fee090", "#fc8d59", "#d73027"), values(r_hmean),
+pal1 <- colorNumeric(c("viridis"), values(r_hmean),
                     na.color = "transparent")
-
-pal2 <- colorNumeric(c("#FFFFCC", "#41B6C4", "#0C2C84"), values(r_hmax),
+pal2 <- colorNumeric(c("viridis"), values(r_hmax),
                     na.color = "transparent")
-
-pal3 <- colorNumeric(c("#e5f5e0", "#a1d99b", "#1b7837"), values(r_hsd),
+pal3 <- colorNumeric(c("viridis"), values(r_hsd),
+                     na.color = "transparent")
+pal4 <- colorNumeric("viridis", values(r_hzq15),
+                     na.color = "transparent")
+pal5 <- colorNumeric("viridis", values(r_hpabove2),
                      na.color = "transparent")
 
 # Add projection information
 crs(r_hmean) <- "+proj=utm +zone=10 +datum=NAD83 +units=m"
 crs(r_hmax) <- "+proj=utm +zone=10 +datum=NAD83 +units=m"
 crs(r_hsd) <- "+proj=utm +zone=10 +datum=NAD83 +units=m"
+crs(r_hzq15) <- "+proj=utm +zone=10 +datum=NAD83 +units=m"
+crs(r_hpabove2) <- "+proj=utm +zone=10 +datum=NAD83 +units=m"
 
 #create leaflet
 m = leaflet() %>%
@@ -263,20 +269,27 @@ m = leaflet() %>%
   addRasterImage(r_hmean, colors = pal1, group = "Mean Height", opacity = 1, maxBytes = "Inf")%>%
   addRasterImage(r_hmax, colors = pal2, group = "Maximum Height", opacity = 1, maxBytes = "Inf")%>%
   addRasterImage(r_hsd, colors = pal3, group = "Standard Deviation of Height", opacity = 1, maxBytes = "Inf")%>%
+  addRasterImage(r_hzq15, colors = pal4, group = "ZQ 15", opacity = 1, maxBytes = "Inf")%>%
+  addRasterImage(r_hpabove2, colors = pal5, group = "PZAbove2", opacity = 1, maxBytes = "Inf")%>%
   
   addLegend(pal = pal1, values = values(r_hmean), group = "Mean Height",
             opacity = 1,
             title = "Mean")%>%
-  
   addLegend(pal = pal2, values = values(r_hmax), group = "Maximum Height",
             opacity = 1,
             title = "Maximum")%>%
-  
+  addLegend(pal = pal4, values = values(r_hzq15), group = "ZQ 15",
+            opacity = 1,
+            title = "ZQ 15")%>%
   addLegend(pal = pal3, values = values(r_hsd), group = "Standard Deviation of Height",
             opacity = 1,
             title = "Standard Deviation")%>%
+  addLegend(pal = pal5, values = values(r_hpabove2), group = "PZAbove2",
+            opacity = 1,
+            title = "PZAbove2")%>%
 
-  addLayersControl(overlayGroups = c("Mean Height", "Maximum Height", "Standard Deviation of Height"),
+  addLayersControl(overlayGroups = c("Mean Height", "Maximum Height", "ZQ 15",
+                                     "Standard Deviation of Height","PZAbove2"),
                    position = c("bottomleft"),
                    options = layersControlOptions(collapsed = TRUE))
   

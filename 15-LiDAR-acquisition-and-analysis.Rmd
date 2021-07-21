@@ -227,8 +227,6 @@ Explore some of the LiDAR derivatives that we produced in the case study above. 
 
 ```{r files, echo=FALSE, warning=FALSE, include =FALSE}
 
-knitr::opts_chunk$set(fig.width = 12, fig.height = 8) #make the interactive maps bigger/smaller across the document
-
 # Load library
 library(leaflet)
 library(raster)
@@ -269,7 +267,7 @@ crs(r_hpabove2) <- "+proj=utm +zone=10 +datum=NAD83 +units=m"
 #create leaflet
 m = leaflet() %>%
   addProviderTiles("Esri.WorldImagery") %>% #http://leaflet-extras.github.io/leaflet-providers/preview/
-  addScaleBar(position = c("topleft")) %>%
+  addScaleBar(position = c("bottomleft")) %>%
 
   addRasterImage(r_hmean, colors = pal1, group = "Mean Height", opacity = 1, maxBytes = "Inf")%>%
   addRasterImage(r_hmax, colors = pal2, group = "Maximum Height", opacity = 1, maxBytes = "Inf")%>%
@@ -295,12 +293,15 @@ m = leaflet() %>%
 
   addLayersControl(overlayGroups = c("Mean Height", "Maximum Height", "ZQ 15",
                                      "Standard Deviation of Height","PZAbove2"),
-                   position = c("bottomleft"),
-                   options = layersControlOptions(collapsed = TRUE))
+                   position = c("topleft"),
+                   options = layersControlOptions(collapsed = TRUE))%>% 
+  hideGroup(c("Maximum Height", "ZQ 15", "Standard Deviation of Height","PZAbove2"))
   
 ```
 
 ```{r map , echo=FALSE, fig.cap="Figure 15.X: Explore different area-based metrics produced in the case study above"}
+knitr::opts_chunk$set(fig.width = 12, fig.height = 12) #make the interactive maps bigger/smaller across the document
+
 m
 
 ```

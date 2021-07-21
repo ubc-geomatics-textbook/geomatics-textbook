@@ -225,7 +225,7 @@ Creating metrics at these two scales are the fundamental way in which we current
 
 Explore some of the LiDAR derivatives that we produced in the case study above. We can see how the pattern for maximum height (zmax) follows the mean height (zmean) quite closely. and areas where the standard deviations of heights are very different from one another. In addition, we can see that the 15th percentil of heights (zq15) also broadly follows this pattern. However, we can see that the standard deviation of heights in the tall areas are quite variable, and that very little ground is visible in our tile (as pzabove2 is very high almost everywhere)
 
-```{r map, echo=FALSE, warning=FALSE, include =FALSE}
+```{r files, echo=FALSE, warning=FALSE, include =FALSE}
 
 knitr::opts_chunk$set(fig.width = 12, fig.height = 8) #make the interactive maps bigger/smaller across the document
 
@@ -300,7 +300,7 @@ m = leaflet() %>%
   
 ```
 
-```{r map 2, echo=FALSE, fig.cap="Figure 15.X: Different layers to explore..."}
+```{r map , echo=FALSE, fig.cap="Figure 15.X: Explore different area-based metrics produced in the case study above"}
 m
 
 ```

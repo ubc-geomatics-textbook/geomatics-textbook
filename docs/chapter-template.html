@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 Fundamentals of remote sensing | An Open Geomatics Textbook</title>
+  <title>Chapter 4 Image Processing | An Open Geomatics Textbook</title>
   <meta name="description" content="Advancing teaching and learning in geomatics at UBC" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 Fundamentals of remote sensing | An Open Geomatics Textbook" />
+  <meta property="og:title" content="Chapter 4 Image Processing | An Open Geomatics Textbook" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/ubc-geomatics-textbook/book/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="ubc-geomatics-textbook/book" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Fundamentals of remote sensing | An Open Geomatics Textbook" />
+  <meta name="twitter:title" content="Chapter 4 Image Processing | An Open Geomatics Textbook" />
   
   <meta name="twitter:description" content="Advancing teaching and learning in geomatics at UBC" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="mapping-data.html"/>
-<link rel="next" href="chapter-template.html"/>
+<link rel="prev" href="chapter-template.html"/>
+
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -56,28 +56,6 @@
 
 
 
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -158,7 +136,6 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#practice-questions-1"><i class="fa fa-check"></i>Practice Questions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#recommended-readings-1"><i class="fa fa-check"></i>Recommended Readings</a></li>
-<li class="chapter" data-level="2.5" data-path="mapping-data.html"><a href="mapping-data.html#section"><i class="fa fa-check"></i><b>2.5</b> —</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="chapter-template.html"><a href="chapter-template.html#chapter-template"><i class="fa fa-check"></i><b>3</b> Fundamentals of remote sensing</a>
 <ul>
@@ -185,6 +162,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#reflection-questions-2"><i class="fa fa-check"></i>Reflection Questions</a></li>
 <li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#practice-questions-2"><i class="fa fa-check"></i>Practice Questions</a></li>
 </ul></li>
+<li class="chapter" data-level="3.7" data-path="chapter-template.html"><a href="chapter-template.html#section"><i class="fa fa-check"></i><b>3.7</b> —</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="chapter-template.html"><a href="chapter-template.html#chapter-template"><i class="fa fa-check"></i><b>4</b> Image Processing</a>
 <ul>
@@ -222,164 +200,70 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="chapter-template" class="section level1" number="3">
-<h1><span class="header-section-number">Chapter 3</span> Fundamentals of remote sensing</h1>
-<p>At some point in your life you may have wondered why the sky is blue. You may have noticed that two leaves on the same tree are slightly different shades of green. It would be perfectly natural to wonder these things and simply allow the questions to remain unanswered. After all, they likely carry minimal significance compared to the other queries of your life. What if, however, these questions could not only be answered, but also lead you to profound insights relating to your environment? What if differences in leaf color indicated an early summer drought or the initial stages of a pest outbreak that would wreak havoc on the economy? <em>Remote sensing</em> is the overarching term that refers any scientific exploration that seeks to address these, and many other questions.</p>
+<div id="chapter-template" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Image Processing</h1>
+<p>Capture paragraph</p>
 <div class="box-content learning-objectives-content">
-<div id="learning-objectives-3" class="section level4 unnumbered box-title learning-objectives-top">
+<div id="learning-objectives-4" class="section level4 unnumbered box-title learning-objectives-top">
 <h4>Learning Objectives</h4>
 </div>
 <ol style="list-style-type: decimal">
-<li>Understand key principles underpinning remote sensing science</li>
-<li>Become familiar with specific types of energy used in RS</li>
-<li>Define key interactions between energy and surface materials that enable RS</li>
-<li>Comprehend various considerations that effect the use of RS</li>
+<li>Goals</li>
 </ol>
 </div>
-<div id="key-terms-3" class="section level3 unnumbered">
+<div id="key-terms-4" class="section level3 unnumbered">
 <h3>Key Terms</h3>
-<p>Radiation, Energy, Photons, Electromagnetic Spectrum, Wavelength, Resolution, Raster, Image, Pixel</p>
+<p>pixel, spatial resolution, temporal resolution, radiometric resolution, spectral resolution, geometric correction, atmospheric correction,</p>
 </div>
-<div id="what-is-remote-sensing" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> What is remote sensing?</h2>
-<p>Simply put, remote sensing is any method of gathering information about an object, or objects, without physical contact. Over the course of human history, a variety of remote sensing techniques have been used. In fact, one could argue that any organism capable of observing electromagnetic radiation has a built in optical remote sensing system, such as human vision. Similar arguments could be made for other senses, such as smell or hearing, but this chapter will focus strictly on techniques that capture and record electromagnetic radiation.</p>
-<p>The first recorded use of optical remote sensing occurred ____ (Plato). Over the next few centuries a variety of photosensitive chemicals were discovered and, in ____, ______ established the technique recognized as photography. The ability to record specific objects within a scene proved enabled the preservation of information in a rapid and accessible medium. Eventually, photography became a prominent means of immortalizing everything from individual humans to exotic landscapes. After all, a picture says a thousand words.</p>
-<p>In 1851, an enthusiastic Frenchman named Gaspard Tournachon mounted a camera on a hot air balloon and captured images of the earth below him. These images were taken as the camera looked straight down, or nadir, at the City of ___ and provided a novel view of the city. For the first time it was possible to examine the distribution of buildings, fields, forests and roads across the landscape. With this, airborne remote sensing was born. Remote sensing technologies continued to advance throughout the 19th and 20th centuries, with major socio-political conflicts like World War I and II acting as crucibles for innovation. The advancement of remote sensing has continued into the 21st century and is unlikely to slow down in the future. This is due to the relevance of three key aspects.</p>
-<p>First and foremost, remote sensing enables the observation of objects in, or from, locations that are otherwise inaccessible for humans. The observation of Mars’ surface from an orbiting satellite is a one current example. A second aspect that makes remote sensing so useful is the collection of information over a large area. For example, airborne remote sensing technologies enable observations of land cover across Canada (Figure 1). The ability to evaluate inaccessible objects or large areas over time is a third valuable aspect of remote sensing and is particularly relevant for land management, as predictions can be informed through the observation of historic patterns and processes. This is especially true for projects aiming to restore degraded ecosystems or plan sustainable land use practices. Before exploring the designs of specific sensor or their applications, however, it is essential to grasp some key components that underpin remote sensing science.</p>
-<p><a href="https://www.tandfonline.com/doi/full/10.1080/07038992.2018.1437719"><img src="images/11-hermosilla-canada-landcover.png" alt="Figure 1. False color (bands: SWIR, NIR, R) Landsat best-available-pixel (BAP) composite of Canada in 2010 overlaid with Canada’s forest- dominated ecozones. Taken from Hermosilla et al., 2018 Can. J. Rem. Sens." /></a></p>
+<div id="overview" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Overview</h2>
+<p>The collection of imagery is challenging and time consuming, with sensor design and deployment often requiring the development of new technologies. Driven by the growing demand for relevant information about environmental change, great emphasis is placed on the creation of “the next new satellite” or “a smaller, yet more powerful drone.” Although innovation in these physical technologies is critical for the advancement of image collection, they don’t guarantee that the imagery will be useful. In reality, the pixel values collected by a sensor are not purely the reflectance values from the surface of interest. Depending on the wavelengths being observed, there may be variations in the amount of photons emitted from the light source and a variety of atmospheric effects, such as scattering. There may also be slight inconsistencies in images collected by the same sensor on the same day or adjacent areas, which would affect the quality of analyses</p>
 </div>
-<div id="types-of-energy" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> Types of Energy</h2>
-<div id="introduction" class="section level3" number="3.2.1">
-<h3><span class="header-section-number">3.2.1</span> Introduction</h3>
-<p>Stepping back from remote sensing for a moment, there are three general types of energy commonly used to remotely observe objects: sonic, thermal and electromagnetic. Sonic, or sound, energy is commonly used in environments where heat or light are inconsistent or hard to measure. Sonar is as example of a sonic remote sensing technique and is often deployed to observe objects in liquid. Thermal, or heat, energy is used in a variety of cases when changes in temperature indicate an underlying physiological process. An environmental example would be the observation of plant health via leaf temperature. Although both sonic and thermal energies provide useful information across a variety of disciplines, they are not the most common.</p>
-<p>Electromagnetic radiation (EMR), which is what the human sense of sight observes, is a popular energy source in remote sensing science. At it’s most basic, this method of observation is based on the measurement of photons. Research using EMR is fundamentally interested in examining the interactions of EMR, or photons, and other particles. Before diving into the applications of EMR remote sensing (photography, spectroscopy, etc.) it is important to understand some basic theory regarding the measurement of photons.</p>
-<p>Essentially, photons are the smallest physical property in the electromagnetic field. Photons can be emitted from objects engaged in nuclear processes (such as the sun), objects excited thermally (like a light bulb) or objects that reflect or emit absorbed radiation. The interactions between emitted photons and other particles can be observed and used to evaluate the properties of the object. A fundamental component of EMR is it’s wavelength, defined as the measured space between two consecutive peaks of a wave (IMAGE). The wavelength of a photon determines if and how it will interact with the particles around it, as well as defines the amount of energy it has. Measuring the differences in photonic energy before and after interacting with another particle is the core of any remote sensing utilizing EMR.</p>
-<p>Perhaps the simplest path to understanding how the properties of photons (i.e. energy, wavelength) are used for remote sensing purposes is through the use of an equation. Albert Einstein explained the energy of a photon as the product of its wave frequency (the number of waves that pass a specific point over a certain amount of time) and Planck’s constant (Equation 1).</p>
-<center>
-<p><em>Equation 1</em></p>
-</center>
-<p><span class="math display">\[
-E = hf
-\]</span>Where E is the energy of a photon, h is Planck’s constant (h = 4.14 × 10<sup>−15</sup> eV/s) and f is the wave frequency. Clearly, an increase in frequency results in an increase of energy. This equation may be altered to include other properties, such as the speed of light and wavelength (Equation 2).</p>
-<center>
-<p><em>Equation 2</em></p>
-</center>
-<p><span class="math display">\[
-E = hc/λ
-\]</span>Where E is the energy of a photon, h is Planck’s constant, c is the speed of light (c = 3 x10<sup>8</sup> m/s) and λ is the wavelength of the radiation. This equation contains more variables, but incorporates wavelength and in doing so utilizes an easy to measure (hc always equals 1240 eV/nm) and familiar characteristic. Due to the large range of wavelengths that photons can exhibit it is necessary to use a specific style of writing to describe them, called scientific notation.</p>
+<div id="common-processing-steps" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Common Processing Steps</h2>
+<div id="geometric-correction" class="section level3" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Geometric correction</h3>
+<ul>
+<li><p>Relief displacement</p></li>
+<li><p>Orthorectification</p></li>
+<li><p>Georeferencing</p></li>
+<li><p>Georegistration</p></li>
+<li><p>Resampling</p>
+<ul>
+<li><p>Nearest neighbour</p></li>
+<li><p>Bilinear interpolation</p></li>
+<li><p>Cubic convolution</p></li>
+</ul></li>
+</ul>
 </div>
-<div id="scientific-notation" class="section level3" number="3.2.2">
-<h3><span class="header-section-number">3.2.2</span> Scientific Notation</h3>
-<p>Expressing extremely large or small numbers presents a challenge to both efficiency and accessibility that has existed likely since the creation of mathematics. Scientific notation presents a simple solution to this problem through simplifying numeric presentation to a value less than 10 that is raised to a particular power. Put simply, the decimal point of a large or small number is moved to make the smallest, single digit whole number. The number of places and direction that the decimal point moves is described by an associated power of 10. Equations 3 and 4 depict how large and small numbers are presented in scientific notation, respectively.</p>
-<center>
-<p><em>Equation 3</em></p>
-</center>
-<p><span class="math display">\[
-1,000,000 = 1.0 X 10^{6} 
-\]</span></p>
-<center>
-<p><em>Equation 4</em></p>
-</center>
-<p><span class="math display">\[
-0.000001 = 1.0 X 10 ^{-6}
-\]</span></p>
+<div id="atmospheric-correction" class="section level3" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Atmospheric correction</h3>
+<ul>
+<li><p>Atmospheric windows</p></li>
+<li><p>Clouds and shadows</p></li>
+<li><p>Scattering?</p></li>
+<li><p>Smoke and haze</p></li>
+</ul>
 </div>
-<div id="electromagnetic-spectrum" class="section level3" number="3.2.3">
-<h3><span class="header-section-number">3.2.3</span> Electromagnetic Spectrum</h3>
-<p>Now that you have an understanding of how the properties of photons can be measured and how to write them, we can begin to explore the electromagnetic spectrum (EMS). The EMS is the continuum along within photons are located based on their properties (Figure 2). We have discussed both wavelength and frequency, which are inversely related and commonly used to describe EMR. Figure 2 also depicts a thermometer laying sideways, which demonstrates that as an object’s temperature increases, the wavelength of the photons emitted decreases. This follows Equation 2, which demonstrates that photons with shorter wavelengths have higher energy. A practical example of this would be that the majority of photons emitted from the sun (5,788 K) are around 0.5 x 10<sup>-6</sup> nm, while the majority of photons emitted from the human body (~310 K) are around 10<sup>-4</sup>. <strong>Theoretical blackbodies???</strong></p>
-<center>
-<p><a href="https://commons.wikimedia.org/wiki/File:EM_Spectrum_Properties_edit.svg"><img src="images/11-EM_Spectrum_Properties_edit.png" alt="Figure 2. Electromagnetic (also known as Milton) spectrum depicting the type, wavelength, frequency and black body emission temperature. Credit: Inductiveload, NASA" /></a></p>
-</center>
-<div class="box-content call-out-content">
-<div id="call-out-1" class="section level4 unnumbered box-title call-out-top">
-<h4>Call out</h4>
-</div>
-<p id="box-text">
-<p>Visualizing the electromagnetic spectrum (EMS) in Figure 2 certainly enables a wonderful comprehension of many concepts relating to photons. Perhaps more astounding, however, is the truth of how the faculty of human vision has incorporated these properties. The portion of the EMS that humans can see is between 400 nm and 750 nm, which correlates with the most common wavelengths emitted from the sun (Figure _). Perhaps it should not be surprising, but of all the possible wavelengths emitted in our environment, human eyes have evolved to maximize solar photon emission.</p>
-</p>
-</div>
-</div>
-<div id="radiation-types" class="section level3" number="3.2.4">
-<h3><span class="header-section-number">3.2.4</span> Radiation Types</h3>
-<p>Since it is possible for photon energy to vary widely across the EMS, it can be useful to group photons based on their wavelength. Generally, there are seven accepted categories. it is important to note that these categories have gradual boundaries, rather than sharp dividing lines. In order of increasing wavelength they are: radio, microwave, infrared, visible, ultraviolet, X ray and Gamma ray. We will detail each of these seven groups in Table 1 <span class="citation">(<a href="#ref-zwinkels2015" role="doc-biblioref">Zwinkels 2015</a>)</span>. If you wish a visual tour of the EMS you can explore <a href="https://books.google.ca/books?hl=en&amp;lr=&amp;id=DfLPpxogdM4C&amp;oi=fnd&amp;pg=PA27&amp;dq=electromagnetic+spectrum+remote+sensing&amp;ots=IabuAFaJV5&amp;sig=cAgV799LGmajf-ERLU2HraQjwyM#v=onepage&amp;q&amp;f=false" title="Tour of the electromagnetic spectrum">this document</a> created by Ginger Butcher for NASA in 2010.</p>
-<table>
-<caption>Table 1. Details for the seven regions of the electromagnetic spectrum.</caption>
-<thead>
-<tr class="header">
-<th>Name</th>
-<th>Wavelength</th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Radio</td>
-<td>1 cm - 1,000 km (10<sup>3</sup> - 10<sup>10</sup>)</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Microwave</td>
-<td>1 mm - 1 cm (10<sup>10</sup> - 10<sup>11</sup>)</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Infrared (IR)</td>
-<td>700 nm - 1 mm (10<sup>11</sup> - 10<sup>14</sup>)</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Visible (Vis)</td>
-<td>400 - 700 nm (10<sup>14</sup> - 10<sup>15</sup>)</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Ultraviolet (UV)</td>
-<td>10 - 400 nm (10<sup>15</sup> - 10<sup>17</sup>)</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>X rays</td>
-<td>0.1 - 10 nm (10<sup>17</sup> - 10<sup>20</sup>)</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Gamma rays</td>
-<td>&lt; 0.1 nm (10<sup>20</sup> - 10<sup>23</sup>)</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="physical-laws-of-radiation" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> Physical laws of radiation</h2>
-<p>With a solid grasp of why EMR is useful for remote sensing science and how EMR is categorized along the EMS, we can begin to apply this core knowledge with ideas and applications related to practical use. As with radiation, there are a plethora of terms used to describe the fundamental concepts that make remote sensing science possible. Some of the most common terms have been included below. They are organized into three categories: Radiation Basics, Foundations of Measurement and Methods of Normalization.</p>
-<p><strong>Radiation Basics</strong></p>
-<p>The use of radiation to quantify properties of an object is inherently linked with relatively complex theories of physics. To minimize both confusion and workload, we will highlight a select number of key concepts that support the use of the EMS for remote sensing (Figure WORKFLOW_). The first concepts to become familiar with are radiant energy and radiant flux</p>
-<p>Radiant energy is essentially the energy carried by photons, which is measured in Joules (J). Recall that the amount photon energy defines what wavelength (Equation 2). Radiant flux, which is interchangeable with radiant power, is the amount of radiant energy that is emitted, reflected, transmitted or absorbed by an object per unit time. Radiant flux considers energy at all wavelengths and is often measured per second, making it’s SI Watts (W), which is simply Joules per second (J/s) . Spectral flux is an associate of radiant flux and simply reports the amount of energy per wavelength (W/nm) or (W/Hz). Combined, these two terms allow us to describe the interaction with electromagnetic radiation and it’s environment; radiant energy interacts with an object, which results in radiant flux.</p>
-<p>Now that you are familiar radiant energy and flux, we can discuss irradiance. Irradiance refers to the amount of radiant energy that contacts a 1 m<sup>2</sup> area each second (W m<sup>-2</sup>). This includes all electromagnetic energy that contacts our 1 m<sup>2</sup> surface, which could be a combination of radiation from the sun, a halogen light bulb overhead and your computer screen. Another important concept is solar irradiance, which strictly refers to the amount of solar radiation interacting with our 1 m<sup>2</sup> area. Solar irradiance is very important in many remote sensing applications as it determines which photons an optical sensor <em>could</em> record in naturally illuminated environments. An associate of irradiance is radiance, which refers the the amount of radiant flux is a specific direction. The direction in question is often called the “solid angle” and makes radiance a directional quantity. You could imagine holding a DLSR camera 90 <sup>0</sup> above a flat leaf so that the only item visible to the shutter is the leaf. The camera would capture the radiance reflected from the leafs surface and the solid angle would be 90<sup>0</sup>. Essentially, irradiance is used to measure the radiant energy that contacts a 1 m<sup>2</sup> area, while radiance measures the radiant flux of an object from a specific angle.</p>
-<p>So far we have discussed radiant energy and flux as basic concepts interacting with a single object (leaf) or 1 m<sup>2</sup> surface. In reality, radiant energy from the sun begins interacting with objects as soon as it enters earth’s atmosphere. The process by which radiation is reflected by other particles is called scattering. Scattering occurs throughout the atmosphere and is generally separated into three categories: Rayleigh, Mie and Non-selective.</p>
-<p>The three categories of atmospheric scattering are defined by the energy’s wavelength and the size of the interacting particle. When the wavelength of incoming radiation is larger than the particles (gases and water vapor) with which it interacts, Rayleigh scattering occurs. Phenomenon related to Rayleigh scattering include Earth’s sky appearing blue. When the wavelength of incoming radiation is similar to that of the particles with which it interacts Mie scattering occurs. The size of particles generally considered to similar is between 0.1 - 10 times that of the wavelength. Smoke and dust are common causes of Mie scattering. A third type of scattering occurs when the particles involved are lager than the wavelength of the incoming radiation. This is called non-selective scattering and results in the uniform scattering of light regardless of the wavelength. Examples of non-selective scattering are clouds and fog.</p>
-<p>The combination of these three scattering types leads to drastic differences between the amount of solar irradiance at the top of the atmosphere and at sea level (Figure __). There are also a variety of wavelengths at which ozone, oxygen, water and carbon dioxide absorb incoming radiation, precluding entire sections of the EMS from reaching the surface. Overall, only a small portion of energy emitted from the sun reaches the Earth’s surface. Most energy is absorbed or scattered by particles in the Earth’s atmosphere</p>
-<p><a href="https://commons.wikimedia.org/wiki/File:Solar_Spectrum.png"><img src="images/11-solar-radiation-spectrum.png" alt="Figure __. Solar radiation spectrum from 250 - 2500 nm. Irradiance measurements at the top of the atmosphere (yellow) and sea level (red) are depicted. The grey line represents the theoretical curve of a 5250^0^ blackbody spectrum. Created by Robert A. Rohde for Global Warming Arts (CC BY-SA 3.0), 2007." /></a></p>
-<p>The process of scattering is also affected by the properties with which it interacts. The angle at which EMR interacts with a surface, as well as the surface material, determine the properties of reflection. A reflector is described based on the properties of EMR that are reflected from it and range from specular to diffuse. Specular reflectance occurs when EMR is reflected in a single direction and can also be called ansiotropic reflectance. A mirror is an example of a specular reflector. A diffuse, or Lambertian, reflector reflects EMR in all directions equally and can also be called an isotropic reflector. An example of a surface that reflects EMR isotropically is paper.</p>
-<p>Although specular and diffuse are measured on an spectrum four general classifications for reflectors are accepted: perfect specular, near-perfect specular, near-perfect diffuse and perfect diffuse. diffuse surfaces tend to be the most useful for remote sensing as they scatter light in all directions. This is useful because sensors can only view a surface from a single angle and can also be moving. Attempting to determine the angle at which EMR is reflected would make many projects unfeasible, especially those covering large areas.</p>
-<p>This is not to say that diffuse reflectors are perfect, however, as some issues remain related to the angle of incidence and the position of the sensor. For example, both back scattering and forward scattering affect the amount of radiation that reaches a sensor, depending on where the sensor is located. If a sensor is observing an object at the same angle as the incident radiation, the majority of reflected EMR will be from backscatter, or EMR that is scattered back towards its source. If the object being observed is perfectly specular, no EMR reflected off the object would be captured by the sensor. If the object is a diffuse or near-perfect diffuse reflector, then there is less of a concern with regards to capturing reflected EMR.</p>
-<p><strong>Foundations of Measurement</strong></p>
-<p>Now that we have discussed radiant energy and the concepts underpinning its interactions with other objects, we can begin to explore the measurements that our sensors record. One of the most important concepts to understand is that of the spectral signature, or spectra. A spectral signature refers to the amount of electromagnetic energy recorded across a defined section of the EMS. A nice example of a spectral signature is Figure __, which presents the sun’s radiation between 250 - 2500 nm in the units of solar irradiance (W/m<sup>2</sup>/nm). Similar graphs are common throughout remote sensing and can employ different units of measure.</p>
-<p>The base measurements taken to generate spectral signatures is of an objects radiance. Acquiring radiance across a defined section of the EMS can be conducted by a variety of sensors and at different spatial scales, highlighting the practical advantages of evaluating surfaces using EMR. To fully capture and compare the objects being measured, however, it is often necessary to normalize radiance. The need for normalization stems mainly from the aforementioned issues of atmospheric effects, source and sensor location and sensor calibration. As with any normalization, the first step is to identify our minimum and maximum values.</p>
-<p>There are two common reference measurements used to determine minimum and maximum radiance: dark and white reference. A dark reference is often taken by measuring the amount of energy recorded by a sensor when the input device is ignored. In theory, this would be the internal darkness of the machine and is considered to be the minimum radiance value in practice. The maximum radiance value is slight more challenging to determine as it requires a perfectly diffuse, flat white surface. A commonly used material is Spectralon, which has almost 100% reflectance between 400 - 1500 nm and greater than 95% reflectance over the entire optical region of the EMS (250 - 2500 nm). With both minimum and maximum values defined, it becomes possible to calculate normalized spectral values for a variety of properties across changing conditions.</p>
-<p><strong>Methods of Normalization</strong></p>
-<p>Upon calibrating an instrument to both 100% and 0% reflectance, it is possible to determine three normalized measurements of EMR: reflectance, transmittance and absorption. Each of these measurements provides useful information for understanding the interactions between EMR and the environment.</p>
-<p>Reflectance refers EMR that has interacted with and effectively bounced back. It has emerged as a popular method of evaluating a variety of environmental properties, including land use change, plant health and plant diversity <span class="citation">(<a href="#ref-asner2011" role="doc-biblioref">Asner et al. 2011</a>)</span>. Another popular normalized measure of the interaction between photons and a surface is transmittance. A photon that is transmitted has passed through the surface with which it interacted and provides insight regarding how much energy can reach other surfaces below. In a forestry context, this information can be particularly useful when determining the amount of radiation that reaches below the upper canopy (cite LAI, etc.). Absorbance is a third, related measurement that refers to the amount of energy absorbed by the cells within a surface and is equal to the the difference in energy between reflectance and transmittance (Equation 5).</p>
-<p><span class="math display">\[
-Reflectance - Transmittance = Absorbance
-\]</span></p>
-<p>Although relatively straight forward, these definitions allow us to start exploring a variety of remote sensing applications. In fact, most optical remote sensing techniques employ at least one of reflectance, transmittance and absorbance to examine the world. Before moving on to the next section, please review the work flow below highlighting what we have learned so far. In our next steps we will move from theory to application and begin to explore the factors that define the quality, and therefore capability, of remotely sensed data.</p>
+<div id="radiometric-correction" class="section level3" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> Radiometric correction</h3>
+<p>Conducted to calibrate and correct pixel values recorded by
+the sensor. This is required the values recorded by a sensor, called digital
+numbers, are a result of light interacting with the surface of reflectance and
+the atmosphere between the sensor. First, a calibration to change raw digital
+numbers into radiance, which removes the effects of the light source (solar
+irradiance/ wavelength</p>
+<ul>
+<li><p>Signal-to-noise</p></li>
+<li><p>Photon shot noise</p></li>
+<li><p>Pattern noise</p></li>
+<li><p>Readout noise</p></li>
+<li><p>Thermal noise</p></li>
+<li><p>Radiometric normalization</p></li>
+</ul>
 <div class="box-content your-turn-content">
-<div id="your-turn-create-a-workflow-of-theories-to-highlight-chapter-so-far" class="section level4 unnumbered box-title your-turn-top">
-<h4>Your turn! Create a workflow of theories to highlight chapter so far</h4>
+<div id="your-turn-3" class="section level4 unnumbered box-title your-turn-top">
+<h4>Your turn!</h4>
 </div>
 <p>Practice questions relating to photon energy:</p>
 <ul>
@@ -388,51 +272,8 @@ Reflectance - Transmittance = Absorbance
 </ul>
 <p>What is the section of the EMS in which humans can see? What is it’s approximate range?</p>
 </div>
-</div>
-<div id="the-four-resolutions" class="section level2" number="3.4">
-<h2><span class="header-section-number">3.4</span> The Four Resolutions</h2>
-<p>One of the first considerations any user must make regarding remotely sensed data is its quality. For most scientific research, good quality data needs to contain information that is relevant to the scale and time period of the study. It would be challenging, for example, to evaluate the changes in vegetation cover in Vancouver, B.C. from 2010 - 2020 by looking at a single image of Calgary, Alberta from 1995. Although this example may seem extreme, it highlights the need for data collectors and users to communicate about where, when and what is included in a dataset. Enter the Four Resolutions.</p>
-<div id="spatial-resolution" class="section level3" number="3.4.1">
-<h3><span class="header-section-number">3.4.1</span> Spatial Resolution</h3>
-<p>Although each resolution is important, spatial resolution holds a key position when determine the usefulness of a dataset as it determines the scale at which information is collected. When a sensor collects information it does so in a single area. That area could be the size of a single tree or a single city, but all the EMR measured by the sensor will be an average of that area. Generally, this area is referred to as a picture element, or pixel. A pixel is the smallest addressable digital element and basic unit of remotely sensed data. When multiple pixels are collected in adjacent areas, perhaps using an instrument with multiple sensors on it, the output is called an image. In short, an image is a collection of pixels, which represent mean values of the area they represent. Spatial resolution, then, is the ground area represented by a pixel.</p>
-<p>There are a variety of factors that affect spatial resolution, or the size of a pixel. One important factor is the sensor’s field of view (FOV). A field of view refers to the observable area of a sensor and is defined by two things: the angle of the FOV and the sensors distance from it’s target. Changes in these two factors result in an increase or decrease in the amount of area captured by a senor and therefore a change in pixel size. Pixels that cover larger areas are considered to have lower spatial resolution, while a relatively smaller pixel is considered high resolution. When a sensor is in motion, collecting multiple pixels across space and time, the term instantaneous field of view (IFOV) is used to describe the FOV at the time each pixel was collected. We will learn more about the challenges of collecting data over space and time in Chapters 12 and 15.</p>
-<p>To determine if a certain spatial resolution is useful, then it would need to be detailed enough to include the features of interest, but large enough to be stored and processed in a reasonable manner. It must also cover the entire study area, which can vary significantly depending on the research objectives. Each of these considerations will direct the data user to a specific sensor. From here, the user can begin to consider the remaining three resolutions.</p>
-</div>
-<div id="temporal-resolution" class="section level3" number="3.4.2">
-<h3><span class="header-section-number">3.4.2</span> Temporal Resolution</h3>
-<p>Much like spatial resolutions deals with the space that a sensor observes, temporal resolution refers to the time interval between successive observations of a given space. Temporal resolution can span seconds or years and is requirement when investigating change. Much like spatial resolution, an acceptable temporal resolution is defined inherently by the nature of the study. For example, a study monitoring the annual urban expansion of Vancouver, B.C. would have a temporal resolution of 1 year.</p>
-</div>
-<div id="spectral-resolution" class="section level3" number="3.4.3">
-<h3><span class="header-section-number">3.4.3</span> Spectral Resolution</h3>
-<p>Earlier in this chapter the concepts and theories surrounding EMR were presented. These theories related directly to the concept of spectral resolution, which refers to the number and dimension of specific EMR wavelengths that a remote sensing instrument can measure. Due to the large range of the EMS and properties of EMR, the term spectral resolution is often used to refer to a single component of its definition. In scientific literature, it is not uncommon to find spectral resolution referring to:</p>
-<ul>
-<li><p>the number of spectral bands (discrete regions of the EMS) that are sensed as a single unit.</p></li>
-<li><p>the location of these units, or groups of bands, along the EMS.</p></li>
-<li><p>the bandwidth (____) of each band.</p></li>
-</ul>
-</div>
-<div id="radiometric-resolution" class="section level3" number="3.4.4">
-<h3><span class="header-section-number">3.4.4</span> Radiometric Resolution</h3>
-<ul>
-<li>defines a sensors capacity to distinguish small differences in energy.</li>
-</ul>
-</div>
-</div>
-<div id="key-applications" class="section level2" number="3.5">
-<h2><span class="header-section-number">3.5</span> Key applications</h2>
-<p>Image Interpretation</p>
-<ul>
-<li><p>Optical remote sensing</p></li>
-<li><p>Spectral Signatures</p></li>
-<li><p>True Color</p></li>
-<li><p>False Color</p></li>
-</ul>
-<p>Airborne Laser Scanning</p>
-<ul>
-<li>Chapter 15</li>
-</ul>
 <div class="box-content case-study-content">
-<div id="case-study-demo-each-resolution-in-relation-to-an-image" class="section level4 unnumbered box-title case-study-top">
+<div id="case-study-demo-each-resolution-in-relation-to-an-image-1" class="section level4 unnumbered box-title case-study-top">
 <h4>Case Study: Demo each resolution in relation to an image</h4>
 </div>
 <div id="box-text" class="section level4 unnumbered">
@@ -448,12 +289,32 @@ Reflectance - Transmittance = Absorbance
 </p>
 </div>
 </div>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.</p>
+<div class="box-content your-turn-content">
+<div id="your-turn-what-is-the-___-resolution-of-this-image" class="section level4 unnumbered box-title your-turn-top">
+<h4>Your turn!: What is the ___ resolution of this image</h4>
 </div>
-<div id="summary-3" class="section level2" number="3.6">
-<h2><span class="header-section-number">3.6</span> Summary</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.</p>
-<div id="reflection-questions-2" class="section level3 unnumbered">
+<p id="box-text">
+<p>Ask the reader to undertake some activity or exercise. Have them explore data, an interactive tool, a web map. Avoid referencing, relying on, or using external URLs. If it can be built, coded, or hosted by us, then it should be.</p>
+</p>
+<iframe width="100%" height="800px" src="http://paulpickell.ca/raster-calculator/low-pass-filter.html" frameBorder="0">
+<p>
+<p>Your browser does not support iframes</p>
+</p>
+</iframe>
+</div>
+<div class="box-content call-out-content">
+<div id="call-out-2" class="section level4 unnumbered box-title call-out-top">
+<h4>Call out</h4>
+</div>
+<p id="box-text">
+<p>This is a call out. Put some important concept or fact in here.</p>
+</p>
+</div>
+</div>
+</div>
+<div id="summary-4" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Summary</h2>
+<div id="reflection-questions-3" class="section level3 unnumbered">
 <h3>Reflection Questions</h3>
 <ol style="list-style-type: decimal">
 <li>Explain ipsum lorem.</li>
@@ -462,7 +323,7 @@ Reflectance - Transmittance = Absorbance
 <li>How does ipsum lorem work?</li>
 </ol>
 </div>
-<div id="practice-questions-2" class="section level3 unnumbered">
+<div id="practice-questions-3" class="section level3 unnumbered">
 <h3>Practice Questions</h3>
 <ol start="2" style="list-style-type: decimal">
 <li>Given ipsum, solve for lorem.</li>
@@ -474,22 +335,13 @@ Reflectance - Transmittance = Absorbance
 </div>
 </div>
 </div>
-<h3>References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-asner2011" class="csl-entry">
-Asner, Gregory P., Roberta E. Martin, David E. Knapp, Raul Tupayachi, Christopher Anderson, Loreli Carranza, Paola Martinez, Mona Houcheime, Felipe Sinca, and Parker Weiss. 2011. <span>“Spectroscopy of Canopy Chemicals in Humid Tropical Forests.”</span> <em>Remote Sensing of Environment</em> 115 (12): 35873598. <a href="https://doi.org/10.1016/j.rse.2011.08.020">https://doi.org/10.1016/j.rse.2011.08.020</a>.
-</div>
-<div id="ref-zwinkels2015" class="csl-entry">
-Zwinkels, Joanne. 2015. <span>“Light, Electromagnetic Spectrum.”</span> In, 1–8. Springer Berlin Heidelberg. <a href="https://doi.org/10.1007/978-3-642-27851-8_204-1">https://doi.org/10.1007/978-3-642-27851-8_204-1</a>.
-</div>
-</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="mapping-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="chapter-template.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="chapter-template.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -540,20 +392,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

@@ -24,7 +24,7 @@
 <meta name="author" content="UBC" />
 
 
-<meta name="date" content="2021-07-21" />
+<meta name="date" content="2021-07-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -371,22 +371,15 @@ E = hc/λ
 <p>The base measurements taken to generate spectral signatures is of an objects radiance. Acquiring radiance across a defined section of the EMS can be conducted by a variety of sensors and at different spatial scales, highlighting the practical advantages of evaluating surfaces using EMR. To fully capture and compare the objects being measured, however, it is often necessary to normalize radiance. The need for normalization stems mainly from the aforementioned issues of atmospheric effects, source and sensor location and sensor calibration. As with any normalization, the first step is to identify our minimum and maximum values.</p>
 <p>There are two common reference measurements used to determine minimum and maximum radiance: dark and white reference. A dark reference is often taken by measuring the amount of energy recorded by a sensor when the input device is ignored. In theory, this would be the internal darkness of the machine and is considered to be the minimum radiance value in practice. The maximum radiance value is slight more challenging to determine as it requires a perfectly diffuse, flat white surface. A commonly used material is Spectralon, which has almost 100% reflectance between 400 - 1500 nm and greater than 95% reflectance over the entire optical region of the EMS (250 - 2500 nm). With both minimum and maximum values defined, it becomes possible to calculate normalized spectral values for a variety of properties across changing conditions.</p>
 <p><strong>Methods of Normalization</strong></p>
-<p>There are three common spectral measurements used in remote sensing science: reflectance, transmittance and absorption. Reflectance refers EMR that has interacted with and effectively bounced back. It has emerged as a popular method of evaluating a variety of environmental properties, including land use change, plant health and plant diversity <span class="citation">(<a href="#ref-asner2011" role="doc-biblioref">Asner et al. 2011</a>)</span>. Another popular normalized measure of the interaction between photons and a surface is transmittance. A photon that is transmitted has passed through the surface with which it interacted and provides insight regarding how much energy can reach other surfaces below. In a forestry context, this information can be particularly useful when determining the amount of radiation that reaches below the upper canopy (cite LAI, etc.). Absorbance is a third, related measurement that refers to the amount of energy absorbed by the cells within a surface and is equal to the the difference in energy between reflectance and transmittance (Equation 5).</p>
+<p>Upon calibrating an instrument to both 100% and 0% reflectance, it is possible to determine three normalized measurements of EMR: reflectance, transmittance and absorption. Each of these measurements provides useful information for understanding the interactions between EMR and the environment.</p>
+<p>Reflectance refers EMR that has interacted with and effectively bounced back. It has emerged as a popular method of evaluating a variety of environmental properties, including land use change, plant health and plant diversity <span class="citation">(<a href="#ref-asner2011" role="doc-biblioref">Asner et al. 2011</a>)</span>. Another popular normalized measure of the interaction between photons and a surface is transmittance. A photon that is transmitted has passed through the surface with which it interacted and provides insight regarding how much energy can reach other surfaces below. In a forestry context, this information can be particularly useful when determining the amount of radiation that reaches below the upper canopy (cite LAI, etc.). Absorbance is a third, related measurement that refers to the amount of energy absorbed by the cells within a surface and is equal to the the difference in energy between reflectance and transmittance (Equation 5).</p>
 <p><span class="math display">\[
 Reflectance - Transmittance = Absorbance
 \]</span></p>
-<ul>
-<li><p>Absorption, transmission and reflectance</p>
-<ul>
-<li><p>absorption = the amount of EMR that is absorbed by a particle</p></li>
-<li><p>transmission = EMR that passes through a particle</p></li>
-<li><p>reflectance = a % of EMR that is reflected from a particle in relation to a particle with ‘perfect’ reflectance</p></li>
-<li><p>Insert equation of all three</p></li>
-</ul></li>
-</ul>
+<p>Although relatively straight forward, these definitions allow us to start exploring a variety of remote sensing applications. In fact, most optical remote sensing techniques employ at least one of reflectance, transmittance and absorbance to examine the world. Before moving on to the next section, please review the work flow below highlighting what we have learned so far. In our next steps we will move from theory to application and begin to explore the factors that define the quality, and therefore capability, of remotely sensed data.</p>
 <div class="box-content your-turn-content">
-<div id="your-turn-3" class="section level4 unnumbered box-title your-turn-top">
-<h4>Your turn!</h4>
+<div id="your-turn-create-a-workflow-of-theories-to-highlight-chapter-so-far" class="section level4 unnumbered box-title your-turn-top">
+<h4>Your turn! Create a workflow of theories to highlight chapter so far</h4>
 </div>
 <p>Practice questions relating to photon energy:</p>
 <ul>
@@ -398,14 +391,25 @@ Reflectance - Transmittance = Absorbance
 </div>
 <div id="the-four-resolutions" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> The Four Resolutions</h2>
+<p>One of the first considerations any user must make regarding remotely sensed data is its quality. For most scientific research, good quality data needs to contain information that is relevant to the scale and time period of the study. It would be challenging, for example, to evaluate the changes in vegetation cover in Vancouver, B.C. from 2010 - 2020 by looking at a single image of Calgary, Alberta from 1995. Although this example may seem extreme, it highlights the need for data collectors and users to communicate about where, when and what is included in a dataset. Enter the Four Resolutions.</p>
 <div id="spatial-resolution" class="section level3" number="3.4.1">
 <h3><span class="header-section-number">3.4.1</span> Spatial Resolution</h3>
+<p>Although each resolution is important, spatial resolution holds a key position when determine the usefulness of a dataset as it determines the scale at which information is collected. When a sensor collects information it does so in a single area. That area could be the size of a single tree or a single city, but all the EMR measured by the sensor will be an average of that area. Generally, this area is referred to as a picture element, or pixel. A pixel is the smallest addressable digital element and basic unit of remotely sensed data. When multiple pixels are collected in adjacent areas, perhaps using an instrument with multiple sensors on it, the output is called an image. In short, an image is a collection of pixels, which represent mean values of the area they represent. Spatial resolution, then, is the ground area represented by a pixel.</p>
+<p>There are a variety of factors that affect spatial resolution, or the size of a pixel. One important factor is the sensor’s field of view (FOV). A field of view refers to the observable area of a sensor and is defined by two things: the angle of the FOV and the sensors distance from it’s target. Changes in these two factors result in an increase or decrease in the amount of area captured by a senor and therefore a change in pixel size. Pixels that cover larger areas are considered to have lower spatial resolution, while a relatively smaller pixel is considered high resolution. When a sensor is in motion, collecting multiple pixels across space and time, the term instantaneous field of view (IFOV) is used to describe the FOV at the time each pixel was collected. We will learn more about the challenges of collecting data over space and time in Chapters 12 and 15.</p>
+<p>To determine if a certain spatial resolution is useful, then it would need to be detailed enough to include the features of interest, but large enough to be stored and processed in a reasonable manner. It must also cover the entire study area, which can vary significantly depending on the research objectives. Each of these considerations will direct the data user to a specific sensor. From here, the user can begin to consider the remaining three resolutions.</p>
 </div>
 <div id="temporal-resolution" class="section level3" number="3.4.2">
 <h3><span class="header-section-number">3.4.2</span> Temporal Resolution</h3>
+<p>Much like spatial resolutions deals with the space that a sensor observes, temporal resolution refers to the time interval between successive observations of a given space. Temporal resolution can span seconds or years and is requirement when investigating change. Much like spatial resolution, an acceptable temporal resolution is defined inherently by the nature of the study. For example, a study monitoring the annual urban expansion of Vancouver, B.C. would have a temporal resolution of 1 year.</p>
 </div>
 <div id="spectral-resolution" class="section level3" number="3.4.3">
 <h3><span class="header-section-number">3.4.3</span> Spectral Resolution</h3>
+<p>Earlier in this chapter the concepts and theories surrounding EMR were presented. These theories related directly to the concept of spectral resolution, which refers to the number and dimension of specific EMR wavelengths that a remote sensing instrument can measure. Due to the large range of the EMS and properties of EMR, the term spectral resolution is often used to refer to a single component of its definition. In scientific literature, it is not uncommon to find spectral resolution referring to:</p>
+<ul>
+<li><p>the number of spectral bands (discrete regions of the EMS) that are sensed as a single unit.</p></li>
+<li><p>the location of these units, or groups of bands, along the EMS.</p></li>
+<li><p>the bandwidth (____) of each band.</p></li>
+</ul>
 </div>
 <div id="radiometric-resolution" class="section level3" number="3.4.4">
 <h3><span class="header-section-number">3.4.4</span> Radiometric Resolution</h3>

@@ -65,13 +65,17 @@ Unlike passive remote sensing technologies, LiDAR has the advantage of being abl
 
 ### Lasers
 
-Lasers are a very important component of LiDAR systems. Here we will discuss some basic concepts, as well as the technical parameters that are important when interpreting LiDAR data. LiDAR lasers are typically beams of near-infrared light (e.g. 1064 nm)(4:10 - video 1), as these wavelengths are considered eye safe. Green wavelengths can be used for bathymetric LiDAR (i.e. water penetrating LiDAR), but are not commonly used on land (video 1). Beam divergence refers to how wide the light beam becomes, and can be used to differentiate LiDAR instruments. Small-footprint LiDAR describes beam diameters intercepting the suface at \<1m, while large-footprint intercepts the surface at around 5-25m (FIND CITATION).Small-footprint LiDAR is primarily what is used commercially, and has high accuracy and the ability to produce high sampling densities. All LiDAR sensors emit pulses at a certain rate; in the early 2000's 80 000 pulses/second was common; now we can emit up to 260 000 pulses/second. As you can imagine, this leads to a large increase in pulse density! Similar to satellite sensors (call back to X chapter;Paul), LiDAR sensors scan in a variety of ways. Zig-zag, rotation mirror line, and push broom scanners are the most common (video 2, 2:08). *Finally, power is important to take into account because...*. This means that each LiDAR flight has the potential to be rather unique, and all of the factors listed above need to be taken into account when doing analysis, as these factors affect how the pulse interacts with the target (if you would like to see more on this specifically, see HERE - 7:45 in video 1 (affects return)).
+Lasers are a very important component of LiDAR systems. Here we will discuss some basic concepts, as well as the technical parameters that are important when interpreting LiDAR data. LiDAR lasers are typically beams of near-infrared light (e.g. 1064 nm)(4:10 - video 1), and are used because these wavelengths are considered eye safe. Green wavelengths are used for bathymetric LiDAR (i.e. water penetrating LiDAR), but are less common, and not typically used on land (video 1). Laser scanners use rotating or oscillating mirrors in order to 'scan' a scene in multiple dimensions (video 2 - 1:00). When these scanners are placed on a moving platform (e.g. a plane), we can cover large areas (video 2, 2:08). LiDAR sensors scan in a variety of ways; zig-zag, rotation mirror line, and push broom scanners are the most common, and use the same principles as those described for sensors in Chapter X (video 2).
 
--   **Technical Specifications of lasers**
+*Beam divergence* is a property that refers to how wide the light beam becomes when it intercepts an object, and can be used to differentiate LiDAR instruments. Small-footprint LiDAR describes beam diameters intercepting the suface at < 1m, while large-footprint intercepts the surface at around 5-25m (FIND CITATION). Small-footprint LiDAR is primarily what is used commercially, and has high accuracy, as well as the ability to produce high sampling densities.
 
-    Several technical aspects of lasers are recorded by the instrument (and usually provided as a flight summary or flight specifications by vendors), while some of it can also be found in the `las` file. We can usually find information that impacts the entire flight in the flight specifications, such as flight height, scan rate, and beam divergence. These aspects shouldn't change for the entire duration of the flight. In contrast, information located in the `las` file affects individual points. Here we can find information such as scan angle, return number, and intensity.
+- *Create figure showing beam divergence and scan angle*
 
--   Table for what each refers to?
+The amount of energy that is reflected off an object and back to the sensor is known as *intensity*. Target reflectivity is not directly related to the LiDAR laser itself, but influences whether the return has enough intensity to register with the LiDAR sensor. In addition to surfaces having different properties, the angle of incidence of the laser also affects how much energy the sensor receives. This is known as *scan angle* and is customizable, but lower scan angles are generally preferred. Commercial LiDAR units on airplanes typically have stronger lasers than drone mounted or mobile laser scanners, which allows them to fly higher and cover more area. 
+
+All LiDAR sensors emit pulses at a certain rate (*pulse rate*), which can be given as pulses/second, or hertz (Hz). Pulse rate is highly variable (and often programmable on sensors), and along with *scan rate* (the number of scan lines per second) and *flight speed* is responsible for what density a point cloud can be. In the early 2000's 80 000 pulses/second was common; now we can emit up to 260 000 pulses/second or more (CITE). All of this information means that each LiDAR data acquisition campaign has the potential to be rather unique, and the parameter listed above in bold need to be taken into account when doing analysis. All of these factors together affect how an individual pulse interacts with the target.
+
+Several technical aspects of lasers are recorded by the instrument (and usually provided as a flight summary or flight specifications by vendors), while some of it can also be found in the `las` file. We can usually find information that impacts the entire flight in the flight specifications, such as flight height, scan rate, and beam divergence. These aspects shouldn't change for the entire duration of the flight. In contrast, information located in the `las` file affects individual points. Here we can find information such as scan angle, return number, and intensity.
 
 ```{r 15-LiDAR_Unit, fig.cap = fig_cap, out.width="70%", echo = FALSE}
 fig_cap <- paste("An example of a LiDAR Unit.")
@@ -80,32 +84,32 @@ knitr::include_graphics(here::here("images", "15-LiDAR_Unit.jpg"))
 
 ### Position and Orientation
 
--   **Global Navigation Satellite Systems**
+**Global Navigation Satellite Systems**
 
-    In order for us to use the calculation from Figure 15.2, we need to know the exact position of the scanner in space. For airborne and mobile platforms, we can can do this by using an on board global positioning system (GPS), as well as post processing using local GPS reference station. This helps us to improve accuracy by not comparing our position to a known local position in order to ensure our location is known as accurately as possible. GPS concepts are covered further in Chapter 4.
+In order for us to use the calculation from Figure 15.2, we need to know the exact position of the scanner in space. For airborne and mobile platforms, we can can do this by using an on board global positioning system (GPS), as well as post processing using local GPS reference station. This helps us to improve accuracy by not comparing our position to a known local position in order to ensure our location is known as accurately as possible. GPS concepts are covered further in Chapter 4.
 
 ```{r 15-XYZ_coordinates, fig.cap = fig_cap, out.width="70%", echo = FALSE}
 fig_cap <- paste("An on board GPS is required to for providing an accurate location of the LiDAR scanner.")
 knitr::include_graphics(here::here("images", "15-XYZ_coordinates.jpg"))
 ```
 
--   **Inertial Measurement Unit (IMU)**
+**Inertial Measurement Unit (IMU)**
 
-    An inertial measurement unit (IMU) consists of gyroscopes and accelerometers and measures the attitude and acceleration of the aircraft along the X, Y, Z axis. This data is combined with the GNSS data to provide a precise location of the scanner in space. This information becomes very important for airborne platforms where wind conditions can cause the orientation of the scanner to change subtly. We refer to the orientation of the platform in space by using the terms pitch, roll, and yaw, to describe which was the scanner is facing (see Figure 15.1).
+An inertial measurement unit (IMU) consists of gyroscopes and accelerometers and measures the attitude and acceleration of the aircraft along the X, Y, Z axis. This data is combined with the GNSS data to provide a precise location of the scanner in space. This information becomes very important for airborne platforms where wind conditions can cause the orientation of the scanner to change subtly. We refer to the orientation of the platform in space by using the terms pitch, roll, and yaw, to describe which was the scanner is facing (see Figure 15.1).
 
--   **Clocks**
+**Clocks**
 
-    LiDAR point data needs to be synched with positioning data in order to know exactly where the point is in space. To do this, a very accurate GPS clock is used to time stamp the laser scanning data (7:30 video 2). Accurate clocks are imperative for producing accurate point clouds; one nanosecond (i.e. one billionth of a second) corresponds to a 30 cm travel distance (as seen in Figure 15.X)! (video 1)
+LiDAR point data needs to be synched with positioning data in order to know exactly where the point is in space. To do this, a very accurate GPS clock is used to time stamp the laser scanning data (7:30 video 2). Accurate clocks are imperative for producing accurate point clouds; one nanosecond (i.e. one billionth of a second) corresponds to a 30 cm travel distance (as seen in Figure 15.X)! (video 1)
 
 ### Platform
 
 LiDAR units can be attached to a variety of platforms. Traditionally, LiDAR units for forestry research were mounted on airplanes and helicopters, as units were large and cumbersome [Figure 15.X], however ground based units such as terrestrial laser scanning (TLS), and mobile laser scanning (MLS) have also been developed. These units tend to have a very high point density, and TLS is often used in modeling tree architecture.
 
--   **Airplanes and Helicopters**
+**Airplanes and Helicopters**
 
 Airplanes and helicopters are still the most common platforms for LiDAR data collection. This is due to their ability to collect large amounts of data in one acquisition. LiDAR units that are designed for airplanes are more powerful than those designed for drones, leading to increased penetration in forests, even though the flight height is significantly increased. Data storage issues can also be mitigated as the platform is not as sensitive to weight restrictions when compared to drones. With increased pulse rates, data acquisitions can also be dense enough to do individual tree crown work. Typical point densities range from 5-200 p/m^2^.
 
--   **Drone**
+**Drone**
 
 As laser units have decreased in size, we have been able to mount LiDAR units to smaller platforms. Drones (also known as unmanned aerial vehicles (UAV) or remotely piloted aerial systems (RPAS)) are extremely convenient to collect high density point clouds over small areas. They typically fly relatively close to the forest (e.g. 50m above the trees) and fly a predined flight route so ensure evenly spaced data collection. Typical point densities range from hundreds to thousands of points per meter squared. A major limitation of drones is currently battery life, as acquisition campaigns are limited by how long the drone can fly for (approximately 20 minutes). This means that collecting large amounts of data is difficult in remote locations.
 
@@ -114,15 +118,15 @@ fig_cap <- paste("Drone mounted LiDAR.")
 knitr::include_graphics(here::here("images", "15-LiDAR_on_Drone_2.jpg"))
 ```
 
--   **Mobile Laser Scanning**
+**Mobile Laser Scanning**
 
 Mobile Laser Scanning (MLS) includes people (sometimes called 'backpack LiDAR') and moving vehicles. This version of LiDAR have been used by transportation and engineering companies to precisely map things like road or building conditions, and as the units have reduced in size there has been and increase in interest for use in forestry. Current MLS units such as Figure 15.X.2 can be carried around by the user in a forest easily. [Specs from Spencer for GeoSLAM]. Typical point densities are in the hundreds to thousands of points per meter squared. This is highly dependent on what the MLS is mounted to!
 
--   **Terrestrial Laser Scanning**
+**Terrestrial Laser Scanning**
 
 Terrestrial Laser Scanning (TLS) is a static system. These units are used by engineers for surveying, and are used by foresters to precisely measure trees. This information can be used to build Quantitative structure models (QSM), to precisely estimate tree parameters. Unlike the other platforms mentioned here, TLS is not necessarily a fast data collection technique. Due to occlusion, the TLS instrument needs to be placed in multiple positions around a plot to be able to fully visualize the trees, which means that a plot can take [cite how long a plot can take] to survey! Typical point densities are in the thousands of points per meter squared.
 
--   **Satellite**
+**Satellite**
 
 The last platform that LiDAR units are used for is on satellites. The two major satellite LiDAR systems are ICESat, and GEDI. - ICESat **FIND MORE REFERENCES**
 
@@ -165,25 +169,23 @@ knitr::include_graphics(here::here("images", "15-LiDAR_Discrete_Full_Waveform.pn
 
 <p id="box-text">
 
-Specifications for LiDAR data acquisitions is highly variable. It is important to know what type of LiDAR you are using, and to understand the technical specifications before diving into your analysis!
+Specifications for LiDAR data acquisitions are highly variable. It is important to know what type of LiDAR you are using, and to understand the technical specifications before diving into your analysis.
 
 </p>
 :::
 
 ## LiDAR Derivatives and Analysis
 
-LiDAR point clouds require post processing to be useful.
+LiDAR point clouds require post processing to be useful. Often, point clouds contain noise that needs to be removed, while the points need to be classified to produce derivatives. Once a point cloud has been cleaned and classified, we can create a variety of products to describe the Earth's surface, as well as describe vertical characteristics of our point clouds. 
 
-Point classification is important!
-
--   What can we do with LiDAR derivatives, why are they important... tie in with LiDAR history (examples from NCC LiDAR Lecture)
--   How do we go from raw cloud to these derivatives - incorporate case study?
--   LiDAR metrics = descriptive statistics from the point cloud over a unit area. How we define that unit is decides what kind of analysis we are able to do, and what kind of inferences are possible.
+-   *MORE*?
 
 ### Bare Earth Elevation
 
-Digital elevataion models (DEMs) represent the Earth's surface.\
-- What is a DEM - also known as digital terrain model - To create DEMs, we need to Rasterization vs TIN - call back to previous topic?
+Digital elevation models (DEMs) represent the Earth's surface. Using a classified point cloud, we can isolate the points that are categorized as ground (`Classification == 2`) and create a raster that represents the ground. DEMs are also called digital terrain models (DTMs), although a DTM can include vector features that represent natural features (CHECK). DEMs have a variety of uses, from terrain modeling for watersheds, to road design (CITE: lidR book). In addition to being used on their own, DEMs can be used to normalize point clouds; this is the process of subtracting the ground elevation from a point cloud in order to place the points on a flat plane, so that each point represents the height above the ground, not absolute height. To create a DEM, various interpolation techniques are available - these techniques are covered in more detail in Chapter X, but common algorithms include inverse distance weighting (IDW), kriging, and k-nearest neighbour (KNN). 
+
+When creating a DEM from a LiDAR point cloud, there are a few important considerations to make. The first is what resolution the DEM should be created with. The density of the point cloud is what dictates this; if the density of a point cloud is low, there is a lower likelihood of a point representing the ground. This means that a lower resolution DEM should be created. Conversely, high density point clouds can produce higher density DEMs. Additionally, forest/vegetation type is important. Dense, coastal forests in BC are likely to have high canopy cover (and therefore fewer ground points) than the more sparse subalpine forests in the province's interior.  
+
 
 ```{r 15-las_dem, fig.cap = fig_cap, out.width="70%", echo = FALSE}
 fig_cap <- paste("A digital elevation model (DEM) produced from LiDAR")
@@ -192,18 +194,18 @@ knitr::include_graphics(here::here("images", "15-las_dem.png"))
 
 ### Digital Surface Model and Canopy Height Models
 
-Digital surface models (DSMs) - What is a CHM
+Digital surface models (DSMs) represent surface features. In contrast to a DEM, the DSM captures the natural and built features of the environment, and can be thought of as a table cloth placed over a scene. When a point cloud is normalized, the derived surface can be called a canopy height model (CHM), as the layer represents the upper canopy height at a given resolution. While the elevation values are different, both surfaces are derived using the same algorithms (CITE lidR BOOK).
 
 ```{r 15-las_CHM_2D, fig.cap = fig_cap, out.width="70%", echo = FALSE}
 fig_cap <- paste("A canopy height model (CHM), also known as a digital surface model (DSM) produced from LiDAR")
 knitr::include_graphics(here::here("images", "15-las_CHM_2D.png"))
 ```
 
--   CHM vs DSM? ... basically the same thing just includes everything...
-
 ### Area Based Approach vs. Individual Tree Crown Approach
 
-LiDAR analysis in forestry uses two broad approaches, an area-based approach (ABA), or an individual tree detection approach (ITD). The ITD approach locates individual trees and allows the estimation of individual tree heights and crown area. From this, other metrics such as stem diameter, number of stems, basal area and stem volume can be derived (Hyyppä and Inkinen 1999). In contrast, the main goal of an ABA is to generate wall-to-wall estimates of inventory attributes, such as mean height, dominant height, mean diameter, stem number, basal area, and volume of the stands (Næsset 2002).
+LiDAR analysis in forestry uses two broad approaches, an area-based approach (ABA), or an individual tree detection approach (ITD). The ITD approach locates individual trees and allows the estimation of individual tree heights and crown area. From this, other metrics such as stem diameter, number of stems, basal area and stem volume can be derived (Hyyppä and Inkinen 1999). In contrast, the main goal of an ABA is to generate wall-to-wall estimates of inventory attributes, such as mean height, dominant height, mean diameter, stem number, basal area, and volume of the stands (Næsset 2002). WHen doing these analyses, we produce LiDAR metrics. These metrics are descriptive statistics from the point cloud over a unit area. How we define that unit is decides what kind of analysis we are able to do, and what kind of inferences are possible (i.e. ABA vs ITD).
+
+- *Add some examples of studies using ABA* - study by Tristan or Piotr?
 
 ```{r 15-las_hmax_2D, fig.cap = fig_cap, out.width="70%", echo = FALSE}
 fig_cap <- paste("Maximum heights of 10 meter cells using an area-based approach.")
@@ -212,12 +214,17 @@ knitr::include_graphics(here::here("images", "15-las_hmax_2D.png"))
 
 ### Tree Segmentation
 
--How and why would we want too do this
+Tree segmentation is becoming operationally relevant as LiDAR systems become more advanced. Tree segmentation is an attempt to extract individual trees from a point cloud. Since point clouds do not include information regarding what point belongs to which tree, we need to classify the points, in a similar way to how we would classify points that represent the ground. 
 
 ```{r 15-Processing_Flowchart, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 fig_cap <- paste("A typical LiDAR processing workflow. After acquiring data, pre-processing is necessary to clean and normalize the point cloud. After this a CHM can be created to detect tree tops, before segmentating the point cloud based on these points." )
 knitr::include_graphics(here::here("images", "15-Processing_Flowchart.png"))
 ```
+
+Once we have segmented a point cloud, we can produce metrics for individual trees.
+
+- *What can you do with individual trees*
+
 ```{r 15-las_treetops, fig.cap = fig_cap, out.width="80%", echo = FALSE}
 fig_cap <- paste("Example of tree tops detected using the `find_trees` function." )
 knitr::include_graphics(here::here("images", "15-las_treetops.png"))
@@ -349,9 +356,9 @@ m = leaflet() %>%
   
 ```
 
-```{r map , echo=FALSE, fig.cap = fig_cap}
+```{r map, echo=FALSE, fig.cap = fig_cap}
 
-fig_cap <- paste("Figure 15.X: Explore different area-based metrics produced in the case study above")
+fig_cap <- paste("Explore different area-based metrics produced in the case study above. Hover over tile icon (top left) to turn different layers on or off.")
 knitr::opts_chunk$set(fig.width = 12, fig.height = 12) #make the interactive maps bigger/smaller across the document
 m
 
@@ -375,7 +382,7 @@ LiDAR! Requires 3 components. Important for vertical characterization of the for
 
 `r if (knitr::is_html_output()) ' ## Recommended Readings {-} '`
 
-"A best practices guide for generating forest inventory attributes from airborne laser scanning data using an area-based approach. Information Report FI-X-010"
+"A best practices guide for generating forest inventory attributes from airborne laser scanning data using an area-based approach. Information Report FI-X-010" 
 
 Ensure all inline citations are properly referenced here.
 

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 Chapter Title | An Open Geomatics Textbook</title>
+  <title>Chapter 4 Image Processing | An Open Geomatics Textbook</title>
   <meta name="description" content="Advancing teaching and learning in geomatics at UBC" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 Chapter Title | An Open Geomatics Textbook" />
+  <meta property="og:title" content="Chapter 4 Image Processing | An Open Geomatics Textbook" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/ubc-geomatics-textbook/book/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="ubc-geomatics-textbook/book" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 Chapter Title | An Open Geomatics Textbook" />
+  <meta name="twitter:title" content="Chapter 4 Image Processing | An Open Geomatics Textbook" />
   
   <meta name="twitter:description" content="Advancing teaching and learning in geomatics at UBC" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="mapping-data.html"/>
+<link rel="prev" href="fundamentals-of-remote-sensing.html"/>
+
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -162,6 +162,7 @@
 <li class="chapter" data-level="" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#reflection-questions-2"><i class="fa fa-check"></i>Reflection Questions</a></li>
 <li class="chapter" data-level="" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#practice-questions-2"><i class="fa fa-check"></i>Practice Questions</a></li>
 </ul></li>
+<li class="chapter" data-level="3.7" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#section"><i class="fa fa-check"></i><b>3.7</b> —</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="image-processing.html"><a href="image-processing.html"><i class="fa fa-check"></i><b>4</b> Image Processing</a>
 <ul>
@@ -199,93 +200,121 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="chapter-template" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Chapter Title</h1>
-<p><strong>Lorem ipsum dolor sit amet</strong>, <em>consectetur adipiscing elit.</em> Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.</p>
+<div id="image-processing" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Image Processing</h1>
+<p>Capture paragraph</p>
 <div class="box-content learning-objectives-content">
-<div id="learning-objectives-1" class="section level4 unnumbered box-title learning-objectives-top">
+<div id="learning-objectives-4" class="section level4 unnumbered box-title learning-objectives-top">
 <h4>Learning Objectives</h4>
 </div>
 <ol style="list-style-type: decimal">
-<li>Objective one</li>
-<li>Objective two</li>
-<li>Objective three</li>
+<li>Goals</li>
 </ol>
 </div>
-<div id="key-terms-1" class="section level3 unnumbered">
+<div id="key-terms-4" class="section level3 unnumbered">
 <h3>Key Terms</h3>
-<p>Ipsum lorem, Phasellus, sollicitudin, finibus</p>
+<p>pixel, spatial resolution, temporal resolution, radiometric resolution, spectral resolution, geometric correction, atmospheric correction,</p>
 </div>
-<div id="first-section-header" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> First Section Header</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.</p>
-<div class="figure">
-<img src="images/01-image.png" class="center" alt="" />
-<p class="caption">Figure caption text is also alt text.</p>
+<div id="overview" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Overview</h2>
+<p>The collection of imagery is challenging and time consuming, with sensor design and deployment often requiring the development of new technologies. Driven by the growing demand for relevant information about environmental change, great emphasis is placed on the creation of “the next new satellite” or “a smaller, yet more powerful drone.” Although innovation in these physical technologies is critical for the advancement of image collection, they don’t guarantee that the imagery will be useful. In reality, the pixel values collected by a sensor are not purely the reflectance values from the surface of interest. Depending on the wavelengths being observed, there may be variations in the amount of photons emitted from the light source and a variety of atmospheric effects, such as scattering. There may also be slight inconsistencies in images collected by the same sensor on the same day or adjacent areas, which would affect the quality of analyses</p>
 </div>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.</p>
+<div id="common-processing-steps" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Common Processing Steps</h2>
+<div id="geometric-correction" class="section level3" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Geometric correction</h3>
+<ul>
+<li><p>Relief displacement</p></li>
+<li><p>Orthorectification</p></li>
+<li><p>Georeferencing</p></li>
+<li><p>Georegistration</p></li>
+<li><p>Resampling</p>
+<ul>
+<li><p>Nearest neighbour</p></li>
+<li><p>Bilinear interpolation</p></li>
+<li><p>Cubic convolution</p></li>
+</ul></li>
+</ul>
+</div>
+<div id="atmospheric-correction" class="section level3" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Atmospheric correction</h3>
+<ul>
+<li><p>Atmospheric windows</p></li>
+<li><p>Clouds and shadows</p></li>
+<li><p>Scattering?</p></li>
+<li><p>Smoke and haze</p></li>
+</ul>
+</div>
+<div id="radiometric-correction" class="section level3" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> Radiometric correction</h3>
+<p>Conducted to calibrate and correct pixel values recorded by
+the sensor. This is required the values recorded by a sensor, called digital
+numbers, are a result of light interacting with the surface of reflectance and
+the atmosphere between the sensor. First, a calibration to change raw digital
+numbers into radiance, which removes the effects of the light source (solar
+irradiance/ wavelength</p>
+<ul>
+<li><p>Signal-to-noise</p></li>
+<li><p>Photon shot noise</p></li>
+<li><p>Pattern noise</p></li>
+<li><p>Readout noise</p></li>
+<li><p>Thermal noise</p></li>
+<li><p>Radiometric normalization</p></li>
+</ul>
 <div class="box-content your-turn-content">
-<div id="your-turn" class="section level4 unnumbered box-title your-turn-top">
+<div id="your-turn-3" class="section level4 unnumbered box-title your-turn-top">
 <h4>Your turn!</h4>
 </div>
-<iframe width="100%" height="800px" src="https://paulpickell.ca/scenejs-test/" frameBorder="0">
-<p>
-Your browser does not support iframes
-</p>
-</iframe>
+<p>Practice questions relating to photon energy:</p>
+<ul>
+<li><p>demonstrate the higher frequency = higher energy</p></li>
+<li><p>higher wavelength = lower energy</p></li>
+</ul>
+<p>What is the section of the EMS in which humans can see? What is it’s approximate range?</p>
 </div>
-</div>
-<div id="second-section-header" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Second Section Header</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.</p>
 <div class="box-content case-study-content">
-<div id="case-study" class="section level4 unnumbered box-title case-study-top">
-<h4>Case Study</h4>
+<div id="case-study-demo-each-resolution-in-relation-to-an-image-1" class="section level4 unnumbered box-title case-study-top">
+<h4>Case Study: Demo each resolution in relation to an image</h4>
 </div>
 <div id="box-text" class="section level4 unnumbered">
 <h4>Case study title max of forty characters</h4>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent non magna non nunc auctor eleifend. Etiam fringilla fermentum nisl at volutpat. Duis sodales lorem interdum, posuere neque sollicitudin, malesuada nisl. Sed laoreet commodo dui et cursus. Curabitur vel porta mauris. In lacinia ac ex ac varius. Nullam at vulputate ligula. Nunc sed faucibus urna, eget placerat sapien. Fusce ut lorem a ante congue consequat et sed tortor. Integer neque urna, vehicula at aliquam non, luctus non mi. Pellentesque et massa vehicula, cursus erat id, aliquet sapien. Sed rhoncus vehicula risus, vel aliquam eros porta eget. Etiam maximus, massa in pretium semper, est libero feugiat ipsum, quis tempor nunc libero in nibh. Nunc sollicitudin mattis metus ut rutrum. Donec urna purus, sodales id nibh in, ultricies tincidunt nibh. Proin porta accumsan aliquet.
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent non magna non nunc auctor eleifend. Etiam fringilla fermentum nisl at volutpat. Duis sodales lorem interdum, posuere neque sollicitudin, malesuada nisl. Sed laoreet commodo dui et cursus. Curabitur vel porta mauris. In lacinia ac ex ac varius. Nullam at vulputate ligula. Nunc sed faucibus urna, eget placerat sapien. Fusce ut lorem a ante congue consequat et sed tortor. Integer neque urna, vehicula at aliquam non, luctus non mi. Pellentesque et massa vehicula, cursus erat id, aliquet sapien. Sed rhoncus vehicula risus, vel aliquam eros porta eget. Etiam maximus, massa in pretium semper, est libero feugiat ipsum, quis tempor nunc libero in nibh. Nunc sollicitudin mattis metus ut rutrum. Donec urna purus, sodales id nibh in, ultricies tincidunt nibh. Proin porta accumsan aliquet.</p>
 </p>
 <p>
-Cras convallis erat ante, ut tristique est tempor elementum. Nam mollis, ipsum at vehicula vestibulum, est magna finibus nisl, et laoreet metus massa et ipsum. Proin eget eros ac odio euismod volutpat et ac diam. Cras viverra ut libero vel pulvinar. Duis nisi magna, sagittis id ligula ac, efficitur commodo eros. Nulla tincidunt id nulla in lobortis. Sed non mi eu mi fermentum cursus. In elit velit, semper sed gravida at, imperdiet sed nibh. Aliquam quis massa malesuada, venenatis nunc sed, malesuada nulla. Vestibulum malesuada purus ut ex ullamcorper, ut blandit lacus lobortis. Curabitur scelerisque velit justo, quis porttitor purus efficitur ut. Phasellus nec arcu vestibulum, consequat ante id, elementum velit. Proin arcu tortor, cursus vitae sem id, congue semper urna. Integer tempus in est eu consequat. Donec sodales, quam vel finibus faucibus, leo ante dictum quam, id tempus ligula dolor quis erat. Curabitur non elementum sem. Mauris placerat fermentum orci non lacinia. Ut imperdiet dui lectus, ac malesuada felis euismod sed. Nulla non volutpat dui, in suscipit turpis.
+<p>Cras convallis erat ante, ut tristique est tempor elementum. Nam mollis, ipsum at vehicula vestibulum, est magna finibus nisl, et laoreet metus massa et ipsum. Proin eget eros ac odio euismod volutpat et ac diam. Cras viverra ut libero vel pulvinar. Duis nisi magna, sagittis id ligula ac, efficitur commodo eros. Nulla tincidunt id nulla in lobortis. Sed non mi eu mi fermentum cursus. In elit velit, semper sed gravida at, imperdiet sed nibh. Aliquam quis massa malesuada, venenatis nunc sed, malesuada nulla. Vestibulum malesuada purus ut ex ullamcorper, ut blandit lacus lobortis. Curabitur scelerisque velit justo, quis porttitor purus efficitur ut. Phasellus nec arcu vestibulum, consequat ante id, elementum velit. Proin arcu tortor, cursus vitae sem id, congue semper urna. Integer tempus in est eu consequat. Donec sodales, quam vel finibus faucibus, leo ante dictum quam, id tempus ligula dolor quis erat. Curabitur non elementum sem. Mauris placerat fermentum orci non lacinia. Ut imperdiet dui lectus, ac malesuada felis euismod sed. Nulla non volutpat dui, in suscipit turpis.</p>
 </p>
 <p>
-Case studies should have at least one image or map (no more than 2 total) and the written length should be around 300 words (shown above). Any references to external literature should by hyperlinked with the Digitial Object Identifier (DOI) permanent URL and <a href="https://bookdown.org/yihui/bookdown/citations.html" target="_blank">entered into the bibliography</a>. Avoid linking to external resources without a DOI and permanent URL. Contact Paul or try using the Leaflet package in R if you want to add an interactive web map.
+<p>Case studies should have at least one image or map (no more than 2 total) and the written length should be around 300 words (shown above). Any references to external literature should by hyperlinked with the Digitial Object Identifier (DOI) permanent URL and <a href="https://bookdown.org/yihui/bookdown/citations.html" target="_blank">entered into the bibliography</a>. Avoid linking to external resources without a DOI and permanent URL. Contact Paul or try using the Leaflet package in R if you want to add an interactive web map.</p>
 </p>
 </div>
 </div>
-</div>
-<div id="third-section-header" class="section level2" number="1.3">
-<h2><span class="header-section-number">1.3</span> Third Section Header</h2>
-<p><a href="https://google.com" target="_blank">This is how we link to something. {target="_blank"} ensures that this link opens in a new window rather than navigating away from the textbook.</a></p>
 <div class="box-content your-turn-content">
-<div id="your-turn-1" class="section level4 unnumbered box-title your-turn-top">
-<h4>Your turn!</h4>
+<div id="your-turn-what-is-the-___-resolution-of-this-image" class="section level4 unnumbered box-title your-turn-top">
+<h4>Your turn!: What is the ___ resolution of this image</h4>
 </div>
 <p>
-Ask the reader to undertake some activity or exercise. Have them explore data, an interactive tool, a web map. Avoid referencing, relying on, or using external URLs. If it can be built, coded, or hosted by us, then it should be.
+<p>Ask the reader to undertake some activity or exercise. Have them explore data, an interactive tool, a web map. Avoid referencing, relying on, or using external URLs. If it can be built, coded, or hosted by us, then it should be.</p>
 </p>
 <iframe width="100%" height="800px" src="http://paulpickell.ca/raster-calculator/low-pass-filter.html" frameBorder="0">
 <p>
-Your browser does not support iframes
+<p>Your browser does not support iframes</p>
 </p>
 </iframe>
 </div>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.</p>
 <div class="box-content call-out-content">
-<div id="call-out" class="section level4 unnumbered box-title call-out-top">
+<div id="call-out-2" class="section level4 unnumbered box-title call-out-top">
 <h4>Call out</h4>
 </div>
 <p>
-This is a call out. Put some important concept or fact in here.
+<p>This is a call out. Put some important concept or fact in here.</p>
 </p>
 </div>
 </div>
-<div id="summary-1" class="section level2" number="1.4">
-<h2><span class="header-section-number">1.4</span> Summary</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.</p>
-<div id="reflection-questions" class="section level3 unnumbered">
+</div>
+<div id="summary-4" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Summary</h2>
+<div id="reflection-questions-3" class="section level3 unnumbered">
 <h3>Reflection Questions</h3>
 <ol style="list-style-type: decimal">
 <li>Explain ipsum lorem.</li>
@@ -294,18 +323,16 @@ This is a call out. Put some important concept or fact in here.
 <li>How does ipsum lorem work?</li>
 </ol>
 </div>
-<div id="practice-questions" class="section level3 unnumbered">
+<div id="practice-questions-3" class="section level3 unnumbered">
 <h3>Practice Questions</h3>
 <ol start="2" style="list-style-type: decimal">
 <li>Given ipsum, solve for lorem.</li>
 <li>Draw ipsum lorem.</li>
 </ol>
-</div>
-</div>
-<div id="recommended-readings" class="section level2 unnumbered">
-<h2>Recommended Readings</h2>
+<p>## Recommended Readings {-}</p>
 <p>Ensure all inline citations are properly referenced here.</p>
 
+</div>
 </div>
 </div>
             </section>
@@ -313,8 +340,8 @@ This is a call out. Put some important concept or fact in here.
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="mapping-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="fundamentals-of-remote-sensing.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

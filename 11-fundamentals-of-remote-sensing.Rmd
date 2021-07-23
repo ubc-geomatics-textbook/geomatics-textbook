@@ -2,6 +2,7 @@
 editor_options:
   markdown:
     wrap: 72
+output: word_document
 ---
 
 # Fundamentals of remote sensing {#fundamentals-of-remote-sensing}
@@ -201,12 +202,13 @@ demonstrates that photons with shorter wavelengths have higher energy. A
 practical example of this would be that the majority of photons emitted
 from the sun (5,788 K) are around 0.5 x 10^-6^ nm, while the majority of
 photons emitted from the human body (\~310 K) are around 10^-4^.
-**Theoretical blackbodies???**
 
 ```{r 11-EMS, fig.cap = fig_cap, out.width = "200%", echo = FALSE}
     fig_cap <- paste("Electromagnetic (also known as Milton) spectrum depicting the type, wavelength, frequency and black body emission temperature. Credit: Inductiveload, NASA.")
     knitr::include_graphics(here::here("images", "11-EMS.png"))
 ```
+
+A key theoretical concept related to the measurement of
 
 ::: {.box-content .call-out-content}
 ::: {.box-title .call-out-top}
@@ -429,21 +431,22 @@ that is transmitted has passed through the surface with which it
 interacted and provides insight regarding how much energy can reach
 other surfaces below. In a forestry context, this information can be
 particularly useful when determining the amount of radiation that
-reaches below the upper canopy (cite LAI, etc.). Absorbance is a third,
+reaches below the upper canopy (cite LAI, etc.). Absorptance is a third,
 related measurement that refers to the amount of energy absorbed by the
-cells within a surface and is equal to the amount of energy not captured
-as reflectance or transmittance (Equation \@ref(eq:absorbance)).
+cells within a surface and is roughly equal to the amount of energy not
+captured as reflectance or transmittance (Equation
+\@ref(eq:absorptance)).
 
 ```{=tex}
 \begin{equation}
-100 - Reflectance - Transmittance = Absorbance
-(\#eq:absorbance)
+Absorptance = 1 - Reflectance - Transmittance 
+(\#eq:absorptance)
 \end{equation}
 ```
 Although relatively straight forward, these definitions allow us to
 start exploring a variety of remote sensing applications. In fact, most
 optical remote sensing techniques employ at least one of reflectance,
-transmittance and absorbance to examine the world. Before moving on to
+transmittance and absorptance to examine the world. Before moving on to
 the next section, please review the work flow below highlighting what we
 have learned so far. In our next steps we will move from theory to
 application and begin to explore the factors that define the quality,
@@ -618,65 +621,92 @@ study.
 (\#eq:bits)
 \end{equation}
 ```
-## Key applications
+## Key Applications
 
-Image Interpretation
+So far in this chapter we have covered the theories and concepts that
+justify the use of EMR for remote sensing. With these fundamentals in
+mind, we can begin discussing some common applications of remote
+sensing. For the purposes of this book, we will focus on studies related
+to environmental management.
 
--   Optical remote sensing
+The use of optical remote sensing (400 - 2500 nm) to analyze the
+environment has become popular over the past half century. Sensor
+development, improved deployability and decreasing costs have enabled
+many researchers to use selected sections of the EMS to monitor
+everything from global land use change to the chlorophyll content of a
+single leaf.
 
--   Spectral Signatures
+Large-scale research projects focused at national or international
+levels have perhaps benefit the most from improved sensor deployment.
+Since 1972, a variety of satellites have been launched with the sole
+purpose of observing the Earth. Landsat is NASA suite of satellites
+designed specifically for this purpose. By the end of 2021, a total of
+nine Landsat missions will have been launched, eight of which have
+successfully reached orbit and provided imagery in at least 5 broad
+spectral bands at 30 m\^2 spatial resolution. This information has been
+used to monitor land cover change, ecosystem services and a variety of
+other environmentally relevant metrics. EXAMPLE 1. EXAMPLE 2. The case
+study at the end of this section highlights a particularly novel
+approach to optical remote sensing that has become a popular methodology
+to evaluate plant health and biodiversity @asner2009 @asner2016
 
--   True Color
+As far as Canada's contributions to remote sensing sensors rank,
+RADARsat is among the most important. This satellite was launched in
+1995 and has grown to a constellation of three space-borne synthetic
+aperture radar (SAR) sensors that feature variable resolution. As an
+active sensor, RADARsat produces and measures EMR with wavelengths
+between 7.5 - 15 cm and is capable of penetrating clouds and smoke. It's
+active nature also enables RADARsat to record observations at night.
+Chapter 12 will discuss radar in more detail.
 
--   False Color
-
-Airborne Laser Scanning
-
--   Chapter 15
+Another active remote sensing technique that has become popular is light
+detection and ranging (LiDAR), which can also be called airborne laser
+scanning (ALS). LiDAR is particularly useful in evaluating structural
+components of the environment, such as forest canopies and elevation.
+More details regarding the theories and applications of LIDAR will be
+presented in Chapter 15.
 
 ::: {.box-content .case-study-content}
 ::: {.box-title .case-study-top}
-#### Case Study: Demo each resolution in relation to an image {.unnumbered}
+#### Case Study {.unnumbered}
 :::
 
-#### Case study title max of forty characters {#box-text .unnumbered}
+#### Optical remote sensing detects functional and biological diversity in South American ecosystems {.unnumbered}
 
 <p>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent non
-magna non nunc auctor eleifend. Etiam fringilla fermentum nisl at
-volutpat. Duis sodales lorem interdum, posuere neque sollicitudin,
-malesuada nisl. Sed laoreet commodo dui et cursus. Curabitur vel porta
-mauris. In lacinia ac ex ac varius. Nullam at vulputate ligula. Nunc sed
-faucibus urna, eget placerat sapien. Fusce ut lorem a ante congue
-consequat et sed tortor. Integer neque urna, vehicula at aliquam non,
-luctus non mi. Pellentesque et massa vehicula, cursus erat id, aliquet
-sapien. Sed rhoncus vehicula risus, vel aliquam eros porta eget. Etiam
-maximus, massa in pretium semper, est libero feugiat ipsum, quis tempor
-nunc libero in nibh. Nunc sollicitudin mattis metus ut rutrum. Donec
-urna purus, sodales id nibh in, ultricies tincidunt nibh. Proin porta
-accumsan aliquet.
+In 2009 Asner and Martin presented the concept of airborne spectranomics
+@asner2009. Their idea was based on the fact that plant leaf tissues
+contain a variety of different components that are associated with
+underlying environmental conditions and that variations in these
+components can be captured by observing their effects on electromagnetic
+radiation (Figure \@ref(fig:11-traits)). They proposed a method that
+linked leaf functional traits, both structural and chemical, to leaf
+reflectance between 400 - 2500 nm using partial least squares regression
+(PLSR) modeling. They demonstrated that these models could accurately
+predict the leaf traits in questions and proved that this methodology
+could be scaled to the canopy-level (). Asner and Martin also showed
+that plant species could be accurately grouped based on the similarities
+of their spectral signatures (Figure \@ref(fig:11-specdiv)). Combined,
+these concepts enabled the accurate detection of functional and
+biological diversity across both the Andes and Amazon region of South
+America.
 
 </p>
 
+```{r 11-traits, fig.cap = fig_cap, out.width = "75%", echo = FALSE}
+    fig_cap <- paste("Funcitonal traits of canopy species presented in Asner and Martin 2009 presented. The comparison of (a) leaf nitrogen (N) and phosphorous (P) with (b) an enhanced trait array of seven traits (chl-a and -b = chlorophyll-a and -b, respectively, SLA = specific leaf area, Car = carotenoids) highlights the increased capacity for differentiation generated through the consideration of additional traits.")
+    knitr::include_graphics(here::here("images", "11-asner-traits.png"))
+```
+
+```{r 11-specdiv, fig.cap = fig_cap, out.width = "75%", echo = FALSE}
+    fig_cap <- paste("Cluster analysis of spectral signatures from 37 unique plant species conducted by Asner and Martin 2009. Red and blue represent high and low reflance values, respecively, and the dendogram presented on the right side of the graph demonstrates the assigned groupings. Figure adapted from Asner and Martin 2009.")
+    knitr::include_graphics(here::here("images", "11-asner2009-specdiv.png"))
+```
+
 <p>
 
-Cras convallis erat ante, ut tristique est tempor elementum. Nam mollis,
-ipsum at vehicula vestibulum, est magna finibus nisl, et laoreet metus
-massa et ipsum. Proin eget eros ac odio euismod volutpat et ac diam.
-Cras viverra ut libero vel pulvinar. Duis nisi magna, sagittis id ligula
-ac, efficitur commodo eros. Nulla tincidunt id nulla in lobortis. Sed
-non mi eu mi fermentum cursus. In elit velit, semper sed gravida at,
-imperdiet sed nibh. Aliquam quis massa malesuada, venenatis nunc sed,
-malesuada nulla. Vestibulum malesuada purus ut ex ullamcorper, ut
-blandit lacus lobortis. Curabitur scelerisque velit justo, quis
-porttitor purus efficitur ut. Phasellus nec arcu vestibulum, consequat
-ante id, elementum velit. Proin arcu tortor, cursus vitae sem id, congue
-semper urna. Integer tempus in est eu consequat. Donec sodales, quam vel
-finibus faucibus, leo ante dictum quam, id tempus ligula dolor quis
-erat. Curabitur non elementum sem. Mauris placerat fermentum orci non
-lacinia. Ut imperdiet dui lectus, ac malesuada felis euismod sed. Nulla
-non volutpat dui, in suscipit turpis.
+Results and Discussion
 
 </p>
 
@@ -694,25 +724,25 @@ interactive web map.
 </p>
 :::
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor
-nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus
-leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris,
-pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus.
-Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque,
-tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque
-sed purus malesuada auctor quis quis massa.
-
 ## Summary
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor
-nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus
-leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris,
-pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus.
-Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque,
-tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque
-sed purus malesuada auctor quis quis massa.
+In this chapter we have covered a variety of physical theories that
+support the use of electromagnetic radiation for the remote analysis of
+objects. Although time consuming, and perhaps not as interesting as
+exploring successful applications, these ideas provide the fundamental
+knowledge needed to employ remote sensing technologies. From sensor
+selection to data processing, your ability to perform remote sensing
+science will rely almost exclusively on your capacity to comprehend the
+relationships between the objects of interest and the physical
+properties that comprise them.
+
+In the next chapter you will enter the world of sensors and explore a
+vast amount of technologies that collect information remotely. This
+journey will include active and passive instruments, as well as examples
+of scientific studies that have successfully employed the data they
+collect. Much like a carpenter selecting the correct tool for a specific
+task, you will need apply your knowledge of the fundamentals to identify
+the best sensor for your research.
 
 ### Reflection Questions {.unnumbered}
 

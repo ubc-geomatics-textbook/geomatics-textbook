@@ -18,14 +18,14 @@ Light Detection and Ranging (LiDAR), Surface Models, LiDAR Metrics, Area-Based A
 
 LiDAR is an active remote sensing technology that uses a laser scanner and time of flight principles to collect 3 dimensional (3D) data. A LiDAR system is made up of three components; a laser-scanning device, and accurate global navigation satellite system (GNSS), and an inertial measurement unit (IMU). The GNSS receiver allows the position of the laser to be determined in space, while the IMU records the orientation of the laser (i.e. roll, pitch, and yaw). Figure \@ref(fig:15-LiDAR-System) shows all of the necessary components of a LiDAR system. When discussing LiDAR in an airborne context, we can also call it airborne laser scanning (ALS).
 
-```{r 15-LiDAR-System, fig.cap = fig_cap, echo = FALSE}
+```{r 15-LiDAR-System, fig.cap = fig_cap, out.width="60%", echo = FALSE}
     fig_cap <- paste("Overview of the components of a LiDAR System")
     knitr::include_graphics(here::here("images","15-LiDAR-System.png"))
 ```
 
 ### How Does it Work?
 
-Typical LiDAR systems use the time of flight method to produce 3D data. A laser ranging instrument produces a short, intense pulse of light from the instrument to a target being measured. Some of this energy is then reflected back to the instrument, where it is recorded (as seen in Figure \@ref(fig:15-Concept-of-LiDAR). Since the speed of light, and the location of the laser ranging instrument is known, we can calculate the position of the target by timing how long it takes between the the pulse being emitted and received. If we shoot many pulses of light towards a target, we can create a 3D point cloud of our target (see \@ref(fig:15-las-denoise) as an example of a forest scene). Modern LiDAR systems can shoot hundreds of thousands of pulses per second, which means LiDAR point clouds can contain millions of points, and be several gigabytes large (\@ref(fig:15-las-denoise)).
+Typical LiDAR systems use the time of flight method to produce 3D data. A laser ranging instrument produces a short, intense pulse of light from the instrument to a target being measured. Some of this energy is then reflected back to the instrument, where it is recorded (as seen in Figure \@ref(fig:15-Concept-of-LiDAR). Since the speed of light, and the location of the laser ranging instrument is known, we can calculate the position of the target by timing how long it takes between the the pulse being emitted and received. If we shoot many pulses of light towards a target, we can create a 3D point cloud of our target (see Figure \@ref(fig:15-las-denoise) as an example of a forest scene). Modern LiDAR systems can shoot hundreds of thousands of pulses per second, which means LiDAR point clouds can contain millions of points, and be several gigabytes large.
 
 ```{r 15-Concept-of-LiDAR, fig.cap = fig_cap, out.width="80%", echo = FALSE}
 fig_cap <- paste("Concept of LiDAR.")
@@ -143,13 +143,15 @@ fig_cap <- paste("Differents in the response between discrete echo and full wave
 knitr::include_graphics(here::here("images", "15-LiDAR-Discrete-Full-Waveform.png"))
 ```
 
-### Multispectral
+### Emerging Technologies
+
+**Multispectral**
 
 -   New.. Titan Optech system?
 -   What use could this have
 -   NCC slides
 
-### Single Photon Lidar
+**Single Photon Lidar**
 
 -   New - requires less power.
 -   NCC slides
@@ -269,9 +271,9 @@ Creating metrics at these two scales are the fundamental way in which we current
 
 ### Your Turn! {.unnumbered}
 
-Explore some of the LiDAR derivatives that we produced in the case study above. We can see how the pattern for maximum height follows the mean height quite closely. In addition, we can see that the 15th percentile of heights (zq15) also broadly follows this pattern. However, we can see that the standard deviation of heights in the tall areas are quite variable, and that very little ground is visible in our tile (as pzabove2 is very high almost everywhere)
+In Figure \@ref(fig:15-map) below, explore some of the LiDAR derivatives that we produced in the case study above. We can see how the pattern for maximum height follows the mean height quite closely. In addition, we can see that the 15th percentile of heights (zq15) also broadly follows this pattern. However, we can see that the standard deviation of heights in the tall areas are quite variable, and that very little ground is visible in our tile (as pzabove2 is very high almost everywhere)
 
-```{r files, echo=FALSE, warning=FALSE, include =FALSE}
+```{r 15-files, echo=FALSE, warning=FALSE, include =FALSE}
 
 # Load library
 library(leaflet)
@@ -345,7 +347,7 @@ m = leaflet() %>%
   
 ```
 
-```{r map, echo=FALSE, fig.cap = fig_cap}
+```{r 15-map, echo=FALSE, fig.cap = fig_cap}
 
 fig_cap <- paste("Explore different area-based metrics produced in the case study above. Hover over tile icon (top left) to turn different layers on or off.")
 knitr::opts_chunk$set(fig.width = 12, fig.height = 12) #make the interactive maps bigger/smaller across the document

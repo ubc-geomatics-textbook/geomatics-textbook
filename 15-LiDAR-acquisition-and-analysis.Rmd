@@ -16,43 +16,44 @@ Light Detection and Ranging (LiDAR), Surface Models, LiDAR Metrics, Area-Based A
 
 ## What is LiDAR?
 
-LiDAR is an active remote sensing technology that uses a laser scanner and time of flight principles to collect 3 dimensional (3D) data. A LiDAR system is made up of three components; a laser-scanning device, and accurate global navigation satellite system (GNSS), and an inertial measurement unit (IMU). The GNSS receiver allows the position of the laser to be determined in space, while the IMU records the orientation of the laser (i.e. roll, pitch, and yaw). Figure \@ref(fig:15-LiDAR-System) shows all of the necessary components of a LiDAR system. When discussing LiDAR in an airborne context, we can also call it airborne laser scanning (ALS).
+LiDAR stands for **Li**ght **D**etection **A**nd **R**anging (sometimes written as lidar, or LIDAR), and is an active remote sensing technology. A laser scanner and time of flight principles are used to collect 3 dimensional (3D) data. A LiDAR system is made up of three components; a laser-scanning device, an accurate global navigation satellite system (GNSS), and an inertial measurement unit (IMU). The GNSS receiver allows the position of the laser to be determined in space, while the IMU records the orientation of the laser (i.e. roll, pitch, and yaw). Figure \@ref(fig:15-LiDAR-System) shows all of the necessary components of a LiDAR system. When discussing LiDAR in an airborne context (i.e. the unit is being flown), we can call it airborne laser scanning (ALS).
 
 ```{r 15-LiDAR-System, fig.cap = fig_cap, out.width="60%", echo = FALSE}
-    fig_cap <- paste("Overview of the components of a LiDAR System")
+    fig_cap <- paste("Overview of the components of a LiDAR System. As is common for large scale data acquisition, the laser scanning is placed on board an aircarft and scans the Earth below it. The aircraft has on on board GPS/GNSS, as well as an intertial measurement unit (IMU). A GPS base station can be used to post-process data and increase spatial accuracy. CREDIT")
     knitr::include_graphics(here::here("images","15-LiDAR-System.png"))
 ```
 
 ### How Does it Work?
 
-Typical LiDAR systems use the time of flight method to produce 3D data. A laser ranging instrument produces a short, intense pulse of light from the instrument to a target being measured. Some of this energy is then reflected back to the instrument, where it is recorded (as seen in Figure \@ref(fig:15-Concept-of-LiDAR). Since the speed of light, and the location of the laser ranging instrument is known, we can calculate the position of the target by timing how long it takes between the the pulse being emitted and received. If we shoot many pulses of light towards a target, we can create a 3D point cloud of our target (see Figure \@ref(fig:15-las-denoise) as an example of a forest scene). Modern LiDAR systems can shoot hundreds of thousands of pulses per second, which means LiDAR point clouds can contain millions of points, and be several gigabytes large.
+Typical LiDAR systems use the time of flight method to produce 3D data. A laser ranging instrument produces a short, intense pulse of light from the instrument to a target being measured. Some of this energy is then reflected back to the instrument, where it is recorded (as seen in Figure \@ref(fig:15-Concept-of-LiDAR). Since the speed of light, and the location of the laser ranging instrument is known, we can calculate the position of the target by timing how long it takes between the the pulse being emitted and received. If we shoot many pulses of light towards a target, we can create a 3D point cloud of our target (see Figure \@ref(fig:15-las-denoise) for an example of a forest scene). Modern LiDAR systems can shoot hundreds of thousands of pulses per second, which means LiDAR point clouds can contain millions of points, and be several gigabytes large.
 
 ```{r 15-Concept-of-LiDAR, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Concept of LiDAR.")
+fig_cap <- paste("Concept of LiDAR. A light signal is emitted by the scanner and reflected off the target. CREDIT")
 knitr::include_graphics(here::here("images", "15-Concept-of-LiDAR.png"))
 ```
 
-Since a LiDAR point cloud is a file containing the three dimensional location of points representing objects on the Earth's surface, there are several parameters to take note of. It is important to know what the technical specifications of the data collection parameters were (for example, what was is the point density?), and how the data was collected (what plaform was used?). A LiDAR dataset includes several pieces of information for each 3D point. `X,Y,Z` location data is included, as well as a GPS time stamp for each point (`gpstime`). Additional information such as `return number`, `scan angle`, `classification`, and `intensity` are also part of the file. We will discuss these concepts in more detail below.
+Since a LiDAR point cloud is a file containing the three dimensional location of points representing objects on the Earth's surface, there are several parameters to take note of. It is important to know what the technical specifications of the data collection parameters were (for example, how many points per square meter do we have?), and how the data was collected (what plaform was used?). A LiDAR dataset includes several pieces of information for each 3D point. `X,Y,Z` location data is included, as well as a GPS time stamp for each point (`gpstime`). Additional information such as `return number`, `scan angle`, `classification`, and `intensity` are also included with the file. We will discuss these concepts in more detail below.
 
-The most common file format for LiDAR files is called the LAS file format (`.las`). This file format was originally designed for 3-dimensional point cloud data, and is a free alternative to proprietary systems or a generic ASCII file interchange system. The main benefits of this file format are that it is relatively quick, can be used by any system, and stores information specific to the nature of LiDAR data without being overly complex. More information regarding the file type specifications can be found [here](https://www.asprs.org/divisions-committees/lidar-division/laser-las-file-format-exchange-activities){target="_blank"}.
+The most common file format for LiDAR files is called the LAS file format (`.las`). This file format was originally designed for 3-dimensional point cloud data, and is a free alternative to proprietary systems or a generic ASCII file interchange system. The main benefits of this file format are that it is relatively quick, can be used by any system, and stores information specific to the nature of LiDAR data without being overly complex (CITE ASPRS website). More information regarding the file type specifications can be found [here](https://www.asprs.org/divisions-committees/lidar-division/laser-las-file-format-exchange-activities){target="_blank"}.
 
 ```{r 15-las-denoise, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("An example of a typical LiDAR point cloud containing 3.14 million points at approximately 80 p/m^2^.")
+fig_cap <- paste("An example of a typical LiDAR point cloud containing 3.14 million points at approximately 80 p/m^2^. The point cloud shows a 200 x 200 meter portion of Pacific Spirit Regional Park in Vancouver, and is part of the 2018 City of Vancouver [dataset](https://opendata.vancouver.ca/explore/dataset/lidar-2018/).")
 knitr::include_graphics(here::here("images", "15-las-denoise.png"))
 ```
 
 ## LiDAR History and Use
 
-LiDAR for forestry and ecology can be used to monitor vegetation structure, stream properties, and topography among other uses. Early LiDAR point densities were low (1-5 p/m^2^), which limited researchers to area based measurements of forest volume and biomass in the 1980s (CITE NELSON 2013). These limitations were primarily due to the LiDAR sensor, as well as data storage difficulties. Technological improvements such as increased pulse rates and smaller footprints (leading to increased point density), and increased storage capacity have allowed researchers to look as individual trees as well as whole forests (CITE Jakubowski 2013). ALS point cloud densities of 1000 p/m^2^ are now entirely feasible.
+LiDAR for forestry and ecology can be used to monitor vegetation structure, stream properties, and topography among other uses. Early LiDAR point densities were low (1-5 p/m^2^), which limited researchers to area based measurements of forest volume and biomass in the 1980s (CITE NELSON 2013). These limitations were primarily due to the LiDAR sensor, as well as data storage difficulties. Technological improvements such as increased pulse rates and smaller footprints (leading to increased point density), and increased storage capacity have allowed researchers to look as individual trees as well as whole forests (CITE Jakubowski 2013). Previously limited to static LiDAR sensors, ALS point cloud densities of 1000 p/m^2^ are now entirely feasible. Figure \@ref(fig:15-high-low-point-density
+) shows two different point clouds densities, and how difficult it can be to delineate individual tree research at low point densities.
 
 ```{r 15-high-low-point-density, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("A cross section of a high density point cloud (A, X p/m^2^), and a lower density point cloud (B, 1 p/m^2^).")
+fig_cap <- paste("A cross section of a high density point cloud (A, 80 p/m^2^), and a lower density point cloud (B, 1 p/m^2^).")
 knitr::include_graphics(here::here("images", "15-high-low-point-density.png"))
 ```
 
 Unlike passive remote sensing technologies, LiDAR has the advantage of being able penetrate forest canopies; this means that we are able to detect the ground. LiDAR can be used to map and examine man-made and natural environments, as the data is extremely precise. It can be used in hazard assessment, forestry, agriculture, wet area mapping, and geologic mapping. In this chapter, we will discuss it's use primarily in a forestry context, where it can be used for volume and biomass estimation, as well as individual tree crown analyses.
 
--   *MORE?*
+-   *MORE? - link to some example free/open case studies?*
 
 ## Components of a LiDAR System
 
@@ -62,7 +63,7 @@ Lasers are a very important component of LiDAR systems. Here we will discuss som
 
 *Beam divergence* is a property that refers to how wide the light beam becomes when it intercepts an object, and can be used to differentiate LiDAR instruments. Small-footprint LiDAR describes beam diameters intercepting the suface at \< 1m, while large-footprint intercepts the surface at around 5-25m (FIND CITATION). Small-footprint LiDAR is primarily what is used commercially, and has high accuracy, as well as the ability to produce high sampling densities.
 
--   *Create figure showing beam divergence and scan angle*
+-   *Create figure showing beam divergence and scan angle? - too much info?*
 
 The amount of energy that is reflected off an object and back to the sensor is known as *intensity*. Target reflectivity is not directly related to the LiDAR laser itself, but influences whether the return has enough intensity to register with the LiDAR sensor. In addition to surfaces having different properties, the angle of incidence of the laser also affects how much energy the sensor receives. This is known as *scan angle* and is customizable, but lower scan angles are generally preferred. Commercial LiDAR units on airplanes typically have stronger lasers than drone mounted or mobile laser scanners, which allows them to fly higher and cover more area.
 
@@ -71,7 +72,7 @@ All LiDAR sensors emit pulses at a certain rate (*pulse rate*), which can be giv
 Several technical aspects of lasers are recorded by the instrument (and usually provided as a flight summary or flight specifications by vendors), while some of it can also be found in the `las` file. We can usually find information that impacts the entire flight in the flight specifications, such as flight height, scan rate, and beam divergence. These aspects shouldn't change for the entire duration of the flight. In contrast, information located in the `las` file affects individual points. Here we can find information such as scan angle, return number, and intensity.
 
 ```{r 15-LiDAR-Unit, fig.cap = fig_cap, out.width="70%", echo = FALSE}
-fig_cap <- paste("An example of a LiDAR Unit.")
+fig_cap <- paste("An example of a LiDAR Unit. CREDIT")
 knitr::include_graphics(here::here("images", "15-LiDAR-Unit.jpg"))
 ```
 
@@ -82,17 +83,17 @@ knitr::include_graphics(here::here("images", "15-LiDAR-Unit.jpg"))
 In order for us to use the calculation from Figure \@ref(fig:15-Concept-of-LiDAR), we need to know the exact position of the scanner in space. For airborne and mobile platforms, we can can do this by using an on board global positioning system (GPS), as well as post processing using local GPS reference station. This helps us to improve accuracy by not comparing our position to a known local position in order to ensure our location is known as accurately as possible. GPS concepts are covered further in Chapter 4.
 
 ```{r 15-XYZ-coordinates, fig.cap = fig_cap, out.width="70%", echo = FALSE}
-fig_cap <- paste("An on board GPS is required to for providing an accurate location of the LiDAR scanner.")
+fig_cap <- paste("An on board GPS is required toprovide an accurate location of the LiDAR scanner in space. CREDIT")
 knitr::include_graphics(here::here("images", "15-XYZ-coordinates.jpg"))
 ```
 
 **Inertial Measurement Unit (IMU)**
 
-An inertial measurement unit (IMU) consists of gyroscopes and accelerometers and measures the attitude and acceleration of the aircraft along the X, Y, Z axis. This data is combined with the GNSS data to provide a precise location of the scanner in space. This information becomes very important for airborne platforms where wind conditions can cause the orientation of the scanner to change subtly. We refer to the orientation of the platform in space by using the terms pitch, roll, and yaw, to describe which was the scanner is facing (see \@ref(fig:15-LiDAR_System)).
+An inertial measurement unit (IMU) consists of gyroscopes and accelerometers and measures the attitude and acceleration of the aircraft along the X, Y, Z axis. This data is combined with the GNSS data to provide a precise location of the scanner in space. This information becomes very important for airborne platforms where wind conditions can cause the orientation of the scanner to change subtly. We refer to the orientation of the platform in space by using the terms pitch, roll, and yaw, to describe which was the scanner is facing (see \@ref(fig:15-LiDAR-System)).
 
 **Clocks**
 
-LiDAR point data needs to be synched with positioning data in order to know exactly where the point is in space. To do this, a very accurate GPS clock is used to time stamp the laser scanning data (7:30 video 2). Accurate clocks are imperative for producing accurate point clouds; one nanosecond (i.e. one billionth of a second) corresponds to a 30 cm travel distance (as seen in Figure \@ref(fig:15-LiDAR-Discrete-Full-Waveform))! (video 1)
+LiDAR point data needs to be synced with positioning data in order to know exactly where the point is in space. To do this, a very accurate GPS clock is used to time stamp the laser scanning data (7:30 video 2). Accurate clocks are imperative for producing accurate point clouds; one nanosecond (i.e. one billionth of a second) corresponds to a 30 cm travel distance (as seen in Figure \@ref(fig:15-LiDAR-Discrete-Full-Waveform))! (video 1)
 
 ### Platform
 
@@ -107,7 +108,7 @@ Airplanes and helicopters are still the most common platforms for LiDAR data col
 As laser units have decreased in size, we have been able to mount LiDAR units to smaller platforms. Drones (also known as unmanned aerial vehicles (UAV) or remotely piloted aerial systems (RPAS)) are extremely convenient to collect high density point clouds over small areas. They typically fly relatively close to the forest (e.g. 50m above the trees) and fly a predined flight route so ensure evenly spaced data collection. Typical point densities range from hundreds to thousands of points per meter squared. A major limitation of drones is currently battery life, as acquisition campaigns are limited by how long the drone can fly for (approximately 20 minutes). This means that collecting large amounts of data is difficult in remote locations.
 
 ```{r 15-LiDAR-on-Drone-2, fig.cap = fig_cap, out.width="70%", echo = FALSE}
-fig_cap <- paste("Drone mounted LiDAR.")
+fig_cap <- paste("Drone mounted LiDAR. This technology is rapidly developing, with many companies working towards creating units capable of acquiring high density datasets over large areas. CREDIT")
 knitr::include_graphics(here::here("images", "15-LiDAR-on-Drone-2.jpg"))
 ```
 
@@ -117,7 +118,7 @@ Mobile Laser Scanning (MLS) includes people (sometimes called 'backpack LiDAR') 
 
 **Terrestrial Laser Scanning**
 
-Terrestrial Laser Scanning (TLS) is a static system. These units are used by engineers for surveying, and are used by foresters to precisely measure trees. This information can be used to build Quantitative structure models (QSM), to precisely estimate tree parameters. Unlike the other platforms mentioned here, TLS is not necessarily a fast data collection technique. Due to occlusion, the TLS instrument needs to be placed in multiple positions around a plot to be able to fully visualize the trees, which means that a plot can take [cite how long a plot can take] to survey! Typical point densities are in the thousands of points per meter squared.
+Terrestrial Laser Scanning (TLS) is a static system. These units are used by engineers for surveying, and are used by foresters to precisely measure trees. This information can be used to build Quantitative structure models (QSM), to precisely estimate tree parameters. Unlike the other platforms mentioned here, TLS is not necessarily a fast data collection technique. Due to occlusion, the TLS instrument needs to be placed in multiple positions around a plot to be able to fully visualize the trees, which means that a plot can take [**cite how long a plot can take**] to survey! Typical point densities are in the thousands of points per meter squared.
 
 **Satellite**
 
@@ -132,7 +133,9 @@ knitr::include_graphics(here::here("images", "15-LiDAR-Platforms.png"))
 
 ### Discrete Return
 
-Discrete return LiDAR = most common. Include figure of a cross-section! 1:10 in video 3 - energy detected from the return has to meet a certain threshold to become a return Classified returns by the arrival sequence - e.g. 1st return = high canopy, or ground if there is no vegetation
+Discrete return LiDAR is currently most common type of LiDAR.
+
+Include figure of a cross-section! 1:10 in video 3 - energy detected from the return has to meet a certain threshold to become a return Classified returns by the arrival sequence - e.g. 1st return = high canopy, or ground if there is no vegetation
 
 ### Full Waveform
 
@@ -143,7 +146,7 @@ fig_cap <- paste("Differents in the response between discrete echo and full wave
 knitr::include_graphics(here::here("images", "15-LiDAR-Discrete-Full-Waveform.png"))
 ```
 
-### Emerging Technologies
+### Emerging Technology
 
 **Multispectral**
 
@@ -163,16 +166,16 @@ knitr::include_graphics(here::here("images", "15-LiDAR-Discrete-Full-Waveform.pn
 
 <p>
 
-Specifications for LiDAR data acquisitions are highly variable. It is important to know what type of LiDAR you are using, and to understand the technical specifications before diving into your analysis.
+Specifications for LiDAR data acquisitions are highly variable. It is important to know what type of LiDAR you are using, and to understand the technical specifications before diving into any analysis.
 
 </p>
 :::
 
 ## LiDAR Derivatives and Analysis
 
-LiDAR point clouds require post processing to be useful. Often, point clouds contain noise that needs to be removed, while the points need to be classified to produce derivatives. Once a point cloud has been cleaned and classified, we can create a variety of products to describe the Earth's surface, as well as describe vertical characteristics of our point clouds.
+LiDAR point clouds require post-processing to be useful. Often, point clouds contain noise that needs to be removed, while the points need to be classified to produce derivatives. Once a point cloud has been cleaned and classified, we can create a variety of products to describe the Earth's surface, as well as describe vertical characteristics of our point clouds.
 
--   *MORE*?
+-   **MORE?** - brief sentence on what kinds of derivatives are commonly produced...
 
 ### Bare Earth Elevation
 

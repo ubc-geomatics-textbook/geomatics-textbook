@@ -34,7 +34,7 @@ knitr::include_graphics(here::here("images", "15-Concept-of-LiDAR.png"))
 
 Since a LiDAR point cloud is a file containing the three dimensional location of points representing objects on the Earth's surface, there are several parameters to take note of. It is important to know what the technical specifications of the data collection parameters were (for example, how many points per square meter do we have?), and how the data was collected (what plaform was used?). A LiDAR dataset includes several pieces of information for each 3D point. `X,Y,Z` location data is included, as well as a GPS time stamp for each point (`gpstime`). Additional information such as `return number`, `scan angle`, `classification`, and `intensity` are also included with the file. We will discuss these concepts in more detail below.
 
-The most common file format for LiDAR files is called the LAS file format (`.las`). This file format was originally designed for 3-dimensional point cloud data, and is a free alternative to proprietary systems or a generic ASCII file interchange system. The main benefits of this file format are that it is relatively quick, can be used by any system, and stores information specific to the nature of LiDAR data without being overly complex (CITE ASPRS website). More information regarding the file type specifications can be found [here](https://www.asprs.org/divisions-committees/lidar-division/laser-las-file-format-exchange-activities){target="_blank"}.
+The most common file format for LiDAR files is called the LAS file format (`.las`). This file format was originally designed for 3-dimensional point cloud data, and is a free alternative to proprietary systems or a generic ASCII file interchange system. The main benefits of this file format are that it is relatively quick, can be used by any system, and stores information specific to the nature of LiDAR data without being overly complex [@AmericanSocietyforPhotogrammetry&RemoteSensing2019]. More information regarding the file type specifications can be found [here](https://www.asprs.org/divisions-committees/lidar-division/laser-las-file-format-exchange-activities){target="_blank"}.
 
 ```{r 15-las-denoise, fig.cap = fig_cap, out.width="80%", echo = FALSE}
 fig_cap <- paste("An example of a typical LiDAR point cloud containing 3.14 million points at approximately 80 p/m^2^. The point cloud shows a 200 x 200 meter portion of Pacific Spirit Regional Park in Vancouver, and is part of the 2018 City of Vancouver [dataset](https://opendata.vancouver.ca/explore/dataset/lidar-2018/).")
@@ -43,8 +43,7 @@ knitr::include_graphics(here::here("images", "15-las-denoise.png"))
 
 ## LiDAR History and Use
 
-LiDAR for forestry and ecology can be used to monitor vegetation structure, stream properties, and topography among other uses. Early LiDAR point densities were low (1-5 p/m^2^), which limited researchers to area based measurements of forest volume and biomass in the 1980s (CITE NELSON 2013). These limitations were primarily due to the LiDAR sensor, as well as data storage difficulties. Technological improvements such as increased pulse rates and smaller footprints (leading to increased point density), and increased storage capacity have allowed researchers to look as individual trees as well as whole forests (CITE Jakubowski 2013). Previously limited to static LiDAR sensors, ALS point cloud densities of 1000 p/m^2^ are now entirely feasible. Figure \@ref(fig:15-high-low-point-density
-) shows two different point clouds densities, and how difficult it can be to delineate individual tree research at low point densities.
+LiDAR for forestry and ecology can be used to monitor vegetation structure, stream properties, and topography among other uses. Early LiDAR point densities were low (1-5 p/m^2^), which limited researchers to area based measurements of forest volume and biomass in the 1980s [@Nelson2013]. These limitations were primarily due to the LiDAR sensor, as well as data storage difficulties. Technological improvements such as increased pulse rates and smaller footprints (leading to increased point density), and increased storage capacity have allowed researchers to look as individual trees as well as whole forests [@Jakubowski2013]. Previously limited to static LiDAR sensors, ALS point cloud densities of 1000 p/m^2^ are now entirely feasible. Figure \@ref(fig:15-high-low-point-density) shows two different point clouds densities, and how difficult it can be to delineate individual tree research at low point densities.
 
 ```{r 15-high-low-point-density, fig.cap = fig_cap, out.width="80%", echo = FALSE}
 fig_cap <- paste("A cross section of a high density point cloud (A, 80 p/m^2^), and a lower density point cloud (B, 1 p/m^2^).")
@@ -53,15 +52,21 @@ knitr::include_graphics(here::here("images", "15-high-low-point-density.png"))
 
 Unlike passive remote sensing technologies, LiDAR has the advantage of being able penetrate forest canopies; this means that we are able to detect the ground. LiDAR can be used to map and examine man-made and natural environments, as the data is extremely precise. It can be used in hazard assessment, forestry, agriculture, wet area mapping, and geologic mapping. In this chapter, we will discuss it's use primarily in a forestry context, where it can be used for volume and biomass estimation, as well as individual tree crown analyses.
 
--   *MORE? - link to some example free/open case studies?*
+-   *MORE? - link to some example free/open case studies?* Examples can include OPEN articles:
+
+    -   [@Goodbody2021]
+
+    -   [@Hamraz2017]
+
+    -   [@Jaboyedoff2012]
 
 ## Components of a LiDAR System
 
 ### Lasers
 
-Lasers are a very important component of LiDAR systems. Here we will discuss some basic concepts, as well as the technical parameters that are important when interpreting LiDAR data. LiDAR lasers are typically beams of near-infrared light (e.g. 1064 nm)(4:10 - video 1), and are used because these wavelengths are considered eye safe. Green wavelengths are used for bathymetric LiDAR (i.e. water penetrating LiDAR), but are less common, and not typically used on land (video 1). Laser scanners use rotating or oscillating mirrors in order to 'scan' a scene in multiple dimensions (video 2 - 1:00). When these scanners are placed on a moving platform (e.g. a plane), we can cover large areas (video 2, 2:08). LiDAR sensors scan in a variety of ways; zig-zag, rotation mirror line, and push broom scanners are the most common, and use the same principles as those described for sensors in Chapter X (video 2).
+Lasers are a very important component of LiDAR systems. Here we will discuss some basic concepts, as well as the technical parameters that are important when interpreting LiDAR data. LiDAR lasers are typically beams of near-infrared light (e.g. 1064 nm), and are used because these wavelengths are considered eye safe. Green wavelengths are used for bathymetric LiDAR (i.e. water penetrating LiDAR), but are less common, and not typically used on land [@UFGeomatics-FortLauderdale2016]. Laser scanners use rotating or oscillating mirrors in order to 'scan' a scene in multiple dimensions [@UFGeomatics-FortLauderdale2016a]. When these scanners are placed on a moving platform (e.g. a plane), we can cover large areas [@UFGeomatics-FortLauderdale2016a]. LiDAR sensors scan in a variety of ways; zig-zag, rotation mirror line, and push broom scanners are the most common, and use the same principles as those described for sensors in Chapter X [@UFGeomatics-FortLauderdale2016a].
 
-*Beam divergence* is a property that refers to how wide the light beam becomes when it intercepts an object, and can be used to differentiate LiDAR instruments. Small-footprint LiDAR describes beam diameters intercepting the suface at \< 1m, while large-footprint intercepts the surface at around 5-25m (FIND CITATION). Small-footprint LiDAR is primarily what is used commercially, and has high accuracy, as well as the ability to produce high sampling densities.
+*Beam divergence* is a property that refers to how wide the light beam becomes when it intercepts an object, and can be used to differentiate LiDAR instruments. Small-footprint LiDAR describes beam diameters intercepting the suface at \< 1m, while large-footprint intercepts the surface at around 5-25m (FIND CITATION - Baltavias?). Small-footprint LiDAR is primarily what is used commercially, and has high accuracy, as well as the ability to produce high sampling densities.
 
 -   *Create figure showing beam divergence and scan angle? - too much info?*
 
@@ -114,7 +119,7 @@ knitr::include_graphics(here::here("images", "15-LiDAR-on-Drone-2.jpg"))
 
 **Mobile Laser Scanning**
 
-Mobile Laser Scanning (MLS) includes people (sometimes called 'backpack LiDAR') and moving vehicles. This version of LiDAR have been used by transportation and engineering companies to precisely map things like road or building conditions, and as the units have reduced in size there has been and increase in interest for use in forestry. Current MLS units such as panel 2 in Figure \@ref(fig:15-LiDAR-Platforms) can be carried around by the user in a forest easily. [Specs from Spencer for GeoSLAM]. Typical point densities are in the hundreds to thousands of points per meter squared. This is highly dependent on what the MLS is mounted to!
+Mobile Laser Scanning (MLS) includes people (sometimes called 'backpack LiDAR') and moving vehicles. This version of LiDAR have been used by transportation and engineering companies to precisely map things like road or building conditions, and as the units have reduced in size there has been and increase in interest for use in forestry. Current MLS units such as panel 2 in Figure \@ref(fig:15-LiDAR-Platforms) can be carried around by the user in a forest easily. [Specs from Spencer for GeoSLAM]. Typical point densities are in the hundreds to thousands of points per square meter. This is highly dependent on what the MLS is mounted to!
 
 **Terrestrial Laser Scanning**
 
@@ -135,11 +140,11 @@ knitr::include_graphics(here::here("images", "15-LiDAR-Platforms.png"))
 
 Discrete return LiDAR is currently most common type of LiDAR.
 
-Include figure of a cross-section! 1:10 in video 3 - energy detected from the return has to meet a certain threshold to become a return Classified returns by the arrival sequence - e.g. 1st return = high canopy, or ground if there is no vegetation
+Include figure of a cross-section! 1:10 in video 3 - energy detected from the return has to meet a certain threshold to become a return Classified returns by the arrival sequence - e.g. 1st return = high canopy, or ground if there is no vegetation [@UFGeomatics-FortLauderdale2016c].
 
 ### Full Waveform
 
-Issue of data storage - now becoming a viable alternative. Look at Figure \@ref(fig:15-LiDAR-Discrete-Full-Waveform) for example 3:00 video 3 - record complete signal at high sampling rates for further processing
+Issue of data storage - now becoming a viable alternative. Look at Figure \@ref(fig:15-LiDAR-Discrete-Full-Waveform) for example 3:00 [@UFGeomatics-FortLauderdale2016c] - record complete signal at high sampling rates for further processing
 
 ```{r 15-LiDAR-Discrete-Full-Waveform, fig.cap = fig_cap, out.width="80%", echo = FALSE}
 fig_cap <- paste("Differents in the response between discrete echo and full waveform LiDAR.")
@@ -179,7 +184,7 @@ LiDAR point clouds require post-processing to be useful. Often, point clouds con
 
 ### Bare Earth Elevation
 
-Digital elevation models (DEMs) represent the Earth's surface. Using a classified point cloud, we can isolate the points that are categorized as ground (`Classification == 2`) and create a raster that represents the ground. DEMs are also called digital terrain models (DTMs), although a DTM can include vector features that represent natural features (CHECK). DEMs have a variety of uses, from terrain modeling for watersheds, to road design (CITE: lidR book). In addition to being used on their own, DEMs can be used to normalize point clouds; this is the process of subtracting the ground elevation from a point cloud in order to place the points on a flat plane, so that each point represents the height above the ground, not absolute height. To create a DEM, various interpolation techniques are available - these techniques are covered in more detail in Chapter X, but common algorithms include inverse distance weighting (IDW), kriging, and k-nearest neighbour (KNN).
+Digital elevation models (DEMs) represent the Earth's surface. Using a classified point cloud, we can isolate the points that are categorized as ground (`Classification == 2`) and create a raster that represents the ground. DEMs are also called digital terrain models (DTMs), although a DTM can include vector features that represent natural features (CHECK). DEMs have a variety of uses, from terrain modeling for watersheds, to road design [@Roussel2021]. In addition to being used on their own, DEMs can be used to normalize point clouds; this is the process of subtracting the ground elevation from a point cloud in order to place the points on a flat plane, so that each point represents the height above the ground, not absolute height. To create a DEM, various interpolation techniques are available - these techniques are covered in more detail in **Chapter X**, but common algorithms include inverse distance weighting (IDW), kriging, and k-nearest neighbour (KNN).
 
 When creating a DEM from a LiDAR point cloud, there are a few important considerations to make. The first is what resolution the DEM should be created with. The density of the point cloud is what dictates this; if the density of a point cloud is low, there is a lower likelihood of a point representing the ground. This means that a lower resolution DEM should be created. Conversely, high density point clouds can produce higher density DEMs. Additionally, forest/vegetation type is important. Dense, coastal forests in BC are likely to have high canopy cover (and therefore fewer ground points) than the more sparse subalpine forests in the province's interior.
 
@@ -190,7 +195,7 @@ knitr::include_graphics(here::here("images", "15-las-dem.png"))
 
 ### Digital Surface Model and Canopy Height Models
 
-Digital surface models (DSMs) represent surface features. In contrast to a DEM, the DSM captures the natural and built features of the environment, and can be thought of as a table cloth placed over a scene. When a point cloud is normalized, the derived surface can be called a canopy height model (CHM), as the layer represents the upper canopy height at a given resolution. While the elevation values are different, both surfaces are derived using the same algorithms (CITE lidR BOOK).
+Digital surface models (DSMs) represent surface features. In contrast to a DEM, the DSM captures the natural and built features of the environment, and can be thought of as a table cloth placed over a scene. When a point cloud is normalized, the derived surface can be called a canopy height model (CHM), as the layer represents the upper canopy height at a given resolution. While the elevation values are different, both surfaces are derived using the same algorithms [@Roussel2021].
 
 ```{r 15-las-CHM-2D, fig.cap = fig_cap, out.width="70%", echo = FALSE}
 fig_cap <- paste("A canopy height model (CHM), also known as a digital surface model (DSM) produced from LiDAR")
@@ -199,7 +204,7 @@ knitr::include_graphics(here::here("images", "15-las-CHM-2D.png"))
 
 ### Area Based Approach vs. Individual Tree Crown Approach
 
-LiDAR analysis in forestry uses two broad approaches, an area-based approach (ABA), or an individual tree detection approach (ITD). The ITD approach locates individual trees and allows the estimation of individual tree heights and crown area. From this, other metrics such as stem diameter, number of stems, basal area and stem volume can be derived (Hyyppä and Inkinen 1999). In contrast, the main goal of an ABA is to generate wall-to-wall estimates of inventory attributes, such as mean height, dominant height, mean diameter, stem number, basal area, and volume of the stands (Næsset 2002). WHen doing these analyses, we produce LiDAR metrics. These metrics are descriptive statistics from the point cloud over a unit area. How we define that unit is decides what kind of analysis we are able to do, and what kind of inferences are possible (i.e. ABA vs ITD).
+LiDAR analysis in forestry uses two broad approaches, an area-based approach (ABA), or an individual tree detection approach (ITD). The ITD approach locates individual trees and allows the estimation of individual tree heights and crown area. From this, other metrics such as stem diameter, number of stems, basal area and stem volume can be derived [@Hyyppa1999]. In contrast, the main goal of an ABA is to generate wall-to-wall estimates of inventory attributes, such as mean height, dominant height, mean diameter, stem number, basal area, and volume of the stands [@Næsset2002]. WHen doing these analyses, we produce LiDAR metrics. These metrics are descriptive statistics from the point cloud over a unit area. How we define that unit is decides what kind of analysis we are able to do, and what kind of inferences are possible (i.e. ABA vs ITD).
 
 -   *Add some examples of studies using ABA* - study by Tristan or Piotr?
 
@@ -239,7 +244,7 @@ As LiDAR acquisition becomes cheaper, more tools are becoming available to do an
 
 <p>
 
-For this case study, we will be using a clipped .las file from the 2018 open [LiDAR dataset](https://opendata.vancouver.ca/explore/dataset/lidar-2018/information/){target="_blank"} of the City of Vancouver and UBC Endowment Lands in British Columbia (we randomly selected a 200 x 200 meter portion of the '4840E_54550N' tile using CloudCompare), and the `lidR` package in R. The script to process this data is included HERE [where to include script?], and you can use the `lidR` [book](https://jean-romain.github.io/lidRbook/){target="_blank"} to get a more in depth understanding of the functions we apply below.
+For this case study, we will be using a clipped .las file from the 2018 open [LiDAR dataset](https://opendata.vancouver.ca/explore/dataset/lidar-2018/information/){target="_blank"} of the City of Vancouver and UBC Endowment Lands in British Columbia (we randomly selected a 200 x 200 meter portion of the '4840E_54550N' tile using CloudCompare), and the `lidR` package in R [@CityofVancouver, @Roussel2020]. The script to process this data is included HERE [where to include script?], and you can use the `lidR` [book](https://jean-romain.github.io/lidRbook/){target="_blank"} to get a more in depth understanding of the functions we apply below [@Roussel2021].
 
 </p>
 
@@ -374,15 +379,17 @@ LiDAR! Requires 3 components. Important for vertical characterization of the for
 2.  What is meant by the term 'discrete return'?
 3.  How is a DEM created? What steps are needed?
 
-`r if (knitr::is_html_output()) ' ## Recommended Readings {-} '`
+## Recommended Readings {-}
 
-"A best practices guide for generating forest inventory attributes from airborne laser scanning data using an area-based approach. Information Report FI-X-010"
+"A best practices guide for generating forest inventory attributes from airborne laser scanning data using an area-based approach. Information Report FI-X-010" - [@White2013]
+
+"Airborne laser scanning for quantifying criteria and indicators of sustainable forest management in Canada" - [@Goodbody2021]
 
 Ensure all inline citations are properly referenced here.
 
 ```{r include=FALSE}
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown', 'htmlwidgets', 'webshot', 'DT',
-  'miniUI', 'tufte', 'servr', 'citr', 'rticles'
-), 'packages.bib')
+  'miniUI', 'tufte', 'servr', 'citr', 'rticles', 'leaflet', 'raster', 'sf', 'sp',
+  'htmlwidgets', 'rgdal', 'leafem', 'geojsonio'), 'packages.bib')
 ```

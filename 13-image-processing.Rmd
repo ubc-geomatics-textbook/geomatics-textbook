@@ -22,44 +22,85 @@ pixel, spatial resolution, temporal resolution, radiometric resolution, spectral
 
 The collection of imagery is challenging and time consuming, with sensor design and deployment often requiring the development of new technologies. Driven by the growing demand for relevant information about environmental change, great emphasis is placed on the creation of "the next new satellite" or "a smaller, yet more powerful drone". Although innovation in these physical technologies is critical for the advancement of image collection, they don't guarantee that the imagery will be useful. In reality, the pixel values collected by a sensor are not purely the reflectance values from the surface of interest. Depending on the wavelengths being observed, there may be variations in the amount of photons emitted from the light source and a variety of atmospheric effects, such as scattering. There may also be slight inconsistencies in images collected by the same sensor on the same day or adjacent areas, which would affect the quality of analyses
 
+**Review what an image is???**
+
 ## Common Processing Steps
+
+The collection of imagery presents a multitude of challenges, yet the act of gathering information represents only a portion of the issues remote sensing scientists face when conducting research. As discussed in Chapters 11 and 12, there are a variety of factors that can affect the radiation that a sensor observes and the location at which the sensor is directed. In this chapter we will discuss the methods used to prepare raw imagery for use in science.
+
+Before diving into the common steps used to render imagery scientifically useful, we will go over some key terms. First and foremost, *image processing,* or *digital image analysis,* refers to any actions taken to improve the accuracy of one or more component of raw imagery. In remote sensing science, the goal of image processing is to generate a *product* that provides accurate and useful information for scientific pursuit. This is in contrast to image processing for artistic purposes, which could include many similar steps, but focus on generating a product that is visually appealing.
+
+*Noise* is another common term associated with image processing and it refers to any element of the data that is not wanted. There are a variety of noise types, which we will discuss later. In contrast to noise, *signal* describes wanted components of the imagery. Combined, signal and noise provide guidance on what specific steps should be taken in relation to the data during image processing. Before they are addressed, however, it is also important to confirm the spatial accuracy of the data.
 
 ### Geometric correction
 
--   Relief displacement
+By definition, remotely sensed data is collected by a sensor at some distance apart from the object(s) being observed. In many instances, the sensor is in motion, and at the very least it is subject to influence from environmental actors like wind. Interactions with phenomena like wind can cause the instantaneous field of view (IFOV) to move slightly during data collection, introducing spatial errors to the imagery. On top of issues relating to sensor displacement, sensors in motion may also observe adjacent areas with different topographic properties.
 
--   Orthorectification
+A combination of these two effects could be visualized by imagining an airplane flying over a forested hillside. As the sensor collects data the plane can be buffeted with wind, changing the direction of a sensor's IFOV to an location that is not the original target. On top of issues with sensor movement, the elevation of the ground is constantly undulating, altering the distance at which the sensors observes the landscape below. These two issues that affect the spatial components of image collection compromise the accuracy of an image and need to be corrected. The general term used to refer to the spatial correction of an image is geometric correction.
 
--   Georeferencing
+### **Relief displacement (Orthorectification?)**
 
--   Georegistration
+The first component of geometric correction we will discuss deals with the terrain being observed. Changes in the terrain over which an image is collected lead to inconsistencies in the distances at which information is collected. These differences lead to objects in the image to appear in location inaccurate with reality. IS THIS NEEDED???
 
--   Resampling
+### **Georeferencing**
 
-    -   Nearest neighbour
+The removal of inaccuracies in the spatial location of an image can be conducted using a technique called georeferencing. The basic concept of georeferencing is to alter the coordinates of an image through the association of highly precise coordinates collected on site using a GPS. Coordinates collected in the field are often called ground points, and form the base of successful georeferencing. In general, increasing the amount and accuracy of ground points leads to increased spatial accuracy of the image.
 
-    -   Bilinear interpolation
+SPLINE, etc??, polynomial (north up and rescale)
 
-    -   Cubic convolution
+### **Georegistration (georectification)**
+
+Similar to georeferencing, georegistration involves adjusting the raw coordinates of an image to match more accurate ones. In the case of georegistration, however, ground points collected in the field are replaced with coordinates from a map or image that has been verified as spatially accurate. This method could be considered a matching of two products, enabling the two products to be analyzed together. An example would be matching two images collected one year apart. If the first image is georeferenced accurately the second image can simply be georegistered by identifying shared features, such as intersections or buildings, and linking them through the creation of control points in each image.
+
+Upon transforming a rasters coordinates it is important to evaluate how accurate the output raster is compared to the input raster. A common method of evaluating the success is through the calculating the square root of the mean of the square of all error, often called the Root Mean Squared Error (RMSE). In short, RMSE represents the average distance at which the output raster is from the ground or control points. The smaller the RMSE, the more accurate the transformation.
+
+### **Resampling**
+
+Despite all the efforts to accurately place an image in space, it is likely that any spatial alterations also change the shape or alignment of the image's pixels. This dislocation between pixel sizes within the image, as well as potential changes in their directionality alter the capacity to evaluate the radiation values stored within them. Imagine that a raw image is represented by a table cloth. On top of the table cloth are thousands of pixels, all of uniform height and width. The corners of this table cloth each have X and Y coordinates. Now imagine that you have to match these coordinates (the corners) to the four more accurate ground points that don't match the table cloth. Completion of this task requires you to stretch one corner of the table cloth outwards, while the other three corners are shifted inside, leading the table cloth to alter it's shape and, in doing so, altering the location and shape of the raw pixels.
+
+This lack of uniformity in pixel size and shape, as well as shifts in the images cardinality (north being up) could compromise future image analysis and need to be corrected for. To do so, users can implement a variety of methods to reassign the spatially accurate values to spatially uniform pixels. This process of transforming an image from one set of coordinates to another is called resampling (Parker 1983 Zotero not working).
+
+The most important concept to understand about resampling is also the first step in the process, which is the creation of a new, empty raster in which all cells are of equal size and are aligned North (Insert demo image). The transformed raster is overlaid with the empty raster with a user defined cell size before each empty cell is assigned a value based on values from the transformed raster. Confusing? Perhaps, but there are a variety of process that can be used to assign cell values to the empty raster and we will discuss three in hopes of clarifying this methodology.
+
+**Nearest neighbor**
+
+Nearest neighbor (NN) is the most simple method of resampling as it looks only at one pixel from the transformed raster. This pixel is selected based on the proximity of it's center to the center of the empty cell and the value is added without further transformation. The simplicity of this method makes it excellent at preserving categorical data, like land cover or aspect, but struggles to capture transitions between cells and can result in output rasters that appear somewhat crude and blockish.
+
+**Bilinear interpolation**
+
+In contrast to NN resampling, bilinear interpolation (BI) uses the values of multiple neighboring cells in the transformed raster to determine the value for a single cell in the empty raster. Essentially, the four cells with centers nearest to the center of the empty cell are selected as input values. A weighted average of these four values is calculated based on their distance from the empty cell and this averaged value becomes the values of the empty cell. The process of calculating an average means that the output value is likely not the same as any of the input values, but remains within their range. These features make BI ideal for datasets with continuous variables, like elevation, rather than categorical ones.
+
+**Cubic convolution**
+
+Similar to bilinear interpolation, cubic convolution (CC) uses multiple cells in the transformed raster to generate the output for a single cell in the empty raster. Instead of using four neighbors, however, this method uses 16. The idea supporting the use of the 16 nearest neighbors is that it results in an output raster with cell values that are more similar to each other than the values of the input raster. This effect is called smoothing and is effective at removing noise, which makes CC the ideal sampling method for imagery. There is one drawback of this smoothing effect, however, as the output value of a cell may be outside the range of the 16 input cell values.
 
 ### Atmospheric correction
 
--   Atmospheric windows
+Following similar logic to that promoting the need for geometric correction, atmospheric correction is intended to minimize discrepancies in pixel values within and across images that occur due to interactions between observed radiation and atmosphere. The severity of impact that the atmosphere has on an image relates to the amount of heterogeneity that occurs in the atmosphere during image collection. The majority of impacts are caused by the three main types of scattering, which were presented in Chapter \@ref(fundamentals-of-remote-sensing).
 
--   Clouds and shadows
+**Atmospheric windows**
 
--   Scattering?
+A key characteristic of the earth's atmosphere that impacts the collection of passive remotely sensed data is the impediment of certain wavelengths. If solar radiation of a specific wavelength cannot reach Earth's surface, it is impossible for a sensor to detect the radiance of that wavelength. There are, however, certain regions of the electromagnetic spectrum (EMS), called atmospheric windows, that are less effected by absorption and scattering than others and it is the observation of these regions that remote sensing relies on. Upon reaching the Earth's surface, however, there are a variety of atmospheric constituents that can affect image quality.
 
--   Smoke and haze
+**Clouds and shadows**
+
+Two of the most common culprits in the disturbance of remotely sensed imagery are clouds and shadows. Both are relatively transient, making the prediction of their inclusion in an image difficult and rendering their effects within an image relatively inconsistent. On top of issues of presence, each introduces unique challenges for image correction.
+
+Clouds are an inherent component of Earth's atmosphere and therefore should warrant respect and care in image processing, rather than sighs of frustration. You could imagine that a single image with 30% cloud cover may not be entirely useful, but their aforementioned permanent transience means that data users must work to reduce their effects, if not remove them entirely.
+
+When approaching the removal of clouds, it is important to recall the physics that drive Mie scattering (Chapter \@ref(fundamentals-of-remote-sensing). Essentially, water vapors in the atmosphere scatter visible and near infrared light and generate what appears to be white objects in the sky. Since the visible and near infrared regions of the EMS fall within an atmospheric window in which many sensor detect radiation, clouds can be recorded as part of an image.
+
+The removal of clouds is often referred to as masking and can prove challenging depending on the region in question as they also generate cloud-shadows. You could imagine a study attempting to evaluate snow cover over a landscape using imagery comprised of wavelengths in the visible region of the EMS. If there was intermittent cloud cover, cloudy areas with no snow could be classified as having snow and snowy areas with cloud-shadows may be classified as no snow.
+
+Martinuzzi et al 2007 published a masking method to remove cloud and cloud-shadow from Landsat imagery (CITE). They proposed the utilization of radiation values collected in the blue (Band 1) and thermal (Band 6) ranges of the EMS to differentiate clouds from objects on the Earth's surface. To remove cloud-shadow, they suggested using information collected from Band 4, in the near infrared region, combined with the predicted location of shadows based on the spatial relationships of the cloud, sun and senor.
+
+Although Martinuzzi et al. 2007 presented a straightforward method for making cloud and cloud-shadow in an image, they did not address the inclusion of shadows caused by landcover structures, such as trees or buildings.
+
+**Smoke and haze**
 
 ### Radiometric correction
 
-Conducted to calibrate and correct pixel values recorded by
-the sensor. This is required the values recorded by a sensor, called digital
-numbers, are a result of light interacting with the surface of reflectance and
-the atmosphere between the sensor. First, a calibration to change raw digital
-numbers into radiance, which removes the effects of the light source (solar
-irradiance/ wavelength
+Conducted to calibrate and correct pixel values recorded by the sensor. This is required the values recorded by a sensor, called digital numbers, are a result of light interacting with the surface of reflectance and the atmosphere between the sensor. First, a calibration to change raw digital numbers into radiance, which removes the effects of the light source (solar irradiance/ wavelength
 
 -   Signal-to-noise
 
@@ -89,24 +130,24 @@ What is the section of the EMS in which humans can see? What is it's approximate
 
 ::: {.box-content .case-study-content}
 ::: {.box-title .case-study-top}
-#### Case Study: Demo each resolution in relation to an image {.unnumbered}
+#### Case Study: Walk through the steps that generate Landsat tiers {.unnumbered}
 :::
 
 #### Case study title max of forty characters {#box-text .unnumbered}
 
-<p >
+<p>
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent non magna non nunc auctor eleifend. Etiam fringilla fermentum nisl at volutpat. Duis sodales lorem interdum, posuere neque sollicitudin, malesuada nisl. Sed laoreet commodo dui et cursus. Curabitur vel porta mauris. In lacinia ac ex ac varius. Nullam at vulputate ligula. Nunc sed faucibus urna, eget placerat sapien. Fusce ut lorem a ante congue consequat et sed tortor. Integer neque urna, vehicula at aliquam non, luctus non mi. Pellentesque et massa vehicula, cursus erat id, aliquet sapien. Sed rhoncus vehicula risus, vel aliquam eros porta eget. Etiam maximus, massa in pretium semper, est libero feugiat ipsum, quis tempor nunc libero in nibh. Nunc sollicitudin mattis metus ut rutrum. Donec urna purus, sodales id nibh in, ultricies tincidunt nibh. Proin porta accumsan aliquet.
 
 </p>
 
-<p >
+<p>
 
 Cras convallis erat ante, ut tristique est tempor elementum. Nam mollis, ipsum at vehicula vestibulum, est magna finibus nisl, et laoreet metus massa et ipsum. Proin eget eros ac odio euismod volutpat et ac diam. Cras viverra ut libero vel pulvinar. Duis nisi magna, sagittis id ligula ac, efficitur commodo eros. Nulla tincidunt id nulla in lobortis. Sed non mi eu mi fermentum cursus. In elit velit, semper sed gravida at, imperdiet sed nibh. Aliquam quis massa malesuada, venenatis nunc sed, malesuada nulla. Vestibulum malesuada purus ut ex ullamcorper, ut blandit lacus lobortis. Curabitur scelerisque velit justo, quis porttitor purus efficitur ut. Phasellus nec arcu vestibulum, consequat ante id, elementum velit. Proin arcu tortor, cursus vitae sem id, congue semper urna. Integer tempus in est eu consequat. Donec sodales, quam vel finibus faucibus, leo ante dictum quam, id tempus ligula dolor quis erat. Curabitur non elementum sem. Mauris placerat fermentum orci non lacinia. Ut imperdiet dui lectus, ac malesuada felis euismod sed. Nulla non volutpat dui, in suscipit turpis.
 
 </p>
 
-<p >
+<p>
 
 Case studies should have at least one image or map (no more than 2 total) and the written length should be around 300 words (shown above). Any references to external literature should by hyperlinked with the Digitial Object Identifier (DOI) permanent URL and [entered into the bibliography](https://bookdown.org/yihui/bookdown/citations.html){target="_blank"}. Avoid linking to external resources without a DOI and permanent URL. Contact Paul or try using the Leaflet package in R if you want to add an interactive web map.
 
@@ -118,7 +159,7 @@ Case studies should have at least one image or map (no more than 2 total) and th
 #### Your turn!: What is the \_\_\_ resolution of this image {.unnumbered}
 :::
 
-<p >
+<p>
 
 Ask the reader to undertake some activity or exercise. Have them explore data, an interactive tool, a web map. Avoid referencing, relying on, or using external URLs. If it can be built, coded, or hosted by us, then it should be.
 
@@ -140,7 +181,7 @@ Your browser does not support iframes
 #### Call out {.unnumbered}
 :::
 
-<p >
+<p>
 
 This is a call out. Put some important concept or fact in here.
 

@@ -24,7 +24,7 @@
 <meta name="author" content="UBC" />
 
 
-<meta name="date" content="2021-07-22" />
+<meta name="date" content="2021-07-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -156,7 +156,7 @@
 <li class="chapter" data-level="3.4.3" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#spectral-resolution"><i class="fa fa-check"></i><b>3.4.3</b> Spectral Resolution</a></li>
 <li class="chapter" data-level="3.4.4" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#radiometric-resolution"><i class="fa fa-check"></i><b>3.4.4</b> Radiometric Resolution</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#key-applications"><i class="fa fa-check"></i><b>3.5</b> Key applications</a></li>
+<li class="chapter" data-level="3.5" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#key-applications"><i class="fa fa-check"></i><b>3.5</b> Key Applications</a></li>
 <li class="chapter" data-level="3.6" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#summary-3"><i class="fa fa-check"></i><b>3.6</b> Summary</a>
 <ul>
 <li class="chapter" data-level="" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#reflection-questions-2"><i class="fa fa-check"></i>Reflection Questions</a></li>
@@ -221,19 +221,26 @@
 </div>
 <div id="common-processing-steps" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Common Processing Steps</h2>
+<p>The collection of imagery presents a multitude of challenges, yet the act of gathering information represents only a portion of the issues remote sensing scientists face when conducting research. As discussed in Chapters 11 and 12, there are a variety of factors that can affect the radiation that a sensor observes and the location at which the sensor is directed. In this chapter we will discuss the methods used to prepare raw imagery for use in science.</p>
+<p>Before diving into the common steps used to render imagery scientifically useful, we will go over some key terms. First and foremost, <em>image processing,</em> or <em>digital image analysis,</em> refers to any actions taken to improve the accuracy of one or more component of raw imagery. In remote sensing science, the goal of image processing is to generate a <em>product</em> that provides accurate and useful information for scientific pursuit. This is in contrast to image processing for artistic purposes, which could include many similar steps, but focus on generating a product that is visually appealing.</p>
+<p><em>Noise</em> is another common term associated with image processing and it refers to any element of the data that is not wanted. There are a variety of noise types, which we will discuss later. In contrast to noise, <em>signal</em> describes wanted components of the imagery. Combined, signal and noise provide guidance on what specific steps should be taken in relation to the data during image processing. Before they are addressed, however, it is also important to confirm the spatial accuracy of the data.</p>
 <div id="geometric-correction" class="section level3" number="4.2.1">
 <h3><span class="header-section-number">4.2.1</span> Geometric correction</h3>
-<ul>
-<li><p>Relief displacement</p></li>
-<li><p>Orthorectification</p></li>
-<li><p>Georeferencing</p></li>
-<li><p>Georegistration</p></li>
-<li><p>Resampling</p>
+<p>By definition, remotely sensed data is collected by a sensor at some distance apart from the object(s) being observed. In many instances, the sensor is in motion, and at the very least it is subject to influence from environmental actors like wind. Interactions with phenomena like wind can cause the instantaneous field of view (IFOV) to move slightly during data collection, introducing spatial errors to the imagery. On top of issues relating to sensor displacement, sensors in motion may also observe adjacent areas with different topographic properties.</p>
+<p>A combination of these two effects could be visualized by imagining an airplane flying over a forested hillside. As the sensor collects data the plane can be buffeted with wind, changing the direction of a sensor’s IFOV to an location that is not the original target. On top of issues with sensor movement, the elevation of the ground is constantly undulating, altering the distance at which the sensors observes the landscape below. These two issues that affect the spatial components of image collection compromise the accuracy of an image and need to be corrected. The general term used to refer to the spatial correction of an image is geometric correction.</p>
+<p><strong>Relief displacement (Orthorectification?)</strong></p>
+<p>The first component of geometric correction we will discuss deals with the terrain being observed. Changes in the terrain over which an image is collected lead to inconsistencies in the distances at which information is collected. These differences lead to objects in the image to appear in location inaccurate with reality. IS THIS NEEDED???</p>
+<p><strong>Georeferencing</strong></p>
+<p>The removal of inaccuracies in the spatial location of an image can be conducted using a technique called georeferencing. The basic concept of georeferencing is to alter the coordinates of an image through the association of highly precise coordinates collected on site using a GPS. Coordinates collected in the field are often called ground points, and form the base of successful georeferencing. In general, increasing the amount and accuracy of ground points leads to increased spatial accuracy of the image.</p>
+<p>SPLINE, etc??</p>
+<p><strong>Georegistration (also georectification)</strong></p>
+<p>Similar to georeferencing, georegistration involves adjusting the raw coordinates of an image to match more accurate ones. In the case of georegistration, however, ground points collected in the field are replaced with coordinates from a map or image that has been verified as spatially accurate. This method could be considered a matching of two products, enabling the two products to be analyzed together. An example would be matching two images collected one year apart. If the first image is georeferenced accurately the second image can simply be georegistered by identifying shared features, such as intersections or buildings, and linking them.</p>
+<p><strong>Resampling</strong></p>
+<p>Despite all the efforts to accurately place an image in space, it is likely that any spatial alterations also change the shape or alignment of the image’s pixels.</p>
 <ul>
 <li><p>Nearest neighbour</p></li>
 <li><p>Bilinear interpolation</p></li>
 <li><p>Cubic convolution</p></li>
-</ul></li>
 </ul>
 </div>
 <div id="atmospheric-correction" class="section level3" number="4.2.2">
@@ -247,12 +254,7 @@
 </div>
 <div id="radiometric-correction" class="section level3" number="4.2.3">
 <h3><span class="header-section-number">4.2.3</span> Radiometric correction</h3>
-<p>Conducted to calibrate and correct pixel values recorded by
-the sensor. This is required the values recorded by a sensor, called digital
-numbers, are a result of light interacting with the surface of reflectance and
-the atmosphere between the sensor. First, a calibration to change raw digital
-numbers into radiance, which removes the effects of the light source (solar
-irradiance/ wavelength</p>
+<p>Conducted to calibrate and correct pixel values recorded by the sensor. This is required the values recorded by a sensor, called digital numbers, are a result of light interacting with the surface of reflectance and the atmosphere between the sensor. First, a calibration to change raw digital numbers into radiance, which removes the effects of the light source (solar irradiance/ wavelength</p>
 <ul>
 <li><p>Signal-to-noise</p></li>
 <li><p>Photon shot noise</p></li>
@@ -273,8 +275,8 @@ irradiance/ wavelength</p>
 <p>What is the section of the EMS in which humans can see? What is it’s approximate range?</p>
 </div>
 <div class="box-content case-study-content">
-<div id="case-study-demo-each-resolution-in-relation-to-an-image-1" class="section level4 unnumbered box-title case-study-top">
-<h4>Case Study: Demo each resolution in relation to an image</h4>
+<div id="case-study-walk-through-the-steps-that-generate-landsat-tiers" class="section level4 unnumbered box-title case-study-top">
+<h4>Case Study: Walk through the steps that generate Landsat tiers</h4>
 </div>
 <div id="box-text" class="section level4 unnumbered">
 <h4>Case study title max of forty characters</h4>

@@ -24,7 +24,7 @@
 <meta name="author" content="UBC" />
 
 
-<meta name="date" content="2021-07-27" />
+<meta name="date" content="2021-07-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,6 +56,28 @@
 
 
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -171,8 +193,12 @@
 <li class="chapter" data-level="4.2" data-path="image-processing.html"><a href="image-processing.html#common-processing-steps"><i class="fa fa-check"></i><b>4.2</b> Common Processing Steps</a>
 <ul>
 <li class="chapter" data-level="4.2.1" data-path="image-processing.html"><a href="image-processing.html#geometric-correction"><i class="fa fa-check"></i><b>4.2.1</b> Geometric correction</a></li>
-<li class="chapter" data-level="4.2.2" data-path="image-processing.html"><a href="image-processing.html#atmospheric-correction"><i class="fa fa-check"></i><b>4.2.2</b> Atmospheric correction</a></li>
-<li class="chapter" data-level="4.2.3" data-path="image-processing.html"><a href="image-processing.html#radiometric-correction"><i class="fa fa-check"></i><b>4.2.3</b> Radiometric correction</a></li>
+<li class="chapter" data-level="4.2.2" data-path="image-processing.html"><a href="image-processing.html#relief-displacement-orthorectification"><i class="fa fa-check"></i><b>4.2.2</b> <strong>Relief displacement (Orthorectification?)</strong></a></li>
+<li class="chapter" data-level="4.2.3" data-path="image-processing.html"><a href="image-processing.html#georeferencing"><i class="fa fa-check"></i><b>4.2.3</b> <strong>Georeferencing</strong></a></li>
+<li class="chapter" data-level="4.2.4" data-path="image-processing.html"><a href="image-processing.html#georegistration-georectification"><i class="fa fa-check"></i><b>4.2.4</b> <strong>Georegistration (georectification)</strong></a></li>
+<li class="chapter" data-level="4.2.5" data-path="image-processing.html"><a href="image-processing.html#resampling"><i class="fa fa-check"></i><b>4.2.5</b> <strong>Resampling</strong></a></li>
+<li class="chapter" data-level="4.2.6" data-path="image-processing.html"><a href="image-processing.html#atmospheric-correction"><i class="fa fa-check"></i><b>4.2.6</b> Atmospheric correction</a></li>
+<li class="chapter" data-level="4.2.7" data-path="image-processing.html"><a href="image-processing.html#radiometric-correction"><i class="fa fa-check"></i><b>4.2.7</b> Radiometric correction</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="image-processing.html"><a href="image-processing.html#summary-4"><i class="fa fa-check"></i><b>4.3</b> Summary</a>
 <ul>
@@ -218,6 +244,7 @@
 <div id="overview" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Overview</h2>
 <p>The collection of imagery is challenging and time consuming, with sensor design and deployment often requiring the development of new technologies. Driven by the growing demand for relevant information about environmental change, great emphasis is placed on the creation of “the next new satellite” or “a smaller, yet more powerful drone.” Although innovation in these physical technologies is critical for the advancement of image collection, they don’t guarantee that the imagery will be useful. In reality, the pixel values collected by a sensor are not purely the reflectance values from the surface of interest. Depending on the wavelengths being observed, there may be variations in the amount of photons emitted from the light source and a variety of atmospheric effects, such as scattering. There may also be slight inconsistencies in images collected by the same sensor on the same day or adjacent areas, which would affect the quality of analyses</p>
+<p><strong>Review what an image is???</strong></p>
 </div>
 <div id="common-processing-steps" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Common Processing Steps</h2>
@@ -228,40 +255,68 @@
 <h3><span class="header-section-number">4.2.1</span> Geometric correction</h3>
 <p>By definition, remotely sensed data is collected by a sensor at some distance apart from the object(s) being observed. In many instances, the sensor is in motion, and at the very least it is subject to influence from environmental actors like wind. Interactions with phenomena like wind can cause the instantaneous field of view (IFOV) to move slightly during data collection, introducing spatial errors to the imagery. On top of issues relating to sensor displacement, sensors in motion may also observe adjacent areas with different topographic properties.</p>
 <p>A combination of these two effects could be visualized by imagining an airplane flying over a forested hillside. As the sensor collects data the plane can be buffeted with wind, changing the direction of a sensor’s IFOV to an location that is not the original target. On top of issues with sensor movement, the elevation of the ground is constantly undulating, altering the distance at which the sensors observes the landscape below. These two issues that affect the spatial components of image collection compromise the accuracy of an image and need to be corrected. The general term used to refer to the spatial correction of an image is geometric correction.</p>
-<p><strong>Relief displacement (Orthorectification?)</strong></p>
+</div>
+<div id="relief-displacement-orthorectification" class="section level3" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> <strong>Relief displacement (Orthorectification?)</strong></h3>
 <p>The first component of geometric correction we will discuss deals with the terrain being observed. Changes in the terrain over which an image is collected lead to inconsistencies in the distances at which information is collected. These differences lead to objects in the image to appear in location inaccurate with reality. IS THIS NEEDED???</p>
-<p><strong>Georeferencing</strong></p>
+</div>
+<div id="georeferencing" class="section level3" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> <strong>Georeferencing</strong></h3>
 <p>The removal of inaccuracies in the spatial location of an image can be conducted using a technique called georeferencing. The basic concept of georeferencing is to alter the coordinates of an image through the association of highly precise coordinates collected on site using a GPS. Coordinates collected in the field are often called ground points, and form the base of successful georeferencing. In general, increasing the amount and accuracy of ground points leads to increased spatial accuracy of the image.</p>
-<p>SPLINE, etc??</p>
-<p><strong>Georegistration (also georectification)</strong></p>
-<p>Similar to georeferencing, georegistration involves adjusting the raw coordinates of an image to match more accurate ones. In the case of georegistration, however, ground points collected in the field are replaced with coordinates from a map or image that has been verified as spatially accurate. This method could be considered a matching of two products, enabling the two products to be analyzed together. An example would be matching two images collected one year apart. If the first image is georeferenced accurately the second image can simply be georegistered by identifying shared features, such as intersections or buildings, and linking them.</p>
-<p><strong>Resampling</strong></p>
-<p>Despite all the efforts to accurately place an image in space, it is likely that any spatial alterations also change the shape or alignment of the image’s pixels.</p>
-<ul>
-<li><p>Nearest neighbour</p></li>
-<li><p>Bilinear interpolation</p></li>
-<li><p>Cubic convolution</p></li>
-</ul>
+<p>SPLINE, etc??, polynomial (north up and rescale)</p>
 </div>
-<div id="atmospheric-correction" class="section level3" number="4.2.2">
-<h3><span class="header-section-number">4.2.2</span> Atmospheric correction</h3>
-<ul>
-<li><p>Atmospheric windows</p></li>
-<li><p>Clouds and shadows</p></li>
-<li><p>Scattering?</p></li>
-<li><p>Smoke and haze</p></li>
-</ul>
+<div id="georegistration-georectification" class="section level3" number="4.2.4">
+<h3><span class="header-section-number">4.2.4</span> <strong>Georegistration (georectification)</strong></h3>
+<p>Similar to georeferencing, georegistration involves adjusting the raw coordinates of an image to match more accurate ones. In the case of georegistration, however, ground points collected in the field are replaced with coordinates from a map or image that has been verified as spatially accurate. This method could be considered a matching of two products, enabling the two products to be analyzed together. An example would be matching two images collected one year apart. If the first image is georeferenced accurately the second image can simply be georegistered by identifying shared features, such as intersections or buildings, and linking them through the creation of control points in each image.</p>
+<p>Upon transforming a rasters coordinates it is important to evaluate how accurate the output raster is compared to the input raster. A common method of evaluating the success is through the calculating the square root of the mean of the square of all error, often called the Root Mean Squared Error (RMSE). In short, RMSE represents the average distance at which the output raster is from the ground or control points. The smaller the RMSE, the more accurate the transformation.</p>
 </div>
-<div id="radiometric-correction" class="section level3" number="4.2.3">
-<h3><span class="header-section-number">4.2.3</span> Radiometric correction</h3>
-<p>Conducted to calibrate and correct pixel values recorded by the sensor. This is required the values recorded by a sensor, called digital numbers, are a result of light interacting with the surface of reflectance and the atmosphere between the sensor. First, a calibration to change raw digital numbers into radiance, which removes the effects of the light source (solar irradiance/ wavelength</p>
+<div id="resampling" class="section level3" number="4.2.5">
+<h3><span class="header-section-number">4.2.5</span> <strong>Resampling</strong></h3>
+<p>Despite all the efforts to accurately place an image in space, it is likely that any spatial alterations also change the shape or alignment of the image’s pixels. This dislocation between pixel sizes within the image, as well as potential changes in their directionality alter the capacity to evaluate the radiation values stored within them. Imagine that a raw image is represented by a table cloth. On top of the table cloth are thousands of pixels, all of uniform height and width. The corners of this table cloth each have X and Y coordinates. Now imagine that you have to match these coordinates (the corners) to the four more accurate ground points that don’t match the table cloth. Completion of this task requires you to stretch one corner of the table cloth outwards, while the other three corners are shifted inside, leading the table cloth to alter it’s shape and, in doing so, altering the location and shape of the raw pixels.</p>
+<p>This lack of uniformity in pixel size and shape, as well as shifts in the images cardinality (north being up) could compromise future image analysis and need to be corrected for. To do so, users can implement a variety of methods to reassign the spatially accurate values to spatially uniform pixels. This process of transforming an image from one set of coordinates to another is called resampling (Parker 1983 Zotero not working).</p>
+<p>The most important concept to understand about resampling is also the first step in the process, which is the creation of a new, empty raster in which all cells are of equal size and are aligned North (Insert demo image). The transformed raster is overlaid with the empty raster with a user defined cell size before each empty cell is assigned a value based on values from the transformed raster. Confusing? Perhaps, but there are a variety of process that can be used to assign cell values to the empty raster and we will discuss three in hopes of clarifying this methodology.</p>
+<p><strong>Nearest neighbor</strong></p>
+<p>Nearest neighbor (NN) is the most simple method of resampling as it looks only at one pixel from the transformed raster. This pixel is selected based on the proximity of it’s center to the center of the empty cell and the value is added without further transformation. The simplicity of this method makes it excellent at preserving categorical data, like land cover or aspect, but struggles to capture transitions between cells and can result in output rasters that appear somewhat crude and blockish.</p>
+<p><strong>Bilinear interpolation</strong></p>
+<p>In contrast to NN resampling, bilinear interpolation (BI) uses the values of multiple neighboring cells in the transformed raster to determine the value for a single cell in the empty raster. Essentially, the four cells with centers nearest to the center of the empty cell are selected as input values. A weighted average of these four values is calculated based on their distance from the empty cell and this averaged value becomes the values of the empty cell. The process of calculating an average means that the output value is likely not the same as any of the input values, but remains within their range. These features make BI ideal for datasets with continuous variables, like elevation, rather than categorical ones.</p>
+<p><strong>Cubic convolution</strong></p>
+<p>Similar to bilinear interpolation, cubic convolution (CC) uses multiple cells in the transformed raster to generate the output for a single cell in the empty raster. Instead of using four neighbors, however, this method uses 16. The idea supporting the use of the 16 nearest neighbors is that it results in an output raster with cell values that are more similar to each other than the values of the input raster. This effect is called smoothing and is effective at removing noise, which makes CC the ideal sampling method for imagery. There is one drawback of this smoothing effect, however, as the output value of a cell may be outside the range of the 16 input cell values.</p>
+</div>
+<div id="atmospheric-correction" class="section level3" number="4.2.6">
+<h3><span class="header-section-number">4.2.6</span> Atmospheric correction</h3>
+<p>Following similar logic to that promoting the need for geometric correction, atmospheric correction is intended to minimize discrepancies in pixel values within and across images that occur due to interactions between observed radiation and atmosphere. The severity of impact that the atmosphere has on an image relates to the amount of heterogeneity that occurs in the atmosphere during image collection. The majority of impacts are caused by the three main types of scattering, which were presented in Chapter <a href="fundamentals-of-remote-sensing.html#fundamentals-of-remote-sensing">3</a>.</p>
+<p><strong>Atmospheric windows</strong></p>
+<p>A key characteristic of the earth’s atmosphere that impacts the collection of passive remotely sensed data is the impediment of certain wavelengths. If solar radiation of a specific wavelength cannot reach Earth’s surface, it is impossible for a sensor to detect the radiance of that wavelength. There are, however, certain regions of the electromagnetic spectrum (EMS), called atmospheric windows, that are less effected by absorption and scattering than others and it is the observation of these regions that remote sensing relies on. Upon reaching the Earth’s surface, however, there are a variety of atmospheric constituents that can affect image quality.</p>
+<p><strong>Clouds and shadows</strong></p>
+<p>Two of the most common culprits in the disturbance of remotely sensed imagery are clouds and shadows. Both are relatively transient, making the prediction of their inclusion in an image difficult and rendering their effects within an image relatively inconsistent. On top of issues of presence, each introduces unique challenges for image correction.</p>
+<p>Clouds are an inherent component of Earth’s atmosphere and therefore should warrant respect and care in image processing, rather than sighs of frustration. You could imagine that a single image with 30% cloud cover may not be entirely useful, but their aforementioned permanent transience means that data users must work to reduce their effects, if not remove them entirely.</p>
+<p>When approaching the removal of clouds, it is important to recall the physics that drive Mie scattering (Chapter <a href="fundamentals-of-remote-sensing.html#fundamentals-of-remote-sensing">3</a>. Essentially, water vapors in the atmosphere scatter visible and near infrared light and generate what appears to be white objects in the sky. Since the visible and near infrared regions of the EMS fall within an atmospheric window in which many sensor detect radiation, clouds can be recorded as part of an image.</p>
+<p>The removal of clouds is often referred to as masking and can prove challenging depending on the region in question as they also generate cloud-shadows. You could imagine a study attempting to evaluate snow cover over a landscape using imagery comprised of wavelengths in the visible region of the EMS. If there was intermittent cloud cover, cloudy areas with no snow could be classified as having snow and snowy areas with cloud-shadows may be classified as no snow.</p>
+<p>Martinuzzi et al 2007 published a masking method to remove cloud and cloud-shadow from Landsat imagery . They proposed the utilization of radiation values collected in the blue (Band 1) and thermal (Band 6) ranges of the EMS to differentiate clouds from objects on the Earth’s surface. To remove cloud-shadow, they suggested using information collected from Band 4, in the near infrared region, combined with the predicted location of shadows based on the spatial relationships of the cloud, sun and senor.</p>
+<p>Although Martinuzzi et al. 2007 presented a straightforward method for making cloud and cloud-shadow in an image, they did not address the inclusion of shadows caused by landcover structures, such as trees or buildings <span class="citation">(<a href="#ref-martinuzzi2007" role="doc-biblioref">Martinuzzi, Gould, and Gonzalez 2007</a>)</span>. Shadows present unique problems for image analysis as they can shade out underlying structures and also be classified as seperate, individual objects. The former issues presents problems for studies evaluating land cover, while the latter confounds machine learning algorithms attempting to identify unique classes in the image based on spectral similarities. Another confounding issue is that the location and size of shadows change throughout the day in accordance with the sun.</p>
+<p>An important feature of any shadow is that the area shaded is still considered to be illuminated, but only by skylight . The exclusion of sunlight from the area creates a unique opportunity for shadow identification and removal <span class="citation">(<a href="#ref-finlayson2001" role="doc-biblioref">Finlayson and Hordley 2001</a>)</span>. Finlayson et al.’s method of shadow removal is complex, using derivative calculus to capitalize on the fact that a illumination invariant function can be recognized based solely on surface reflectance. Although more complicated that Martinuzzi et al.’s approach, it may be worth reviewing <span class="citation">(<a href="#ref-finlayson2001" role="doc-biblioref">Finlayson and Hordley 2001</a>)</span> if you are interested in learning more about shadow removal.</p>
+<p><strong>Smoke and Haze</strong></p>
+<p>Smoke and haze present unique issues to image processing as they tend to vary in presence, consistency and density. They also represent different types of scattering, with smoke causing Mie scattering and haze causing non-selective scattering. Makarau et al., 2014 demonstrated that haze can be removed through the creation of a haze thickness map (HTM) <span class="citation">(<a href="#ref-makarau2014" role="doc-biblioref">Makarau et al. 2014</a>)</span>. This methodology is equally as complex as that of <span class="citation">(<a href="#ref-finlayson2001" role="doc-biblioref">Finlayson and Hordley 2001</a>)</span> and is perhaps beyond the scope of this book. It is important to note, though, that removal of shadows, clouds, smoke and haze relies on an understanding of how their respective scattering types affect incoming solar radiation. Successful removal, then, depends on using spectral bands that are not effected by the particular type of scattering occurring within the image.</p>
+</div>
+<div id="radiometric-correction" class="section level3" number="4.2.7">
+<h3><span class="header-section-number">4.2.7</span> Radiometric correction</h3>
+<p>We have discussed how the creation of an image by a remote sensor leads to slight variations in spatial and atmospheric properties between pixels and that these inconsistencies must be corrected for. In this section, we will discuss some issues affecting the information within a pixel and some common remedies. In essence, we will explore how the raw digital numbers collected by a sensor can be converted to radiance and reflectance.</p>
+<p><strong>Signal-to-noise</strong></p>
+<p>A key concept of radiometric correction is the ratio of desired information, or signal to background information (noise) within a pixel. The signal-to-noise ratio (SNR) is a common method of presenting this information and provides an overall statement about image quality. A common method of calculating SNR is to divide the mean (µ) signal value of the sensor by its standard deviation (𝛔) (Equation <a href="#eq:snr">(4.1)</a>)</p>
+<span class="math display" id="eq:snr">\[\begin{equation}
+SNR = µ _{signal} /𝛔 _{signal}
+\tag{4.1}
+\end{equation}\]</span>
 <ul>
-<li><p>Signal-to-noise</p></li>
 <li><p>Photon shot noise</p></li>
 <li><p>Pattern noise</p></li>
 <li><p>Readout noise</p></li>
 <li><p>Thermal noise</p></li>
 <li><p>Radiometric normalization</p></li>
+<li><p>Stretching</p>
+<ul>
+<li>contrast stretching</li>
+</ul></li>
 </ul>
 <div class="box-content your-turn-content">
 <div id="your-turn-3" class="section level4 unnumbered box-title your-turn-top">
@@ -334,7 +389,30 @@
 <p>## Recommended Readings {-}</p>
 <p>Ensure all inline citations are properly referenced here.</p>
 
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div class="csl-entry">
+Finlayson, Graham D., and Steven D. Hordley. 2001. <span>“Color Constancy at a Pixel.”</span> <em>Journal of the Optical Society of America A</em> 18 (2): 253. <a href="https://doi.org/10.1364/josaa.18.000253">https://doi.org/10.1364/josaa.18.000253</a>.
 </div>
+<div class="csl-entry">
+Makarau, Aliaksei, Rudolf Richter, Rupert Müller, and Peter Reinartz. 2014. <span>“Haze Detection and Removal in Remotely Sensed Multispectral Imagery.”</span> <em>IEEE Transactions on Geoscience and Remote Sensing</em> 52 (9): 5895–905. <a href="https://doi.org/10.1109/TGRS.2013.2293662">https://doi.org/10.1109/TGRS.2013.2293662</a>.
+</div>
+<div class="csl-entry">
+Martinuzzi, Sebastián, William A. Gould, and Olga M. Ramos Gonzalez. 2007. <span>“Creating Cloud-Free Landsat ETM+ Data Sets in Tropical Landscapes: Cloud and Cloud-Shadow Removal.”</span> <em>U.S. Department of Agriculture, Forest Service, International Institute of Tropical Forestry. Gen. Tech. Rep. IITF-32.</em> 32. <a href="https://doi.org/10.2737/IITF-GTR-32">https://doi.org/10.2737/IITF-GTR-32</a>.
+</div>
+</div>
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-finlayson2001" class="csl-entry">
+Finlayson, Graham D., and Steven D. Hordley. 2001. <span>“Color Constancy at a Pixel.”</span> <em>Journal of the Optical Society of America A</em> 18 (2): 253. <a href="https://doi.org/10.1364/josaa.18.000253">https://doi.org/10.1364/josaa.18.000253</a>.
+</div>
+<div id="ref-makarau2014" class="csl-entry">
+Makarau, Aliaksei, Rudolf Richter, Rupert Müller, and Peter Reinartz. 2014. <span>“Haze Detection and Removal in Remotely Sensed Multispectral Imagery.”</span> <em>IEEE Transactions on Geoscience and Remote Sensing</em> 52 (9): 5895–905. <a href="https://doi.org/10.1109/TGRS.2013.2293662">https://doi.org/10.1109/TGRS.2013.2293662</a>.
+</div>
+<div id="ref-martinuzzi2007" class="csl-entry">
+Martinuzzi, Sebastián, William A. Gould, and Olga M. Ramos Gonzalez. 2007. <span>“Creating Cloud-Free Landsat ETM+ Data Sets in Tropical Landscapes: Cloud and Cloud-Shadow Removal.”</span> <em>U.S. Department of Agriculture, Forest Service, International Institute of Tropical Forestry. Gen. Tech. Rep. IITF-32.</em> 32. <a href="https://doi.org/10.2737/IITF-GTR-32">https://doi.org/10.2737/IITF-GTR-32</a>.
 </div>
 </div>
             </section>
@@ -394,6 +472,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

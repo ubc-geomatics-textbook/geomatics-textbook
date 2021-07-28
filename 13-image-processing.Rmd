@@ -92,41 +92,73 @@ When approaching the removal of clouds, it is important to recall the physics th
 
 The removal of clouds is often referred to as masking and can prove challenging depending on the region in question as they also generate cloud-shadows. You could imagine a study attempting to evaluate snow cover over a landscape using imagery comprised of wavelengths in the visible region of the EMS. If there was intermittent cloud cover, cloudy areas with no snow could be classified as having snow and snowy areas with cloud-shadows may be classified as no snow.
 
-Martinuzzi et al 2007 published a masking method to remove cloud and cloud-shadow from Landsat imagery (CITE). They proposed the utilization of radiation values collected in the blue (Band 1) and thermal (Band 6) ranges of the EMS to differentiate clouds from objects on the Earth's surface. To remove cloud-shadow, they suggested using information collected from Band 4, in the near infrared region, combined with the predicted location of shadows based on the spatial relationships of the cloud, sun and senor.
+Martinuzzi et al 2007 published a masking method to remove cloud and cloud-shadow from Landsat imagery . They proposed the utilization of radiation values collected in the blue (Band 1) and thermal (Band 6) ranges of the EMS to differentiate clouds from objects on the Earth's surface. To remove cloud-shadow, they suggested using information collected from Band 4, in the near infrared region, combined with the predicted location of shadows based on the spatial relationships of the cloud, sun and senor.
 
-Although Martinuzzi et al. 2007 presented a straightforward method for making cloud and cloud-shadow in an image, they did not address the inclusion of shadows caused by landcover structures, such as trees or buildings.
+Although Martinuzzi et al. 2007 presented a straightforward method for making cloud and cloud-shadow in an image, they did not address the inclusion of shadows caused by landcover structures, such as trees or buildings [@martinuzzi2007]. Shadows present unique problems for image analysis as they can shade out underlying structures and also be classified as seperate, individual objects. The former issues presents problems for studies evaluating land cover, while the latter confounds machine learning algorithms attempting to identify unique classes in the image based on spectral similarities. Another confounding issue is that the location and size of shadows change throughout the day in accordance with the sun.
 
-**Smoke and haze**
+An important feature of any shadow is that the area shaded is still considered to be illuminated, but only by skylight . The exclusion of sunlight from the area creates a unique opportunity for shadow identification and removal [@finlayson2001]. Finlayson et al.'s method of shadow removal is complex, using derivative calculus to capitalize on the fact that a illumination invariant function can be recognized based solely on surface reflectance. Although more complicated that Martinuzzi et al.'s approach, it may be worth reviewing [@finlayson2001] if you are interested in learning more about shadow removal.
+
+**Smoke and Haze**
+
+Smoke and haze present unique issues to image processing as they tend to vary in presence, consistency and density. They also represent different types of scattering, with smoke causing Mie scattering and haze causing non-selective scattering. Makarau et al., 2014 demonstrated that haze can be removed through the creation of a haze thickness map (HTM) [@makarau2014]. This methodology is equally as complex as that of [@finlayson2001] and is perhaps beyond the scope of this book. It is important to note, though, that removal of shadows, clouds, smoke and haze relies on an understanding of how their respective scattering types affect incoming solar radiation. Successful removal, then, depends on using spectral bands that are not effected by the particular type of scattering occurring within the image.
 
 ### Radiometric correction
 
-Conducted to calibrate and correct pixel values recorded by the sensor. This is required the values recorded by a sensor, called digital numbers, are a result of light interacting with the surface of reflectance and the atmosphere between the sensor. First, a calibration to change raw digital numbers into radiance, which removes the effects of the light source (solar irradiance/ wavelength
+We have discussed how the creation of an image by a remote sensor leads to slight variations in spatial and atmospheric properties between pixels and that these inconsistencies must be corrected for. In this section, we will discuss some issues affecting the information within a pixel and some common remedies. In essence, we will explore how the raw digital numbers collected by a sensor can be converted to radiance and reflectance.
 
--   Signal-to-noise
+**Signal-to-noise**
 
--   Photon shot noise
+A key concept of radiometric correction is the ratio of desired information, or signal to background information (noise) within a pixel. The signal-to-noise ratio (SNR) is a common method of presenting this information and provides an overall statement about image quality. A common method of calculating SNR is to divide the mean (µ) signal value of the sensor by its standard deviation (𝛔), where signal represents an optical intensity. (Equation \@ref(eq:snr))
 
--   Pattern noise
+```{=tex}
+\begin{equation}
+SNR = µ _{signal} /𝛔 _{signal}
+(\#eq:snr)
+\end{equation}
+```
+It is clearl, through Equation \@ref(eq:snr), that the average signal value of an instrument represents the value that its designers desire to capture. It is also clear that an increase in signal leads to an improved SNR. What remains unclear, however, is what causes a sensor to observe and record undesired noise to be recorded. In reality, there are a variety of noise types that can affect the SNR of a sensor.
 
--   Readout noise
+**Photon shot noise**
 
--   Thermal noise
+The first type of noise we will address is due to inconsistencies in the number of photons observed at different time intervals. Since photons are quantum particles (they are the smallest measurable amount of radiation), a sensor can only observe them as whole numbers. This, coupled with other random fluctuations in radiation properties, means that a sensor directed at the same location may observe 10 photons at one time interval and 12 a later interval. Over time, it is possible to determine the average amount of photons observed by a sensor, but creates inconsistencies across individual observations. Photon shot noise can be calculated as the square root, of the signal. This suggests that stronger signal leads to a relative decrease in shot noise.
 
--   Radiometric normalization
+**Pattern noise**
+
+Also known as fixed-pattern noise, pattern noise arises in instruments that have multiple sensors along a single array. Pattern noise occurs due to one sensor collecting relatively higher values than others, resulting in heightened brightness in the pixels it creates.
+
+**Readout noise**
+
+Readout noise is created through the inconsistencies relating to the interaction of multiple physical measurement electronic devices. Since it is impossible to have a sensor without physical devices, readout noise is inherent in all sensors. Readout noise is therefore equal to any difference in pixel value when all sensors are exposed to identical levels of illumination. There are a variety of technical methods used to correct for this error, but the concepts and mathematics supporting them are perhaps beyond the scope of this book. Some useful resources are \_\_\_ and \_\_\_.
+
+**Thermal noise**
+
+Another inherent type of sensor noise is thermal noise. Thermal noise occurs in any device using electricity and is caused by the vibrations of the devices charge carriers. This means that thermal noise can never fully be removed from an image, although it can be reduced by lowering the temperature of the environment at which the sensor is operating.
 
 ::: {.box-content .your-turn-content}
 ::: {.box-title .your-turn-top}
 #### Your turn! {.unnumbered}
 :::
 
-Practice questions relating to photon energy:
-
--   demonstrate the higher frequency = higher energy
-
--   higher wavelength = lower energy
-
-What is the section of the EMS in which humans can see? What is it's approximate range?
+Calculate SNR for various sensors
 :::
+
+**Radiometric normalization**
+
+As discussed in Chapter \@ref(fundamentals-of-remote-sensing), the normalization of radiometric values collected by a sensor enables the comparison of data within and across images. A common normalization output in remote sensing studies evaluating the environment is reflectance, which can be calculated simply by dividing the radiance value of a pixel collected when observing the object(s) of interest with the radiance value of a pixel observing a surface with 100% reflectance.
+
+### Image enhancement
+
+So far, in this Chapter, we have discussed methods of correcting spatial, atmospheric and radiometric errors that are commonly present in remotely sensed images. While the removal of these artifacts is necessary, it is also important to explore some common methods of enhancing an image once these aforementioned corrections have been made. Both image stretching and sharpening have roots in spatial and radiometric correction, so keep your mind open to the inherent links that arise.
+
+**Stretching**
+
+Image stretching refers to the adjustment of radiometric values of the input methods to better exploit the radiometric resolution of an image. In principle, the distribution of radiometric values within a image is altered in a manner that improves it's capacity to perform a desired task. For instance, if an image collected with an 8-bit radiometric resolution (256 radiometric values; 0-255). appears too dark, it is likely that the distribution of pixel values is centered on a radiometric value greater than 127 (middle of a 8-bit scale). In fact, of 0 represents white and 255 represents black, it is very likely that the majority of pixels are closer to 255. In this case, the lowest value(s) observed in the image can be adjusted to 0, the relationship of this change can be determined and then applied to all other observed vaue
+
+**Sharpening**
+
+-   include Deeps paper
+
+-   
 
 ::: {.box-content .case-study-content}
 ::: {.box-title .case-study-top}

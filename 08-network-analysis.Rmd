@@ -181,7 +181,7 @@ leaflet(height=200, width="80%") %>% setView(lng=-123.17161003346679, lat=49.254
 ```
 
 #### Trees
-In tree topologies, nodes are structured from a root node and arranged into edges that are similar to branches of a tree. This highly hierarchical structure create a sort of *parent - child* relationship amongst nodes. The spatial configuration of boat marinas are usually structures in tree-like topologies.
+In tree topologies, nodes are structured from a root node and arranged into edges that are similar to branches of a tree. This highly hierarchical structure create a sort of *parent - child* relationship amongst nodes. The spatial configuration of boat marinas are usually structures in tree-like topologies. By definition, all tree network structures will always have more than one terminal nodes (a node that only has one connection to the network).
 
 ```{r, echo=FALSE}
 
@@ -198,14 +198,14 @@ leaflet(height=500, width="80%") %>% setView(lng=-123.1270252730915, lat=49.2953
 Networks can then be arranged according to various different configurations. Aside from classifying networks into different types according to their topologies, some of the most useful features of spatial network analysis refers to how to extract information from these structures given certain parameters.
 
 ### Network tracing
-The act of modelling spatial networks is called *Network tracing*. When tracing a network it is important to bear in mind the direction with which information is added to the network, especially when this orientation information is important to further analyze flows and relationships within such structure. For example
+The act of modelling spatial networks is called *Network tracing*. When tracing a network it is important to bear in mind the direction with which information is added to the network, especially when this orientation information is important to further analyze flows and relationships within such structure. For example, when mapping hydrological networks to study its flows it might be useful to model rivers downstream as this is an important information to represent the dynamics of the network.
 
 ```{r, echo=FALSE}
 
 ```
 
 ### Linear referencing
-Linear referencing is used for finding the length of paths along the network [@ramsey23LinearReferencing2012].
+Linear referencing systems are commonly used for finding the length of paths along the network [@ramsey23LinearReferencing2012]. In this method, locations are defined in terms of 
 
 ### Routing
 [@systemsinnovationNetworkDiffusionContagion2015].
@@ -223,10 +223,14 @@ Linear referencing is used for finding the length of paths along the network [@r
 ```
 
 #### Reach analysis
-Reach techniques are commonly used to find the incidence of defined elements within a certain radius from a chosen node.
+Reach techniques are commonly used to find the incidence of defined elements within a certain radius from a chosen node. All possible routes are modeled. The number of terminal nodes varies according to the network structure. Urban walkability indices usually uses reach techniques to assess the intensity of certain indicators (such as intersection density or non-residential land uses) given a walkable radius [@martinoSpatialNetworkAnalysis2020].
+
+```{r, echo=FALSE}
+
+```
 
 ### Network Centrality
-[@ajorlouIntroductionNetworkModels2018].
+Nodes and edges of a graph can be ranked in terms of how "important" they are to the overall network. Network centrality measures represent whether elements of a graph are more central or peripheral to the overall system. Such measures can then be interpreted as indicators of importance. Applications are endless. Centrality measures are used for ranking search engine pages [], for finding persons of interest in social networks [] and for modelling movement in street network [].  There are several centrality measures that serve to the most various purposes. The most common ones are: Degree, Closeness and Betweenness centrality.
 
 #### Degree centrality
 The number of connections of each node.

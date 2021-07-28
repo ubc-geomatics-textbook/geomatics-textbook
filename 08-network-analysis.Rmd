@@ -1,6 +1,9 @@
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(igraph)
+library(rgdal)
+library(rgeos)
+library(leaflet)
 library(networkD3)
 ```
 
@@ -38,7 +41,7 @@ A node (or vertex) may represent any thing that can be connected with other thin
 ### Edges
 Edges, on the other hand, represent how vertices are interconnected to each other. So it may represent the vertices' social connections, street segments, molecular bindings, etc. The graph below represents rapid and frequent transit lines in Metro Vancouver. Each node represents a transit line and the edges represents connections between those lines.
 
-```{r pressure, echo=FALSE}
+```{r simple_graph, echo=FALSE}
 data <- data.frame(
   from=c("Expo Line", "99-B Line", "R4", "Canada Line", "R4", "Millenium Line", "Millenium Line", "Seabus", "Seabus", "Seabus", "Expo Line", "R4", "West Coast Express", "West Coast Express", "R5", "R5", "West Coast Express", "Millenium Line", "West Coast Express",  "West Coast Express"),
   to=c("99-B Line", "Canada Line", "Canada Line", "Expo Line", "Expo Line", "Expo Line", "99-B Line", "Canada Line", "Expo Line", "R2", "R1", "99-B Line", "Expo Line", "Millenium Line", "Expo Line", "Canada Line", "R3", "R3", "Seabus", "Canada Line")
@@ -58,6 +61,23 @@ There are two major types of connections within the graphs: directed and undirec
 ### Direct
 Directed graphs are networks where the order of elements change relationships between them. We represent directed connections with an arrow. For example, in the case of the transit network we could use a directed graph to represent the path one has to take in order to shift from one line to another.
 
+```{r directed_graph, echo=FALSE}
+
+origins <- c("Expo Line", "99-B Line", "R4", "Canada Line", "R4", "Millenium Line", "Millenium Line", "Seabus", "Seabus", "Seabus", "Expo Line", "R4", "West Coast Express", "West Coast Express", "R5", "R5", "West Coast Express", "Millenium Line", "West Coast Express",  "West Coast Express")
+
+destinations <- c("99-B Line", "Canada Line", "Canada Line", "Expo Line", "Expo Line", "Expo Line", "99-B Line", "Canada Line", "Expo Line", "R2", "R1", "99-B Line", "Expo Line", "Millenium Line", "Expo Line", "Canada Line", "R3", "R3", "Seabus", "Canada Line")
+
+links <- data.frame(source=origins, target=destinations)
+nodes <- data.frame(name=unique(c(unique(origins), unique(destinations))))
+
+data(MisLinks)
+data(MisNodes)
+
+forceNetwork(Links = MisLinks, Nodes = MisNodes, Source = "source",
+             Target = "target", Value = "value", NodeID = "name",
+             Group = "group", opacity = 0.4, zoom = TRUE)
+```
+
 ### Undirect
 On the other hand, in an undirected graph, connections are represented as simple lines instead of arrows. The order of elements does not matter.
 
@@ -65,60 +85,169 @@ On the other hand, in an undirected graph, connections are represented as simple
 Topology is the study of how network elements are arranged. The same elements arranged in different ways can change the network structure and dynamics. A very common example is the arrangement of computer networks [@wikibooksCommunicationNetworksNetwork2018].
 
 ### Physical versus logical topology
+In GIS we use networks to represent spatial structures of various kinds. While all networks can be represented in an abstract space - this is, without a defined position in the real-world - some network analysis might be more useful when we attach physical properties to them, such as latitude and longitude coordinates. We call *logical topology* the study of how network elements are arranged in this abstract space. On the other hand, *physical topology* refers to the arrangemet of networks in the physical space. We can then classify "types" of networks according to the way their nodes is arranged.
 
-### Lines
-Nodes are arranged in series where every node has no more than two connections.
-(Example: Skytrain transit line)
+### Non-hierarchical
+#### Lines
+Lines are when nodes are arranged in series where every node has no more than two connections, except for the two end nodes. A rail transit line, for example, can be represented as a line network. The map below portrays the SkyTrain Millenium Line in Vancouver. Each node represents a stop and the lines  the connections between those stops.
 
-### Rings
-Every node has no mode than two connections and the "first" and "last" nodes are connected to each other forming a circle.
-(Example: Stanley park seawall trail)
+```{r, echo=FALSE}
 
-### Meshes
-Every node is connected to more than one node.
-(Example: Tree canopy)
+lineData <- readLines("data/transit_millenium_line.geojson") %>% paste(collapse = "\n")
+nodeData <- readOGR("data/transit_millenium_stops.geojson", layer="transit_millenium_stops", verbose=FALSE)
 
-### Stars
-Two or more nodes arranged around a central node.
-(Example: Courtyard apartment)
+leaflet(height=200, width="80%") %>% setView(lng=-122.9220614617343, lat=49.26585706918778, zoom=11) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addGeoJSON(lineData, weight=3, color="gray", fill=FALSE) %>%
+  addCircles(data=nodeData, radius=20)
+```
 
-### Trees
-Nodes are structured from a root node arranged into a number of smaller nodes.
-(Example: Boat marinas)
+#### Rings
+Rings are similar to lines except that there are no end nodes. So each and every node has two connections and the "first" and "last" nodes are connected to each other forming a circle. The spatial structure of the Stanley park seawall trail in Vancouver resembles a ring. In this example, nodes stand for intersections and view spots and edges are the connections between these spots along the seawall.
 
-### Buses
-Nodes are structured with one connection around a central path.
-(Example: Building-street connections)
- 
-### Fully connected
-Every node is connected to every other node.
-(Example: Soccer field visibility)
+```{r, echo=FALSE}
+
+lineData <- readLines("data/stanley_park_seawall.geojson") %>% paste(collapse = "\n")
+nodeData <- readOGR("data/stanley_park_seawall_nodes.geojson", layer="stanley_park_seawall_nodes", verbose=FALSE)
+
+leaflet(height=400, width="80%") %>% setView(lng=-123.14051382816635, lat=49.3035701861337, zoom=14) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addGeoJSON(lineData, weight=3, color="gray", fill=FALSE) %>%
+  addCircles(data=nodeData)
+```
+
+#### Meshes
+In a mesh, every node is also connected to more than one node. However, in this case nodes can be connected to more than two nodes. Connections in a mesh are non-hierarchical. Contrary to rings and lines where there is only one possible route from one node to another, in a mesh there are multiple routes to access other nodes in the network. A common way to generate a mesh network is using Delaunay triangulation [@wikimediafoundationDelaunayTriangulation2021], where nodes are connected in order to form triangles and maximize the minimum angle of all triangles. Mesh configurations are commonly used in decentralized structures such as the internet. 
+
+```{r, echo=FALSE}
+
+lineData <- readLines("data/tree_canopy_mesh.geojson") %>% paste(collapse = "\n")
+polyData <- readOGR("data/tree_canopy_shapes.geojson", layer="tree_canopy_shapes", verbose=FALSE, GDAL1_integer64_policy=TRUE)
+nodeData <- readOGR("data/tree_canopy_centroids.geojson", layer="tree_canopy_centroids", verbose=FALSE)
+
+leaflet(height=300, width="80%") %>% setView(lng=-123.13264678513188, lat=49.23942113799484, zoom=17) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(data=polyData, color="green", weight=0) %>%
+  addGeoJSON(lineData, weight=1, color="gray", fill=FALSE) %>%
+  addCircles(data=nodeData, radius=0.5)
+```
+
+
+#### Fully connected
+As the name suggests, in fully connected networks every node is connected to every other node. The graph representing all possible origin-destination commutes among Metro Vancouver municipalities is a type of fully connected network.
+
+```{r, echo=FALSE}
+
+polygonData <- readOGR("data/regional_boundaries.geojson", layer="regional_boundaries", verbose=FALSE)
+lineData <- readLines("data/regional_commutes.geojson") %>% paste(collapse = "\n")
+nodeData <- readOGR("data/regional_commutes_nodes.geojson", layer="regional_commutes_nodes", verbose=FALSE)
+
+leaflet(height=420, width="80%") %>% setView(lng=-122.89050696548136, lat=49.19456939297959, zoom=10) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addGeoJSON(lineData, weight=2, color="gray", fill=FALSE) %>%
+  addCircles(data=nodeData, radius=1) %>%
+  addPolygons(data=polygonData, weight=1, color="green")
+```
+
+### Hierarchical topologies
+Different from non-hierarchical topologies, hierarchical configurations are structured around a central node or link.
+
+#### Stars
+Stars are hierarchical structures where two or more nodes are directly connected to a central node. This concentric garden at the University of British Columbia can be represented according to a star topology.
+
+```{r, echo=FALSE}
+
+lineData <- readLines("data/concentric_garden.geojson") %>% paste(collapse = "\n")
+nodeData <- readOGR("data/concentric_garden_nodes.geojson", layer="concentric_garden_nodes", verbose=FALSE)
+
+leaflet(height=200, width="80%") %>% setView(lng=-123.24650254301488, lat=49.25331570212763, zoom=19) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addGeoJSON(lineData, weight=2, color="gray", fill=FALSE) %>%
+  addCircles(data=nodeData, radius=1)
+```
+
+#### Buses
+Buses are structures where every path from one node to another passes through a central path or corridor. If we isolate a street segment from an urban street network, the connections between buildings and streets depict a bus topology.
+
+```{r, echo=FALSE}
+
+lineData <- readLines("data/row_houses.geojson") %>% paste(collapse = "\n")
+nodeData <- readOGR("data/row_houses_nodes.geojson", layer="row_housses_nodes", verbose=FALSE)
+
+leaflet(height=200, width="80%") %>% setView(lng=-123.17161003346679, lat=49.2547602831889, zoom=18) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addGeoJSON(lineData, weight=2, color="gray", fill=FALSE) %>%
+  addCircles(data=nodeData, radius=1)
+```
+
+#### Trees
+In tree topologies, nodes are structured from a root node and arranged into edges that are similar to branches of a tree. This highly hierarchical structure create a sort of *parent - child* relationship amongst nodes. The spatial configuration of boat marinas are usually structures in tree-like topologies.
+
+```{r, echo=FALSE}
+
+lineData <- readLines("data/boat_marina.geojson") %>% paste(collapse = "\n")
+nodeData <- readOGR("data/boat_marina_nodes.geojson", layer="boat_marina_nodes", verbose=FALSE)
+
+leaflet(height=500, width="80%") %>% setView(lng=-123.1270252730915, lat=49.29535129069547, zoom=17) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addGeoJSON(lineData, weight=2, color="gray", fill=FALSE) %>%
+  addCircles(data=nodeData, radius=1)
+```
 
 ## Spatial Network Analysis
+Networks can then be arranged according to various different configurations. Aside from classifying networks into different types according to their topologies, some of the most useful features of spatial network analysis refers to how to extract information from these structures given certain parameters.
 
 ### Network tracing
+The act of modelling spatial networks is called *Network tracing*. When tracing a network it is important to bear in mind the direction with which information is added to the network, especially when this orientation information is important to further analyze flows and relationships within such structure. For example
+
+```{r, echo=FALSE}
+
+```
 
 ### Linear referencing
-[@ramsey23LinearReferencing2012].
+Linear referencing is used for finding the length of paths along the network [@ramsey23LinearReferencing2012].
 
 ### Routing
 [@systemsinnovationNetworkDiffusionContagion2015].
 
-### Least cost paths
+#### Least cost paths
 
-### Least cost corridors
+```{r, echo=FALSE}
 
-## Network Centrality
+```
+
+#### Least cost corridors
+
+```{r, echo=FALSE}
+
+```
+
+#### Reach analysis
+Reach techniques are commonly used to find the incidence of defined elements within a certain radius from a chosen node.
+
+### Network Centrality
 [@ajorlouIntroductionNetworkModels2018].
 
-### Degree centrality
+#### Degree centrality
 The number of connections of each node.
 
-### Closeness centrality
+```{r, echo=FALSE}
+
+```
+
+#### Closeness centrality
 How close the node is to every other node of the graph in logical distance.
 
-### Betweenness centrality
-How likely a node is to be passed through when going from every node to every other node of the graph.
+```{r, echo=FALSE}
+
+```
+
+#### Betweenness centrality
+How likely a node or an edge is to be passed through when going from every node to every other node of the graph.
+
+```{r, echo=FALSE}
+
+```
 
 :::: {.box-content .case-study-content}
 

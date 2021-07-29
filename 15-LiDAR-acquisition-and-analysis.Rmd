@@ -210,7 +210,7 @@ LiDAR analysis in forestry uses two broad approaches, an area-based approach (AB
 When doing either of these analyses, we typically produce LiDAR metrics. These metrics are descriptive statistics of the point cloud over a unit area. How we define that unit is decides what kind of analysis we are able to do, and what kind of inferences are possible (i.e. ABA vs ITD). An ITD approach has a 'unit' size of one tree, whereas the ABA typically uses a grid size of 20 x 20 m. Both approaches require ground truthing, and for an ABA approach, plot sizes are typically designed to be of a similar area to the chosen grid size [White2013].
 
 -   **Add an example study using ABA?** 
-    -study by Tristan or Piotr?
+    - for example @Tompalski2019
 
 ```{r 15-las-hmax-2D, fig.cap = fig_cap, out.width="70%", echo = FALSE}
 fig_cap <- paste("Maximum heights of 10 meter cells using an area-based approach.")
@@ -384,13 +384,15 @@ LiDAR is an active remote sensing technology that requires three components; a l
 
 ## Recommended Readings {.unnumbered}
 
-"A best practices guide for generating forest inventory attributes from airborne laser scanning data using an area-based approach. Information Report FI-X-010" - [@White2013]
+- "A best practices guide for generating forest inventory attributes from airborne laser scanning data using an area-based approach. Information Report FI-X-010" - @White2013
 
-"Airborne laser scanning for quantifying criteria and indicators of sustainable forest management in Canada" - [@Goodbody2021]
+- "Airborne laser scanning for quantifying criteria and indicators of sustainable forest management in Canada" - @Goodbody2021
 
-```{r include=FALSE, echo=FALSE}
+
+
+```{r, include=FALSE, echo=FALSE}
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown', 'htmlwidgets', 'webshot', 'DT',
   'miniUI', 'tufte', 'servr', 'citr', 'rticles', 'leaflet', 'raster', 'sf', 'sp',
-  'htmlwidgets', 'rgdal', 'leafem', 'geojsonio'), 'packages.bib')
+  'htmlwidgets', 'rgdal', 'leafem', 'geojsonio', 'lidR'), 'packages.bib')
 ```

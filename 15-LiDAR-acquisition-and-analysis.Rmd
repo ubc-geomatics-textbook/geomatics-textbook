@@ -1,6 +1,7 @@
 ---
 always_allow_html: true
 ---
+
 # LiDAR Acquisition and Analysis {#LiDAR-acquisition-and-analysis}
 
 ::: {.box-content .learning-objectives-content}
@@ -40,22 +41,23 @@ Since a LiDAR point cloud is a file containing the 3D location of points represe
 The most common file format for LiDAR files is called the LAS file format (`.las`). This file format was originally designed for 3D point cloud data, and is a free alternative to proprietary systems or a generic ASCII file interchange system. The main benefits of this file format are that it is relatively quick, can be used by any system, and stores information specific to the nature of LiDAR data without being overly complex [@AmericanSocietyforPhotogrammetry&RemoteSensing2019]. More information regarding the file type specifications can be found [here](https://www.asprs.org/divisions-committees/lidar-division/laser-las-file-format-exchange-activities){target="_blank"}.
 
 ```{r 15-las-denoise, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("An example of a typical LiDAR point cloud containing 3.14 million points at approximately 80 p/m^2^. The point cloud shows a 200 x 200 meter portion of Pacific Spirit Regional Park in Vancouver, and is part of the 2018 City of Vancouver [dataset](https://opendata.vancouver.ca/explore/dataset/lidar-2018/).")
+fig_cap <- paste("An example of a typical LiDAR point cloud containing 3.14 million points at approximately 80 p·m^-2^. The point cloud shows a 200 x 200 meter portion of Pacific Spirit Regional Park in Vancouver, and is part of the 2018 City of Vancouver [dataset](https://opendata.vancouver.ca/explore/dataset/lidar-2018/).")
 knitr::include_graphics(here::here("images", "15-las-denoise.png"))
 ```
 
 ## LiDAR History and Use
 
-LiDAR for forestry and ecology has been used to monitor vegetation structure, stream properties, and topography among other uses. The earliest versions of LiDAR were known as profiling systems and first investigated in the 1960's [@Nelson2013]. A major limitation of early LiDAR profiling systems were that the system was locked in a near-nadir position (i.e. along-track path), which meant that only transects could be collected, as opposed to a larger swath width as with modern systems [@Nelson2013; @Lim2003]. Technological advancements meant that early scanning LiDAR systems became more common in the 1980s, although point densities were low (1-5 p/m^2^), which limited researchers to area based measurements of forest volume and biomass [@Nelson2013]. These limitations were primarily due to the LiDAR sensor, as well as data storage difficulties. Technological improvements such as increased pulse rates and smaller footprints (leading to increased point density), and increased storage capacity have allowed researchers to look as individual trees as well as whole forests [@Jakubowski2013]. Previously limited to static LiDAR sensors, ALS point cloud densities of 1000 p/m^2^ are now entirely feasible. Figure \@ref(fig:15-high-low-point-density) shows two different point clouds densities, and how difficult it would be to delineate individual tree crowns at low point densities.
+LiDAR for forestry and ecology has been used to monitor vegetation structure, stream properties, and topography among other uses. The earliest versions of LiDAR were known as profiling systems and first investigated in the 1960's [@Nelson2013]. A major limitation of early LiDAR profiling systems were that the system was locked in a near-nadir position (i.e. along-track path), which meant that only transects could be collected, as opposed to a larger swath width as with modern systems [@Nelson2013; @Lim2003]. Technological advancements meant that early scanning LiDAR systems became more common in the 1980s, although point densities (measured as points per square meter, p·m^-2^) were low. Densities of 1-5 p·m^-2^ limited researchers to area based measurements of forest volume and biomass [@Nelson2013]. These limitations were primarily due to the LiDAR sensor, as well as data storage difficulties. Technological improvements such as increased pulse rates and smaller footprints (leading to increased point density), and increased storage capacity have allowed researchers to look as individual trees as well as whole forests [@Jakubowski2013]. Previously limited to static LiDAR sensors, ALS point cloud densities of 1000 p·m^-2^ are now entirely feasible. Figure \@ref(fig:15-high-low-point-density) shows two different point clouds densities, and how difficult it would be to delineate individual tree crowns at low point densities.
 
 ```{r 15-high-low-point-density, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("A cross section of a high density point cloud (A, 80 p/m^2^), and a lower density point cloud (B, 1 p/m^2^).")
+fig_cap <- paste("A cross section of a high density point cloud (A, 80 p·m^-2^), and a lower density point cloud (B, 1 p·m^-2^).")
 knitr::include_graphics(here::here("images", "15-high-low-point-density.png"))
 ```
 
 Unlike passive remote sensing technologies, LiDAR has the advantage of being able penetrate forest canopies; this means that we are able to detect the ground, and also characterize both vertical and horizontal vegetation structure. Since the data is extremely accurate, surface models developed using LiDAR are used in many fields where man-mane and natural environments need to be mapped. LiDAR derivatives are used in hazard assessment, forestry, agriculture, wet area mapping, and geologic mapping. In this chapter, we will discuss the use of LiDAR primarily in a forestry context, where raw data and derivatives are used for volume and biomass estimation, as well as individual tree crown analyses.
 
 -   **MORE? - link to some example free/open case studies?** Examples here include OPEN articles, but can also be linked as recommended readings:
+
     -   @Goodbody2021
     -   @Jaboyedoff2012
     -   @Hamraz2017
@@ -114,7 +116,7 @@ LiDAR units can be attached to a variety of platforms. Traditionally, LiDAR unit
 
 **Airplanes and Helicopters**
 
-Airplanes and helicopters are still the most common platforms for LiDAR data collection. This is due to their ability to collect large amounts of data in one acquisition. LiDAR units that are designed for airplanes are more powerful than those designed for drones, leading to increased penetration in forests, even though the flight height is significantly increased. Data storage issues can also be mitigated as the platform is not as sensitive to weight restrictions when compared to drones. With increased pulse rates, data acquisitions can also be dense enough to do individual tree crown work. Since helicopters are capable of flying at lower altitudes, slower speeds, and following terrain, they are capable of collecting more dense data, but higher operating costs [@White2013]. Typical point densities range from 5-200 p/m^2^.
+Airplanes and helicopters are still the most common platforms for LiDAR data collection. This is due to their ability to collect large amounts of data in one acquisition. LiDAR units that are designed for airplanes are more powerful than those designed for drones, leading to increased penetration in forests, even though the flight height is significantly increased. Data storage issues can also be mitigated as the platform is not as sensitive to weight restrictions when compared to drones. With increased pulse rates, data acquisitions can also be dense enough to do individual tree crown work. Since helicopters are capable of flying at lower altitudes, slower speeds, and following terrain, they are capable of collecting more dense data, but higher operating costs [@White2013]. Typical point densities range from 5-200 p·m^-2^.
 
 **Drone**
 
@@ -127,7 +129,7 @@ knitr::include_graphics(here::here("images", "15-LiDAR-on-Drone-2.jpg"))
 
 **Mobile Laser Scanning**
 
-Mobile Laser Scanning (MLS) includes people (sometimes called 'backpack LiDAR') and moving vehicles. This version of LiDAR has been used by transportation and engineering companies to precisely map things like road or building conditions, and as the units have reduced in size there has been and increase in interest for use in forestry. Current MLS units such as panel 2 in Figure \@ref(fig:15-LiDAR-Platforms) can be carried around by the user in a forest easily. The point density for that specific unit is approximately 6000 p/m^2^ while the battery can last for over an hour. Typical point densities are highly dependent on what the MLS is mounted to; and can range from hundreds to thousands of points per square meter.
+Mobile Laser Scanning (MLS) includes people (sometimes called 'backpack LiDAR') and moving vehicles. This version of LiDAR has been used by transportation and engineering companies to precisely map things like road or building conditions, and as the units have reduced in size there has been and increase in interest for use in forestry. Current MLS units such as panel 2 in Figure \@ref(fig:15-LiDAR-Platforms) can be carried around by the user in a forest easily. The point density for that specific unit is approximately 6000 p·m^-2^ while the battery can last for over an hour. Typical point densities are highly dependent on what the MLS is mounted to; and can range from hundreds to thousands of points per square meter.
 
 **Terrestrial Laser Scanning**
 
@@ -135,7 +137,7 @@ Terrestrial Laser Scanning (TLS) is a static system, meaning that is is placed i
 
 **Satellite**
 
-Satellites are a relatively new platform for LiDAR sensors. Two current satellite sensors are highlighted here; ICESat-2 and GEDI. Both are examples of large-footprint, profiling LiDAR systems. ICESat-2 was launched in 2018, with the objectives to determine sea-ice thickness and measure vegetation canopy height for large scale biomass estimation [NASA2021a]. The ICESat-2 LiDAR sensor is composed of 6 beams in 3 pairs, each with a footprint size of 13m [NASA2021a]. GEDI is a LiDAR sensor that was installed on the International Space Station in 2018, with 3 lasers producing 10 parallel tracks of observations, and a footprint size of 25m [@NASA2021]. The GEDI sensor can be seen in panel 4 of Figure \@ref(fig:15-LiDAR-Platforms).
+Satellites are a relatively new platform for LiDAR sensors. Two current satellite sensors are highlighted here; ICESat-2 and GEDI. Both are examples of large-footprint, profiling LiDAR systems. ICESat-2 was launched in 2018, with the objectives to determine sea-ice thickness and measure vegetation canopy height for large scale biomass estimation [@NASA2021a]. The ICESat-2 LiDAR sensor is composed of 6 beams in 3 pairs, each with a footprint size of 13m [@NASA2021a]. GEDI is a LiDAR sensor that was installed on the International Space Station in 2018, with 3 lasers producing 10 parallel tracks of observations, and a footprint size of 25m [@NASA2021]. The GEDI sensor can be seen in panel 4 of Figure \@ref(fig:15-LiDAR-Platforms).
 
 ```{r 15-LiDAR-Platforms, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 fig_cap <- paste("LiDAR Platforms 1: A terrestrial laser scanner (TLS) ('Lidar P1270901.jpg', @Monniaux, CC-BY-SA-3.0). 2: A hand-held moblie laser scanner (MLS). 3: Car mounted MLS ('3D mobile mapping unit', @OregonDepartmentofTransportation2016, CC-BY-2.0)' SOURCE, 4: GEDI, a spaceborne LiDAR sensor ('A New Hope: GEDI to Yield 3D Forest Carbon Map', @NEONEducation2014, CC-BY-2.0).")
@@ -150,7 +152,7 @@ Discrete return LiDAR is the most common type of LiDAR. Here, the reflected ener
 
 ### Full Waveform
 
-Full waveform LiDAR systems record reflected energy from each laser pulse as a continuous signal [@White2013].Traditionally, discrete return systems would only digitally store the discrete returns, without recording the complete analog return [@UFGeomatics-FortLauderdale2016c]. In contrast, full waveform systems digitize the entire analog signal at high sampling rates [@UFGeomatics-FortLauderdale2016c]. This can be seen on the right hand side of Figure \@ref(fig:15-LiDAR-Discrete-Full-Waveform). This type of LiDAR creates much larger file sizes which were an issue in the past, but with modern storage capabilities it is becoming a viable alternative to discrete return LiDAR. 
+Full waveform LiDAR systems record reflected energy from each laser pulse as a continuous signal [@White2013].Traditionally, discrete return systems would only digitally store the discrete returns, without recording the complete analog return [@UFGeomatics-FortLauderdale2016c]. In contrast, full waveform systems digitize the entire analog signal at high sampling rates [@UFGeomatics-FortLauderdale2016c]. This can be seen on the right hand side of Figure \@ref(fig:15-LiDAR-Discrete-Full-Waveform). This type of LiDAR creates much larger file sizes which were an issue in the past, but with modern storage capabilities it is becoming a viable alternative to discrete return LiDAR.
 
 ```{r 15-LiDAR-Discrete-Full-Waveform, fig.cap = fig_cap, out.width="70%", echo = FALSE}
 fig_cap <- paste("Differents in the response between discrete echo and full waveform LiDAR. 'Airborne Laser Scanning Discrete Echo and Full Waveform signal comparison', @Beck2012, CC-BY-SA-3.0).")
@@ -159,9 +161,9 @@ knitr::include_graphics(here::here("images", "15-LiDAR-Discrete-Full-Waveform.pn
 
 ### Emerging Technology
 
-**Single Photon LiDAR** is an emerging technology that allows wall-to-wall mapping detecting photons reflected off of surfaces more efficiently than traditional LiDAR sensors [@Swatantran2016]. While traditional LiDAR systems emit high energy laser beams, single photon systems transmit shorter, lower energy pulses [@Swatantran2016]. These systems use a green laser (532 nm), and due to the high efficiency nature of the technology can acquire high density point clouds (12-30 p/m^2^) up to 30 times faster than traditional systems, and operate at higher altitudes [@Swatantran2016]. The system is also capable of penetration semi-porous obscurations such as vegetation, ground fog and thin clouds during daytime and night-time operations [@Swatantran2016].
+**Single Photon LiDAR** is an emerging technology that allows wall-to-wall mapping detecting photons reflected off of surfaces more efficiently than traditional LiDAR sensors [@Swatantran2016]. While traditional LiDAR systems emit high energy laser beams, single photon systems transmit shorter, lower energy pulses [@Swatantran2016]. These systems use a green laser (532 nm), and due to the high efficiency nature of the technology can acquire high density point clouds (12-30 p·m^-2^) up to 30 times faster than traditional systems, and operate at higher altitudes [@Swatantran2016]. The system is also capable of penetration semi-porous obscurations such as vegetation, ground fog and thin clouds during daytime and night-time operations [@Swatantran2016].
 
-**Multispectral LiDAR** units such as the Optech Titan sensor operate three distinct wavelengths of 1550 nm, 1064 nm, and 532 nm [@Morsy2017]. This technology enables 3D spectral information to be captured; for example, NDVI can be calculated for the 3D point cloud. Combining multispectral LiDAR at three wavelengths allows for higher reliability and accuracy compared to single-wavelength LiDAR [@Morsy2017], however this technology is not yet widespread. 
+**Multispectral LiDAR** units such as the Optech Titan sensor operate three distinct wavelengths of 1550 nm, 1064 nm, and 532 nm [@Morsy2017]. This technology enables 3D spectral information to be captured; for example, NDVI can be calculated for the 3D point cloud. Combining multispectral LiDAR at three wavelengths allows for higher reliability and accuracy compared to single-wavelength LiDAR [@Morsy2017], however this technology is not yet widespread.
 
 ::: {.box-content .call-out-content}
 ::: {.box-title .call-out-top}
@@ -178,8 +180,6 @@ Specifications for LiDAR data acquisitions are highly variable. It is important 
 ## LiDAR Derivatives and Analysis
 
 LiDAR point clouds require post-processing to be useful. Often, point clouds contain noise that needs to be removed, while the points need to be classified to produce derivatives. Once a point cloud has been cleaned and classified, we can create a variety of products to describe the Earth's surface, as well as describe vertical characteristics of our point clouds. The most important points to identify in a point cloud are ground and non-ground returns; these points are crucial for deriving digital elevation models, digital surface models, and canopy height models.
-
-- **MORE?**
 
 ### Bare Earth Elevation
 
@@ -207,8 +207,9 @@ LiDAR analysis in forestry uses two broad approaches, an area-based approach (AB
 
 When doing either of these analyses, we typically produce LiDAR metrics. These metrics are descriptive statistics of the point cloud over a unit area. How we define that unit is decides what kind of analysis we are able to do, and what kind of inferences are possible (i.e. ABA vs ITD). An ITD approach has a 'unit' size of one tree, whereas the ABA typically uses a grid size of 20 x 20 m. Both approaches require ground truthing, and for an ABA approach, plot sizes are typically designed to be of a similar area to the chosen grid size [White2013].
 
--   **Add an example study using ABA?** 
-    - @Tompalski2019
+-   **Add an example study using ABA?**
+
+    -   @Tompalski2019
 
 ```{r 15-las-hmax-2D, fig.cap = fig_cap, out.width="70%", echo = FALSE}
 fig_cap <- paste("Maximum heights of 10 meter cells using an area-based approach.")
@@ -225,6 +226,8 @@ knitr::include_graphics(here::here("images", "15-Processing-Flowchart.png"))
 ```
 
 Once we have segmented a point cloud, we can produce metrics for individual trees. These metrics can be used to help to identify structural traits of trees, which can then be used to identify different tree species, or to characterize different forest types. Ground based LiDAR scanners (MLS and TLS) are also used to very accurately estimate tree, trunk, and branch volumes.
+
+-   **Add an example study using ITD?**
 
 ```{r 15-las-treetops, fig.cap = fig_cap, out.width="80%", echo = FALSE}
 fig_cap <- paste("Example of tree tops detected using the `find_trees` function." )
@@ -382,13 +385,9 @@ LiDAR is an active remote sensing technology that requires three components; a l
 
 ## Recommended Readings {.unnumbered}
 
-- "A best practices guide for generating forest inventory attributes from airborne laser scanning data using an area-based approach. Information Report FI-X-010" - @White2013
+-   A best practices guide for generating forest inventory attributes from airborne laser scanning data using an area-based approach. Information Report FI-X-010 - @White2013
 
-- "Airborne laser scanning for quantifying criteria and indicators of sustainable forest management in Canada" - @Goodbody2021
-
-
-
-
+-   Airborne laser scanning for quantifying criteria and indicators of sustainable forest management in Canada - @Goodbody2021
 
 ```{r, include=FALSE, echo=FALSE}
 knitr::write_bib(c(

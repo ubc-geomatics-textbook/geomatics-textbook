@@ -48,27 +48,32 @@ such as human vision. Similar arguments could be made for other senses,
 such as smell or hearing, but this chapter will focus strictly on
 techniques that capture and record electromagnetic radiation.
 
-The first recorded use of optical remote sensing occurred \_\_\_\_
-(Plato). Over the next few centuries a variety of photosensitive
-chemicals were discovered and, in \_\_\_\_, \_\_\_\_\_\_ established the
-technique recognized as photography. The ability to record specific
-objects within a scene proved enabled the preservation of information in
-a rapid and accessible medium. Eventually, photography became a
-prominent means of immortalizing everything from individual humans to
-exotic landscapes. After all, a picture says a thousand words.
+One of the first recorded conceptualizations of remote sensing was
+presented by Plato in the Allegory of a Cave, where he philosophized
+that the sense of sight is simply a contracted version of reality from
+which the observer can interpret facts presented through transient
+images created by light (Allegory of a Cave). Over the next few
+centuries a variety of photosensitive chemicals were discovered which
+enabled the transient images humans see to be recorded . This technology
+was called photography (see [A History of
+Photography](https://www.scienceandmediamuseum.org.uk/objects-and-stories/history-photography)).
+The ability to record the interaction of light and specific objects
+within a scene proved enabled the preservation of information in an
+accessible medium. Eventually, photography became a prominent means of
+immortalizing everything from individual humans to exotic landscapes.
+After all, a picture says a thousand words.
 
-In 1851, an enthusiastic Frenchman named Gaspard Tournachon mounted a
+In 1858, an enthusiastic Frenchman named Gaspard Tournachon mounted a
 camera on a hot air balloon and captured images of the earth below him.
-These images were taken as the camera looked straight down, or nadir, at
-the City of \_\_\_ and provided a novel view of the city. For the first
-time it was possible to examine the distribution of buildings, fields,
-forests and roads across the landscape. With this, airborne remote
-sensing was born. Remote sensing technologies continued to advance
-throughout the 19th and 20th centuries, with major socio-political
-conflicts like World War I and II acting as crucibles for innovation.
-The advancement of remote sensing has continued into the 21st century
-and is unlikely to slow down in the future. This is due to the relevance
-of three key aspects.
+These images were taken as the camera looked down at a small village
+outside Paris. For the first time it was possible to examine the
+distribution of buildings, fields, forests and roads across the
+landscape. With this, airborne remote sensing was born. Remote sensing
+technologies continued to advance throughout the 19th and 20th
+centuries, with major socio-political conflicts like World War I and II
+acting as crucibles for innovation. The advancement of remote sensing
+has continued into the 21st century and is unlikely to slow down in the
+future. This is due to the relevance of three key aspects.
 
 First and foremost, remote sensing enables the observation of objects
 in, or from, locations that are otherwise inaccessible for humans. The
@@ -76,11 +81,11 @@ observation of Mars' surface from an orbiting satellite is a one current
 example. A second aspect that makes remote sensing so useful is the
 collection of information over a large area. For example, airborne
 remote sensing technologies enable observations of land cover across
-Canada (Figure \@ref(fig:11-hermosilla-canada-landcover)). The baility
-ot evaluate inaccessible objects or large areas over time is a tird
-avluable aspect of remote sensing and is particularly relevant for lnd
-amnagement, as predictions can be informed through the observation of
-hstoric patterns and processes. This is especially true for projects
+Canada (Figure \@ref(fig:11-hermosilla-canada-landcover)). The ability
+to evaluate inaccessible objects or large areas over time is a third
+valuable aspect of remote sensing and is particularly relevant for land
+management, as predictions can be informed through the observation of
+historic patterns and processes. This is especially true for projects
 aiming to restore degraded ecosystems or plan sustainable land use
 practices. Before exploring the designs of specific sensor or their
 applications, however, it is essential to grasp some key components that
@@ -194,21 +199,25 @@ be measured and how to write them, we can begin to explore the
 electromagnetic spectrum (EMS). The EMS is the continuum along within
 photons are located based on their properties (Figure
 \@ref(fig:11-EMS)). We have discussed both wavelength and frequency,
-which are inversely related and commonly used to describe EMR. Figure 2
-also depicts a thermometer laying sideways, which demonstrates that as
-an object's temperature increases, the wavelength of the photons emitted
-decreases. This follows Equation \@ref(eq:energy-wvl), which
-demonstrates that photons with shorter wavelengths have higher energy. A
-practical example of this would be that the majority of photons emitted
-from the sun (5,788 K) are around 0.5 x 10^-6^ nm, while the majority of
-photons emitted from the human body (\~310 K) are around 10^-4^.
+which are inversely related and commonly used to describe EMR. Figure
+\@ref(fig:11-EMS) also depicts a thermometer laying sideways, which
+demonstrates that as an object's temperature increases, the wavelength
+of the photons emitted decreases. This follows Equation
+\@ref(eq:energy-wvl), which demonstrates that photons with shorter
+wavelengths have higher energy. A practical example of this would be
+that the majority of photons emitted from the sun (5,788 K) are around
+0.5 x 10^-6^ nm, while the majority of photons emitted from the human
+body (\~310 K) are around 10^-4^. These measurements are theoretical and
+are calculated using theoretical object, often called a blackbody that
+allows all energy to enter (no reflectance, hence "black") and be
+absorbed (no transmission). The resulting EMR that is emitted would be
+generated thermally and be equal or greater than any other body at the
+same temperature.
 
 ```{r 11-EMS, fig.cap = fig_cap, out.width = "200%", echo = FALSE}
     fig_cap <- paste("Electromagnetic (also known as Milton) spectrum depicting the type, wavelength, frequency and black body emission temperature. Credit: Inductiveload, NASA.")
     knitr::include_graphics(here::here("images", "11-EMS.png"))
 ```
-
-A key theoretical concept related to the measurement of
 
 ::: {.box-content .call-out-content}
 ::: {.box-title .call-out-top}
@@ -242,18 +251,33 @@ the EMS you can explore [this
 document](https://books.google.ca/books?hl=en&lr=&id=DfLPpxogdM4C&oi=fnd&pg=PA27&dq=electromagnetic+spectrum+remote+sensing&ots=IabuAFaJV5&sig=cAgV799LGmajf-ERLU2HraQjwyM#v=onepage&q&f=false "Tour of the electromagnetic spectrum")
 created by Ginger Butcher for NASA in 2010.
 
-| Name             | Wavelength                       | Details |
-|------------------|----------------------------------|---------|
-| Radio            | 1 cm - 1,000 km (10^3^ - 10^10^) |         |
-| Microwave        | 1 mm - 1 cm (10^10^ - 10^11^)    |         |
-| Infrared (IR)    | 700 nm - 1 mm (10^11^ - 10^14^)  |         |
-| Visible (Vis)    | 400 - 700 nm (10^14^ - 10^15^)   |         |
-| Ultraviolet (UV) | 10 - 400 nm (10^15^ - 10^17^)    |         |
-| X rays           | 0.1 - 10 nm (10^17^ - 10^20^)    |         |
-| Gamma rays       | \< 0.1 nm (10^20^ - 10^23^)      |         |
++-----------------+----------------------+
+| Name            | Wavelength           |
++=================+======================+
+| Radio           | 1 cm - 1,000 km      |
+|                 | (10^3^ - 10^10^)     |
++-----------------+----------------------+
+| Microwave       | 1 mm - 1 cm (10^10^  |
+|                 | - 10^11^)            |
++-----------------+----------------------+
+| Infrared (IR)   | 700 nm - 1 mm        |
+|                 | (10^11^ - 10^14^)    |
++-----------------+----------------------+
+| Visible (Vis)   | 400 - 700 nm (10^14^ |
+|                 | - 10^15^)            |
++-----------------+----------------------+
+| Ultraviolet     | 10 - 400 nm (10^15^  |
+| (UV)            | - 10^17^)            |
++-----------------+----------------------+
+| X rays          | 0.1 - 10 nm (10^17^  |
+|                 | - 10^20^)            |
++-----------------+----------------------+
+| Gamma rays      | \< 0.1 nm (10^20^ -  |
+|                 | 10^23^)              |
++-----------------+----------------------+
 
-: Table 1. Details for the seven regions of the electromagnetic
-spectrum.
+: Table 1. Names and associated wavelengths for the seven regions of the
+electromagnetic spectrum.
 
 ## Physical laws of radiation
 
@@ -271,9 +295,8 @@ Methods of Normalization.
 The use of radiation to quantify properties of an object is inherently
 linked with relatively complex theories of physics. To minimize both
 confusion and workload, we will highlight a select number of key
-concepts that support the use of the EMS for remote sensing (Figure
-WORKFLOW\_). The first concepts to become familiar with are radiant
-energy and radiant flux
+concepts that support the use of the EMS for remote sensing. The first
+concepts to become familiar with are radiant energy and radiant flux
 
 Radiant energy is essentially the energy carried by photons, which is
 measured in Joules (J). Recall that the amount photon energy defines
@@ -290,26 +313,26 @@ with an object, which results in radiant flux.
 
 Now that you are familiar radiant energy and flux, we can discuss
 irradiance. Irradiance refers to the amount of radiant energy that
-contacts a 1 m^2^ area each second (W m^-2^). This includes all
-electromagnetic energy that contacts our 1 m^2^ surface, which could be
-a combination of radiation from the sun, a halogen light bulb overhead
-and your computer screen. Another important concept is solar irradiance,
+contacts a 1 m-2 area each second (W.m-2). This includes all
+electromagnetic energy that contacts our 1 m-2 surface, which could be a
+combination of radiation from the sun, a halogen light bulb overhead and
+your computer screen. Another important concept is solar irradiance,
 which strictly refers to the amount of solar radiation interacting with
-our 1 m^2^ area. Solar irradiance is very important in many remote
+our 1 m-2 area. Solar irradiance is very important in many remote
 sensing applications as it determines which photons an optical sensor
 *could* record in naturally illuminated environments. An associate of
 irradiance is radiance, which refers the the amount of radiant flux is a
 specific direction. The direction in question is often called the "solid
 angle" and makes radiance a directional quantity. You could imagine
-holding a DLSR camera 90 ^0^ above a flat leaf so that the only item
+holding a DLSR camera 90 degrees above a flat leaf so that the only item
 visible to the shutter is the leaf. The camera would capture the
 radiance reflected from the leafs surface and the solid angle would be
-90^0^. Essentially, irradiance is used to measure the radiant energy
-that contacts a 1 m^2^ area, while radiance measures the radiant flux of
-an object from a specific angle.
+90 degrees. Essentially, irradiance is used to measure the radiant
+energy that contacts a 1 m-2 area, while radiance measures the radiant
+flux of an object from a specific angle.
 
 So far we have discussed radiant energy and flux as basic concepts
-interacting with a single object (leaf) or 1 m^2^ surface. In reality,
+interacting with a single object (leaf) or 1 m-2 surface. In reality,
 radiant energy from the sun begins interacting with objects as soon as
 it enters earth's atmosphere. The process by which radiation is
 reflected by other particles is called scattering. Scattering occurs
@@ -333,12 +356,12 @@ clouds and fog.
 
 The combination of these three scattering types leads to drastic
 differences between the amount of solar irradiance at the top of the
-atmosphere and at sea level (Figure \_\_). There are also a variety of
-wavelengths at which ozone, oxygen, water and carbon dioxide absorb
-incoming radiation, precluding entire sections of the EMS from reaching
-the surface. Overall, only a small portion of energy emitted from the
-sun reaches the Earth's surface. Most energy is absorbed or scattered by
-particles in the Earth's atmosphere
+atmosphere and at sea level (Figure \@ref(fig:11-solar-radiation)).
+There are also a variety of wavelengths at which ozone, oxygen, water
+and carbon dioxide absorb incoming radiation, precluding entire sections
+of the EMS from reaching the surface. Overall, only a small portion of
+energy emitted from the sun reaches the Earth's surface. Most energy is
+absorbed or scattered by particles in the Earth's atmosphere
 
 ```{r 11-solar-radiation, fig.cap = fig_cap, out.width = "200%", echo = FALSE}
     fig_cap <- paste("Solar radiation spectrum from 250 - 2500 nm. Irradiance measurements at the top of the atmosphere (yellow) and sea level (red) are depicted. The grey line represents the theoretical curve of a 5250 degree C blackbody spectrum. Created by Robert A. Rohde for Global
@@ -386,9 +409,10 @@ measurements that our sensors record. One of the most important concepts
 to understand is that of the spectral signature, or spectra. A spectral
 signature refers to the amount of electromagnetic energy recorded across
 a defined section of the EMS. A nice example of a spectral signature is
-Figure \_\_, which presents the sun's radiation between 250 - 2500 nm in
-the units of solar irradiance (W/m^2^/nm). Similar graphs are common
-throughout remote sensing and can employ different units of measure.
+Figure \@ref(fig:11-solar-radiation), which presents the sun's radiation
+between 250 - 2500 nm in the units of solar irradiance (W/m-2/nm).
+Similar graphs are common throughout remote sensing and can employ
+different units of measure.
 
 The base measurements taken to generate spectral signatures is of an
 objects radiance. Acquiring radiance across a defined section of the EMS
@@ -454,17 +478,17 @@ and therefore capability, of remotely sensed data.
 
 ::: {.box-content .your-turn-content}
 ::: {.box-title .your-turn-top}
-#### Your turn! Create a workflow of theories to highlight chapter so far {.unnumbered}
+#### Your turn! {.unnumbered}
 :::
 
-Practice questions relating to photon energy:
+Calculate:
 
--   demonstrate the higher frequency = higher energy
+1.  The number of zeros in 2.5 x 10-7
 
--   higher wavelength = lower energy
+2.  The energy (E) of a photon with a wavelength of 450 nm.
 
-What is the section of the EMS in which humans can see? What is it's
-approximate range?
+3.  The absorptance value for a surface with a reflectance of 0.4 and a
+    transmittance of 0.35
 :::
 
 ## The Four Resolutions
@@ -563,29 +587,39 @@ consequences of a decrease in energy is a decrease in spatial resolution
 information).
 
 A common method for visualizing the spectral resolution of a sensor is
-to place each band along the EMS (NASA Figure). This allows users to
-determine which sensor best captures the information they are interested
-in studying. For some applications, such as land use, it is acceptable
-to use sensors with relatively wide bands collecting information in a
-small number of strategic locations along the EMS. For other
-applications, spectral information may need to be more detailed and
-capture information using thin, adjacent bands spanning a large region
-of the EMS. These specifications will be discussed in greater detail in
-Chapter 12, so for now we'll focus on how spectral information can be
-useful.
+to place each band along the EMS according to it's associated bandwidth
+and wavelengths (Figure \@ref(fig:11-landsat-bands)). This allows users
+to determine which sensor best captures the information they are
+interested in studying. For some applications, such as land use, it is
+acceptable to use sensors with relatively wide bands collecting
+information in a small number of strategic locations along the EMS. For
+other applications, spectral information may need to be more detailed
+and capture information using thin, adjacent bands spanning a large
+region of the EMS. These specifications will be discussed in greater
+detail in Chapter 12, so for now we'll focus on how spectral information
+can be useful.
+
+```{r 11-landsat-bands, fig.cap = fig_cap, out.width = "100%", echo = FALSE}
+    fig_cap <- paste("Locations of bands for various sensors deployed by NASA on one of more Landsat misison. Landsat 1-5 had the Multispectral Scanner System (MSS), while the Thematic Mapper (TM) was aboard Landsat 4-5. The Enrinched TM Plus (ETM+) had 8 bands and was aboard Landsat 7. Grey distributions in the background represent the atmospheric transmission values for a mid-latitude, hazy, summer atmosphere. This image was created by NASA.")
+    knitr::include_graphics(here::here("images", "11-landsat-bands.png"))
+```
 
 The collection of spectral data across more than one band allows the
 creation of a spectral curve, or spectral signature. Spectral signature
 are the cornerstone of many remote sensing applications and highlight
 many properties of the surface from which they were collected. The
 creation of a spectral signature is quite simple and can be depicted in
-two dimensions (FIGURE). Essentially, the observed value of each band is
-connected to the observed value of each adjacent band in 2D space. When
-all bands are connected, a spectral signature is born. As we will see in
-a later case study, spectral signatures can provide a plethora of
-relevant information relating to the composition of an object.
+two dimensions (Figure \@ref(fig:11-specsig). Essentially, the observed
+value of each band is connected to the observed value of each adjacent
+band in 2D space. When all bands are connected, a spectral signature is
+born. As we will see in a later case study, spectral signatures can
+provide a plethora of relevant information relating to the composition
+of an object.
 
-SPECTRAL SIGNATURE FIGURE
+```{r 11-specsig, fig.cap = fig_cap, out.width = "200%", echo = FALSE}
+    fig_cap <- paste("Five spectral signatures of various living and non-living samples collected using an ASD FieldSpec3 Imaging Spectroradiometer.")
+    knitr::include_graphics(here::here("images", "11-spectralsig.png"))
+```
 
 ### Radiometric Resolution
 
@@ -633,8 +667,8 @@ The use of optical remote sensing (400 - 2500 nm) to analyze the
 environment has become popular over the past half century. Sensor
 development, improved deployability and decreasing costs have enabled
 many researchers to use selected sections of the EMS to monitor
-everything from global land use change to the chlorophyll content of a
-single leaf.
+everything from the chlorophyll content of a single leaf [@curran1989]
+to global forest cover [@hansen2013].
 
 Large-scale research projects focused at national or international
 levels have perhaps benefit the most from improved sensor deployment.
@@ -643,28 +677,28 @@ purpose of observing the Earth. Landsat is NASA suite of satellites
 designed specifically for this purpose. By the end of 2021, a total of
 nine Landsat missions will have been launched, eight of which have
 successfully reached orbit and provided imagery in at least 5 broad
-spectral bands at 30 m\^2 spatial resolution. This information has been
-used to monitor land cover change, ecosystem services and a variety of
-other environmentally relevant metrics. EXAMPLE 1. EXAMPLE 2. The case
-study at the end of this section highlights a particularly novel
-approach to optical remote sensing that has become a popular methodology
-to evaluate plant health and biodiversity @asner2009 @asner2016
+spectral bands at 30 m-2 spatial resolution. This information has been
+used to monitor of land cover change, ecosystem services and a variety
+of other environmentally relevant metrics [@deel2012]. The case study at
+the end of this section highlights a particularly novel approach to
+optical remote sensing that has become a popular methodology to evaluate
+plant health and biodiversity [@ustin2009][@wang2018].
 
 As far as Canada's contributions to remote sensing sensors rank,
-RADARsat is among the most important. This satellite was launched in
-1995 and has grown to a constellation of three space-borne synthetic
-aperture radar (SAR) sensors that feature variable resolution. As an
-active sensor, RADARsat produces and measures EMR with wavelengths
-between 7.5 - 15 cm and is capable of penetrating clouds and smoke. It's
-active nature also enables RADARsat to record observations at night.
-Chapter 12 will discuss radar in more detail.
+RADARsat is among the most important [@raney1991]. This satellite was
+launched in 1995 and has grown to a constellation of three space-borne
+synthetic aperture radar (SAR) sensors that feature variable resolution.
+As an active sensor, RADARsat produces and measures EMR with wavelengths
+between 7.5 - 15 cm and is capable of penetrating clouds and smoke
+[@raney1991]. It's active nature also enables RADARsat to record
+observations at night. Chapter 12 will discuss radar in more detail.
 
 Another active remote sensing technique that has become popular is light
 detection and ranging (LiDAR), which can also be called airborne laser
 scanning (ALS). LiDAR is particularly useful in evaluating structural
-components of the environment, such as forest canopies and elevation.
-More details regarding the theories and applications of LIDAR will be
-presented in Chapter 15.
+components of the environment, such as forest canopies and elevation
+[@coops2007]. More details regarding the theories and applications of
+LIDAR will be presented in Chapter 15.
 
 ::: {.box-content .case-study-content}
 ::: {.box-title .case-study-top}
@@ -685,9 +719,9 @@ linked leaf functional traits, both structural and chemical, to leaf
 reflectance between 400 - 2500 nm using partial least squares regression
 (PLSR) modeling. They demonstrated that these models could accurately
 predict the leaf traits in questions and proved that this methodology
-could be scaled to the canopy-level (). Asner and Martin also showed
-that plant species could be accurately grouped based on the similarities
-of their spectral signatures (Figure \@ref(fig:11-specdiv)). Combined,
+could be scaled to the canopy-level. Asner and Martin also showed that
+plant species could be accurately grouped based on the similarities of
+their spectral signatures (Figure \@ref(fig:11-specdiv)). Combined,
 these concepts enabled the accurate detection of functional and
 biological diversity across both the Andes and Amazon region of South
 America.
@@ -703,25 +737,6 @@ America.
     fig_cap <- paste("Cluster analysis of spectral signatures from 37 unique plant species conducted by Asner and Martin 2009. Red and blue represent high and low reflance values, respecively, and the dendogram presented on the right side of the graph demonstrates the assigned groupings. Figure adapted from Asner and Martin 2009.")
     knitr::include_graphics(here::here("images", "11-asner2009-specdiv.png"))
 ```
-
-<p>
-
-Results and Discussion
-
-</p>
-
-<p>
-
-Case studies should have at least one image or map (no more than 2
-total) and the written length should be around 300 words (shown above).
-Any references to external literature should by hyperlinked with the
-Digitial Object Identifier (DOI) permanent URL and [entered into the
-bibliography](https://bookdown.org/yihui/bookdown/citations.html){target="_blank"}.
-Avoid linking to external resources without a DOI and permanent URL.
-Contact Paul or try using the Leaflet package in R if you want to add an
-interactive web map.
-
-</p>
 :::
 
 ## Summary
@@ -744,21 +759,16 @@ collect. Much like a carpenter selecting the correct tool for a specific
 task, you will need apply your knowledge of the fundamentals to identify
 the best sensor for your research.
 
-### Reflection Questions {.unnumbered}
+### Reflection Questions
 
-1.  Explain ipsum lorem.
-2.  Define ipsum lorem.
-3.  What is the role of ispum lorem?
-4.  How does ipsum lorem work?
-
-### Practice Questions {.unnumbered}
-
-2.  Given ipsum, solve for lorem.
-3.  Draw ipsum lorem.
-
-`r if (knitr::is_html_output()) ' ## Recommended Readings {-} '`
-
-Ensure all inline citations are properly referenced here.
+1.  What section of the electromagnetic spectrum is adjacent to, but
+    shorter in wavelength than, what the human eye can see?
+2.  What is the general term used to describe the process that stops
+    large amounts of electromagnetic radiation from reaching the Earth's
+    surface. Name the three types?
+3.  List and describe the four resolutions.
+4.  What aspect of the relationship between light and leaves did
+    [@asner2009] exploit to derive leaf chemicals?
 
 ```{r include=FALSE}
 knitr::write_bib(c(

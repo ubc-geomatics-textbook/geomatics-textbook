@@ -199,7 +199,7 @@ leaflet(height=500, width="80%") %>% setView(lng=-123.1270252730915, lat=49.2953
 Networks can then be arranged according to various different configurations. Aside from classifying networks into different types according to their topologies, some of the most useful features of spatial network analysis refers to how to extract information from these structures given certain parameters.
 
 ### Network Tracing
-The act of modelling spatial networks is called *Network tracing*. When tracing a network it is important to bear in mind the direction with which information is added to the network, especially when this orientation information is important to further analyze flows and relationships within such structure. For example, when mapping hydrological networks to study its flows it might be useful to model the direction of streams as this is an important information to represent the dynamics of the network.
+The act of modelling spatial networks is called *Network tracing*. When tracing a network it is important to bear in mind the direction with which information is added to the network, especially when this orientation information is important to further analyze flows and relationships within such structure. For example, when mapping hydrological networks to study its flows it might be useful to model the direction of streams coherently as this might be an important information to represent the dynamics of the network.
 
 ```{r, echo=FALSE}
 
@@ -211,9 +211,10 @@ The act of modelling spatial networks is called *Network tracing*. When tracing 
 Linear referencing systems are commonly used for finding the length of pathways along the network [@ramsey23LinearReferencing2012]. In this method, the graph elements are defined in terms of their physical location and edges are used to calculate distances among parts of the network.
 
 ### Routing
-Finding routes between nodes is an useful application of spatial networks. [@systemsinnovationNetworkDiffusionContagion2015].
+Finding routes between nodes is an useful application of spatial networks. This is how maping tools help us navigate the world by finding the most efficient route to move around the city, for example. [@systemsinnovationNetworkDiffusionContagion2015].
 
 #### Least Cost Paths
+The notion of cost let us compare different routes. It relates to the necessary distance (either physically or logically) to go from a certain node to another.
 
 ```{r, echo=FALSE}
 
@@ -236,27 +237,27 @@ Closeness centrality measures how close each node is to every other node of the 
 
 intersections <- readOGR("data/ubc_intersections.geojson", verbose=FALSE)
 map <- leaflet(intersections, height=500, width="80%") %>% addTiles()
-pal <- colorNumeric(palette="viridis", domain=intersections$closeness, n=6)
+pal <- colorNumeric(palette="viridis", domain=intersections$closeness, n=6, reverse=TRUE)
 
 map %>% 
   addProviderTiles(providers$CartoDB.Positron) %>%
-  addPolygons(data=intersections, color=~colorQuantile("viridis", closeness)(closeness)) %>%
+  addPolygons(data=intersections, color=~colorQuantile("viridis", closeness, reverse=TRUE)(closeness)) %>%
   addLegend("bottomright", pal=pal, values=~closeness, title="Closeness", opacity=1)
 
 ```
 
 #### Betweenness Centrality
-Betweenness centrality measures how likely a node or an edge is to be passed through when going from every node to every other node of the graph. If we imagine agents travelling from each node to every other node and back, betweenness centrality would be the trail left by those agents. While closeness highlights central spaces, betweenness highlights pathways that lead to those central spaces. Using the same street network at UBC
+Betweenness centrality measures how likely a node or an edge is to be passed through when going from every node to every other node of the graph. If we imagine agents travelling from each node to every other node and back, betweenness centrality would be the trail left by those agents. While closeness highlights central spaces, betweenness highlights pathways that lead to those central spaces. Using the same street network at UBC we can calculate the betweenness of segments.
 
 ```{r, echo=FALSE}
 
 segments <- readOGR("data/ubc_segments.geojson", verbose=FALSE)
 map <- leaflet(segments, height=500, width="80%") %>% addTiles()
-pal <- colorNumeric(palette="viridis", domain=segments$betweenness, n=6)
+pal <- colorNumeric(palette="viridis", domain=segments$betweenness, n=6, reverse=TRUE)
 
 map %>% 
   addProviderTiles(providers$CartoDB.Positron) %>%
-  addPolygons(data=segments, color=~colorQuantile("viridis", betweenness)(betweenness)) %>%
+  addPolygons(data=segments, color=~colorQuantile("viridis", betweenness, reverse=TRUE)(betweenness)) %>%
   addLegend("bottomright", pal=pal, values=~betweenness, title="Betweenness", opacity=1)
 
 ```
@@ -276,6 +277,16 @@ We can use centrality measures to evaluate how accessible certain spaces are fro
 #### Central and peripheral green spaces in Vancouver? {#box-text -}
 [@mantegnaUBCChangingClimate2021]
 <p id="box-text"></p>
+Are green spaces evenly accessible throughout the whole city? Which parks are closer to the whole city? Centrality analysis can be used to answer these questions.
+
+First we need to run the Closeness for the street network of the City of Vancouver. The network information can be downloaded for free from [OpenStreetMap](https://www.openstreetmap.org/).
+
+This is the result of running the Closeness centrality analysis for the whole city. Now we can overlay Parks & Green spaces data from the [City of Vancouver Open Data portal](https://opendata.vancouver.ca/explore/dataset/parks-polygon-representation/information/) and get the average closeness of each green space.
+
+``` {r, echo=FALSE}
+
+```
+
 
 <p id="box-text"></p>
 

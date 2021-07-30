@@ -54,13 +54,9 @@ fig_cap <- paste("A cross section of a high density point cloud (A, 80 p·m^-2^)
 knitr::include_graphics(here::here("images", "15-high-low-point-density.png"))
 ```
 
-Unlike passive remote sensing technologies, LiDAR has the advantage of being able penetrate forest canopies; this means that we are able to detect the ground, and also characterize both vertical and horizontal vegetation structure. Since the data is extremely accurate, surface models developed using LiDAR are used in many fields where man-mane and natural environments need to be mapped. LiDAR derivatives are used in hazard assessment, forestry, agriculture, wet area mapping, and geologic mapping. In this chapter, we will discuss the use of LiDAR primarily in a forestry context, where raw data and derivatives are used for volume and biomass estimation, as well as individual tree crown analyses.
+Unlike passive remote sensing technologies, LiDAR has the advantage of being able penetrate forest canopies; this means that we are able to detect the ground, and also characterize both vertical and horizontal vegetation structure. Since the data is extremely accurate, surface models developed using LiDAR are used in many fields where man-made and natural environments need to be mapped. LiDAR derivatives such as surface models are used in hazard assessment (see here: @Jaboyedoff2012), forestry (read more here: @Goodbody2021), wet area mapping (here: @Eash2018 and @Zurqani2020), geologic/geomorphological mapping, and agriculture. In this chapter, we will discuss the use of LiDAR primarily in a forestry context, where raw data and derivatives are used for volume and biomass estimation, as well as individual tree crown analyses.
 
--   **MORE? - link to some example free/open case studies?** Examples here include OPEN articles, but can also be linked as recommended readings:
-
-    -   @Goodbody2021
-    -   @Jaboyedoff2012
-    -   @Hamraz2017
+-   **MORE? - I have linked to some example free/open case studies in the text but could elaborate further if needed**
 
 ## Components of a LiDAR System
 
@@ -179,7 +175,7 @@ Specifications for LiDAR data acquisitions are highly variable. It is important 
 
 ## LiDAR Derivatives and Analysis
 
-LiDAR point clouds require post-processing to be useful. Often, point clouds contain noise that needs to be removed, while the points need to be classified to produce derivatives. Once a point cloud has been cleaned and classified, we can create a variety of products to describe the Earth's surface, as well as describe vertical characteristics of our point clouds. The most important points to identify in a point cloud are ground and non-ground returns; these points are crucial for deriving digital elevation models, digital surface models, and canopy height models.
+LiDAR point clouds require post-processing to be useful. Often, point clouds contain noise that needs to be removed, while the points need to be classified to produce derivatives. Once a point cloud has been cleaned and classified, we can create a variety of products to describe the Earth's surface, as well as describe vertical characteristics of our point clouds. The most important points to identify in a point cloud are ground and non-ground returns; these points are crucial for deriving surface models, such as: digital elevation models, digital surface models, and canopy height models.
 
 ### Bare Earth Elevation
 
@@ -203,13 +199,9 @@ knitr::include_graphics(here::here("images", "15-las-CHM-2D.png"))
 
 ### Area Based Approach vs. Individual Tree Crown Approach
 
-LiDAR analysis in forestry uses two broad approaches, an area-based approach (ABA), or an individual tree crown detection approach (ITD). The ITD approach locates individual trees and allows the estimation of individual tree heights and crown area. From this, other metrics such as stem diameter, number of stems, basal area and stem volume can be derived [@Hyyppa1999]. In contrast, the main goal of an ABA is to generate wall-to-wall estimates of inventory attributes, such as mean height, dominant height, mean diameter, stem number, basal area, and volume of the stands [@Næsset2002]. Since the ABA produces wall-to-wall estimates, the products are usually in a raster format. The ABA approach is what is most often used for forestry inventories, and is an an extensive best practices guide for Canada was produced in 2013 by @White2013.
+LiDAR analysis in forestry uses two broad approaches, an area-based approach (ABA), or an individual tree crown detection approach (ITD). The ITD approach locates individual trees and allows the estimation of individual tree heights and crown area. From this, other metrics such as stem diameter, number of stems, basal area and stem volume can be derived [@Hyyppa1999]. In contrast, the main goal of an ABA is to generate wall-to-wall estimates of inventory attributes, such as mean height, dominant height, mean diameter, stem number, basal area, and volume of the stands [@Næsset2002]. Since the ABA produces wall-to-wall estimates, the products are usually in a raster format. The ABA approach is what is most often used for forestry inventories, and is an an extensive best practices guide for Canada was produced in 2013 by @White2013. Examples such as @Tompalski2019 show the power that using an ABA can have.
 
 When doing either of these analyses, we typically produce LiDAR metrics. These metrics are descriptive statistics of the point cloud over a unit area. How we define that unit is decides what kind of analysis we are able to do, and what kind of inferences are possible (i.e. ABA vs ITD). An ITD approach has a 'unit' size of one tree, whereas the ABA typically uses a grid size of 20 x 20 m. Both approaches require ground truthing, and for an ABA approach, plot sizes are typically designed to be of a similar area to the chosen grid size [White2013].
-
--   **Add an example study using ABA?**
-
-    -   @Tompalski2019
 
 ```{r 15-las-hmax-2D, fig.cap = fig_cap, out.width="70%", echo = FALSE}
 fig_cap <- paste("Maximum heights of 10 meter cells using an area-based approach.")
@@ -226,8 +218,6 @@ knitr::include_graphics(here::here("images", "15-Processing-Flowchart.png"))
 ```
 
 Once we have segmented a point cloud, we can produce metrics for individual trees. These metrics can be used to help to identify structural traits of trees, which can then be used to identify different tree species, or to characterize different forest types. Ground based LiDAR scanners (MLS and TLS) are also used to very accurately estimate tree, trunk, and branch volumes.
-
--   **Add an example study using ITD?**
 
 ```{r 15-las-treetops, fig.cap = fig_cap, out.width="80%", echo = FALSE}
 fig_cap <- paste("Example of tree tops detected using the `find_trees` function." )

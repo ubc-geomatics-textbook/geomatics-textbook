@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Types of Data {#types-of-data}
 
 **Data Types**, Any entity we wish to represent in a Geographic Information System can be described with three pieces of information What, When, and Where?  In the previous chapter, we introduced how to represent the where on the earth an entity occurs inside a GIS.  In this chapter we will introduce how we can describe what an entity is or when it occurs.  Then we will cover how we use spatial data models to link the what and when to the where using spatial data models.  Then we will wrap up by introducing some of the specific file types we use in GIS to represent spatial data.
@@ -19,8 +24,6 @@
 Attribute, Qualitative, Quantitative, Vector, Raster
 
 
-
-
 ## Attribute Data
 
 Spatial data is the foundation of Geographic Information Science, but spatial coordinates are meaningless unless they are linked with descriptive information about the location.  Any non-spatial data relating to a spatial entity is known as an attribute.  This non-spatial data can broadly be classified as either qualitative or quantitative.  Data that is strictly descriptive and lacks any numeric quantity is qualitative.  Data with numerical values that are separated by some meaningful interval is quantitative.  The types of analysis we can conduct with qualitative data is more limited than quantitative data, but that does not necessarily mean quantitative is "better" than qualitative.
@@ -33,7 +36,7 @@ Should I have subsections to introduce quantitative vs. qualitative?
 
 ### Nominal
 
-Qualitative data that just consists of a name/category with no ranking or direction is known as Nominal data.  One category is not more or less, better or worse than another, they are just different.  A good example would be flower types (see fig).  Other examples would be zoning categories, colors, flavors of ice cream, place names, etc.  The only arithmetic operations we can do with nominal data are checking for equality (True/False), count occurrences, and calculate the mode (most frequent occurrence).  
+Qualitative data that just consists of a name or category with no ranking or direction is known as Nominal data.  One category is not more or less, better or worse than another, they are just different.  A good example would be flower types (see fig).  Other examples would be zoning categories, colors, flavors of ice cream, place names, etc.  The only arithmetic operations we can do with nominal data are checking for equality (True/False), count occurrences, and calculate the mode (most frequent occurrence).  
 
 
 ![My own images, can update text/font/styling as necessary](images/03-flowers-nominal.png){.center}
@@ -42,6 +45,7 @@ Qualitative data that just consists of a name/category with no ranking or direct
 
 
 
+- Map of Squamish Place Names in Downtown Vancouver
 
 ### Ordinal
 
@@ -89,8 +93,7 @@ I think all these can just be lumped in with Ratio Above^
 ## Spatial data models
 ### Vector data
 
-Vectors use points, lines, and polygons to represent objects
-Data attributes are stored in a separate database table and linked using simple identification numbers
+Vectors data represents spatial entities as points, lines, and/or polygons.  Attributes (What/When) are stored in a separate database table and linked using a unique identifier, sometimes refereed to as an Index or object ID.  The index is unique to each entity (eg. there can only be one shape with an index value of 34, and only one row in the attribute table with a corresponding index value of 34).  
  
 
 ![https://www.oercommons.org/courses/introduction-to-geospatial-concepts/view - might be easier to recreate our own if the logo is an issue?](images/03-vector-example.png){.center}
@@ -103,6 +106,7 @@ Points have an (𝒙,𝒚) coordinate pair describing their location
 
 ![Very rough draft.](images/03-vector-points.png){.center}
 
+
 #### Lines
 Lines are one-dimensional:
 They have length, but no width or height
@@ -111,6 +115,7 @@ Lines may also have any number of middle points, called vertices
 
 
 ![I'll make something similar for lines.](images/03-vector-points.png){.center}
+
 
 #### Polygons
 Polygons are two-dimensional:
@@ -121,6 +126,7 @@ Polygons have straight or curved line segments, sometimes called “edges”
 
 
 ![I'll make something similar for polygons.](images/03-vector-points.png){.center}
+
 
 #### Tabular Data (Attributes)
 Information about a point, line, or area
@@ -134,7 +140,8 @@ Rows are distinct
 Null values possible
 
 
-![Simple diagram from my lecture notes, I can recreate a better one if needed.](images/03-vector-attributes.png){.center}
+- Map of Census Tracts in Toronto showing lots of attributes?
+<!-- ![Simple diagram from my lecture notes, I can recreate a better one if needed.](images/03-vector-attributes.png){.center} -->
 
 ### Raster data
 Space represented with a grid of equally sized pixels/grid cells.
@@ -175,8 +182,18 @@ Are these worth more than a passing mention?
 
 #### Police Involved Deaths in Canada {#box-text -}
 
-<p id="box-text">I'll fill this in later. Here is a <a href="https://github.com/PoliceInvolvedDeathsInCanada">link</a> to the github org where I'll be hosting the data.  I'll give an interactive map & a brief discussion the data types used (nominal) ratio (police involved death rate and how they can be used together.  I think this is a good example of how qualitative data and descriptor can be very useful.  But its also super depressing.</p>
+<p id="box-text">I'll flush this out in more depth later when I can dedicate some time to working on the actual project.Here is a <a href="https://github.com/PoliceInvolvedDeathsInCanada">link</a> to the github org where I'll be hosting the data.</p>
 
+<p id="box-text">Data types used:
+1) Nominal (Race)
+2) Ratio (Counts & PKR)
+3) Ordinal (Ranking)
+4) Interval (PKDI)
+
+Methods Discussed:
+1) Normalization
+2) Classification
+</p>
 
 <iframe width=100% height=800px src='images/03-PoliceViolenceIncidents_BC.html' frameBorder="0" >
   <p>Your browser does not support iframes</p>

@@ -32,7 +32,7 @@ Networks are abstract structures used to represent patterns of relationships amo
 ### Key Terms {-}
 Network analysis, Spatial networks, Graph theory
 
-## Introduction to graph theory
+## Introduction to Graph Theory
 Graphs are the abstract language of networks [@systemsinnovationGraphTheoryOverview2015]. Graph theory is the area of mathematics that study graphs. By abstracting networks into graphs, one is able to measure different kinds of indicators that represents information about relationships that exist within a certain system. This is especially useful to assess the state of complex adaptive systems such as societies, cities, ecosystems, etc. All graphs are composed of two parts: nodes and edges.
 
 ### Nodes
@@ -55,7 +55,7 @@ simpleNetwork(data, charge=-500, linkDistance=50, fontSize=10)
 ![Rapid and frequent transit network in Metro Vancouver. Source: City of Pitt Meadows](https://www.pittmeadows.ca/sites/default/files/docs/23-07-2019_2-47-50_pm.jpg).(images/metro_vancouver_transit_network.jpeg){.center}
 
 
-## Connectivity and order
+## Connectivity and Order
 There are two major types of connections within the graphs: directed and undirected. Connections are directed when they have a specific node of origin and destination. 
 
 ### Direct
@@ -81,13 +81,13 @@ forceNetwork(Links = MisLinks, Nodes = MisNodes, Source = "source",
 ### Undirect
 On the other hand, in an undirected graph, connections are represented as simple lines instead of arrows. The order of elements does not matter.
 
-## Network topologies
+## Network Topologies
 Topology is the study of how network elements are arranged. The same elements arranged in different ways can change the network structure and dynamics. A very common example is the arrangement of computer networks [@wikibooksCommunicationNetworksNetwork2018].
 
-### Physical versus logical topology
+### Physical vs. Logical Topology
 In GIS we use networks to represent spatial structures of various kinds. While all networks can be represented in an abstract space - this is, without a defined position in the real-world - some network analysis might be more useful when we attach physical properties to them, such as latitude and longitude coordinates. We call *logical topology* the study of how network elements are arranged in this abstract space. On the other hand, *physical topology* refers to the arrangemet of networks in the physical space. We can then classify "types" of networks according to the way their nodes is arranged.
 
-### Non-hierarchical
+### Non-Hierarchical Topologies
 #### Lines
 Lines are when nodes are arranged in series where every node has no more than two connections, except for the two end nodes. A rail transit line, for example, can be represented as a line network. The map below portrays the SkyTrain Millenium Line in Vancouver. Each node represents a stop and the lines  the connections between those stops.
 
@@ -117,7 +117,7 @@ leaflet(height=400, width="80%") %>% setView(lng=-123.14051382816635, lat=49.303
 ```
 
 #### Meshes
-In a mesh, every node is also connected to more than one node. However, in this case nodes can be connected to more than two nodes. Connections in a mesh are non-hierarchical. Contrary to rings and lines where there is only one possible route from one node to another, in a mesh there are multiple routes to access other nodes in the network. A common way to generate a mesh network is using Delaunay triangulation [@wikimediafoundationDelaunayTriangulation2021], where nodes are connected in order to form triangles and maximize the minimum angle of all triangles. Mesh configurations are commonly used in decentralized structures such as the internet. 
+In a mesh, every node is also connected to more than one node. However, in this case nodes can be connected to more than two nodes. Connections in a mesh are non-hierarchical. Contrary to rings and lines where there is only one possible route from one node to another, in a mesh there are multiple routes to access other nodes in the network. A common way to generate a mesh network is using Delaunay triangulation [@wikimediaDelaunayTriangulation2021], where nodes are connected in order to form triangles and maximize the minimum angle of all triangles. Mesh configurations are commonly used in decentralized structures such as the internet. 
 
 ```{r, echo=FALSE}
 
@@ -133,7 +133,7 @@ leaflet(height=300, width="80%") %>% setView(lng=-123.13264678513188, lat=49.239
 ```
 
 
-#### Fully connected
+#### Fully Connected
 As the name suggests, in fully connected networks every node is connected to every other node. The graph representing all possible origin-destination commutes among Metro Vancouver municipalities is a type of fully connected network.
 
 ```{r, echo=FALSE}
@@ -149,8 +149,9 @@ leaflet(height=420, width="80%") %>% setView(lng=-122.89050696548136, lat=49.194
   addPolygons(data=polygonData, weight=1, color="green")
 ```
 
-### Hierarchical topologies
-Different from non-hierarchical topologies, hierarchical configurations are structured around a central node or link.
+### Hierarchical Topologies
+Different from non-hierarchical topologies, hierarchical configurations are structured around a central node or link. 
+<!-- By looking into hierarchical topologies it becomes easier to understand the notion of depth. The more distant a node is from the central node or link, the more depth it has. Hover the mouse over the nodes in the following maps to check out their depth. -->
 
 #### Stars
 Stars are hierarchical structures where two or more nodes are directly connected to a central node. This concentric garden at the University of British Columbia can be represented according to a star topology.
@@ -197,32 +198,28 @@ leaflet(height=500, width="80%") %>% setView(lng=-123.1270252730915, lat=49.2953
 ## Spatial Network Analysis
 Networks can then be arranged according to various different configurations. Aside from classifying networks into different types according to their topologies, some of the most useful features of spatial network analysis refers to how to extract information from these structures given certain parameters.
 
-### Network tracing
-The act of modelling spatial networks is called *Network tracing*. When tracing a network it is important to bear in mind the direction with which information is added to the network, especially when this orientation information is important to further analyze flows and relationships within such structure. For example, when mapping hydrological networks to study its flows it might be useful to model rivers downstream as this is an important information to represent the dynamics of the network.
+### Network Tracing
+The act of modelling spatial networks is called *Network tracing*. When tracing a network it is important to bear in mind the direction with which information is added to the network, especially when this orientation information is important to further analyze flows and relationships within such structure. For example, when mapping hydrological networks to study its flows it might be useful to model the direction of streams as this is an important information to represent the dynamics of the network.
 
 ```{r, echo=FALSE}
 
+
+
 ```
 
-### Linear referencing
-Linear referencing systems are commonly used for finding the length of paths along the network [@ramsey23LinearReferencing2012]. In this method, locations are defined in terms of 
+### Linear Referencing
+Linear referencing systems are commonly used for finding the length of pathways along the network [@ramsey23LinearReferencing2012]. In this method, the graph elements are defined in terms of their physical location and edges are used to calculate distances among parts of the network.
 
 ### Routing
-[@systemsinnovationNetworkDiffusionContagion2015].
+Finding routes between nodes is an useful application of spatial networks. [@systemsinnovationNetworkDiffusionContagion2015].
 
-#### Least cost paths
-
-```{r, echo=FALSE}
-
-```
-
-#### Least cost corridors
+#### Least Cost Paths
 
 ```{r, echo=FALSE}
 
 ```
 
-#### Reach analysis
+#### Reach Analysis
 Reach techniques are commonly used to find the incidence of defined elements within a certain radius from a chosen node. All possible routes are modeled. The number of terminal nodes varies according to the network structure. Urban walkability indices usually uses reach techniques to assess the intensity of certain indicators (such as intersection density or non-residential land uses) given a walkable radius [@martinoSpatialNetworkAnalysis2020].
 
 ```{r, echo=FALSE}
@@ -230,28 +227,45 @@ Reach techniques are commonly used to find the incidence of defined elements wit
 ```
 
 ### Network Centrality
-Nodes and edges of a graph can be ranked in terms of how "important" they are to the overall network. Network centrality measures represent whether elements of a graph are more central or peripheral to the overall system. Such measures can then be interpreted as indicators of importance. Applications are endless. Centrality measures are used for ranking search engine pages [], for finding persons of interest in social networks [] and for modelling movement in street network [].  There are several centrality measures that serve to the most various purposes. The most common ones are: Degree, Closeness and Betweenness centrality.
+Nodes and edges of a graph can be ranked in terms of how "important" they are to the overall network. Network centrality measures represent whether elements of a graph are more central or peripheral to the overall system. Such measures can then be interpreted as indicators of importance. Applications are endless. Centrality measures are used for ranking search engine pages [@wikimediaPageRank2021], for finding persons of interest in social networks [@ajorlouIntroductionNetworkModels2018] and for modelling movement in street network [@hillierNaturalMovementConfiguration1993]. There are several centrality measures that serve to the most various purposes. Some of the most commonly used ones are Closeness and Betweenness centrality.
 
-#### Degree centrality
-The number of connections of each node.
-
-```{r, echo=FALSE}
-
-```
-
-#### Closeness centrality
-How close the node is to every other node of the graph in logical distance.
+#### Closeness Centrality
+Closeness centrality measures how close each node is to every other node of the graph in terms of topological distances. It highlights nodes located in easily accessible spaces. For example when analyzing the closeness of street intersections at the University of British Columbia (UBC), intersections in core streets such as the Main Mall, Agronomy Road and Northwest Marine Drive are ranked as highly central whereas more residential and segregated areas such as Acadia Road are ranked with lower closeness centrality.
 
 ```{r, echo=FALSE}
 
+intersections <- readOGR("data/ubc_intersections.geojson", verbose=FALSE)
+map <- leaflet(intersections, height=500, width="80%") %>% addTiles()
+pal <- colorNumeric(palette="viridis", domain=intersections$closeness, n=6)
+
+map %>% 
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(data=intersections, color=~colorQuantile("viridis", closeness)(closeness)) %>%
+  addLegend("bottomright", pal=pal, values=~closeness, title="Closeness", opacity=1)
+
 ```
 
-#### Betweenness centrality
-How likely a node or an edge is to be passed through when going from every node to every other node of the graph.
+#### Betweenness Centrality
+Betweenness centrality measures how likely a node or an edge is to be passed through when going from every node to every other node of the graph. If we imagine agents travelling from each node to every other node and back, betweenness centrality would be the trail left by those agents. While closeness highlights central spaces, betweenness highlights pathways that lead to those central spaces. Using the same street network at UBC
 
 ```{r, echo=FALSE}
 
+segments <- readOGR("data/ubc_segments.geojson", verbose=FALSE)
+map <- leaflet(segments, height=500, width="80%") %>% addTiles()
+pal <- colorNumeric(palette="viridis", domain=segments$betweenness, n=6)
+
+map %>% 
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(data=segments, color=~colorQuantile("viridis", betweenness)(betweenness)) %>%
+  addLegend("bottomright", pal=pal, values=~betweenness, title="Betweenness", opacity=1)
+
 ```
+
+<br>
+
+We can use centrality measures to evaluate how accessible certain spaces are from the point of view of their spatial structure with a broader system.
+
+<br>
 
 :::: {.box-content .case-study-content}
 
@@ -269,3 +283,4 @@ How likely a node or an edge is to be passed through when going from every node 
 
 ::::
 
+<br>

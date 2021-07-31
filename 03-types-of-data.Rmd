@@ -6,8 +6,7 @@ output:
 # Types of Data {#types-of-data}
 ^^ Can we change the chapter name?  I think something like **Spatial Data Models & Data Types** would be more appropriate
 
-
-**Data Types** Within the context of a Geographic Information System, each piece of information pertaining to an entity can be referred to as an **Attribute**.  An entity can have many different attributes associated with it, but each attribute can broadly be said to address one of three questions: What, When, or Where?  A collection of attributes representing a set of entities are known as a **Dataset**.  The attributes that describe *where* the entities occurs are known as **Spatial Data** while all other attributes are **Non-Spatial Data**.  
+**Types of Data** Within the context of a Geographic Information System, each piece of information pertaining to an phenomena can be referred to as an **Attribute**.  An phenomena can have many different attributes associated with it, but each attribute can broadly be said to address one of three questions: **What**, **When**, or **Where**?  Attributes that describe *where* are known as **Spatial Data** while all other attributes are **Non-Spatial Data**.  
 
 In the previous chapter, we discussed some of the unique challenges associated with representing spatial data in a GIS, and how to account for these these with geographic coordinates systems and map projections.  In this chapter we will discuss more broadly how to represent both spatial and non-spatial data in a Geographic Information System.  We will introduce the different types of data that can represent non-spatial attributes and discuss the different scales this data can be measured on.  Then we will introduce the different models we use to link the spatial and non-spatial data.  Finally, we will cover some of the different file types that can be used to store data.
 
@@ -17,9 +16,9 @@ In the previous chapter, we discussed some of the unique challenges associated w
 #### Learning Objectives {-}
 ::: 
 
-1. Introduce Spatial Data Models
-2. Learn about the scales we use to measure data
-3. Learn about the different file types we use in GIS
+1. Data types and measurement scales
+2. Introduce spatial data models
+3. File types we use in GIS
 
 ::::
 
@@ -27,57 +26,51 @@ In the previous chapter, we discussed some of the unique challenges associated w
 
 Attribute, Qualitative, Quantitative, Discrete, Continuous, Vector, Raster, Measurement Scale
 
-## Spatial Data
 
-You might encounter the phrase "Spatial is special" in your time studying GIS.  Spatial data is the foundation of Geographic Information Science, it is what distinguishes GIS from the broader field of data science.  One of the unique qualities of spatial data was succinctly summarized by Waldo Tobler as the First Law of Geography: *"Everything is related to everything else, but near things are more related than distant things."*  This might seem obvious, of course this is true!  People in the same neighborhood are more likely to interact than those living on different continents.  Red Cedars on Vancouver Island are more related to each other than they are Black Spruce in the Mackenzie River Valley.  But there is some nuance to the statement.  Near things are more related to one another, but it does not guarantee similarity.  Downtown Vancouver averages about 40 cm of snow per year, but the summit of Grouse Mountain 15 km to the north, receives over 9 meters of snow in a typical year.  Being so close together, these locations are impacted by the same storm systems, but the 1200 m elevation difference causes the same storms to produce vastly different quantities and different types of precipitation.  The measure of similarity between objects across space called spatial **autocorrelation**.  Spatial autocorrelation is both a curse and a blessing in the geospatial sciences.  We can exploit this unique property to our advantage to make spatial inferences, but it also violates the assumptions of many statistical tests.  **Note - Will the concept of autocorrelation be covered in more detail further along in the book?  I think its important to introduce early on, but not sure if giving more than a cursory reference here is necessary?**
 
-![Visualization of Tobler's First Law. [8]](images/03-spatial-is-special.jpg){.center}
+## Types of Data
 
-As discussed in the previous chapter, spatial data is three-dimensional, though we usually project it into two-dimensions for simplicity.  Because of the unique transformations that must be applied to spatial data, it must be treated and represented differently than the non-spatial data that describe *what* is happening and *when*.  We can't simply put all of our data into a spreadsheet and start analyzing it.  We have to use **Spatial Data Models** to organize our spatial and non-spatial data into a format that can be interpreted by a GIS.  There are two main types of spatial data models: the **Raster** and **Vector** models.  These two models represent the world in fundamentally different ways, and the choice of which model to use is often dictated by the specific data we are working with and the task at hand.  Before we dive into an explanation of the raster and vector models, lets first talk a bit about the different types of phenomena we encounter and the types of data we can use to describe them.
-
-### Types of Data
-
-All data can broadly be classified as either **qualitative** or **quantitative**.  Data that are strictly descriptive and lack any numeric quantity are qualitative and data with numerical values that are separated by some meaningful interval are quantitative.  The types of analysis we can conduct with qualitative data are more limited than quantitative data, but that does not necessarily mean quantitative data are "better" than qualitative.
-
-A quantitative variable be either **discrete** or **continuous**.  Discrete variables (i.e. integers) are obtained by counting (e.g. population) and values within a range cannot be infinitely subdivided.  You can have a population of 1, 37, or 179 but you cannot have a population of 2.3.  Discrete variables (i.e. real numbers) on the other hand are measured (e.g. temperature) and can take an infinite number of values a given range, but they cannot be counted.  You can have temperatures of 10, 10.5, or 10.1167 &deg;C, but a temperature of 10&deg;C does not mean you have 10 individual degrees of temperature.
+All data, spatial and non-spatial, can broadly be classified as either **qualitative** or **quantitative**.  These data types fundamentally different and are therefore measured on fundamentally different scales. The types of analysis we can conduct with qualitative data are more limited than quantitative data, but that does not necessarily mean quantitative data are “better” than qualitative.
 
 ![Summary of the types of data.](images/03-data-types.png){.center}
-
-### Types of Phenomena
-
-**Discrete Objects**: have distinct, well-defined boundaries, are countable (ie. there are a finite number of them), and their boundaries can be exactly measured (e.g. a building, a municipality).
-
-**Discrete Data** data can only take a limited set of values (e.g. land cover types, zoning classes, population)
-
-**Continuous Fields**: lack clearly-defined boundaries, can be measured at an infinite number of points, and values can vary dramatically over short distances.
-
-**Continuous Data**: measurements can take any value within some range (e.g. temperature, height)
-
-*Note* Discrete objects can be described with continuous data and continuous fields can be described with discrete data.  Buildings are discrete objects because they have exact boundaries, but building height is a continuous variable.  Similarly, land cover is a continuous field because every location in an area has a land a land cover type, but the land cover type can only take a limited number of values.
-
-
-
-
-*This isn't a fully comprehensive framework for understanding data types (Chrisman, Nicholas R. "Rethinking Levels of Measurement for Cartography", Vol. 25, pg. 231-242, 1998). but I think it's sufficient for an intro level GIS text?  I think going into log scales, derived ratios, graded membership etc. might just overly complicate things.  There really isnt much literature out them within the context of GIS anyway.  I've elected to keep it simple, but I can add more if y'all think its necessary*
-
-## Qualitative Data
-
-Qualitative data describes the qualities of an entity, without giving us any numeric information about that entity.  Most qualitative data you will work with in a GIS are textual, but there are circumstances where you may encounter non-textual data (e.g. images) in a dataset.  There are two key categories we can consider when trying to understand Qualitative Data: Nominal and Ordinal Data.
-
-
-## Quantitative Data
-
-Qualitative data describes the quantities associated with an entity.  Qualitative data are numeric and the difference between data points has inherent meaning (as opposed to the arbitrary numbers assigned in the ordinal data example).  This allows us to conduct a wider range of arithmetic operations on quantitative data.  There are two key categories we can consider when trying to understand quantitative data: Interval and Ratio Data.
-
-## Measurement Scales
-
-![From my lectures.  IDK the original source, but it'd be easy enough to just "recreate" my own.](images/03-scales.png){.center}
 
 ![From my lectures.  IDK the original source, but it'd be easy enough to just "recreate" my own.](images/03-operations.png){.center}
 
 
+### Qualitative Data
 
-### Ratio
+Qualitative data are categorical; they are strictly descriptive and lack any meaningful numeric value.  They describe the qualities of an phenomena, without giving us any numeric information.  Most qualitative data you will work with in a GIS are textual or coded numerals, but there are circumstances where you may encounter non-textual data (e.g. images, sound clips, videos) in a dataset.  Qualitative data can be "spatial" in nature (e.g. relative directional descriptors: left/right, near/far, north/south), but because they lack numeric values, they cannot be used for spatial analysis.  Qualitative data can be measured on either a **Nominal** or **Ordinal** scale.
+
+**Nominal** data that just consists of names or categories with no ranking or direction are nominal.  One category is not more or less, better or worse than another, they are just different.  A good example would be flower types (see fig).  Other examples would be zoning categories, colors, flavors of ice cream, place names, etc.  
+
+![Each flower is different, but no flower is "more" or "less" a flower than any of the others.](images/03-flowers-nominal.png){.center}
+
+**Oridnal** data are categories that also have a some ranking or directionality.  A good example would be relative sizes (see fig).  Some other good examples of ordinal data include spice levels (mild, medium, hot), residential zoning density (low, medium, high), and survey responses.  
+
+![We can see Yarrow is taller than her sister Shamsa, so we can rank these dogs by height.  However, we haven't measured their heights, so we don't know how much taller Yarrow is than Shamsa.  ](images/03-dogs-ordinal.png){.center}
+
+The only arithmetic operations we can do with nominal data are checking for equality (True/False), counting occurrences (frequencies), and calculating the mode (most frequent occurrence).  With ordinal data, we can these operations as well, plus a few more.  We can check the order/rank (greater than, less than) and in some circumstances we can calculate the median (see figure).
+
+![My own images, can update text/font/styling as necessary](images/03-nominal-opperations.png){.center}
+ 
+![In some circumstances, we can directly calculate the median (middle value) of an ordinal set.  With odd numbered sets (e.g. Group 1), the median, is simply the middle value of the set, when sorted lowest to highest.  We can always take the median when we have an odd number.  With even numbered sets, its a bit more complicated.  The median, is the average of the middle two values.  For Group 2, the middle values (5th and 6th) are both "Neutral", so we don't have an issue.  But for Group 3, the 5th value is "Neutral" and the 6th value is "Agree".  We can't directly average these two ordinal values.  One solution is to arbitrarily assign a numeric score to the ordinal categories (e.g. 1-5).  This would then allow you to show the median is between "Neutral" and "Agree"](images/03-ordinal-operatons.png){.center}
+
+### Quantitative Data
+
+Quantitative data are numeric; they describe the quantities associated with an phenomena.  The numerical values that are separated by a unit that has some inherent meaning (as opposed to the arbitrary numeric codes like in the ordinal data example).  This allows us to conduct a wider range of arithmetic operations on quantitative data.  In addition to the operations we perform on Qualitative data; with numeric data we can always calculate measures of central tendency (mean/median) and we can add/subtract values to calculate differences.  
+
+Numeric data can be either **discrete** or **continuous**.  Discrete variables (e.g. population) are obtained by counting and values within a range cannot be infinitely subdivided.  You can have a population of 1, 37, or 179 but you cannot have a population of 2.3.  Continuous variables (e.g. temperature) can take an infinite number of values a given range, but they cannot be counted.  You can have temperatures of 10, 10.5, or 10.1167 &deg;C, but a temperature of 10&deg;C does not mean you have 10 individual degrees of temperature.
+
+Quantitative data (both discrete and continuous) can be measured on either an **Interval** or **Ratio** scale.  These types of quantitative data are closely related, but have one important distinction.  **Ratio** data have fixed, meaningful, absolute zero points.  The absolute zero point means ratio data cannot take negative values.  It also means that we can multiply/divide two values to calculate a meaningful ratio between them (hence the name).  **Interval** data on the other hand, have arbitrary zero points, meaning they can can take negative values.  Because the zero point is arbitrary, we cannot multiply/divide two values or calculate meaningful ratios between two values.  A good example to highlight the difference between these two measurement scales are the Celsius (*interval*) and Kelvin (*ratio*) scales for temperature (see fig).  
+
+![Temperature is a quantity that describes the amount of energy present in a system.  Celsius and Kelvin units of temperature measurement, and the conversion between the two is very simple: &deg;C = &deg;K-273.15 are both ways of describing it.  Kelvin has an absolute zero point](images/03-interval-ratio-temperature.png){.center}
+
+Other examples of interval data include: the pH scale, IQ test scores, dates, and times.   
+
+Because they have an arbitrary zero value, the arithmetic operations we can some of the operations we can do with interval data.
+
+
+#### Ratio
 
 Quantitative data on a fixed scale with an absolute zero point is known as ratio data.  This is the most flexible type of data, allowing us to do any kind of arithmetic operation.  Because of the fixed and meaningful zero point, we can multiply/divide data points to calculate meaningful ratios (hence the name) describing the relationship between those data points.  Multiplication/division of two data values are not meaningful when performed on other types of data.  Additionally, we can: add/subtract values, calculate measures of central tendency (mean & median), rank/order the data, count frequencies, and check for equality.
 
@@ -85,41 +78,70 @@ A good example of ratio data are population total (see figure).  Population coun
 
 ![Canadian population estimates 2020](images/03-ratio-population.png){.center}
 
-### Interval
-
-Quantitative data on a fixed scale but with an arbitrary zero point is known as interval data.  A good example of this type of data is temperature in degrees Celsius (see fig).  Other examples include the pH scale, IQ test scores, dates, and times (Dates and Times are a special type of data discussed in a bit more detail below).  The defining quality of Interval data is that the zero point is arbitrary, i.e. it lacks definitive meaning.  This limits some of the operations we can do with interval data.
-
-![Temperature is a quantity that describes the amount of energy present in a system. ... Elaborate](images/03-interval-temperature.png){.center}
 
 
-### Nominal
-
-Qualitative data that just consists of names or categories with no ranking or direction are known as nominal data.  One category is not more or less, better or worse than another, they are just different.  A good example would be flower types (see fig).  Other examples would be zoning categories, colors, flavors of ice cream, place names, etc.  The only arithmetic operations we can do with nominal data are checking for equality (True/False), counting occurrences (frequencies), and calculating the mode (most frequent occurrence).
+![From my lectures.  IDK the original source, but it'd be easy enough to just "recreate" my own.](images/03-scales.png){.center}
 
 
-![My own images, can update text/font/styling as necessary](images/03-flowers-nominal.png){.center}
-
-![My own images, can update text/font/styling as necessary](images/03-nominal-opperations.png){.center}
 
 
-### Ordinal
-
-Qualitative data that have some sort of ranking or directionality, but no associated or meaningful numerical scale are known as Ordinal.  A good example would be relative sizes (see fig).  Some other good examples of ordinal data include spice levels (mild, medium, hot), residential zoning density (low, medium, high), and survey responses.  With ordinal data, we can do all the operations we can do with nominal data, plus a few more.  We can check the order/rank (greater than, less than) and in some circumstances we can calculate the median (see figure).
-
-
-![We can see Yarrow is taller than her sister Shamsa, so we can rank these dogs by height.  However, we haven't measured their heights, so we don't know how much taller Yarrow is than Shamsa.  ](images/03-dogs-ordinal.png){.center}
-
-![In some circumstances, we can directly calculate the median (middle value) of an ordinal set.  With odd numbered sets (e.g. Group 1), the median, is simply the middle value of the set, when sorted lowest to highest.  We can always take the median when we have an odd number.  With even numbered sets, its a bit more complicated.  The median, is the average of the middle two values.  For Group 2, the middle values (5th and 6th) are both "Neutral", so we don't have an issue.  But for Group 3, the 5th value is "Neutral" and the 6th value is "Agree".  We can't directly average these two ordinal values.  One solution is to arbitrarily assign a numeric score to the ordinal categories (e.g. 1-5).  This would then allow you to show the median is between "Neutral" and "Agree"](images/03-ordinal-operatons.png){.center}
-
-
+*This isn't a fully comprehensive framework for understanding data types (Chrisman, Nicholas R. "Rethinking Levels of Measurement for Cartography", Vol. 25, pg. 231-242, 1998). but I think it's sufficient for an intro level GIS text?  I think going into log scales, derived ratios, graded membership etc. might just overly complicate things.  There really isn't much literature out them within the context of GIS anyway.  I've elected to keep it simple, but I can add more if y'all think its necessary*
 
 ### Temporal
 
-Temporal data is a special type of numeric data because it is formatted in a unique way.
+Temporal data is a special type of numeric data because it is formatted in a unique way. ... I'll probably drop this?
 
-## Spatial data models
+## Spatial is Special
 
-Spatial data models what we use to link spatial and non-spatial data.  Spatial data models allow us to organize and store geographic data in a systematic way so that we can effectively display, query, and edit our data within a GIS.  There are two primary types of data models that we rely on in GIS: Vector and Raster.   
+You might encounter the phrase "Spatial is special" in your time studying GIS.  Spatial data is the foundation of Geographic Information Science, it is what distinguishes GIS from the broader field of data science.  One of the unique qualities of spatial data was succinctly summarized by Waldo Tobler as the First Law of Geography: *"Everything is related to everything else, but near things are more related than distant things."*  This might seem obvious, of course this is true!  People in the same neighborhood are more likely to interact than those living on different continents.  Red Cedars on Vancouver Island are more related to each other than they are Black Spruce in the Mackenzie River Valley.  But there is some nuance to the statement.  Near things are more related to one another, but it does not guarantee similarity.  Downtown Vancouver averages about 40 cm of snow per year, but the summit of Grouse Mountain 15 km to the north, receives over 9 meters of snow in a typical year.  Being so close together, these locations are impacted by the same storm systems, but the 1200 m elevation difference causes the same storms to produce vastly different quantities and different types of precipitation.  The measure of similarity between objects across space called spatial **autocorrelation**.  Spatial autocorrelation is both a curse and a blessing in the geospatial sciences.  We can exploit this unique property to our advantage to make spatial inferences, but it also violates the assumptions of many statistical tests.  **Note - Will the concept of autocorrelation be covered in more detail further along in the book?  I think its important to introduce early on, but not sure if giving more than a cursory reference here is necessary?**
+
+![Visualization of Tobler's First Law. [8]](images/03-spatial-is-special.jpg){.center}
+
+## Spatial Data Models
+
+As discussed in the previous chapter, spatial data is three-dimensional, though we usually project it into two-dimensions for simplicity.  Because of the unique transformations that must be applied to spatial data, it must be treated and represented differently than the non-spatial data that describe *what* is happening and *when*.  We can't simply put all of our data into a spreadsheet and start analyzing it.  We have to use **Spatial Data Models** to organize our data and link our spatial and non-spatial data.  Spatial data models store geographic data in a systematic way so that we can effectively display, query, edit, and analyze our data within a GIS.  
+
+There are two main types of spatial data models: the **Raster** and **Vector** models.  The raster data model represents spatial data as grid of cells, and each has a non-spatial attributes associated with it.  The vector data model represents spatial data as either points, lines, or polygons that are each linked to non-spatial attributes.  These two models represent the world in fundamentally different ways.  One is not inherently better than the other, but they are better suited for different circumstances.  The choice of which model to use is often dictated by three main factors:
+
+1) The  type of phenomena we are trying to represent.
+2) The scale at which we plan to analyze our data.
+3) How we plan to use the data.
+
+Before we dive deeper into an explanation of what the raster and vector models are, lets first talk a bit about the different types of phenomena we encounter and the types of analysis we want to conduct.
+
+
+![Representing space in the raster model vs. the vector model [8]](images/03-vector-v-raster.jpg){.center}
+
+### Types of Phenomena
+
+There are two kinds of phenomena we observe in the real world and represent in a GIS **Discrete Objects** and **Continuous Fields**.  Discrete objects have distinct, well-defined boundaries meaning their geography can be exactly measured (e.g. a building, a street, a tree).  They are also countable, meaning there are a finite number of them.  Continuous fields lack clearly-defined boundaries and can be measured at an infinite number of points (e.g. elevation, precipitation).  The values of a continuous field can vary dramatically over short distances.  The vector data model is typically better suited for discrete objects and the raster data model is better for continuous fields.  However, either model *can* be used to represent either type of phenomena, and there are some circumstances where one model may be preferable over the other because of the task at hand rather than the type of phenomena.  *Note* Discrete objects can be described with continuous data and continuous fields can be described with discrete data.  Buildings are discrete objects because they have exact boundaries, but building height is a continuous variable.  Similarly, land cover is a continuous field because every location has a land cover type, but the land cover type can only take a limited number of values.
+
+![One the right, we see discrete objects, on the left we see a continuous field.  These images are from my slides.  I'm not sure the original source of the DEM image, it would be easy enough to just make my own down the line though.](images/03-data-types.png){.center}
+
+
+## Raster Data Model
+
+Raster data is any pixelated (or gridded) data where each pixel (or cell) is associated with a specific geographical location. The value of a pixel can be quantitative (e.g. elevation) or qualitative (e.g. land use). If this sounds familiar, it is because this data structure is very common: it’s how we represent any digital image. A geospatial raster is only different from a digital photo in that it is accompanied by spatial information that connects the data to a particular location. This includes the raster’s extent and cell size, the number of rows and columns, and its coordinate reference system (or CRS). (Adapted from [4])
+
+In a raster layer, each pixel/cell can only have a single value associated with it.  Multiple bands can be combined to store or generate more information, as is done with a RGB color photograph.  In GIS, rasters are most commonly encountered as: satellite imagery, drone imagery, elevation models, and scanned maps.  
+
+
+Multiple layers can be combined
+Each layer represents a different field
+Raster Math:
+Layers can be combined with expressions get new information
+A = Average July Temperature
+B = Average January Temperature
+C = A – B
+Average Temperature Range
+
+![https://www.oercommons.org/courses/introduction-to-geospatial-concepts/view - I think this one is pretty good, I use it in my lecture notes.](images/03-raster-example.png){.center}
+
+![https://www.oercommons.org/courses/introduction-to-geospatial-concepts/view - I think this one is pretty good, I use it in my lecture notes.](images/03-raster-resolution.png){.center}
+
+#### Cell data
+#### Digital numbers
+
 
 ### Vector data
 
@@ -173,38 +195,15 @@ Null values possible
 - Map of Census Tracts in Toronto showing lots of attributes?
 <!-- ![Simple diagram from my lecture notes, I can recreate a better one if needed.](images/03-vector-attributes.png){.center} -->
 
-### Raster data
-Space represented with a grid of equally sized pixels/grid cells.
-A single value is assigned to each cell
-In GIS, rasters are most commonly encountered as:
-Satellite imagery
-Drone imagery
-Elevation models
-Bathymetric models
-Scanned maps
-
-Numeric data value assigned to each grid cell at each location, corresponding to the entity being modelled. 
-Typically used to represent surfaces, since every grid cell is assigned a data value.
-
-
-Multiple layers can be combined
-Each layer represents a different field
-Raster Math:
-Layers can be combined with expressions get new information
-A = Average July Temperature
-B = Average January Temperature
-C = A – B
-Average Temperature Range
-
-![https://www.oercommons.org/courses/introduction-to-geospatial-concepts/view - I think this one is pretty good, I use it in my lecture notes.](images/03-raster-example.png){.center}
-
-![https://www.oercommons.org/courses/introduction-to-geospatial-concepts/view - I think this one is pretty good, I use it in my lecture notes.](images/03-raster-resolution.png){.center}
-
-#### Cell data
-#### Digital numbers
 
 ### Triangulated Irregular Networks
-Are these worth more than a passing mention?
+How important is it to mention these?  I've never used a TIN for anything except in making surfaces from drone imagery.  I can definitional mention them, but how much focus to the really deserve?
+
+
+
+
+
+
 
 
 #### Case Study {-}

@@ -17,37 +17,46 @@ In the previous chapter, we discussed some of the unique challenges associated w
 #### Learning Objectives {-}
 ::: 
 
-1. Learn about spatial data models and how they work
-2. Learn about the various scales we use to measure data
+1. Introduce Spatial Data Models
+2. Learn about the scales we use to measure data
 3. Learn about the different file types we use in GIS
 
 ::::
 
 ### Key Terms {-}
 
-Attribute, Qualitative, Quantitative, Vector, Raster, Measurement Scale
+Attribute, Qualitative, Quantitative, Discrete, Continuous, Vector, Raster, Measurement Scale
 
 ## Spatial Data
 
 You might encounter the phrase "Spatial is special" in your time studying GIS.  Spatial data is the foundation of Geographic Information Science, it is what distinguishes GIS from the broader field of data science.  One of the unique qualities of spatial data was succinctly summarized by Waldo Tobler as the First Law of Geography: *"Everything is related to everything else, but near things are more related than distant things."*  This might seem obvious, of course this is true!  People in the same neighborhood are more likely to interact than those living on different continents.  Red Cedars on Vancouver Island are more related to each other than they are Black Spruce in the Mackenzie River Valley.  But there is some nuance to the statement.  Near things are more related to one another, but it does not guarantee similarity.  Downtown Vancouver averages about 40 cm of snow per year, but the summit of Grouse Mountain 15 km to the north, receives over 9 meters of snow in a typical year.  Being so close together, these locations are impacted by the same storm systems, but the 1200 m elevation difference causes the same storms to produce vastly different quantities and different types of precipitation.  The measure of similarity between objects across space called spatial **autocorrelation**.  Spatial autocorrelation is both a curse and a blessing in the geospatial sciences.  We can exploit this unique property to our advantage to make spatial inferences, but it also violates the assumptions of many statistical tests.  **Note - Will the concept of autocorrelation be covered in more detail further along in the book?  I think its important to introduce early on, but not sure if giving more than a cursory reference here is necessary?**
 
-![Visualization of Tobler's First Law.](images/03-spatial-is-special.jpg){.center}
+![Visualization of Tobler's First Law. [8]](images/03-spatial-is-special.jpg){.center}
 
 As discussed in the previous chapter, spatial data is three-dimensional, though we usually project it into two-dimensions for simplicity.  Because of the unique transformations that must be applied to spatial data, it must be treated and represented differently than the non-spatial data that describe *what* is happening and *when*.  We can't simply put all of our data into a spreadsheet and start analyzing it.  We have to use **Spatial Data Models** to organize our spatial and non-spatial data into a format that can be interpreted by a GIS.  There are two main types of spatial data models: the **Raster** and **Vector** models.  These two models represent the world in fundamentally different ways, and the choice of which model to use is often dictated by the specific data we are working with and the task at hand.  Before we dive into an explanation of the raster and vector models, lets first talk a bit about the different types of phenomena we encounter and the types of data we can use to describe them.
 
-### Types of Phenomena
-
-**Discrete Objects**: have distinct, well-defined boundaries, are countable (ie. there are a finite number of them), and their boundaries can be exactly measured (e.g. a building).
-
-**Continuous Fields**: lack clearly-defined boundaries, can be measured at an infinite number of points, and values can vary dramatically over short distances.
-
-## Types of Data
+### Types of Data
 
 All data can broadly be classified as either **qualitative** or **quantitative**.  Data that are strictly descriptive and lack any numeric quantity are qualitative and data with numerical values that are separated by some meaningful interval are quantitative.  The types of analysis we can conduct with qualitative data are more limited than quantitative data, but that does not necessarily mean quantitative data are "better" than qualitative.
 
+A quantitative variable be either **discrete** or **continuous**.  Discrete variables (i.e. integers) are obtained by counting (e.g. population) and values within a range cannot be infinitely subdivided.  You can have a population of 1, 37, or 179 but you cannot have a population of 2.3.  Discrete variables (i.e. real numbers) on the other hand are measured (e.g. temperature) and can take an infinite number of values a given range, but they cannot be counted.  You can have temperatures of 10, 10.5, or 10.1167 &deg;C, but a temperature of 10&deg;C does not mean you have 10 individual degrees of temperature.
 
-**Discrete Data** data can only take a limited set of values (e.g. land cover types, zoning classes)
-**Continuous Data**: measurements can take any value within some range (e.g. temperature)
+![Summary of the types of data.](images/03-data-types.png){.center}
+
+### Types of Phenomena
+
+**Discrete Objects**: have distinct, well-defined boundaries, are countable (ie. there are a finite number of them), and their boundaries can be exactly measured (e.g. a building, a municipality).
+
+**Discrete Data** data can only take a limited set of values (e.g. land cover types, zoning classes, population)
+
+**Continuous Fields**: lack clearly-defined boundaries, can be measured at an infinite number of points, and values can vary dramatically over short distances.
+
+**Continuous Data**: measurements can take any value within some range (e.g. temperature, height)
+
+*Note* Discrete objects can be described with continuous data and continuous fields can be described with discrete data.  Buildings are discrete objects because they have exact boundaries, but building height is a continuous variable.  Similarly, land cover is a continuous field because every location in an area has a land a land cover type, but the land cover type can only take a limited number of values.
+
+
+
 
 *This isn't a fully comprehensive framework for understanding data types (Chrisman, Nicholas R. "Rethinking Levels of Measurement for Cartography", Vol. 25, pg. 231-242, 1998). but I think it's sufficient for an intro level GIS text?  I think going into log scales, derived ratios, graded membership etc. might just overly complicate things.  There really isnt much literature out them within the context of GIS anyway.  I've elected to keep it simple, but I can add more if y'all think its necessary*
 

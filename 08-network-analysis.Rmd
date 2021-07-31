@@ -330,7 +330,7 @@ map %>%
   addLegend("bottomright", pal=pal, values=~closeness_mean, title="Closeness", opacity=1)
 
 parks_df = data.frame(parks$closeness_mean)
-ggplot(parks_df, aes(x=parks.closeness_mean)) + geom_density(alpha=0.2, fill="#FF6666")
+ggplot(parks_df, aes(x=parks.closeness_mean)) + geom_density(alpha=0.3, fill=rgb(160/255, 208/255, 224/255))
 
 ```
 

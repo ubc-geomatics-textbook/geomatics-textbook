@@ -4,6 +4,7 @@ library(igraph)
 library(rgdal)
 library(rgeos)
 library(leaflet)
+library(ggplot2)
 library(networkD3)
 ```
 
@@ -67,15 +68,15 @@ origins <- c("Expo Line", "99-B Line", "R4", "Canada Line", "R4", "Millenium Lin
 
 destinations <- c("99-B Line", "Canada Line", "Canada Line", "Expo Line", "Expo Line", "Expo Line", "99-B Line", "Canada Line", "Expo Line", "R2", "R1", "99-B Line", "Expo Line", "Millenium Line", "Expo Line", "Canada Line", "R3", "R3", "Seabus", "Canada Line")
 
-links <- data.frame(source=origins, target=destinations)
-nodes <- data.frame(name=unique(c(unique(origins), unique(destinations))))
+node_names <- unique(c(unique(origins), unique(destinations)))
 
-data(MisLinks)
-data(MisNodes)
+groups <- c(1, 2, 2, 1, 1, 3, 1, 2, 2, 2, 2)
+links <- data.frame(source=origins, target=destinations, value=1)
+nodes <- data.frame(name=node_names, group=groups)
 
-forceNetwork(Links = MisLinks, Nodes = MisNodes, Source = "source",
+forceNetwork(Links = links, Nodes = nodes, Source = "source",
              Target = "target", Value = "value", NodeID = "name",
-             Group = "group", opacity = 0.4, zoom = TRUE)
+             Group = "group")
 ```
 
 ### Undirect
@@ -145,8 +146,7 @@ nodeData <- readOGR("data/regional_commutes_nodes.geojson", layer="regional_comm
 leaflet(height=420, width="80%") %>% setView(lng=-122.89050696548136, lat=49.19456939297959, zoom=10) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addGeoJSON(lineData, weight=2, color="gray", fill=FALSE) %>%
-  addCircles(data=nodeData, radius=1) %>%
-  addPolygons(data=polygonData, weight=1, color="green")
+  addCircles(data=nodeData, radius=1)
 ```
 
 ### Hierarchical Topologies
@@ -203,7 +203,13 @@ The act of modelling spatial networks is called *Network tracing*. When tracing 
 
 ```{r, echo=FALSE}
 
+nodes <- readOGR("data/fraser_river_nodes.geojson", verbose=FALSE)
+links <- readOGR("data/fraser_river.geojson", verbose=FALSE)
 
+leaflet(links, height=500, width="80%") %>% addTiles() %>% 
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolylines(data=links, color="gray") %>%
+  addCircles(data=nodes, radius=1)
 
 ```
 
@@ -214,16 +220,41 @@ Linear referencing systems are commonly used for finding the length of pathways 
 Finding routes between nodes is an useful application of spatial networks. This is how maping tools help us navigate the world by finding the most efficient route to move around the city, for example. [@systemsinnovationNetworkDiffusionContagion2015].
 
 #### Least Cost Paths
-The notion of cost let us compare different routes. It relates to the necessary distance (either physically or logically) to go from a certain node to another.
+The notion of cost let us compare different routes. It relates to the necessary distance (either physically or logically) to go from a certain node to another. The map below displays the least cost path in terms of physical distance (shortest path) between two points.
 
 ```{r, echo=FALSE}
+
+nodes <- readOGR("data/shortest_path_nodes.geojson", verbose=FALSE)
+path <- readOGR("data/shortest_path.geojson", verbose=FALSE)
+map <- leaflet(nodes, height=500, width="80%") %>% addTiles()
+
+map %>% 
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolylines(data=path) %>%
+  addCircles(data=nodes)
 
 ```
 
 #### Reach Analysis
-Reach techniques are commonly used to find the incidence of defined elements within a certain radius from a chosen node. All possible routes are modeled. The number of terminal nodes varies according to the network structure. Urban walkability indices usually uses reach techniques to assess the intensity of certain indicators (such as intersection density or non-residential land uses) given a walkable radius [@martinoSpatialNetworkAnalysis2020].
+Reach techniques are commonly used to find the incidence of defined elements within a certain radius from a chosen node. All possible routes are modeled. The number of terminal nodes varies according to the network structure. Urban walkability indices usually uses reach techniques to assess the intensity of certain indicators (such as intersection density or non-residential land uses) given a walkable radius [@martinoSpatialNetworkAnalysis2020]. In the map below we portray the network reach from a given origin point into the Pacific Spirit Regional Park within 400m (red), 800m (yellow), 1200m (green) and 1600m (blue) radii.
 
 ```{r, echo=FALSE}
+
+origin <- readOGR("data/pacific_spirit_origin.geojson", verbose=FALSE)
+base_net <- readOGR("data/pacific_spirit_network.geojson", verbose=FALSE)
+net_400 <- readOGR("data/pacific_spirit_400.geojson", verbose=FALSE)
+net_800 <- readOGR("data/pacific_spirit_800.geojson", verbose=FALSE)
+net_1200 <- readOGR("data/pacific_spirit_1200.geojson", verbose=FALSE)
+net_1600 <- readOGR("data/pacific_spirit_1600.geojson", verbose=FALSE)
+
+leaflet(net_1600, height=500, width="80%") %>% setView(lng=-123.22165125449455, lat=49.25752614491611, zoom=14) %>% addTiles() %>% 
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolylines(data=base_net, color="gray") %>%
+  addPolylines(data=net_1600, color="blue") %>%
+  addPolylines(data=net_1200, color="green") %>%
+  addPolylines(data=net_800, color="yellow") %>%
+  addPolylines(data=net_400, color="red") %>%
+  addCircles(data=origin, radius=2, color="black")
 
 ```
 
@@ -241,7 +272,7 @@ pal <- colorNumeric(palette="viridis", domain=intersections$closeness, n=6, reve
 
 map %>% 
   addProviderTiles(providers$CartoDB.Positron) %>%
-  addPolygons(data=intersections, color=~colorQuantile("viridis", closeness, reverse=TRUE)(closeness)) %>%
+  addPolygons(data=intersections, color=~colorNumeric("viridis", closeness, reverse=TRUE)(closeness)) %>%
   addLegend("bottomright", pal=pal, values=~closeness, title="Closeness", opacity=1)
 
 ```
@@ -253,7 +284,7 @@ Betweenness centrality measures how likely a node or an edge is to be passed thr
 
 segments <- readOGR("data/ubc_segments.geojson", verbose=FALSE)
 map <- leaflet(segments, height=500, width="80%") %>% addTiles()
-pal <- colorNumeric(palette="viridis", domain=segments$betweenness, n=6, reverse=TRUE)
+pal <- colorQuantile(palette="viridis", domain=segments$betweenness, n=6, reverse=TRUE)
 
 map %>% 
   addProviderTiles(providers$CartoDB.Positron) %>%
@@ -277,16 +308,29 @@ We can use centrality measures to evaluate how accessible certain spaces are fro
 #### Central and peripheral green spaces in Vancouver? {#box-text -}
 [@mantegnaUBCChangingClimate2021]
 <p id="box-text"></p>
-Are green spaces evenly accessible throughout the whole city? Which parks are closer to the whole city? Centrality analysis can be used to answer these questions.
+Are green spaces evenly accessible throughout the whole city? Which parks are topologically *closer* to the city as a whole? Centrality analysis of the street network can be used to answer these questions.
 
-First we need to run the Closeness for the street network of the City of Vancouver. The network information can be downloaded for free from [OpenStreetMap](https://www.openstreetmap.org/).
+First we need to find the Closeness measure for the street network of the City of Vancouver. The network information was downloaded from [OpenStreetMap](https://www.openstreetmap.org/). The [graph-tool](https://graph-tool.skewed.de/) software was used to calculate the centrality measure. With the results of centrality for all street intersections in the city, we can overlay Parks & Green spaces data from the [City of Vancouver Open Data portal](https://opendata.vancouver.ca/explore/dataset/parks-polygon-representation/information/) and get the average closeness of nodes within each green space.
 
-This is the result of running the Closeness centrality analysis for the whole city. Now we can overlay Parks & Green spaces data from the [City of Vancouver Open Data portal](https://opendata.vancouver.ca/explore/dataset/parks-polygon-representation/information/) and get the average closeness of each green space.
 
 ``` {r, echo=FALSE}
 
+parks <- readOGR("data/vancouver_parks.geojson", verbose=FALSE)
+
+map <- leaflet(parks, height=500, width="100%") %>% addTiles()
+pal <- colorNumeric(palette="viridis", domain=parks$betweenness, n=6, reverse=TRUE)
+
+map %>% 
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(data=parks, color=~colorNumeric("viridis", closeness_mean, reverse=TRUE)(closeness_mean)) %>%
+  addLegend("bottomright", pal=pal, values=~closeness_mean, title="Closeness", opacity=1)
+
+parks_df = data.frame(parks$closeness_mean)
+ggplot(parks_df, aes(x=parks.closeness_mean)) + geom_density(alpha=0.2, fill="#FF6666")
+
 ```
 
+Results show parks located in the middle of the city have highger closeness than parks located at the edges. In other words, these parks are located in parts of the city that have easy access to the city's street network as a whole. As the histogram leans towards the right, we can conclude that there are more parks with higher closeness than parks with lower closeness.
 
 <p id="box-text"></p>
 

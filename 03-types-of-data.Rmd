@@ -70,14 +70,21 @@ Quantitative data (both discrete and continuous) can be measured on either an **
 
 ![From my lectures.  IDK the original source, but it'd be easy enough to just "recreate" my own.](images/03-scales.png){.center}
 
+### Other Measurement Scales
+
+I'll elaborate on this more later.
+
+- Derived Ratio - 'Data Normalization' - Dividing one value by another to get the ratio of the two
+
+![Changing the scale on this plot to logarithmic allows us to visualize the differences across a larger range..](images/03-log-population.png){.center}
 
 
+- Log scale - Changing the base value of the data to a logarithmic scale can make it easier to work with data that varies by many orders of magnitude.
 
-*This isn't a fully comprehensive framework for understanding data types (Chrisman, Nicholas R. "Rethinking Levels of Measurement for Cartography", Vol. 25, pg. 231-242, 1998). but I think it's sufficient for an intro level GIS text?  I think going into log scales, derived ratios, graded membership etc. might just overly complicate things.  There really isn't much literature out them within the context of GIS anyway.  I've elected to keep it simple, but I can add more if y'all think its necessary*
+![Changing the scale on this plot to logarithmic allows us to visualize the differences across a larger range..](images/03-log-population.png){.center}
 
-### Temporal
+- Graded membership - When one category doesn't fit ...
 
-Temporal data is a special type of numeric data because it is formatted in a unique way. ... I'll probably drop this?
 
 ## Spatial is Special
 
@@ -102,7 +109,7 @@ Before we dive deeper into an explanation of what the raster and vector models a
 
 ### Types of Phenomena
 
-There are two kinds of phenomena we observe in the real world and represent in a GIS **Discrete Objects** and **Continuous Fields**.  Discrete objects have distinct, well-defined boundaries meaning their geography can be exactly measured (e.g. a building, a street, a tree).  They are also countable, meaning there are a finite number of them.  Continuous fields lack clearly-defined boundaries and can be measured at an infinite number of points (e.g. elevation, precipitation).  The values of a continuous field can vary dramatically over short distances.  The vector data model is typically better suited for discrete objects and the raster data model is better for continuous fields.  However, either model *can* be used to represent either type of phenomena, and there are some circumstances where one model may be preferable over the other because of the task at hand rather than the type of phenomena.  *Note* Discrete objects can be described with continuous data and continuous fields can be described with discrete data.  Buildings are discrete objects because they have exact boundaries, but building height is a continuous variable.  Similarly, land cover is a continuous field because every location has a land cover type, but the land cover type can only take a limited number of values.
+There are two kinds of phenomena we observe in the real world and represent in a GIS **Discrete Objects** and **Continuous Fields**.  Discrete objects have distinct, well-defined boundaries meaning their geography can be exactly measured (e.g. a building, a street, a tree).  They are also countable, meaning there are a finite number of them.  Continuous fields lack clearly-defined boundaries and can be measured at an infinite number of points (e.g. elevation, precipitation, land cover).  The values of a continuous field can vary dramatically over short distances.  The vector data model is typically better suited for discrete objects and the raster data model is better for continuous fields.  However, either model *can* be used to represent either type of phenomena, and there are some circumstances where one model may be preferable over the other because of the task at hand rather than the type of phenomena.  *Note* Discrete objects can continuous fields can both be described with quantitative or qualitative data depending on the context.
 
 ![One the right, we see discrete objects, on the left we see a continuous field.  These images are from my slides.  I'm not sure the original source of the DEM image, it would be easy enough to just make my own down the line though.](images/03-data-types.png){.center}
 
@@ -111,64 +118,46 @@ There are two kinds of phenomena we observe in the real world and represent in a
 
 Raster data is any pixelated (or gridded) data where each pixel (or cell) is associated with a specific geographical location. The value of a pixel can be quantitative (e.g. elevation) or qualitative (e.g. land use). If this sounds familiar, it is because this data structure is very common: it’s how we represent any digital image. A geospatial raster is only different from a digital photo in that it is accompanied by spatial information that connects the data to a particular location. This includes the raster’s extent and cell size, the number of rows and columns, and its coordinate reference system (or CRS). (Adapted from [4])
 
-In a raster layer, each pixel/cell can only have a single value associated with it.  Multiple bands can be combined to store or generate more information, as is done with a RGB color photograph.  In GIS, rasters are most commonly encountered as: satellite imagery, drone imagery, elevation models, and scanned maps.  
+In GIS, rasters are most commonly encountered as: satellite imagery, drone imagery, elevation models, and scanned maps.  Raster data is very well suited for representing continuous fields, where the phenomenon varies across space and cell values correspond to measured (or estimated) value at specific location.  It can also be used to represent discrete objects.  Also called thematic rasters
+Data classes represented with different integer values
 
-
-Multiple layers can be combined
-Each layer represents a different field
-Raster Math:
-Layers can be combined with expressions get new information
-A = Average July Temperature
-B = Average January Temperature
-C = A – B
-Average Temperature Range
+In a raster layer, each pixel/cell can only have a single value associated with it.  Multiple bands can be combined to store or more information, as is done with a RGB color photograph.  Algebraic expressions can also be performed quickly and efficiently with raster layers a inputs.  This is known as raster overlay, and is one of the key advantages to raster data.  If layer A = Average July Temperature and layer B = Average January Temperature, then A – B will give us the Average Temperature Range across the rasters domain.
 
 ![https://www.oercommons.org/courses/introduction-to-geospatial-concepts/view - I think this one is pretty good, I use it in my lecture notes.](images/03-raster-example.png){.center}
 
 ![https://www.oercommons.org/courses/introduction-to-geospatial-concepts/view - I think this one is pretty good, I use it in my lecture notes.](images/03-raster-resolution.png){.center}
 
-#### Cell data
-#### Digital numbers
-
-
-### Vector data
+## Vector data
 
 Vectors data represents spatial entities as points, lines, and/or polygons.  Attributes (What/When) are stored in a separate database table and linked using a unique identifier, sometimes refereed to as an Index or object ID.  The index is unique to each entity (eg. there can only be one shape with an index value of 34, and only one row in the attribute table with a corresponding index value of 34).  
  
-
 ![https://www.oercommons.org/courses/introduction-to-geospatial-concepts/view - might be easier to recreate our own if the logo is an issue?](images/03-vector-example.png){.center}
  
-
-#### Points
+### Points
 Points are “zero-dimensional”:
 They don’t have length, width, or height in the system
 Points have an (𝒙,𝒚) coordinate pair describing their location
 
 ![Very rough draft.](images/03-vector-points.png){.center}
 
-
-#### Lines
+### Lines
 Lines are one-dimensional:
 They have length, but no width or height
 Lines have at least two points, a beginning point and an end point
 Lines may also have any number of middle points, called vertices
 
-
 ![I'll make something similar for lines.](images/03-vector-points.png){.center}
 
-
-#### Polygons
+### Polygons
 Polygons are two-dimensional:
 They may have length and width
 Polygons have at least three points
 The beginning and end points must be the same 
 Polygons have straight or curved line segments, sometimes called “edges”
 
-
 ![I'll make something similar for polygons.](images/03-vector-points.png){.center}
 
-
-#### Tabular Data (Attributes)
+### Tabular Data (Attributes)
 Information about a point, line, or area
 Only one data type per column
 Data type limits what kind and how much information 
@@ -180,19 +169,12 @@ Rows are distinct
 Null values possible
 
 
-- Map of Census Tracts in Toronto showing lots of attributes?
-<!-- ![Simple diagram from my lecture notes, I can recreate a better one if needed.](images/03-vector-attributes.png){.center} -->
+<!-- - Map of Census Tracts in Toronto showing lots of attributes? -->
+![Simple diagram from my lecture notes, I can recreate a better one if needed.](images/03-vector-attributes.png){.center}
 
 
-### Triangulated Irregular Networks
+## Triangulated Irregular Networks
 How important is it to mention these?  I've never used a TIN for anything except in making surfaces from drone imagery.  I can definitional mention them, but how much focus to the really deserve?
-
-
-
-
-
-
-
 
 #### Case Study {-}
 :::
@@ -220,32 +202,80 @@ Methods Discussed:
 
 ::::
 
-
+VV This might be better at the top?
 ## How is Data Represented in a Computer
+
 Before we talk about the different types of data, lets briefly discuss how information is represented inside a computer, the
 
 ### Bits & Bytes
-Bits are singluar pieces of information, representing 1's and 0's.  A circut is either on or off.  The next step up from that, is the byte.  "The byte is a unit of digital information that most commonly consists of eight bits. Historically, the byte was the number of bits used to encode a single character of text in a computer and for this reason it is the smallest addressable unit of memory in many computer architectures." - copy pasta from Wikipedia
+
+Bits are singular pieces of information, representing 1's and 0's.  A circut is either on or off.  The next step up from that, is the byte.  "The byte is a unit of digital information that most commonly consists of eight bits. Historically, the byte was the number of bits used to encode a single character of text in a computer and for this reason it is the smallest addressable unit of memory in many computer architectures." - copy pasta from Wikipedia
 
 ### Types of Numbers
-Integer vs. Floating-point  Discreet vs. Continuous
+
+Integer vs. Floating-point (Discreet vs. Continuous)
 
 ### Other types of information
+
 Text, Boolean, Dates
 
 
 ## Common file types
+
+In GIS we work with many different types of files.
+
 ### Shapefile (.shp)
+
+--From [4] -- Will adapt/adjust later
+
+Like raster data, vector data can also come in many different formats. For this workshop, we will use the Shapefile format which has the extension .shp. A .shp file stores the geographic coordinates of each vertice in the vector, as well as metadata including:
+
+    Extent - the spatial extent of the shapefile (i.e. geographic area that the shapefile covers). The spatial extent for a shapefile represents the combined extent for all spatial objects in the shapefile.
+    Object type - whether the shapefile includes points, lines, or polygons.
+    Coordinate reference system (CRS)
+    Other attributes - for example, a line shapefile that contains the locations of streams, might contain the name of each stream.
+
+Because the structure of points, lines, and polygons are different, each individual shapefile can only contain one vector type (all points, all lines or all polygons). You will not find a mixture of point, line and polygon objects in a single shapefile.
+
+
 ### Geodatabase (.gdb)
+
 This isn't really a file type?  Might this go better in chapter 5?
 
 ### LAS (.las)
+
 ### Comma Separated Values (.csv)
+
+Comma separated values are a common human readable file format that is suitable for storing attribute data.  It can also be used to efficiently store spatial data in point format.   
+
 ### GPS data (.gpx)
+
+
 ### Keyhole Markup Language (.kml)
+
+
+
 ### ASCII images (.asc)
+
+
+
 ### ENVI-format images (.dat)
+
+
 ### GeoTiff images (.tif)
+
+--From [4] -- Will adapt/adjust later
+
+Raster data can come in many different formats. For this workshop, we will use the GeoTIFF format which has the extension .tif. A .tif file stores metadata or attributes about the file as embedded tif tags. For instance, your camera might store a tag that describes the make and model of the camera or the date the photo was taken when it saves a .tif. A GeoTIFF is a standard .tif image format with additional spatial (georeferencing) information embedded in the file as tags. These tags should include the following raster metadata:
+
+    Extent
+    Resolution
+    Coordinate Reference System (CRS) - we will introduce this concept in a later episode
+    Values that represent missing data (NoDataValue) - we will introduce this concept in a later lesson.
+
+We will discuss these attributes in more detail in a later lesson. In that lesson, we will also learn how to use R to extract raster attributes from a GeoTIFF file.
+
+
 :::: {.box-content .your-turn-content}
 
 ::: {.box-title .your-turn-top}

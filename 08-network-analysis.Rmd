@@ -76,9 +76,6 @@ nodes <- data.frame(name=node_names, group=groups, size=10, id=seq.int(length(no
 
 links <- data.frame(source=origins, target=destinations, id=seq.int(length(origins)), row.names="id", value=1)
 
-data("MisNodes")
-data("MisLinks")
-
 forceNetwork(Links = MisLinks, Nodes = MisNodes, Source = "source", Value="value",
              Target = "target", NodeID = "name", Nodesize="size", linkColour="gray",
              Group = "group", opacity=0.8, zoom=TRUE, arrow=TRUE)

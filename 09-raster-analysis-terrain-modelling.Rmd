@@ -57,7 +57,9 @@ A **Digital Terrain Model (DTM)** represents elevation through points and lines 
 
 ### Digital Surface Models (DSM)
 
-Up to this point, we have been looking digital vertical models of _bare Earth_, that is, just plain old elevation of terrain above a vertical datum. If you want to represent the height of features above the bare Earth, like houses and trees, then you would need to use a **Digital Surface Model (DSM)**. Whereas a DTM and DEM both represent elevation above a vertical datum, which is usually mean sea level represented by the geoid, a DSM represents height above a DTM or DEM. In this way, we can model features on the surface and their heights. We will look at more examples of working with DSMs in Chapter 15. 
+Up to this point, we have been looking digital vertical models of _bare Earth_, that is, just plain old elevation of terrain above a vertical datum. If you want to represent the height of features above the bare Earth, like houses and trees, then you would need to use a **Digital Surface Model (DSM)**. Whereas a DTM and DEM both represent elevation above a vertical datum, which is usually mean sea level represented by the geoid, a DSM represents height above a DTM or DEM. In this way, we can model features on the surface and their heights. We will look at more examples of working with DSMs in Chapter 15.
+
+### Contours
 
 ## Raster functions
 
@@ -93,20 +95,13 @@ Figure 9.X shows the slope of Nelson River pouring into Hudson Bay. Again, red i
 
 ### Heat load index
 
-```{r, echo=FALSE}
-library(raster)
-library(spatialEco)
-mta <- raster("data/09/CDEM_Mount_Assiniboine.tif")
-mta_hli <- hli(mta)
-writeRaster(mta_hli,"data/09/CDEM_Mount_Assiniboine_HLI.tif",overwrite=T,format='GTiff',datatype='FLT4S')
+One important derivative from aspect is a **heat load index (HLI)**, which quantifies the heat from incident solar radiation on a slope. There are several variations for computing the heat load on terrain, but a commonly used calculation is the HLI proposed by McCune and Keon (2002):
 
-nr <- raster("data/09/SRTM_Nelson_River.tif")
-nr_hli <- hli(nr)
-writeRaster(nr,"data/09/SRTM_Nelson_River_HLI.tif",overwrite=T,format='GTiff',datatype='FLT4S')
+$$
+HLI=\frac{1-cos(aspect-45)}{2}
+$$
 
-```
-
-One important derivative from aspect is 
+If you imagine aspect represented by azimuths of a circle, then this calculation has the effect of "folding" that circle in half along the 45° azimuth (northeast-southwest) so that southwest-facing slopes have higher values and northeast-facing slopes have lower values. Although both southeast- and southwest-facing slopes theoretically receive the same amount of incident solar radiation, this heat load index reflects the fact that southwest-facing slopes will be significantly hotter and drier, which can help inform vegetation potential and fuel moisture content.
 
 ![Figure 9.X Comparing Heat Load Index (HLI) for Mount Assiniboine and the Nelson River. Data from Canadian Digital Elevation Model and MAXAR, respectively.](images/09-00-mount-assiniboine-nelson-river-heat-load-index.png){.center}
 
@@ -116,17 +111,17 @@ A **hillshade** is a DEM with a simulated light source. The values in a hillshad
 
 ![Figure 9.X Hillshade of Mount Assiniboine at the border of Alberta and British Columbia, Canada. Data from Canadian Digital Elevation Model. Online version is animated across all azimuths from 0° to 350° by 10° intervals.](images/09-00-mount-assiniboine-hillshade-animation.gif){.center}
 
-A hillshade is still a 2D raster with 3D features simulated through an illumination process. A hillshade does not reveal much for flatter terrain since there is not much variation in slopes across the entire raster, as can be seen in Figure 9.X for Nelson River, which is also animated in the same way as Figure 9.X. As you can see, there is no change over the water of the river and Hudson Bay where slope is 0° and aspect is undefined and only some minor terrain features are apparent over the land.
+A hillshade is still a 2D raster with 3D features simulated through an illumination process. A hillshade does not reveal much for flatter terrain since there is not much variation in slopes across the entire raster, as can be seen in Figure 9.X for Nelson River, which is also animated in the same way as Figure 9.X. As you can see, there is no change over the water of the river and Hudson Bay where slope is 0° and aspect is undefined and only some minor terrain features are apparent over the land. Still, if you watch closely, some finer scale features can be made apparent that are not otherwise visible from the original DEM and other terrain derivatives.
 
 ![Figure 9.X Hillshade of Nelson River pouring into Hudson Bay, Manitoba, Canada. Data from Shuttle Radar Topography Mission. Online version is animated across azimuths from 0° to 350° by 10° intervals.](images/09-00-nelson-river-hillshade-animation.gif){.center}
 
 ### Sinks, peaks, and saddles oh my!
 
-**Sinks** are depressions in a DEM where the focal cell is surrounded by eight neighbouring cells with higher elevations (Figure 9.X). Sinks are often naturally occurring (e.g., lakes, ponds, and wetlands), but can also be due to random error, elevation precision, DEM cell size, or other pre-processing that may have been applied to the DEM such as mosaicking. The problem with sinks when modeling runoff is that water will enter the cell, but will not be able to exit in any direction. Therefore, sinks result in an undefined flow direction and a process must be undertaken to identify and fill them in the DEM prior to calculating flow direction.
+**Sinks** are depressions in a DEM where the focal cell is surrounded by eight neighbouring cells with higher elevations (Figure 9.X). Sinks are often naturally occurring (e.g., lakes, ponds, and wetlands), but can also be due to random error, elevation precision, DEM cell size, or other pre-processing that may have been applied to the DEM such as mosaicking. The problem with sinks when modeling runoff is that water will enter the cell, but will not be able to exit in any direction, so they must be filled prior to using a DEM in any hydrology workflow. 
 
 ![Figure 9.X Sink](images/09-00-sink.png){.center}
 
-**Peaks** are the opposite of sinks, where a focal cell is surrounded by eight neighbouring cells that share the same lower elevation (Figure 9.X). Like sinks, peaks are also naturally occurring (e.g., mountain peaks and ridge lines) and may also be artifacts of data resolution and processing. Peaks also result in an undefined flow direction and must be removed before calculating flow direction. 
+**Peaks** are the opposite of sinks, where a focal cell is surrounded by eight neighbouring cells that share the same lower elevation (Figure 9.X). Like sinks, peaks are also naturally occurring (e.g., mountain peaks and ridge lines) and may also be artifacts of data resolution and processing. 
 
 ![Figure 9.X Peak](images/09-00-peak.png){.center}
 
@@ -160,9 +155,17 @@ Another way to derive and classify landforms is through the use of a **topograph
 
 ## Hydrology work"flows"
 
-### Flow direction
+By now, you should recognize that water can be modelled over a DEM by making the simple assumption that water will flow from higher elevations to lower elevations. We can undertake this modelling using a DEM because the continuous surface of elevation values can represent the runoff process. In this next section, we will look at how we can extract everything from runoff accumulation to stream networks and watersheds from a DEM.
 
-### Flow accumulation
+### Flow direction and flow accumulation
+
+Runoff is the most fundamental process that can be modelled from a DEM. In fact, modelling runoff supports nearly every subsequent derived hydrological variable of interest (e.g., flow accumulation, stream order, and watersheds). The principle assumption is that water flows from higher elevations to lower elevations. So the first step in any hydrological workflow is to calculate **flow direction** or the path that water will flow given precipitation over a focal cell in the DEM. This is made possible because we also know the eight neighbouring cell elevations. Thus, flow direction is a focal function that answers the simple question, _which neighbouring cell has the lowest elevation?_ With only eight neighbours, runoff can only travel in eight unique azimuths. Depending on the GIS software that you use to make the calculation, flow direction can be encoded as an azimuth with valid values of $FlowDir∈\{0,45,90,135,180,225,270,315,360\}$ (16-bit integer) where 0 is reserved for undefined flow direction, but more commonly it is encoded as an 8-bit integer to save disk space for very large DEMs with valid values of $FlowDir∈\{1,2,4,8,16,32,64,128,255\}$ where 255 is reserved for undefined flow direction. Once we know the flow direction we can calculate the **flow accumulation**, which is a focal function tally of the number of upslope DEM cells that flow into the focal cell. Figure 9.X illustrates how flow direction and flow accumulation work together to model runoff over a DEM surface. 
+
+![Figure 9.X Flow direction shown in arrows and flow accumulation of upslope cells shown in numbers.](images/09-00-flow-direction-accumulation.png){.center}
+
+Trouble arises when there are two or more neighboring cells with the same minima (e.g., a peak or saddle). This is especially the case for very flat terrain where the elevation might be the same in nearly every direction. As we have already seen, sinks can cause water to flow into but not out of the focal cell, and therefore result in an undefined flow direction. Sinks must therefore be identified and filled in a DEM before calculating flow direction. There are several algorithms for filling sinks, but generally the process involves calculating flow direction and then moving downslope from the highest elevations of the DEM to the valley bottoms and identifying depressions, which are then filled. This process continues to iterate until no more depressions are identified (Marks et al 1984).  Figure 9.X animates this iterative process of filling sinks in a cross-sectional profile of elevation, but the process is actually applied simultaneously over both geographic dimensions. Each iteration can introduce new sinks since the filling process directly modifies the DEM, so flow direction must be recalculated after each iteration in order to solve the next set of sinks. As a result, this filling process can be quite time consuming and usually stopping criteria are imposed such as a minimum depth threshold or a minimum slope for all cells in the DEM (i.e., no cells with flat slopes) to ensure that runoff is continuously downslope
+
+![Figure 9.X Animated process of filling sinks in a DEM.](images/09-00-sink-fill.gif){.center}
 
 ### Flow length
 

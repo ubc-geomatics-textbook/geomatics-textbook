@@ -56,13 +56,24 @@ There are many different types of thematic types. A commonly used thematic map i
 
 One of the reasons choropleth maps are so widely used is because much of the data with which we're concerned, such as demographic data, is tied to aereal units like Census tracts or counties. With the advent of browser-based web mapping applications such as ArcGIS Online, choropleth maps can easily be created in just a few steps. The map below was created in Esri's ArcGIS Online and represents the COVID-19 case fatality ratio for Canada's health regions.
 
-![A choropleth map representing the 
+```{r 05-choropleth, fig.cap = fig_cap, out.width="80%", echo = FALSE}
+fig_cap <- paste("A choropleth map representing the 
 case fatality ratio of COVID-19 for health 
-regions in Canada.] (c) Maya Daurio (images/05-choropleth.jpg){.center}
+regions in Canada [dataset](https://resources-covid19canada.hub.arcgis.com/datasets/health-region-summaries/explore) (c) Maya Daurio.")
+knitr::include_graphics(here::here("images", "05-choropleth.jpg"))
+```
 
-This map is also a good example of the potential problems with choropleth maps, which has to do something called the [Modifiable areal unit problem](https://en.wikipedia.org/wiki/Modifiable_areal_unit_problem), or MAUP. This results when data such as population, the measurement of population per unit area, is aggregated into an aereal unit, where the shape and scale of the unit affects the resulting rates, or values, of the data. In this map example, the areal unit is a health region, which vary considerably by size and population density across Canada. Canada's population is also largely concentrated along the U.S.-Canada border, which might explain why the case fatality ratio is higher in areas with more concentrated populations. This map fails to convey that kind of nuance.
+This map is also a good example of the potential problems with choropleth maps, which has to do with something called the [Modifiable areal unit problem](https://en.wikipedia.org/wiki/Modifiable_areal_unit_problem), or MAUP. This results when data such as population, the measurement of population per unit area, is aggregated into an aereal unit, where the shape and scale of the unit affects the resulting rates, or values, of the data. In this map example, the areal unit is a health region, which vary considerably by size and population density across Canada. Canada's population is also largely concentrated along the U.S.-Canada border, which might explain why the case fatality ratio is higher in areas with more concentrated populations. This map fails to convey that kind of nuance and illustrates one of the weaknesses of choropleth maps, in spite of their wide use and applicability, particularly when displaying census data.
 
 ### Dot Density Maps
+
+In contrast to choropleth maps, raw data/counts (e.g. number of mother tongue language speakers) as well as rates/ratios (e.g. number of mother tongue language speakers per sq kilometer) can be used in dot density maps. These maps use a one-to-one density, where one dot represents one count, or a one-to-many density, where one dot represents a number of counts to map the spatial distribution of a certain phenomenon. In the map below, one dot represents five speakers. Also unlike choropleth maps, dot density maps do not need to be tied to enumeration units, although they can be, such as in this map example illustrating mother tongue language speakers by census tract. Dots are distributed randomly, and a potential misleading aspect of dot density maps is the false interpretation that the dots are placed in precise locations in space.
+
+```{r 06-dotDensity, fig.cap = fig_cap, out.width="80%", echo = FALSE}
+fig_cap <- paste("Dot density map showing the distribution of Cantonese and Mandarin mother tongue language speakers by census tract [dataset (retrieved from SimplyAnalytics)](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm)")
+knitr::include_graphics(here::here("images", "06-dotDensity.jpg"))
+```
+
 
 ### Isoline Maps
 

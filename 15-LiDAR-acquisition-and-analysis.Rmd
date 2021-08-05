@@ -282,7 +282,7 @@ Creating metrics at these two scales are the fundamental way in which we current
 
 ### Your Turn! {.unnumbered}
 
-In Figure \@ref(fig:15-map) below, explore some of the LiDAR derivatives that we produced in the case study above. We can see how the pattern for maximum height follows the mean height quite closely. In addition, we can see that the 15th percentile of heights (ZQ 15) also broadly follows this pattern. However, we can see that the standard deviation of heights in the tall areas are quite variable, and that very little ground is visible in our tile (as PZAbove2 is very high almost everywhere).
+In Figure \@ref(fig:15-map) below, explore some of the LiDAR derivatives that we produced in the case study above. We can see how the pattern for maximum height follows the mean height quite closely. In addition, we can see that the 15th percentile of heights (ZQ 15) also broadly follows this pattern. However, we can see that the standard deviation of heights in the tall areas are quite variable, and that very little ground is visible in our tile (as the percentage of points above 2 m, PZAbove2 is very high almost everywhere).
 
 ```{r 15-files, echo=FALSE, warning=FALSE, include =FALSE}
 
@@ -368,7 +368,7 @@ m
 
 ## Summary
 
-LiDAR is an active remote sensing technology that requires three components; a laser scanner, a GNSS, and an IMU. The laser scanner emits short, intense pulses of light and measures the time it takes for energy to be reflected back to the device. Time of flight principles are used to produce 3D point clouds, as we know exactly where in space the laser scanner is using the GNSS and UMU. These 3D point clouds can be used to monitor vegetation structure, stream properties, and topography. Point cloud derivatives such surface models can help us analyze different aspects of a forest or landscape. These surfaces can describe the ground (DEM), the top of the Earth's surface (DSM), or the height of the forest canopy (CHM) when the point cloud is normalized. When using LiDAR in a forestry context, it is important to decide on what resolution we need for our study; we can use an ABA or ITD approach to create LiDAR metrics, which can be used to make different types of inferences about the forest.  
+LiDAR is an active remote sensing technology that requires three components; a laser scanner, a GNSS, and an IMU. The laser scanner emits short, intense pulses of light and measures the time it takes for energy to be reflected back to the device. Time of flight principles are used to produce 3D point clouds, as we know exactly where in space the laser scanner is using the GNSS and IMU. These 3D point clouds can be used to monitor vegetation structure, stream properties, and topography. Point cloud derivatives such surface models can help us analyze different aspects of a forest or landscape. These surfaces can describe the ground (DEM), the top of the Earth's surface (DSM), or the height of the forest canopy (CHM) when the point cloud is normalized. When using LiDAR in a forestry context, it is important to decide on what resolution we need for our study; we can use an ABA or ITD approach to create LiDAR metrics, which can be used to make different types of inferences about the forest.  
 
 ### Reflection Questions {.unnumbered}
 

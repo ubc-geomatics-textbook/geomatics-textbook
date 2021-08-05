@@ -228,7 +228,7 @@
 </div>
 <div id="types-of-maps" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Types of Maps</h2>
-<p>There are many different types of maps. Just try doing a Google search, and you will come across descriptions of thematic, cadastral, topographic, and physiographic maps, to name but a few. There is no standard agreement on how many different categories of maps exist. Although some differentiate among as many as five types of maps based on the functions they serve (ICSM 2021), all maps can also be categorized into just two types, <strong>reference</strong> and <strong>thematic</strong>. Reference maps represent the human-made or natural features of the landscape and are sometimes thought of as basemaps. They provide information about a particular location, such as in the example below, depicting the longest rivers in the location of Canada and where they overlap with the United States. Topographic maps based on the <a href="https://www.nrcan.gc.ca/earth-sciences/geography/topographic-information/maps/national-topographic-system-maps/9767">National Topographic System (NTS)</a> are another example of reference maps.</p>
+<p>There are many different types of maps. Just try doing a Google search, and you will come across descriptions of thematic, cadastral, topographic, and physiographic maps, to name but a few. There is no standard agreement on how many different categories of maps exist. Although some differentiate among as many as five types of maps based on the functions they serve (ICSM 2021), all maps can also be categorized into just two types, <strong>reference</strong> and <strong>thematic</strong>. Reference maps represent the human-made or natural features of the landscape and are sometimes thought of as basemaps. They provide information about a particular location, such as in the example below, depicting the longest rivers in the location of Canada and where they overlap with the United States. Topographic maps based on the <a href="https://www.nrcan.gc.ca/earth-sciences/geography/topographic-information/maps/national-topographic-system-maps/9767" target="_blank">National Topographic System (NTS)</a> are another example of reference maps.</p>
 <div class="figure">
 <img src="images/02-longRivers.png" class="center" alt="" />
 <p class="caption">One example of a reference map. <a href="https://en.wikipedia.org/wiki/List_of_longest_rivers_of_Canada#/media/File:Longest_Rivers_of_Canada.png">Longest Rivers of Canada</a> (c) <a href="https://en.wikipedia.org/wiki/User:Shannon1">Shannon1</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>.</p>
@@ -251,6 +251,7 @@
 <h3><span class="header-section-number">1.1.2</span> Choropleth Maps</h3>
 <p>There are many different types of thematic types. A commonly used thematic map is a <strong>choropleth</strong> map, which applies different colours or shading to the entire extent of a predefined aereal unit (Weiss et al. 2008). Data used in choropleth maps must be standardized and represented as rates or ratios rather than raw counts or numbers.</p>
 <p>One of the reasons choropleth maps are so widely used is because much of the data with which we’re concerned, such as demographic data, is tied to aereal units like census tracts or counties.</p>
+<p>The map below represents, using percentages instead of absolute numbers, the spatial distribution of the percentage of Cantonese speakers per total population in each census tract in the city of Vancouver, British Columbia. Household population of mother tongue language speakers by census tract is an example of demographic data collected by Statistics Canada and can serve as a proxy for linguistic diversity. This map shows greater concentration of Cantonese speakers in census tracts in the East Vancouver area.</p>
 <div class="figure"><span id="fig:05-choropleth"></span>
 <img src="images/05-choropleth.png" alt="A choropleth map representing the 
 percentage of Cantonese speakers per total population of census tracts in the City of Vancouver [Household Population by Mother Tongue](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm)retrieved from [SimplyAnalytics](https://simplyanalytics.com/)." width="80%" />
@@ -259,44 +260,74 @@ Figure 1.1: A choropleth map representing the
 percentage of Cantonese speakers per total population of census tracts in the City of Vancouver <a href="https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm">Household Population by Mother Tongue</a>retrieved from <a href="https://simplyanalytics.com/">SimplyAnalytics</a>.
 </p>
 </div>
-<p>This map is also a good example of the potential problems with choropleth maps, which has to do with something called the <a href="https://en.wikipedia.org/wiki/Modifiable_areal_unit_problem">Modifiable areal unit problem</a>, or MAUP. This results when data such as population, the measurement of population per unit area, is aggregated into an aereal unit, where the shape and scale of the unit affects the resulting rates, or values, of the data. In this map example, the areal unit is a health region, which vary considerably by size and population density across Canada. Canada’s population is also largely concentrated along the U.S.-Canada border, which might explain why the case fatality ratio is higher in areas with more concentrated populations. This map fails to convey that kind of nuance and illustrates one of the weaknesses of choropleth maps, in spite of their wide use and applicability, particularly when displaying census data.</p>
+<p>This map is also a good example of the potential problems with choropleth maps, which has to do with something called the <a href="https://en.wikipedia.org/wiki/Modifiable_areal_unit_problem" target="_blank">Modifiable areal unit problem</a>, or MAUP. This results when data such as population, which is the measurement of population per unit area, is aggregated into an areal unit, where the shape and scale of the unit affects the resulting rates, or values, of the data. In this map example, the areal unit is a census tract, which vary by size and population density across the city and are delineated according to factors other than number of mother tongue language speakers. Without knowing anything about census tracts, we may assume based on this map that an entire census tract contains a disproportionate percentage of Cantoneses speakers, when in reality it may be just a few households more than the census tract next to it. This map fails to convey that kind of nuance and illustrates one of the weaknesses of choropleth maps, in spite of their wide use and applicability, particularly when displaying census data.</p>
 </div>
 <div id="dot-density-maps" class="section level3" number="1.1.3">
 <h3><span class="header-section-number">1.1.3</span> Dot Density Maps</h3>
-<p>In contrast to choropleth maps, raw data/counts (e.g. number of mother tongue language speakers) as well as rates/ratios (e.g. number of mother tongue language speakers per square kilometer) can be used in <strong>dot density</strong> maps. These maps use a one-to-one density, where one dot represents one count, or a one-to-many density, where one dot represents a number of counts to map the spatial distribution of a certain phenomenon. In the map below, one dot represents 20 speakers. Also unlike choropleth maps, dot density maps do not need to be tied to enumeration units, although they can be, such as in this map example illustrating mother tongue language speakers by census tract. Dots are distributed randomly, and a potential misleading aspect of dot density maps is the false interpretation that the dots are placed in precise locations in space.</p>
+<p>In contrast to choropleth maps, raw data/counts (e.g. number of mother tongue language speakers) as well as rates/ratios (e.g. number of mother tongue language speakers per square kilometer) can be used in <strong>dot density</strong> maps. These maps use a one-to-one density, where one dot represents one count, or a one-to-many density, where one dot represents a number of counts to map the spatial distribution of a certain phenomenon. In the map below, one dot represents 20 speakers, and rather than mapping one language community, we can view the spatial distribution of two language communities to better understand different settlement patterns between two groups of Chinese speakers.</p>
+<p>Also unlike choropleth maps, dot density maps do not need to be tied to enumeration units, although they can be, such as in this map example, which uses another method of mapping the same data that was used in the choropleth map above. For their part, dots are distributed randomly, and a potential misleading aspect of dot density maps is the false interpretation that the dots are placed in precise locations in space.</p>
 <div class="figure"><span id="fig:06-dotDensity"></span>
 <img src="images/06-dotDensity.png" alt="Dot density map showing the distribution of Cantonese and Mandarin mother tongue language speakers by census tract [Household Population by Mother Tongue](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm)retrieved from [SimplyAnalytics](https://simplyanalytics.com/)." width="80%" />
 <p class="caption">
 Figure 1.2: Dot density map showing the distribution of Cantonese and Mandarin mother tongue language speakers by census tract <a href="https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm">Household Population by Mother Tongue</a>retrieved from <a href="https://simplyanalytics.com/">SimplyAnalytics</a>.
 </p>
 </div>
-<p>For additional</p>
 </div>
 <div id="isoline-maps" class="section level3" number="1.1.4">
 <h3><span class="header-section-number">1.1.4</span> Isoline Maps</h3>
+<ul>
+<li>07-isoline.jpg from row 23 of <a href="https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192" target="_blank">OER Content Sharing</a></li>
+</ul>
 </div>
 <div id="diagrammatic-maps" class="section level3" number="1.1.5">
 <h3><span class="header-section-number">1.1.5</span> Diagrammatic Maps</h3>
+<p><em>Note: I think I would combine diagrammatic and cartogram subsections.</em></p>
 </div>
 <div id="cartograms" class="section level3" number="1.1.6">
 <h3><span class="header-section-number">1.1.6</span> Cartograms</h3>
-<p><em>Note: <span class="citation">(<a href="#ref-Paul" role="doc-biblioref"><strong>Paul?</strong></a>)</span>, see example interactive quiz at bottom of this <a href="https://openpress.usask.ca/introgeomatics/chapter/thematic-maps/">Introduction to Geomatics</a> OER textbook.</em></p>
+<ul>
+<li>08-cartogram.png from row 42 of <a href="https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192" target="_blank">OER Content Sharing</a></li>
+</ul>
+<p><em>Note: Paul, see example interactive quiz at bottom of this <a href="https://openpress.usask.ca/introgeomatics/chapter/thematic-maps/" target="_blank">Introduction to Geomatics</a> OER textbook.</em></p>
+<div id="additional-resources-on-types-of-maps" class="section level4" number="1.1.6.1">
+<h4><span class="header-section-number">1.1.6.1</span> Additional Resources on Types of Maps</h4>
+<ul>
+<li><a href="https://openpress.usask.ca/introgeomatics/chapter/thematic-maps/" target="_blank">Thematic Maps</a></li>
+<li><a href="https://www.axismaps.com/guide/choropleth" target="_blank">Choropleth Maps</a></li>
+<li><a href="https://www.axismaps.com/guide/dot-density" target="_blank">Dot Density Maps</a></li>
+<li><a href="http://wiki.gis.com/wiki/index.php/Dot_density_map" target="_blank">Dot density map</a></li>
+<li><a href="https://www.e-education.psu.edu/geog486/node/641" target="_blank">Types of Maps</a></li>
+</ul>
+</div>
 </div>
 </div>
 <div id="map-composition" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Map Composition</h2>
+<p>Most effective maps comprise standard elements that help orient the map viewer in space and provide helpful contextual information. There is no one way to compose a map, but a good cartographer will arrange and design map elements to provide the greatest clarity. Many maps not only include the phenomenon or object being mapped, called the <strong>figure</strong>, but also the spatial context of the figure, representing where it is in relation to the space around it, called the <strong>ground</strong>. Maps often have a <strong>frame</strong>, which bounds the figure and any other map elements within a predetermined length and width. Some frames are visible to the map reader, while others are not and simply act as a bounding box for the cartographer while designing the map.</p>
 <div id="figure" class="section level3" number="1.2.1">
 <h3><span class="header-section-number">1.2.1</span> Figure</h3>
+<ul>
+<li>09-figure.jpg from row 32 of <a href="https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192" target="_blank">OER Content Sharing</a></li>
+</ul>
 </div>
 <div id="ground" class="section level3" number="1.2.2">
 <h3><span class="header-section-number">1.2.2</span> Ground</h3>
+<ul>
+<li>use 09-figure.jpg</li>
+</ul>
 </div>
 <div id="frame" class="section level3" number="1.2.3">
 <h3><span class="header-section-number">1.2.3</span> Frame</h3>
+<ul>
+<li>use 09-figure.jpg</li>
+</ul>
 </div>
 </div>
 <div id="elements-of-maps" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Elements of Maps</h2>
+<p>Whereas the figure is the most prominent element of a map, most maps also contain additional elements that provide important supplementary information, without which the purpose of the map would be less clear. Thinking back to the dot density example from the previous section, it would be difficult to understand what the map was about without a title and a <strong>legend</strong>, which contained labeling and symbols explaining the units in the map.</p>
+<p>Other elements are important for spatial orientation, such as the <strong>scale</strong> and <strong>north arrow</strong>, which provide distance and directional information, particularly critical for navigational maps such as a park trail map.</p>
+<p>Just as in writing, it is also important to provide information about the data sources used in creating the map. Not only does this credit the authors of the data, it also provides transparency and the ability to assess the reliability of the data.</p>
 <div id="text" class="section level3" number="1.3.1">
 <h3><span class="header-section-number">1.3.1</span> Text</h3>
 </div>
@@ -425,13 +456,11 @@ Figure 1.2: Dot density map showing the distribution of Cantonese and Mandarin m
 </div>
 <div id="balance" class="section level3" number="1.8.4">
 <h3><span class="header-section-number">1.8.4</span> Balance</h3>
-<p>ADD EXAMPLES OF DOT DENSITY, PROPORTIONAL, ETC.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.</p>
 <div class="figure">
 <img src="images/01-image.png" class="center" alt="" />
 <p class="caption">Figure caption text is also alt text.</p>
 </div>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.</p>
 <div class="box-content your-turn-content">
 <div id="your-turn" class="section level4 unnumbered box-title your-turn-top">
 <h4>Your turn!</h4>

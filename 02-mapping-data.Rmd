@@ -117,8 +117,8 @@ library(leaflet)
 library(RColorBrewer)
 library(raster)
 
-countries <- rgdal::readOGR("data/canada.geojson")
-r <- raster("data/CGG2013_minus_HT21997_meters.tif")
+countries <- rgdal::readOGR("data/02/canada.geojson")
+r <- raster("data/02/CGG2013_minus_HT21997_meters.tif")
 p <- brewer.pal(11,"RdYlBu")
 pal <- colorNumeric(p, values(r), na.color = "transparent")
 

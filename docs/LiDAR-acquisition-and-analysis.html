@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 Network Analysis | An Open Geomatics Textbook</title>
+  <title>Chapter 4 LiDAR Acquisition and Analysis | An Open Geomatics Textbook</title>
   <meta name="description" content="Advancing teaching and learning in geomatics at UBC" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 Network Analysis | An Open Geomatics Textbook" />
+  <meta property="og:title" content="Chapter 4 LiDAR Acquisition and Analysis | An Open Geomatics Textbook" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/ubc-geomatics-textbook/book/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="ubc-geomatics-textbook/book" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Network Analysis | An Open Geomatics Textbook" />
+  <meta name="twitter:title" content="Chapter 4 LiDAR Acquisition and Analysis | An Open Geomatics Textbook" />
   
   <meta name="twitter:description" content="Advancing teaching and learning in geomatics at UBC" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="relational-databases.html"/>
-<link rel="next" href="spatial-estimation.html"/>
+<link rel="prev" href="spatial-estimation.html"/>
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -53,9 +53,6 @@
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/d3-4.5.0/d3.min.js"></script>
-<script src="libs/forceNetwork-binding-0.4/forceNetwork.js"></script>
 
 
 
@@ -265,169 +262,293 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="network-analysis" class="section level1">
-<h1><span class="header-section-number">Chapter 3</span> Network Analysis</h1>
-<p>Networks are abstract structures used to represent patterns of relationships among sets of various “things” <span class="citation">(Ajorlou <a href="#ref-ajorlouIntroductionNetworkModels2018" role="doc-biblioref">2018</a>)</span>. Such structures can be used to represent social connections, spatial patterns, ecological relationships, etc. In GIS, the elements that compose geospatial networks are geolocated – in other words: they have latitude and longitude values attached to them. Network analysis encompasses a series of techniques used to interpret information from those networks. This chapter introduces basic concepts for building, analyzing and applying spatial networks to real-world problems.</p>
+<div id="LiDAR-acquisition-and-analysis" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> LiDAR Acquisition and Analysis</h1>
+<p><strong>Bold Text</strong>, <em>Italicized Text</em> Regular Text.</p>
 <div class="box-content learning-objectives-content">
 <div class="box-title learning-objectives-top">
-<h4 id="learning-objectives-3" class="unnumbered">Learning Objectives</h4>
+<h4 id="learning-objectives-5" class="unnumbered">Learning Objectives</h4>
 </div>
-<p id="box-text">
-By the end of the chapter, students will be able:
-</p>
 <ol style="list-style-type: decimal">
-<li>To understand what networks are and to identify the elements that compose them;</li>
-<li>To categorize different types of networks according to their topologies;</li>
-<li>To create spatial networks and learn how to apply them in various applications;</li>
-<li>To extract relevant information from spatial networks about the relationship between their elements, such as routes, distances and centralities.</li>
+<li>Understand <em>how</em> LiDAR works</li>
+<li>Understand <em>what</em> we can do with LiDAR data</li>
+<li>Understand the basic processing steps required to use LiDAR data in a forestry context</li>
 </ol>
 </div>
-<div id="key-terms-3" class="section level3 unnumbered">
+<div id="key-terms-5" class="section level3 unnumbered">
 <h3>Key Terms</h3>
-<p>Network analysis, Spatial networks, Graph theory</p>
+<p>LiDAR, ALS, Surface Models, LiDAR Metrics, Area-Based Approach, Individual Tree Detection</p>
 </div>
-<div id="introduction-to-graph-theory" class="section level2">
-<h2><span class="header-section-number">3.1</span> Introduction to graph theory</h2>
-<p>Graphs are the abstract language of networks <span class="citation">(Systems Innovation <a href="#ref-systemsinnovationGraphTheoryOverview2015" role="doc-biblioref">2015</a><a href="#ref-systemsinnovationGraphTheoryOverview2015" role="doc-biblioref">a</a>)</span>. Graph theory is the area of mathematics that study graphs. By abstracting networks into graphs, one is able to measure different kinds of indicators that represents information about relationships that exist within a certain system. This is especially useful to assess the state of complex adaptive systems such as societies, cities, ecosystems, etc. All graphs are composed of two parts: nodes and edges.</p>
-<div id="nodes" class="section level3">
-<h3><span class="header-section-number">3.1.1</span> Nodes</h3>
-<p>A node (or vertex) may represent any thing that can be connected with other things. For example, it can represent people in social networks, street intersections in road networks, or chemical compounds in molecular networks, among others.</p>
+<div id="what-is-lidar" class="section level2">
+<h2><span class="header-section-number">4.1</span> What is LiDAR?</h2>
+<p>LiDAR is an active remote sensing technology that uses a laser scanner and time of flight principles to collect 3 dimensional data. A LiDAR system is made up of three components; a laser-scanning device, and accurate global navigation satellite system (GNSS), and an inertial measurement unit (IMU). The GNSS receiver allows the position of the laser to be determined in space, while the IMU records the orientation of the laser (i.e. roll, pitch, and yaw). When discussing LiDAR in an airborne context, we can also call it airborne laser scanning (ALS).</p>
+<div id="how-does-it-work" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> How does it Work?</h3>
+<p>Typical LiDAR systems use the time of flight method to produce 3D data. A laser ranging instrument produces a short, intense pulse of light from the instrument to a target being measured. Some of this energy is then reflected back to the instrument, where it is recorded. Since the speed of light, and the location of the laser ranging instrument is known, we can calculate the position of the target by timing how long it takes between the the pulse being emitted and received.</p>
+<div class="figure">
+<img src="images/15-Concept_of_LiDAR.png" class="center" alt="" />
+<p class="caption">Figure X Concept of LiDAR.</p>
 </div>
-<div id="edges" class="section level3">
-<h3><span class="header-section-number">3.1.2</span> Edges</h3>
-<p>Edges, on the other hand, represent how vertices are interconnected to each other. So it may represent the vertices’ social connections, street segments, molecular bindings, etc. The graph below represents rapid and frequent transit lines in Metro Vancouver. Each node represents a transit line and the edges represents connections between those lines.</p>
-<div id="htmlwidget-15fe914d37061670ea9d" style="width:672px;height:480px;" class="forceNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-15fe914d37061670ea9d">{"x":{"links":{"source":[2,0,7,1,7,3,3,9,9,9,2,7,10,10,8,8,10,3,10,10],"target":[0,1,1,2,2,2,0,1,2,5,4,0,2,3,2,1,6,6,9,1],"value":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"colour":["#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666"]},"nodes":{"name":["99-B Line","Canada Line","Expo Line","Millenium Line","R1","R2","R3","R4","R5","Seabus","West Coast Express"],"group":[1,1,1,1,1,1,1,1,1,1,1],"nodesize":[8,8,8,8,8,8,8,8,8,8,8]},"options":{"NodeID":"name","Group":"group","colourScale":"d3.scaleOrdinal(['#3182bd'])","fontSize":10,"fontFamily":"serif","clickTextSize":25,"linkDistance":50,"linkWidth":"'1.5px'.toString()","charge":-500,"opacity":0.6,"zoom":false,"legend":false,"arrows":false,"nodesize":true,"radiusCalculation":"d.nodesize","bounded":false,"opacityNoHover":1,"clickAction":null}},"evals":[],"jsHooks":[]}</script>
-<p class="codeblock-label">
-Graph representing Metro Vancouver rapid and frequent transit network
+<p>A LiDAR dataset includes several pieces of information for each 3D point. X,Y,Z location data is included, as well as information about how the data was collected. In many cases, this includes</p>
+<p>The most common file format for LiDAR files is called the LAS file format (.las). This file format was originally designed for 3-dimensional point cloud data, and is a free alternative to proprietary systems or a generic ASCII file interchange system. The main benefits of this file format are that it is relatively quick, can be used by any system, and stores information specific to the nature of LiDAR data wihtout being overly complex (:<a href="https://www.asprs.org/divisions-committees/lidar-division/laser-las-file-format-exchange-activities" class="uri">https://www.asprs.org/divisions-committees/lidar-division/laser-las-file-format-exchange-activities</a>).</p>
+<p>LiDAR HISTORY</p>
+<ul>
+<li><p>Early LiDAR point densities were low, which</p></li>
+<li><p>Brief history in forestry / what can we do with LiDAR</p></li>
+</ul>
+<div class="figure">
+<img src="images/15-LiDAR_System.png" class="center" alt="" />
+<p class="caption">Figure X LiDAR System.</p>
+</div>
+</div>
+</div>
+<div id="components-of-lidar-systems" class="section level2">
+<h2><span class="header-section-number">4.2</span> Components of LiDAR Systems</h2>
+<div id="lasers" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Lasers</h3>
+<ul>
+<li>4:10 - video 1</li>
+<li>Typical wavelengths (eye safe, NIR vs green for bathymetric)</li>
+<li>Power</li>
+<li>Beam divergence - important to take into account. Think about a dinner plate compared to a bicycle wheel. A beam that has low divergence (dinner plate) will be able to distinguish more objects than a high divergence beam (bicycle wheel).</li>
+<li>Target interaction - 7:45 in video 1</li>
+<li>Scanning types - zig-zag, rotating mirror line, push broom (call back to RS chapter?) - video 2, 2:08</li>
+<li>Pulse frequency, scan rate, scan angle</li>
+</ul>
+<div class="figure">
+<img src="images/15-LiDAR_Unit.jpg" class="center" alt="" />
+<p class="caption">Figure X LiDAR Unit.</p>
+</div>
+</div>
+<div id="position-and-orientation" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Position and Orientation</h3>
+<ul>
+<li><p><strong>Global Navigation Satellite Systems</strong></p>
+<ul>
+<li><p>Require us to know our position exactly!</p></li>
+<li><p>Callback to GNSS?</p></li>
+<li><p>On board GPS and GPS reference stations on the ground are used to post process the data in order to be as accurate as possible</p></li>
+</ul></li>
+</ul>
+<div class="figure">
+<img src="images/15-XYZ_coordinates.jpg" class="center" alt="" />
+<p class="caption">Figure X XYZ Coordinates.</p>
+</div>
+<ul>
+<li><p><strong>Inertial Measurement Unit (IMU)</strong></p>
+<ul>
+<li><p>An inertial measurement unit (IMU) consists of gyroscopes and accelerometers measures the attitude and acceleration of the aircraft along the X, Y, Z axis. This data is combined with the GNSS data to provide a precise location of the scanner in space.</p></li>
+<li><p>Mentioned elswhere? What is it - focus on image that discusses pitch/roll/yaw</p></li>
+</ul></li>
+<li><p><strong>Clocks</strong></p>
+<ul>
+<li><p>The LiDAR point data needs to be synched with the positioning data in order to know where the point is in space. To do this, a very accurate GPS clock is used to time stamp the laser scanning data (7:30 video 2).</p></li>
+<li><p>Accurate clocks are imperative for producing accurate point clouds. One nanosecond corresponds to a 30 cm travel distance A - (video 1)</p></li>
+</ul></li>
+</ul>
+</div>
+<div id="platform" class="section level3">
+<h3><span class="header-section-number">4.2.3</span> Platform</h3>
+<p>LiDAR units can be attached to a variety of platforms. Traditionally, LiDAR units for forestry research were mounted on airplanes and helicopters, as units were large and cumbersome [Figure X for actual scanner], however ground based units such as terrestrial laser scanning (TLS), and mobile laser scanning (MLS) have also been developed. These units tend to have a very high point density, and TLS is often used in modeling tree architecture.</p>
+<ul>
+<li><p>Plane vs helicopter - what is normal</p></li>
+<li><p>Drone: As technology has improved and laser units have gotten smaller, we can mount LiDAR units to drones (also known as…)</p></li>
+</ul>
+<div class="figure">
+<img src="images/15-LiDAR_on_Drone_2.jpg" class="center" alt="" />
+<p class="caption">Figure X Drone mounted LiDAR.</p>
+</div>
+<ul>
+<li><p>MLS/backpack</p></li>
+<li><p>Satellite based:</p>
+<ul>
+<li><p>ICESat</p></li>
+<li><p>GEDI</p></li>
+</ul></li>
+</ul>
+<div class="figure">
+<img src="images/15-GEDI.jpg" class="center" alt="" />
+<p class="caption">Figure X GEDI.</p>
+</div>
+<ul>
+<li>Cars: Don’t need figure..</li>
+</ul>
+<div class="figure">
+<img src="images/15-Mobile_LiDAR.jpg" class="center" alt="" />
+<p class="caption">Figure X Mobile LiDAR System.</p>
+</div>
+<ul>
+<li>TLS</li>
+</ul>
+<p><strong>IDEA</strong>: combine different types into one collage</p>
+</div>
+</div>
+<div id="types-of-lidar" class="section level2">
+<h2><span class="header-section-number">4.3</span> Types of LiDAR</h2>
+<div id="discrete-return" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> Discrete Return</h3>
+<p>Discrete return LiDAR = more common. Include figure of a cross-section!</p>
+</div>
+<div id="full-waveform" class="section level3">
+<h3><span class="header-section-number">4.3.2</span> Full Waveform</h3>
+</div>
+<div id="multispectral" class="section level3">
+<h3><span class="header-section-number">4.3.3</span> Multispectral</h3>
+<ul>
+<li>New</li>
+</ul>
+</div>
+<div id="single-photon-lidar" class="section level3">
+<h3><span class="header-section-number">4.3.4</span> Single Photon Lidar</h3>
+<ul>
+<li>New</li>
+</ul>
+<div class="figure">
+<img src="images/15-LiDAR_Discrete_Full_Waveform.png" class="center" alt="" />
+<p class="caption">Figure X LiDAR Discrete vs Full Waveform.</p>
+</div>
+<p><a href="https://google.com" target="_blank">This is how we link to something. {target=“_blank”} ensures that this link opens in a new window rather than navigating away from the textbook.</a></p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<div class="box-content call-out-content">
+<div class="box-title call-out-top">
+<h4 id="call-out" class="unnumbered">Call out</h4>
+</div>
+<p id="box-text">
+<p>This is a call out. Put some important concept or fact in here.</p>
 </p>
-<p><img src="https://www.pittmeadows.ca/sites/default/files/docs/23-07-2019_2-47-50_pm.jpg" alt="Rapid and frequent transit network in Metro Vancouver. Source: City of Pitt Meadows" />.(images/metro_vancouver_transit_network.jpeg){.center}</p>
 </div>
 </div>
-<div id="connectivity-and-order" class="section level2">
-<h2><span class="header-section-number">3.2</span> Connectivity and order</h2>
-<p>There are two major types of connections within the graphs: directed and undirected. Connections are directed when they have a specific node of origin and destination.</p>
-<div id="direct" class="section level3">
-<h3><span class="header-section-number">3.2.1</span> Direct</h3>
-<p>Directed graphs are networks where the order of elements change relationships between them. We represent directed connections with an arrow. For example, in the case of the transit network we could use a directed graph to represent the path one has to take in order to shift from one line to another.</p>
 </div>
-<div id="undirect" class="section level3">
-<h3><span class="header-section-number">3.2.2</span> Undirect</h3>
-<p>On the other hand, in an undirected graph, connections are represented as simple lines instead of arrows. The order of elements does not matter.</p>
+<div id="lidar-derivatives-and-analysis" class="section level2">
+<h2><span class="header-section-number">4.4</span> LiDAR Derivatives and Analysis</h2>
+<ul>
+<li>What can we do with LiDAR derivatives, why are they important</li>
+<li>What is the use for LiDAR in forestry and ecology - examples from NCC LiDAR Lecture</li>
+<li>How do we go from raw cloud to these derivatives</li>
+</ul>
+<div class="figure">
+<img src="images/15-las_denoise.png" class="center" alt="" />
+<p class="caption">Figure X typical LiDAR point cloud.</p>
 </div>
-</div>
-<div id="network-topologies" class="section level2">
-<h2><span class="header-section-number">3.3</span> Network topologies</h2>
-<p>Topology is the study of how network elements are arranged. The same elements arranged in different ways can change the network structure and dynamics. A very common example is the arrangement of computer networks <span class="citation">(Wikibooks <a href="#ref-wikibooksCommunicationNetworksNetwork2018" role="doc-biblioref">2018</a>)</span>.</p>
-<div id="physical-versus-logical-topology" class="section level3">
-<h3><span class="header-section-number">3.3.1</span> Physical versus logical topology</h3>
-</div>
-<div id="lines" class="section level3">
-<h3><span class="header-section-number">3.3.2</span> Lines</h3>
-<p>Nodes are arranged in series where every node has no more than two connections.
-(Example: Skytrain transit line)</p>
-</div>
-<div id="rings" class="section level3">
-<h3><span class="header-section-number">3.3.3</span> Rings</h3>
-<p>Every node has no mode than two connections and the “first” and “last” nodes are connected to each other forming a circle.
-(Example: Stanley park seawall trail)</p>
-</div>
-<div id="meshes" class="section level3">
-<h3><span class="header-section-number">3.3.4</span> Meshes</h3>
-<p>Every node is connected to more than one node.
-(Example: Tree canopy)</p>
-</div>
-<div id="stars" class="section level3">
-<h3><span class="header-section-number">3.3.5</span> Stars</h3>
-<p>Two or more nodes arranged around a central node.
-(Example: Courtyard apartment)</p>
-</div>
-<div id="trees" class="section level3">
-<h3><span class="header-section-number">3.3.6</span> Trees</h3>
-<p>Nodes are structured from a root node arranged into a number of smaller nodes.
-(Example: Boat marinas)</p>
-</div>
-<div id="buses" class="section level3">
-<h3><span class="header-section-number">3.3.7</span> Buses</h3>
-<p>Nodes are structured with one connection around a central path.
-(Example: Building-street connections)</p>
-</div>
-<div id="fully-connected" class="section level3">
-<h3><span class="header-section-number">3.3.8</span> Fully connected</h3>
-<p>Every node is connected to every other node.
-(Example: Soccer field visibility)</p>
+<div id="bare-earth-elevation" class="section level3">
+<h3><span class="header-section-number">4.4.1</span> Bare Earth Elevation</h3>
+<ul>
+<li>What is a DEM</li>
+</ul>
+<div class="figure">
+<img src="images/15-las_dem.png" class="center" alt="" />
+<p class="caption">Figure X DEM.</p>
 </div>
 </div>
-<div id="spatial-network-analysis" class="section level2">
-<h2><span class="header-section-number">3.4</span> Spatial Network Analysis</h2>
-<div id="network-tracing" class="section level3">
-<h3><span class="header-section-number">3.4.1</span> Network tracing</h3>
-</div>
-<div id="linear-referencing" class="section level3">
-<h3><span class="header-section-number">3.4.2</span> Linear referencing</h3>
-<p><span class="citation">(Ramsey <a href="#ref-ramsey23LinearReferencing2012" role="doc-biblioref">2012</a>)</span>.</p>
-</div>
-<div id="routing" class="section level3">
-<h3><span class="header-section-number">3.4.3</span> Routing</h3>
-<p><span class="citation">(Systems Innovation <a href="#ref-systemsinnovationNetworkDiffusionContagion2015" role="doc-biblioref">2015</a><a href="#ref-systemsinnovationNetworkDiffusionContagion2015" role="doc-biblioref">b</a>)</span>.</p>
-</div>
-<div id="least-cost-paths" class="section level3">
-<h3><span class="header-section-number">3.4.4</span> Least cost paths</h3>
-</div>
-<div id="least-cost-corridors" class="section level3">
-<h3><span class="header-section-number">3.4.5</span> Least cost corridors</h3>
+<div id="canopy-height-model" class="section level3">
+<h3><span class="header-section-number">4.4.2</span> Canopy Height Model</h3>
+<ul>
+<li>What is a CHM</li>
+</ul>
+<div class="figure">
+<img src="images/15-las_CHM_2D.png" class="center" alt="" />
+<p class="caption">Figure X CHM.</p>
 </div>
 </div>
-<div id="network-centrality" class="section level2">
-<h2><span class="header-section-number">3.5</span> Network Centrality</h2>
-<p><span class="citation">(Ajorlou <a href="#ref-ajorlouIntroductionNetworkModels2018" role="doc-biblioref">2018</a>)</span>.</p>
-<div id="degree-centrality" class="section level3">
-<h3><span class="header-section-number">3.5.1</span> Degree centrality</h3>
-<p>The number of connections of each node.</p>
+<div id="canopy-surface-model" class="section level3">
+<h3><span class="header-section-number">4.4.3</span> Canopy Surface Model</h3>
+<ul>
+<li>CHM vs DSM?</li>
+</ul>
 </div>
-<div id="closeness-centrality" class="section level3">
-<h3><span class="header-section-number">3.5.2</span> Closeness centrality</h3>
-<p>How close the node is to every other node of the graph in logical distance.</p>
+<div id="grid-metrics" class="section level3">
+<h3><span class="header-section-number">4.4.4</span> Grid Metrics</h3>
+<ul>
+<li>What are these used for</li>
+</ul>
+<div class="figure">
+<img src="images/15-las_hmax_2D.png" class="center" alt="" />
+<p class="caption">Figure X DEM.</p>
 </div>
-<div id="betweenness-centrality" class="section level3">
-<h3><span class="header-section-number">3.5.3</span> Betweenness centrality</h3>
-<p>How likely a node is to be passed through when going from every node to every other node of the graph.</p>
+<div class="figure">
+<img src="images/15-las_metrics_2D.png" class="center" alt="" />
+<p class="caption">Figure X DEM.</p>
+</div>
+</div>
+<div id="tree-segmentation" class="section level3">
+<h3><span class="header-section-number">4.4.5</span> Tree Segmentation</h3>
+<p>-How and why would we want too do this</p>
+<div class="figure">
+<img src="images/15-Processing_Flowchart.png" class="center" alt="" />
+<p class="caption">Figure X Processing Flowchart.</p>
+</div>
+<div class="figure">
+<img src="images/15-las_treetops.png" class="center" alt="" />
+<p class="caption">Figure X DEM.</p>
+</div>
+</div>
+<div id="software" class="section level3">
+<h3><span class="header-section-number">4.4.6</span> Software</h3>
+<p>We use lidR for this section.. Can use XYZ</p>
 <div class="box-content case-study-content">
 <div class="box-title case-study-top">
-<h4 id="case-study-1" class="unnumbered">Case Study</h4>
+<h4 id="case-study-6" class="unnumbered">Case Study</h4>
 </div>
-<h4 id="box-text" class="unnumbered">Central and peripheral green spaces in Vancouver?</h4>
-<span class="citation">(Mantegna <a href="#ref-mantegnaUBCChangingClimate2021" role="doc-biblioref">2021</a>)</span>
+<h4 id="box-text" class="unnumbered">Creating LiDAR Metrics from a Raw Point Cloud</h4>
 <p id="box-text">
+<p>For this case study, we will be using a clipped .las file from the 2018 open LiDAR dataset of City of Vancouver and UBC Endowment Lands in British Columbia (we randomly selected a 200 x 200 meter portion of the ‘4840E_54550N’ tile, see below for the link where you can download the data), and the <code>lidR</code> package in R. The script to process this data is included HERE [where to include script?], and you can use the <code>lidR</code> book [link] to get a more in depth understanding of the functions we apply below.</p>
 </p>
 <p id="box-text">
+<p>The first step when looking at LiDAR data is to inspect it; we recommend using the free software CloudCompare (link below), or the <code>plot()</code> function in the <code>lidR</code> package. Once we have a sense of our data, we can clean and filter the data, using <code>classify_noise()</code> and the ‘-drop’ switch to get rid of the noise in our dataset [include image showing noisy vs. clean data?]. Our cleaned dataset can then be used to create a DEM; first we can <code>classify_ground()</code>, followed by using the <code>grid_terrain()</code> function [call back to previous chapter] – this is an essential step that could require quite a bit of tweaking depending on what you want to use the DEM for! In our case, the DEM is used to <em>normalize</em> the point cloud. Normalization removes the effect of terrain on above ground measurements, allowing comparisons of vegetation heights. [insert image of DEM and CHM]. The normalized point cloud is used to create our CHM (created using <code>grid_canopy()</code>). It is at this point that we can analyze the point cloud in a variety of ways. We can use an area-based approach (ABA) to create metrics at the grid level (<code>grid_metrics()</code>), or we can derive metrics at the individual tree scale. In order to do this we need to first segment the trees (<code>segment_trees()</code>) before creating metrics (<code>tree_metrics()</code>). Below we can see an example of a segmented point cloud.</p>
 </p>
 <p id="box-text">
+<p>Case studies should have at least one image or map (no more than 2 total) and the written length should be around 300 words (shown above). Any references to external literature should by hyperlinked with the Digitial Object Identifier (DOI) permanent URL and <a href="https://bookdown.org/yihui/bookdown/citations.html" target="_blank">entered into the bibliography</a>. Avoid linking to external resources without a DOI and permanent URL. Contact Paul or try using the Leaflet package in R if you want to add an interactive web map.</p>
 </p>
 </div>
+<div class="box-content your-turn-content">
+<div class="box-title your-turn-top">
+<h4 id="your-turn-1" class="unnumbered">Your turn!</h4>
+</div>
+<p id="box-text">
+<p>Explore some of the LiDAR derivatives that we produced in the case study above</p>
+</p>
+<p id="box-text">
+<p>Interactive map of rasters:</p>
+<ul>
+<li><p>DEM</p></li>
+<li><p>CHM</p></li>
+<li><p>and some grid metrics - e.g. mean and p99?</p>
+</p></li>
+</ul>
+<p id="box-text">
+<p>Screenshot vs. interactive point cloud - data size concerns</p>
+</p>
+<p id="box-text">
+<p>Necessity of being able to rotate point cloud? Relatively little gain for trouble of small area.</p>
+</p>
+<p>Your browser does not support iframes</p>
+</p>
+</iframe>
+</div>
+</div>
+</div>
+<div id="summary-3" class="section level2">
+<h2><span class="header-section-number">4.5</span> Summary</h2>
+<p>LiDAR! Requires 3 components. Important for vertical characterization of the forest. Can produce useful rasters</p>
+<div id="reflection-questions-2" class="section level3 unnumbered">
+<h3>Reflection Questions</h3>
+<ol style="list-style-type: decimal">
+<li>Explain ipsum lorem.</li>
+<li>Define ipsum lorem.</li>
+<li>What is the role of ispum lorem?</li>
+<li>How does ipsum lorem work?</li>
+</ol>
+</div>
+<div id="practice-questions-2" class="section level3 unnumbered">
+<h3>Practice Questions</h3>
+<ol start="2" style="list-style-type: decimal">
+<li>Given ipsum, solve for lorem.</li>
+<li>Draw ipsum lorem.</li>
+</ol>
+<p>## Recommended Readings {-}</p>
+<p>Ensure all inline citations are properly referenced here.</p>
 
 </div>
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-ajorlouIntroductionNetworkModels2018">
-<p>Ajorlou, Amir. 2018. “Introduction to Network Models.” Course. <em>MIT OpenCourseWare</em>. https://ocw.mit.edu/courses/civil-and-environmental-engineering/1-022-introduction-to-network-models-fall-2018/.</p>
-</div>
-<div id="ref-mantegnaUBCChangingClimate2021">
-<p>Mantegna, Nicholas. 2021. “UBC in A Changing Climate: Soft Landscape Communities Design Strategy.” Student Research Report.</p>
-</div>
-<div id="ref-ramsey23LinearReferencing2012">
-<p>Ramsey, Paul. 2012. “23. Linear Referencing Introduction to PostGIS.” http://postgis.net/workshops/postgis-intro/linear_referencing.html.</p>
-</div>
-<div id="ref-systemsinnovationGraphTheoryOverview2015">
-<p>Systems Innovation. 2015a. “Graph Theory Overview.” https://youtu.be/82zlRaRUsaY.</p>
-</div>
-<div id="ref-systemsinnovationNetworkDiffusionContagion2015">
-<p>Systems Innovation. 2015b. “Network Diffusion &amp; Contagion.” https://youtu.be/bTXUJQhEqL0.</p>
-</div>
-<div id="ref-wikibooksCommunicationNetworksNetwork2018">
-<p>Wikibooks. 2018. “Communication Networks/Network Topologies.” https://en.wikibooks.org/wiki/Communication_Networks/Network_Topologies.</p>
 </div>
 </div>
             </section>
@@ -435,8 +556,8 @@ Graph representing Metro Vancouver rapid and frequent transit network
           </div>
         </div>
       </div>
-<a href="relational-databases.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="spatial-estimation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="spatial-estimation.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

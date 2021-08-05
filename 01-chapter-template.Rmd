@@ -1,6 +1,6 @@
 # Chapter Title {#chapter-template}
 
-**Lorem ipsum dolor sit amet**, _consectetur adipiscing elit._ Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
+**Lorem ipsum dolor sit amet**, _consectetur adipiscing elit._ Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque[@Tashakkori2010], consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada[@Howell2020]. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna[@thompson2012sampling]. Sed sed neque sed purus malesuada auctor quis quis massa[@Teddlie2007].
 
 :::: {.box-content .learning-objectives-content}
 
@@ -39,9 +39,32 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem
 
 ::::
 
-## Second Section Header
+## 10.1 Second Section Header {-}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa. 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa Figure \@ref(fig:figs). 
+
+```{r ,echo=FALSE, warning=FALSE, message=FALSE}
+library(plotly)
+library(ggplot2)
+library(scales)
+m <- matrix(c(1:625), nrow=25, ncol=25)
+df <- expand.grid(x=1:ncol(m),y=1:nrow(m))
+df$val <- m[as.matrix(df[c('y','x')])]
+n <- df[sample(nrow(df), 60, replace = FALSE, prob = NULL),]
+p<-ggplot(n,aes(x=x, y=y, label=val)) + 
+  geom_tile(data=df, fill='transparent', colour = 'black') + 
+  geom_tile(data=n,fill='black')+
+  scale_y_reverse() +
+  theme_classic() + 
+  theme(axis.text  = element_blank(),
+        panel.grid = element_blank(),
+        axis.line  = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+p
+```
+\ref{fig10.1:figs} Simple random sample of 60 units from a population of 625 units.
+
 
 :::: {.box-content .case-study-content}
 

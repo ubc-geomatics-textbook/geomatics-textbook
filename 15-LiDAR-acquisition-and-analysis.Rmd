@@ -38,12 +38,12 @@ fig_cap <- paste("Concept of LiDAR. A light signal is emitted by the scanner and
 knitr::include_graphics(here::here("images", "15-Concept-of-LiDAR.png"))
 ```
 
-Since a LiDAR point cloud is a file containing the 3D location of points representing objects on the Earth's surface, there are several parameters to take note of. It is important to know what the technical specifications of the data collection parameters were (for example, how many points per square meter do we have?), and how the data was collected (what platform was used?). A LiDAR dataset includes several pieces of information for each 3D point. $X,Y,Z$ location data tells us where each point is (usually to the centimeter scale), and a GPS time stamp is included for each point (`gpstime`). Additional information such as $return number$, $scan angle$, $classification$, and $intensity$ are also included with the file, which will be discussed in more detail below ([Components of a LiDAR System]).
+Since a LiDAR point cloud is a file containing the 3D location of points representing objects on the Earth's surface, there are several parameters to take note of. It is important to know what the technical specifications of the data collection parameters were (for example, how many points per square meter do we have?), and how the data was collected (what platform was used?). A LiDAR dataset includes several pieces of information for each 3D point. $X,Y,Z$ location data tells us where each point is (usually to the centimeter scale), and a GPS time stamp is included for each point ($gpstime$). Additional information such as $return$ $number$, $scan$ $angle$, $classification$, and $intensity$ are also included with the file, which will be discussed in more detail below ([Components of a LiDAR System]).
 
 The most common file format for LiDAR files is called the LAS file format (`.las`). This file format was originally designed for 3D point cloud data, and is a free alternative to proprietary systems or a generic ASCII file interchange system. The main benefits of this file format are that it is relatively quick, can be used by any system, and stores information specific to the nature of LiDAR data without being overly complex [@AmericanSocietyforPhotogrammetry&RemoteSensing2019]. More information regarding the file type specifications can be found [at their website](https://www.asprs.org/divisions-committees/lidar-division/laser-las-file-format-exchange-activities){target="_blank"}.
 
 ```{r 15-las-denoise, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("An example of a typical LiDAR point cloud containing 3.14 million points at approximately 80 points·m^-2^. The point cloud shows a 200 x 200 meter portion of Pacific Spirit Regional Park in Vancouver, and is part of the [2018 City of Vancouver dataset](https://opendata.vancouver.ca/explore/dataset/lidar-2018/). (Du Toit, CC-by-4.0).")
+fig_cap <- paste("An example of a typical LiDAR point cloud containing 3.14 million points at approximately 80 points·m^-2^. The point cloud shows a 200 x 200 meter portion of Pacific Spirit Regional Park in Vancouver, and is part of the [2018 City of Vancouver dataset](https://opendata.vancouver.ca/explore/dataset/lidar-2018/). (Du Toit, CC-BY-4.0).")
 knitr::include_graphics(here::here("images", "15-las-denoise.png"))
 ```
 
@@ -52,7 +52,7 @@ knitr::include_graphics(here::here("images", "15-las-denoise.png"))
 LiDAR for forestry and ecology has been used to monitor vegetation structure, stream properties, and topography among other uses. The earliest versions of LiDAR were known as profiling systems and first investigated in the 1960's [@Nelson2013]. A major limitation of early LiDAR profiling systems were that the system was locked in a near-nadir position (i.e. along-track path), which meant that only transects could be collected, as opposed to a larger swath width as with modern systems [@Nelson2013; @Lim2003]. Technological advancements meant that early scanning LiDAR systems became more common in the 1980s, although point densities (measured as points per square meter, points·m^-2^) were low. Densities of 1-5 points·m^-2^ limited researchers to area based measurements of forest volume and biomass [@Nelson2013]. These limitations were primarily due to the LiDAR sensor, as well as data storage difficulties. Technological improvements such as increased pulse rates and smaller footprints (leading to increased point density), and increased storage capacity have allowed researchers to look as individual trees as well as whole forests [@Jakubowski2013]. Previously limited to static LiDAR sensors, ALS point cloud densities of 1000 points·m^-2^ are now entirely feasible. Figure \@ref(fig:15-high-low-point-density) shows two different point clouds densities, and how difficult it would be to delineate individual tree crowns at low point densities.
 
 ```{r 15-high-low-point-density, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("A cross section of a high density point cloud (A, 80 points·m^-2^), and a lower density point cloud (B, 1 points·m^-2^). (Du Toit, CC-by-4.0).")
+fig_cap <- paste("A cross section of a high density point cloud (A, 80 points·m^-2^), and a lower density point cloud (B, 1 points·m^-2^). (Du Toit, CC-BY-4.0).")
 knitr::include_graphics(here::here("images", "15-high-low-point-density.png"))
 ```
 
@@ -67,14 +67,14 @@ Unlike passive remote sensing technologies, LiDAR has the advantage of being abl
 *Beam divergence* is a property that refers to how wide the light beam becomes when it intercepts an object, and can be used to differentiate LiDAR instruments. Small-footprint LiDAR describes beam diameters intercepting the surface at \< 1m, while large-footprint intercepts the surface at around 5-25 m [@Lim2003]. Small-footprint LiDAR is primarily what is used in forest inventory and ecology studies, and has high accuracy, as well as the ability to produce high sampling densities. For these studies, beam divergence is typically 0.15--2.0 mrad [@White2013]. The concept is illustrated in Figure \@ref(fig:15-Beam-Divergence).
 
 ```{r 15-Beam-Divergence, fig.cap = fig_cap, out.width="60%", echo = FALSE}
-fig_cap <- paste("Two examples of how beam divergence affects footprint size. (Du Toit, CC-by-4.0).")
+fig_cap <- paste("Two examples of how beam divergence affects footprint size. (Du Toit, CC-BY-4.0).")
 knitr::include_graphics(here::here("images", "15-Beam-Divergence.png"))
 ```
 
 The amount of energy that is reflected off an object and back to the sensor is known as *intensity*. Target reflectivity is not directly related to the LiDAR laser itself, but influences whether the return has enough intensity to register with the LiDAR sensor. In addition to surfaces having different properties, the angle of incidence of the laser also affects how much energy the sensor receives. This 'field of view' is known as *scan angle* and is customizable, but lower scan angles are generally preferred (\<25°, @White2013). The concept of scan angle is the same as discussed in **Chapter X** and illustrated in Figure \@ref(fig:15-Scan-Angle). Commercial LiDAR units on airplanes typically have stronger lasers than drone mounted or mobile laser scanners, which allows them to fly higher and cover more area.
 
 ```{r 15-Scan-Angle, fig.cap = fig_cap, out.width="60%", echo = FALSE}
-fig_cap <- paste("Scan angle is the angle from nadir at which the laser is pointing. The scan angle and aircraft flight height together are responsible for swath width. (Du Toit, CC-by-4.0).")
+fig_cap <- paste("Scan angle is the angle from nadir at which the laser is pointing. The scan angle and aircraft flight height together are responsible for swath width. (Du Toit, CC-BY-4.0).")
 knitr::include_graphics(here::here("images", "15-Scan-Angle.png"))
 ```
 
@@ -136,7 +136,7 @@ Terrestrial Laser Scanning (TLS) is a static system, meaning that is is placed i
 Satellites are a relatively new platform for LiDAR sensors. Two current satellite sensors are highlighted here; ICESat-2 (Ice, Cloud and land Elevation Satellite) and GEDI (Global Ecosystem Dynamics Investigation). Both are examples of large-footprint, profiling LiDAR systems. ICESat-2 was launched in 2018, with the objectives to determine sea-ice thickness and measure vegetation canopy height for large scale biomass estimation [@NASA2021a]. The ICESat-2 LiDAR sensor is composed of 6 beams in 3 pairs, each with a footprint size of 13m [@NASA2021a]. GEDI is a LiDAR sensor that was installed on the International Space Station in 2018, with 3 lasers producing 10 parallel tracks of observations, and a footprint size of 25m [@NASA2021]. The GEDI sensor can be seen in panel 4 of Figure \@ref(fig:15-LiDAR-Platforms).
 
 ```{r 15-LiDAR-Platforms, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste("LiDAR Platforms 1: A terrestrial laser scanner (TLS). ('Lidar P1270901.jpg', @Monniaux, CC-BY-SA-3.0). 2: A hand-held moblie laser scanner (MLS). (Du Toit, CC-by-4.0). 3: Car mounted MLS. ('3D mobile mapping unit', @OregonDepartmentofTransportation2016, CC-BY-2.0)'. 4: GEDI, a spaceborne LiDAR sensor. ('A New Hope: GEDI to Yield 3D Forest Carbon Map', @NEONEducation2014, CC-BY-2.0).")
+fig_cap <- paste("LiDAR Platforms 1: A terrestrial laser scanner (TLS). ('Lidar P1270901.jpg', @Monniaux, CC-BY-SA-3.0). 2: A hand-held moblie laser scanner (MLS). (Du Toit, CC-BY-4.0). 3: Car mounted MLS. ('3D mobile mapping unit', @OregonDepartmentofTransportation2016, CC-BY-2.0)'. 4: GEDI, a spaceborne LiDAR sensor. ('A New Hope: GEDI to Yield 3D Forest Carbon Map', @NEONEducation2014, CC-BY-2.0).")
 knitr::include_graphics(here::here("images", "15-LiDAR-Platforms.png"))
 ```
 
@@ -179,21 +179,21 @@ LiDAR point clouds require post-processing to be useful. Often, point clouds con
 
 ### Bare Earth Elevation
 
-Digital elevation models (DEMs) are raster products that represent height of the Earth's surface above a reference such as sea level [@White2013]. Using a classified point cloud, we can isolate the points that are categorized as ground (`Classification == 2`) and create a raster that represents the ground. DEMs are also called digital terrain models (DTMs), although a DTM can include vector features that represent natural features (**Check that this language aligns with other chapters**). DEMs have a variety of uses, from terrain modeling for watersheds, to road design [@Roussel2021]. In addition to being used on their own, DEMs can be used to normalize point clouds; this is the process of subtracting the ground elevation from a point cloud in order to place the points on a flat plane, so that each point represents the height above the ground, not absolute height. To create a DEM, various interpolation techniques are available - these techniques are covered in more detail in **Chapter X**, but common algorithms include inverse distance weighting (IDW), kriging, and k-nearest neighbour (KNN).
+Digital elevation models (DEMs) are raster products that represent height of the Earth's surface above a reference such as sea level [@White2013]. Using a classified point cloud, we can isolate the points that are categorized as ground (`Classification == 2`) and create a raster that represents the ground (see Figure \@ref(fig:15-las-dem) below). DEMs are also called digital terrain models (DTMs), although a DTM can include vector features that represent natural features (**Check that this language aligns with other chapters**). DEMs have a variety of uses, from terrain modeling for watersheds, to road design [@Roussel2021]. In addition to being used on their own, DEMs can be used to normalize point clouds; this is the process of subtracting the ground elevation from a point cloud in order to place the points on a flat plane, so that each point represents the height above the ground, not absolute height. To create a DEM, various interpolation techniques are available - these techniques are covered in more detail in **Chapter X**, but common algorithms include inverse distance weighting (IDW), kriging, and k-nearest neighbour (KNN).
 
 When creating a DEM from a LiDAR point cloud, there are a few important considerations to make. The first is what resolution the DEM should be created with. The density of the point cloud is what dictates this; if the density of a point cloud is low, there is a lower likelihood of a point representing the ground. This means that a lower resolution DEM should be created. Conversely, high density point clouds can produce higher density DEMs. Additionally, forest/vegetation type is important. Dense, coastal forests in BC are likely to have high canopy cover (and therefore fewer ground points) than the more sparse subalpine forests in the province's interior.
 
 ```{r 15-las-dem, fig.cap = fig_cap, out.width="70%", echo = FALSE}
-fig_cap <- paste("A digital elevation model (DEM) produced from LiDAR. (Du Toit, CC-by-4.0).")
+fig_cap <- paste("A digital elevation model (DEM) produced from LiDAR. (Du Toit, CC-BY-4.0).")
 knitr::include_graphics(here::here("images", "15-las-dem.png"))
 ```
 
 ### Digital Surface Model and Canopy Height Models
 
-Digital surface models (DSMs) represent the height of surface features above the ground, relative to the same reference as DEMs [@White2013]. In contrast to a DEM, the DSM captures the natural and built features of the environment, and can be thought of as a table cloth placed over a scene. When a point cloud is normalized by subtracting a DEM from a DSM, the derived surface can be called a canopy height model (CHM), and represents the height of the canopy above ground level [@White2013]. While the elevation values are different, both surfaces can be derived using the same algorithms [@Roussel2021].
+Digital surface models (DSMs) represent the height of surface features above the ground, relative to the same reference as DEMs [@White2013]. In contrast to a DEM, the DSM captures the natural and built features of the environment, and can be thought of as a table cloth placed over a scene. When a point cloud is normalized by subtracting a DEM from a DSM, the derived surface can be called a canopy height model (CHM, Figure \@ref(fig:15-las-CHM-2D)), and represents the height of the canopy above ground level [@White2013]. While the elevation values are different, both surfaces can be derived using the same algorithms [@Roussel2021].
 
 ```{r 15-las-CHM-2D, fig.cap = fig_cap, out.width="70%", echo = FALSE}
-fig_cap <- paste("A canopy height model (CHM), also known as a digital surface model (DSM) produced from LiDAR. (Du Toit, CC-by-4.0).")
+fig_cap <- paste("A canopy height model (CHM), also known as a digital surface model (DSM) produced from LiDAR. (Du Toit, CC-BY-4.0).")
 knitr::include_graphics(here::here("images", "15-las-CHM-2D.png"))
 ```
 
@@ -201,10 +201,10 @@ knitr::include_graphics(here::here("images", "15-las-CHM-2D.png"))
 
 LiDAR analysis in forestry uses two broad approaches, an **area-based approach (ABA)**, or an **individual tree crown detection approach (ITD)**. The ITD approach locates individual trees and allows the estimation of individual tree heights and crown area. From this, other metrics such as stem diameter, number of stems, basal area and stem volume can be derived [@Hyyppa1999]. In contrast, the main goal of an ABA is to generate wall-to-wall estimates of inventory attributes, such as mean height, dominant height, mean diameter, stem number, basal area, and volume of the stands [@Næsset2002]. Since the ABA produces wall-to-wall estimates, the products are usually in a raster format. The ABA approach is what is most often used for forestry inventories, and is an an extensive best practices guide for Canada was produced in 2013 by @White2013. Examples such as @Tompalski2019 show the power that using an ABA can have.
 
-When doing either of these analyses, we typically produce **LiDAR metrics**. These metrics are descriptive statistics of the point cloud over a unit area. How we define that unit is decides what kind of analysis we are able to do, and what kind of inferences are possible (i.e. ABA vs ITD). An ITD approach has a 'unit' size of one tree, whereas the ABA typically uses a grid size of 20 x 20 m. Both approaches require ground truthing, and for an ABA approach, plot sizes are typically designed to be of a similar area to the chosen grid size [@White2013].
+When doing either of these analyses, we typically produce **LiDAR metrics**. These metrics are descriptive statistics of the point cloud over a unit area; for example Figure \@ref(fig:15-las-hmax-2D) shows the maximum height of 10 x 10 m cells. How we define that unit is decides what kind of analysis we are able to do, and what kind of inferences are possible (i.e. ABA vs ITD). An ITD approach has a 'unit' size of one tree, whereas the ABA typically uses a grid size of 20 x 20 m. Both approaches require ground truthing, and for an ABA approach, plot sizes are typically designed to be of a similar area to the chosen grid size [@White2013].
 
 ```{r 15-las-hmax-2D, fig.cap = fig_cap, out.width="70%", echo = FALSE}
-fig_cap <- paste("Maximum heights of 10 meter cells using an area-based approach. (Du Toit, CC-by-4.0).")
+fig_cap <- paste("Maximum heights of 10 meter cells using an area-based approach. (Du Toit, CC-BY-4.0).")
 knitr::include_graphics(here::here("images", "15-las-hmax-2D.png"))
 ```
 
@@ -213,14 +213,14 @@ knitr::include_graphics(here::here("images", "15-las-hmax-2D.png"))
 Tree segmentation is required when undertaking an ITD approach. Increased point densities as well as other advancements in LiDAR systems mean that this approach is becoming operationally relevant. Tree segmentation is an attempt to extract individual trees from a point cloud. Since point clouds do not include information regarding what point belongs to which tree, we need to classify the points in a similar way to how we would classify points that represent the ground. Several different algorithms exist in order to detect individual trees and then segments them. Most algorithms follow the logic that tree tops will be near the top of the point cloud, and once the tree top has been identified, a region growing algorithm can be used to 'grow' the point cloud downwards.
 
 ```{r 15-Processing-Flowchart, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste("A typical LiDAR processing workflow. After acquiring data, pre-processing is necessary to clean and normalize the point cloud. After this a CHM can be created to detect tree tops, before segmentating the point cloud based on these points. (Du Toit, CC-by-4.0)." )
+fig_cap <- paste("A typical LiDAR processing workflow. After acquiring data, pre-processing is necessary to clean and normalize the point cloud. After this a CHM can be created to detect tree tops, before segmentating the point cloud based on these points. (Du Toit, CC-BY-4.0)." )
 knitr::include_graphics(here::here("images", "15-Processing-Flowchart.png"))
 ```
 
 Once we have segmented a point cloud, we can produce metrics for individual trees. These metrics can be used to help to identify structural traits of trees, which can then be used to identify different tree species, or to characterize different forest types. Ground based LiDAR scanners (MLS and TLS) are also used to very accurately estimate tree, trunk, and branch volumes.
 
 ```{r 15-las-treetops, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Example of tree tops detected using the `find_trees` function. (Du Toit, CC-by-4.0)." )
+fig_cap <- paste("Example of tree tops detected using the `find_trees` function. (Du Toit, CC-BY-4.0)." )
 knitr::include_graphics(here::here("images", "15-las-treetops.png"))
 ```
 
@@ -231,7 +231,7 @@ As with other data collection techniques, there are a few sources of error to be
 Aside from positional errors, there can also be issues with how we correct for atmospheric conditions, and how it absorbs light. The target surface should also be taken into account, as it can cause multipath errors (where the pulse is reflected off multiple surfaces before returning to the sensor, see Figure \@ref(fig:15-multipath-error)), and occlusion (lasers can not penetrate through solid objects). Finally, areas with highly variable terrain can lead to uncertainty in position, especially when with low density LiDAR. 
 
 ```{r 15-multipath-error, fig.cap = fig_cap, out.width="70%", echo = FALSE}
-fig_cap <- paste("Example of multipath errors that can occur. The green dot is where our point is actually located in space, while the blue point shows where the point is placed in the point cloud. The red line shows the path of the reflected pulse. (Du Toit, CC-by-4.0)." )
+fig_cap <- paste("Example of multipath errors that can occur. The green dot is where our point is actually located in space, while the blue point shows where the point is placed in the point cloud. The red line shows the path of the reflected pulse. (Du Toit, CC-BY-4.0)." )
 knitr::include_graphics(here::here("images", "15-Multipath-Error.png"))
 ```
 ### Software and Analysis Tools
@@ -256,7 +256,7 @@ For this case study, we will be using a clipped .las file from the 2018 open [Li
 The first step when looking at LiDAR data is to inspect it; we recommend using the free software CloudCompare, or plotting the .las file in the `lidR` package. Once we have a sense of our data, we can clean and filter the data to remove noise. Our cleaned dataset can then be used to create a DEM; first we need to classify ground points, followed by using an algorithm to rasterize our new ground points to create a surface. This is an essential step that could require quite a bit of tweaking depending on what you want to use the DEM for. It is important to take density into account; a sparse point cloud will not be good for a high resolution DEM! In our case, the DEM is used to *normalize* the point cloud. Normalization removes the effect of terrain on above ground measurements, allowing comparisons of vegetation heights (as can see in the very uniform point cloud in Figure \@ref(fig:15-las-normalize).
 
 ```{r 15-las-normalize, fig.cap = fig_cap, out.width="60%", echo = FALSE}
-fig_cap <- paste("A normalized point cloud. (Du Toit, CC-by-4.0)." )
+fig_cap <- paste("A normalized point cloud. (Du Toit, CC-BY-4.0)." )
 knitr::include_graphics(here::here("images", "15-las-normalize.png"))
 ```
 
@@ -267,7 +267,7 @@ knitr::include_graphics(here::here("images", "15-las-normalize.png"))
 The normalized point cloud is used to create our CHM. It is at this point that we can analyze the point cloud in a variety of ways. We can use an area-based approach (ABA) to create metrics at the grid level (using our normalized point cloud), or we can derive metrics at the individual tree scale. In order to do this we need to first segment the trees before creating metrics. Segmentation can be tedious, as it requires the user tweak the parameters of their segmentation algorithm. Understanding your forest type, and inspecting the point cloud visually can be very useful when deciding what kind of segmentation routine you want to run. Below we can see an example of a segmented point cloud.
 
 ```{r 15-las-segmented, fig.cap = fig_cap, out.width="60%", echo = FALSE}
-fig_cap <- paste("A segmented point cloud using the algorithm based on @Dalponte2016. (Du Toit, CC-by-4.0).")
+fig_cap <- paste("A segmented point cloud using the algorithm based on @Dalponte2016. (Du Toit, CC-BY-4.0).")
 knitr::include_graphics(here::here("images", "15-las-segmented.png"))
 ```
 
@@ -360,7 +360,7 @@ m = leaflet() %>%
 
 ```{r 15-map, echo=FALSE, fig.cap = fig_cap}
 
-fig_cap <- paste("Explore different area-based metrics produced in the case study above. Hover over tile icon (top left) to turn different layers on or off. (Du Toit, CC-by-4.0). NOTE: this map is interactive.")
+fig_cap <- paste("Explore different area-based metrics produced in the case study above. Hover over tile icon (top left) to turn different layers on or off. (Du Toit, CC-BY-4.0). NOTE: this map is interactive.")
 knitr::opts_chunk$set(fig.width = 12, fig.height = 12) #make the interactive maps bigger/smaller across the document
 m
 

@@ -11,7 +11,7 @@ Maps represent areas larger than we can see, usually from above, and some depict
 ![Maps illustrate how variables are related in space. [Percentage of the population aged 65 and over in 2016 by census tract](https://www12.statcan.gc.ca/census-recensement/2016/geo/map-carte/ref/thematic-thematiques/as/files-fichiers/map-carte-5/2016-92173-002-305-013-02-00-eng.pdf
 ) (c) [Statistics Canada](https://www-statcan-gc-ca.eu1.proxy.openathens.net/eng/about/about?MM=as), [Open Government Licence - Canada](https://open.canada.ca/en/open-government-licence-canada).](images/01-moncton.jpg){.center}
 
-Cartography is the art and science of designing maps and consists of certain principles and rules that help ensure accuracy and clarity. All maps are simplified representations of a place and reflect the particular choices and motivations of the cartographer. Cartography is as much about deciding what to omit from a map as it choosing what to include. Making beautiful maps involves the art, and science, of selecting and modifying data and portraying concepts with clarity and precision. Decisions around colour, font size, graphical hierarchies, classification themes, and legends are all elements of maps that determine how effective, and accurate, they are in conveying information. In this chapter, you will learn about what elements go into making an effective map, the different categories of maps, and the principles of map design. 
+**Cartography** is the art and science of designing maps and consists of certain principles and rules that help ensure accuracy and clarity. All maps are simplified representations of a place and reflect the particular choices and motivations of the cartographer. Cartography is as much about deciding what to omit from a map as it choosing what to include. Making beautiful maps involves the art, and science, of selecting and modifying data and portraying concepts with clarity and precision. Decisions around colour, font size, graphical hierarchies, classification themes, and legends are all elements of maps that determine how effective, and accurate, they are in conveying information. In this chapter, you will learn about what elements go into making an effective map, the different categories of maps, and the principles of map design. 
 
 :::: {.box-content .learning-objectives-content}
 
@@ -27,11 +27,11 @@ Cartography is the art and science of designing maps and consists of certain pri
 
 ### Key Terms {-}
 
-Map elements, symbology, classification, cartography
+Map elements, symbology, classification, cartography, north arrow, scale, thematic, choropleth, dot density, reference, isoline
 
 ## Types of Maps
 
-There are many different types of maps. Just try doing a Google search, and you will come across descriptions of thematic, cadastral, topographic, and physiographic maps, to name but a few. There is no standard agreement on how many different categories of maps exist. Although some differentiate among as many as five  types of maps based on the functions they serve (ICSM 2021), all maps can also be categorized into just two types, reference and thematic. Reference maps represent the human-made or natural features of the landscape and are sometimes thought of as basemaps. They provide information about a particular location, such as in the example below, depicting the longest rivers in the location of Canada and where they overlap with the United States. Topographic maps based on the [National Topographic System (NTS)](https://www.nrcan.gc.ca/earth-sciences/geography/topographic-information/maps/national-topographic-system-maps/9767) are another example of reference maps.
+There are many different types of maps. Just try doing a Google search, and you will come across descriptions of thematic, cadastral, topographic, and physiographic maps, to name but a few. There is no standard agreement on how many different categories of maps exist. Although some differentiate among as many as five  types of maps based on the functions they serve (ICSM 2021), all maps can also be categorized into just two types, **reference** and **thematic**. Reference maps represent the human-made or natural features of the landscape and are sometimes thought of as basemaps. They provide information about a particular location, such as in the example below, depicting the longest rivers in the location of Canada and where they overlap with the United States. Topographic maps based on the [National Topographic System (NTS)](https://www.nrcan.gc.ca/earth-sciences/geography/topographic-information/maps/national-topographic-system-maps/9767){target="_blank"} are another example of reference maps.
 
 ![One example of a reference map. [Longest Rivers of Canada](https://en.wikipedia.org/wiki/List_of_longest_rivers_of_Canada#/media/File:Longest_Rivers_of_Canada.png
 ) (c) [Shannon1](https://en.wikipedia.org/wiki/User:Shannon1), [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/).](images/02-longRivers.png){.center}
@@ -52,44 +52,75 @@ Quantitative thematic maps depict the spatial patterns of numerical data, often 
 
 ### Choropleth Maps
 
-There are many different types of thematic types. A commonly used thematic map is a choropleth map, which applies different colours or shading to the entire extent of a predefined aereal unit (Weiss et al. 2008). Data used in choropleth maps must be standardized and represented as rates or ratios rather than raw counts or numbers.
+There are many different types of thematic types. A commonly used thematic map is a **choropleth** map, which applies different colours or shading to the entire extent of a predefined aereal unit (Weiss et al. 2008). Data used in choropleth maps must be standardized and represented as rates or ratios rather than raw counts or numbers.
 
-One of the reasons choropleth maps are so widely used is because much of the data with which we're concerned, such as demographic data, is tied to aereal units like Census tracts or counties. With the advent of browser-based web mapping applications such as ArcGIS Online, choropleth maps can easily be created in just a few steps. The map below was created in Esri's ArcGIS Online and represents the COVID-19 case fatality ratio for Canada's health regions.
+One of the reasons choropleth maps are so widely used is because much of the data with which we're concerned, such as demographic data, is tied to aereal units like census tracts or counties.
+
+The map below represents, using percentages instead of absolute numbers, the spatial distribution of the percentage of Cantonese speakers per total population in each census tract in the city of Vancouver, British Columbia. Household population of mother tongue language speakers by census tract is an example of demographic data collected by Statistics Canada and can serve as a proxy for linguistic diversity. This map shows greater concentration of Cantonese speakers in census tracts in the East Vancouver area.
 
 ```{r 05-choropleth, fig.cap = fig_cap, out.width="80%", echo = FALSE}
 fig_cap <- paste("A choropleth map representing the 
-case fatality ratio of COVID-19 for health 
-regions in Canada [dataset](https://resources-covid19canada.hub.arcgis.com/datasets/health-region-summaries/explore) (c) Maya Daurio.")
-knitr::include_graphics(here::here("images", "05-choropleth.jpg"))
+percentage of Cantonese speakers per total population of census tracts in the City of Vancouver [Household Population by Mother Tongue](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm)retrieved from [SimplyAnalytics](https://simplyanalytics.com/).")
+knitr::include_graphics(here::here("images", "05-choropleth.png"))
 ```
 
-This map is also a good example of the potential problems with choropleth maps, which has to do with something called the [Modifiable areal unit problem](https://en.wikipedia.org/wiki/Modifiable_areal_unit_problem), or MAUP. This results when data such as population, the measurement of population per unit area, is aggregated into an aereal unit, where the shape and scale of the unit affects the resulting rates, or values, of the data. In this map example, the areal unit is a health region, which vary considerably by size and population density across Canada. Canada's population is also largely concentrated along the U.S.-Canada border, which might explain why the case fatality ratio is higher in areas with more concentrated populations. This map fails to convey that kind of nuance and illustrates one of the weaknesses of choropleth maps, in spite of their wide use and applicability, particularly when displaying census data.
+This map is also a good example of the potential problems with choropleth maps, which has to do with something called the [Modifiable areal unit problem](https://en.wikipedia.org/wiki/Modifiable_areal_unit_problem){target="_blank"}, or MAUP. This results when data such as population, which is the measurement of population per unit area, is aggregated into an areal unit, where the shape and scale of the unit affects the resulting rates, or values, of the data. In this map example, the areal unit is a census tract, which vary by size and population density across the city and are delineated according to factors other than number of mother tongue language speakers. Without knowing anything about census tracts, we may assume based on this map that an entire census tract contains a disproportionate percentage of Cantoneses speakers, when in reality it may be just a few households more than the census tract next to it. This map fails to convey that kind of nuance and illustrates one of the weaknesses of choropleth maps, in spite of their wide use and applicability, particularly when displaying census data.
 
 ### Dot Density Maps
 
-In contrast to choropleth maps, raw data/counts (e.g. number of mother tongue language speakers) as well as rates/ratios (e.g. number of mother tongue language speakers per sq kilometer) can be used in dot density maps. These maps use a one-to-one density, where one dot represents one count, or a one-to-many density, where one dot represents a number of counts to map the spatial distribution of a certain phenomenon. In the map below, one dot represents five speakers. Also unlike choropleth maps, dot density maps do not need to be tied to enumeration units, although they can be, such as in this map example illustrating mother tongue language speakers by census tract. Dots are distributed randomly, and a potential misleading aspect of dot density maps is the false interpretation that the dots are placed in precise locations in space.
+In contrast to choropleth maps, raw data/counts (e.g. number of mother tongue language speakers) as well as rates/ratios (e.g. number of mother tongue language speakers per square kilometer) can be used in **dot density** maps. These maps use a one-to-one density, where one dot represents one count, or a one-to-many density, where one dot represents a number of counts to map the spatial distribution of a certain phenomenon. In the map below, one dot represents 20 speakers, and rather than mapping one language community, we can view the spatial distribution of two language communities to better understand different settlement patterns between two groups of Chinese speakers. 
+
+Also unlike choropleth maps, dot density maps do not need to be tied to enumeration units, although they can be, such as in this map example, which uses another method of mapping the same data that was used in the choropleth map above. For their part, dots are distributed randomly, and a potential misleading aspect of dot density maps is the false interpretation that the dots are placed in precise locations in space.
 
 ```{r 06-dotDensity, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Dot density map showing the distribution of Cantonese and Mandarin mother tongue language speakers by census tract [dataset (retrieved from SimplyAnalytics)](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm)")
-knitr::include_graphics(here::here("images", "06-dotDensity.jpg"))
+fig_cap <- paste("Dot density map showing the distribution of Cantonese and Mandarin mother tongue language speakers by census tract [Household Population by Mother Tongue](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm)retrieved from [SimplyAnalytics](https://simplyanalytics.com/).")
+knitr::include_graphics(here::here("images", "06-dotDensity.png"))
 ```
-
 
 ### Isoline Maps
 
+ - 07-isoline.jpg from row 23 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
+
 ### Diagrammatic Maps
+
+_Note: I think I would combine diagrammatic and cartogram subsections._
 
 ### Cartograms
 
+- 08-cartogram.png from row 42 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
+
+_Note: Paul, see example interactive quiz at bottom of this [Introduction to Geomatics](https://openpress.usask.ca/introgeomatics/chapter/thematic-maps/){target="_blank"} OER textbook._
+
+#### Additional Resources on Types of Maps
+
+- [Thematic Maps](https://openpress.usask.ca/introgeomatics/chapter/thematic-maps/){target="_blank"}
+- [Choropleth Maps](https://www.axismaps.com/guide/choropleth){target="_blank"}
+- [Dot Density Maps](https://www.axismaps.com/guide/dot-density){target="_blank"}
+- [Dot density map](http://wiki.gis.com/wiki/index.php/Dot_density_map){target="_blank"}
+- [Types of Maps](https://www.e-education.psu.edu/geog486/node/641){target="_blank"}
+
+
 ## Map Composition
+Most effective maps comprise standard elements that help orient the map viewer in space and provide helpful contextual information. There is no one way to compose a map, but a good cartographer will arrange and design map elements to provide the greatest clarity. Many maps not only include the phenomenon or object being mapped, called the **figure**, but also the spatial context of the figure, representing where it is in relation to the space around it, called the **ground**. Maps often have a **frame**, which bounds the figure and any other map elements within a predetermined length and width. Some frames are visible to the map reader, while others are not and simply act as a bounding box for the cartographer while designing the map.
 
 ### Figure
 
+- 09-figure.jpg from row 32 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
+
 ### Ground
 
+- use 09-figure.jpg
+ 
 ### Frame
 
+- use 09-figure.jpg
+
 ## Elements of Maps
+Whereas the figure is the most prominent element of a map, most maps also contain additional elements that provide important supplementary information, without which the purpose of the map would be less clear. Thinking back to the dot density example from the previous section, it would be difficult to understand what the map was about without a title and a **legend**, which contained labeling and symbols explaining the units in the map. 
+
+Other elements are important for spatial orientation, such as the **scale** and **north arrow**, which provide distance and directional information, particularly critical for navigational maps such as a park trail map.
+
+Just as in writing, it is also important to provide information about the data sources used in creating the map. Not only does this credit the authors of the data, it also provides transparency and the ability to assess the reliability of the data.
 
 ### Text
 
@@ -177,14 +208,13 @@ knitr::include_graphics(here::here("images", "06-dotDensity.jpg"))
 
 ### Balance
 
-ADD EXAMPLES OF DOT DENSITY, PROPORTIONAL, ETC.
 
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa. 
 
 ![Figure caption text is also alt text.](images/01-image.png){.center}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
+
 
 :::: {.box-content .your-turn-content}
 

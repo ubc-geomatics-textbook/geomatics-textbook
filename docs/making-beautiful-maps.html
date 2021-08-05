@@ -211,7 +211,7 @@
 <img src="images/01-moncton.jpg" class="center" alt="" />
 <p class="caption">Maps illustrate how variables are related in space. <a href="https://www12.statcan.gc.ca/census-recensement/2016/geo/map-carte/ref/thematic-thematiques/as/files-fichiers/map-carte-5/2016-92173-002-305-013-02-00-eng.pdf">Percentage of the population aged 65 and over in 2016 by census tract</a> (c) <a href="https://www-statcan-gc-ca.eu1.proxy.openathens.net/eng/about/about?MM=as">Statistics Canada</a>, <a href="https://open.canada.ca/en/open-government-licence-canada">Open Government Licence - Canada</a>.</p>
 </div>
-<p>Cartography is the art and science of designing maps and consists of certain principles and rules that help ensure accuracy and clarity. All maps are simplified representations of a place and reflect the particular choices and motivations of the cartographer. Cartography is as much about deciding what to omit from a map as it choosing what to include. Making beautiful maps involves the art, and science, of selecting and modifying data and portraying concepts with clarity and precision. Decisions around colour, font size, graphical hierarchies, classification themes, and legends are all elements of maps that determine how effective, and accurate, they are in conveying information. In this chapter, you will learn about what elements go into making an effective map, the different categories of maps, and the principles of map design.</p>
+<p><strong>Cartography</strong> is the art and science of designing maps and consists of certain principles and rules that help ensure accuracy and clarity. All maps are simplified representations of a place and reflect the particular choices and motivations of the cartographer. Cartography is as much about deciding what to omit from a map as it choosing what to include. Making beautiful maps involves the art, and science, of selecting and modifying data and portraying concepts with clarity and precision. Decisions around colour, font size, graphical hierarchies, classification themes, and legends are all elements of maps that determine how effective, and accurate, they are in conveying information. In this chapter, you will learn about what elements go into making an effective map, the different categories of maps, and the principles of map design.</p>
 <div class="box-content learning-objectives-content">
 <div id="learning-objectives-1" class="section level4 unnumbered box-title learning-objectives-top">
 <h4>Learning Objectives</h4>
@@ -224,11 +224,11 @@
 </div>
 <div id="key-terms-1" class="section level3 unnumbered">
 <h3>Key Terms</h3>
-<p>Map elements, symbology, classification, cartography</p>
+<p>Map elements, symbology, classification, cartography, north arrow, scale, thematic, choropleth, dot density, reference, isoline</p>
 </div>
 <div id="types-of-maps" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Types of Maps</h2>
-<p>There are many different types of maps. Just try doing a Google search, and you will come across descriptions of thematic, cadastral, topographic, and physiographic maps, to name but a few. There is no standard agreement on how many different categories of maps exist. Although some differentiate among as many as five types of maps based on the functions they serve (ICSM 2021), all maps can also be categorized into just two types, reference and thematic. Reference maps represent the human-made or natural features of the landscape and are sometimes thought of as basemaps. They provide information about a particular location, such as in the example below, depicting the longest rivers in the location of Canada and where they overlap with the United States. Topographic maps based on the <a href="https://www.nrcan.gc.ca/earth-sciences/geography/topographic-information/maps/national-topographic-system-maps/9767">National Topographic System (NTS)</a> are another example of reference maps.</p>
+<p>There are many different types of maps. Just try doing a Google search, and you will come across descriptions of thematic, cadastral, topographic, and physiographic maps, to name but a few. There is no standard agreement on how many different categories of maps exist. Although some differentiate among as many as five types of maps based on the functions they serve (ICSM 2021), all maps can also be categorized into just two types, <strong>reference</strong> and <strong>thematic</strong>. Reference maps represent the human-made or natural features of the landscape and are sometimes thought of as basemaps. They provide information about a particular location, such as in the example below, depicting the longest rivers in the location of Canada and where they overlap with the United States. Topographic maps based on the <a href="https://www.nrcan.gc.ca/earth-sciences/geography/topographic-information/maps/national-topographic-system-maps/9767">National Topographic System (NTS)</a> are another example of reference maps.</p>
 <div class="figure">
 <img src="images/02-longRivers.png" class="center" alt="" />
 <p class="caption">One example of a reference map. <a href="https://en.wikipedia.org/wiki/List_of_longest_rivers_of_Canada#/media/File:Longest_Rivers_of_Canada.png">Longest Rivers of Canada</a> (c) <a href="https://en.wikipedia.org/wiki/User:Shannon1">Shannon1</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>.</p>
@@ -249,29 +249,28 @@
 </div>
 <div id="choropleth-maps" class="section level3" number="1.1.2">
 <h3><span class="header-section-number">1.1.2</span> Choropleth Maps</h3>
-<p>There are many different types of thematic types. A commonly used thematic map is a choropleth map, which applies different colours or shading to the entire extent of a predefined aereal unit (Weiss et al. 2008). Data used in choropleth maps must be standardized and represented as rates or ratios rather than raw counts or numbers.</p>
-<p>One of the reasons choropleth maps are so widely used is because much of the data with which we’re concerned, such as demographic data, is tied to aereal units like Census tracts or counties. With the advent of browser-based web mapping applications such as ArcGIS Online, choropleth maps can easily be created in just a few steps. The map below was created in Esri’s ArcGIS Online and represents the COVID-19 case fatality ratio for Canada’s health regions.</p>
+<p>There are many different types of thematic types. A commonly used thematic map is a <strong>choropleth</strong> map, which applies different colours or shading to the entire extent of a predefined aereal unit (Weiss et al. 2008). Data used in choropleth maps must be standardized and represented as rates or ratios rather than raw counts or numbers.</p>
+<p>One of the reasons choropleth maps are so widely used is because much of the data with which we’re concerned, such as demographic data, is tied to aereal units like census tracts or counties.</p>
 <div class="figure"><span id="fig:05-choropleth"></span>
-<img src="images/05-choropleth.jpg" alt="A choropleth map representing the 
-case fatality ratio of COVID-19 for health 
-regions in Canada [dataset](https://resources-covid19canada.hub.arcgis.com/datasets/health-region-summaries/explore) (c) Maya Daurio." width="80%" />
+<img src="images/05-choropleth.png" alt="A choropleth map representing the 
+percentage of Cantonese speakers per total population of census tracts in the City of Vancouver [Household Population by Mother Tongue](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm)retrieved from [SimplyAnalytics](https://simplyanalytics.com/)." width="80%" />
 <p class="caption">
 Figure 1.1: A choropleth map representing the
-case fatality ratio of COVID-19 for health
-regions in Canada <a href="https://resources-covid19canada.hub.arcgis.com/datasets/health-region-summaries/explore">dataset</a> (c) Maya Daurio.
+percentage of Cantonese speakers per total population of census tracts in the City of Vancouver <a href="https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm">Household Population by Mother Tongue</a>retrieved from <a href="https://simplyanalytics.com/">SimplyAnalytics</a>.
 </p>
 </div>
 <p>This map is also a good example of the potential problems with choropleth maps, which has to do with something called the <a href="https://en.wikipedia.org/wiki/Modifiable_areal_unit_problem">Modifiable areal unit problem</a>, or MAUP. This results when data such as population, the measurement of population per unit area, is aggregated into an aereal unit, where the shape and scale of the unit affects the resulting rates, or values, of the data. In this map example, the areal unit is a health region, which vary considerably by size and population density across Canada. Canada’s population is also largely concentrated along the U.S.-Canada border, which might explain why the case fatality ratio is higher in areas with more concentrated populations. This map fails to convey that kind of nuance and illustrates one of the weaknesses of choropleth maps, in spite of their wide use and applicability, particularly when displaying census data.</p>
 </div>
 <div id="dot-density-maps" class="section level3" number="1.1.3">
 <h3><span class="header-section-number">1.1.3</span> Dot Density Maps</h3>
-<p>In contrast to choropleth maps, raw data/counts (e.g. number of mother tongue language speakers) as well as rates/ratios (e.g. number of mother tongue language speakers per sq kilometer) can be used in dot density maps. These maps use a one-to-one density, where one dot represents one count, or a one-to-many density, where one dot represents a number of counts to map the spatial distribution of a certain phenomenon. In the map below, one dot represents five speakers. Also unlike choropleth maps, dot density maps do not need to be tied to enumeration units, although they can be, such as in this map example illustrating mother tongue language speakers by census tract. Dots are distributed randomly, and a potential misleading aspect of dot density maps is the false interpretation that the dots are placed in precise locations in space.</p>
+<p>In contrast to choropleth maps, raw data/counts (e.g. number of mother tongue language speakers) as well as rates/ratios (e.g. number of mother tongue language speakers per square kilometer) can be used in <strong>dot density</strong> maps. These maps use a one-to-one density, where one dot represents one count, or a one-to-many density, where one dot represents a number of counts to map the spatial distribution of a certain phenomenon. In the map below, one dot represents 20 speakers. Also unlike choropleth maps, dot density maps do not need to be tied to enumeration units, although they can be, such as in this map example illustrating mother tongue language speakers by census tract. Dots are distributed randomly, and a potential misleading aspect of dot density maps is the false interpretation that the dots are placed in precise locations in space.</p>
 <div class="figure"><span id="fig:06-dotDensity"></span>
-<img src="images/06-dotDensity.jpg" alt="Dot density map showing the distribution of Cantonese and Mandarin mother tongue language speakers by census tract [dataset (retrieved from SimplyAnalytics)](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm)" width="80%" />
+<img src="images/06-dotDensity.png" alt="Dot density map showing the distribution of Cantonese and Mandarin mother tongue language speakers by census tract [Household Population by Mother Tongue](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm)retrieved from [SimplyAnalytics](https://simplyanalytics.com/)." width="80%" />
 <p class="caption">
-Figure 1.2: Dot density map showing the distribution of Cantonese and Mandarin mother tongue language speakers by census tract <a href="https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm">dataset (retrieved from SimplyAnalytics)</a>
+Figure 1.2: Dot density map showing the distribution of Cantonese and Mandarin mother tongue language speakers by census tract <a href="https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm">Household Population by Mother Tongue</a>retrieved from <a href="https://simplyanalytics.com/">SimplyAnalytics</a>.
 </p>
 </div>
+<p>For additional</p>
 </div>
 <div id="isoline-maps" class="section level3" number="1.1.4">
 <h3><span class="header-section-number">1.1.4</span> Isoline Maps</h3>
@@ -281,6 +280,7 @@ Figure 1.2: Dot density map showing the distribution of Cantonese and Mandarin m
 </div>
 <div id="cartograms" class="section level3" number="1.1.6">
 <h3><span class="header-section-number">1.1.6</span> Cartograms</h3>
+<p><em>Note: <span class="citation">(<a href="#ref-Paul" role="doc-biblioref"><strong>Paul?</strong></a>)</span>, see example interactive quiz at bottom of this <a href="https://openpress.usask.ca/introgeomatics/chapter/thematic-maps/">Introduction to Geomatics</a> OER textbook.</em></p>
 </div>
 </div>
 <div id="map-composition" class="section level2" number="1.2">

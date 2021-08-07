@@ -60,7 +60,7 @@ The map below represents, using percentages instead of absolute numbers, the spa
 
 ```{r 05-choropleth, fig.cap = fig_cap, out.width="80%", echo = FALSE}
 fig_cap <- paste("A choropleth map representing the 
-percentage of Cantonese speakers per total population of census tracts in the City of Vancouver [Household Population by Mother Tongue](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm)retrieved from [SimplyAnalytics](https://simplyanalytics.com/).")
+percentage of Cantonese speakers per total population of census tracts in the City of Vancouver [Household Population by Mother Tongue](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm) retrieved from [SimplyAnalytics](https://simplyanalytics.com/).")
 knitr::include_graphics(here::here("images", "05-choropleth.png"))
 ```
 
@@ -73,11 +73,16 @@ In contrast to choropleth maps, raw data/counts (e.g. number of mother tongue la
 Also unlike choropleth maps, dot density maps do not need to be tied to enumeration units, although they can be, such as in this map example, which uses another method of mapping the same data that was used in the choropleth map above. For their part, dots are distributed randomly, and a potential misleading aspect of dot density maps is the false interpretation that the dots are placed in precise locations in space.
 
 ```{r 06-dotDensity, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Dot density map showing the distribution of Cantonese and Mandarin mother tongue language speakers by census tract [Household Population by Mother Tongue](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm)retrieved from [SimplyAnalytics](https://simplyanalytics.com/).")
+fig_cap <- paste("Dot density map showing the distribution of Cantonese and Mandarin mother tongue language speakers by census tract [Household Population by Mother Tongue](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm) retrieved from [SimplyAnalytics](https://simplyanalytics.com/).")
 knitr::include_graphics(here::here("images", "06-dotDensity.png"))
 ```
 
 ### Isoline Maps
+
+```{r 07-isoline, fig.cap = fig_cap, out.width="80%", echo = FALSE}
+fig_cap <- paste("An isoline map representing growing seasons from the _Atlas of Canada_. Isolines are lines which connect points with identical values. ('Growing Seasons', @Norman Leon Nicholson & Paul Comtois, CC BY-NC-SA 3.1) retrieved from [David Rumsey Map Collection](https://www.davidrumsey.com/luna/servlet/s/c68r55).")
+knitr::include_graphics(here::here("images", "07-isoline.jpg"))
+```
 
  - 07-isoline.jpg from row 23 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
 
@@ -86,6 +91,11 @@ knitr::include_graphics(here::here("images", "06-dotDensity.png"))
 _Note: I think I would combine diagrammatic and cartogram subsections._
 
 ### Cartograms
+
+```{r 08-cartogram, fig.cap = fig_cap, out.width="80%", echo = FALSE}
+fig_cap <- paste("A effective illustration of a cartogram representing the population (%) with no access to clean drinking water. ([@World Mapper](https://worldmapper.org/maps/no-water-access-per-capita/#&gid=1&pid=1), CC BY-NC-SA 4.0).")
+knitr::include_graphics(here::here("images", "08-cartogram.png"))
+```
 
 - 08-cartogram.png from row 42 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
 
@@ -104,6 +114,11 @@ _Note: Paul, see example interactive quiz at bottom of this [Introduction to Geo
 Most effective maps comprise standard elements that help orient the map viewer in space and provide helpful contextual information. There is no one way to compose a map, but a good cartographer will arrange and design map elements to provide the greatest clarity. Many maps not only include the phenomenon or object being mapped, called the **figure**, but also the spatial context of the figure, representing where it is in relation to the space around it, called the **ground**. Maps often have a **frame**, which bounds the figure and any other map elements within a predetermined length and width. Some frames are visible to the map reader, while others are not and simply act as a bounding box for the cartographer while designing the map.
 
 ### Figure
+
+```{r 09-figure, fig.cap = fig_cap, out.width="80%", echo = FALSE}
+fig_cap <- paste("The components of effective map composition.('Map composition.', @Steven Manson, CC BY-NC-SA 4.0) [_Mapping, Society, and Technology_](https://open.lib.umn.edu/mapping/chapter/4-design-and-symbolization/#return-footnote-399-1).")
+knitr::include_graphics(here::here("images", "09-figure.jpg"))
+```
 
 - 09-figure.jpg from row 32 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
 
@@ -124,7 +139,12 @@ Just as in writing, it is also important to provide information about the data s
 
 ### Text
 
-- 10-text.svg from row 43 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
+```{r 10-text, fig.cap = fig_cap, out.width="80%", echo = FALSE}
+fig_cap <- paste("Typography standards for cartography.('Cartographic style guide.', @Eric Gaba, CC BY 2.5) retrieved from [Wikipedia](https://en.wikipedia.org/wiki/Typography_(cartography)#/media/File:Maps_template-en.svg).")
+knitr::include_graphics(here::here("images", "10-text.png"))
+```
+
+- 10-text.png from row 43 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
 
 ### Legend
 
@@ -132,8 +152,13 @@ Just as in writing, it is also important to provide information about the data s
 
 ### Scale and North Arrow
 
+```{r 11-scale, fig.cap = fig_cap, out.width="80%", echo = FALSE}
+fig_cap <- paste("Six maps of Ottowa at different scales from the _Atlas of Canada_. ('Comparison of scales', @Norman Leon Nicholson, CC BY-NC-SA 3.1) retrieved from [David Rumsey Map Collection](https://www.davidrumsey.com/luna/servlet/detail/RUMSEY~8~1~323156~90092341:-6--Comparison-of-scales-).")
+knitr::include_graphics(here::here("images", "11-scale.jpg"))
+```
+
 - 11-scale.jpg from row 21 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
-- image is great example of both scale and scale bars, not of north arrow
+- image is great example of both concept of scale and scale bars, not of north arrow
 
 ### Measured Grid
 
@@ -146,44 +171,119 @@ Just as in writing, it is also important to provide information about the data s
 ## Symbolization
 **Symbolization** is the process by which cartographers choose how to represent the features on a map. Unless the map comprises an aerial or satellite image of the surface of the earth, all maps are representations of reality, whereby information is conveyed through the use of symbols.
 
-There are many ways to visually alter symbols to convey information and show both qualitative and quantitative differences between features in the map. These include varying symbols by size, shape, and colour, to name just a few. Using points to map the location of Canada's cities, for example, the cartographer may use different shapes to illustrate differences between cities and towns. To show variations in populations of those cities, the cartographer might vary the size of the symbols. 
+There are many ways to visually alter symbols - represented by points, lines, or polygons -  to convey information and show both qualitative and quantitative differences between features in the map. These include varying symbols by size, shape, and colour, to name just a few. Using points to map the location of Canada's cities, for example, the cartographer may use different shapes to illustrate differences between cities and towns. To show variations in populations of those cities, the cartographer might vary the size of the symbols.
+
+```{r 12-symbolization, fig.cap = fig_cap, out.width="80%", echo = FALSE}
+fig_cap <- paste("The components of symbolization ('Symbolization', @Steven Manson, CC BY-NC-SA 4.0) [_Mapping, Society, and Technology_](https://open.lib.umn.edu/mapping/chapter/4-design-and-symbolization/#return-footnote-399-6).")
+knitr::include_graphics(here::here("images", "12-symbolization.png"))
+```
 
 ### Separable
 
-- 12-separable.png from row 33, page 7 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
+```{r 13-separable, fig.cap = fig_cap, out.width="80%", echo = FALSE}
+fig_cap <- paste("Separable and integral visual combinations delineated by value/shape and heighth/width, respectively. (@Martin E. Elmer) [_Symbol Considerations for Bivariate Thematic Mapping_](https://minds.wisconsin.edu/bitstream/handle/1793/67887/Elmer%20Martin%20E%202012.pdf?sequence=1&isAllowed=y).")
+knitr::include_graphics(here::here("images", "13-separable.png"))
+```
+
+- 13-separable.png from row 33, page 7 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
 
 ### Integral
 
-- use 12-separable.png for this too
+- use 13-separable.png for this too
 
 ### Graduated
 
-- 13-graduated.png from row 45 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
+```{r 14-graduated, fig.cap = fig_cap, out.width="80%", echo = FALSE}
+fig_cap <- paste("Graduated symbols vary symbol size representing a category of values ('Proportional & Graduated Symbols', @Anthony Robinson, CC BY-NC-SA 4.1) [_Maps and the Geospatial Revolution_](https://www.e-education.psu.edu/maps/l5_p3.html).")
+knitr::include_graphics(here::here("images", "14-graduated.png"))
+```
+
+- 14-graduated.png from row 45 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
 
 ### Configurable
 
-- - 14-configurable.png from row 33 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
+```{r 15-configurable, fig.cap = fig_cap, out.width="80%", echo = FALSE}
+fig_cap <- paste("Separable and integral visual combinations delineated by value/shape and heighth/width, respectively. (@Martin E. Elmer) [_Symbol Considerations for Bivariate Thematic Mapping_](https://minds.wisconsin.edu/bitstream/handle/1793/67887/Elmer%20Martin%20E%202012.pdf?sequence=1&isAllowed=y).")
+knitr::include_graphics(here::here("images", "15-configurable.png"))
+```
+
+- 15-configurable.png from row 33 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
 
 
 ### Proportional
 
-- 15-proportional.png from row 45 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
+```{r 16-proportional, fig.cap = fig_cap, out.width="80%", echo = FALSE}
+fig_cap <- paste("Proportional symbols vary size of symbols in relation to their attribute value. ('Proportional & Graduated Symbols', @Anthony Robinson, CC BY-NC-SA 4.1) [_Maps and the Geospatial Revolution_](https://www.e-education.psu.edu/maps/l5_p3.html).")
+knitr::include_graphics(here::here("images", "16-proportional.png"))
+```
+
+- 16-proportional.png from row 45 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
 
 ### Line Weight
 
+```{r 17-lineWeight, fig.cap = fig_cap, out.width="80%", echo = FALSE}
+fig_cap <- paste("Varying the thickness of different lines in the map can help focus attention and differentiate between map features. (['Map Elements and Design Principles'](https://alg.manifoldapp.org/read/introduction-to-cartography/section/b9662d0a-4926-4947-922d-a67a2cae0eec#2), @Uli Ingram, CC-BY-SA-4.0).")
+knitr::include_graphics(here::here("images", "17-lineWeight.png"))
+```
+
+#### Additional Resources
+
+- [The Graduated Colour Map: A Minefield for Armchair Cartographers](https://gis.blog.ryerson.ca/2020/03/26/the-graduated-colour-map-a-minefield-for-armchair-cartographers/)
+
 ## Colour
+Cartographers use **colour** in maps to communicate information, to differentiate among features, and to illustrate spatial patterns. Maps are interpreted visually, so cartographic decisions about colour are particularly important.
+
+Colour can also influence the feeling of a map. Some cartographers caution against using red for symbols, for example, because it can convey a sense of alarm. In general, it is a good idea to pay attention to how colours convey intensity.
+
+Choice of colours should also take into account that some people are colourblind, especially when choosing a colour scheme. [Colorbrewer 2.0](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) is an online tool to help cartographers evaluate how easy it is to differentiate among colours in a colour scheme.
+
+Colour is actually comprised of three elements: hue, chroma, and lightness, or value.
 
 ### Hue
 
+```{r 18-hue, fig.cap = fig_cap, out.width="80%", echo = FALSE}
+fig_cap <- paste("Hues are what we commonly think of as the names of colours and distinguish between qualitative data.('Hue', @Adrienne Fruver, CC BY-NC-SA 3.0) [_Mapping, Society, and Technology_](https://open.lib.umn.edu/mapping/chapter/4-design-and-symbolization/#footnote-399-13).")
+knitr::include_graphics(here::here("images", "18-hue.png"))
+```
+
 ### Chroma
+
+```{r 19-chroma, fig.cap = fig_cap, out.width="80%", echo = FALSE}
+fig_cap <- paste("Higher values represent lighter colorus while lower values refer to dark colours.('Chroma', @Steven Manson, CC BY-NC-SA 4.0) [_Mapping, Society, and Technology_](https://www.e-education.psu.edu/geog486/node/606).")
+knitr::include_graphics(here::here("images", "19-chroma.png"))
+```
 
 ### Lightness
 
+
+```{r 20-lightness, fig.cap = fig_cap, out.width="80%", echo = FALSE}
+fig_cap <- paste("Higher values represent lighter colours while lower values refer to darker colours.('Value', @Cary Anderson, CC BY-NC-SA 4.0) [_Geog 486: Cartography and Visualization_](https://www.e-education.psu.edu/geog486/node/606).")
+knitr::include_graphics(here::here("images", "20-lightness.png"))
+```
+
 ### Bivariate Colour Schemes
+
+```{r 21-bivariate, fig.cap = fig_cap, out.width="80%", echo = FALSE}
+fig_cap <- paste("Different examples of bivariate legends.('Bivariate', @Axis Maps, CC BY-NC-SA 4.0) [_Cartography Guide_](https://www.axismaps.com/guide/bivariate-choropleth).")
+knitr::include_graphics(here::here("images", "21-bivariate.png"))
+```
 
 ### Colour Pickers
 
+ - maybe just reference ColorBrewer?
+
+#### Additional Resources
+
+- [Colour Theory and Cartography](https://openpress.usask.ca/introgeomatics/part/colour-theory-and-cartography/)
+
+- [Mapping COVID-19: How maps make us feel](https://www.canadiangeographic.ca/article/mapping-covid-19-how-maps-make-us-feel)
+
+- [ColorBrewer 2.0](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3)
+
 ## Classification Schemes
+Data **classification** is the process of aggregating large numbers of observations into categories of values or data ranges. Classification is typically used for choropleth or graduated symbol maps. The purpose of classifying data is to simplify it for easier interpretation by the map reader. Rather than differentiating each value by modifying the symbol hue or size, values are grouped together into discrete classes.
+
+There are many classification schemes which determine how breaks in the data are defined, and it can sometimes be difficult to understand which classification method is best to use or whether to use classification for your data at all. Choosing the best classification scheme depends on your data, what you are trying to communicate, and who is your intended map audience.
 
 ### Qualitative
 
@@ -197,7 +297,16 @@ There are many ways to visually alter symbols to convey information and show bot
 
 ### Standard Deviation
 
-## Generalizations
+#### Additional Resources
+
+- [Better Breaks Define Your Map's Purpose](https://www.esri.com/arcgis-blog/products/arcgis-online/mapping/better-breaks-define-your-maps-purpose/)
+
+- [Simplification](https://open.lib.umn.edu/mapping/chapter/5-simplification/)
+
+## Generalization
+One of the cartographer's biggest challenges in making a map is deciding what information to exclude. Because maps are a representation of reality that must fit within certain dimensions and communicate clearly to the map audience, the amount of detailed information included must be limited. This process of simplifying detailed information is known as **generalization**.
+
+Cartographers have developed many techniques for eliminating, highlighting, or subduing visual information in maps, some of which have been incorporated into geoprocessing tools commonly used in GIS software. For example, merging two or more polygons together can be performed by running a tool. 
 
 ### Select
 
@@ -223,7 +332,14 @@ There are many ways to visually alter symbols to convey information and show bot
 
 ### Merge
 
+#### Additional Resources
+
+-[Cartographic generalization](http://wiki.gis.com/wiki/index.php/Cartographic_generalization)
+
 ## Map Design
+**Map design** is the process of incorporating cartographic design principles to produce an interesting and effective map. It involves arranging appropriate map elements, such as a title and legend, in a way that is easy for the map audience to interpret, as well as visually foregrounding more important information so that it stands out against less relevant details. Of course good map design is also about making effective choices for symbol colours and situating the map in such a way that the map audience understands its orientation in space.
+
+Good map design effectively integrates map elements with design principles and symbolization to produce a persuasive map (Deluca and Bonsal 2017).
 
 ### Subject
 
@@ -235,12 +351,6 @@ There are many ways to visually alter symbols to convey information and show bot
 - see [Visual Hierarchy](https://www.axismaps.com/guide/visual-hierarchy) for discussion of and examples of visual hierachy instead
 
 ### Balance
-
-
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa. 
-
-![Figure caption text is also alt text.](images/01-image.png){.center}
 
 
 
@@ -256,9 +366,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem
 
 ::::
 
-## Second Section Header
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa. 
 
 :::: {.box-content .case-study-content}
 
@@ -330,6 +438,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem
 Anderson, C. (2020). Types of Maps. Retrieved June 11, 2021, from _GEOG 486: Cartography and Visualization_ website: https://www.e-education.psu.edu/geog486/node/641
 
 Cote, Paul. (2021). GIS Manual: Elements of Cartographic Style. _PbcGIS_. https://www.pbcgis.com/style/.
+
+Deluca, E., & Bonsal, D. (2017). Design and Symbolization. In S. Manson (Ed.), _Mapping, Society, and Technology_. Retrieved from https://open.lib.umn.edu/mapping/chapter/4-design-and-symbolization/
 
 Intergovernmental Committee on Surveying and Mapping (ICSM). 2021. “Types of Maps.” _Overview to the Fundamentals of Mapping_. https://www.icsm.gov.au/education/fundamentals-mapping/types-maps.
 

@@ -36,6 +36,8 @@ Network analysis, Spatial networks, Graph theory
 ## Introduction to Graph Theory
 Graphs are the abstract language of networks [@systemsinnovationGraphTheoryOverview2015]. Graph theory is the area of mathematics that study graphs. By abstracting networks into graphs, one is able to measure different kinds of indicators that represents information about relationships that exist within a certain system. This is especially useful to assess the state of complex adaptive systems such as societies, cities, ecosystems, etc. All graphs are composed of two parts: nodes and edges.
 
+Why networks can be useful? Data behaviour: connectivity, flows, direction, paths.
+
 ### Nodes
 A node (or vertex) may represent any thing that can be connected with other things. For example, it can represent people in social networks, street intersections in road networks, or chemical compounds in molecular networks, among others.
 
@@ -53,7 +55,7 @@ simpleNetwork(data, charge=-500, linkDistance=50, fontSize=10, zoom=TRUE)
 <p class="codeblock-label">Graph representing Metro Vancouver rapid and frequent transit network</p>
 
 
-![Rapid and frequent transit network in Metro Vancouver. Source: City of Pitt Meadows](https://www.pittmeadows.ca/sites/default/files/docs/23-07-2019_2-47-50_pm.jpg).(images/metro_vancouver_transit_network.jpeg){.center}
+![Rapid and frequent transit network in Metro Vancouver. Source: City of Pitt Meadows](https://www.pittmeadows.ca/sites/default/files/docs/23-07-2019_2-47-50_pm.jpg).(images/08-metro_vancouver_transit_network.png){.center}
 
 
 ## Connectivity and Order
@@ -96,8 +98,8 @@ Lines are when nodes are arranged in series where every node has no more than tw
 
 ```{r, echo=FALSE}
 
-lineData <- readLines("data/transit_millenium_line.geojson") %>% paste(collapse = "\n")
-nodeData <- readOGR("data/transit_millenium_stops.geojson", layer="transit_millenium_stops", verbose=FALSE)
+lineData <- readLines("data/08-transit_millenium_line.geojson") %>% paste(collapse = "\n")
+nodeData <- readOGR("data/08-transit_millenium_stops.geojson", layer="transit_millenium_stops", verbose=FALSE)
 
 leaflet(height=200, width="80%") %>% setView(lng=-122.9220614617343, lat=49.26585706918778, zoom=11) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
@@ -110,8 +112,8 @@ Rings are similar to lines except that there are no end nodes. So each and every
 
 ```{r, echo=FALSE}
 
-lineData <- readLines("data/stanley_park_seawall.geojson") %>% paste(collapse = "\n")
-nodeData <- readOGR("data/stanley_park_seawall_nodes.geojson", layer="stanley_park_seawall_nodes", verbose=FALSE)
+lineData <- readLines("data/08-stanley_park_seawall.geojson") %>% paste(collapse = "\n")
+nodeData <- readOGR("data/08-stanley_park_seawall_nodes.geojson", layer="stanley_park_seawall_nodes", verbose=FALSE)
 
 leaflet(height=400, width="80%") %>% setView(lng=-123.14051382816635, lat=49.3035701861337, zoom=14) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
@@ -124,9 +126,9 @@ In a mesh, every node is also connected to more than one node. However, in this 
 
 ```{r, echo=FALSE}
 
-lineData <- readLines("data/tree_canopy_mesh.geojson") %>% paste(collapse = "\n")
-polyData <- readOGR("data/tree_canopy_shapes.geojson", layer="tree_canopy_shapes", verbose=FALSE, GDAL1_integer64_policy=TRUE)
-nodeData <- readOGR("data/tree_canopy_centroids.geojson", layer="tree_canopy_centroids", verbose=FALSE)
+lineData <- readLines("data/08-tree_canopy_mesh.geojson") %>% paste(collapse = "\n")
+polyData <- readOGR("data/08-tree_canopy_shapes.geojson", layer="tree_canopy_shapes", verbose=FALSE, GDAL1_integer64_policy=TRUE)
+nodeData <- readOGR("data/08-tree_canopy_centroids.geojson", layer="tree_canopy_centroids", verbose=FALSE)
 
 leaflet(height=300, width="80%") %>% setView(lng=-123.13264678513188, lat=49.23942113799484, zoom=17) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
@@ -141,9 +143,9 @@ As the name suggests, in fully connected networks every node is connected to eve
 
 ```{r, echo=FALSE}
 
-polygonData <- readOGR("data/regional_boundaries.geojson", layer="regional_boundaries", verbose=FALSE)
-lineData <- readLines("data/regional_commutes.geojson") %>% paste(collapse = "\n")
-nodeData <- readOGR("data/regional_commutes_nodes.geojson", layer="regional_commutes_nodes", verbose=FALSE)
+polygonData <- readOGR("data/08-regional_boundaries.geojson", layer="regional_boundaries", verbose=FALSE)
+lineData <- readLines("data/08-regional_commutes.geojson") %>% paste(collapse = "\n")
+nodeData <- readOGR("data/08-regional_commutes_nodes.geojson", layer="regional_commutes_nodes", verbose=FALSE)
 
 leaflet(height=420, width="80%") %>% setView(lng=-122.89050696548136, lat=49.19456939297959, zoom=10) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
@@ -160,8 +162,8 @@ Stars are hierarchical structures where two or more nodes are directly connected
 
 ```{r, echo=FALSE}
 
-lineData <- readLines("data/concentric_garden.geojson") %>% paste(collapse = "\n")
-nodeData <- readOGR("data/concentric_garden_nodes.geojson", layer="concentric_garden_nodes", verbose=FALSE)
+lineData <- readLines("data/08-concentric_garden.geojson") %>% paste(collapse = "\n")
+nodeData <- readOGR("data/08-concentric_garden_nodes.geojson", layer="concentric_garden_nodes", verbose=FALSE)
 
 leaflet(height=200, width="80%") %>% setView(lng=-123.24650254301488, lat=49.25331570212763, zoom=19) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
@@ -174,8 +176,8 @@ Buses are structures where every path from one node to another passes through a 
 
 ```{r, echo=FALSE}
 
-lineData <- readLines("data/row_houses.geojson") %>% paste(collapse = "\n")
-nodeData <- readOGR("data/row_houses_nodes.geojson", layer="row_housses_nodes", verbose=FALSE)
+lineData <- readLines("data/08-row_houses.geojson") %>% paste(collapse = "\n")
+nodeData <- readOGR("data/08-row_houses_nodes.geojson", layer="row_housses_nodes", verbose=FALSE)
 
 leaflet(height=200, width="80%") %>% setView(lng=-123.17161003346679, lat=49.2547602831889, zoom=18) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
@@ -188,8 +190,8 @@ In tree topologies, nodes are structured from a root node and arranged into edge
 
 ```{r, echo=FALSE}
 
-lineData <- readLines("data/boat_marina.geojson") %>% paste(collapse = "\n")
-nodeData <- readOGR("data/boat_marina_nodes.geojson", layer="boat_marina_nodes", verbose=FALSE)
+lineData <- readLines("data/08-boat_marina.geojson") %>% paste(collapse = "\n")
+nodeData <- readOGR("data/08-boat_marina_nodes.geojson", layer="boat_marina_nodes", verbose=FALSE)
 
 leaflet(height=500, width="80%") %>% setView(lng=-123.1270252730915, lat=49.29535129069547, zoom=17) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
@@ -205,8 +207,8 @@ The act of modelling spatial networks is called *Network tracing*. When tracing 
 
 ```{r, echo=FALSE}
 
-nodes <- readOGR("data/fraser_river_nodes.geojson", verbose=FALSE)
-links <- readOGR("data/fraser_river.geojson", verbose=FALSE)
+nodes <- readOGR("data/08-fraser_river_nodes.geojson", verbose=FALSE)
+links <- readOGR("data/08-fraser_river.geojson", verbose=FALSE)
 
 leaflet(links, height=500, width="80%") %>% addTiles() %>% 
   addProviderTiles(providers$CartoDB.Positron) %>%
@@ -219,15 +221,15 @@ leaflet(links, height=500, width="80%") %>% addTiles() %>%
 Linear referencing systems are commonly used for finding the length of pathways along the network [@ramsey23LinearReferencing2012]. In this method, the graph elements are defined in terms of their physical location and edges are used to calculate distances among parts of the network.
 
 ### Routing
-Finding routes between nodes is an useful application of spatial networks. This is how maping tools help us navigate the world by finding the most efficient route to move around the city, for example. [@systemsinnovationNetworkDiffusionContagion2015].
+Finding routes between nodes is an useful application of spatial networks. This is how mapping tools help us navigate the world by finding the most efficient route to move around the city, for example. [@systemsinnovationNetworkDiffusionContagion2015].
 
 #### Least Cost Paths
 The notion of cost let us compare different routes. It relates to the necessary distance (either physically or logically) to go from a certain node to another. The map below displays the least cost path in terms of physical distance (shortest path) between two points.
 
 ```{r, echo=FALSE}
 
-nodes <- readOGR("data/shortest_path_nodes.geojson", verbose=FALSE)
-path <- readOGR("data/shortest_path.geojson", verbose=FALSE)
+nodes <- readOGR("data/08-shortest_path_nodes.geojson", verbose=FALSE)
+path <- readOGR("data/08-shortest_path.geojson", verbose=FALSE)
 map <- leaflet(nodes, height=500, width="80%") %>% addTiles()
 
 map %>% 
@@ -242,20 +244,20 @@ Reach techniques are commonly used to find the incidence of defined elements wit
 
 ```{r, echo=FALSE}
 
-origin <- readOGR("data/pacific_spirit_origin.geojson", verbose=FALSE)
-base_net <- readOGR("data/pacific_spirit_network.geojson", verbose=FALSE)
-net_400 <- readOGR("data/pacific_spirit_400.geojson", verbose=FALSE)
-net_800 <- readOGR("data/pacific_spirit_800.geojson", verbose=FALSE)
-net_1200 <- readOGR("data/pacific_spirit_1200.geojson", verbose=FALSE)
-net_1600 <- readOGR("data/pacific_spirit_1600.geojson", verbose=FALSE)
+origin <- readOGR("data/08-pacific_spirit_origin.geojson", verbose=FALSE)
+base_net <- readOGR("data/08-pacific_spirit_network.geojson", verbose=FALSE)
+net_400 <- readOGR("data/08-pacific_spirit_400.geojson", verbose=FALSE)
+net_800 <- readOGR("data/08-pacific_spirit_800.geojson", verbose=FALSE)
+net_1200 <- readOGR("data/08-pacific_spirit_1200.geojson", verbose=FALSE)
+net_1600 <- readOGR("data/08-pacific_spirit_1600.geojson", verbose=FALSE)
 
 leaflet(net_1600, height=500, width="80%") %>% setView(lng=-123.22165125449455, lat=49.25752614491611, zoom=14) %>% addTiles() %>% 
   addProviderTiles(providers$CartoDB.Positron) %>%
-  addPolylines(data=base_net, color="gray") %>%
-  addPolylines(data=net_1600, color="blue") %>%
-  addPolylines(data=net_1200, color="green") %>%
-  addPolylines(data=net_800, color="yellow") %>%
-  addPolylines(data=net_400, color="red") %>%
+  addPolylines(data=base_net, color="lightgray") %>%
+  addPolylines(data=net_1600, color="mediumaquamarine") %>%
+  addPolylines(data=net_1200, color="lightblue") %>%
+  addPolylines(data=net_800, color="gold") %>%
+  addPolylines(data=net_400, color="lightcoral") %>%
   addCircles(data=origin, radius=2, color="black")
 
 ```
@@ -268,7 +270,7 @@ Closeness centrality measures how close each node is to every other node of the 
 
 ```{r, echo=FALSE}
 
-intersections <- readOGR("data/ubc_intersections.geojson", verbose=FALSE)
+intersections <- readOGR("data/08-ubc_intersections.geojson", verbose=FALSE)
 map <- leaflet(intersections, height=500, width="80%") %>% addTiles()
 pal <- colorNumeric(palette="viridis", domain=intersections$closeness, n=6, reverse=TRUE)
 
@@ -284,7 +286,7 @@ Betweenness centrality measures how likely a node or an edge is to be passed thr
 
 ```{r, echo=FALSE}
 
-segments <- readOGR("data/ubc_segments.geojson", verbose=FALSE)
+segments <- readOGR("data/08-ubc_segments.geojson", verbose=FALSE)
 map <- leaflet(segments, height=500, width="80%") %>% addTiles()
 pal <- colorQuantile(palette="viridis", domain=segments$betweenness, n=6, reverse=TRUE)
 
@@ -316,7 +318,7 @@ First we need to find the Closeness measure for the street network of the City o
 
 ``` {r, echo=FALSE}
 
-parks <- readOGR("data/vancouver_parks.geojson", verbose=FALSE)
+parks <- readOGR("data/08-vancouver_parks.geojson", verbose=FALSE)
 
 map <- leaflet(parks, height=500, width="100%") %>% addTiles()
 pal <- colorNumeric(palette="viridis", domain=parks$betweenness, n=6, reverse=TRUE)
@@ -333,6 +335,23 @@ ggplot(parks_df, aes(x=parks.closeness_mean)) + geom_density(alpha=0.3, fill=rgb
 
 Results show parks located in the middle of the city have highger closeness than parks located at the edges. In other words, these parks are located in parts of the city that have easy access to the city's street network as a whole. As the histogram leans towards the right, we can conclude that there are more parks with higher closeness than parks with lower closeness.
 
+<p id="box-text"></p>
+
+<p id="box-text"></p>
+
+::::
+
+<br>
+
+
+
+:::: {.box-content .case-study-content}
+
+::: {.box-title .case-study-top}
+#### Practice & Reflection {-}
+:::
+
+Text
 <p id="box-text"></p>
 
 <p id="box-text"></p>

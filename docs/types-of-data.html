@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Types of Data | An Open Geomatics Textbook</title>
+  <meta name="description" content="Advancing teaching and learning in geomatics at UBC" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Types of Data | An Open Geomatics Textbook" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/ubc-geomatics-textbook/book/" />
+  
+  <meta property="og:description" content="Advancing teaching and learning in geomatics at UBC" />
+  <meta name="github-repo" content="ubc-geomatics-textbook/book" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Types of Data | An Open Geomatics Textbook" />
+  
+  <meta name="twitter:description" content="Advancing teaching and learning in geomatics at UBC" />
+  
+
+<meta name="author" content="UBC" />
+
+
+<meta name="date" content="2021-08-15" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="chapter-template.html"/>
+<link rel="next" href="data-integration.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">An Open Geomatics Textbook</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#contacts"><i class="fa fa-check"></i><b>0.1</b> Contacts</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#project-wiki"><i class="fa fa-check"></i><b>0.2</b> Project Wiki</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#style-guide"><i class="fa fa-check"></i><b>0.3</b> Style Guide</a>
+<ul>
+<li class="chapter" data-level="0.3.1" data-path="index.html"><a href="index.html#audience"><i class="fa fa-check"></i><b>0.3.1</b> Audience</a></li>
+<li class="chapter" data-level="0.3.2" data-path="index.html"><a href="index.html#general-style"><i class="fa fa-check"></i><b>0.3.2</b> General Style</a></li>
+<li class="chapter" data-level="0.3.3" data-path="index.html"><a href="index.html#learning-objectives"><i class="fa fa-check"></i><b>0.3.3</b> Learning Objectives</a></li>
+<li class="chapter" data-level="0.3.4" data-path="index.html"><a href="index.html#summary"><i class="fa fa-check"></i><b>0.3.4</b> Summary</a></li>
+<li class="chapter" data-level="0.3.5" data-path="index.html"><a href="index.html#key-terms"><i class="fa fa-check"></i><b>0.3.5</b> Key Terms</a></li>
+<li class="chapter" data-level="0.3.6" data-path="index.html"><a href="index.html#headings-and-labels"><i class="fa fa-check"></i><b>0.3.6</b> Headings and Labels</a></li>
+<li class="chapter" data-level="0.3.7" data-path="index.html"><a href="index.html#formulae"><i class="fa fa-check"></i><b>0.3.7</b> Formulae</a></li>
+<li class="chapter" data-level="0.3.8" data-path="index.html"><a href="index.html#units"><i class="fa fa-check"></i><b>0.3.8</b> Units</a></li>
+<li class="chapter" data-level="0.3.9" data-path="index.html"><a href="index.html#numbers"><i class="fa fa-check"></i><b>0.3.9</b> Numbers</a></li>
+<li class="chapter" data-level="0.3.10" data-path="index.html"><a href="index.html#dates-and-times"><i class="fa fa-check"></i><b>0.3.10</b> Dates and times</a></li>
+<li class="chapter" data-level="0.3.11" data-path="index.html"><a href="index.html#tables"><i class="fa fa-check"></i><b>0.3.11</b> Tables</a></li>
+<li class="chapter" data-level="0.3.12" data-path="index.html"><a href="index.html#code-blocks"><i class="fa fa-check"></i><b>0.3.12</b> Code blocks</a></li>
+<li class="chapter" data-level="0.3.13" data-path="index.html"><a href="index.html#abbreviations"><i class="fa fa-check"></i><b>0.3.13</b> Abbreviations</a></li>
+<li class="chapter" data-level="0.3.14" data-path="index.html"><a href="index.html#initialisms"><i class="fa fa-check"></i><b>0.3.14</b> Initialisms</a></li>
+<li class="chapter" data-level="0.3.15" data-path="index.html"><a href="index.html#acronyms"><i class="fa fa-check"></i><b>0.3.15</b> Acronyms</a></li>
+<li class="chapter" data-level="0.3.16" data-path="index.html"><a href="index.html#punctuation"><i class="fa fa-check"></i><b>0.3.16</b> Punctuation</a></li>
+<li class="chapter" data-level="0.3.17" data-path="index.html"><a href="index.html#citations"><i class="fa fa-check"></i><b>0.3.17</b> Citations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="chapter-template.html"><a href="chapter-template.html"><i class="fa fa-check"></i><b>1</b> Chapter Title</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#key-terms-1"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="1.1" data-path="chapter-template.html"><a href="chapter-template.html#first-section-header"><i class="fa fa-check"></i><b>1.1</b> First Section Header</a></li>
+<li class="chapter" data-level="1.2" data-path="chapter-template.html"><a href="chapter-template.html#second-section-header"><i class="fa fa-check"></i><b>1.2</b> Second Section Header</a></li>
+<li class="chapter" data-level="1.3" data-path="chapter-template.html"><a href="chapter-template.html#third-section-header"><i class="fa fa-check"></i><b>1.3</b> Third Section Header</a></li>
+<li class="chapter" data-level="1.4" data-path="chapter-template.html"><a href="chapter-template.html#summary-1"><i class="fa fa-check"></i><b>1.4</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#reflection-questions"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#practice-questions"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#recommended-readings"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="types-of-data.html"><a href="types-of-data.html"><i class="fa fa-check"></i><b>2</b> Types of Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#key-terms-2"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="2.1" data-path="types-of-data.html"><a href="types-of-data.html#types-of-phenomena"><i class="fa fa-check"></i><b>2.1</b> Types of Phenomena</a></li>
+<li class="chapter" data-level="2.2" data-path="types-of-data.html"><a href="types-of-data.html#types-of-data-1"><i class="fa fa-check"></i><b>2.2</b> Types of Data</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="types-of-data.html"><a href="types-of-data.html#qualitative-data"><i class="fa fa-check"></i><b>2.2.1</b> Qualitative Data</a></li>
+<li class="chapter" data-level="2.2.2" data-path="types-of-data.html"><a href="types-of-data.html#quantitative-data"><i class="fa fa-check"></i><b>2.2.2</b> Quantitative Data</a></li>
+<li class="chapter" data-level="2.2.3" data-path="types-of-data.html"><a href="types-of-data.html#summary-of-data-types"><i class="fa fa-check"></i><b>2.2.3</b> Summary of Data Types</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="types-of-data.html"><a href="types-of-data.html#spatial-is-special"><i class="fa fa-check"></i><b>2.3</b> Spatial is Special</a></li>
+<li class="chapter" data-level="2.4" data-path="types-of-data.html"><a href="types-of-data.html#spatial-data-models"><i class="fa fa-check"></i><b>2.4</b> Spatial Data Models</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="types-of-data.html"><a href="types-of-data.html#raster-data-model"><i class="fa fa-check"></i><b>2.4.1</b> Raster Data Model</a></li>
+<li class="chapter" data-level="2.4.2" data-path="types-of-data.html"><a href="types-of-data.html#vector-data"><i class="fa fa-check"></i><b>2.4.2</b> Vector Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="types-of-data.html"><a href="types-of-data.html#choice-of-data-model"><i class="fa fa-check"></i><b>2.5</b> Choice of Data Model</a></li>
+<li class="chapter" data-level="2.6" data-path="types-of-data.html"><a href="types-of-data.html#summary-2"><i class="fa fa-check"></i><b>2.6</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#reflection-questions-1"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#practice-questions-1"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#recommended-readings-1"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-integration.html"><a href="data-integration.html"><i class="fa fa-check"></i><b>3</b> Chapter Title</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-integration.html"><a href="data-integration.html#key-terms-3"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="3.1" data-path="data-integration.html"><a href="data-integration.html#problems-with-data-integration"><i class="fa fa-check"></i><b>3.1</b> Problems with data integration</a></li>
+<li class="chapter" data-level="3.2" data-path="data-integration.html"><a href="data-integration.html#framing-the-problem"><i class="fa fa-check"></i><b>3.2</b> Framing the problem</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="data-integration.html"><a href="data-integration.html#about-the-data"><i class="fa fa-check"></i><b>3.2.1</b> About the data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data-integration.html"><a href="data-integration.html#data-resolution"><i class="fa fa-check"></i><b>3.3</b> Data Resolution</a></li>
+<li class="chapter" data-level="3.4" data-path="data-integration.html"><a href="data-integration.html#integrating-vector-and-raster-data"><i class="fa fa-check"></i><b>3.4</b> Integrating vector and raster data</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="data-integration.html"><a href="data-integration.html#rasterization"><i class="fa fa-check"></i><b>3.4.1</b> Rasterization</a></li>
+<li class="chapter" data-level="3.4.2" data-path="data-integration.html"><a href="data-integration.html#vectorization"><i class="fa fa-check"></i><b>3.4.2</b> Vectorization</a></li>
+<li class="chapter" data-level="3.4.3" data-path="data-integration.html"><a href="data-integration.html#zonal-statistics"><i class="fa fa-check"></i><b>3.4.3</b> Zonal Statistics</a></li>
+<li class="chapter" data-level="3.4.4" data-path="data-integration.html"><a href="data-integration.html#smoothing"><i class="fa fa-check"></i><b>3.4.4</b> Smoothing</a></li>
+<li class="chapter" data-level="3.4.5" data-path="data-integration.html"><a href="data-integration.html#simplifying"><i class="fa fa-check"></i><b>3.4.5</b> Simplifying</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="data-integration.html"><a href="data-integration.html#spatial-data-errors"><i class="fa fa-check"></i><b>3.5</b> Spatial data errors</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="data-integration.html"><a href="data-integration.html#accuracy-vs.-precision"><i class="fa fa-check"></i><b>3.5.1</b> Accuracy vs. Precision</a></li>
+<li class="chapter" data-level="3.5.2" data-path="data-integration.html"><a href="data-integration.html#vagueness-and-ambiguity"><i class="fa fa-check"></i><b>3.5.2</b> Vagueness and Ambiguity</a></li>
+<li class="chapter" data-level="3.5.3" data-path="data-integration.html"><a href="data-integration.html#quantifying-spatial-errors-rmse-euclids-distance"><i class="fa fa-check"></i><b>3.5.3</b> Quantifying spatial errors RMSE, Euclid’s distance</a></li>
+<li class="chapter" data-level="3.5.4" data-path="data-integration.html"><a href="data-integration.html#logical-errors"><i class="fa fa-check"></i><b>3.5.4</b> Logical Errors</a></li>
+<li class="chapter" data-level="3.5.5" data-path="data-integration.html"><a href="data-integration.html#ecological-fallacy-atomistic-fallacy-maup-etc.-its-important-to-include-these-whether-here-or-elsewhere"><i class="fa fa-check"></i><b>3.5.5</b> Ecological Fallacy, Atomistic Fallacy, MAUP etc. Its important to include these, whether here or elsewhere?</a></li>
+<li class="chapter" data-level="3.5.6" data-path="data-integration.html"><a href="data-integration.html#other-errors"><i class="fa fa-check"></i><b>3.5.6</b> Other Errors?</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">An Open Geomatics Textbook</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="types-of-data" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Types of Data</h1>
+<p>^^ Can we change the chapter name? I think something like <strong>Spatial Data Models &amp; Data Types</strong> would be more appropriate.</p>
+<p>In the previous chapter, we discussed some of the unique challenges associated with representing spatial data in a GIS, and how to account for these these with geographic coordinates systems and map projections. In this chapter we will discuss more broadly how to represent both spatial and non-spatial data in a Geographic Information System. We will introduce the different types of data that can represent non-spatial attributes and discuss the different scales this data can be measured on. Then we will introduce the different <em>spatial data models</em> we use to link the spatial and non-spatial data. Finally, we will cover some of the different file types that can be used to store data.</p>
+<div class="box-content learning-objectives-content">
+<div id="learning-objectives-2" class="section level4 unnumbered box-title learning-objectives-top">
+<h4>Learning Objectives</h4>
+</div>
+<ol style="list-style-type: decimal">
+<li>Data types and measurement scales</li>
+<li>Introduce spatial data models</li>
+<li>File types we use in GIS</li>
+</ol>
+</div>
+<div id="key-terms-2" class="section level3 unnumbered">
+<h3>Key Terms</h3>
+<p>Attribute, Qualitative, Quantitative, Discrete, Continuous, Vector, Raster, Measurement Scale</p>
+</div>
+<div id="types-of-phenomena" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Types of Phenomena</h2>
+<p>There are two kinds of phenomena we observe in the real world and represent in a GIS <strong>Discrete Objects</strong> and <strong>Continuous Fields</strong>. Discrete objects have distinct, well-defined boundaries meaning their geography can be exactly measured (e.g. a building, a street, a tree). They are also countable, meaning there are a finite number of them. Continuous fields lack clearly-defined boundaries and can be measured at an infinite number of points (e.g. elevation, precipitation, land cover). The values of a continuous field can vary dramatically over short distances. Both kinds of phenomena can be represented in a GIS, but they requrie different considerations and are usually use different data models.</p>
+<!--   The vector data model is typically better suited for discrete objects and the raster data model is better for continuous fields.  However, either model *can* be used to represent either type of phenomena, and there are some circumstances where one model may be preferable over the other because of the task at hand rather than the type of phenomena.  *Note* Discrete objects can continuous fields can both be described with quantitative or qualitative data depending on the context. -->
+<div class="figure">
+<img src="images/03-phenomena-types" class="center" alt="" />
+<p class="caption">One the right, we see discrete objects, on the left we see a continuous field. These images are from my slides. I’m not sure the original source of the DEM image, it would be easy enough to just make my own down the line though.</p>
+</div>
+</div>
+<div id="types-of-data-1" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Types of Data</h2>
+<p>Within the context of a Geographic Information System, each piece of information pertaining to a phenomena can be referred to as an <strong>Attribute</strong>. An phenomena can have many different attributes associated with it, but each attribute can broadly be said to address one of three questions: <strong>What</strong>, <strong>When</strong>, or <strong>Where</strong>? Attributes that describe <em>where</em> are known as <strong>Spatial Data</strong> while all other attributes are <strong>Non-Spatial Data</strong>. All data, spatial and non-spatial, can broadly be classified as either <strong>qualitative</strong> or <strong>quantitative</strong>. These data types fundamentally different and are therefore measured on fundamentally different scales. The types of analysis we can conduct with qualitative data are more limited than quantitative data, but that does not necessarily mean quantitative data are “better” than qualitative.</p>
+<div class="figure">
+<img src="images/03-data-types.png" class="center" alt="" />
+<p class="caption">Summary of the types of data.</p>
+</div>
+<div id="qualitative-data" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Qualitative Data</h3>
+<p>Qualitative data are categorical; they are strictly descriptive and lack any meaningful numeric value. They describe the qualities of an phenomena, without giving us any numeric information. Most qualitative data you will work with in a GIS are textual or coded numerals, but there are circumstances where you may encounter non-textual data (e.g. images, sound clips, videos) in a dataset. Qualitative data can be “spatial” in nature (e.g. relative directional descriptors: left/right, near/far, north/south), but because they lack numeric values, they cannot be used for spatial analysis. Qualitative data can be measured on either a <strong>Nominal</strong> or <strong>Ordinal</strong> scale.</p>
+<div id="nominal-scale" class="section level4" number="2.2.1.1">
+<h4><span class="header-section-number">2.2.1.1</span> Nominal Scale</h4>
+<p>These are data that just consists of names or categories with no ranking or direction are nominal. One category is not more or less, better or worse than another, they are just different. A good example would be flower types (see fig). Other examples would be zoning categories, colors, flavors of ice cream, place names, etc.</p>
+<div class="figure">
+<img src="images/03-flowers-nominal.png" class="center" alt="" />
+<p class="caption">Each flower is different, but no flower is “more” or “less” a flower than any of the others.</p>
+</div>
+<div class="figure">
+<img src="images/03-nominal-opperations.png" class="center" alt="" />
+<p class="caption">With nominal data, you can check for equality, and count occurenecees, but that is it.</p>
+</div>
+</div>
+<div id="ordinal-scale" class="section level4" number="2.2.1.2">
+<h4><span class="header-section-number">2.2.1.2</span> Ordinal Scale</h4>
+<p>These data are categories that also have a some ranking or directionality. A good example would be relative sizes (see fig). Some other good examples of ordinal data include spice levels (mild, medium, hot), residential zoning density (low, medium, high), and survey responses.</p>
+<div class="figure">
+<img src="images/03-dogs-ordinal.png" class="center" alt="" />
+<p class="caption">We can see Yarrow is taller than her sister Shamsa, so we can rank these dogs by height. However, we haven’t measured their heights, so we don’t know how much taller Yarrow is than Shamsa.</p>
+</div>
+<p>The only arithmetic operations we can do with nominal data are checking for equality (True/False), counting occurrences (frequencies), and calculating the mode (most frequent occurrence). With ordinal data, we can these operations as well, plus a few more. We can check the order/rank (greater than, less than) and in some circumstances we can calculate the median (see figure).</p>
+<div class="figure">
+<img src="images/03-ordinal-operatons.png" class="center" alt="" />
+<p class="caption">In some circumstances, we can directly calculate the median (middle value) of an ordinal set. With odd numbered sets (e.g. Group 1), the median, is simply the middle value of the set, when sorted lowest to highest. We can always take the median when we have an odd number. With even numbered sets, its a bit more complicated. The median, is the average of the middle two values. For Group 2, the middle values (5th and 6th) are both “Neutral,” so we don’t have an issue. But for Group 3, the 5th value is “Neutral” and the 6th value is “Agree.” We can’t directly average these two ordinal values. One solution is to arbitrarily assign a numeric score to the ordinal categories (e.g. 1-5). This would then allow you to show the median is between “Neutral” and “Agree.”</p>
+</div>
+</div>
+<div id="graded-membership" class="section level4" number="2.2.1.3">
+<h4><span class="header-section-number">2.2.1.3</span> Graded Membership</h4>
+<p>When trying to group real world phenomena into categories, there are often “exceptions” that blur the lines a bit. Take this example: you are trying to develop a land cover classification scheme for Garibaldi Provincial park in British Columbia. Some of the land surface is unquestionably alpine tundra and some is certainly forest area. However, the transition between forest and alpine meadow is not an abrupt line. How/where do you draw the line? Examples like this are known as fuzzy variables, and we often use a <em>Graded Membership</em> scale to assign them to categories. With the landscape classification, a simple approach would be a “winner take all” approach. If a plot is 5% bare rock, 40% forest, and 45% alpine meadow, the area will be classified as alpine meadow. From that point forward, in the GIS, that area will be treated as alpine meadow, any information about the variability within the area will be lost. In practice, many of the qualitative data we work with in GIS, especially those describing natural phenomena, are actually graded membership variables.</p>
+<div class="figure">
+<img src="images/03-fuzzy.jpg" class="center" alt="" />
+<p class="caption">Will annotate to show better example.</p>
+</div>
+</div>
+</div>
+<div id="quantitative-data" class="section level3" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Quantitative Data</h3>
+<p>Quantitative data are numeric; they describe the quantities associated with an phenomena. The numerical values that are separated by a unit that has some inherent meaning (as opposed to the arbitrary numeric codes like in the ordinal data example). This allows us to conduct a wider range of arithmetic operations on quantitative data. In addition to the operations we perform on Qualitative data; with numeric data we can always calculate measures of central tendency (mean/median) and we can add/subtract values to calculate differences.</p>
+<p>Numeric data can be either <strong>discrete</strong> or <strong>continuous</strong>. Discrete variables (e.g. population) are obtained by counting and values within a range cannot be infinitely subdivided. You can have a population of 1, 37, or 179 but you cannot have a population of 2.3. Continuous variables (e.g. temperature) can take an infinite number of values a given range, but they cannot be counted. You can have temperatures of 10, 10.5, or 10.1167 °C, but a temperature of 10°C does not mean you have 10 individual degrees of temperature. Quantitative data (both discrete and continuous) can be measured on either an <strong>Interval</strong> or <strong>Ratio</strong> scale. These types of quantitative data are closely related, but have one important distinction.</p>
+<div id="ratio-data" class="section level4" number="2.2.2.1">
+<h4><span class="header-section-number">2.2.2.1</span> Ratio Data</h4>
+<p>These data have fixed, meaningful, absolute zero points. The absolute zero point means ratio data cannot take negative values. It also means that we can multiply/divide two values to calculate a meaningful ratio between them (hence the name). A good example of ratio data are population total (see figure). Population counts start at zero and go up from there. A population of zero means there are no residents, and its impossible to have a negative population. Other examples of ratio data include: temperature (<em>in degrees Kelvin</em>), precipitation, tree height, income, rental cost, and units of time (years, seconds, etc.)</p>
+<div class="figure">
+<img src="images/03-ratio-population.png" class="center" alt="" />
+<p class="caption">Because of the fixed, meaningful zero point, we can calculate ratios between populations: e.g. Manitoba’s population is 1/10th that of Ontario, British Columbia has 129 times as many people as Nunavut.</p>
+</div>
+</div>
+<div id="interval-data" class="section level4" number="2.2.2.2">
+<h4><span class="header-section-number">2.2.2.2</span> Interval Data</h4>
+<p>These data on the other hand, have an arbitrarily set zero point. This means they can can take negative values. Because the zero point is arbitrary, we cannot multiply/divide two values or calculate meaningful ratios between two values. A good example of interval data is temperature measured in Celsius, and comparing it to Kelvin highlights the difference between the two data types (see fig). The conversion between Kelvin (ratio) and Celsius (interval) is very simple: °C = °K-273.15. Zero Kelvin is “Absolute Zero” - ie. the lack of temperature, while zero Celsius is the freezing point of water (273.15 degrees above absolute zero). Other examples of interval data include: the pH scale, IQ test scores, elevation (relative to a datum) dates (April 12th, 2011), and times (11:00 A.M.).</p>
+<div class="figure">
+<img src="images/03-interval-ratio-temperature.png" class="center" alt="" />
+<p class="caption">The ratio between two temperatures in Celsius is not meaningful, 20°C is not “twice” as warm as 10°C. Kelvin’s zero point is fixed to absolute zero, the “absence” of temperature. So we can calculate the ratio, 293.15°K is 1.035 times warmer than 283.15°K.</p>
+</div>
+</div>
+<div id="derived-ratio-normalizing-data" class="section level4" number="2.2.2.3">
+<h4><span class="header-section-number">2.2.2.3</span> Derived Ratio: Normalizing Data</h4>
+<p>Sometimes we want to account for the influence of one variable when analyzing another. To do this, we can divide one value by by another to get the ratio of the two, also known as a <strong>derived ratio</strong>. This process is sometimes referred to as <strong>Normalizing</strong> or <strong>Standardizing</strong> our data. The basic formula is: <span class="math inline">\(C=\frac{A}{B}\)</span>, where A is our variable of interest, B is our confounding variable, and C is our new derived ratio. There are many circumstances where we might need to do this. One common example is population density (see figure). Another key example is housing affordability.</p>
+<div class="figure">
+<img src="images/03-Affordability.png" class="center" alt="" />
+<p class="caption">Figure needs to be re-worked as the data from simply analytics is wrong…</p>
+</div>
+</div>
+</div>
+<div id="summary-of-data-types" class="section level3" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Summary of Data Types</h3>
+<div class="figure">
+<img src="images/03-operations.png" class="center" alt="" />
+<p class="caption">From my lectures. IDK the original source, but it’d be easy enough to just “recreate” my own.</p>
+</div>
+<div class="figure">
+<img src="images/03-scales.png" class="center" alt="" />
+<p class="caption">From my lectures. IDK the original source, but it’d be easy enough to just “recreate” my own.</p>
+</div>
+</div>
+</div>
+<div id="spatial-is-special" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Spatial is Special</h2>
+<p><em>“Everything is related to everything else, but near things are more related than distant things.”</em> -</p>
+<p>You might encounter the phrase “Spatial is special” in your time studying GIS. Spatial data is the foundation of Geographic Information Science, it is what distinguishes GIS from the broader field of data science. This was succinctly summarized by Waldo Tobler in The First Law of Geography:
+- <em>“Everything is related to everything else, but near things are more related than distant things.”</em></p>
+<p>This might seem obvious: people interact more if they live in the same city, orca pods in different areas develop different dialects, A hemlock on Vancouver Island are more related to its neighbors than to a hemlock in the New Brunswick. Generally, near things are more related to one another, but it <em>does not guarantee similarity</em>. Downtown Vancouver averages 40 cm of snow/year, but the ski resort on Grouse Mountain 15 km north gets over 9 m. These locations are impacted by the same storm systems, but the 1200 m elevation difference causes vastly different quantities and different types of precipitation.</p>
+<p>The measure of similarity between objects across space called <strong>spatial autocorrelation</strong>. Spatial autocorrelation allows us to make some a key assumptions when representing spatial data. We don’t have to measure a phenomena everywhere in order to represent it adequately. We only need to measure it at specific locations or over regular intervals. If point A is in dense forest, it is likely point B 10 m away is also in a dense forest. We don’t have to get the location of every tree in the forest. Instead, we can look at the average presence of trees over a larger area.</p>
+<div class="figure">
+<img src="images/03-spatial-is-special.jpg" class="center" alt="" />
+<p class="caption">Visualization of Tobler’s First Law. [8]</p>
+</div>
+</div>
+<div id="spatial-data-models" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Spatial Data Models</h2>
+<p>As discussed in the previous chapter, spatial data is three-dimensional, though we usually project it into two-dimensions for simplicity. Because of the unique transformations that must be applied to spatial data, it must be treated and represented differently than the non-spatial data that describe <em>what</em> is happening and <em>when</em>. We can’t simply put all of our data into a spreadsheet and start analyzing it. We have to use <strong>Spatial Data Models</strong> to organize our data and link our spatial and non-spatial data. Spatial data models store geographic data in a systematic way so that we can effectively display, query, edit, and analyze our data within a GIS.</p>
+<p>There are two main types of spatial data models: the <strong>Raster</strong> and <strong>Vector</strong> models. The raster data model represents spatial data as grid of cells, and each cell has one non-spatial attribute associated with it. The vector data model represents spatial data as either points, lines, or polygons that are each linked to one or more non-spatial attributes. These two models represent the world in fundamentally different ways. One is not inherently better than the other, but they are better suited for different circumstances. The choice of which model to use is often dictated by three main factors:</p>
+<ol style="list-style-type: decimal">
+<li>The type of phenomena we are trying to represent.</li>
+<li>The scale at which we plan to analyze our data.</li>
+<li>How we plan to use the data.</li>
+</ol>
+<div class="figure">
+<img src="images/03-vector-v-raster.jpg" class="center" alt="" />
+<p class="caption">Representing space in the raster model vs. the vector model [8]</p>
+</div>
+<div id="raster-data-model" class="section level3" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Raster Data Model</h3>
+<p>The raster data model represents a phenomena across space as a gridded set of cell (or pixels). The cell size determines the <strong>Resolution</strong> of the raster image, that is the smallest feature we can resolve with the raster. A 10 m resolution raster has cells that are 10 x 10 m (100 m2), a 2 m resolution has cells that are 2 x 2 m (4 m2). Along with the cell size, the number of rows and columns dictates the bounds (or extent) of a raster image. A raster with a 2 m cell size, 15 rows, and 10 columns, will cover an area of 30 m x 20 m (600 m2). Because of the full coverage within their bounds, raster data models are very well suited for representing <em>continuous phenomena</em> where cell values correspond to measured (or estimated) value at specific location. In GIS, rasters are commonly encountered as: satellite and drone imagery, elevation models, climate data, model outputs, and scanned maps.</p>
+<div class="figure">
+<img src="images/03-raster-example.png" class="center" alt="" />
+<p class="caption">I think this one is pretty good, I use it in my lecture notes. [8]</p>
+</div>
+<p>The value of a pixel can be quantitative (e.g. elevation) or qualitative (e.g. land use). Each pixel/cell can only have a single value associated with it. Multiple bands can be combined to store or more information, as is done with a RGB color photograph. Algebraic expressions can also be performed quickly and efficiently with raster layers a inputs. This is known as raster overlay, and is one of the key advantages to raster data. If layer A = Average July Temperature and layer B = Average January Temperature, then A – B will give us the Average Temperature Range across the rasters domain.</p>
+<div class="figure">
+<img src="images/03-raster-overlay.png" class="center" alt="" />
+<p class="caption">Raster math illustration</p>
+</div>
+<p>Rasters data relies on Spatial Autocorrelation and The First Law of Geography, the model assumes that <em>all areas</em> within a given cell are equally represented by the cell value. Depending on the resolution of the raster and the scale of the task at hand, this may or may not be an effective assumption. If you are trying to represent the coastline of Nova Scotia, 100 m or even 1 km resolution cells will likely suffice (see figure). However, 10 km cells severely degrade the quality of the representation. At a 100 km cell size, the province is indistinguishable.</p>
+<div class="figure">
+<img src="images/03-raster-resolution.png" class="center" alt="" />
+<p class="caption">Raster Resolution</p>
+</div>
+<div id="file-types" class="section level4" number="2.4.1.1">
+<h4><span class="header-section-number">2.4.1.1</span> File Types</h4>
+<p>Raster data can come in many different formats. One of the most common/functional is the GeoTIFF format which has the extension .tif. A .tif file stores metadata or attributes about the file as embedded tif tags. For instance, your camera might store a tag that describes the make and model of the camera or the date the photo was taken when it saves a .tif. A GeoTIFF is a standard .tif image format with additional spatial (georeferencing) information embedded in the file as tags. These tags should include the following raster metadata:
+* Extent
+* Resolution
+* Coordinate Reference System (CRS) - we will introduce this concept in a later episode
+* Values that represent missing data (NoDataValue) - we will introduce this concept in a later lesson.</p>
+<p>^ Adapted from [4]</p>
+<p>Other file types you will likely encounter include:
+* 1) IMG - A proprietary image format commonly used by ESRI products
+* 2) JPEG2000 - A geospatial version of the common .jpg image type
+* 3) ASCII - An older human readable format (simple text file) with slower performance than the types listed above.</p>
+</div>
+</div>
+<div id="vector-data" class="section level3" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> Vector Data</h3>
+<p>The vector data model is much more well suited to represent discrete phenomena than the raster data model. A vector feature is a representation of a discrete object as a set of x,y coordinate pairs (points) linked to set of descriptive attribute about that object. A vector feature’s coordinates can consist of just one x,y pair to form a single point feature, or multiple points which can be connected to form lines or polygons (see figure). The non-spatial attribute data is typically stored in a <strong>Tabular</strong> format separate from the spatial data, and it is linked using an index. One of the key advantages of the vector model is the ability to store and retrieve many attributes them quickly.</p>
+<p><strong>Points</strong> are “zero-dimensional,” they have no length, or width. A point feature is just an individual 𝒙,𝒚 coordinate pair representing a precise location, that has some linked attribute information. Points are great for representing a variety of objects, depending on the scale. Fire hydrants, light poles, and trees are suitable to be represented as points in almost any application. If you are making a map of mines in British Columbia, or cities across Canada, it’s probably acceptable to just display them as points.</p>
+<p><strong>Lines</strong> are one-dimensional, they have length, but no width and thus no area. A line consists of two or more points. Every line must have start point and an end point, but they may also have any number of middle points, called vertices. A vertex is just any point where two or more lines meet. Lines are also great for representing a variety of objects, depending on the scale. Hiking trails, flight paths, coastlines, and power lines are suitable to be represented as lines in almost most applications. When making smaller scale maps, its often sufficient to represent rivers as lines, though at large scales we might elect to use a polygon.</p>
+<p><strong>Polygons</strong> are two-dimensional, they have both a length and width and therefore we can also calculate their area. All polygons consist of a set of at three or more points (vertices) connected by line segments called “edges” that connect to form an enclosed shape. All polygons form an enclosed shape, but some can also have“holes” (think doughnuts!), these holes are sometimes called interior rings. Each interior ring is a separate set vertices and edges that is wholly contained within the polygon and no two interior rings can overlap. Polygons are useful for representing many different objects depending: political boundaries boundaries, Köppen climate zones, lakes, continents, etc. At large scales they can represent things like buildings which we might choose to represent as points at smaller scales.</p>
+<div class="figure">
+<img src="images/03-vector-model.png" class="center" alt="" />
+<p class="caption">Vector objects (points, lines, or polygons) are stored along with any number of attribute. Point, line, and polygon data are typically stored in separate files. Each object in the map view is labeled with it’s index. This value corresponds to the row in the attribute table and is useful for locating the attributes that correspond to the object.</p>
+</div>
+<p>Sometimes, a discrete object has multiple parts, that are spatially separated. In these circumstances, the vector model allows for multi-polygon, multi-line, or multi-point objects. A good example of when a multi-polygon would be useful is the StatsCanada provincial boundary file (see figure). Roads sometimes need to be stored as multi-lines as well, for example Highway 1 crosses the Georgia Straight from Vancouver to Nanaimo. If we want the to represent the entire Highway as one object, we need to use a multi-line.</p>
+<div class="figure">
+<img src="images/03-multi-polygon.png" class="center" alt="" />
+<p class="caption">Nunavut is composed of many different islands. We don’t need to represent every island as a separate object if we only want to</p>
+</div>
+<p>Vector data also has a <strong>Resolution</strong> although it has a somewhat different definition in the context of the vector model.</p>
+<div class="figure">
+<img src="images/03-vector-resolution.png" class="center" alt="" />
+<p class="caption">Vector resolution is defined a bit differently</p>
+</div>
+<div id="file-types-1" class="section level4" number="2.4.2.1">
+<h4><span class="header-section-number">2.4.2.1</span> File Types</h4>
+<p>–From [4] – Will adapt/adjust later</p>
+<p>Like raster data, vector data can also come in many different formats. For this workshop, we will use the Shapefile format which has the extension .shp. A .shp file stores the geographic coordinates of each vertice in the vector, as well as metadata including:</p>
+<pre><code>Extent - the spatial extent of the shapefile (i.e. geographic area that the shapefile covers). The spatial extent for a shapefile represents the combined extent for all spatial objects in the shapefile.
+Object type - whether the shapefile includes points, lines, or polygons.
+Coordinate reference system (CRS)
+Other attributes - for example, a line shapefile that contains the locations of streams, might contain the name of each stream.</code></pre>
+<p>Because the structure of points, lines, and polygons are different, each individual shapefile can only contain one vector type (all points, all lines or all polygons). You will not find a mixture of point, line and polygon objects in a single shapefile.</p>
+<p><strong>Simple text files</strong> are human readable file formats (.txt, .csv) that are suitable for storing point and attribute data. You will often encounter .txt or .csv files when working with weather data for instance (see Table). Coordinates (typically latitude and longitude) are stored in a text files along with the other attributes. We can bring this type of file into a GIS, but we need to convert the data to point features before we can display it.</p>
+</div>
+<div id="canadian-weather-station-file" class="section level4" number="2.4.2.2">
+<h4><span class="header-section-number">2.4.2.2</span> Canadian Weather Station File</h4>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="15%" />
+<col width="9%" />
+<col width="25%" />
+<col width="26%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Province</th>
+<th align="right">Climate ID</th>
+<th align="right">Latitude (Decimal Degrees)</th>
+<th align="right">Longitude (Decimal Degrees)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ACTIVE PASS</td>
+<td>BRITISH COLUMBIA</td>
+<td align="right">1010066</td>
+<td align="right">48.87</td>
+<td align="right">-123.28</td>
+</tr>
+<tr class="even">
+<td>ALBERT HEAD</td>
+<td>BRITISH COLUMBIA</td>
+<td align="right">1010235</td>
+<td align="right">48.40</td>
+<td align="right">-123.48</td>
+</tr>
+<tr class="odd">
+<td>BAMBERTON OCEAN CEMENT</td>
+<td>BRITISH COLUMBIA</td>
+<td align="right">1010595</td>
+<td align="right">48.58</td>
+<td align="right">-123.52</td>
+</tr>
+<tr class="even">
+<td>BEAR CREEK</td>
+<td>BRITISH COLUMBIA</td>
+<td align="right">1010720</td>
+<td align="right">48.50</td>
+<td align="right">-124.00</td>
+</tr>
+<tr class="odd">
+<td>BEAVER LAKE</td>
+<td>BRITISH COLUMBIA</td>
+<td align="right">1010774</td>
+<td align="right">48.50</td>
+<td align="right">-123.35</td>
+</tr>
+<tr class="even">
+<td>BECHER BAY</td>
+<td>BRITISH COLUMBIA</td>
+<td align="right">1010780</td>
+<td align="right">48.33</td>
+<td align="right">-123.63</td>
+</tr>
+<tr class="odd">
+<td>BRENTWOOD BAY 2</td>
+<td>BRITISH COLUMBIA</td>
+<td align="right">1010960</td>
+<td align="right">48.60</td>
+<td align="right">-123.47</td>
+</tr>
+<tr class="even">
+<td>BRENTWOOD CLARKE ROAD</td>
+<td>BRITISH COLUMBIA</td>
+<td align="right">1010961</td>
+<td align="right">48.57</td>
+<td align="right">-123.45</td>
+</tr>
+<tr class="odd">
+<td>BRENTWOOD W SAANICH RD</td>
+<td>BRITISH COLUMBIA</td>
+<td align="right">1010965</td>
+<td align="right">48.57</td>
+<td align="right">-123.43</td>
+</tr>
+<tr class="even">
+<td>CENTRAL SAANICH VEYANESS</td>
+<td>BRITISH COLUMBIA</td>
+<td align="right">1011467</td>
+<td align="right">48.58</td>
+<td align="right">-123.42</td>
+</tr>
+</tbody>
+</table>
+<p><strong>GeoJSON</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="types-of-data.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb2-2"><a href="types-of-data.html#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;FeatureCollection&quot;</span><span class="fu">,</span></span>
+<span id="cb2-3"><a href="types-of-data.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;features&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb2-4"><a href="types-of-data.html#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb2-5"><a href="types-of-data.html#cb2-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;Feature&quot;</span><span class="fu">,</span></span>
+<span id="cb2-6"><a href="types-of-data.html#cb2-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;geometry&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-7"><a href="types-of-data.html#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;Polygon&quot;</span><span class="fu">,</span></span>
+<span id="cb2-8"><a href="types-of-data.html#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;coordinates&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb2-9"><a href="types-of-data.html#cb2-9" aria-hidden="true" tabindex="-1"></a>          <span class="ot">[</span></span>
+<span id="cb2-10"><a href="types-of-data.html#cb2-10" aria-hidden="true" tabindex="-1"></a>            <span class="ot">[</span><span class="fl">100.0</span><span class="ot">,</span> <span class="fl">0.0</span><span class="ot">],</span> <span class="ot">[</span><span class="fl">101.0</span><span class="ot">,</span> <span class="fl">0.0</span><span class="ot">],</span> <span class="ot">[</span><span class="fl">101.0</span><span class="ot">,</span> <span class="fl">1.0</span><span class="ot">],</span></span>
+<span id="cb2-11"><a href="types-of-data.html#cb2-11" aria-hidden="true" tabindex="-1"></a>            <span class="ot">[</span><span class="fl">100.0</span><span class="ot">,</span> <span class="fl">1.0</span><span class="ot">],</span> <span class="ot">[</span><span class="fl">100.0</span><span class="ot">,</span> <span class="fl">0.0</span><span class="ot">]</span></span>
+<span id="cb2-12"><a href="types-of-data.html#cb2-12" aria-hidden="true" tabindex="-1"></a>          <span class="ot">]</span></span>
+<span id="cb2-13"><a href="types-of-data.html#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="ot">]</span></span>
+<span id="cb2-14"><a href="types-of-data.html#cb2-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">},</span></span>
+<span id="cb2-15"><a href="types-of-data.html#cb2-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;properties&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-16"><a href="types-of-data.html#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;prop0&quot;</span><span class="fu">:</span> <span class="st">&quot;value0&quot;</span><span class="fu">,</span></span>
+<span id="cb2-17"><a href="types-of-data.html#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;prop1&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;this&quot;</span><span class="fu">:</span> <span class="st">&quot;that&quot;</span> <span class="fu">}</span></span>
+<span id="cb2-18"><a href="types-of-data.html#cb2-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">}</span></span>
+<span id="cb2-19"><a href="types-of-data.html#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb2-20"><a href="types-of-data.html#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb2-21"><a href="types-of-data.html#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="choice-of-data-model" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Choice of Data Model</h2>
+<p>Vector data has some important advantages:</p>
+<pre><code>The geometry itself contains information about what the dataset creator thought was important
+The geometry structures hold information in themselves - why choose point over polygon, for instance?
+Each geometry feature can carry multiple attributes instead of just one, e.g. a database of cities can have attributes for name, country, population, etc
+Data storage can be very efficient compared to rasters</code></pre>
+<p>The downsides of vector data include:</p>
+<pre><code>potential loss of detail compared to raster
+potential bias in datasets - what didn’t get recorded?
+Calculations involving multiple vector layers need to do math on the geometry as well as the attributes, so can be slow compared to raster math.</code></pre>
+<p>Vector datasets are in use in many industries besides geospatial fields. For instance, computer graphics are largely vector-based, although the data structures in use tend to join points using arcs and complex curves rather than straight lines. Computer-aided design (CAD) is also vector- based. The difference is that geospatial datasets are accompanied by information tying their features to real-world locations.</p>
+<div id="case-study-1" class="section level4 unnumbered">
+<h4>Case Study</h4>
+<p>:::</p>
+</div>
+<div id="box-text" class="section level4 unnumbered">
+<h4>Police Involved Deaths in Canada</h4>
+<p id="box-text">
+I’ll flush this out in more depth later when I can dedicate some time to working on the actual project.Here is a <a href="https://github.com/PoliceInvolvedDeathsInCanada">link</a> to the github org where I’ll be hosting the data.
+</p>
+<p id="box-text">
+<p>Data types used:
+1) Nominal (Race)
+2) Ratio (Counts &amp; PKR)
+3) Ordinal (Ranking)
+4) Interval (PKDI)</p>
+Methods Discussed:
+1) Normalization
+2) Classification
+</p>
+<div class="figure">
+<img src="images/03-police-violence.png" class="center" alt="" />
+<p class="caption">Rough flowchart draft</p>
+</div>
+<iframe width="100%" height="800px" src="images/03-PoliceViolenceIncidents_BC.html" frameBorder="0">
+<p>
+Your browser does not support iframes
+</p>
+</iframe>
+<p>::::</p>
+</div>
+<div class="box-content your-turn-content">
+<div id="your-turn-2" class="section level4 unnumbered box-title your-turn-top">
+<h4>Your turn!</h4>
+</div>
+<p id="box-text">
+I’ll do some exercise building on the case study.
+</p>
+</div>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.</p>
+<div class="box-content call-out-content">
+<div id="call-out-1" class="section level4 unnumbered box-title call-out-top">
+<h4>Call out</h4>
+</div>
+<p id="box-text">
+This is a call out. Put some important concept or fact in here.
+</p>
+</div>
+</div>
+<div id="summary-2" class="section level2" number="2.6">
+<h2><span class="header-section-number">2.6</span> Summary</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.</p>
+<div id="reflection-questions-1" class="section level3 unnumbered">
+<h3>Reflection Questions</h3>
+<ol style="list-style-type: decimal">
+<li>Explain ipsum lorem.</li>
+<li>Define ipsum lorem.</li>
+<li>What is the role of ispum lorem?</li>
+<li>How does ipsum lorem work?</li>
+</ol>
+</div>
+<div id="practice-questions-1" class="section level3 unnumbered">
+<h3>Practice Questions</h3>
+<ol start="2" style="list-style-type: decimal">
+<li>Given ipsum, solve for lorem.</li>
+<li>Draw ipsum lorem.</li>
+</ol>
+</div>
+</div>
+<div id="recommended-readings-1" class="section level2 unnumbered">
+<h2>Recommended Readings</h2>
+<p>Ensure all inline citations are properly referenced here.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chapter-template.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-integration.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

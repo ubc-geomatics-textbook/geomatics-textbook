@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Chapter Title | An Open Geomatics Textbook</title>
+  <meta name="description" content="Advancing teaching and learning in geomatics at UBC" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Chapter Title | An Open Geomatics Textbook" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/ubc-geomatics-textbook/book/" />
+  
+  <meta property="og:description" content="Advancing teaching and learning in geomatics at UBC" />
+  <meta name="github-repo" content="ubc-geomatics-textbook/book" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Chapter Title | An Open Geomatics Textbook" />
+  
+  <meta name="twitter:description" content="Advancing teaching and learning in geomatics at UBC" />
+  
+
+<meta name="author" content="UBC" />
+
+
+<meta name="date" content="2021-08-15" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="types-of-data.html"/>
+
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">An Open Geomatics Textbook</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#contacts"><i class="fa fa-check"></i><b>0.1</b> Contacts</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#project-wiki"><i class="fa fa-check"></i><b>0.2</b> Project Wiki</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#style-guide"><i class="fa fa-check"></i><b>0.3</b> Style Guide</a>
+<ul>
+<li class="chapter" data-level="0.3.1" data-path="index.html"><a href="index.html#audience"><i class="fa fa-check"></i><b>0.3.1</b> Audience</a></li>
+<li class="chapter" data-level="0.3.2" data-path="index.html"><a href="index.html#general-style"><i class="fa fa-check"></i><b>0.3.2</b> General Style</a></li>
+<li class="chapter" data-level="0.3.3" data-path="index.html"><a href="index.html#learning-objectives"><i class="fa fa-check"></i><b>0.3.3</b> Learning Objectives</a></li>
+<li class="chapter" data-level="0.3.4" data-path="index.html"><a href="index.html#summary"><i class="fa fa-check"></i><b>0.3.4</b> Summary</a></li>
+<li class="chapter" data-level="0.3.5" data-path="index.html"><a href="index.html#key-terms"><i class="fa fa-check"></i><b>0.3.5</b> Key Terms</a></li>
+<li class="chapter" data-level="0.3.6" data-path="index.html"><a href="index.html#headings-and-labels"><i class="fa fa-check"></i><b>0.3.6</b> Headings and Labels</a></li>
+<li class="chapter" data-level="0.3.7" data-path="index.html"><a href="index.html#formulae"><i class="fa fa-check"></i><b>0.3.7</b> Formulae</a></li>
+<li class="chapter" data-level="0.3.8" data-path="index.html"><a href="index.html#units"><i class="fa fa-check"></i><b>0.3.8</b> Units</a></li>
+<li class="chapter" data-level="0.3.9" data-path="index.html"><a href="index.html#numbers"><i class="fa fa-check"></i><b>0.3.9</b> Numbers</a></li>
+<li class="chapter" data-level="0.3.10" data-path="index.html"><a href="index.html#dates-and-times"><i class="fa fa-check"></i><b>0.3.10</b> Dates and times</a></li>
+<li class="chapter" data-level="0.3.11" data-path="index.html"><a href="index.html#tables"><i class="fa fa-check"></i><b>0.3.11</b> Tables</a></li>
+<li class="chapter" data-level="0.3.12" data-path="index.html"><a href="index.html#code-blocks"><i class="fa fa-check"></i><b>0.3.12</b> Code blocks</a></li>
+<li class="chapter" data-level="0.3.13" data-path="index.html"><a href="index.html#abbreviations"><i class="fa fa-check"></i><b>0.3.13</b> Abbreviations</a></li>
+<li class="chapter" data-level="0.3.14" data-path="index.html"><a href="index.html#initialisms"><i class="fa fa-check"></i><b>0.3.14</b> Initialisms</a></li>
+<li class="chapter" data-level="0.3.15" data-path="index.html"><a href="index.html#acronyms"><i class="fa fa-check"></i><b>0.3.15</b> Acronyms</a></li>
+<li class="chapter" data-level="0.3.16" data-path="index.html"><a href="index.html#punctuation"><i class="fa fa-check"></i><b>0.3.16</b> Punctuation</a></li>
+<li class="chapter" data-level="0.3.17" data-path="index.html"><a href="index.html#citations"><i class="fa fa-check"></i><b>0.3.17</b> Citations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="chapter-template.html"><a href="chapter-template.html"><i class="fa fa-check"></i><b>1</b> Chapter Title</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#key-terms-1"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="1.1" data-path="chapter-template.html"><a href="chapter-template.html#first-section-header"><i class="fa fa-check"></i><b>1.1</b> First Section Header</a></li>
+<li class="chapter" data-level="1.2" data-path="chapter-template.html"><a href="chapter-template.html#second-section-header"><i class="fa fa-check"></i><b>1.2</b> Second Section Header</a></li>
+<li class="chapter" data-level="1.3" data-path="chapter-template.html"><a href="chapter-template.html#third-section-header"><i class="fa fa-check"></i><b>1.3</b> Third Section Header</a></li>
+<li class="chapter" data-level="1.4" data-path="chapter-template.html"><a href="chapter-template.html#summary-1"><i class="fa fa-check"></i><b>1.4</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#reflection-questions"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#practice-questions"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#recommended-readings"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="types-of-data.html"><a href="types-of-data.html"><i class="fa fa-check"></i><b>2</b> Types of Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#key-terms-2"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="2.1" data-path="types-of-data.html"><a href="types-of-data.html#types-of-phenomena"><i class="fa fa-check"></i><b>2.1</b> Types of Phenomena</a></li>
+<li class="chapter" data-level="2.2" data-path="types-of-data.html"><a href="types-of-data.html#types-of-data-1"><i class="fa fa-check"></i><b>2.2</b> Types of Data</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="types-of-data.html"><a href="types-of-data.html#qualitative-data"><i class="fa fa-check"></i><b>2.2.1</b> Qualitative Data</a></li>
+<li class="chapter" data-level="2.2.2" data-path="types-of-data.html"><a href="types-of-data.html#quantitative-data"><i class="fa fa-check"></i><b>2.2.2</b> Quantitative Data</a></li>
+<li class="chapter" data-level="2.2.3" data-path="types-of-data.html"><a href="types-of-data.html#summary-of-data-types"><i class="fa fa-check"></i><b>2.2.3</b> Summary of Data Types</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="types-of-data.html"><a href="types-of-data.html#spatial-is-special"><i class="fa fa-check"></i><b>2.3</b> Spatial is Special</a></li>
+<li class="chapter" data-level="2.4" data-path="types-of-data.html"><a href="types-of-data.html#spatial-data-models"><i class="fa fa-check"></i><b>2.4</b> Spatial Data Models</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="types-of-data.html"><a href="types-of-data.html#raster-data-model"><i class="fa fa-check"></i><b>2.4.1</b> Raster Data Model</a></li>
+<li class="chapter" data-level="2.4.2" data-path="types-of-data.html"><a href="types-of-data.html#vector-data"><i class="fa fa-check"></i><b>2.4.2</b> Vector Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="types-of-data.html"><a href="types-of-data.html#choice-of-data-model"><i class="fa fa-check"></i><b>2.5</b> Choice of Data Model</a></li>
+<li class="chapter" data-level="2.6" data-path="types-of-data.html"><a href="types-of-data.html#summary-2"><i class="fa fa-check"></i><b>2.6</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#reflection-questions-1"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#practice-questions-1"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#recommended-readings-1"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-integration.html"><a href="data-integration.html"><i class="fa fa-check"></i><b>3</b> Chapter Title</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-integration.html"><a href="data-integration.html#key-terms-3"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="3.1" data-path="data-integration.html"><a href="data-integration.html#problems-with-data-integration"><i class="fa fa-check"></i><b>3.1</b> Problems with data integration</a></li>
+<li class="chapter" data-level="3.2" data-path="data-integration.html"><a href="data-integration.html#framing-the-problem"><i class="fa fa-check"></i><b>3.2</b> Framing the problem</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="data-integration.html"><a href="data-integration.html#about-the-data"><i class="fa fa-check"></i><b>3.2.1</b> About the data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data-integration.html"><a href="data-integration.html#data-resolution"><i class="fa fa-check"></i><b>3.3</b> Data Resolution</a></li>
+<li class="chapter" data-level="3.4" data-path="data-integration.html"><a href="data-integration.html#integrating-vector-and-raster-data"><i class="fa fa-check"></i><b>3.4</b> Integrating vector and raster data</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="data-integration.html"><a href="data-integration.html#rasterization"><i class="fa fa-check"></i><b>3.4.1</b> Rasterization</a></li>
+<li class="chapter" data-level="3.4.2" data-path="data-integration.html"><a href="data-integration.html#vectorization"><i class="fa fa-check"></i><b>3.4.2</b> Vectorization</a></li>
+<li class="chapter" data-level="3.4.3" data-path="data-integration.html"><a href="data-integration.html#zonal-statistics"><i class="fa fa-check"></i><b>3.4.3</b> Zonal Statistics</a></li>
+<li class="chapter" data-level="3.4.4" data-path="data-integration.html"><a href="data-integration.html#smoothing"><i class="fa fa-check"></i><b>3.4.4</b> Smoothing</a></li>
+<li class="chapter" data-level="3.4.5" data-path="data-integration.html"><a href="data-integration.html#simplifying"><i class="fa fa-check"></i><b>3.4.5</b> Simplifying</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="data-integration.html"><a href="data-integration.html#spatial-data-errors"><i class="fa fa-check"></i><b>3.5</b> Spatial data errors</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="data-integration.html"><a href="data-integration.html#accuracy-vs.-precision"><i class="fa fa-check"></i><b>3.5.1</b> Accuracy vs. Precision</a></li>
+<li class="chapter" data-level="3.5.2" data-path="data-integration.html"><a href="data-integration.html#vagueness-and-ambiguity"><i class="fa fa-check"></i><b>3.5.2</b> Vagueness and Ambiguity</a></li>
+<li class="chapter" data-level="3.5.3" data-path="data-integration.html"><a href="data-integration.html#quantifying-spatial-errors-rmse-euclids-distance"><i class="fa fa-check"></i><b>3.5.3</b> Quantifying spatial errors RMSE, Euclid’s distance</a></li>
+<li class="chapter" data-level="3.5.4" data-path="data-integration.html"><a href="data-integration.html#logical-errors"><i class="fa fa-check"></i><b>3.5.4</b> Logical Errors</a></li>
+<li class="chapter" data-level="3.5.5" data-path="data-integration.html"><a href="data-integration.html#ecological-fallacy-atomistic-fallacy-maup-etc.-its-important-to-include-these-whether-here-or-elsewhere"><i class="fa fa-check"></i><b>3.5.5</b> Ecological Fallacy, Atomistic Fallacy, MAUP etc. Its important to include these, whether here or elsewhere?</a></li>
+<li class="chapter" data-level="3.5.6" data-path="data-integration.html"><a href="data-integration.html#other-errors"><i class="fa fa-check"></i><b>3.5.6</b> Other Errors?</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">An Open Geomatics Textbook</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-integration" class="section level1" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Chapter Title</h1>
+<p><strong>Data Integration</strong>, This chapter is about some of the more practical aspects implementing GIS in a workflow. What type of problems and pitfalls might you encounter and how do you account for them?</p>
+<p>This chapter will walk you through a number of things you will encounter when working in GIS, using an an applied example as a guide. Then you will be presented with two other case studies showing you example workflow. One will show how the police involved deaths data presented in Chapter 3 was compiled. The second will show (forest stuff - second case study - need guidance on how to include).
+(Skeeter et al. 2021 - Arctic Science).</p>
+<div class="box-content learning-objectives-content">
+<div id="learning-objectives-3" class="section level4 unnumbered box-title learning-objectives-top">
+<h4>Learning Objectives</h4>
+</div>
+<ol style="list-style-type: decimal">
+<li>Objective one</li>
+<li>Objective two</li>
+<li>Objective three</li>
+</ol>
+</div>
+<div id="key-terms-3" class="section level3 unnumbered">
+<h3>Key Terms</h3>
+<p>Data, Integration, Other Stuff</p>
+</div>
+<div id="problems-with-data-integration" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Problems with data integration</h2>
+<p>Most GIS projects require us to analyze multiple data layers, sometimes from disparate sources to answer our research question. When working with different layers from different sources you are likely to encounter multiple incongruousness. What do you do if some of your layers are in vector format and some in raster? What if one of your datasets is 10 years older than another? How do you handle data that were collected at different resolutions or scales stored in different file types? These are questions that pop up every day when working in GIS.</p>
+<p>We will discuss what to do when you encounter different:
+1) Data types, sources, formats<br />
+2) Data resolutions
+3) Datum, extents, scales
+4) Time periods, collection dates</p>
+</div>
+<div id="framing-the-problem" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Framing the problem</h2>
+<p>For millennia, wetlands in the Canadian Arctic have been accumulating large stockpiles of Carbon. Permafrost (frozen ground) and short growing seasons in these landscapes cause dead organic matter freezes into the soil before it can fully decompose. Climate change in the Arctic is causing permafrost to degrade, at rapid rates in some regions. This will speed up decomposition of these large Carbon stockpiles and could potential result in a large pulse of greenhouse gasses (Carbon Dioxide and Methane) being released into the atmosphere. Creating a positive feedback mechanism that further exacerbates warming. At the same time, climate change is causing trees and shrubs to encroach on the tundra and leading to longer growing seasons. Increased plant growth sequesters Carbon Dioxide and serves as a negative feedback mechanism (“Remediating” climate change).</p>
+<p>[Find/make and insert diagram]</p>
+<p>Monitoring Carbon balances of Arctic ecosystems is especially difficult and expensive due to the harsh conditions and inaccessible nature of most locations. Because of this, very little is known about how these systems are and will continue responding to climate change relative to other biomes. Figuring out the Carbon balance of these can help fill a “big knowledge gap” and improve the accuracy of global climate models.</p>
+<div id="about-the-data" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> About the data</h3>
+<p>The MacKenzie Delta (xx km2) is the second largest Arctic Delta in the world. It is a patchwork of river channels, lakes, boreal forests, and Carbon rich wetlands. It is very much understudied from the perspective of climate sciences. To date, only one ground based observation of landscape level Carbon exchange has been made anywhere in the Mackenzie Delta. In 2017, an intensive study was conducted using a method known as Eddy Covariance to measure the uptake/emission of Carbon Dioxide and Methane across a wetland (xx m2) in real-time (30-minute intervals) at a site in the Delta known as Fish Island (Skeeter et al. 2021).</p>
+<div class="figure">
+<img src="images/16-ec-site.JPG" class="center" alt="" />
+<p class="caption">The Eddy Covariance system at Fish Island J. Skeeter (2017)</p>
+</div>
+<div class="figure">
+<img src="images/16-fig1.jpg" class="center" alt="" />
+<p class="caption">Maybe insert Web-map showing site instead</p>
+</div>
+<p>In the site was a strong sink for Carbon during the growing season in 2017. But, Arctic climates are characterized by extreme inter-annual variation so one year alone cannot be used determine the average carbon balance. Unfortunately, due to funding issues, what was supposed to be a multi-year research campaign, was shutdown after just one season.</p>
+<p>Regardless …</p>
+<p>How can we use this one year of data from one point location to get a better idea of the Carbon balances in the Arctic? We can pull in data from other sources, do a bit of fancy modelling, and a few “back of the envelope” calculations to come up with some ballpark guesses.</p>
+<!-- 
+1) Data types, sources, formats   
+2) Data resolutions
+3) Datum, extents, scales
+4) Time periods, collection dates -->
+</div>
+</div>
+<div id="data-resolution" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Data Resolution</h2>
+<p>What do you do if your data are collected at different resolutions?</p>
+</div>
+<div id="integrating-vector-and-raster-data" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Integrating vector and raster data</h2>
+<p>How can you work with both raster and vector data and when might you want to switch between data types?</p>
+<p>Evey Eddy Covariance observation has a “footprint” or upwind source area for the Carbon. It is calculated using some complicated calculus that is well beyond the scope of this class, but</p>
+<div id="rasterization" class="section level3" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Rasterization</h3>
+<p>Say you have a vector layer of landscape classification scheme and need to intersect it with a source area raster</p>
+</div>
+<div id="vectorization" class="section level3" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Vectorization</h3>
+<p>Say you have a model that outputs a raster layer representing an upwind source area for an Eddy Covariance observation and you want to display it in a more human friendly format.</p>
+</div>
+<div id="zonal-statistics" class="section level3" number="3.4.3">
+<h3><span class="header-section-number">3.4.3</span> Zonal Statistics</h3>
+<p>Say you have a raster layer (e.g. maximum annual NDVI) and you want to describe it over a certain region.</p>
+</div>
+<div id="smoothing" class="section level3" number="3.4.4">
+<h3><span class="header-section-number">3.4.4</span> Smoothing</h3>
+</div>
+<div id="simplifying" class="section level3" number="3.4.5">
+<h3><span class="header-section-number">3.4.5</span> Simplifying</h3>
+</div>
+</div>
+<div id="spatial-data-errors" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Spatial data errors</h2>
+<div id="accuracy-vs.-precision" class="section level3" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Accuracy vs. Precision</h3>
+<p>Measurement Errors
+Accuracy:
+The degree to which a set of measurements correctly matches the real world values. How close are we to the real value?
+If there is a consistent (systematic) offset from that real world value, our measurements are inaccurate. They have a bias.
+Precision:
+The degree of agreement between multiple measurements of the same real world phenomena. How repeatable is a measurement?
+If you take five measurements of the same feature, how likely are they to be similar? Lack of precision can be attributed to random errors.</p>
+<div class="figure">
+<img src="images/16-accuracy-vs-precision.png" class="center" alt="" />
+<p class="caption">Source</p>
+</div>
+<div class="figure">
+<img src="images/16-accuracy-vs-precision2.png" class="center" alt="" />
+<p class="caption">Source</p>
+</div>
+</div>
+<div id="vagueness-and-ambiguity" class="section level3" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> Vagueness and Ambiguity</h3>
+<p>Vagueness - Victoria … does it mean Victoria BC vs. Victoria AU</p>
+<p>Ambiguity - coastline - is it the high water line? Low water line? mean water level?</p>
+</div>
+<div id="quantifying-spatial-errors-rmse-euclids-distance" class="section level3" number="3.5.3">
+<h3><span class="header-section-number">3.5.3</span> Quantifying spatial errors RMSE, Euclid’s distance</h3>
+</div>
+<div id="logical-errors" class="section level3" number="3.5.4">
+<h3><span class="header-section-number">3.5.4</span> Logical Errors</h3>
+<p>Data incongruousness</p>
+</div>
+<div id="ecological-fallacy-atomistic-fallacy-maup-etc.-its-important-to-include-these-whether-here-or-elsewhere" class="section level3" number="3.5.5">
+<h3><span class="header-section-number">3.5.5</span> Ecological Fallacy, Atomistic Fallacy, MAUP etc. Its important to include these, whether here or elsewhere?</h3>
+</div>
+<div id="other-errors" class="section level3" number="3.5.6">
+<h3><span class="header-section-number">3.5.6</span> Other Errors?</h3>
+<ul>
+<li>source data errors, out of date data, data entry &amp; digitization?</li>
+</ul>
+<p>::::</p>
+<div class="box-content case-study-content">
+<div id="case-study-2" class="section level4 unnumbered box-title case-study-top">
+<h4>Case Study</h4>
+</div>
+<div id="box-text" class="section level4 unnumbered">
+<h4>Large Scale</h4>
+<p id="box-text">
+Footprint mapping, temporal upscaling. I’ll fill in more text here later, these figs are just grabbed from my thesis chapters. The gist of it - Measured NEE in one year. Have 10 years of climate data + Reanalysis data + satellite data. Combine these data sources &amp; train a model to do a temporal upscale/sensitivity analysis to see how inter-annual climate variability impacts NEE. Then do a landscape classification with a greenest pixel NDVI image, intersecting with the flux footprint. Use that to find the representative areas to do a “back of the envelope” spatial upscaling.
+</p>
+<div class="figure">
+<img src="images/16-flux-upscaling-estiamte.png" class="center" alt="" />
+<p class="caption">Rough flowchart draft</p>
+</div>
+<div class="figure">
+<img src="images/16-fig1.jpg" class="center" alt="" />
+<p class="caption">Reference map showing the Mackenzie Delta (Currently from chapter 2, I’ll change it to a full delta NDVI map)</p>
+</div>
+<div class="figure">
+<img src="images/16-fig2.jpg" class="center" alt="" />
+<p class="caption">Landscape classification and drone imagery</p>
+</div>
+<div class="figure">
+<img src="images/16-fig3.jpg" class="center" alt="" />
+<p class="caption">Footprint NDVI profile</p>
+</div>
+<div class="figure">
+<img src="images/16-fig4.jpg" class="center" alt="" />
+<p class="caption">Climate Data</p>
+</div>
+<div class="figure">
+<img src="images/16-fig5.jpg" class="center" alt="" />
+<p class="caption">Temporally upscaled flux estimate</p>
+</div>
+<div class="figure">
+<img src="images/16-fig6.jpg" class="center" alt="" />
+<p class="caption">Landscape classification based on fig 3</p>
+</div>
+</div>
+</div>
+<p>::::</p>
+<div class="box-content case-study-content">
+<div id="case-study-3" class="section level4 unnumbered box-title case-study-top">
+<h4>Case Study</h4>
+</div>
+<div id="box-text" class="section level4 unnumbered">
+<h4>Small Scale</h4>
+<p id="box-text">
+Case Study: UBC Trees in a Changing Climate
+</p>
+<p id="box-text">
+The file structure for this case study doesn’t match the structure of the template, so I’ve left it out for now, until I can get a bit more guidance on it.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="types-of-data.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

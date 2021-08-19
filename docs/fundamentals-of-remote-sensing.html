@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Fundamentals of remote sensing | An Open Geomatics Textbook</title>
+  <meta name="description" content="Advancing teaching and learning in geomatics at UBC" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Fundamentals of remote sensing | An Open Geomatics Textbook" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/ubc-geomatics-textbook/book/" />
+  
+  <meta property="og:description" content="Advancing teaching and learning in geomatics at UBC" />
+  <meta name="github-repo" content="ubc-geomatics-textbook/book" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Fundamentals of remote sensing | An Open Geomatics Textbook" />
+  
+  <meta name="twitter:description" content="Advancing teaching and learning in geomatics at UBC" />
+  
+
+<meta name="author" content="UBC" />
+
+
+<meta name="date" content="2021-08-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="network-analysis.html"/>
+<link rel="next" href="image-processing.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">An Open Geomatics Textbook</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#contacts"><i class="fa fa-check"></i><b>0.1</b> Contacts</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#project-wiki"><i class="fa fa-check"></i><b>0.2</b> Project Wiki</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#style-guide"><i class="fa fa-check"></i><b>0.3</b> Style Guide</a>
+<ul>
+<li class="chapter" data-level="0.3.1" data-path="index.html"><a href="index.html#audience"><i class="fa fa-check"></i><b>0.3.1</b> Audience</a></li>
+<li class="chapter" data-level="0.3.2" data-path="index.html"><a href="index.html#general-style"><i class="fa fa-check"></i><b>0.3.2</b> General Style</a></li>
+<li class="chapter" data-level="0.3.3" data-path="index.html"><a href="index.html#learning-objectives"><i class="fa fa-check"></i><b>0.3.3</b> Learning Objectives</a></li>
+<li class="chapter" data-level="0.3.4" data-path="index.html"><a href="index.html#summary"><i class="fa fa-check"></i><b>0.3.4</b> Summary</a></li>
+<li class="chapter" data-level="0.3.5" data-path="index.html"><a href="index.html#key-terms"><i class="fa fa-check"></i><b>0.3.5</b> Key Terms</a></li>
+<li class="chapter" data-level="0.3.6" data-path="index.html"><a href="index.html#headings-and-labels"><i class="fa fa-check"></i><b>0.3.6</b> Headings and Labels</a></li>
+<li class="chapter" data-level="0.3.7" data-path="index.html"><a href="index.html#formulae"><i class="fa fa-check"></i><b>0.3.7</b> Formulae</a></li>
+<li class="chapter" data-level="0.3.8" data-path="index.html"><a href="index.html#units"><i class="fa fa-check"></i><b>0.3.8</b> Units</a></li>
+<li class="chapter" data-level="0.3.9" data-path="index.html"><a href="index.html#numbers"><i class="fa fa-check"></i><b>0.3.9</b> Numbers</a></li>
+<li class="chapter" data-level="0.3.10" data-path="index.html"><a href="index.html#dates-and-times"><i class="fa fa-check"></i><b>0.3.10</b> Dates and times</a></li>
+<li class="chapter" data-level="0.3.11" data-path="index.html"><a href="index.html#tables"><i class="fa fa-check"></i><b>0.3.11</b> Tables</a></li>
+<li class="chapter" data-level="0.3.12" data-path="index.html"><a href="index.html#code-blocks"><i class="fa fa-check"></i><b>0.3.12</b> Code blocks</a></li>
+<li class="chapter" data-level="0.3.13" data-path="index.html"><a href="index.html#abbreviations"><i class="fa fa-check"></i><b>0.3.13</b> Abbreviations</a></li>
+<li class="chapter" data-level="0.3.14" data-path="index.html"><a href="index.html#initialisms"><i class="fa fa-check"></i><b>0.3.14</b> Initialisms</a></li>
+<li class="chapter" data-level="0.3.15" data-path="index.html"><a href="index.html#acronyms"><i class="fa fa-check"></i><b>0.3.15</b> Acronyms</a></li>
+<li class="chapter" data-level="0.3.16" data-path="index.html"><a href="index.html#punctuation"><i class="fa fa-check"></i><b>0.3.16</b> Punctuation</a></li>
+<li class="chapter" data-level="0.3.17" data-path="index.html"><a href="index.html#citations"><i class="fa fa-check"></i><b>0.3.17</b> Citations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="mapping-data.html"><a href="mapping-data.html"><i class="fa fa-check"></i><b>1</b> Mapping Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#key-terms-1"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="1.1" data-path="mapping-data.html"><a href="mapping-data.html#introduction-to-geodesy"><i class="fa fa-check"></i><b>1.1</b> Introduction to geodesy</a></li>
+<li class="chapter" data-level="1.2" data-path="mapping-data.html"><a href="mapping-data.html#models-of-earth"><i class="fa fa-check"></i><b>1.2</b> Models of Earth</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="mapping-data.html"><a href="mapping-data.html#geodetic-vertical-datums"><i class="fa fa-check"></i><b>1.2.1</b> Geodetic vertical datums</a></li>
+<li class="chapter" data-level="1.2.2" data-path="mapping-data.html"><a href="mapping-data.html#tidal-vertical-datums"><i class="fa fa-check"></i><b>1.2.2</b> Tidal Vertical Datums</a></li>
+<li class="chapter" data-level="1.2.3" data-path="mapping-data.html"><a href="mapping-data.html#gravimetric-vertical-datums"><i class="fa fa-check"></i><b>1.2.3</b> Gravimetric Vertical Datums</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="mapping-data.html"><a href="mapping-data.html#referencing-location"><i class="fa fa-check"></i><b>1.3</b> Referencing Location</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="mapping-data.html"><a href="mapping-data.html#cartesian-coordinate-systems"><i class="fa fa-check"></i><b>1.3.1</b> Cartesian Coordinate Systems</a></li>
+<li class="chapter" data-level="1.3.2" data-path="mapping-data.html"><a href="mapping-data.html#celestial-coordinate-systems"><i class="fa fa-check"></i><b>1.3.2</b> Celestial Coordinate Systems</a></li>
+<li class="chapter" data-level="1.3.3" data-path="mapping-data.html"><a href="mapping-data.html#geographic-coordinate-systems"><i class="fa fa-check"></i><b>1.3.3</b> Geographic Coordinate Systems</a></li>
+<li class="chapter" data-level="1.3.4" data-path="mapping-data.html"><a href="mapping-data.html#projected-coordinate-systems"><i class="fa fa-check"></i><b>1.3.4</b> Projected Coordinate Systems</a></li>
+<li class="chapter" data-level="1.3.5" data-path="mapping-data.html"><a href="mapping-data.html#measuring-map-projection-distortion"><i class="fa fa-check"></i><b>1.3.5</b> Measuring map projection distortion</a></li>
+<li class="chapter" data-level="1.3.6" data-path="mapping-data.html"><a href="mapping-data.html#map-projections-for-environmental-management"><i class="fa fa-check"></i><b>1.3.6</b> Map projections for environmental management</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="mapping-data.html"><a href="mapping-data.html#summary-1"><i class="fa fa-check"></i><b>1.4</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#reflection-questions"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#practice-questions"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#recommended-readings"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="types-of-data.html"><a href="types-of-data.html"><i class="fa fa-check"></i><b>2</b> Types of Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#key-terms-2"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="2.1" data-path="types-of-data.html"><a href="types-of-data.html#types-of-phenomena"><i class="fa fa-check"></i><b>2.1</b> Types of Phenomena</a></li>
+<li class="chapter" data-level="2.2" data-path="types-of-data.html"><a href="types-of-data.html#types-of-data-1"><i class="fa fa-check"></i><b>2.2</b> Types of Data</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="types-of-data.html"><a href="types-of-data.html#qualitative-data"><i class="fa fa-check"></i><b>2.2.1</b> Qualitative Data</a></li>
+<li class="chapter" data-level="2.2.2" data-path="types-of-data.html"><a href="types-of-data.html#quantitative-data"><i class="fa fa-check"></i><b>2.2.2</b> Quantitative Data</a></li>
+<li class="chapter" data-level="2.2.3" data-path="types-of-data.html"><a href="types-of-data.html#summary-of-data-types"><i class="fa fa-check"></i><b>2.2.3</b> Summary of Data Types</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="types-of-data.html"><a href="types-of-data.html#spatial-is-special"><i class="fa fa-check"></i><b>2.3</b> Spatial is Special</a></li>
+<li class="chapter" data-level="2.4" data-path="types-of-data.html"><a href="types-of-data.html#spatial-data-models"><i class="fa fa-check"></i><b>2.4</b> Spatial Data Models</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="types-of-data.html"><a href="types-of-data.html#raster-data-model"><i class="fa fa-check"></i><b>2.4.1</b> Raster Data Model</a></li>
+<li class="chapter" data-level="2.4.2" data-path="types-of-data.html"><a href="types-of-data.html#vector-data"><i class="fa fa-check"></i><b>2.4.2</b> Vector Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="types-of-data.html"><a href="types-of-data.html#choice-of-data-model"><i class="fa fa-check"></i><b>2.5</b> Choice of Data Model</a></li>
+<li class="chapter" data-level="2.6" data-path="types-of-data.html"><a href="types-of-data.html#summary-2"><i class="fa fa-check"></i><b>2.6</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#reflection-questions-1"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#practice-questions-1"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#recommended-readings-1"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="relational-databases.html"><a href="relational-databases.html"><i class="fa fa-check"></i><b>3</b> Relational Databases</a>
+<ul>
+<li class="chapter" data-level="" data-path="relational-databases.html"><a href="relational-databases.html#key-terms-3"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="3.1" data-path="relational-databases.html"><a href="relational-databases.html#relational-database-management-systems"><i class="fa fa-check"></i><b>3.1</b> Relational database management systems</a></li>
+<li class="chapter" data-level="3.2" data-path="relational-databases.html"><a href="relational-databases.html#relational-databases-1"><i class="fa fa-check"></i><b>3.2</b> Relational databases</a></li>
+<li class="chapter" data-level="3.3" data-path="relational-databases.html"><a href="relational-databases.html#relational-algebra"><i class="fa fa-check"></i><b>3.3</b> Relational algebra</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="relational-databases.html"><a href="relational-databases.html#selection"><i class="fa fa-check"></i><b>3.3.1</b> Selection</a></li>
+<li class="chapter" data-level="3.3.2" data-path="relational-databases.html"><a href="relational-databases.html#projection"><i class="fa fa-check"></i><b>3.3.2</b> Projection</a></li>
+<li class="chapter" data-level="3.3.3" data-path="relational-databases.html"><a href="relational-databases.html#rename"><i class="fa fa-check"></i><b>3.3.3</b> Rename</a></li>
+<li class="chapter" data-level="3.3.4" data-path="relational-databases.html"><a href="relational-databases.html#set-union"><i class="fa fa-check"></i><b>3.3.4</b> Set Union</a></li>
+<li class="chapter" data-level="3.3.5" data-path="relational-databases.html"><a href="relational-databases.html#set-intersection"><i class="fa fa-check"></i><b>3.3.5</b> Set Intersection</a></li>
+<li class="chapter" data-level="3.3.6" data-path="relational-databases.html"><a href="relational-databases.html#set-difference"><i class="fa fa-check"></i><b>3.3.6</b> Set Difference</a></li>
+<li class="chapter" data-level="3.3.7" data-path="relational-databases.html"><a href="relational-databases.html#cartesian-product"><i class="fa fa-check"></i><b>3.3.7</b> Cartesian Product</a></li>
+<li class="chapter" data-level="3.3.8" data-path="relational-databases.html"><a href="relational-databases.html#set-divison"><i class="fa fa-check"></i><b>3.3.8</b> Set Divison</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="relational-databases.html"><a href="relational-databases.html#boolean-algebra"><i class="fa fa-check"></i><b>3.4</b> Boolean algebra</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="relational-databases.html"><a href="relational-databases.html#equality-operators"><i class="fa fa-check"></i><b>3.4.1</b> Equality operators</a></li>
+<li class="chapter" data-level="3.4.2" data-path="relational-databases.html"><a href="relational-databases.html#conditional-operators"><i class="fa fa-check"></i><b>3.4.2</b> Conditional operators</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="relational-databases.html"><a href="relational-databases.html#joining-relations"><i class="fa fa-check"></i><b>3.5</b> Joining relations</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="relational-databases.html"><a href="relational-databases.html#keys"><i class="fa fa-check"></i><b>3.5.1</b> Keys</a></li>
+<li class="chapter" data-level="3.5.2" data-path="relational-databases.html"><a href="relational-databases.html#natural-join"><i class="fa fa-check"></i><b>3.5.2</b> Natural Join</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="relational-databases.html"><a href="relational-databases.html#outer-join"><i class="fa fa-check"></i><b>3.6</b> Outer Join</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="relational-databases.html"><a href="relational-databases.html#right-and-left-outer-join"><i class="fa fa-check"></i><b>3.6.1</b> Right and Left Outer Join</a></li>
+<li class="chapter" data-level="3.6.2" data-path="relational-databases.html"><a href="relational-databases.html#theta-join"><i class="fa fa-check"></i><b>3.6.2</b> Theta Join</a></li>
+<li class="chapter" data-level="3.6.3" data-path="relational-databases.html"><a href="relational-databases.html#cardinality-of-joins"><i class="fa fa-check"></i><b>3.6.3</b> Cardinality of Joins</a></li>
+<li class="chapter" data-level="3.6.4" data-path="relational-databases.html"><a href="relational-databases.html#structured-query-language"><i class="fa fa-check"></i><b>3.6.4</b> Structured Query Language</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="relational-databases.html"><a href="relational-databases.html#summary-3"><i class="fa fa-check"></i><b>3.7</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="relational-databases.html"><a href="relational-databases.html#reflection-questions-2"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="relational-databases.html"><a href="relational-databases.html#practice-questions-2"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="relational-databases.html"><a href="relational-databases.html#recommended-readings-2"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="network-analysis.html"><a href="network-analysis.html"><i class="fa fa-check"></i><b>4</b> Network Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="network-analysis.html"><a href="network-analysis.html#key-terms-4"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="4.1" data-path="network-analysis.html"><a href="network-analysis.html#introduction-to-graph-theory"><i class="fa fa-check"></i><b>4.1</b> Introduction to Graph Theory</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="network-analysis.html"><a href="network-analysis.html#nodes"><i class="fa fa-check"></i><b>4.1.1</b> Nodes</a></li>
+<li class="chapter" data-level="4.1.2" data-path="network-analysis.html"><a href="network-analysis.html#edges"><i class="fa fa-check"></i><b>4.1.2</b> Edges</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="network-analysis.html"><a href="network-analysis.html#connectivity-and-order"><i class="fa fa-check"></i><b>4.2</b> Connectivity and Order</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="network-analysis.html"><a href="network-analysis.html#direct"><i class="fa fa-check"></i><b>4.2.1</b> Direct</a></li>
+<li class="chapter" data-level="4.2.2" data-path="network-analysis.html"><a href="network-analysis.html#undirect"><i class="fa fa-check"></i><b>4.2.2</b> Undirect</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="network-analysis.html"><a href="network-analysis.html#network-topologies"><i class="fa fa-check"></i><b>4.3</b> Network Topologies</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="network-analysis.html"><a href="network-analysis.html#physical-vs.-logical-topology"><i class="fa fa-check"></i><b>4.3.1</b> Physical vs. Logical Topology</a></li>
+<li class="chapter" data-level="4.3.2" data-path="network-analysis.html"><a href="network-analysis.html#non-hierarchical-topologies"><i class="fa fa-check"></i><b>4.3.2</b> Non-Hierarchical Topologies</a></li>
+<li class="chapter" data-level="4.3.3" data-path="network-analysis.html"><a href="network-analysis.html#hierarchical-topologies"><i class="fa fa-check"></i><b>4.3.3</b> Hierarchical Topologies</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="network-analysis.html"><a href="network-analysis.html#spatial-network-analysis"><i class="fa fa-check"></i><b>4.4</b> Spatial Network Analysis</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="network-analysis.html"><a href="network-analysis.html#network-tracing"><i class="fa fa-check"></i><b>4.4.1</b> Network Tracing</a></li>
+<li class="chapter" data-level="4.4.2" data-path="network-analysis.html"><a href="network-analysis.html#linear-referencing"><i class="fa fa-check"></i><b>4.4.2</b> Linear Referencing</a></li>
+<li class="chapter" data-level="4.4.3" data-path="network-analysis.html"><a href="network-analysis.html#routing"><i class="fa fa-check"></i><b>4.4.3</b> Routing</a></li>
+<li class="chapter" data-level="4.4.4" data-path="network-analysis.html"><a href="network-analysis.html#network-centrality"><i class="fa fa-check"></i><b>4.4.4</b> Network Centrality</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html"><i class="fa fa-check"></i><b>5</b> Fundamentals of remote sensing</a>
+<ul>
+<li class="chapter" data-level="" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#key-terms-5"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="5.1" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#what-is-remote-sensing"><i class="fa fa-check"></i><b>5.1</b> What is remote sensing?</a></li>
+<li class="chapter" data-level="5.2" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#types-of-energy"><i class="fa fa-check"></i><b>5.2</b> Types of Energy</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#introduction-1"><i class="fa fa-check"></i><b>5.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2.2" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#scientific-notation"><i class="fa fa-check"></i><b>5.2.2</b> Scientific Notation</a></li>
+<li class="chapter" data-level="5.2.3" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#electromagnetic-spectrum"><i class="fa fa-check"></i><b>5.2.3</b> Electromagnetic Spectrum</a></li>
+<li class="chapter" data-level="5.2.4" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#radiation-types"><i class="fa fa-check"></i><b>5.2.4</b> Radiation Types</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#factors-affecting-radiation"><i class="fa fa-check"></i><b>5.3</b> Factors affecting radiation</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#radiation-basics"><i class="fa fa-check"></i><b>5.3.1</b> <strong>Radiation Basics</strong></a></li>
+<li class="chapter" data-level="5.3.2" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#foundations-of-measurement"><i class="fa fa-check"></i><b>5.3.2</b> <strong>Foundations of Measurement</strong></a></li>
+<li class="chapter" data-level="5.3.3" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#methods-of-normalization"><i class="fa fa-check"></i><b>5.3.3</b> <strong>Methods of Normalization</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#the-four-resolutions"><i class="fa fa-check"></i><b>5.4</b> The Four Resolutions</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#spatial-resolution"><i class="fa fa-check"></i><b>5.4.1</b> Spatial Resolution</a></li>
+<li class="chapter" data-level="5.4.2" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#temporal-resolution"><i class="fa fa-check"></i><b>5.4.2</b> Temporal Resolution</a></li>
+<li class="chapter" data-level="5.4.3" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#spectral-resolution"><i class="fa fa-check"></i><b>5.4.3</b> Spectral Resolution</a></li>
+<li class="chapter" data-level="5.4.4" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#radiometric-resolution"><i class="fa fa-check"></i><b>5.4.4</b> Radiometric Resolution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#key-applications"><i class="fa fa-check"></i><b>5.5</b> Key Applications</a></li>
+<li class="chapter" data-level="5.6" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#summary-4"><i class="fa fa-check"></i><b>5.6</b> Summary</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#reflection-questions-3"><i class="fa fa-check"></i><b>5.6.1</b> Reflection Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="image-processing.html"><a href="image-processing.html"><i class="fa fa-check"></i><b>6</b> Image Processing</a>
+<ul>
+<li class="chapter" data-level="" data-path="image-processing.html"><a href="image-processing.html#key-terms-6"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="6.1" data-path="image-processing.html"><a href="image-processing.html#overview"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="image-processing.html"><a href="image-processing.html#geometric-correction"><i class="fa fa-check"></i><b>6.2</b> Geometric correction</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="image-processing.html"><a href="image-processing.html#orthoimagery"><i class="fa fa-check"></i><b>6.2.1</b> Orthoimagery</a></li>
+<li class="chapter" data-level="6.2.2" data-path="image-processing.html"><a href="image-processing.html#relief-displacement"><i class="fa fa-check"></i><b>6.2.2</b> <strong>Relief displacement</strong></a></li>
+<li class="chapter" data-level="6.2.3" data-path="image-processing.html"><a href="image-processing.html#georeferencing"><i class="fa fa-check"></i><b>6.2.3</b> <strong>Georeferencing</strong></a></li>
+<li class="chapter" data-level="6.2.4" data-path="image-processing.html"><a href="image-processing.html#georegistration-georectification"><i class="fa fa-check"></i><b>6.2.4</b> <strong>Georegistration (georectification)</strong></a></li>
+<li class="chapter" data-level="6.2.5" data-path="image-processing.html"><a href="image-processing.html#resampling"><i class="fa fa-check"></i><b>6.2.5</b> <strong>Resampling</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="image-processing.html"><a href="image-processing.html#atmospheric-correction"><i class="fa fa-check"></i><b>6.3</b> Atmospheric correction</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="image-processing.html"><a href="image-processing.html#atmospheric-windows"><i class="fa fa-check"></i><b>6.3.1</b> <strong>Atmospheric windows</strong></a></li>
+<li class="chapter" data-level="6.3.2" data-path="image-processing.html"><a href="image-processing.html#clouds-and-shadows"><i class="fa fa-check"></i><b>6.3.2</b> <strong>Clouds and shadows</strong></a></li>
+<li class="chapter" data-level="6.3.3" data-path="image-processing.html"><a href="image-processing.html#smoke-and-haze"><i class="fa fa-check"></i><b>6.3.3</b> <strong>Smoke and Haze</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="image-processing.html"><a href="image-processing.html#radiometric-correction"><i class="fa fa-check"></i><b>6.4</b> Radiometric correction</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="image-processing.html"><a href="image-processing.html#signal-to-noise"><i class="fa fa-check"></i><b>6.4.1</b> <strong>Signal-to-noise</strong></a></li>
+<li class="chapter" data-level="6.4.2" data-path="image-processing.html"><a href="image-processing.html#radiometric-normalization"><i class="fa fa-check"></i><b>6.4.2</b> <strong>Radiometric normalization</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="image-processing.html"><a href="image-processing.html#image-enhancement"><i class="fa fa-check"></i><b>6.5</b> Image enhancement</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="image-processing.html"><a href="image-processing.html#stretching"><i class="fa fa-check"></i><b>6.5.1</b> <strong>Stretching</strong></a></li>
+<li class="chapter" data-level="6.5.2" data-path="image-processing.html"><a href="image-processing.html#sharpening"><i class="fa fa-check"></i><b>6.5.2</b> <strong>Sharpening</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="image-processing.html"><a href="image-processing.html#summary-5"><i class="fa fa-check"></i><b>6.6</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="image-processing.html"><a href="image-processing.html#reflection-questions-4"><i class="fa fa-check"></i>Reflection Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html"><i class="fa fa-check"></i><b>7</b> LiDAR Acquisition and Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#key-terms-7"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="7.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#what-is-lidar"><i class="fa fa-check"></i><b>7.1</b> What is LiDAR?</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#how-does-it-work"><i class="fa fa-check"></i><b>7.1.1</b> How does it Work?</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#components-of-lidar-systems"><i class="fa fa-check"></i><b>7.2</b> Components of LiDAR Systems</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#lasers"><i class="fa fa-check"></i><b>7.2.1</b> Lasers</a></li>
+<li class="chapter" data-level="7.2.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#position-and-orientation"><i class="fa fa-check"></i><b>7.2.2</b> Position and Orientation</a></li>
+<li class="chapter" data-level="7.2.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#platform"><i class="fa fa-check"></i><b>7.2.3</b> Platform</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#types-of-lidar"><i class="fa fa-check"></i><b>7.3</b> Types of LiDAR</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#discrete-return"><i class="fa fa-check"></i><b>7.3.1</b> Discrete Return</a></li>
+<li class="chapter" data-level="7.3.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#full-waveform"><i class="fa fa-check"></i><b>7.3.2</b> Full Waveform</a></li>
+<li class="chapter" data-level="7.3.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#multispectral"><i class="fa fa-check"></i><b>7.3.3</b> Multispectral</a></li>
+<li class="chapter" data-level="7.3.4" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#single-photon-lidar"><i class="fa fa-check"></i><b>7.3.4</b> Single Photon Lidar</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#lidar-derivatives-and-analysis"><i class="fa fa-check"></i><b>7.4</b> LiDAR Derivatives and Analysis</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#bare-earth-elevation"><i class="fa fa-check"></i><b>7.4.1</b> Bare Earth Elevation</a></li>
+<li class="chapter" data-level="7.4.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#canopy-height-model"><i class="fa fa-check"></i><b>7.4.2</b> Canopy Height Model</a></li>
+<li class="chapter" data-level="7.4.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#canopy-surface-model"><i class="fa fa-check"></i><b>7.4.3</b> Canopy Surface Model</a></li>
+<li class="chapter" data-level="7.4.4" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#grid-metrics"><i class="fa fa-check"></i><b>7.4.4</b> Grid Metrics</a></li>
+<li class="chapter" data-level="7.4.5" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#tree-segmentation"><i class="fa fa-check"></i><b>7.4.5</b> Tree Segmentation</a></li>
+<li class="chapter" data-level="7.4.6" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#software"><i class="fa fa-check"></i><b>7.4.6</b> Software</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#summary-6"><i class="fa fa-check"></i><b>7.5</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#reflection-questions-5"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#practice-questions-3"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="data-integration.html"><a href="data-integration.html"><i class="fa fa-check"></i><b>8</b> Chapter Title</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-integration.html"><a href="data-integration.html#key-terms-8"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="8.1" data-path="data-integration.html"><a href="data-integration.html#problems-with-data-integration"><i class="fa fa-check"></i><b>8.1</b> Problems with data integration</a></li>
+<li class="chapter" data-level="8.2" data-path="data-integration.html"><a href="data-integration.html#framing-the-problem"><i class="fa fa-check"></i><b>8.2</b> Framing the problem</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="data-integration.html"><a href="data-integration.html#about-the-data"><i class="fa fa-check"></i><b>8.2.1</b> About the data</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="data-integration.html"><a href="data-integration.html#data-resolution"><i class="fa fa-check"></i><b>8.3</b> Data Resolution</a></li>
+<li class="chapter" data-level="8.4" data-path="data-integration.html"><a href="data-integration.html#integrating-vector-and-raster-data"><i class="fa fa-check"></i><b>8.4</b> Integrating vector and raster data</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="data-integration.html"><a href="data-integration.html#rasterization"><i class="fa fa-check"></i><b>8.4.1</b> Rasterization</a></li>
+<li class="chapter" data-level="8.4.2" data-path="data-integration.html"><a href="data-integration.html#vectorization"><i class="fa fa-check"></i><b>8.4.2</b> Vectorization</a></li>
+<li class="chapter" data-level="8.4.3" data-path="data-integration.html"><a href="data-integration.html#zonal-statistics"><i class="fa fa-check"></i><b>8.4.3</b> Zonal Statistics</a></li>
+<li class="chapter" data-level="8.4.4" data-path="data-integration.html"><a href="data-integration.html#smoothing"><i class="fa fa-check"></i><b>8.4.4</b> Smoothing</a></li>
+<li class="chapter" data-level="8.4.5" data-path="data-integration.html"><a href="data-integration.html#simplifying"><i class="fa fa-check"></i><b>8.4.5</b> Simplifying</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="data-integration.html"><a href="data-integration.html#spatial-data-errors"><i class="fa fa-check"></i><b>8.5</b> Spatial data errors</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="data-integration.html"><a href="data-integration.html#accuracy-vs.-precision"><i class="fa fa-check"></i><b>8.5.1</b> Accuracy vs. Precision</a></li>
+<li class="chapter" data-level="8.5.2" data-path="data-integration.html"><a href="data-integration.html#vagueness-and-ambiguity"><i class="fa fa-check"></i><b>8.5.2</b> Vagueness and Ambiguity</a></li>
+<li class="chapter" data-level="8.5.3" data-path="data-integration.html"><a href="data-integration.html#quantifying-spatial-errors-rmse-euclids-distance"><i class="fa fa-check"></i><b>8.5.3</b> Quantifying spatial errors RMSE, Euclid’s distance</a></li>
+<li class="chapter" data-level="8.5.4" data-path="data-integration.html"><a href="data-integration.html#logical-errors"><i class="fa fa-check"></i><b>8.5.4</b> Logical Errors</a></li>
+<li class="chapter" data-level="8.5.5" data-path="data-integration.html"><a href="data-integration.html#ecological-fallacy-atomistic-fallacy-maup-etc.-its-important-to-include-these-whether-here-or-elsewhere"><i class="fa fa-check"></i><b>8.5.5</b> Ecological Fallacy, Atomistic Fallacy, MAUP etc. Its important to include these, whether here or elsewhere?</a></li>
+<li class="chapter" data-level="8.5.6" data-path="data-integration.html"><a href="data-integration.html#other-errors"><i class="fa fa-check"></i><b>8.5.6</b> Other Errors?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html"><i class="fa fa-check"></i><b>9</b> Making Beautiful Maps</a>
+<ul>
+<li class="chapter" data-level="" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#key-terms-9"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="9.1" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#types-of-maps"><i class="fa fa-check"></i><b>9.1</b> Types of Maps</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#thematic-maps"><i class="fa fa-check"></i><b>9.1.1</b> Thematic Maps</a></li>
+<li class="chapter" data-level="9.1.2" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#choropleth-maps"><i class="fa fa-check"></i><b>9.1.2</b> Choropleth Maps</a></li>
+<li class="chapter" data-level="9.1.3" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#dot-density-maps"><i class="fa fa-check"></i><b>9.1.3</b> Dot Density Maps</a></li>
+<li class="chapter" data-level="9.1.4" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#isoline-maps"><i class="fa fa-check"></i><b>9.1.4</b> Isoline Maps</a></li>
+<li class="chapter" data-level="9.1.5" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#diagrammatic-maps"><i class="fa fa-check"></i><b>9.1.5</b> Diagrammatic Maps</a></li>
+<li class="chapter" data-level="9.1.6" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#cartograms"><i class="fa fa-check"></i><b>9.1.6</b> Cartograms</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#map-composition"><i class="fa fa-check"></i><b>9.2</b> Map Composition</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#figure"><i class="fa fa-check"></i><b>9.2.1</b> Figure</a></li>
+<li class="chapter" data-level="9.2.2" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#ground"><i class="fa fa-check"></i><b>9.2.2</b> Ground</a></li>
+<li class="chapter" data-level="9.2.3" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#frame"><i class="fa fa-check"></i><b>9.2.3</b> Frame</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#elements-of-maps"><i class="fa fa-check"></i><b>9.3</b> Elements of Maps</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#text"><i class="fa fa-check"></i><b>9.3.1</b> Text</a></li>
+<li class="chapter" data-level="9.3.2" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#legend"><i class="fa fa-check"></i><b>9.3.2</b> Legend</a></li>
+<li class="chapter" data-level="9.3.3" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#scale-and-north-arrow"><i class="fa fa-check"></i><b>9.3.3</b> Scale and North Arrow</a></li>
+<li class="chapter" data-level="9.3.4" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#measured-grid"><i class="fa fa-check"></i><b>9.3.4</b> Measured Grid</a></li>
+<li class="chapter" data-level="9.3.5" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#citation"><i class="fa fa-check"></i><b>9.3.5</b> Citation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#symbolization"><i class="fa fa-check"></i><b>9.4</b> Symbolization</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#separable"><i class="fa fa-check"></i><b>9.4.1</b> Separable</a></li>
+<li class="chapter" data-level="9.4.2" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#integral"><i class="fa fa-check"></i><b>9.4.2</b> Integral</a></li>
+<li class="chapter" data-level="9.4.3" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#graduated"><i class="fa fa-check"></i><b>9.4.3</b> Graduated</a></li>
+<li class="chapter" data-level="9.4.4" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#configurable"><i class="fa fa-check"></i><b>9.4.4</b> Configurable</a></li>
+<li class="chapter" data-level="9.4.5" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#proportional"><i class="fa fa-check"></i><b>9.4.5</b> Proportional</a></li>
+<li class="chapter" data-level="9.4.6" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#line-weight"><i class="fa fa-check"></i><b>9.4.6</b> Line Weight</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#colour"><i class="fa fa-check"></i><b>9.5</b> Colour</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#hue"><i class="fa fa-check"></i><b>9.5.1</b> Hue</a></li>
+<li class="chapter" data-level="9.5.2" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#chroma"><i class="fa fa-check"></i><b>9.5.2</b> Chroma</a></li>
+<li class="chapter" data-level="9.5.3" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#lightness"><i class="fa fa-check"></i><b>9.5.3</b> Lightness</a></li>
+<li class="chapter" data-level="9.5.4" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#bivariate-colour-schemes"><i class="fa fa-check"></i><b>9.5.4</b> Bivariate Colour Schemes</a></li>
+<li class="chapter" data-level="9.5.5" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#colour-pickers"><i class="fa fa-check"></i><b>9.5.5</b> Colour Pickers</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#classification-schemes"><i class="fa fa-check"></i><b>9.6</b> Classification Schemes</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#qualitative"><i class="fa fa-check"></i><b>9.6.1</b> Qualitative</a></li>
+<li class="chapter" data-level="9.6.2" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#sequential"><i class="fa fa-check"></i><b>9.6.2</b> Sequential</a></li>
+<li class="chapter" data-level="9.6.3" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#intervals"><i class="fa fa-check"></i><b>9.6.3</b> Intervals</a></li>
+<li class="chapter" data-level="9.6.4" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#quantiles"><i class="fa fa-check"></i><b>9.6.4</b> Quantiles</a></li>
+<li class="chapter" data-level="9.6.5" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#natural-breaks-jenna"><i class="fa fa-check"></i><b>9.6.5</b> Natural Breaks (Jenna)</a></li>
+<li class="chapter" data-level="9.6.6" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#standard-deviation"><i class="fa fa-check"></i><b>9.6.6</b> Standard Deviation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#generalization"><i class="fa fa-check"></i><b>9.7</b> Generalization</a>
+<ul>
+<li class="chapter" data-level="9.7.1" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#select"><i class="fa fa-check"></i><b>9.7.1</b> Select</a></li>
+<li class="chapter" data-level="9.7.2" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#amalgamate"><i class="fa fa-check"></i><b>9.7.2</b> Amalgamate</a></li>
+<li class="chapter" data-level="9.7.3" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#exaggerate"><i class="fa fa-check"></i><b>9.7.3</b> Exaggerate</a></li>
+<li class="chapter" data-level="9.7.4" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#displace"><i class="fa fa-check"></i><b>9.7.4</b> Displace</a></li>
+<li class="chapter" data-level="9.7.5" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#refine"><i class="fa fa-check"></i><b>9.7.5</b> Refine</a></li>
+<li class="chapter" data-level="9.7.6" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#simplify"><i class="fa fa-check"></i><b>9.7.6</b> Simplify</a></li>
+<li class="chapter" data-level="9.7.7" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#aggregate"><i class="fa fa-check"></i><b>9.7.7</b> Aggregate</a></li>
+<li class="chapter" data-level="9.7.8" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#typify"><i class="fa fa-check"></i><b>9.7.8</b> Typify</a></li>
+<li class="chapter" data-level="9.7.9" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#smooth"><i class="fa fa-check"></i><b>9.7.9</b> Smooth</a></li>
+<li class="chapter" data-level="9.7.10" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#enhance"><i class="fa fa-check"></i><b>9.7.10</b> Enhance</a></li>
+<li class="chapter" data-level="9.7.11" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#collapse"><i class="fa fa-check"></i><b>9.7.11</b> Collapse</a></li>
+<li class="chapter" data-level="9.7.12" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#merge"><i class="fa fa-check"></i><b>9.7.12</b> Merge</a></li>
+</ul></li>
+<li class="chapter" data-level="9.8" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#map-design"><i class="fa fa-check"></i><b>9.8</b> Map Design</a>
+<ul>
+<li class="chapter" data-level="9.8.1" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#subject"><i class="fa fa-check"></i><b>9.8.1</b> Subject</a></li>
+<li class="chapter" data-level="9.8.2" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#projection-and-orientation"><i class="fa fa-check"></i><b>9.8.2</b> Projection and Orientation</a></li>
+<li class="chapter" data-level="9.8.3" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#hierarchy"><i class="fa fa-check"></i><b>9.8.3</b> Hierarchy</a></li>
+<li class="chapter" data-level="9.8.4" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#balance"><i class="fa fa-check"></i><b>9.8.4</b> Balance</a></li>
+</ul></li>
+<li class="chapter" data-level="9.9" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#third-section-header"><i class="fa fa-check"></i><b>9.9</b> Third Section Header</a></li>
+<li class="chapter" data-level="9.10" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#summary-7"><i class="fa fa-check"></i><b>9.10</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#reflection-questions-6"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#practice-questions-4"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#recommended-readings-3"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">An Open Geomatics Textbook</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="fundamentals-of-remote-sensing" class="section level1" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Fundamentals of remote sensing</h1>
+<p>At some point in your life you may have wondered why the sky is blue.
+You may have noticed that two leaves on the same tree are slightly
+different shades of green. It would be perfectly natural to wonder these
+things and simply allow the questions to remain unanswered. After all,
+they likely carry minimal significance compared to the other queries of
+your life. What if, however, these questions could not only be answered,
+but also lead you to profound insights relating to your environment?
+What if differences in leaf color indicated an early summer drought or
+the initial stages of a pest outbreak that would wreak havoc on the
+economy? <em>Remote sensing</em> is the overarching term that refers any
+scientific exploration that seeks to address these, and many other
+questions.</p>
+<div class="box-content learning-objectives-content">
+<div id="learning-objectives-5" class="section level4 unnumbered box-title learning-objectives-top">
+<h4>Learning Objectives</h4>
+</div>
+<ol style="list-style-type: decimal">
+<li>Understand key principles underpinning remote sensing science</li>
+<li>Become familiar with specific types of energy used in RS</li>
+<li>Define key interactions between energy and surface materials that
+enable RS</li>
+<li>Comprehend various considerations that effect the use of RS</li>
+</ol>
+</div>
+<div id="key-terms-5" class="section level3 unnumbered">
+<h3>Key Terms</h3>
+<p>Electromagnetic, Energy, Photons, Pixel, Radiation, Resolution,
+Spectrum, Wavelength</p>
+</div>
+<div id="what-is-remote-sensing" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> What is remote sensing?</h2>
+<p>Simply put, remote sensing is any method of gathering information about
+an object, or objects, without physical contact. Over the course of
+human history, a variety of remote sensing techniques have been used. In
+fact, one could argue that any organism capable of observing
+<strong>electromagnetic</strong> <strong>radiation</strong> has a built in optical remote sensing
+system, such as human vision. Similar arguments could be made for other
+senses, such as smell or hearing, but this chapter will focus strictly
+on techniques that capture and record electromagnetic <strong>radiation</strong>.</p>
+<p>One of the first recorded conceptualizations of remote sensing was
+presented by Plato in the Allegory of a Cave, where he philosophized
+that the sense of sight is simply a contracted version of reality from
+which the observer can interpret facts presented through transient
+images created by light. Over the next few centuries a variety of
+photosensitive chemicals were discovered which enabled the transient
+images humans see to be recorded . This technology was called
+photography (see <a href="https://www.scienceandmediamuseum.org.uk/objects-and-stories/history-photography">A History of
+Photography</a>).
+The ability to record the interaction of light and specific objects
+within a scene proved enabled the preservation of information in an
+accessible medium. Eventually, photography became a prominent means of
+immortalizing everything from individual humans to exotic landscapes.
+After all, a picture says a thousand words.</p>
+<p>In 1858, an enthusiastic Frenchman named Gaspard Tournachon mounted a
+camera on a hot air balloon and captured images of the earth below him.
+Eventually, Tournachon used his balloon method to capture images of
+Paris (Figure <a href="fundamentals-of-remote-sensing.html#fig:11-nadar">5.1</a>). For the first time it was possible
+to examine the distribution of buildings, fields, forests and roads
+across the landscape. With this, airborne remote sensing was born.
+Remote sensing technologies continued to advance throughout the 19th and
+20th centuries, with major socio-political conflicts like World War I
+and II acting as crucibles for innovation. The advancement of remote
+sensing has continued into the 21st century and is unlikely to slow down
+in the future. This is due to the relevance of three key aspects.</p>
+<div class="figure"><span style="display:block;" id="fig:11-nadar"></span>
+<img src="images/11-nadar-triomphe-1868.png" alt="Images of the Arc de Triomphe in Paris, France taken by Tournachone from a balloon in 1968." width="75%" />
+<p class="caption">
+Figure 5.1: Images of the Arc de Triomphe in Paris, France taken by Tournachone from a balloon in 1968.
+</p>
+</div>
+<p>First and foremost, remote sensing enables the observation of objects
+in, or from, locations that are otherwise inaccessible for humans. The
+observation of Mars’ surface from an orbiting satellite is a one current
+example. A second aspect that makes remote sensing so useful is the
+collection of information over a large area. For example, airborne
+remote sensing technologies enable observations of land cover across
+Canada (Figure <a href="fundamentals-of-remote-sensing.html#fig:11-hermosilla-canada-landcover">5.2</a>). The ability
+to evaluate inaccessible objects or large areas over time is a third
+valuable aspect of remote sensing and is particularly relevant for land
+management, as predictions can be informed through the observation of
+historic patterns and processes. This is especially true for projects
+aiming to restore degraded ecosystems or plan sustainable land use
+practices. Before exploring the designs of specific sensor or their
+applications, however, it is essential to grasp some key components that
+underpin remote sensing science.</p>
+<div class="figure"><span style="display:block;" id="fig:11-hermosilla-canada-landcover"></span>
+<img src="images/11-hermosilla-canada-landcover.png" alt="Landcover classification of Canada generated by Hermosilla et al., 2018 for the year 2005."  />
+<p class="caption">
+Figure 5.2: Landcover classification of Canada generated by Hermosilla et al., 2018 for the year 2005.
+</p>
+</div>
+</div>
+<div id="types-of-energy" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Types of Energy</h2>
+<div id="introduction-1" class="section level3" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Introduction</h3>
+<p>Stepping back from remote sensing for a moment, there are three general
+types of <strong>energy</strong> commonly used to remotely observe objects: sonic,
+thermal and electromagnetic. Sonic, or sound, <strong>energy</strong> is commonly
+used in environments where heat or light are inconsistent or hard to
+measure. Sonar is as example of a sonic remote sensing technique and is
+often deployed to observe objects in liquid. Thermal, or heat,
+<strong>energy</strong> is used in a variety of cases when changes in temperature
+indicate an underlying physiological process. An environmental example
+would be the observation of plant health via leaf temperature. Although
+both sonic and thermal energies provide useful information across a
+variety of disciplines, they are not the most common.</p>
+<p>Electromagnetic <strong>radiation</strong> (EMR), which is what the human sense of
+sight observes, is a popular <strong>energy</strong> source in remote sensing
+science. At it’s most basic, this method of observation is based on the
+measurement of <strong>photons</strong>. Research using EMR is fundamentally
+interested in examining the interactions of EMR, or photons, and other
+particles. Before diving into the applications of EMR remote sensing
+(photography, spectroscopy, etc.) it is important to understand some
+basic theory regarding the measurement of photons.</p>
+<p>Essentially, photons are the smallest physical property in the
+electromagnetic field. Photons can be emitted from objects engaged in
+nuclear processes (such as the sun), objects excited thermally (like a
+light bulb) or objects that reflect or emit absorbed <strong>radiation</strong>. The
+interactions between emitted photons and other particles can be observed
+and used to evaluate the properties of the object. A fundamental
+component of EMR is it’s <strong>wavelength</strong>, defined as the measured space
+between two consecutive peaks of a wave (IMAGE). The wavelength of a
+photon determines if and how it will interact with the particles around
+it, as well as defines the amount of <strong>energy</strong> it has. Measuring the
+differences in photon <strong>energy</strong> before and after interacting with
+another particle is the core of any remote sensing utilizing EMR.</p>
+<p>Perhaps the simplest path to understanding how the properties of photons
+(i.e. <strong>energy</strong>, wavelength) are used for remote sensing purposes is
+through the use of an equation. Albert Einstein explained the <strong>energy</strong>
+of a photon as the product of its wave frequency (the number of waves
+that pass a specific point over a certain amount of time) and Planck’s
+constant (Equation <a href="fundamentals-of-remote-sensing.html#eq:energy-freq">(5.1)</a>)</p>
+<span class="math display" id="eq:energy-freq">\[\begin{equation}
+E = hf 
+\tag{5.1}
+\end{equation}\]</span>
+<p>Where E is the <strong>energy</strong> of a photon, h is Planck’s constant (h = 4.14
+× 10<sup>−15</sup> eV/s) and f is the wave frequency. Clearly, an increase in
+frequency results in an increase of <strong>energy</strong>. This equation may be
+altered to include other properties, such as the speed of light and
+wavelength (Equation <a href="fundamentals-of-remote-sensing.html#eq:energy-wvl">(5.2)</a>).</p>
+<span class="math display" id="eq:energy-wvl">\[\begin{equation}
+E = hc/λ 
+\tag{5.2}
+\end{equation}\]</span>
+<p>Where E is the <strong>energy</strong> of a photon, h is Planck’s constant, c is the
+speed of light (c = 3 x10<sup>8</sup> m/s) and λ is the wavelength of the
+<strong>radiation</strong>. This equation contains more variables, but incorporates
+wavelength and in doing so utilizes an easy to measure (hc always equals
+1240 eV/nm) and familiar characteristic. Due to the large range of
+wavelengths that photons can exhibit it is necessary to use a specific
+style of writing to describe them, called scientific notation.</p>
+</div>
+<div id="scientific-notation" class="section level3" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> Scientific Notation</h3>
+<p>Expressing extremely large or small numbers presents a challenge to both
+efficiency and accessibility that has existed likely since the creation
+of mathematics. Scientific notation presents a simple solution to this
+problem through simplifying numeric presentation to a value less than 10
+that is raised to a particular power. Put simply, the decimal point of a
+large or small number is moved to make the smallest, single digit whole
+number. The number of places and direction that the decimal point moves
+is described by an associated power of 10. Equations <a href="fundamentals-of-remote-sensing.html#eq:SI-large">(5.3)</a>
+and <a href="fundamentals-of-remote-sensing.html#eq:SI-small">(5.4)</a> depict how large and small numbers are presented
+in scientific notation, respectively.</p>
+<span class="math display" id="eq:SI-large">\[\begin{equation}
+1,000,000 = 1.0 × 10^{6} 
+\tag{5.3}
+\end{equation}\]</span>
+<span class="math display" id="eq:SI-small">\[\begin{equation}
+0.000001 = 1.0 × 10 ^{-6} 
+\tag{5.4}
+\end{equation}\]</span>
+<p>It is common to use mathematical operators to add, subtract, divide or
+multiply large numbers written in scientific notation. Addition and
+subtraction require the number with the smallest exponent to be altered
+to match the exponent of the largest number <a href="fundamentals-of-remote-sensing.html#eq:SI-add">(5.5)</a>. The
+multiplication of two numbers written in scientific notation you simply
+multiply their coefficients and add their exponents
+<a href="fundamentals-of-remote-sensing.html#eq:SI-multiply">(5.6)</a>. Division of two scientific numbers follows a
+similar structure, in which you divide the coefficients and subtract the
+exponents <a href="fundamentals-of-remote-sensing.html#eq:SI-divide">(5.7)</a>.</p>
+<span class="math display" id="eq:SI-add">\[\begin{equation}
+2.6 × 10 ^{5} + 2.0 × 10 ^{4}   -&gt;
+2.6 × 10 ^{5} + 0.2 × 10 ^{5} = 2.8 × 10 ^{5} 
+\tag{5.5}
+\end{equation}\]</span>
+<span class="math display" id="eq:SI-multiply">\[\begin{equation}
+1.5 × 10 ^{5} ✕ 2.0 × 10 ^{3} = 3.0 × 10 ^{8} 
+\tag{5.6}
+\end{equation}\]</span>
+<span class="math display" id="eq:SI-divide">\[\begin{equation}
+1.5 × 10 ^{5} / 2.0 × 10 ^{3} = 0.75 × 10 ^{2} = 75
+\tag{5.7}
+\end{equation}\]</span>
+</div>
+<div id="electromagnetic-spectrum" class="section level3" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> Electromagnetic Spectrum</h3>
+<p>Now that you have an understanding of how the properties of photons can
+be measured and how to write them, we can begin to explore the
+electromagnetic <strong>spectrum</strong> (EMS). The EMS is the continuum along
+within photons are located based on their properties (Figure
+<a href="fundamentals-of-remote-sensing.html#fig:11-EMS">5.3</a>). We have discussed both wavelength and frequency,
+which are inversely related and commonly used to describe EMR. Figure
+<a href="fundamentals-of-remote-sensing.html#fig:11-EMS">5.3</a> also depicts a thermometer laying sideways, which
+demonstrates that as an object’s temperature increases, the wavelength
+of the photons emitted decreases. This follows Equation
+<a href="fundamentals-of-remote-sensing.html#eq:energy-wvl">(5.2)</a>, which demonstrates that photons with shorter
+wavelengths have higher <strong>energy</strong>. A practical example of this would be
+that the majority of photons emitted from the sun (5,788 K) are around
+0.5 x 10<sup>-6</sup> nm, while the majority of photons emitted from the human
+body (~310 K) are around 10<sup>-4</sup>. These measurements are theoretical and
+are calculated using theoretical object, often called a blackbody that
+allows all <strong>energy</strong> to enter (no reflectance, hence “black”) and be
+absorbed (no transmission). The resulting EMR that is emitted would be
+generated thermally and be equal or greater than any other body at the
+same temperature. It is important to remember, however, that blackbodies
+do not exist and any real object will always emit a temperature less
+than a theoretical blackbody.</p>
+<div class="figure"><span style="display:block;" id="fig:11-EMS"></span>
+<img src="images/11-EMS.png" alt="Electromagnetic (also known as Milton) spectrum depicting the type, wavelength, frequency and black body emission temperature. Credit: Inductiveload, NASA." width="200%" />
+<p class="caption">
+Figure 5.3: Electromagnetic (also known as Milton) spectrum depicting the type, wavelength, frequency and black body emission temperature. Credit: Inductiveload, NASA.
+</p>
+</div>
+<div class="box-content call-out-content">
+<div id="call-out-1" class="section level4 unnumbered box-title call-out-top">
+<h4>Call out</h4>
+</div>
+<p>
+<p>Visualizing the electromagnetic spectrum (EMS) in Figure 2 certainly
+enables a wonderful comprehension of many concepts relating to photons.
+Perhaps more astounding, however, is the truth of how the faculty of
+human vision has incorporated these properties. The portion of the EMS
+that humans can see is between 400 nm and 750 nm, which correlates with
+the most common wavelengths emitted from the sun. Perhaps it should not
+be surprising, but of all the possible wavelengths emitted in our
+environment, human eyes have evolved to maximize solar photon emission.</p>
+</p>
+</div>
+</div>
+<div id="radiation-types" class="section level3" number="5.2.4">
+<h3><span class="header-section-number">5.2.4</span> Radiation Types</h3>
+<p>Since it is possible for photon <strong>energy</strong> to vary widely across the
+EMS, it can be useful to group photons based on their wavelength.
+Generally, there are seven accepted categories. it is important to note
+that these categories have gradual boundaries, rather than sharp
+dividing lines. In order of increasing wavelength they are: radio,
+microwave, infrared, visible, ultraviolet, X ray and Gamma ray. We will
+detail each of these seven groups in Table 1 <span class="citation">(<a href="#ref-zwinkels2020" role="doc-biblioref">Zwinkels 2020</a>)</span>. If you
+wish a visual tour of the EMS you can explore <a href="https://books.google.ca/books?id=DfLPpxogdM4C&amp;pg=PP1#v=onepage&amp;q&amp;f=false" title="Tour of the electromagnetic spectrum">this
+document</a>
+created by Ginger Butcher for NASA in 2010.</p>
+<table>
+<caption>Table 1. Names and associated wavelengths for the seven regions of the
+electromagnetic spectrum.</caption>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Wavelength</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Radio</td>
+<td>1 cm - 1,000 km (10<sup>3</sup> - 10<sup>10</sup>)</td>
+</tr>
+<tr class="even">
+<td>Microwave</td>
+<td>1 mm - 1 cm (10<sup>10</sup> - 10<sup>11</sup>)</td>
+</tr>
+<tr class="odd">
+<td>Infrared (IR)</td>
+<td>700 nm - 1 mm (10<sup>11</sup> - 10<sup>14</sup>)</td>
+</tr>
+<tr class="even">
+<td>Visible (Vis)</td>
+<td>400 - 700 nm (10<sup>14</sup> - 10<sup>15</sup>)</td>
+</tr>
+<tr class="odd">
+<td>Ultraviolet (UV)</td>
+<td>10 - 400 nm (10<sup>15</sup> - 10<sup>17</sup>)</td>
+</tr>
+<tr class="even">
+<td>X rays</td>
+<td>0.1 - 10 nm (10<sup>17</sup> - 10<sup>20</sup>)</td>
+</tr>
+<tr class="odd">
+<td>Gamma rays</td>
+<td>&lt; 0.1 nm (10<sup>20</sup> - 10<sup>23</sup>)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="factors-affecting-radiation" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Factors affecting radiation</h2>
+<p>With a solid grasp of why EMR is useful for remote sensing science and
+how EMR is categorized along the EMS, we can begin to apply this core
+knowledge with ideas and applications related to practical use. As with
+<strong>radiation</strong>, there are a plethora of terms used to describe the
+fundamental concepts that make remote sensing science possible. Some of
+the most common terms have been included below. They are organized into
+three categories: <strong>Radiation</strong> Basics, Foundations of Measurement and
+Methods of Normalization.</p>
+<div id="radiation-basics" class="section level3" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> <strong>Radiation Basics</strong></h3>
+<p>The use of <strong>radiation</strong> to quantify properties of an object is
+inherently linked with relatively complex theories of physics. To
+minimize both confusion and workload, we will highlight a select number
+of key concepts that support the use of the EMS for remote sensing. The
+first concepts to become familiar with are radiant <strong>energy</strong> and
+radiant flux</p>
+<p>Radiant <strong>energy</strong> is essentially the <strong>energy</strong> carried by photons,
+which is measured in Joules (J). Recall that the amount photon
+<strong>energy</strong> defines what wavelength (Equation <a href="fundamentals-of-remote-sensing.html#eq:energy-wvl">(5.2)</a>.
+Radiant flux, which is interchangeable with radiant power, is the amount
+of radiant <strong>energy</strong> that is emitted, reflected, transmitted or
+absorbed by an object per unit time. Radiant flux considers <strong>energy</strong>
+at all wavelengths and is often measured per second, making it’s SI
+Watts (W), which is simply Joules per second (J/s) . Spectral flux is an
+associate of radiant flux and simply reports the amount of <strong>energy</strong>
+per wavelength (W/nm) or (W/Hz). Combined, these two terms allow us to
+describe the interaction with electromagnetic <strong>radiation</strong> and it’s
+environment; radiant <strong>energy</strong> interacts with an object, which results
+in radiant flux.</p>
+<p>Now that you are familiar radiant <strong>energy</strong> and flux, we can discuss
+irradiance. Irradiance refers to the amount of radiant <strong>energy</strong> that
+contacts a 1 m<sup>-2</sup> area each second (W · m<sup>-2</sup>). This includes all
+electromagnetic <strong>energy</strong> that contacts our 1 m<sup>-2</sup> surface, which
+could be a combination of <strong>radiation</strong> from the sun, a halogen light
+bulb overhead and your computer screen. Another important concept is
+solar irradiance, which strictly refers to the amount of solar
+<strong>radiation</strong> interacting with our 1 m<sup>-2</sup> area. Solar irradiance is
+very important in many remote sensing applications as it determines
+which photons an optical sensor <em>could</em> record in naturally illuminated
+environments. An associate of irradiance is radiance, which refers the
+the amount of radiant flux is a specific direction. The direction in
+question is often called the <em>solid angle</em> and makes radiance a
+directional quantity. You could imagine holding a DLSR camera 90 degrees
+above a flat leaf so that the only item visible to the shutter is the
+leaf. The camera would capture the radiance reflected from the leafs
+surface and the solid angle would be 90 degrees. Essentially, irradiance
+is used to measure the radiant <strong>energy</strong> that contacts a 1 m<sup>-2</sup> area,
+while radiance measures the radiant flux of an object from a specific
+angle.</p>
+<p>Another key idea central to understanding <strong>radiation</strong> is the
+theoretical blackbody. We discussed theoretical blackbodies in Section
+<a href="fundamentals-of-remote-sensing.html#electromagnetic-spectrum">5.2.3</a> and outlined that they are essentially
+an ideal body that perfectly absorbs all <strong>energy</strong> it interacts with.
+Blackbodies can reach thermal equilibrium and therefore can emit thermal
+<strong>energy</strong> in amounts directly related to their temperature. These
+characteristics enable the estimation of spectral emission and can be
+used to determine the expected spectral emission of other objects.</p>
+<p>There are three important physical laws related to theoretical
+blackbodies. Plank’s Law describes that an increase in a bodies
+temperature causes both an increase in the total <strong>radiation</strong> from the
+body and shift in the peak of the emitted spectrum to shorter
+wavelengths. Wein’s Law highlights the inverse relationship between
+temperature and wavelength and enables the estimation of the wavelength
+at which the peak of the emitted spectrum will occur. A third important
+law relevant to blackbodies is the Stefan-Boltzmann Law, which
+demonstrates that the temperature of a blackbody is four powers greater
+than the total <strong>energy</strong> it emits. Combined, these three laws
+demonstrate a fundamental concept of electromagnetic <strong>radiation</strong>: the
+temperature of a body determines how much <strong>energy</strong> is emitted and at
+what wavelength the spectrum peak will occur.</p>
+<p>So far we have discussed radiant <strong>energy</strong> and flux as basic concepts
+interacting with a single object (leaf) or 1 m<sup>-2</sup> surface. In reality,
+radiant <strong>energy</strong> from the sun begins interacting with objects as soon
+as it enters earth’s atmosphere. The process by which <strong>radiation</strong> is
+reflected by other particles is called scattering. Scattering occurs
+throughout the atmosphere and is generally separated into three
+categories: Rayleigh, Mie and non-selective.</p>
+<p>The three categories of atmospheric scattering are defined by the
+<strong>energy</strong>’s wavelength and the size of the interacting particle. When
+the wavelength of incoming <strong>radiation</strong> is larger than the particles
+(gases and water vapor) with which it interacts, Rayleigh scattering
+occurs. Phenomenon related to Rayleigh scattering include Earth’s sky
+appearing blue (Figure <a href="fundamentals-of-remote-sensing.html#fig:11-scattering">5.4</a>). When the wavelength of
+incoming <strong>radiation</strong> is similar to that of the particles with which it
+interacts Mie scattering occurs. The size of particles generally
+considered to similar is between 0.1 - 10 times that of the wavelength
+(Figure <a href="fundamentals-of-remote-sensing.html#fig:11-scattering">5.4</a>). Smoke and dust are common causes of
+Mie scattering. A third type of scattering occurs when the particles
+involved are lager than the wavelength of the incoming <strong>radiation</strong>.
+This is called non-selective scattering and results in the uniform
+scattering of light regardless of the wavelength (Figure
+<a href="fundamentals-of-remote-sensing.html#fig:11-scattering">5.4</a>). Examples of non-selective scattering are
+clouds and fog.</p>
+<div class="figure"><span style="display:block;" id="fig:11-scattering"></span>
+<img src="images/11-scattering.png" alt="Depiction of Rayleigh, Mie and non-selective scattering. Created by The Good Doctor Fry (CC BY-SA 4.0)"  />
+<p class="caption">
+Figure 5.4: Depiction of Rayleigh, Mie and non-selective scattering. Created by The Good Doctor Fry (CC BY-SA 4.0)
+</p>
+</div>
+<p>The combination of these three scattering types leads to drastic
+differences between the amount of solar irradiance at the top of the
+atmosphere and at sea level (Figure <a href="fundamentals-of-remote-sensing.html#fig:11-solar-radiation">5.5</a>).
+There are also a variety of wavelengths at which ozone, oxygen, water
+and carbon dioxide absorb incoming <strong>radiation</strong>, precluding entire
+sections of the EMS from reaching the surface. Overall, only a small
+portion of <strong>energy</strong> emitted from the sun reaches the Earth’s surface
+(~1360 W · m<sup>-2</sup>), depending on the time of day and year. Most
+<strong>energy</strong> is absorbed or scattered by particles in the Earth’s
+atmosphere.</p>
+<div class="figure"><span style="display:block;" id="fig:11-solar-radiation"></span>
+<img src="images/11-solar-radiation.png" alt="Solar radiation spectrum from 250 - 2500 nm. Irradiance measurements at the top of the atmosphere (yellow) and sea level (red) are depicted. The grey line represents the theoretical curve of a 5250 degree C blackbody spectrum. Created by Robert A. Rohde for Global
+Warming Arts (CC BY-SA 3.0), 2007."  />
+<p class="caption">
+Figure 5.5: Solar radiation spectrum from 250 - 2500 nm. Irradiance measurements at the top of the atmosphere (yellow) and sea level (red) are depicted. The grey line represents the theoretical curve of a 5250 degree C blackbody spectrum. Created by Robert A. Rohde for Global
+Warming Arts (CC BY-SA 3.0), 2007.
+</p>
+</div>
+<p>The process of scattering is also affected by the properties with which
+the scattering EMR interacts. The angle at which EMR interacts with a
+surface, as well as the surface material, determine the properties of
+reflection. A reflector is described based on the properties of EMR that
+are reflected from it and range from specular to diffuse (Figure
+<a href="fundamentals-of-remote-sensing.html#fig:11-reflectors">5.6</a>). Specular reflectance occurs when EMR is
+reflected in a single direction and can also be called ansiotropic
+reflectance. A mirror is an example of a specular reflector. A diffuse,
+or Lambertian, reflector reflects EMR in all directions equally and can
+also be called an isotropic reflector. An example of a surface that
+reflects EMR isotropically is paper.</p>
+<div class="figure"><span style="display:block;" id="fig:11-reflectors"></span>
+<img src="images/11-reflectors.png" alt="Depictions of specular and diffuse reflectors. Created by Ant Beck (CC BY-SA 3.0), 2012." width="75%" height="75%" />
+<p class="caption">
+Figure 5.6: Depictions of specular and diffuse reflectors. Created by Ant Beck (CC BY-SA 3.0), 2012.
+</p>
+</div>
+<p>Although specular and diffuse are measured on an spectrum four general
+classifications for reflectors are accepted: perfect specular,
+near-perfect specular, near-perfect diffuse and perfect diffuse. Diffuse
+surfaces tend to be the most useful for remote sensing as they scatter
+light in all directions. This is useful because sensors can only view a
+surface from a single angle and can also be moving. Attempting to
+determine the angle at which EMR is reflected would make many projects
+unfeasible, especially those covering large areas.</p>
+<p>This is not to say that diffuse reflectors are perfect, however, as some
+issues remain related to the angle of incidence and the position of the
+sensor. For example, both back scattering and forward scattering affect
+the amount of radiation that reaches a sensor, depending on where the
+sensor is located. If a sensor is observing an object at the same angle
+as the incident radiation, the majority of reflected EMR will be from
+backscatter, or EMR that is scattered back towards its source. If the
+object being observed is perfectly specular, no EMR reflected off the
+object would be captured by the sensor. If the object is a diffuse or
+near-perfect diffuse reflector, then there is less of a concern with
+regards to capturing reflected EMR.</p>
+</div>
+<div id="foundations-of-measurement" class="section level3" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> <strong>Foundations of Measurement</strong></h3>
+<p>Now that we have discussed radiant <strong>energy</strong> and the concepts
+underpinning its interactions with other objects, we can begin to
+explore the measurements that our sensors record. One of the most
+important concepts to understand is that of the spectral signature, or
+spectra. A spectral signature refers to the amount of electromagnetic
+<strong>energy</strong> recorded across a defined section of the EMS. A nice example
+of a spectral signature is Figure <a href="fundamentals-of-remote-sensing.html#fig:11-solar-radiation">5.5</a>, which
+presents the sun’s <strong>radiation</strong> between 250 - 2500 nm in the units of
+solar irradiance (W/m-2/nm). Similar graphs are common throughout remote
+sensing and can employ different units of measure.</p>
+<p>The base measurements taken to generate spectral signatures is of an
+objects radiance. Acquiring radiance across a defined section of the EMS
+can be conducted by a variety of sensors and at different spatial
+scales, highlighting the practical advantages of evaluating surfaces
+using EMR. To fully capture and compare the objects being measured,
+however, it is often necessary to normalize radiance. The need for
+normalization stems mainly from the aforementioned issues of atmospheric
+effects, source and sensor location and sensor calibration. As with any
+normalization, the first step is to identify our minimum and maximum
+values.</p>
+<p>There are two common reference measurements used to determine minimum
+and maximum radiance: dark and white reference. A dark reference is
+often taken by measuring the amount of <strong>energy</strong> recorded by a sensor
+when the input device is ignored. In theory, this would be the internal
+darkness of the machine and is considered to be the minimum radiance
+value in practice. The maximum radiance value is slight more challenging
+to determine as it requires a perfectly diffuse, flat white surface. A
+commonly used material is Spectralon, which has almost 100% reflectance
+between 400 - 1500 nm and greater than 95% reflectance over the entire
+optical region of the EMS (250 - 2500 nm). With both minimum and maximum
+values defined, it becomes possible to calculate normalized spectral
+values for a variety of properties across changing conditions.</p>
+</div>
+<div id="methods-of-normalization" class="section level3" number="5.3.3">
+<h3><span class="header-section-number">5.3.3</span> <strong>Methods of Normalization</strong></h3>
+<p>Upon calibrating an instrument to both 100% and 0% reflectance, it is
+possible to determine three normalized measurements of EMR: reflectance,
+transmittance and absorption. Each of these measurements provides useful
+information for understanding the interactions between EMR and the
+environment.</p>
+<p>Reflectance refers EMR that has interacted with and effectively bounced
+back. It has emerged as a popular method of evaluating a variety of
+environmental properties, including land use change, plant health and
+plant diversity <span class="citation">(<a href="#ref-asner2011" role="doc-biblioref">Asner et al. 2011</a>)</span>. Another popular normalized measure of the
+interaction between photons and a surface is transmittance. A photon
+that is transmitted has passed through the surface with which it
+interacted and provides insight regarding how much <strong>energy</strong> can reach
+other surfaces below. In a forestry context, this information can be
+particularly useful when determining the amount of <strong>radiation</strong> that
+reaches below the upper canopy (cite LAI, etc.). Absorptance is a third,
+related measurement that refers to the amount of <strong>energy</strong> absorbed by
+the cells within a surface and is roughly equal to the amount of
+<strong>energy</strong> not captured as reflectance or transmittance (Equation
+<a href="fundamentals-of-remote-sensing.html#eq:absorptance">(5.8)</a>).</p>
+<span class="math display" id="eq:absorptance">\[\begin{equation}
+Absorptance = 1 - Reflectance - Transmittance 
+\tag{5.8}
+\end{equation}\]</span>
+<p>Although relatively straight forward, these definitions allow us to
+start exploring a variety of remote sensing applications. In fact, most
+optical remote sensing techniques employ at least one of reflectance,
+transmittance and absorptance to examine the world. Before moving on to
+the next section, please review the work flow below highlighting what we
+have learned so far. In our next steps we will move from theory to
+application and begin to explore the factors that define the quality,
+and therefore capability, of remotely sensed data.</p>
+<div class="box-content your-turn-content">
+<div id="your-turn-2" class="section level4 unnumbered box-title your-turn-top">
+<h4>Your turn!</h4>
+</div>
+<p>Calculate:</p>
+<ol style="list-style-type: decimal">
+<li><p>The number of zeros in 2.5 x 10-7</p></li>
+<li><p>The <strong>energy</strong> (E) of a photon with a wavelength of 450 nm.</p></li>
+<li><p>The absorptance value for a surface with a reflectance of 0.4 and a
+transmittance of 0.35</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="the-four-resolutions" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> The Four Resolutions</h2>
+<p>One of the first considerations any user must make regarding remotely
+sensed data is its quality. For most scientific research, good quality
+data needs to contain information that is relevant to the scale and time
+period of the study. It would be challenging, for example, to evaluate
+the changes in vegetation cover in Vancouver, B.C. from 2010 - 2020 by
+looking at a single image of Calgary, Alberta from 1995. Although this
+example may seem extreme, it highlights the need for data collectors and
+users to communicate about where, when and what is included in a
+dataset. Enter the Four <strong>Resolutions</strong>.</p>
+<div id="spatial-resolution" class="section level3" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> Spatial Resolution</h3>
+<p>Although each resolution is important, spatial resolution holds a key
+position when determine the usefulness of a dataset as it determines the
+scale at which information is collected. When a sensor collects
+information it does so in a single area. That area could be the size of
+a single tree or a single city, but all the EMR measured by the sensor
+will be an average of that area. Generally, this area is referred to as
+a picture element, or <strong>pixel.</strong> A pixel is the smallest addressable
+digital element and basic unit of remotely sensed data. When multiple
+pixels are collected in adjacent areas, perhaps using an instrument with
+multiple sensors on it, the output is called an image. In short, an
+image is a collection of pixels, which represent mean values of
+reflected or transmitted <strong>radiation</strong> over some area. Spatial
+resolution, then, is the ground area represented by a pixel.</p>
+<p>There are a variety of factors that affect spatial resolution, or the
+size of a pixel. One important factor is the sensor’s field of view
+(FOV). A field of view refers to the observable area of a sensor and is
+defined by two things: the angle of the FOV and the sensors distance
+from it’s target. Changes in these two factors result in an increase or
+decrease in the amount of area captured by a senor and therefore a
+change in pixel size. Pixels that cover larger areas are considered to
+have lower spatial resolution, while a relatively smaller pixel is
+considered high resolution. When a sensor is in motion, collecting
+multiple pixels across space and time, the term instantaneous field of
+view (IFOV) is used to describe the FOV at the time each pixel was
+collected. We will learn more about the challenges of collecting data
+over space and time in Chapters 12 and 15.</p>
+<p>To determine if a certain spatial resolution is useful, then it would
+need to be detailed enough to include the features of interest, but
+large enough to be stored and processed in a reasonable manner. It must
+also cover the entire study area, which can vary significantly depending
+on the research objectives. Each of these considerations will direct the
+data user to a specific sensor. From here, the user can begin to
+consider the remaining three resolutions.</p>
+</div>
+<div id="temporal-resolution" class="section level3" number="5.4.2">
+<h3><span class="header-section-number">5.4.2</span> Temporal Resolution</h3>
+<p>Much like spatial resolutions deals with the space that a sensor
+observes, temporal resolution refers to the time interval between
+successive observations of a given space. Temporal resolution can span
+seconds or years and is requirement when investigating change. An
+acceptable temporal resolution is defined inherently by the nature of
+the study. For example, a study monitoring the annual urban expansion of
+Vancouver, B.C. would have a temporal resolution of 1 year. Other common
+temporal resolutions include hourly, for applications monitoring
+weather, and daily, which is often used when monitoring plant phenology.</p>
+</div>
+<div id="spectral-resolution" class="section level3" number="5.4.3">
+<h3><span class="header-section-number">5.4.3</span> Spectral Resolution</h3>
+<p>Earlier in this chapter the concepts and theories surrounding EMR were
+presented. These theories related directly to the concept of spectral
+resolution, which refers to the number and dimension of specific EMR
+wavelengths that a remote sensing instrument can measure. Due to the
+large range of the EMS and properties of EMR, the term spectral
+resolution is often used to refer to any single component of its
+definition. In scientific literature, it is not uncommon to find
+“spectral resolution” referring to:</p>
+<ul>
+<li><p>the number of spectral bands (discrete regions of the EMS) that are
+sensed as a single unit.</p></li>
+<li><p>the location of these units, or groups of bands, along the EMS.</p></li>
+<li><p>the number of individual bands within each unit. Also called
+bandwidth.</p></li>
+</ul>
+<p>Each of these components plays a role is describing the spectral
+resolution of a pixel and enables users to identify appropriate sensors
+for their application. It is also important to consider the laws
+associated with the <strong>energy</strong> of EMR. Recall that shorter wavelengths
+have more <strong>energy</strong>, which makes it easier to detect. The implications
+of this is that longer wavelengths require larger bandwidths for the
+sensor to observe them. An easy visualization of this concept involves
+selecting two wavelengths along the EMS. If we select the first
+wavelength at 0.4 nm and the second wavelength at 0.8 nm, we can use
+Equation <a href="fundamentals-of-remote-sensing.html#eq:energy-wvl">(5.2)</a> to demonstrate that the first wavelength
+has twice as much <strong>energy</strong> as the second. This is an important theory
+to note as the consequences of a decrease in energy is a decrease in
+spatial resolution (a larger number of bands need to be combined to
+collect enough information).</p>
+<p>A common method for visualizing the spectral resolution of a sensor is
+to place each band along the EMS according to it’s associated bandwidth
+and wavelengths (Figure <a href="fundamentals-of-remote-sensing.html#fig:11-landsat-bands">5.7</a>). This allows users
+to determine which sensor best captures the information they are
+interested in studying. For some applications, such as land cover, it is
+acceptable to use sensors with relatively wide bands collecting
+information in a small number of strategic locations along the EMS. For
+other applications, spectral information may need to be more detailed
+and capture information using thin, adjacent bands spanning a large
+region of the EMS. These specifications will be discussed in greater
+detail in Chapter 12, so for now we’ll focus on how spectral information
+can be useful.</p>
+<div class="figure"><span style="display:block;" id="fig:11-landsat-bands"></span>
+<img src="images/11-landsat-bands.png" alt="Locations of bands for various sensors deployed by NASA on one of more Landsat misison. Landsat 1-5 had the Multispectral Scanner System (MSS), while the Thematic Mapper (TM) was aboard Landsat 4-5. The Enrinched TM Plus (ETM+) had 8 bands and was aboard Landsat 7. Grey distributions in the background represent the atmospheric transmission values for a mid-latitude, hazy, summer atmosphere. This image was created by NASA." width="100%" />
+<p class="caption">
+Figure 5.7: Locations of bands for various sensors deployed by NASA on one of more Landsat misison. Landsat 1-5 had the Multispectral Scanner System (MSS), while the Thematic Mapper (TM) was aboard Landsat 4-5. The Enrinched TM Plus (ETM+) had 8 bands and was aboard Landsat 7. Grey distributions in the background represent the atmospheric transmission values for a mid-latitude, hazy, summer atmosphere. This image was created by NASA.
+</p>
+</div>
+<p>The collection of spectral data across more than one band allows the
+creation of a spectral curve, or spectral signature. Spectral signature
+are the cornerstone of many remote sensing applications and highlight
+many properties of the surface from which they were collected. The
+creation of a spectral signature is quite simple and can be depicted in
+two dimensions (Figure <a href="fundamentals-of-remote-sensing.html#fig:11-specsig">5.8</a>. Essentially, the observed
+value of each band is connected to the observed value of each adjacent
+band in 2D space. When all bands are connected, a spectral signature is
+born. As we will see in a later case study, spectral signatures can
+provide a plethora of relevant information relating to the composition
+of an object.</p>
+<div class="figure"><span style="display:block;" id="fig:11-specsig"></span>
+<img src="images/11-spectralsig.png" alt="Five spectral signatures of various living and non-living samples collected using an ASD FieldSpec3 Imaging Spectroradiometer." width="200%" />
+<p class="caption">
+Figure 5.8: Five spectral signatures of various living and non-living samples collected using an ASD FieldSpec3 Imaging Spectroradiometer.
+</p>
+</div>
+</div>
+<div id="radiometric-resolution" class="section level3" number="5.4.4">
+<h3><span class="header-section-number">5.4.4</span> Radiometric Resolution</h3>
+<p>In short, radiometric resolution is the quantification of a sensors
+ability to detect differences in <strong>energy</strong>. Photons enter a sensor
+through a filter that only permits specific wavelengths.The <strong>energy</strong>
+of the photon is recorded as a digital number (DN) and the digital
+number is assigned to a pixel.</p>
+<p>A simple visualization of radiometric resolution would be to think of
+three colors: red, green and blue (Figure Cambridge in color). A sensor
+detecting <strong>energy</strong> in the ranges of these three wavelengths would
+contain three separate detectors. Each detector is specialized to record
+<strong>energy</strong> in a single, unique range, say red (~700 nm). The amount of
+<strong>energy</strong> that is recorded while observing an area is stored in a pixel
+as a DN, with the lowest DN number representing zero sensor detected
+<strong>energy</strong> in this wavelength range and the highest DN representing
+maximum sensor detected <strong>energy</strong>.</p>
+<p>The radiometric resolution of a detector, then, is the number of
+discernible values, or segments, present between zero and maximum DN
+values. These segments are usually referred to as bits and can be
+mathematically represented as an exponent of 2 (Equation
+<a href="fundamentals-of-remote-sensing.html#eq:bits">(5.9)</a>). The number of bits in that a detector can resolve may
+also be called the <em>color depth</em> of the image. Figure
+<a href="fundamentals-of-remote-sensing.html#fig:11-radiometric">5.9</a> clearly presents the increase in detail
+provided by additional bits, but recall that increasing any resolution
+generally increases storage and processing time. As such, it is
+important to select an appropriate radiometric resolution based on the
+needs of your study.</p>
+<span class="math display" id="eq:bits">\[\begin{equation}
+8 bits = 2^8 = 256 levels
+\tag{5.9}
+\end{equation}\]</span>
+<div class="figure"><span style="display:block;" id="fig:11-radiometric"></span>
+<img src="images/11-radiometric-res.PNG" alt="Discernable values of sensors with 1, 2 and 4 bot radiometric resolutions. Created by Paul Hacker CC BY-SA 4.0."  />
+<p class="caption">
+Figure 5.9: Discernable values of sensors with 1, 2 and 4 bot radiometric resolutions. Created by Paul Hacker CC BY-SA 4.0.
+</p>
+</div>
+</div>
+</div>
+<div id="key-applications" class="section level2" number="5.5">
+<h2><span class="header-section-number">5.5</span> Key Applications</h2>
+<p>So far in this chapter we have covered the theories and concepts that
+justify the use of EMR for remote sensing. With these fundamentals in
+mind, we can begin discussing some common applications of remote
+sensing. For the purposes of this book, we will focus on studies related
+to environmental management.</p>
+<p>The use of optical remote sensing (400 - 2500 nm) to analyze the
+environment has become popular over the past half century. Sensor
+development, improved deployability and decreasing costs have enabled
+many researchers to use selected sections of the EMS to monitor
+everything from the chlorophyll content of a single leaf <span class="citation">(<a href="#ref-curran1989" role="doc-biblioref">Curran 1989</a>)</span>
+to global forest cover <span class="citation">(<a href="#ref-hansen2013" role="doc-biblioref">Hansen 2013</a>)</span>.</p>
+<p>Large-scale research projects focused at national or international
+levels have perhaps benefit the most from improved sensor deployment.
+Since the 1960s, a variety of satellites have been launched with the
+sole purpose of observing the Earth. Landsat is NASA suite of satellites
+designed specifically for this purpose. By the end of 2021, a total of
+nine Landsat missions will have been launched, eight of which have
+successfully reached orbit and provided imagery in at least 5 broad
+spectral bands at 30 m-2 spatial resolution. This information has been
+used to monitor of land cover change, ecosystem services and a variety
+of other environmentally relevant metrics <span class="citation">(<a href="#ref-deel2012" role="doc-biblioref">Deel et al. 2012</a>)</span>. The case study at
+the end of this section highlights a particularly novel approach to
+optical remote sensing that has become a popular methodology to evaluate
+plant health and biodiversity <span class="citation">(<a href="#ref-ustin2009" role="doc-biblioref">Ustin and Schaepman 2009</a>; <a href="#ref-wang2018" role="doc-biblioref">Wang et al. 2018</a>)</span>.</p>
+<p>As far as Canada’s contributions to remote sensing sensors rank,
+RADARsat is among the most important <span class="citation">(<a href="#ref-raney1991" role="doc-biblioref">Raney et al. 1991</a>)</span>. This satellite was
+launched in 1995 and has grown to a constellation of three space-borne
+synthetic aperture radar (SAR) sensors that feature variable resolution.
+As an active sensor, RADARsat produces and measures EMR with wavelengths
+between 7.5 - 15 cm and is capable of penetrating clouds and smoke
+<span class="citation">(<a href="#ref-raney1991" role="doc-biblioref">Raney et al. 1991</a>)</span>. It’s active nature also enables RADARsat to record
+observations at night. Chapter 12 will discuss radar in more detail.</p>
+<p>Another active remote sensing technique that has become popular is light
+detection and ranging (LiDAR), which can also be called airborne laser
+scanning (ALS). LiDAR is particularly useful in evaluating structural
+components of the environment, such as forest canopies and elevation
+<span class="citation">(<a href="#ref-coops2007" role="doc-biblioref">Coops et al. 2007</a>)</span>. More details regarding the theories and applications of
+LIDAR will be presented in Chapter 15.</p>
+<div class="box-content case-study-content">
+<div id="case-study-3" class="section level4 unnumbered box-title case-study-top">
+<h4>Case Study</h4>
+</div>
+<div id="optical-remote-sensing-to-evaluate-land-cover-in-canada" class="section level4 unnumbered">
+<h4>Optical remote sensing to evaluate land cover in Canada</h4>
+<p>
+<p>The capacity to evaluate change in an environment relies on the ability
+to capture information at useful resolutions. Land cover, which is
+simply the combination of abiotic and biotic components existing in a
+defined area, is a useful metric for evaluating changes across an
+ecosystem and land cover analyses have been deployed at a variety of
+scales. These studies can be limited, however, by the resolutions at
+which information is collected. Hermosilla et al., 2018 provide an
+interesting method of land cover assessment that utilizes Landsat to
+derive land cover and land cover change across Canada over a 29 year
+span <span class="citation">(<a href="#ref-hermosilla2018" role="doc-biblioref">Hermosilla et al. 2018</a>)</span>.</p>
+<p>Before exploring the methods of this study, it is important to highlight
+the qualities of the Landsat program that enabled it. Launched in 1973,
+Landsat was NASA’s first satellite designated for evaluating Earth’s
+surface. Although a variety of technological upgrades have been
+introduced since the 1973 launch, each Landsat satellite has a spatial
+resolution of 30m<sup>2</sup>. Considering the spatial coverage of this mission
+includes the majority of our planet, this spatial resolution is quite
+useful.</p>
+<p>Another important quality of Landsat is that every satellite carries a
+multi-spectral sensor with at least four bands, which enables the
+differentiation between multiple land cover classes, including
+vegetation and urban building. More information regarding the changes in
+spectral resolution between Landsat satellites can be found in Figure
+<a href="fundamentals-of-remote-sensing.html#fig:11-landsat-bands">5.7</a>. The temporal resolution of Landsat is the
+third high-quality characteristic of this satellite mission that enables
+the accurate evaluation of land cover. With a return interval of 16
+days, Landsat provides information for the same location on Earth almost
+twice per month. This is particularly important for a country as large
+as Canada, which contains 12 ecozones dominated by forest, and enables
+the selection of a Best Available Pixel (BAP), which is selected based
+on a variety of criteria that quantifies a pixels quality (Figure
+<a href="fundamentals-of-remote-sensing.html#fig:11-hermo-false">5.10</a>). You can learn more about Landsat BAP in
+<span class="citation">(<a href="#ref-thompson2015" role="doc-biblioref">Thompson et al. 2015</a>)</span>.</p>
+</p>
+<div class="figure"><span style="display:block;" id="fig:11-hermo-false"></span>
+<img src="images/11-hermosilla-false-colour.png" alt="False colour composite (bands: shortwave infrared, near infrared and red) for 2010. Each pixel in this image was selected based on its classification as a Best Available Pixel (BAP)." width="90%" />
+<p class="caption">
+Figure 5.10: False colour composite (bands: shortwave infrared, near infrared and red) for 2010. Each pixel in this image was selected based on its classification as a Best Available Pixel (BAP).
+</p>
+</div>
+<p>
+<p>For their analysis, Hermosilla et al., 2018 use imagery captured from
+Landsat 5 onward with the Thematic Mapper, which means their data
+contains seven unique spectral bands spanning segments between 0.45 nm
+to 2.35 nm. The ability to observe reflectance values across a
+relatively wide range of the EMS enabled land cover analysis across all
+forested eco-regions in Canada. After applying a masking model, the
+authors were provided a framework to generate annual land cover maps for
+all of Canada’s forested areas, which were presented at the beginning of
+this chapter (Figure <a href="fundamentals-of-remote-sensing.html#fig:11-hermosilla-canada-landcover">5.2</a>). From
+these annual composites, it was also possible for the authors to
+indentify land cover change over time and quantify the effects of
+specific disturbance types, such as harvesting and fire (Figure
+<a href="fundamentals-of-remote-sensing.html#fig:11-hermo-disturb">5.11</a>). These comprehensive maps demonstrate the
+capability of well-designed remote sensing technologies to obtain
+scientifically relevant information and highlight the potential of
+remote sensing in environmental assessment.</p>
+</p>
+<div class="figure"><span style="display:block;" id="fig:11-hermo-disturb"></span>
+<img src="images/11-hermo-disturbance.png" alt="Temporal sequences depicting landcover before and after (a) harvesting and (b) fire. The year of change is represented by 'Y'. Adapted from Hermosilla et al., 2018." width="90%" />
+<p class="caption">
+Figure 5.11: Temporal sequences depicting landcover before and after (a) harvesting and (b) fire. The year of change is represented by ‘Y.’ Adapted from Hermosilla et al., 2018.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="summary-4" class="section level2" number="5.6">
+<h2><span class="header-section-number">5.6</span> Summary</h2>
+<p>In this chapter we have covered a variety of physical theories that
+support the use of electromagnetic <strong>radiation</strong> for the remote analysis
+of objects. These ideas provide the fundamental knowledge needed to
+employ remote sensing technologies. From sensor selection to data
+processing, your ability to perform remote sensing science will rely
+almost exclusively on your capacity to comprehend the relationships
+between the objects of interest and the physical properties that
+comprise them.</p>
+<p>In the next chapter you will enter the world of sensors and explore a
+vast amount of technologies that collect information remotely. This
+journey will include active and passive instruments, as well as examples
+of scientific studies that have successfully employed the data they
+collect. Much like a carpenter selecting the correct tool for a specific
+task, you will need apply your knowledge of the fundamentals to identify
+the best sensor for your research.</p>
+<div id="reflection-questions-3" class="section level3" number="5.6.1">
+<h3><span class="header-section-number">5.6.1</span> Reflection Questions</h3>
+<ol style="list-style-type: decimal">
+<li>What section of the electromagnetic spectrum is adjacent to, but
+shorter in wavelength than, what the human eye can see?</li>
+<li>What is the general term used to describe the process that stops
+large amounts of electromagnetic radiation from reaching the Earth’s
+surface. Name the three types?</li>
+<li>List and describe the four resolutions.</li>
+<li>Why is using the Best Available Pixel important for land cover
+mapping?</li>
+</ol>
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-asner2011" class="csl-entry">
+Asner, Gregory P., Roberta E. Martin, David E. Knapp, Raul Tupayachi, Christopher Anderson, Loreli Carranza, Paola Martinez, Mona Houcheime, Felipe Sinca, and Parker Weiss. 2011. <span>“Spectroscopy of Canopy Chemicals in Humid Tropical Forests.”</span> <em>Remote Sensing of Environment</em> 115 (12): 35873598. <a href="https://doi.org/10.1016/j.rse.2011.08.020">https://doi.org/10.1016/j.rse.2011.08.020</a>.
+</div>
+<div id="ref-coops2007" class="csl-entry">
+Coops, Nicholas C., Thomas Hilker, Michael A. Wulder, Benoît St-Onge, Glenn Newnham, Anders Siggins, and J. A. Trofymow. 2007. <span>“Estimating Canopy Structure of Douglas-Fir Forest Stands from Discrete-Return LiDAR.”</span> <em>Trees - Structure and Function</em> 21 (3): 295310. <a href="https://doi.org/10.1007/s00468-006-0119-6">https://doi.org/10.1007/s00468-006-0119-6</a>.
+</div>
+<div id="ref-curran1989" class="csl-entry">
+Curran, Paul J. 1989. <span>“Remote Sensing of Foliar Chemistry.”</span> <em>Remote Sensing of Environment</em> 30 (3): 271278. <a href="https://doi.org/10.1016/0034-4257(89)90069-2">https://doi.org/10.1016/0034-4257(89)90069-2</a>.
+</div>
+<div id="ref-deel2012" class="csl-entry">
+Deel, Lindsay N., Brenden E. McNeil, Philip G. Curtis, Shawn P. Serbin, Aditya Singh, Keith N. Eshleman, and Philip A. Townsend. 2012. <span>“Relationship of a Landsat Cumulative Disturbance Index to Canopy Nitrogen and Forest Structure.”</span> <em>Remote Sensing of Environment</em> 118: 4049. <a href="https://doi.org/10.1016/j.rse.2011.10.026">https://doi.org/10.1016/j.rse.2011.10.026</a>.
+</div>
+<div id="ref-hansen2013" class="csl-entry">
+Hansen, M C. 2013. <span>“High-Resolution Global Maps Of”</span> 850 (November): 850854. <a href="https://doi.org/10.1126/science.1244693">https://doi.org/10.1126/science.1244693</a>.
+</div>
+<div id="ref-hermosilla2018" class="csl-entry">
+Hermosilla, Txomin, Michael A. Wulder, Joanne C. White, Nicholas C. Coops, and Geordie W. Hobart. 2018. <span>“Disturbance-Informed Annual Land Cover Classification Maps of Canada’s Forested Ecosystems for a 29-Year Landsat Time Series.”</span> <em>Canadian Journal of Remote Sensing</em> 44 (1): 6787. <a href="https://doi.org/10.1080/07038992.2018.1437719">https://doi.org/10.1080/07038992.2018.1437719</a>.
+</div>
+<div id="ref-raney1991" class="csl-entry">
+Raney, R.K., A.P. Luscombe, E.J. Langham, and S. Ahmed. 1991. <span>“RADARSAT (SAR Imaging).”</span> <em>Proceedings of the IEEE</em> 79 (6): 839–49. <a href="https://doi.org/10.1109/5.90162">https://doi.org/10.1109/5.90162</a>.
+</div>
+<div id="ref-thompson2015" class="csl-entry">
+Thompson, Shanley D., Trisalyn A. Nelson, Joanne C. White, and Michael A. Wulder. 2015. <span>“Mapping Dominant Tree Species over Large Forested Areas Using Landsat Best-Available-Pixel Image Composites.”</span> <em>Canadian Journal of Remote Sensing</em> 41 (3): 203–18. <a href="https://doi.org/10.1080/07038992.2015.1065708">https://doi.org/10.1080/07038992.2015.1065708</a>.
+</div>
+<div id="ref-ustin2009" class="csl-entry">
+Ustin, Susan L., and Michael E. Schaepman. 2009. <span>“Imaging Spectroscopy Special Issue.”</span> <em>Remote Sensing of Environment</em> 113 (SUPPL. 1): S1. <a href="https://doi.org/10.1016/j.rse.2008.09.018">https://doi.org/10.1016/j.rse.2008.09.018</a>.
+</div>
+<div id="ref-wang2018" class="csl-entry">
+Wang, Ran, John A. Gamon, Jeannine Cavender-Bares, Philip A. Townsend, and Arthur I. Zygielbaum. 2018. <span>“The Spatial Sensitivity of the Spectral Diversity-Biodiversity Relationship: An Experimental Test in a Prairie Grassland.”</span> <em>Ecological Applications</em> 28 (2): 541556. <a href="https://doi.org/10.1002/eap.1669">https://doi.org/10.1002/eap.1669</a>.
+</div>
+<div id="ref-zwinkels2020" class="csl-entry">
+Zwinkels, Joanne. 2020. <span>“Encyclopedia of Color Science and Technology.”</span> <em>Encyclopedia of Color Science and Technology</em>, 18. <a href="https://doi.org/10.1007/978-3-642-27851-8">https://doi.org/10.1007/978-3-642-27851-8</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="network-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="image-processing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["open-geomatics-textbook.pdf", "open-geomatics-textbook.epub"],
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -29,6 +29,7 @@ gitbook.require(["gitbook", "lodash", "jQuery"], function(gitbook, _, $) {
         // lunr cannot handle non-English text very well, e.g. the default
         // tokenizer cannot deal with Chinese text, so we may want to replace
         // lunr with a dumb simple text matching approach.
+
         if (_search.engine === 'lunr') {
           index = lunr(function () {
             this.ref('url');

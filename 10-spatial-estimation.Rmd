@@ -1,5 +1,12 @@
 # Spatial Estimation {#spatial-estimation}
 
+**Geostatistics** uses the metrics based on statistical tools that are used to characterize the distribution of an event across the geographical region of interest (Getis et al., 2004).In context of spatial data, it is important to understand what is occurring where. Sometimes there is a detailed and precise information of an event across the geographical area such that a continuous map can be built out of that information. While, most of the time , only discrete and unrepresentative information on the spatial event is collected, which doesnot allow to create a precise continuous surface of the event over entire geographic area of interest. In such scenario, researchers should focus on two things; 
+
+1) How can researchers best utilize the available discrete information to represent the event across entire area using the appropriate sampling strategies. 
+
+2) Once a good sampling strategy is employed, researchers should be able to estimate the occurrence of the event across the unsampled region in the entirety of study area using proper spatial estimation technique.
+
+This chapter introduces some basic ideas on different types of **sampling** strategies in spatial context. In addition, this chapter also introduces various type of spatial statistics that are being used in **estimating** the occurrence of events in the unsampled locations. 
 
 :::: {.box-content .learning-objectives-content}
 
@@ -14,7 +21,6 @@
 
 ::::
 
-
 ### Key Terms {-}
 
 Sampling, Spatial autocorrelation, Moran's I, Kriging, Interpolation, Spatial regression
@@ -23,17 +29,24 @@ Sampling, Spatial autocorrelation, Moran's I, Kriging, Interpolation, Spatial re
 
 Like any other data, spatial data will only make true sense if it can represent the entire population of the interest and provide some flexibility in level of spatial analysis that can be performed from it. A representative sample will allow us to make unbiased and more accurate inferences of certain attribute of the population. While, spatial analysis will allow to understand where and what is occurring in the area of our interest.Two kind of limitation are inherent in a spatial data:
 
-1. There is a high chance that the information regarding an attribute may be present as a duplicate due to spatial autocorrelation.
+1. There is a high chance that the information regarding an attribute may be present as a duplicate due to **spatial autocorrelation**.
 
 2. On the other hand, a spatial data can carry the unobserved location within a study area. 
 
-To overcome this limitation, one should come up with a proper sampling strategies to ensure that the given sample is representative, big enough and doesnot contain any redundant information. While the need to account for additional variables about a location may be intimidating, many spatial statistic processes are out there to help with basic prediction and estimation of the information in an unobserved location. For example, interpolation and spatial regression can help us estimate or predict the value of a variable in a sampled location. Similarly, spatial autocorrelation measures the degree of similarity between samples at different sampled locations.
+To overcome this limitation, one should come up with a proper **sampling** strategies to ensure that the given sample is representative, big enough and doesnot contain any redundant information. While the need to account for additional variables about a location may be intimidating, many spatial statistic processes are out there to help with basic **prediction** and **estimation** of the information in an unobserved location. For example, interpolation and spatial regression can help us estimate or predict the value of a variable in a sampled location. Similarly, **spatial autocorrelation** measures the degree of similarity between samples at different sampled locations.
+
+
+## Classical vs. Geostatistical Inferences
+
+In classical statistics, the variance is assumed to be totally random when samples are drawn from a defined sampling space [@Jacquez] and are assumed to come from one distribution [@Steel and Torrie 1990]. The inference about the population is the based on the comparison of a test statistic calculated for a sample to the distribution of the statistic under the null hypothesis for the reference distribution [@Jacquez]. The significance level of a test statistics from the sample is compared with the critical value of test statistics obtained by repeatedly reordering the data at random proportion [@Jacquez]. Interpretation of this significance level on the classical model: if less than or equal to the a level (usually 5%) the null hypothesis of ‘no pattern’ is rejected [@Jacquez].
+
+While in geostatistics, the variance is assumed to be partly random and each point in the field represents a sample from some distribution. However,the distribution at any one point may differ completely from that at all other points in its shape, mean, and variance. The distribution of differences in sample values separated by a specified distance is assumed to be the same over the entire field. In geostatistics, if the sample values are similar (also know as **spatial autocorrelation**) given that they are in proximity to each other, the random variance of the distribution of differences in sample values is relatively small. If the sample values doesnot show spatial autocorrelation, the variance is larger. In geostatistics, the **semi-variance**, i.e., half of the variance is used to measure the similarity between points at a given distance apart. Using the semivarince, a graph of semivariance versus distance is constructed, know as **semi-variogram**. Thus, in geostatistics, there are two stages: 1) semivariogram construction and 2) incorporating semi-variogram to estimate the values at unsampled locations using various spatial methods (Clark, 1980). We will get into details about semivariogram construction and spatial methods in the later sections of this chapter. 
 
 ## Sampling
 
-Sampling can be defined as the process of selecting some part of a population in order to make an inference, and estimate some parameters about the whole population[@thompson2012sampling]. For example, to estimate the amount of biomass of trees in Malcom knapp forest, BC, scientist collects the data on tree size, and height from randomly distributed 100 small plots across the forest. Based on some equations and using the tree data on height and size from 100 plots, biomass of entire Malcom knapp forest can be estimated. Similarly, to estimate the amount of recoverable oil in a region, a few (highly expensive) sample holes are drilled (example adapted from @thompson2012sampling). The situation is similar in a national opinion survey, in which only a sample of the people in the population is contacted, and the opinions in the sample are used to estimate the proportions with the various opinions in the whole population (example adapted from @thompson2012sampling, pp.1). 
+**Sampling** can be defined as the process of selecting some part of a population (also known as **sample**) in order to make an inference, and estimate some parameters about the whole population[@thompson2012sampling]. For example, to estimate the amount of biomass of trees in Malcom Knapp Forest, BC, scientist collects the data on tree size, and height from randomly distributed 100 small plots across the forest. Based on some equations and using the tree data on height and size from 100 plots, biomass of entire Malcom knapp forest can be estimated. Similarly, to estimate the amount of recoverable oil in a region, a few (highly expensive) sample holes are drilled (example adapted from @thompson2012sampling). The situation is similar in a national opinion survey, in which only a sample of the people in the population is contacted, and the opinions in the sample are used to estimate the proportions with the various opinions in the whole population (example adapted from @thompson2012sampling, pp.1). 
 
-Sampling shouldnot be confused with observational study. In an observational study, one has no control over the sample while in sampling one can deliberately select samples which prevent research bias[@thompson2012sampling]. Sampling accounts on how data can be collected out of every possibilities under the control of investigator [@thompson2012sampling]. 
+**Sampling** shouldnot be confused with **observational** study. In an observational study, one has no control over the sample while in sampling one can deliberately select samples which prevent research bias[@thompson2012sampling]. Sampling accounts on how data can be collected out of every possibilities under the control of investigator [@thompson2012sampling]. 
 
 Broadly, sampling can be categorized into two groups [@Teddlie2007]:
 
@@ -1618,12 +1631,33 @@ Disjunctive kriging allows to estimate the value of a variable of interest at an
 
 ## Spatial regression models
 
+For classical statistics tests,**spatial autocorrelation** is problematic as ordinary least square (regression) or analysis of variance (ANOVA) assumes that observations are independent in space and time. However, geostatistical data violates the assumptions of independence, and using regression and ANOVA might inflate the significance of t and F statistics, when, in fact, they may not be significant at all [@Meng]. In that case one should try to improve the regression model by adding important **auxiliary** (independent variables that are associated or important in predicting the variables of interest) and incorporating the spatial autocorrelation structure using spatial regression model. We will show two examples of spatial regression model in this section using our familiar YSm data for Fort Saint Johns TSA. 
+
+
+:::: {.box-content .case-study-content}
+
+::: {.box-title .case-study-top}
+#### Case Study {-}
+:::
+For this case study, we will use ground plot data from Young stand monitoring (YSM) program data [@ProvinceofBC2018] for Fort saint Johns timber supply area (TSA) in the province of British Columbia, Canada.Fort saint johns is divided into 6 blocks respectively **Figure 10.17**. There is a total of 108 YSM plots used in this study **Figure 10.17**. The total basal area (m2/ha) is our variable of interest or response variable in this study. For each of the YSM plot the total basal area was calculated by adding the basal area for all trees within the plot. We will use the auxillary variables such as stems per hectare, elevation, site index, and slope percent 
+<p id="box-text">
+</p>
+
+<p id="box-text">
+</p>
+
+<p id="box-text">
+</p>
+::::
+
 ### Spatial lag model 
+
+Spatial lag models assume that the spatial autocorrelation only exist in the response variable or the variable of interest.
+
+##### Steps in fitting spatial lag model 
 
 ### Spatial error model 
 
-### Trend surface analysis 
-
-### Geographically weighted regression
+Spatial error models assume that the spatial autocorrelation exists in the residuals or the error term of the regression equation.
 
 

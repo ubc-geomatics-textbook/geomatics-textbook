@@ -238,9 +238,33 @@ _Wondering if this section is necessary. In order to explain principle points, w
 
 ### Field of View
 
-Though you are looking at a screen to read this, there are other objects you can see above, below, and beside it; if someone walks into the room behind you, you can turn your head to look at them. Everything you can see without standing up or leaning over is your *field of view*. Similarly, the field of view of a remote sensing system refers to everything in a scene it can detect without shifting its position. Field of view is negatively related to the spatial resolution of an image - a large field of view results in a larger pixel size and vice versa. It is also related to focal length as mentioned previously, but this is not particularly important for us to study.
+Though you are looking at a screen, there are likely other objects you can see above, below, and beside it. If someone walks into the room behind you, you may turn your head to look at them. If you hear the phone ringing in another room, you may walk over to see who is calling. All of these scenarios represent different uses of your *field of view* (FOV), or what you can see in a given moment.
 
+Building and launching remote sensing systems is very costly, so its in our best interest to have them see as much as possible with the least expenditure of effort. We can maximize the FOV of a remote sensing system by giving it the freedom to "look around". Humans have three degrees of motion that allow us to change our FOV: scanning with our eyes, swiveling our heads, and shifting the position of our bodies. Optical systems can have three analogous degrees of motion: the motion of the lens elements (eyes), the motion of the camera (head), and the motion of the platform (body).
 
+Examples of optical systems with different degrees of motion are given in table \@ref(fig:12-DoM-table).
+
+<br>
+
+```{r 12-DoM-table, fig.cap = fig_cap, out.width="100%", echo = FALSE}
+
+fig_cap <- paste("Table showing examples of motion in remote sensing systems")
+
+table <- as.data.frame(read.csv(here::here("data", "12", "DoM-table.csv")))
+
+knitr::kable(table)
+
+```
+
+<br>
+
+Remote sensing systems typically have zero, one, or two degrees of motion. Rarely do optical systems have all three. There are two reasons for this: first that its not necessary to have so much adjustment, and second that more moving parts means a higher possibility of malfunction, which is a real headache when the defunct system could be 700 km above the Earth's surface.
+
+When a remote sensing system has two or more degrees of motion, we introduce a second measure of FOV called the *instantaneous field of view*, or *IFOV*. The FOV tells us what the remote sensing system is capable of seeing through its entire range of motion. The IFOV tells us what the remote sensing system can detect in a single given moment in that range of motion. Frequently, the IFOV of a system is a single pixel.
+
+FOV and IFOV are measured as the angle subtended by the camera
+
+<br>
 
 :::: {.box-content .call-out-content}
 

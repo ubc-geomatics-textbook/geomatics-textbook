@@ -111,25 +111,7 @@ When you measure the height of something relative to a gravimetric vertical datu
 
 <p id="box-text">For reference, CGVD2013 is 17 centimeters below mean sea level measured in Vancouver at the Pacific Ocean, 39 centimeters above mean sea level in Halifax at the Atlantic Ocean, and 36 centimeters above mean sea level in Tuktoyaktuk at the Arctic Ocean. The older CGDV28 did not have any survey benchmarks in the far north of Canada and, with the advent of more reliable satellite-based measurements, was modernized in 2015 to CGVD2013. The United States currently uses the North American Vertical Datum of 1988 (NAVD88), which was never adopted by Canada, but the United States will be modernizing their vertical datum by adopting a gravimetric model with the same gravity potential value as Canada as early as 2025.</p>
 
-``` {r echo=F, message=F, warning=F}
-library(rgdal)
-library(leaflet)
-library(RColorBrewer)
-library(raster)
 
-countries <- rgdal::readOGR("data/canada.geojson")
-r <- raster("data/CGG2013_minus_HT21997_meters.tif")
-p <- brewer.pal(11,"RdYlBu")
-pal <- colorNumeric(p, values(r), na.color = "transparent")
-
-m <- leaflet(countries) %>%
-  addTiles() %>%
-  addScaleBar(position = c("topleft")) %>%
-  addRasterImage(r, colors = pal, group = "Difference", opacity = 1, maxBytes = "Inf") %>%
-  addPolygons(stroke = T, color="black", weight=1, smoothFactor = 0.3, fillOpacity = 0) %>%
-  addLegend(pal = pal, values = values(r), group = "Difference", opacity = 1, title = "CGVD2013 minus CGVD28 (meters)")
-m
-```
 
 ::::
 
@@ -257,45 +239,22 @@ Albers is another example of an equivalent map projection, but unlike Sinusoidal
 Azimuthal projections use a flat circular plane to project the Earth onto a map. This plane is usually oriented so that it is tangent at a single point, usually the North or South Pole. In the case of a polar azimuthal projection, meridians radiate outward as straight lines from the pole to the edge of the circular plane and the parallels are represented as concentric circles. As a result, distortion increases as you move away from the centre point of the map with the outer edge of the plane representing an **antipode** or an opposite point on Earth. The primary benefit of azimuthal projections is that they preserve direction and distance between the centre point and any other point in the map (Figure 2.18). The shortest geographic distance between the centre point and any other point creates a line known as a **great circle**, which divides the Earth into two equal portions. So another benefit of an Azimuthal project is that great circles can be mapped as straight lines. Azimuthal projections are commonly used when distance and direction are important, such as weather RADAR stations or air traffic control towers. It is important to realize that the centre point for an azimuthal projection can be any point on Earth and the equidistant property can be exploited for a number of applications.
 
 ![Figure 2.18 North Pole Azimuthal map projection with Tissot's Indicatrices in red](images/02-Azimuthal-map.png){.center}
-<br/>
-
-:::: {.box-content .your-turn-content}
-
-::: {.box-title .your-turn-top}
-#### Your turn! {-}
-:::
-
-<p id="box-text">
-Add projection explorer transition tool here.
-<br>
-<select id="projection-menu"></select></p>
-
-::: {#map}
-:::
-
-::: {.centered-box-content}
-<button id="pause">Pause</button>
-:::
-
-<p id="box-text"></p>
-
-::::
 
 ## Summary
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
+In this chapter, you learned about the science and technology of geodesy that goes into mapping data. We described the different models of Earth's shape and the advantages and disadvantages that each model has. More generally, models of Earth represent vertical datums to which heights are referenced. When we think of "where" something is on Earth, we must use horizontal datums to reference location. There are two types of horizontal datums that are very important to geomatics: (1) a geographic coordinate system uses lines of latitude and longitude to define locations on Earth's 3-dimensional surface while (2) a projected coordinate system flattens Earth into a manageable 2-dimensional coordinate space. In the case of projected coordinate systems, we have many choices when deciding which map projection to use when we map data, each with its own uses and distortions. The next time that you look at a map, ask yourself with your new found appreciation of geodesy, how is this information being misrepresented to me?
 
 ### Reflection Questions {-}
 
-1. Explain ipsum lorem.
-2. Define ipsum lorem.
-3. What is the role of ispum lorem?
-4. How does ipsum lorem work?
+1. Describe the process of measuring the height of something on Earth.
+2. Explain the difference between a geographic coordinate system and a projected coordinate system.
+3. Name as many projected coordinate systems as you can.
+4. 
 
 ### Practice Questions {-}
 
-2. Given ipsum, solve for lorem.
-3. Draw ipsum lorem.
+1. Choose a continent to roughly draw and then draw a grid of latitude and longitude lines in 3 different projected coordinate systems on a piece of paper. Describe the distortions that you expect and point to where they appear on your continent.
+2. x`x`
 
 ## Recommended Readings {-}
 

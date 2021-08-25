@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 15 LiDAR Acquisition and Analysis | An Open Geomatics Textbook</title>
+  <meta name="description" content="Advancing teaching and learning in geomatics at UBC" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 15 LiDAR Acquisition and Analysis | An Open Geomatics Textbook" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/ubc-geomatics-textbook/book/" />
+  
+  <meta property="og:description" content="Advancing teaching and learning in geomatics at UBC" />
+  <meta name="github-repo" content="ubc-geomatics-textbook/book" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 15 LiDAR Acquisition and Analysis | An Open Geomatics Textbook" />
+  
+  <meta name="twitter:description" content="Advancing teaching and learning in geomatics at UBC" />
+  
+
+<meta name="author" content="UBC" />
+
+
+<meta name="date" content="2021-08-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="image-analysis.html"/>
+<link rel="next" href="data-integration.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.4.1/leaflet-providers-plugin.js"></script>
+
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">An Open Geomatics Textbook</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#contacts"><i class="fa fa-check"></i><b>0.1</b> Contacts</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#project-wiki"><i class="fa fa-check"></i><b>0.2</b> Project Wiki</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#style-guide"><i class="fa fa-check"></i><b>0.3</b> Style Guide</a>
+<ul>
+<li class="chapter" data-level="0.3.1" data-path="index.html"><a href="index.html#audience"><i class="fa fa-check"></i><b>0.3.1</b> Audience</a></li>
+<li class="chapter" data-level="0.3.2" data-path="index.html"><a href="index.html#general-style"><i class="fa fa-check"></i><b>0.3.2</b> General Style</a></li>
+<li class="chapter" data-level="0.3.3" data-path="index.html"><a href="index.html#learning-objectives"><i class="fa fa-check"></i><b>0.3.3</b> Learning Objectives</a></li>
+<li class="chapter" data-level="0.3.4" data-path="index.html"><a href="index.html#summary"><i class="fa fa-check"></i><b>0.3.4</b> Summary</a></li>
+<li class="chapter" data-level="0.3.5" data-path="index.html"><a href="index.html#key-terms"><i class="fa fa-check"></i><b>0.3.5</b> Key Terms</a></li>
+<li class="chapter" data-level="0.3.6" data-path="index.html"><a href="index.html#headings-and-labels"><i class="fa fa-check"></i><b>0.3.6</b> Headings and Labels</a></li>
+<li class="chapter" data-level="0.3.7" data-path="index.html"><a href="index.html#formulae"><i class="fa fa-check"></i><b>0.3.7</b> Formulae</a></li>
+<li class="chapter" data-level="0.3.8" data-path="index.html"><a href="index.html#units"><i class="fa fa-check"></i><b>0.3.8</b> Units</a></li>
+<li class="chapter" data-level="0.3.9" data-path="index.html"><a href="index.html#numbers"><i class="fa fa-check"></i><b>0.3.9</b> Numbers</a></li>
+<li class="chapter" data-level="0.3.10" data-path="index.html"><a href="index.html#dates-and-times"><i class="fa fa-check"></i><b>0.3.10</b> Dates and times</a></li>
+<li class="chapter" data-level="0.3.11" data-path="index.html"><a href="index.html#tables"><i class="fa fa-check"></i><b>0.3.11</b> Tables</a></li>
+<li class="chapter" data-level="0.3.12" data-path="index.html"><a href="index.html#code-blocks"><i class="fa fa-check"></i><b>0.3.12</b> Code blocks</a></li>
+<li class="chapter" data-level="0.3.13" data-path="index.html"><a href="index.html#abbreviations"><i class="fa fa-check"></i><b>0.3.13</b> Abbreviations</a></li>
+<li class="chapter" data-level="0.3.14" data-path="index.html"><a href="index.html#initialisms"><i class="fa fa-check"></i><b>0.3.14</b> Initialisms</a></li>
+<li class="chapter" data-level="0.3.15" data-path="index.html"><a href="index.html#acronyms"><i class="fa fa-check"></i><b>0.3.15</b> Acronyms</a></li>
+<li class="chapter" data-level="0.3.16" data-path="index.html"><a href="index.html#punctuation"><i class="fa fa-check"></i><b>0.3.16</b> Punctuation</a></li>
+<li class="chapter" data-level="0.3.17" data-path="index.html"><a href="index.html#citations"><i class="fa fa-check"></i><b>0.3.17</b> Citations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="what-is-geomatics.html"><a href="what-is-geomatics.html"><i class="fa fa-check"></i><b>1</b> What is Geomatics?</a></li>
+<li class="chapter" data-level="2" data-path="mapping-data.html"><a href="mapping-data.html"><i class="fa fa-check"></i><b>2</b> Mapping Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#key-terms-1"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="2.1" data-path="mapping-data.html"><a href="mapping-data.html#introduction-to-geodesy"><i class="fa fa-check"></i><b>2.1</b> Introduction to geodesy</a></li>
+<li class="chapter" data-level="2.2" data-path="mapping-data.html"><a href="mapping-data.html#models-of-earth"><i class="fa fa-check"></i><b>2.2</b> Models of Earth</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="mapping-data.html"><a href="mapping-data.html#geodetic-vertical-datums"><i class="fa fa-check"></i><b>2.2.1</b> Geodetic vertical datums</a></li>
+<li class="chapter" data-level="2.2.2" data-path="mapping-data.html"><a href="mapping-data.html#tidal-vertical-datums"><i class="fa fa-check"></i><b>2.2.2</b> Tidal Vertical Datums</a></li>
+<li class="chapter" data-level="2.2.3" data-path="mapping-data.html"><a href="mapping-data.html#gravimetric-vertical-datums"><i class="fa fa-check"></i><b>2.2.3</b> Gravimetric Vertical Datums</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="mapping-data.html"><a href="mapping-data.html#referencing-location"><i class="fa fa-check"></i><b>2.3</b> Referencing Location</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="mapping-data.html"><a href="mapping-data.html#cartesian-coordinate-systems"><i class="fa fa-check"></i><b>2.3.1</b> Cartesian Coordinate Systems</a></li>
+<li class="chapter" data-level="2.3.2" data-path="mapping-data.html"><a href="mapping-data.html#celestial-coordinate-systems"><i class="fa fa-check"></i><b>2.3.2</b> Celestial Coordinate Systems</a></li>
+<li class="chapter" data-level="2.3.3" data-path="mapping-data.html"><a href="mapping-data.html#geographic-coordinate-systems"><i class="fa fa-check"></i><b>2.3.3</b> Geographic Coordinate Systems</a></li>
+<li class="chapter" data-level="2.3.4" data-path="mapping-data.html"><a href="mapping-data.html#projected-coordinate-systems"><i class="fa fa-check"></i><b>2.3.4</b> Projected Coordinate Systems</a></li>
+<li class="chapter" data-level="2.3.5" data-path="mapping-data.html"><a href="mapping-data.html#measuring-map-projection-distortion"><i class="fa fa-check"></i><b>2.3.5</b> Measuring map projection distortion</a></li>
+<li class="chapter" data-level="2.3.6" data-path="mapping-data.html"><a href="mapping-data.html#map-projections-for-environmental-management"><i class="fa fa-check"></i><b>2.3.6</b> Map projections for environmental management</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="mapping-data.html"><a href="mapping-data.html#summary-1"><i class="fa fa-check"></i><b>2.4</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#reflection-questions"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#practice-questions"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#recommended-readings"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="types-of-data.html"><a href="types-of-data.html"><i class="fa fa-check"></i><b>3</b> Types of Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#key-terms-2"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="3.1" data-path="types-of-data.html"><a href="types-of-data.html#types-of-phenomena"><i class="fa fa-check"></i><b>3.1</b> Types of Phenomena</a></li>
+<li class="chapter" data-level="3.2" data-path="types-of-data.html"><a href="types-of-data.html#types-of-data-1"><i class="fa fa-check"></i><b>3.2</b> Types of Data</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="types-of-data.html"><a href="types-of-data.html#qualitative-data"><i class="fa fa-check"></i><b>3.2.1</b> Qualitative Data</a></li>
+<li class="chapter" data-level="3.2.2" data-path="types-of-data.html"><a href="types-of-data.html#quantitative-data"><i class="fa fa-check"></i><b>3.2.2</b> Quantitative Data</a></li>
+<li class="chapter" data-level="3.2.3" data-path="types-of-data.html"><a href="types-of-data.html#summary-of-data-types"><i class="fa fa-check"></i><b>3.2.3</b> Summary of Data Types</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="types-of-data.html"><a href="types-of-data.html#spatial-is-special"><i class="fa fa-check"></i><b>3.3</b> Spatial is Special</a></li>
+<li class="chapter" data-level="3.4" data-path="types-of-data.html"><a href="types-of-data.html#spatial-data-models"><i class="fa fa-check"></i><b>3.4</b> Spatial Data Models</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="types-of-data.html"><a href="types-of-data.html#raster-data-model"><i class="fa fa-check"></i><b>3.4.1</b> Raster Data Model</a></li>
+<li class="chapter" data-level="3.4.2" data-path="types-of-data.html"><a href="types-of-data.html#vector-data"><i class="fa fa-check"></i><b>3.4.2</b> Vector Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="types-of-data.html"><a href="types-of-data.html#choice-of-data-model"><i class="fa fa-check"></i><b>3.5</b> Choice of Data Model</a></li>
+<li class="chapter" data-level="3.6" data-path="types-of-data.html"><a href="types-of-data.html#summary-2"><i class="fa fa-check"></i><b>3.6</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#reflection-questions-1"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#practice-questions-1"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#recommended-readings-1"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html"><i class="fa fa-check"></i><b>4</b> Collecting and Editing Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#key-terms-3"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="4.0.1" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#open-data"><i class="fa fa-check"></i><b>4.0.1</b> Open data</a></li>
+<li class="chapter" data-level="4.1" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#finding-data"><i class="fa fa-check"></i><b>4.1</b> Finding data</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#data-in-academia"><i class="fa fa-check"></i><b>4.1.1</b> Data in academia</a></li>
+<li class="chapter" data-level="4.1.2" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#government-data"><i class="fa fa-check"></i><b>4.1.2</b> Government data</a></li>
+<li class="chapter" data-level="4.1.3" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#census-data"><i class="fa fa-check"></i><b>4.1.3</b> Census data</a></li>
+<li class="chapter" data-level="4.1.4" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#non-governmental-organization-data"><i class="fa fa-check"></i><b>4.1.4</b> Non-governmental organization data</a></li>
+<li class="chapter" data-level="4.1.5" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#citizen-science"><i class="fa fa-check"></i><b>4.1.5</b> Citizen science</a></li>
+<li class="chapter" data-level="4.1.6" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#international-data"><i class="fa fa-check"></i><b>4.1.6</b> International data</a></li>
+<li class="chapter" data-level="4.1.7" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#unpublished-data-and-the-data-request"><i class="fa fa-check"></i><b>4.1.7</b> Unpublished Data and the Data Request</a></li>
+<li class="chapter" data-level="4.1.8" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#metadata"><i class="fa fa-check"></i><b>4.1.8</b> Metadata</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#historical-data-collections"><i class="fa fa-check"></i><b>4.2</b> Historical data collections</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#historical-aerial-photographs"><i class="fa fa-check"></i><b>4.2.1</b> Historical aerial photographs</a></li>
+<li class="chapter" data-level="4.2.2" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#accessing-historical-aerial-photograph-collections"><i class="fa fa-check"></i><b>4.2.2</b> Accessing historical aerial photograph collections</a></li>
+<li class="chapter" data-level="4.2.3" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#natural-resource-administrative-data"><i class="fa fa-check"></i><b>4.2.3</b> Natural resource administrative data</a></li>
+<li class="chapter" data-level="4.2.4" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#historical-maps"><i class="fa fa-check"></i><b>4.2.4</b> Historical maps</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#georeferencing-historical-maps"><i class="fa fa-check"></i><b>4.3</b> Georeferencing historical maps</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#control-points-on-maps-with-grids-or-graticule."><i class="fa fa-check"></i><b>4.3.1</b> Control points on maps with grids or graticule.</a></li>
+<li class="chapter" data-level="4.3.2" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#grid-and-graticule-as-control-points"><i class="fa fa-check"></i><b>4.3.2</b> Grid and graticule as control points</a></li>
+<li class="chapter" data-level="4.3.3" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#rubbersheeting"><i class="fa fa-check"></i><b>4.3.3</b> Rubbersheeting</a></li>
+<li class="chapter" data-level="4.3.4" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#documenting-georeferencing"><i class="fa fa-check"></i><b>4.3.4</b> Documenting georeferencing</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#data-transformations"><i class="fa fa-check"></i><b>4.4</b> Data transformations</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#affine"><i class="fa fa-check"></i><b>4.4.1</b> Affine</a></li>
+<li class="chapter" data-level="4.4.2" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#similarity"><i class="fa fa-check"></i><b>4.4.2</b> Similarity</a></li>
+<li class="chapter" data-level="4.4.3" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#projective"><i class="fa fa-check"></i><b>4.4.3</b> Projective</a></li>
+<li class="chapter" data-level="4.4.4" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#reflection-questions-2"><i class="fa fa-check"></i><b>4.4.4</b> Reflection questions</a></li>
+<li class="chapter" data-level="4.4.5" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#summary-3"><i class="fa fa-check"></i><b>4.4.5</b> Summary</a></li>
+<li class="chapter" data-level="4.4.6" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#references"><i class="fa fa-check"></i><b>4.4.6</b> References</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="relational-databases.html"><a href="relational-databases.html"><i class="fa fa-check"></i><b>5</b> Relational Databases</a>
+<ul>
+<li class="chapter" data-level="" data-path="relational-databases.html"><a href="relational-databases.html#key-terms-4"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="5.1" data-path="relational-databases.html"><a href="relational-databases.html#relational-database-management-systems"><i class="fa fa-check"></i><b>5.1</b> Relational database management systems</a></li>
+<li class="chapter" data-level="5.2" data-path="relational-databases.html"><a href="relational-databases.html#relational-databases-1"><i class="fa fa-check"></i><b>5.2</b> Relational databases</a></li>
+<li class="chapter" data-level="5.3" data-path="relational-databases.html"><a href="relational-databases.html#relational-algebra"><i class="fa fa-check"></i><b>5.3</b> Relational algebra</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="relational-databases.html"><a href="relational-databases.html#selection"><i class="fa fa-check"></i><b>5.3.1</b> Selection</a></li>
+<li class="chapter" data-level="5.3.2" data-path="relational-databases.html"><a href="relational-databases.html#projection"><i class="fa fa-check"></i><b>5.3.2</b> Projection</a></li>
+<li class="chapter" data-level="5.3.3" data-path="relational-databases.html"><a href="relational-databases.html#rename"><i class="fa fa-check"></i><b>5.3.3</b> Rename</a></li>
+<li class="chapter" data-level="5.3.4" data-path="relational-databases.html"><a href="relational-databases.html#set-union"><i class="fa fa-check"></i><b>5.3.4</b> Set Union</a></li>
+<li class="chapter" data-level="5.3.5" data-path="relational-databases.html"><a href="relational-databases.html#set-intersection"><i class="fa fa-check"></i><b>5.3.5</b> Set Intersection</a></li>
+<li class="chapter" data-level="5.3.6" data-path="relational-databases.html"><a href="relational-databases.html#set-difference"><i class="fa fa-check"></i><b>5.3.6</b> Set Difference</a></li>
+<li class="chapter" data-level="5.3.7" data-path="relational-databases.html"><a href="relational-databases.html#cartesian-product"><i class="fa fa-check"></i><b>5.3.7</b> Cartesian Product</a></li>
+<li class="chapter" data-level="5.3.8" data-path="relational-databases.html"><a href="relational-databases.html#set-divison"><i class="fa fa-check"></i><b>5.3.8</b> Set Divison</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="relational-databases.html"><a href="relational-databases.html#boolean-algebra"><i class="fa fa-check"></i><b>5.4</b> Boolean algebra</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="relational-databases.html"><a href="relational-databases.html#equality-operators"><i class="fa fa-check"></i><b>5.4.1</b> Equality operators</a></li>
+<li class="chapter" data-level="5.4.2" data-path="relational-databases.html"><a href="relational-databases.html#conditional-operators"><i class="fa fa-check"></i><b>5.4.2</b> Conditional operators</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="relational-databases.html"><a href="relational-databases.html#joining-relations"><i class="fa fa-check"></i><b>5.5</b> Joining relations</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="relational-databases.html"><a href="relational-databases.html#keys"><i class="fa fa-check"></i><b>5.5.1</b> Keys</a></li>
+<li class="chapter" data-level="5.5.2" data-path="relational-databases.html"><a href="relational-databases.html#natural-join"><i class="fa fa-check"></i><b>5.5.2</b> Natural Join</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="relational-databases.html"><a href="relational-databases.html#outer-join"><i class="fa fa-check"></i><b>5.6</b> Outer Join</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="relational-databases.html"><a href="relational-databases.html#right-and-left-outer-join"><i class="fa fa-check"></i><b>5.6.1</b> Right and Left Outer Join</a></li>
+<li class="chapter" data-level="5.6.2" data-path="relational-databases.html"><a href="relational-databases.html#theta-join"><i class="fa fa-check"></i><b>5.6.2</b> Theta Join</a></li>
+<li class="chapter" data-level="5.6.3" data-path="relational-databases.html"><a href="relational-databases.html#cardinality-of-joins"><i class="fa fa-check"></i><b>5.6.3</b> Cardinality of Joins</a></li>
+<li class="chapter" data-level="5.6.4" data-path="relational-databases.html"><a href="relational-databases.html#structured-query-language"><i class="fa fa-check"></i><b>5.6.4</b> Structured Query Language</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="relational-databases.html"><a href="relational-databases.html#summary-4"><i class="fa fa-check"></i><b>5.7</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="relational-databases.html"><a href="relational-databases.html#reflection-questions-3"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="relational-databases.html"><a href="relational-databases.html#practice-questions-2"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="relational-databases.html"><a href="relational-databases.html#recommended-readings-2"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html"><i class="fa fa-check"></i><b>6</b> Overlay and Proximity Analysis</a></li>
+<li class="chapter" data-level="7" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html"><i class="fa fa-check"></i><b>7</b> Topology and Geocoding</a></li>
+<li class="chapter" data-level="8" data-path="network-analysis.html"><a href="network-analysis.html"><i class="fa fa-check"></i><b>8</b> Network Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="network-analysis.html"><a href="network-analysis.html#key-terms-5"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="8.1" data-path="network-analysis.html"><a href="network-analysis.html#introduction-to-graph-theory"><i class="fa fa-check"></i><b>8.1</b> Introduction to Graph Theory</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="network-analysis.html"><a href="network-analysis.html#nodes"><i class="fa fa-check"></i><b>8.1.1</b> Nodes</a></li>
+<li class="chapter" data-level="8.1.2" data-path="network-analysis.html"><a href="network-analysis.html#edges"><i class="fa fa-check"></i><b>8.1.2</b> Edges</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="network-analysis.html"><a href="network-analysis.html#connectivity-and-order"><i class="fa fa-check"></i><b>8.2</b> Connectivity and Order</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="network-analysis.html"><a href="network-analysis.html#direct"><i class="fa fa-check"></i><b>8.2.1</b> Direct</a></li>
+<li class="chapter" data-level="8.2.2" data-path="network-analysis.html"><a href="network-analysis.html#undirect"><i class="fa fa-check"></i><b>8.2.2</b> Undirect</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="network-analysis.html"><a href="network-analysis.html#network-topologies"><i class="fa fa-check"></i><b>8.3</b> Network Topologies</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="network-analysis.html"><a href="network-analysis.html#physical-vs.-logical-topology"><i class="fa fa-check"></i><b>8.3.1</b> Physical vs. Logical Topology</a></li>
+<li class="chapter" data-level="8.3.2" data-path="network-analysis.html"><a href="network-analysis.html#non-hierarchical-topologies"><i class="fa fa-check"></i><b>8.3.2</b> Non-Hierarchical Topologies</a></li>
+<li class="chapter" data-level="8.3.3" data-path="network-analysis.html"><a href="network-analysis.html#hierarchical-topologies"><i class="fa fa-check"></i><b>8.3.3</b> Hierarchical Topologies</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="network-analysis.html"><a href="network-analysis.html#spatial-network-analysis"><i class="fa fa-check"></i><b>8.4</b> Spatial Network Analysis</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="network-analysis.html"><a href="network-analysis.html#network-tracing"><i class="fa fa-check"></i><b>8.4.1</b> Network Tracing</a></li>
+<li class="chapter" data-level="8.4.2" data-path="network-analysis.html"><a href="network-analysis.html#linear-referencing"><i class="fa fa-check"></i><b>8.4.2</b> Linear Referencing</a></li>
+<li class="chapter" data-level="8.4.3" data-path="network-analysis.html"><a href="network-analysis.html#routing"><i class="fa fa-check"></i><b>8.4.3</b> Routing</a></li>
+<li class="chapter" data-level="8.4.4" data-path="network-analysis.html"><a href="network-analysis.html#network-centrality"><i class="fa fa-check"></i><b>8.4.4</b> Network Centrality</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html"><i class="fa fa-check"></i><b>9</b> Raster Analysis and Terrain Modelling</a></li>
+<li class="chapter" data-level="10" data-path="spatial-estimation.html"><a href="spatial-estimation.html"><i class="fa fa-check"></i><b>10</b> Spatial Estimation</a>
+<ul>
+<li class="chapter" data-level="" data-path="spatial-estimation.html"><a href="spatial-estimation.html#key-terms-6"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="10.1" data-path="spatial-estimation.html"><a href="spatial-estimation.html#introduction-1"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
+<li class="chapter" data-level="10.2" data-path="spatial-estimation.html"><a href="spatial-estimation.html#classical-vs.-geostatistical-inferences"><i class="fa fa-check"></i><b>10.2</b> Classical vs. Geostatistical Inferences</a></li>
+<li class="chapter" data-level="10.3" data-path="spatial-estimation.html"><a href="spatial-estimation.html#sampling"><i class="fa fa-check"></i><b>10.3</b> Sampling</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="spatial-estimation.html"><a href="spatial-estimation.html#probability-sampling"><i class="fa fa-check"></i><b>10.3.1</b> Probability Sampling</a></li>
+<li class="chapter" data-level="10.3.2" data-path="spatial-estimation.html"><a href="spatial-estimation.html#non-probability-sampling"><i class="fa fa-check"></i><b>10.3.2</b> Non-probability Sampling</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="spatial-estimation.html"><a href="spatial-estimation.html#spatial-autocorrelation"><i class="fa fa-check"></i><b>10.4</b> Spatial Autocorrelation</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="spatial-estimation.html"><a href="spatial-estimation.html#morans-i"><i class="fa fa-check"></i><b>10.4.1</b> Moran’s I</a></li>
+<li class="chapter" data-level="10.4.2" data-path="spatial-estimation.html"><a href="spatial-estimation.html#gearys-c"><i class="fa fa-check"></i><b>10.4.2</b> Geary’s C</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="spatial-estimation.html"><a href="spatial-estimation.html#semivariogram-modeling"><i class="fa fa-check"></i><b>10.5</b> Semivariogram Modeling</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="spatial-estimation.html"><a href="spatial-estimation.html#gaussian"><i class="fa fa-check"></i><b>10.5.1</b> Gaussian</a></li>
+<li class="chapter" data-level="10.5.2" data-path="spatial-estimation.html"><a href="spatial-estimation.html#spherical"><i class="fa fa-check"></i><b>10.5.2</b> Spherical</a></li>
+<li class="chapter" data-level="10.5.3" data-path="spatial-estimation.html"><a href="spatial-estimation.html#exponential"><i class="fa fa-check"></i><b>10.5.3</b> Exponential</a></li>
+<li class="chapter" data-level="10.5.4" data-path="spatial-estimation.html"><a href="spatial-estimation.html#circular"><i class="fa fa-check"></i><b>10.5.4</b> Circular</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="spatial-estimation.html"><a href="spatial-estimation.html#spatial-interpolation"><i class="fa fa-check"></i><b>10.6</b> Spatial Interpolation</a>
+<ul>
+<li class="chapter" data-level="10.6.1" data-path="spatial-estimation.html"><a href="spatial-estimation.html#methods-without-using-semi-variogram"><i class="fa fa-check"></i><b>10.6.1</b> Methods Without Using Semi-variogram</a></li>
+<li class="chapter" data-level="10.6.2" data-path="spatial-estimation.html"><a href="spatial-estimation.html#methods-using-semi-variogram"><i class="fa fa-check"></i><b>10.6.2</b> Methods Using Semi-variogram</a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="spatial-estimation.html"><a href="spatial-estimation.html#spatial-regression-models"><i class="fa fa-check"></i><b>10.7</b> Spatial Regression Models</a>
+<ul>
+<li class="chapter" data-level="10.7.1" data-path="spatial-estimation.html"><a href="spatial-estimation.html#spatial-lag-model"><i class="fa fa-check"></i><b>10.7.1</b> Spatial Lag Model</a></li>
+<li class="chapter" data-level="10.7.2" data-path="spatial-estimation.html"><a href="spatial-estimation.html#spatial-error-model"><i class="fa fa-check"></i><b>10.7.2</b> Spatial Error Model</a></li>
+<li class="chapter" data-level="10.7.3" data-path="spatial-estimation.html"><a href="spatial-estimation.html#selection-between-lag-and-error-model"><i class="fa fa-check"></i><b>10.7.3</b> Selection Between Lag and Error Model</a></li>
+<li class="chapter" data-level="" data-path="spatial-estimation.html"><a href="spatial-estimation.html#reflection-questions-4"><i class="fa fa-check"></i>Reflection Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html"><i class="fa fa-check"></i><b>11</b> Fundamentals of remote sensing</a>
+<ul>
+<li class="chapter" data-level="" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#key-terms-7"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="11.1" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#what-is-remote-sensing"><i class="fa fa-check"></i><b>11.1</b> What is remote sensing?</a></li>
+<li class="chapter" data-level="11.2" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#types-of-energy"><i class="fa fa-check"></i><b>11.2</b> Types of Energy</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#introduction-2"><i class="fa fa-check"></i><b>11.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="11.2.2" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#scientific-notation"><i class="fa fa-check"></i><b>11.2.2</b> Scientific Notation</a></li>
+<li class="chapter" data-level="11.2.3" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#electromagnetic-spectrum"><i class="fa fa-check"></i><b>11.2.3</b> Electromagnetic Spectrum</a></li>
+<li class="chapter" data-level="11.2.4" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#radiation-types"><i class="fa fa-check"></i><b>11.2.4</b> Radiation Types</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#factors-affecting-radiation"><i class="fa fa-check"></i><b>11.3</b> Factors affecting radiation</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#radiation-basics"><i class="fa fa-check"></i><b>11.3.1</b> <strong>Radiation Basics</strong></a></li>
+<li class="chapter" data-level="11.3.2" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#foundations-of-measurement"><i class="fa fa-check"></i><b>11.3.2</b> <strong>Foundations of Measurement</strong></a></li>
+<li class="chapter" data-level="11.3.3" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#methods-of-normalization"><i class="fa fa-check"></i><b>11.3.3</b> <strong>Methods of Normalization</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#the-four-resolutions"><i class="fa fa-check"></i><b>11.4</b> The Four Resolutions</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#spatial-resolution"><i class="fa fa-check"></i><b>11.4.1</b> Spatial Resolution</a></li>
+<li class="chapter" data-level="11.4.2" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#temporal-resolution"><i class="fa fa-check"></i><b>11.4.2</b> Temporal Resolution</a></li>
+<li class="chapter" data-level="11.4.3" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#spectral-resolution"><i class="fa fa-check"></i><b>11.4.3</b> Spectral Resolution</a></li>
+<li class="chapter" data-level="11.4.4" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#radiometric-resolution"><i class="fa fa-check"></i><b>11.4.4</b> Radiometric Resolution</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#key-applications"><i class="fa fa-check"></i><b>11.5</b> Key Applications</a></li>
+<li class="chapter" data-level="11.6" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#summary-5"><i class="fa fa-check"></i><b>11.6</b> Summary</a>
+<ul>
+<li class="chapter" data-level="11.6.1" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#reflection-questions-5"><i class="fa fa-check"></i><b>11.6.1</b> Reflection Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="chapter-template.html"><a href="chapter-template.html"><i class="fa fa-check"></i><b>12</b> Remote Sensing Systems</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#key-terms-8"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="12.1" data-path="chapter-template.html"><a href="chapter-template.html#optical-system-basics"><i class="fa fa-check"></i><b>12.1</b> Optical System Basics</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="chapter-template.html"><a href="chapter-template.html#lenses"><i class="fa fa-check"></i><b>12.1.1</b> Lenses</a></li>
+<li class="chapter" data-level="12.1.2" data-path="chapter-template.html"><a href="chapter-template.html#focal-length"><i class="fa fa-check"></i><b>12.1.2</b> Focal Length</a></li>
+<li class="chapter" data-level="12.1.3" data-path="chapter-template.html"><a href="chapter-template.html#principle-points"><i class="fa fa-check"></i><b>12.1.3</b> Principle Points</a></li>
+<li class="chapter" data-level="12.1.4" data-path="chapter-template.html"><a href="chapter-template.html#field-of-view"><i class="fa fa-check"></i><b>12.1.4</b> Field of View</a></li>
+<li class="chapter" data-level="12.1.5" data-path="chapter-template.html"><a href="chapter-template.html#perspectives"><i class="fa fa-check"></i><b>12.1.5</b> Perspectives</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="chapter-template.html"><a href="chapter-template.html#sensors"><i class="fa fa-check"></i><b>12.2</b> Sensors</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="chapter-template.html"><a href="chapter-template.html#detectors"><i class="fa fa-check"></i><b>12.2.1</b> Detectors</a></li>
+<li class="chapter" data-level="12.2.2" data-path="chapter-template.html"><a href="chapter-template.html#analog-to-digital-converters"><i class="fa fa-check"></i><b>12.2.2</b> Analog-to-Digital Converters</a></li>
+<li class="chapter" data-level="12.2.3" data-path="chapter-template.html"><a href="chapter-template.html#panchromatic-sensors"><i class="fa fa-check"></i><b>12.2.3</b> Panchromatic Sensors</a></li>
+<li class="chapter" data-level="12.2.4" data-path="chapter-template.html"><a href="chapter-template.html#multispectral-sensors"><i class="fa fa-check"></i><b>12.2.4</b> Multispectral Sensors</a></li>
+<li class="chapter" data-level="12.2.5" data-path="chapter-template.html"><a href="chapter-template.html#hyperspectral-sensors"><i class="fa fa-check"></i><b>12.2.5</b> Hyperspectral Sensors</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="chapter-template.html"><a href="chapter-template.html#platforms"><i class="fa fa-check"></i><b>12.3</b> Platforms</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="chapter-template.html"><a href="chapter-template.html#terrestrial-systems"><i class="fa fa-check"></i><b>12.3.1</b> Terrestrial Systems</a></li>
+<li class="chapter" data-level="12.3.2" data-path="chapter-template.html"><a href="chapter-template.html#aerial-systems"><i class="fa fa-check"></i><b>12.3.2</b> Aerial systems</a></li>
+<li class="chapter" data-level="12.3.3" data-path="chapter-template.html"><a href="chapter-template.html#satellite-systems"><i class="fa fa-check"></i><b>12.3.3</b> Satellite Systems</a></li>
+<li class="chapter" data-level="12.3.4" data-path="chapter-template.html"><a href="chapter-template.html#orbital-physics"><i class="fa fa-check"></i><b>12.3.4</b> Orbital Physics</a></li>
+<li class="chapter" data-level="12.3.5" data-path="chapter-template.html"><a href="chapter-template.html#low-earth-orbit"><i class="fa fa-check"></i><b>12.3.5</b> Low Earth Orbit</a></li>
+<li class="chapter" data-level="12.3.6" data-path="chapter-template.html"><a href="chapter-template.html#medium-earth-orbit"><i class="fa fa-check"></i><b>12.3.6</b> Medium Earth Orbit</a></li>
+<li class="chapter" data-level="12.3.7" data-path="chapter-template.html"><a href="chapter-template.html#polar-and-sun-synchronous-orbit"><i class="fa fa-check"></i><b>12.3.7</b> Polar and Sun-synchronous Orbit</a></li>
+<li class="chapter" data-level="12.3.8" data-path="chapter-template.html"><a href="chapter-template.html#geostationary-orbit"><i class="fa fa-check"></i><b>12.3.8</b> Geostationary Orbit</a></li>
+<li class="chapter" data-level="12.3.9" data-path="chapter-template.html"><a href="chapter-template.html#lagrange-points"><i class="fa fa-check"></i><b>12.3.9</b> Lagrange Points</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="chapter-template.html"><a href="chapter-template.html#important-satellite-systems-for-environmental-management"><i class="fa fa-check"></i><b>12.4</b> Important Satellite Systems for Environmental Management</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="chapter-template.html"><a href="chapter-template.html#landsat"><i class="fa fa-check"></i><b>12.4.1</b> LANDSAT</a></li>
+<li class="chapter" data-level="12.4.2" data-path="chapter-template.html"><a href="chapter-template.html#radarsat"><i class="fa fa-check"></i><b>12.4.2</b> RADARSAt</a></li>
+<li class="chapter" data-level="12.4.3" data-path="chapter-template.html"><a href="chapter-template.html#advanced-very-high-resolution-radiometer-avhrr"><i class="fa fa-check"></i><b>12.4.3</b> Advanced Very High Resolution Radiometer (AVHRR)</a></li>
+<li class="chapter" data-level="12.4.4" data-path="chapter-template.html"><a href="chapter-template.html#moderate-resolution-spectroradiometer-modis"><i class="fa fa-check"></i><b>12.4.4</b> Moderate Resolution Spectroradiometer (MODIS)</a></li>
+<li class="chapter" data-level="12.4.5" data-path="chapter-template.html"><a href="chapter-template.html#icesat"><i class="fa fa-check"></i><b>12.4.5</b> ICESat</a></li>
+<li class="chapter" data-level="12.4.6" data-path="chapter-template.html"><a href="chapter-template.html#advanced-spaceborne-thermal-emission-and-reflection-radiometer-aster"><i class="fa fa-check"></i><b>12.4.6</b> Advanced Spaceborne Thermal Emission and Reflection Radiometer (ASTER)</a></li>
+<li class="chapter" data-level="12.4.7" data-path="chapter-template.html"><a href="chapter-template.html#defense-meteorology-satellite-program-dmsp"><i class="fa fa-check"></i><b>12.4.7</b> Defense Meteorology Satellite Program (DMSP)</a></li>
+<li class="chapter" data-level="12.4.8" data-path="chapter-template.html"><a href="chapter-template.html#visible-infrared-imaging-radiometer-suite-viirs"><i class="fa fa-check"></i><b>12.4.8</b> Visible Infrared Imaging Radiometer Suite (VIIRS)</a></li>
+<li class="chapter" data-level="12.4.9" data-path="chapter-template.html"><a href="chapter-template.html#wildfiresat"><i class="fa fa-check"></i><b>12.4.9</b> WildfireSat</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="chapter-template.html"><a href="chapter-template.html#summary-6"><i class="fa fa-check"></i><b>12.5</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#reflection-questions-6"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#practice-questions-3"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#recommended-readings-3"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="image-processing.html"><a href="image-processing.html"><i class="fa fa-check"></i><b>13</b> Image Processing</a>
+<ul>
+<li class="chapter" data-level="" data-path="image-processing.html"><a href="image-processing.html#key-terms-9"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="13.1" data-path="image-processing.html"><a href="image-processing.html#overview"><i class="fa fa-check"></i><b>13.1</b> Overview</a></li>
+<li class="chapter" data-level="13.2" data-path="image-processing.html"><a href="image-processing.html#geometric-correction"><i class="fa fa-check"></i><b>13.2</b> Geometric correction</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="image-processing.html"><a href="image-processing.html#orthoimagery"><i class="fa fa-check"></i><b>13.2.1</b> Orthoimagery</a></li>
+<li class="chapter" data-level="13.2.2" data-path="image-processing.html"><a href="image-processing.html#relief-displacement"><i class="fa fa-check"></i><b>13.2.2</b> <strong>Relief displacement</strong></a></li>
+<li class="chapter" data-level="13.2.3" data-path="image-processing.html"><a href="image-processing.html#georeferencing"><i class="fa fa-check"></i><b>13.2.3</b> <strong>Georeferencing</strong></a></li>
+<li class="chapter" data-level="13.2.4" data-path="image-processing.html"><a href="image-processing.html#georegistration-georectification"><i class="fa fa-check"></i><b>13.2.4</b> <strong>Georegistration (georectification)</strong></a></li>
+<li class="chapter" data-level="13.2.5" data-path="image-processing.html"><a href="image-processing.html#resampling"><i class="fa fa-check"></i><b>13.2.5</b> <strong>Resampling</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="image-processing.html"><a href="image-processing.html#atmospheric-correction"><i class="fa fa-check"></i><b>13.3</b> Atmospheric correction</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="image-processing.html"><a href="image-processing.html#atmospheric-windows"><i class="fa fa-check"></i><b>13.3.1</b> <strong>Atmospheric windows</strong></a></li>
+<li class="chapter" data-level="13.3.2" data-path="image-processing.html"><a href="image-processing.html#clouds-and-shadows"><i class="fa fa-check"></i><b>13.3.2</b> <strong>Clouds and shadows</strong></a></li>
+<li class="chapter" data-level="13.3.3" data-path="image-processing.html"><a href="image-processing.html#smoke-and-haze"><i class="fa fa-check"></i><b>13.3.3</b> <strong>Smoke and Haze</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="image-processing.html"><a href="image-processing.html#radiometric-correction"><i class="fa fa-check"></i><b>13.4</b> Radiometric correction</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="image-processing.html"><a href="image-processing.html#signal-to-noise"><i class="fa fa-check"></i><b>13.4.1</b> <strong>Signal-to-noise</strong></a></li>
+<li class="chapter" data-level="13.4.2" data-path="image-processing.html"><a href="image-processing.html#radiometric-normalization"><i class="fa fa-check"></i><b>13.4.2</b> <strong>Radiometric normalization</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="image-processing.html"><a href="image-processing.html#image-enhancement"><i class="fa fa-check"></i><b>13.5</b> Image enhancement</a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="image-processing.html"><a href="image-processing.html#stretching"><i class="fa fa-check"></i><b>13.5.1</b> <strong>Stretching</strong></a></li>
+<li class="chapter" data-level="13.5.2" data-path="image-processing.html"><a href="image-processing.html#sharpening"><i class="fa fa-check"></i><b>13.5.2</b> <strong>Sharpening</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="image-processing.html"><a href="image-processing.html#summary-7"><i class="fa fa-check"></i><b>13.6</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="image-processing.html"><a href="image-processing.html#reflection-questions-7"><i class="fa fa-check"></i>Reflection Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="image-analysis.html"><a href="image-analysis.html"><i class="fa fa-check"></i><b>14</b> Image Analysis</a></li>
+<li class="chapter" data-level="15" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html"><i class="fa fa-check"></i><b>15</b> LiDAR Acquisition and Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#key-terms-10"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="15.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#what-is-lidar"><i class="fa fa-check"></i><b>15.1</b> What is LiDAR?</a>
+<ul>
+<li class="chapter" data-level="15.1.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#how-does-it-work"><i class="fa fa-check"></i><b>15.1.1</b> How Does it Work?</a></li>
+</ul></li>
+<li class="chapter" data-level="15.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#lidar-history-and-use"><i class="fa fa-check"></i><b>15.2</b> LiDAR History and Use</a></li>
+<li class="chapter" data-level="15.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#components-of-a-lidar-system"><i class="fa fa-check"></i><b>15.3</b> Components of a LiDAR System</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#lasers"><i class="fa fa-check"></i><b>15.3.1</b> Lasers</a></li>
+<li class="chapter" data-level="15.3.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#position-and-orientation"><i class="fa fa-check"></i><b>15.3.2</b> Position and Orientation</a></li>
+<li class="chapter" data-level="15.3.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#platform"><i class="fa fa-check"></i><b>15.3.3</b> Platform</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#types-of-lidar"><i class="fa fa-check"></i><b>15.4</b> Types of LiDAR</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#discrete-return"><i class="fa fa-check"></i><b>15.4.1</b> Discrete Return</a></li>
+<li class="chapter" data-level="15.4.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#full-waveform"><i class="fa fa-check"></i><b>15.4.2</b> Full Waveform</a></li>
+<li class="chapter" data-level="15.4.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#emerging-technology"><i class="fa fa-check"></i><b>15.4.3</b> Emerging Technology</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#lidar-derivatives-and-analysis"><i class="fa fa-check"></i><b>15.5</b> LiDAR Derivatives and Analysis</a>
+<ul>
+<li class="chapter" data-level="15.5.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#bare-earth-elevation"><i class="fa fa-check"></i><b>15.5.1</b> Bare Earth Elevation</a></li>
+<li class="chapter" data-level="15.5.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#digital-surface-model-and-canopy-height-models"><i class="fa fa-check"></i><b>15.5.2</b> Digital Surface Model and Canopy Height Models</a></li>
+<li class="chapter" data-level="15.5.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#area-based-approach-vs.-individual-tree-crown-approach"><i class="fa fa-check"></i><b>15.5.3</b> Area Based Approach vs. Individual Tree Crown Approach</a></li>
+<li class="chapter" data-level="15.5.4" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#tree-segmentation"><i class="fa fa-check"></i><b>15.5.4</b> Tree Segmentation</a></li>
+<li class="chapter" data-level="15.5.5" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#sources-of-error"><i class="fa fa-check"></i><b>15.5.5</b> Sources of Error</a></li>
+<li class="chapter" data-level="15.5.6" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#software-and-analysis-tools"><i class="fa fa-check"></i><b>15.5.6</b> Software and Analysis Tools</a></li>
+<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#your-turn-12"><i class="fa fa-check"></i>Your Turn!</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#summary-8"><i class="fa fa-check"></i><b>15.6</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#reflection-questions-8"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#practice-questions-4"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#recommended-readings-4"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="data-integration.html"><a href="data-integration.html"><i class="fa fa-check"></i><b>16</b> Chapter Title</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-integration.html"><a href="data-integration.html#key-terms-11"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="16.1" data-path="data-integration.html"><a href="data-integration.html#problems-with-data-integration"><i class="fa fa-check"></i><b>16.1</b> Problems with data integration</a></li>
+<li class="chapter" data-level="16.2" data-path="data-integration.html"><a href="data-integration.html#framing-the-problem"><i class="fa fa-check"></i><b>16.2</b> Framing the problem</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="data-integration.html"><a href="data-integration.html#about-the-data"><i class="fa fa-check"></i><b>16.2.1</b> About the data</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="data-integration.html"><a href="data-integration.html#data-resolution"><i class="fa fa-check"></i><b>16.3</b> Data Resolution</a></li>
+<li class="chapter" data-level="16.4" data-path="data-integration.html"><a href="data-integration.html#integrating-vector-and-raster-data"><i class="fa fa-check"></i><b>16.4</b> Integrating vector and raster data</a>
+<ul>
+<li class="chapter" data-level="16.4.1" data-path="data-integration.html"><a href="data-integration.html#rasterization"><i class="fa fa-check"></i><b>16.4.1</b> Rasterization</a></li>
+<li class="chapter" data-level="16.4.2" data-path="data-integration.html"><a href="data-integration.html#vectorization"><i class="fa fa-check"></i><b>16.4.2</b> Vectorization</a></li>
+<li class="chapter" data-level="16.4.3" data-path="data-integration.html"><a href="data-integration.html#zonal-statistics"><i class="fa fa-check"></i><b>16.4.3</b> Zonal Statistics</a></li>
+<li class="chapter" data-level="16.4.4" data-path="data-integration.html"><a href="data-integration.html#smoothing"><i class="fa fa-check"></i><b>16.4.4</b> Smoothing</a></li>
+<li class="chapter" data-level="16.4.5" data-path="data-integration.html"><a href="data-integration.html#simplifying"><i class="fa fa-check"></i><b>16.4.5</b> Simplifying</a></li>
+</ul></li>
+<li class="chapter" data-level="16.5" data-path="data-integration.html"><a href="data-integration.html#spatial-data-errors"><i class="fa fa-check"></i><b>16.5</b> Spatial data errors</a>
+<ul>
+<li class="chapter" data-level="16.5.1" data-path="data-integration.html"><a href="data-integration.html#accuracy-vs.-precision"><i class="fa fa-check"></i><b>16.5.1</b> Accuracy vs. Precision</a></li>
+<li class="chapter" data-level="16.5.2" data-path="data-integration.html"><a href="data-integration.html#vagueness-and-ambiguity"><i class="fa fa-check"></i><b>16.5.2</b> Vagueness and Ambiguity</a></li>
+<li class="chapter" data-level="16.5.3" data-path="data-integration.html"><a href="data-integration.html#quantifying-spatial-errors-rmse-euclids-distance"><i class="fa fa-check"></i><b>16.5.3</b> Quantifying spatial errors RMSE, Euclid’s distance</a></li>
+<li class="chapter" data-level="16.5.4" data-path="data-integration.html"><a href="data-integration.html#logical-errors"><i class="fa fa-check"></i><b>16.5.4</b> Logical Errors</a></li>
+<li class="chapter" data-level="16.5.5" data-path="data-integration.html"><a href="data-integration.html#ecological-fallacy-atomistic-fallacy-maup-etc.-its-important-to-include-these-whether-here-or-elsewhere"><i class="fa fa-check"></i><b>16.5.5</b> Ecological Fallacy, Atomistic Fallacy, MAUP etc. Its important to include these, whether here or elsewhere?</a></li>
+<li class="chapter" data-level="16.5.6" data-path="data-integration.html"><a href="data-integration.html#other-errors"><i class="fa fa-check"></i><b>16.5.6</b> Other Errors?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html"><i class="fa fa-check"></i><b>17</b> Making Beautiful Maps</a>
+<ul>
+<li class="chapter" data-level="" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#key-terms-12"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="17.1" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#types-of-maps"><i class="fa fa-check"></i><b>17.1</b> Types of Maps</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#thematic-maps"><i class="fa fa-check"></i><b>17.1.1</b> Thematic Maps</a></li>
+<li class="chapter" data-level="17.1.2" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#choropleth-maps"><i class="fa fa-check"></i><b>17.1.2</b> Choropleth Maps</a></li>
+<li class="chapter" data-level="17.1.3" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#dot-density-maps"><i class="fa fa-check"></i><b>17.1.3</b> Dot Density Maps</a></li>
+<li class="chapter" data-level="17.1.4" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#isoline-maps"><i class="fa fa-check"></i><b>17.1.4</b> Isoline Maps</a></li>
+<li class="chapter" data-level="17.1.5" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#diagrammatic-maps"><i class="fa fa-check"></i><b>17.1.5</b> Diagrammatic Maps</a></li>
+<li class="chapter" data-level="17.1.6" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#cartograms"><i class="fa fa-check"></i><b>17.1.6</b> Cartograms</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#map-composition"><i class="fa fa-check"></i><b>17.2</b> Map Composition</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#figure"><i class="fa fa-check"></i><b>17.2.1</b> Figure</a></li>
+<li class="chapter" data-level="17.2.2" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#ground"><i class="fa fa-check"></i><b>17.2.2</b> Ground</a></li>
+<li class="chapter" data-level="17.2.3" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#frame"><i class="fa fa-check"></i><b>17.2.3</b> Frame</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#elements-of-maps"><i class="fa fa-check"></i><b>17.3</b> Elements of Maps</a>
+<ul>
+<li class="chapter" data-level="17.3.1" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#text"><i class="fa fa-check"></i><b>17.3.1</b> Text</a></li>
+<li class="chapter" data-level="17.3.2" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#legend"><i class="fa fa-check"></i><b>17.3.2</b> Legend</a></li>
+<li class="chapter" data-level="17.3.3" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#scale-and-north-arrow"><i class="fa fa-check"></i><b>17.3.3</b> Scale and North Arrow</a></li>
+<li class="chapter" data-level="17.3.4" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#measured-grid"><i class="fa fa-check"></i><b>17.3.4</b> Measured Grid</a></li>
+<li class="chapter" data-level="17.3.5" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#citation"><i class="fa fa-check"></i><b>17.3.5</b> Citation</a></li>
+</ul></li>
+<li class="chapter" data-level="17.4" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#symbolization"><i class="fa fa-check"></i><b>17.4</b> Symbolization</a>
+<ul>
+<li class="chapter" data-level="17.4.1" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#separable"><i class="fa fa-check"></i><b>17.4.1</b> Separable</a></li>
+<li class="chapter" data-level="17.4.2" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#integral"><i class="fa fa-check"></i><b>17.4.2</b> Integral</a></li>
+<li class="chapter" data-level="17.4.3" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#graduated"><i class="fa fa-check"></i><b>17.4.3</b> Graduated</a></li>
+<li class="chapter" data-level="17.4.4" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#configurable"><i class="fa fa-check"></i><b>17.4.4</b> Configurable</a></li>
+<li class="chapter" data-level="17.4.5" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#proportional"><i class="fa fa-check"></i><b>17.4.5</b> Proportional</a></li>
+<li class="chapter" data-level="17.4.6" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#line-weight"><i class="fa fa-check"></i><b>17.4.6</b> Line Weight</a></li>
+</ul></li>
+<li class="chapter" data-level="17.5" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#colour"><i class="fa fa-check"></i><b>17.5</b> Colour</a>
+<ul>
+<li class="chapter" data-level="17.5.1" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#hue"><i class="fa fa-check"></i><b>17.5.1</b> Hue</a></li>
+<li class="chapter" data-level="17.5.2" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#chroma"><i class="fa fa-check"></i><b>17.5.2</b> Chroma</a></li>
+<li class="chapter" data-level="17.5.3" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#lightness"><i class="fa fa-check"></i><b>17.5.3</b> Lightness</a></li>
+<li class="chapter" data-level="17.5.4" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#bivariate-colour-schemes"><i class="fa fa-check"></i><b>17.5.4</b> Bivariate Colour Schemes</a></li>
+<li class="chapter" data-level="17.5.5" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#colour-pickers"><i class="fa fa-check"></i><b>17.5.5</b> Colour Pickers</a></li>
+</ul></li>
+<li class="chapter" data-level="17.6" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#classification-schemes"><i class="fa fa-check"></i><b>17.6</b> Classification Schemes</a>
+<ul>
+<li class="chapter" data-level="17.6.1" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#qualitative"><i class="fa fa-check"></i><b>17.6.1</b> Qualitative</a></li>
+<li class="chapter" data-level="17.6.2" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#sequential"><i class="fa fa-check"></i><b>17.6.2</b> Sequential</a></li>
+<li class="chapter" data-level="17.6.3" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#intervals"><i class="fa fa-check"></i><b>17.6.3</b> Intervals</a></li>
+<li class="chapter" data-level="17.6.4" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#quantiles"><i class="fa fa-check"></i><b>17.6.4</b> Quantiles</a></li>
+<li class="chapter" data-level="17.6.5" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#natural-breaks-jenna"><i class="fa fa-check"></i><b>17.6.5</b> Natural Breaks (Jenna)</a></li>
+<li class="chapter" data-level="17.6.6" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#standard-deviation"><i class="fa fa-check"></i><b>17.6.6</b> Standard Deviation</a></li>
+</ul></li>
+<li class="chapter" data-level="17.7" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#generalization"><i class="fa fa-check"></i><b>17.7</b> Generalization</a>
+<ul>
+<li class="chapter" data-level="17.7.1" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#select"><i class="fa fa-check"></i><b>17.7.1</b> Select</a></li>
+<li class="chapter" data-level="17.7.2" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#amalgamate"><i class="fa fa-check"></i><b>17.7.2</b> Amalgamate</a></li>
+<li class="chapter" data-level="17.7.3" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#exaggerate"><i class="fa fa-check"></i><b>17.7.3</b> Exaggerate</a></li>
+<li class="chapter" data-level="17.7.4" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#displace"><i class="fa fa-check"></i><b>17.7.4</b> Displace</a></li>
+<li class="chapter" data-level="17.7.5" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#refine"><i class="fa fa-check"></i><b>17.7.5</b> Refine</a></li>
+<li class="chapter" data-level="17.7.6" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#simplify"><i class="fa fa-check"></i><b>17.7.6</b> Simplify</a></li>
+<li class="chapter" data-level="17.7.7" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#aggregate"><i class="fa fa-check"></i><b>17.7.7</b> Aggregate</a></li>
+<li class="chapter" data-level="17.7.8" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#typify"><i class="fa fa-check"></i><b>17.7.8</b> Typify</a></li>
+<li class="chapter" data-level="17.7.9" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#smooth"><i class="fa fa-check"></i><b>17.7.9</b> Smooth</a></li>
+<li class="chapter" data-level="17.7.10" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#enhance"><i class="fa fa-check"></i><b>17.7.10</b> Enhance</a></li>
+<li class="chapter" data-level="17.7.11" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#collapse"><i class="fa fa-check"></i><b>17.7.11</b> Collapse</a></li>
+<li class="chapter" data-level="17.7.12" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#merge"><i class="fa fa-check"></i><b>17.7.12</b> Merge</a></li>
+</ul></li>
+<li class="chapter" data-level="17.8" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#map-design"><i class="fa fa-check"></i><b>17.8</b> Map Design</a>
+<ul>
+<li class="chapter" data-level="17.8.1" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#subject"><i class="fa fa-check"></i><b>17.8.1</b> Subject</a></li>
+<li class="chapter" data-level="17.8.2" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#projection-and-orientation"><i class="fa fa-check"></i><b>17.8.2</b> Projection and Orientation</a></li>
+<li class="chapter" data-level="17.8.3" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#hierarchy"><i class="fa fa-check"></i><b>17.8.3</b> Hierarchy</a></li>
+<li class="chapter" data-level="17.8.4" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#balance"><i class="fa fa-check"></i><b>17.8.4</b> Balance</a></li>
+</ul></li>
+<li class="chapter" data-level="17.9" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#third-section-header"><i class="fa fa-check"></i><b>17.9</b> Third Section Header</a></li>
+<li class="chapter" data-level="17.10" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#summary-9"><i class="fa fa-check"></i><b>17.10</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#reflection-questions-9"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#practice-questions-5"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html#recommended-readings-5"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">An Open Geomatics Textbook</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="LiDAR-acquisition-and-analysis" class="section level1" number="15">
+<h1><span class="header-section-number">Chapter 15</span> LiDAR Acquisition and Analysis</h1>
+<p>Remotely sensed data has traditionally relied on sensors to passively collect reflected energy from the Earth’s surface. As you have read in the preceding chapters, the information that we can derive from these sensors is immense; from landscape level satellite analyses to individual tree vigor assessments. One aspect that is more difficult to characterize however, is what a landscape looks like in three dimensions. LiDAR is changing how we can interpret landscapes and forests by producing it’s own source of energy; this allows us to ask questions not only about the top of the Earth’s surface, but also about the structure of the forest, and what the ground looks like beneath it. In this chapter, we discuss what LiDAR is, as well as how we can use it in multiple different contexts.</p>
+<div class="box-content learning-objectives-content">
+<div id="learning-objectives-10" class="section level4 unnumbered box-title learning-objectives-top">
+<h4>Learning Objectives</h4>
+</div>
+<ol style="list-style-type: decimal">
+<li>Understand what LiDAR is and how it works</li>
+<li>Understand what we can do with LiDAR data, and what products we can generate</li>
+<li>Understand the basic processing steps required to use LiDAR data for forestry and ecological analysis</li>
+</ol>
+</div>
+<div id="key-terms-10" class="section level3 unnumbered">
+<h3>Key Terms</h3>
+<p>Light Detection and Ranging (LiDAR), Laser, Global Navigation Satellite System (GNSS), Inertial Measurement Unit (IMU), Discrete Return, Full Waveform, Surface Models, Area-Based Approach (ABA), Individual Tree Crown Detection (ITD), LiDAR Metrics, Tree Segmentation.</p>
+</div>
+<div id="what-is-lidar" class="section level2" number="15.1">
+<h2><span class="header-section-number">15.1</span> What is LiDAR?</h2>
+<p><strong>LiDAR</strong> stands for <strong>Li</strong>ght <strong>D</strong>etection <strong>A</strong>nd <strong>R</strong>anging (sometimes written as lidar, or LIDAR), and is an active remote sensing technology. A laser scanner and time of flight principles are used to collect three dimensional (3D) data. LiDAR systems are made up of three components; a laser-scanning device, an accurate global navigation satellite system (GNSS), and an inertial measurement unit (IMU). The laser-scanning device emits pulses of light and measures the time it takes for energy to be reflected to the device. The GNSS receiver allows the position of the laser to be determined in space, while the IMU records the orientation of the laser (i.e. roll, pitch, and yaw <span class="citation">(<a href="#ref-White2013" role="doc-biblioref">White et al. 2013</a>)</span>). Figure <a href="LiDAR-acquisition-and-analysis.html#fig:15-LiDAR-System">15.1</a> illustrates all of the necessary components of a LiDAR system. When discussing LiDAR in an airborne context (i.e. the unit is being flown), we can call it airborne laser scanning (ALS), and if the unit is in a fixed position on the ground it is called terrestrial laser scanning (TLS).</p>
+<div class="figure"><span style="display:block;" id="fig:15-LiDAR-System"></span>
+<img src="images/15-LiDAR-System.png" alt="Overview of the components of a LiDAR System. As is common for large scale data acquisition, the laser scanning is placed on board an aircarft and scans the Earth below it. The aircraft has on on board GPS/GNSS, as well as an intertial measurement unit (IMU). A GPS base station can be used to post-process data and increase spatial accuracy.('LiDAR-i lend', @Marek91342012, CC-BY-SA-3.0)." width="60%" />
+<p class="caption">
+Figure 15.1: Overview of the components of a LiDAR System. As is common for large scale data acquisition, the laser scanning is placed on board an aircarft and scans the Earth below it. The aircraft has on on board GPS/GNSS, as well as an intertial measurement unit (IMU). A GPS base station can be used to post-process data and increase spatial accuracy.(‘LiDAR-i lend,’ <span class="citation"><a href="#ref-Marek91342012" role="doc-biblioref">Marek9134</a> (<a href="#ref-Marek91342012" role="doc-biblioref">2012</a>)</span>, CC-BY-SA-3.0).
+</p>
+</div>
+<div id="how-does-it-work" class="section level3" number="15.1.1">
+<h3><span class="header-section-number">15.1.1</span> How Does it Work?</h3>
+<p>Typical LiDAR systems use the time of flight method to produce 3D data. A laser ranging instrument produces a short, intense pulse of light from the instrument to a target being measured. Some of this energy is then reflected back to the instrument, where it is recorded (as seen in Figure <a href="LiDAR-acquisition-and-analysis.html#fig:15-Concept-of-LiDAR">15.2</a>). Since the speed of light, and the location of the laser ranging instrument is known, we can calculate the position of the target by timing how long it takes between the the pulse being emitted and received. If we shoot many pulses of light towards a target, we can create a 3D point cloud of our target (see Figure <a href="LiDAR-acquisition-and-analysis.html#fig:15-las-denoise">15.3</a> for an example of a forest scene). Modern LiDAR systems can emit hundreds of thousands of pulses per second, which means LiDAR point clouds can contain millions of points, and be several gigabytes large.</p>
+<div class="figure"><span style="display:block;" id="fig:15-Concept-of-LiDAR"></span>
+<img src="images/15-Concept-of-LiDAR.png" alt="Concept of LiDAR. A light signal is emitted by the scanner and reflected off the target. ('Concept of LiDAR', @Cartographer3d2021, CC-BY-SA-4.0)." width="80%" />
+<p class="caption">
+Figure 15.2: Concept of LiDAR. A light signal is emitted by the scanner and reflected off the target. (‘Concept of LiDAR,’ <span class="citation"><a href="#ref-Cartographer3d2021" role="doc-biblioref">Cartographer3d</a> (<a href="#ref-Cartographer3d2021" role="doc-biblioref">2021</a>)</span>, CC-BY-SA-4.0).
+</p>
+</div>
+<p>Since a LiDAR point cloud is a file containing the 3D location of points representing objects on the Earth’s surface, there are several parameters to take note of. It is important to know what the technical specifications of the data collection parameters were (for example, how many points per square meter do we have?), and how the data was collected (what platform was used?). A LiDAR dataset includes several pieces of information for each 3D point. <span class="math inline">\(X,Y,Z\)</span> location data tells us where each point is (usually to the centimeter scale), and a GPS time stamp is included for each point (<span class="math inline">\(gpstime\)</span>). Additional information such as <span class="math inline">\(return\)</span> <span class="math inline">\(number\)</span>, <span class="math inline">\(scan\)</span> <span class="math inline">\(angle\)</span>, <span class="math inline">\(classification\)</span>, and <span class="math inline">\(intensity\)</span> are also included with the file, which will be discussed in more detail below (<a href="LiDAR-acquisition-and-analysis.html#components-of-a-lidar-system">Components of a LiDAR System</a>).</p>
+<p>The most common file format for LiDAR files is called the LAS file format (<code>.las</code>). This file format was originally designed for 3D point cloud data, and is a free alternative to proprietary systems or a generic ASCII file interchange system. The main benefits of this file format are that it is relatively quick, can be used by any system, and stores information specific to the nature of LiDAR data without being overly complex <span class="citation">(<a href="#ref-AmericanSocietyforPhotogrammetry&amp;RemoteSensing2019" role="doc-biblioref">American Society for Photogrammetry &amp; Remote Sensing 2019</a>)</span>. More information regarding the file type specifications can be found <a href="https://www.asprs.org/divisions-committees/lidar-division/laser-las-file-format-exchange-activities" target="_blank">at their website</a>.</p>
+<div class="figure"><span style="display:block;" id="fig:15-las-denoise"></span>
+<img src="images/15-las-denoise.png" alt="An example of a typical LiDAR point cloud containing 3.14 million points at approximately 80 points·m^-2^. The point cloud shows a 200 x 200 meter portion of Pacific Spirit Regional Park in Vancouver, and is part of the [2018 City of Vancouver dataset](https://opendata.vancouver.ca/explore/dataset/lidar-2018/). (Du Toit, CC-BY-4.0)." width="80%" />
+<p class="caption">
+Figure 15.3: An example of a typical LiDAR point cloud containing 3.14 million points at approximately 80 points·m<sup>-2</sup>. The point cloud shows a 200 x 200 meter portion of Pacific Spirit Regional Park in Vancouver, and is part of the <a href="https://opendata.vancouver.ca/explore/dataset/lidar-2018/">2018 City of Vancouver dataset</a>. (Du Toit, CC-BY-4.0).
+</p>
+</div>
+</div>
+</div>
+<div id="lidar-history-and-use" class="section level2" number="15.2">
+<h2><span class="header-section-number">15.2</span> LiDAR History and Use</h2>
+<p>LiDAR for forestry and ecology has been used to monitor vegetation structure, stream properties, and topography among other uses. The earliest versions of LiDAR were known as profiling systems and first investigated in the 1960’s <span class="citation">(<a href="#ref-Nelson2013" role="doc-biblioref">Nelson 2013</a>)</span>. A major limitation of early LiDAR profiling systems were that the system was locked in a near-nadir position (i.e. along-track path), which meant that only transects could be collected, as opposed to a larger swath width as with modern systems <span class="citation">(<a href="#ref-Nelson2013" role="doc-biblioref">Nelson 2013</a>; <a href="#ref-Lim2003" role="doc-biblioref">Lim et al. 2003</a>)</span>. Technological advancements meant that early scanning LiDAR systems became more common in the 1980s, although point densities (measured as points per square meter, points·m<sup>-2</sup>) were low. Densities of 1-5 points·m<sup>-2</sup> limited researchers to area based measurements of forest volume and biomass <span class="citation">(<a href="#ref-Nelson2013" role="doc-biblioref">Nelson 2013</a>)</span>. These limitations were primarily due to the LiDAR sensor, as well as data storage difficulties. Technological improvements such as increased pulse rates and smaller footprints (leading to increased point density), and increased storage capacity have allowed researchers to look as individual trees as well as whole forests <span class="citation">(<a href="#ref-Jakubowski2013" role="doc-biblioref">Jakubowski et al. 2013</a>)</span>. Previously limited to static LiDAR sensors, ALS point cloud densities of 1000 points·m<sup>-2</sup> are now entirely feasible. Figure <a href="LiDAR-acquisition-and-analysis.html#fig:15-high-low-point-density">15.4</a> shows two different point clouds densities, and how difficult it would be to delineate individual tree crowns at low point densities.</p>
+<div class="figure"><span style="display:block;" id="fig:15-high-low-point-density"></span>
+<img src="images/15-high-low-point-density.png" alt="A cross section of a high density point cloud (A, 80 points·m^-2^), and a lower density point cloud (B, 1 point·m^-2^). (Du Toit, CC-BY-4.0)." width="80%" />
+<p class="caption">
+Figure 15.4: A cross section of a high density point cloud (A, 80 points·m<sup>-2</sup>), and a lower density point cloud (B, 1 point·m<sup>-2</sup>). (Du Toit, CC-BY-4.0).
+</p>
+</div>
+<p>Unlike passive remote sensing technologies, LiDAR has the advantage of being able penetrate forest canopies; this means that we are able to detect the ground, and also characterize both vertical and horizontal vegetation structure. Since the data is extremely accurate, surface models developed using LiDAR are used in many fields where human-made and natural environments need to be mapped. LiDAR derivatives such as surface models are used in hazard assessment (see here: <span class="citation"><a href="#ref-Jaboyedoff2012" role="doc-biblioref">Jaboyedoff et al.</a> (<a href="#ref-Jaboyedoff2012" role="doc-biblioref">2012</a>)</span>), forestry (read more here: <span class="citation"><a href="#ref-Goodbody2021" role="doc-biblioref">Goodbody et al.</a> (<a href="#ref-Goodbody2021" role="doc-biblioref">2021</a>)</span>), wet area mapping (here: <span class="citation"><a href="#ref-Eash2018" role="doc-biblioref">Eash et al.</a> (<a href="#ref-Eash2018" role="doc-biblioref">2018</a>)</span> and <span class="citation"><a href="#ref-Zurqani2020" role="doc-biblioref">Zurqani et al.</a> (<a href="#ref-Zurqani2020" role="doc-biblioref">2020</a>)</span>), geologic/geomorphological mapping, and agriculture. In this chapter, we will discuss the use of LiDAR primarily in a forestry context, where raw data and derivatives are used for volume and biomass estimation, as well as individual tree crown analyses.</p>
+</div>
+<div id="components-of-a-lidar-system" class="section level2" number="15.3">
+<h2><span class="header-section-number">15.3</span> Components of a LiDAR System</h2>
+<div id="lasers" class="section level3" number="15.3.1">
+<h3><span class="header-section-number">15.3.1</span> Lasers</h3>
+<p><strong>Lasers</strong> are a very important component of LiDAR systems. Here we will discuss some basic concepts, as well as the technical parameters that are important when interpreting LiDAR data. LiDAR lasers are typically beams of <em>near-infrared</em> light (800 – 1,550 nm, typically 1,064 nm), and are used because these wavelengths are considered eye safe <span class="citation">(<a href="#ref-White2013" role="doc-biblioref">White et al. 2013</a>)</span>. Green wavelengths are used for bathymetric LiDAR (i.e. water penetrating LiDAR), but are less common, and not typically used on land <span class="citation">(<a href="#ref-UFGeomatics-FortLauderdale2016" role="doc-biblioref">UF Geomatics - Fort Lauderdale 2016a</a>)</span>. Laser scanners use rotating or oscillating mirrors in order to ‘scan’ a scene in multiple dimensions <span class="citation">(<a href="#ref-UFGeomatics-FortLauderdale2016a" role="doc-biblioref">UF Geomatics - Fort Lauderdale 2016b</a>)</span>. When these scanners are placed on a moving platform (e.g. a plane), we can cover large areas <span class="citation">(<a href="#ref-UFGeomatics-FortLauderdale2016a" role="doc-biblioref">UF Geomatics - Fort Lauderdale 2016b</a>)</span>. LiDAR sensors scan in a variety of ways; zig-zag, rotation mirror line, and push broom scanners are the most common, and use the same principles as those described for sensors in <strong>Chapter 12 (double check, dynamically link)</strong> <span class="citation">(<a href="#ref-UFGeomatics-FortLauderdale2016a" role="doc-biblioref">UF Geomatics - Fort Lauderdale 2016b</a>)</span>.</p>
+<p><em>Beam divergence</em> is a property that refers to how wide the light beam becomes when it intercepts an object, and can be used to differentiate LiDAR instruments. Small-footprint LiDAR describes beam diameters intercepting the surface at &lt; 1 m, while large-footprint intercepts the surface at around 5 - 25 m <span class="citation">(<a href="#ref-Lim2003" role="doc-biblioref">Lim et al. 2003</a>)</span>. Small-footprint LiDAR is primarily what is used in forest inventory and ecology studies, and has high accuracy, as well as the ability to produce high sampling densities. For these studies, beam divergence is typically 0.15 – 2.0 mrad <span class="citation">(<a href="#ref-White2013" role="doc-biblioref">White et al. 2013</a>)</span>. The concept is illustrated in Figure <a href="LiDAR-acquisition-and-analysis.html#fig:15-Beam-Divergence">15.5</a>, and the equation is shown below in <a href="LiDAR-acquisition-and-analysis.html#eq:footprint">(15.1)</a>, where <span class="math inline">\(D\)</span> = footprint diameter, <span class="math inline">\(h\)</span> = flight height (m), and <span class="math inline">\(\gamma\)</span> = laser beam divergence (mrad).</p>
+<p><span class="math display" id="eq:footprint">\[\begin{equation} 
+  D = h \gamma
+  \tag{15.1}
+\end{equation}\]</span></p>
+<div class="figure"><span style="display:block;" id="fig:15-Beam-Divergence"></span>
+<img src="images/15-Beam-Divergence.png" alt="Two examples of how beam divergence affects footprint size. (Du Toit, CC-BY-4.0)." width="60%" />
+<p class="caption">
+Figure 15.5: Two examples of how beam divergence affects footprint size. (Du Toit, CC-BY-4.0).
+</p>
+</div>
+<p>The amount of energy that is reflected off an object and back to the sensor is known as <em>intensity</em>. Target reflectivity is not directly related to the LiDAR laser itself, but influences whether the return has enough intensity to register with the LiDAR sensor. In addition to surfaces having different properties, the angle of incidence of the laser also affects how much energy the sensor receives. This ‘field of view’ is known as <em>scan angle</em> and is customizable, but lower scan angles are generally preferred (&lt;25°, <span class="citation"><a href="#ref-White2013" role="doc-biblioref">White et al.</a> (<a href="#ref-White2013" role="doc-biblioref">2013</a>)</span>). The concept of scan angle is the same as discussed in <strong>Chapter 12 (double check, dynamically link)</strong> and illustrated in Figure <a href="LiDAR-acquisition-and-analysis.html#fig:15-Scan-Angle">15.6</a>. Commercial LiDAR units on airplanes typically have stronger lasers than drone mounted or mobile laser scanners, which allows them to fly higher and cover more area.</p>
+<div class="figure"><span style="display:block;" id="fig:15-Scan-Angle"></span>
+<img src="images/15-Scan-Angle.png" alt="Scan angle is the angle from nadir at which the laser is pointing. The scan angle and aircraft flight height together are responsible for swath width. (Du Toit, CC-BY-4.0)." width="60%" />
+<p class="caption">
+Figure 15.6: Scan angle is the angle from nadir at which the laser is pointing. The scan angle and aircraft flight height together are responsible for swath width. (Du Toit, CC-BY-4.0).
+</p>
+</div>
+<p>All LiDAR sensors emit pulses at a certain rate (<em>pulse rate</em>), which can be given as pulses/second, or hertz (Hz). Pulse rate is highly variable (and often programmable on sensors), and along with <em>scan rate</em> (the number of scan lines per second) and <em>flight speed</em> is responsible for what density a point cloud can be. Pulse rates are commonly 50,000 - 200,000 Hz <span class="citation">(<a href="#ref-White2013" role="doc-biblioref">White et al. 2013</a>)</span>. All of this information means that each LiDAR data acquisition campaign has the potential to be rather unique, and the parameters italicized above need to be taken into account when doing analysis. All of these factors together affect how an individual pulse interacts with the target.</p>
+<p>Several technical aspects of lasers are recorded by the instrument (and usually provided as a flight summary or flight specifications by vendors), while some of it can also be found in the <code>las</code> file. We can usually find information that impacts the entire flight in the flight specifications, such as flight height, scan rate, and beam divergence. These aspects shouldn’t change for the entire duration of the flight. In contrast, information located in the <code>las</code> file affects individual points. Here we can find information such as scan angle, return number, and intensity.</p>
+<div class="figure"><span style="display:block;" id="fig:15-LiDAR-Unit"></span>
+<img src="images/15-LiDAR-Unit.jpg" alt="An example of a LiDAR Unit. ('LiDAR machine', @TheCenterforInternationalForestryResearchCIFOR2014, CC-BY-NC-ND-2.0)." width="70%" />
+<p class="caption">
+Figure 15.7: An example of a LiDAR Unit. (‘LiDAR machine,’ <span class="citation"><a href="#ref-TheCenterforInternationalForestryResearchCIFOR2014" role="doc-biblioref">The Center for International Forestry Research (CIFOR)</a> (<a href="#ref-TheCenterforInternationalForestryResearchCIFOR2014" role="doc-biblioref">2014</a>)</span>, CC-BY-NC-ND-2.0).
+</p>
+</div>
+</div>
+<div id="position-and-orientation" class="section level3" number="15.3.2">
+<h3><span class="header-section-number">15.3.2</span> Position and Orientation</h3>
+<p><strong>Global Navigation Satellite Systems</strong></p>
+<p>In order for us to use the calculation from Figure <a href="LiDAR-acquisition-and-analysis.html#fig:15-Concept-of-LiDAR">15.2</a>, we need to know the exact position of the scanner in space. For airborne and mobile platforms, we can can do this by using the <strong>global navigation satellite system (GNSS)</strong>, as well as post processing using a local GNSS reference station. This helps us to improve accuracy by not comparing our position to a known local position in order to ensure our location is known as accurately as possible. GNSS concepts are covered further in <strong>Chapter 4 (double check, dynamically link)</strong>.</p>
+<div class="figure"><span style="display:block;" id="fig:15-XYZ-coordinates"></span>
+<img src="images/15-XYZ-coordinates.jpg" alt="An on board GNSS is required toprovide an accurate location of the LiDAR scanner in space. ('A key component of a lidar system is a GPS', @NEONEducation2014, CC-BY-NC-SA-2.0)." width="70%" />
+<p class="caption">
+Figure 15.8: An on board GNSS is required toprovide an accurate location of the LiDAR scanner in space. (‘A key component of a lidar system is a GPS,’ <span class="citation"><a href="#ref-NEONEducation2014" role="doc-biblioref">NEON Education</a> (<a href="#ref-NEONEducation2014" role="doc-biblioref">2014</a>)</span>, CC-BY-NC-SA-2.0).
+</p>
+</div>
+<p><strong>Inertial Measurement Unit (IMU)</strong></p>
+<p>An <strong>inertial measurement unit (IMU)</strong> consists of gyroscopes and accelerometers and measures the attitude and acceleration of the aircraft along the X, Y, Z axis. This data is combined with the GNSS data to provide a precise location of the scanner in space. This information becomes very important for airborne platforms where wind conditions can cause the orientation of the scanner to change subtly. We refer to the orientation of the platform in space by using the terms pitch, roll, and yaw, to describe which was the scanner is facing (see <a href="LiDAR-acquisition-and-analysis.html#fig:15-LiDAR-System">15.1</a>).</p>
+<p><strong>Clocks</strong></p>
+<p>LiDAR point data needs to be synced with positioning data in order to know exactly where the point is in space. To do this, a very accurate GPS clock is used to time stamp the laser scanning data <span class="citation">(<a href="#ref-UFGeomatics-FortLauderdale2016a" role="doc-biblioref">UF Geomatics - Fort Lauderdale 2016b</a>)</span>. Accurate clocks are imperative for producing accurate point clouds; one nanosecond (i.e. one billionth of a second) corresponds to a 30 cm travel distance, as seen in Figure <a href="LiDAR-acquisition-and-analysis.html#fig:15-LiDAR-Discrete-Full-Waveform">15.11</a> <span class="citation">(<a href="#ref-UFGeomatics-FortLauderdale2016" role="doc-biblioref">UF Geomatics - Fort Lauderdale 2016a</a>)</span>!</p>
+</div>
+<div id="platform" class="section level3" number="15.3.3">
+<h3><span class="header-section-number">15.3.3</span> Platform</h3>
+<p>LiDAR units can be attached to a variety of platforms. Traditionally, LiDAR units for forestry research were mounted on airplanes and helicopters, as units were large and cumbersome, however ground based units such as terrestrial laser scanning (TLS), and mobile laser scanning (MLS) have also been developed. These units tend to have a very high point density, and TLS is often used in modeling tree architecture.</p>
+<p><strong>Airplanes and Helicopters</strong></p>
+<p>Airplanes and helicopters are still the most common platforms for LiDAR data collection. This is due to their ability to collect large amounts of data in one acquisition. LiDAR units that are designed for airplanes are more powerful than those designed for drones, leading to increased penetration in forests, even though the flight height is significantly increased. Data storage issues can also be mitigated as the platform is not as sensitive to weight restrictions when compared to drones. With increased pulse rates, data acquisitions can also be dense enough to do individual tree crown work. Since helicopters are capable of flying at lower altitudes, slower speeds, and following terrain, they are capable of collecting more dense data, but higher operating costs <span class="citation">(<a href="#ref-White2013" role="doc-biblioref">White et al. 2013</a>)</span>. Typical point densities range from 5 - 200 points·m<sup>-2</sup>.</p>
+<p><strong>Drone</strong></p>
+<p>As laser units have decreased in size, we have been able to mount LiDAR units to smaller platforms. Drones (also known as unmanned aerial vehicles (UAV) or remotely piloted aerial systems (RPAS)) are extremely convenient to collect high density point clouds over small areas. They typically fly relatively close to the forest (e.g. 50 m above the trees) and fly a pre-defined flight route so ensure evenly spaced data collection. Typical point densities range from hundreds to thousands of points per meter squared. A major limitation of drones is currently battery life, as acquisition campaigns are limited by how long the drone can fly for (approximately 20 - 30 minutes). This means that collecting large amounts of data is difficult in remote locations.</p>
+<div class="figure"><span style="display:block;" id="fig:15-LiDAR-on-Drone-2"></span>
+<img src="images/15-LiDAR-on-Drone-2.jpg" alt="Drone mounted LiDAR. This technology is rapidly developing, with many companies working towards creating units capable of acquiring high density datasets over large areas. ('LiDARUSA Snoopy 120 LiDAR', @Clapurhands2019,  CC-BY-SA-4.0)." width="70%" />
+<p class="caption">
+Figure 15.9: Drone mounted LiDAR. This technology is rapidly developing, with many companies working towards creating units capable of acquiring high density datasets over large areas. (‘LiDARUSA Snoopy 120 LiDAR,’ <span class="citation"><a href="#ref-Clapurhands2019" role="doc-biblioref">Mc Clapurhands</a> (<a href="#ref-Clapurhands2019" role="doc-biblioref">2019</a>)</span>, CC-BY-SA-4.0).
+</p>
+</div>
+<p><strong>Mobile Laser Scanning</strong></p>
+<p>Mobile Laser Scanning (MLS) includes people (sometimes called ‘backpack LiDAR’) and moving vehicles. This version of LiDAR has been used by transportation and engineering companies to precisely map things like road or building conditions, and as the units have reduced in size there has been and increase in interest for use in forestry. Current MLS units such as panel 2 in Figure <a href="LiDAR-acquisition-and-analysis.html#fig:15-LiDAR-Platforms">15.10</a> can be carried around by the user in a forest easily. The point density for that specific unit is approximately 6,000 points·m<sup>-2</sup> while the battery can last for over an hour. Typical point densities are highly dependent on what the MLS is mounted to; and can range from hundreds to thousands of points per square meter.</p>
+<p><strong>Terrestrial Laser Scanning</strong></p>
+<p>Terrestrial Laser Scanning (TLS) is a static system, meaning that is is placed in one location, takes measurements of a scene, and can then be moved (see panel 1 of Figure <a href="LiDAR-acquisition-and-analysis.html#fig:15-LiDAR-Platforms">15.10</a>. These units are used by engineers for surveying, and are used by foresters to precisely measure trees. This information can be used to build quantitative structure models (QSM), to precisely estimate tree parameters. Unlike the other platforms mentioned here, TLS is not necessarily a fast data collection technique. Due to occlusion, the TLS instrument needs to be placed in multiple positions around a plot to be able to fully visualize the trees/plot, which means that a one hectare plot can take three to six days to survey <span class="citation">(<a href="#ref-Wilkes2015" role="doc-biblioref">Wilkes et al. 2015</a>)</span>! Typical point densities are in the thousands of points per meter squared.</p>
+<p><strong>Satellite</strong></p>
+<p>Satellites are a relatively new platform for LiDAR sensors. Two current satellite sensors are highlighted here; ICESat-2 (Ice, Cloud and land Elevation Satellite) and GEDI (Global Ecosystem Dynamics Investigation). Both are examples of large-footprint, profiling LiDAR systems. ICESat-2 was launched in 2018, with the objectives to determine sea-ice thickness and measure vegetation canopy height for large scale biomass estimation <span class="citation">(<a href="#ref-NASA2021a" role="doc-biblioref">NASA and Neumann 2021</a>)</span>. The ICESat-2 LiDAR sensor is composed of 6 beams in 3 pairs, each with a footprint size of 13 m <span class="citation">(<a href="#ref-NASA2021a" role="doc-biblioref">NASA and Neumann 2021</a>)</span>. GEDI is a LiDAR sensor that was installed on the International Space Station in 2018, with 3 lasers producing 10 parallel tracks of observations, and a footprint size of 25 m <span class="citation">(<a href="#ref-NASA2021" role="doc-biblioref">NASA and University of Maryland 2021</a>)</span>. The GEDI sensor can be seen in panel 4 of Figure <a href="LiDAR-acquisition-and-analysis.html#fig:15-LiDAR-Platforms">15.10</a>.</p>
+<div class="figure"><span style="display:block;" id="fig:15-LiDAR-Platforms"></span>
+<img src="images/15-LiDAR-Platforms.png" alt="LiDAR Platforms 1: A terrestrial laser scanner (TLS). ('Lidar P1270901.jpg', @Monniaux, CC-BY-SA-3.0). 2: A hand-held moblie laser scanner (MLS). (Du Toit, CC-BY-4.0). 3: Car mounted MLS. ('3D mobile mapping unit', @OregonDepartmentofTransportation2016, CC-BY-2.0)'. 4: GEDI, a spaceborne LiDAR sensor. ('A New Hope: GEDI to Yield 3D Forest Carbon Map', @NEONEducation2014, CC-BY-2.0)." width="90%" />
+<p class="caption">
+Figure 15.10: LiDAR Platforms 1: A terrestrial laser scanner (TLS). (‘Lidar P1270901.jpg,’ <span class="citation"><a href="#ref-Monniaux" role="doc-biblioref">Monniaux</a> (<a href="#ref-Monniaux" role="doc-biblioref">2007</a>)</span>, CC-BY-SA-3.0). 2: A hand-held moblie laser scanner (MLS). (Du Toit, CC-BY-4.0). 3: Car mounted MLS. (‘3D mobile mapping unit,’ <span class="citation"><a href="#ref-OregonDepartmentofTransportation2016" role="doc-biblioref">Oregon Department of Transportation</a> (<a href="#ref-OregonDepartmentofTransportation2016" role="doc-biblioref">2016</a>)</span>, CC-BY-2.0)‘. 4: GEDI, a spaceborne LiDAR sensor. (’A New Hope: GEDI to Yield 3D Forest Carbon Map,’ <span class="citation"><a href="#ref-NEONEducation2014" role="doc-biblioref">NEON Education</a> (<a href="#ref-NEONEducation2014" role="doc-biblioref">2014</a>)</span>, CC-BY-2.0).
+</p>
+</div>
+</div>
+</div>
+<div id="types-of-lidar" class="section level2" number="15.4">
+<h2><span class="header-section-number">15.4</span> Types of LiDAR</h2>
+<div id="discrete-return" class="section level3" number="15.4.1">
+<h3><span class="header-section-number">15.4.1</span> Discrete Return</h3>
+<p><strong>Discrete return</strong> LiDAR is the most common type of LiDAR. Here, the reflected energy from a pulse is converted into return targets referenced in time and space <span class="citation">(<a href="#ref-White2013" role="doc-biblioref">White et al. 2013</a>)</span>. Discrete return systems can often record multiple returns (often 5 or more), as long as the energy from each return meets the energy threshold to be classified as a return. Returns are classified per pulse, by the arrival sequence in which the return signals are detected by the sensor <span class="citation">(<a href="#ref-UFGeomatics-FortLauderdale2016c" role="doc-biblioref">UF Geomatics - Fort Lauderdale 2016c</a>)</span>. In the case where a laser pulse intercepts a solid object (such as a building), only a single return would occur; in contrast if the laser pulse can penetrate through the object (e.g. the forest), some of the energy will be returned to the instrument where the pulse intercepts stems/branches/leaves <span class="citation">(<a href="#ref-White2013" role="doc-biblioref">White et al. 2013</a>)</span>. Figure <a href="LiDAR-acquisition-and-analysis.html#fig:15-LiDAR-Discrete-Full-Waveform">15.11</a> shows an example of this; a discrete return system would interpret the returned echo as two returns, as there are two peaks in the returned echo corresponding to a canopy and a ground hit. In a forested landscape, first returns often represent the upper canopy, while last returns correspond to the ground or objects near the ground <span class="citation">(<a href="#ref-White2013" role="doc-biblioref">White et al. 2013</a>)</span>.</p>
+</div>
+<div id="full-waveform" class="section level3" number="15.4.2">
+<h3><span class="header-section-number">15.4.2</span> Full Waveform</h3>
+<p><strong>Full waveform</strong> LiDAR systems record reflected energy from each laser pulse as a continuous signal <span class="citation">(<a href="#ref-White2013" role="doc-biblioref">White et al. 2013</a>)</span>.Traditionally, discrete return systems would only digitally store the discrete returns, without recording the complete analog return <span class="citation">(<a href="#ref-UFGeomatics-FortLauderdale2016c" role="doc-biblioref">UF Geomatics - Fort Lauderdale 2016c</a>)</span>. In contrast, full waveform systems digitize the entire analog signal at high sampling rates <span class="citation">(<a href="#ref-UFGeomatics-FortLauderdale2016c" role="doc-biblioref">UF Geomatics - Fort Lauderdale 2016c</a>)</span>. This can be seen on the right hand side of Figure <a href="LiDAR-acquisition-and-analysis.html#fig:15-LiDAR-Discrete-Full-Waveform">15.11</a>. This type of LiDAR creates much larger file sizes which were an issue in the past, but with modern storage capabilities it is becoming a viable alternative to discrete return LiDAR.</p>
+<div class="figure"><span style="display:block;" id="fig:15-LiDAR-Discrete-Full-Waveform"></span>
+<img src="images/15-LiDAR-Discrete-Full-Waveform.png" alt="Differents in the response between discrete echo and full waveform LiDAR. 'Airborne Laser Scanning Discrete Echo and Full Waveform signal comparison', @Beck2012, CC-BY-SA-3.0)." width="70%" />
+<p class="caption">
+Figure 15.11: Differents in the response between discrete echo and full waveform LiDAR. ‘Airborne Laser Scanning Discrete Echo and Full Waveform signal comparison,’ <span class="citation"><a href="#ref-Beck2012" role="doc-biblioref">Beck</a> (<a href="#ref-Beck2012" role="doc-biblioref">2012</a>)</span>, CC-BY-SA-3.0).
+</p>
+</div>
+</div>
+<div id="emerging-technology" class="section level3" number="15.4.3">
+<h3><span class="header-section-number">15.4.3</span> Emerging Technology</h3>
+<p><strong>Single Photon LiDAR</strong> is an emerging technology that allows wall-to-wall mapping detecting photons reflected off of surfaces more efficiently than traditional LiDAR sensors <span class="citation">(<a href="#ref-Swatantran2016" role="doc-biblioref">Swatantran et al. 2016</a>)</span>. While traditional LiDAR systems emit high energy laser beams, single photon systems transmit shorter, lower energy pulses <span class="citation">(<a href="#ref-Swatantran2016" role="doc-biblioref">Swatantran et al. 2016</a>)</span>. These systems use a green laser (532 nm), and due to the high efficiency nature of the technology can acquire high density point clouds (12 - 30 points·m<sup>-2</sup>) up to 30 times faster than traditional systems, and operate at higher altitudes <span class="citation">(<a href="#ref-Swatantran2016" role="doc-biblioref">Swatantran et al. 2016</a>)</span>. The system is also capable of penetration semi-porous obscurations such as vegetation, ground fog and thin clouds during daytime and night-time operations <span class="citation">(<a href="#ref-Swatantran2016" role="doc-biblioref">Swatantran et al. 2016</a>)</span>.</p>
+<p><strong>Multispectral LiDAR</strong> units such as the Optech Titan sensor operate three distinct wavelengths of 1,550 nm, 1,064 nm, and 532 nm <span class="citation">(<a href="#ref-Morsy2017" role="doc-biblioref">Morsy, Shaker, and El-Rabbany 2017</a>)</span>. This technology enables 3D spectral information to be captured; for example, NDVI can be calculated for the 3D point cloud. Combining multispectral LiDAR at three wavelengths allows for higher reliability and accuracy compared to single-wavelength LiDAR <span class="citation">(<a href="#ref-Morsy2017" role="doc-biblioref">Morsy, Shaker, and El-Rabbany 2017</a>)</span>, however this technology is not yet widespread.</p>
+<div class="box-content call-out-content">
+<div id="call-out-4" class="section level4 unnumbered box-title call-out-top">
+<h4>Call out</h4>
+</div>
+<p>
+<p>Specifications for LiDAR data acquisitions are highly variable. It is important to know what type of LiDAR you are using, and to understand the technical specifications of the point cloud before diving into any analysis.</p>
+</p>
+</div>
+</div>
+</div>
+<div id="lidar-derivatives-and-analysis" class="section level2" number="15.5">
+<h2><span class="header-section-number">15.5</span> LiDAR Derivatives and Analysis</h2>
+<p>LiDAR point clouds require post-processing to be useful. Often, point clouds contain noise that needs to be removed, while the points need to be classified to produce derivatives. Once a point cloud has been cleaned and classified, we can create a variety of products to describe the Earth’s surface, as well as describe vertical characteristics of our point clouds. The most important points to identify in a point cloud are ground and non-ground returns; these points are crucial for deriving <strong>surface models</strong>, such as: digital elevation models, digital surface models, and canopy height models.</p>
+<div id="bare-earth-elevation" class="section level3" number="15.5.1">
+<h3><span class="header-section-number">15.5.1</span> Bare Earth Elevation</h3>
+<p>Digital elevation models (DEMs) are raster products that represent height of the Earth’s surface above a reference such as sea level <span class="citation">(<a href="#ref-White2013" role="doc-biblioref">White et al. 2013</a>)</span>. Using a classified point cloud, we can isolate the points that are categorized as ground (<code>Classification == 2</code>) and create a raster that represents the ground (see Figure <a href="LiDAR-acquisition-and-analysis.html#fig:15-las-dem">15.12</a> below). DEMs are also called digital terrain models (DTMs), although a DTM can include vector features that represent natural features. DEMs have a variety of uses, from terrain modeling for watersheds, to road design <span class="citation">(<a href="#ref-Roussel2021" role="doc-biblioref">Jean-Romain Roussel, Goodbody, and Tompalski 2021</a>)</span>. In addition to being used on their own, DEMs can be used to normalize point clouds; this is the process of subtracting the ground elevation from a point cloud in order to place the points on a flat plane, so that each point represents the height above the ground, not absolute height. To create a DEM, various interpolation techniques are available - these techniques are covered in more detail in <strong>Chapter 10 (double check, dynamically link)</strong>, but common algorithms include inverse distance weighting (IDW), kriging, and k-nearest neighbour (KNN).</p>
+<p>When creating a DEM from a LiDAR point cloud, there are a few important considerations to make. The first is what resolution the DEM should be created with. The density of the point cloud is what dictates this; if the density of a point cloud is low, there is a lower likelihood of a point representing the ground. This means that a lower resolution DEM should be created. Conversely, high density point clouds can produce higher density DEMs. Additionally, forest/vegetation type is important. Dense, coastal forests in BC are likely to have high canopy cover (and therefore fewer ground points) than the more sparse subalpine forests in the province’s interior.</p>
+<div class="figure"><span style="display:block;" id="fig:15-las-dem"></span>
+<img src="images/15-las-DEM.png" alt="A digital elevation model (DEM) produced from LiDAR. (Du Toit, CC-BY-4.0)." width="70%" />
+<p class="caption">
+Figure 15.12: A digital elevation model (DEM) produced from LiDAR. (Du Toit, CC-BY-4.0).
+</p>
+</div>
+</div>
+<div id="digital-surface-model-and-canopy-height-models" class="section level3" number="15.5.2">
+<h3><span class="header-section-number">15.5.2</span> Digital Surface Model and Canopy Height Models</h3>
+<p>Digital surface models (DSMs) represent the height of surface features above the ground, relative to the same reference as DEMs <span class="citation">(<a href="#ref-White2013" role="doc-biblioref">White et al. 2013</a>)</span>. In contrast to a DEM, the DSM captures the natural and built features of the environment, and can be thought of as a table cloth placed over a scene. When a point cloud is normalized by subtracting a DEM from a DSM, the derived surface can be called a canopy height model (CHM, Figure <a href="LiDAR-acquisition-and-analysis.html#fig:15-las-CHM-2D">15.13</a>), and represents the height of the canopy above ground level <span class="citation">(<a href="#ref-White2013" role="doc-biblioref">White et al. 2013</a>)</span>. While the elevation values are different, both surfaces can be derived using the same algorithms <span class="citation">(<a href="#ref-Roussel2021" role="doc-biblioref">Jean-Romain Roussel, Goodbody, and Tompalski 2021</a>)</span>.</p>
+<div class="figure"><span style="display:block;" id="fig:15-las-CHM-2D"></span>
+<img src="images/15-las-CHM-2D.png" alt="A canopy height model (CHM), also known as a digital surface model (DSM) produced from LiDAR. (Du Toit, CC-BY-4.0)." width="70%" />
+<p class="caption">
+Figure 15.13: A canopy height model (CHM), also known as a digital surface model (DSM) produced from LiDAR. (Du Toit, CC-BY-4.0).
+</p>
+</div>
+</div>
+<div id="area-based-approach-vs.-individual-tree-crown-approach" class="section level3" number="15.5.3">
+<h3><span class="header-section-number">15.5.3</span> Area Based Approach vs. Individual Tree Crown Approach</h3>
+<p>LiDAR analysis in forestry uses two broad approaches, an <strong>area-based approach (ABA)</strong>, or an <strong>individual tree crown detection approach (ITD)</strong>. The ITD approach locates individual trees and allows the estimation of individual tree heights and crown area. From this, other metrics such as stem diameter, number of stems, basal area and stem volume can be derived <span class="citation">(<a href="#ref-Hyyppa1999" role="doc-biblioref">Hyyppä and Inkinen 1999</a>)</span>. In contrast, the main goal of an ABA is to generate wall-to-wall estimates of inventory attributes, such as mean height, dominant height, mean diameter, stem number, basal area, and volume of the stands <span class="citation">(<a href="#ref-Næsset2002" role="doc-biblioref">Næsset 2002</a>)</span>. Since the ABA produces wall-to-wall estimates, the products are usually in a raster format. The ABA approach is what is most often used for forestry inventories, and is an an extensive best practices guide for Canada was produced in 2013 by <span class="citation"><a href="#ref-White2013" role="doc-biblioref">White et al.</a> (<a href="#ref-White2013" role="doc-biblioref">2013</a>)</span>. Examples such as <span class="citation"><a href="#ref-Tompalski2019" role="doc-biblioref">Tompalski et al.</a> (<a href="#ref-Tompalski2019" role="doc-biblioref">2019</a>)</span> show the power that using an ABA can have.</p>
+<p>When doing either of these analyses, we typically produce <strong>LiDAR metrics</strong>. These metrics are descriptive statistics of the point cloud over a unit area; for example Figure <a href="LiDAR-acquisition-and-analysis.html#fig:15-las-hmax-2D">15.14</a> shows the maximum height of 10 x 10 m cells. How we define that unit is decides what kind of analysis we are able to do, and what kind of inferences are possible (i.e. ABA vs ITD). An ITD approach has a ‘unit’ size of one tree, whereas the ABA typically uses a grid size of 20 x 20 m. Both approaches require ground truthing, and for an ABA approach, plot sizes are typically designed to be of a similar area to the chosen grid size <span class="citation">(<a href="#ref-White2013" role="doc-biblioref">White et al. 2013</a>)</span>.</p>
+<div class="figure"><span style="display:block;" id="fig:15-las-hmax-2D"></span>
+<img src="images/15-las-hmax-2D.png" alt="Maximum heights of 10 meter cells using an area-based approach. (Du Toit, CC-BY-4.0)." width="70%" />
+<p class="caption">
+Figure 15.14: Maximum heights of 10 meter cells using an area-based approach. (Du Toit, CC-BY-4.0).
+</p>
+</div>
+</div>
+<div id="tree-segmentation" class="section level3" number="15.5.4">
+<h3><span class="header-section-number">15.5.4</span> Tree Segmentation</h3>
+<p><strong>Tree segmentation</strong> is required when undertaking an ITD approach. Increased point densities as well as other advancements in LiDAR systems mean that this approach is becoming operationally relevant. Tree segmentation is an attempt to extract individual trees from a point cloud. Since point clouds do not include information regarding what point belongs to which tree, we need to classify the points in a similar way to how we would classify points that represent the ground. Several different algorithms exist in order to detect individual trees and then segments them. Most algorithms follow the logic that tree tops will be near the top of the point cloud, and once the tree top has been identified, a region growing algorithm can be used to ‘grow’ the point cloud downwards.</p>
+<div class="figure"><span style="display:block;" id="fig:15-Processing-Flowchart"></span>
+<img src="images/15-Processing-Flowchart.png" alt="A typical LiDAR processing workflow. After acquiring data, pre-processing is necessary to clean and normalize the point cloud. After this a CHM can be created to detect tree tops, before segmentating the point cloud based on these points. (Du Toit, CC-BY-4.0)." width="90%" />
+<p class="caption">
+Figure 15.15: A typical LiDAR processing workflow. After acquiring data, pre-processing is necessary to clean and normalize the point cloud. After this a CHM can be created to detect tree tops, before segmentating the point cloud based on these points. (Du Toit, CC-BY-4.0).
+</p>
+</div>
+<p>Once we have segmented a point cloud, we can produce metrics for individual trees. These metrics can be used to help to identify structural traits of trees, which can then be used to identify different tree species, or to characterize different forest types. Ground based LiDAR scanners (MLS and TLS) are also used to very accurately estimate tree, trunk, and branch volumes.</p>
+<div class="figure"><span style="display:block;" id="fig:15-las-treetops"></span>
+<img src="images/15-las-treetops.png" alt="Example of tree tops detected using the `find_trees` function. (Du Toit, CC-BY-4.0)." width="80%" />
+<p class="caption">
+Figure 15.16: Example of tree tops detected using the <code>find_trees</code> function. (Du Toit, CC-BY-4.0).
+</p>
+</div>
+</div>
+<div id="sources-of-error" class="section level3" number="15.5.5">
+<h3><span class="header-section-number">15.5.5</span> Sources of Error</h3>
+<p>As with other data collection techniques, there are a few sources of error to be aware of. Accuracy of the components are important; if the GNSS is accurate to 1 m, it will cause significant issues compared to a GNSS that is accurate to 2 cm! Additionally, if the IMU has issues, we can have trouble locating ourselves in space, which affects where the laser return is ‘placed’ in 3D space. Typically, we are supplied with estimates of accuracy by the data supplier.</p>
+<p>Aside from positional errors, there can also be issues with how we correct for atmospheric conditions, and how it absorbs light. The target surface should also be taken into account, as it can cause multipath errors (where the pulse is reflected off multiple surfaces before returning to the sensor, see Figure <a href="LiDAR-acquisition-and-analysis.html#fig:15-multipath-error">15.17</a>), and occlusion (lasers can not penetrate through solid objects). Finally, areas with highly variable terrain can lead to uncertainty in position, especially when with low density LiDAR.</p>
+<div class="figure"><span style="display:block;" id="fig:15-multipath-error"></span>
+<img src="images/15-Multipath-Error.png" alt="Example of multipath errors that can occur. The green dot is where our point is actually located in space, while the blue point shows where the point is placed in the point cloud. The red line shows the path of the reflected pulse. (Du Toit, CC-BY-4.0)." width="70%" />
+<p class="caption">
+Figure 15.17: Example of multipath errors that can occur. The green dot is where our point is actually located in space, while the blue point shows where the point is placed in the point cloud. The red line shows the path of the reflected pulse. (Du Toit, CC-BY-4.0).
+</p>
+</div>
+</div>
+<div id="software-and-analysis-tools" class="section level3" number="15.5.6">
+<h3><span class="header-section-number">15.5.6</span> Software and Analysis Tools</h3>
+<p>As LiDAR acquisition becomes cheaper, more tools are becoming available to do analysis. In this chapter, we use <a href="https://cran.r-project.org/web/packages/lidR/" target="_blank">lidR</a>; a free and open source R package that can be used for the entire process of analyzing a point cloud. Several other options exist, such as <a href="https://github.com/carlos-alberto-silva/weblidar-treetop" target="_blank">A Shiny-based Application for Extracting Forest Information from LiDAR data</a> (also in R), the <a href="http://mparkan.github.io/Digital-Forestry-Toolbox/" target="_blank">Digital-Forestry-Toolbox</a> which is available for MATLAB, <a href="http://forsys.cfr.washington.edu/fusion/fusion_overview.html" target="_blank">FUSION</a>, a software developed by the USDA Forest Service, and finally <a href="https://www.qgis.org/en/site/" target="_blank">QGIS</a>, a free GIS. Paid software is also frequently used in LiDAR processing (examples include <a href="https://www.esri.com/en-us/home" target="_blank">ArcGIS Pro</a>, and <a href="https://rapidlasso.com/lastools/" target="_blank">LAStools</a>), although the cost can be prohibitive. Finally, the open source software <a href="https://www.danielgm.net/cc/" target="_blank">CloudCompare</a> can be incredibly useful for both viewing and manually clipping/editing point clouds.</p>
+<div class="box-content case-study-content">
+<div id="case-study-11" class="section level4 unnumbered box-title case-study-top">
+<h4>Case Study</h4>
+</div>
+<div id="box-text" class="section level4 unnumbered">
+<h4>Creating LiDAR Metrics from a Raw Point Cloud</h4>
+<p>
+<p>For this case study, we will be using a clipped .las file from the 2018 open <a href="https://opendata.vancouver.ca/explore/dataset/lidar-2018/information/" target="_blank">LiDAR dataset</a> of the City of Vancouver and UBC Endowment Lands in British Columbia (we randomly selected a 200 x 200 m portion of the ‘4840E_54550N’ tile using CloudCompare), and the <code>lidR</code> package in R <span class="citation"><a href="#ref-Roussel2020" role="doc-biblioref">Jean Romain Roussel et al.</a> (<a href="#ref-Roussel2020" role="doc-biblioref">2020</a>)</span>. The script to process this data is included in the data folder of the GitHub repository, and you can use the <code>lidR</code> <a href="https://jean-romain.github.io/lidRbook/" target="_blank">book</a> to get a more in depth understanding of the functions we apply below <span class="citation">(<a href="#ref-Roussel2021" role="doc-biblioref">Jean-Romain Roussel, Goodbody, and Tompalski 2021</a>)</span>.</p>
+</p>
+<p>
+<p>The first step when looking at LiDAR data is to inspect it; we recommend using the free software CloudCompare, or plotting the .las file in the <code>lidR</code> package. Once we have a sense of our data, we can clean and filter the data to remove noise. Our cleaned dataset can then be used to create a DEM; first we need to classify ground points, followed by using an algorithm to rasterize our new ground points to create a surface. This is an essential step that could require quite a bit of tweaking depending on what you want to use the DEM for. It is important to take density into account; a sparse point cloud will not be good for a high resolution DEM! In our case, the DEM is used to <em>normalize</em> the point cloud. Normalization removes the effect of terrain on above ground measurements, allowing comparisons of vegetation heights (as can see in the very uniform point cloud in Figure <a href="LiDAR-acquisition-and-analysis.html#fig:15-las-normalize">15.18</a>.</p>
+<div class="figure"><span style="display:block;" id="fig:15-las-normalize"></span>
+<img src="images/15-las-normalize.png" alt="A normalized point cloud. (Du Toit, CC-BY-4.0)." width="60%" />
+<p class="caption">
+Figure 15.18: A normalized point cloud. (Du Toit, CC-BY-4.0).
+</p>
+</div>
+</p>
+<p>
+<p>The normalized point cloud is used to create our CHM. It is at this point that we can analyze the point cloud in a variety of ways. We can use an area-based approach (ABA) to create metrics at the grid level (using our normalized point cloud), or we can derive metrics at the individual tree scale. In order to do this we need to first segment the trees before creating metrics. Segmentation can be tedious, as it requires the user tweak the parameters of their segmentation algorithm. Understanding your forest type, and inspecting the point cloud visually can be very useful when deciding what kind of segmentation routine you want to run. Below we can see an example of a segmented point cloud.</p>
+<div class="figure"><span style="display:block;" id="fig:15-las-segmented"></span>
+<img src="images/15-las-segmented.png" alt="A segmented point cloud using the algorithm based on @Dalponte2016. (Du Toit, CC-BY-4.0)." width="60%" />
+<p class="caption">
+Figure 15.19: A segmented point cloud using the algorithm based on <span class="citation"><a href="#ref-Dalponte2016" role="doc-biblioref">Dalponte and Coomes</a> (<a href="#ref-Dalponte2016" role="doc-biblioref">2016</a>)</span>. (Du Toit, CC-BY-4.0).
+</p>
+</div>
+</p>
+<p>
+<p>Creating metrics at these two scales are the fundamental way in which we currently think about analyzing forests using LiDAR. Each tells us different things about the forest, so it is important to take scale into account when choosing what kind of analysis you want to do. Below we can see a Leaflet map of some area based metrics created for this point cloud!</p>
+</p>
+</div>
+</div>
+</div>
+<div id="your-turn-12" class="section level3 unnumbered">
+<h3>Your Turn!</h3>
+<p>In Figure <a href="LiDAR-acquisition-and-analysis.html#fig:15-map">15.20</a> below, explore some of the LiDAR derivatives that we produced in the case study above. We can see how the pattern for maximum height follows the mean height quite closely. In addition, we can see that the 15th percentile of heights (ZQ 15) also broadly follows this pattern. However, we can see that the standard deviation of heights in the tall areas are quite variable, and that very little ground is visible in our tile (as the percentage of points above 2 m, PZAbove2 is very high almost everywhere).</p>
+<div class="figure"><span style="display:block;" id="fig:15-map"></span>
+<div id="htmlwidget-12dcfb24ca3ccd901998" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-12dcfb24ca3ccd901998">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.WorldImagery",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addRasterImage","args":["data:image/png;base64,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",[[49.2544184405484,-123.216437573515],[49.2498179935775,-123.209410143498]],1,null,null,"Mean Height"]},{"method":"addRasterImage","args":["data:image/png;base64,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",[[49.2544184405484,-123.216437573515],[49.2498179935775,-123.209410143498]],1,null,null,"Maximum Height"]},{"method":"addRasterImage","args":["data:image/png;base64,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",[[49.2544184405484,-123.216437573515],[49.2498179935775,-123.209410143498]],1,null,null,"Standard Deviation of Height"]},{"method":"addRasterImage","args":["data:image/png;base64,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",[[49.2544184405484,-123.216437573515],[49.2498179935775,-123.209410143498]],1,null,null,"ZQ 15"]},{"method":"addRasterImage","args":["data:image/png;base64,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",[[49.2544184405484,-123.216437573515],[49.2498179935775,-123.209410143498]],1,null,null,"PZAbove2"]},{"method":"addLegend","args":[{"colors":["#440154 , #48186A 6.25898873423293%, #433C84 17.4717011143864%, #365C8D 28.6844134945398%, #2A788E 39.8971258746933%, #20928C 51.1098382548467%, #27AD81 62.3225506350001%, #55C667 73.5352630151536%, #98D83E 84.747975395307%, #E4E419 95.9606877754605%, #FDE725 "],"labels":["5","10","15","20","25","30","35","40","45"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":"Mean","extra":{"p_1":0.0625898873423293,"p_n":0.959606877754605},"layerId":null,"className":"info legend","group":"Mean Height"}]},{"method":"addLegend","args":[{"colors":["#440154 , #472B7A 11.9140615298724%, #375B8D 28.1901025497873%, #26828E 44.4661435697022%, #24AA83 60.7421845896171%, #68CC5C 77.018225609532%, #D2E21B 93.2942666294469%, #FDE725 "],"labels":["20","30","40","50","60","70"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":"Maximum","extra":{"p_1":0.119140615298724,"p_n":0.932942666294469},"layerId":null,"className":"info legend","group":"Maximum Height"}]},{"method":"addLegend","args":[{"colors":["#440154 , #440154 0%, #482979 11.3843356294477%, #3E4C8A 22.7686712588953%, #306A8E 34.153006888343%, #25858E 45.5373425177906%, #1FA188 56.9216781472383%, #3BBB75 68.3060137766859%, #78D153 79.6903494061336%, #C3DF23 91.0746850355813%, #FDE725 "],"labels":["0","5","10","15","20","25","30","35","40"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":"ZQ 15","extra":{"p_1":0,"p_n":0.910746850355813},"layerId":null,"className":"info legend","group":"ZQ 15"}]},{"method":"addLegend","args":[{"colors":["#440154 , #424186 19.2220471639187%, #27808E 43.1051572996944%, #37B878 66.9882674354702%, #C1DF24 90.8713775712459%, #FDE725 "],"labels":["5","10","15","20"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":"Standard Deviation","extra":{"p_1":0.192220471639187,"p_n":0.908713775712459},"layerId":null,"className":"info legend","group":"Standard Deviation of Height"}]},{"method":"addLegend","args":[{"colors":["#440154 , #482374 9.51453031280838%, #3E4A89 22.4410259824072%, #2E6D8E 35.367521652006%, #228C8D 48.2940173216048%, #25AB82 61.2205129912036%, #58C765 74.1470086608024%, #A8DB34 87.0735043304012%, #FDE725 100%, #FDE725 "],"labels":["30","40","50","60","70","80","90","100"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":"PZAbove2","extra":{"p_1":0.0951453031280838,"p_n":1},"layerId":null,"className":"info legend","group":"PZAbove2"}]},{"method":"addLayersControl","args":[[],["Mean Height","Maximum Height","ZQ 15","Standard Deviation of Height","PZAbove2"],{"collapsed":true,"autoZIndex":true,"position":"topleft"}]},{"method":"hideGroup","args":[["Maximum Height","ZQ 15","Standard Deviation of Height","PZAbove2"]]}],"limits":{"lat":[49.2498179935775,49.2544184405484],"lng":[-123.216437573515,-123.209410143498]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 15.20: Explore different area-based metrics produced in the case study above. Hover over tile icon (top left) to turn different layers on or off. (Du Toit, CC-BY-4.0). NOTE: this map contains interactive content and is available online.
+</p>
+</div>
+</div>
+</div>
+<div id="summary-8" class="section level2" number="15.6">
+<h2><span class="header-section-number">15.6</span> Summary</h2>
+<p>LiDAR is an active remote sensing technology that requires three components; a laser scanner, a GNSS, and an IMU. The laser scanner emits short, intense pulses of light and measures the time it takes for energy to be reflected back to the device. Time of flight principles are used to produce 3D point clouds, as we know exactly where in space the laser scanner is using the GNSS and IMU. These 3D point clouds can be used to monitor vegetation structure, stream properties, and topography. Point cloud derivatives such surface models can help us analyze different aspects of a forest or landscape. These surfaces can describe the ground (DEM), the top of the Earth’s surface (DSM), or the height of the forest canopy (CHM) when the point cloud is normalized. When using LiDAR in a forestry context, it is important to decide on what resolution we need for our study; we can use an ABA or ITD approach to create LiDAR metrics, which can be used to make different types of inferences about the forest.</p>
+<div id="reflection-questions-8" class="section level3 unnumbered">
+<h3>Reflection Questions</h3>
+<ol style="list-style-type: decimal">
+<li>What are the three main components of a LiDAR system?</li>
+<li>Why is LiDAR so useful for forestry operations compared to other remote sensing technologies?</li>
+<li>How is a DEM created? What are the main step that are needed?</li>
+</ol>
+</div>
+<div id="practice-questions-4" class="section level3 unnumbered">
+<h3>Practice Questions</h3>
+<ol style="list-style-type: decimal">
+<li>If pulse of light is reflected off a surface 50 m away, what is the travel time of that pulse of light?</li>
+<li>If a plane is flying at 450 m above the ground and the LiDAR sensor has a beam divergence of 0.17 mrad, what is the footprint diameter?</li>
+<li>Explain what is meant by the term ‘discrete return?’</li>
+<li>What is a typical LiDAR wavelength?</li>
+</ol>
+</div>
+</div>
+<div id="recommended-readings-4" class="section level2 unnumbered">
+<h2>Recommended Readings</h2>
+<ul>
+<li>A best practices guide for generating forest inventory attributes from airborne laser scanning data using an area-based approach. Information Report FI-X-010 - <span class="citation"><a href="#ref-White2013" role="doc-biblioref">White et al.</a> (<a href="#ref-White2013" role="doc-biblioref">2013</a>)</span></li>
+<li>Airborne laser scanning for quantifying criteria and indicators of sustainable forest management in Canada - <span class="citation"><a href="#ref-Goodbody2021" role="doc-biblioref">Goodbody et al.</a> (<a href="#ref-Goodbody2021" role="doc-biblioref">2021</a>)</span></li>
+<li>Use of LIDAR in landslide investigations: A review - <span class="citation"><a href="#ref-Jaboyedoff2012" role="doc-biblioref">Jaboyedoff et al.</a> (<a href="#ref-Jaboyedoff2012" role="doc-biblioref">2012</a>)</span></li>
+</ul>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-AmericanSocietyforPhotogrammetry&amp;RemoteSensing2019" class="csl-entry">
+American Society for Photogrammetry &amp; Remote Sensing. 2019. <span>“<span>LASER (LAS) FILE FORMAT EXCHANGE ACTIVITIES</span>.”</span> <a href="https://www.asprs.org/divisions-committees/lidar-division/laser-las-file-format-exchange-activities">https://www.asprs.org/divisions-committees/lidar-division/laser-las-file-format-exchange-activities</a>.
+</div>
+<div id="ref-Beck2012" class="csl-entry">
+Beck, Anthony. 2012. <span>“<span class="nocase">Airborne Laser Scanning Discrete Echo and Full Waveform signal comparison</span>.”</span> <a href="https://commons.wikimedia.org/wiki/File:Airborne_Laser_Scanning_Discrete_Echo_and_Full_Waveform_signal_comparison.svg">https://commons.wikimedia.org/wiki/File:Airborne_Laser_Scanning_Discrete_Echo_and_Full_Waveform_signal_comparison.svg</a>.
+</div>
+<div id="ref-Cartographer3d2021" class="csl-entry">
+Cartographer3d. 2021. <span>“<span class="nocase">Concept of LiDAR</span>.”</span> <a href="https://commons.wikimedia.org/wiki/File:Concept_of_LiDAR.svg">https://commons.wikimedia.org/wiki/File:Concept_of_LiDAR.svg</a>.
+</div>
+<div id="ref-Dalponte2016" class="csl-entry">
+Dalponte, Michele, and David A. Coomes. 2016. <span>“<span class="nocase">Tree-centric mapping of forest carbon density from airborne laser scanning and hyperspectral data</span>.”</span> <em>Methods in Ecology and Evolution</em> 7 (10): 1236–45. <a href="https://doi.org/10.1111/2041-210X.12575">https://doi.org/10.1111/2041-210X.12575</a>.
+</div>
+<div id="ref-Eash2018" class="csl-entry">
+Eash, David A., Kimberlee K. Barnes, Padraic S. O’Shea, and Brian K. Gelder. 2018. <span>“<span class="nocase">Stream-channel and watershed delineations and basin-characteristic measurements using lidar elevation data for small drainage basins within the Des Moines Lobe landform region in Iowa</span>.”</span> <em>U.S. Geological Survey Scientific Investigations Report 2017–5108</em>. https://doi.org/<a href="https://doi.org/10.3133/sir20175108">https://doi.org/10.3133/sir20175108</a>.
+</div>
+<div id="ref-Goodbody2021" class="csl-entry">
+Goodbody, Tristan R H, Nicholas C Coops, Joan E Luther, Piotr Tompalski, Christopher Mulverhill, Catherine Frizzle, Richard Fournier, Shane Furze, and Sam Herniman. 2021. <span>“<span class="nocase">Airborne laser scanning for quantifying criteria and indicators of sustainable forest management in Canada</span>”</span> 985 (July): 972–85.
+</div>
+<div id="ref-Hyyppa1999" class="csl-entry">
+Hyyppä, Juha, and Mikko Inkinen. 1999. <span>“<span class="nocase">Detecting and estimating attributes for single trees using laser scanner</span>.”</span> <em>The Photogrammetric Journal of Finland</em> 16 (2): 27–42.
+</div>
+<div id="ref-Jaboyedoff2012" class="csl-entry">
+Jaboyedoff, Michel, Thierry Oppikofer, Antonio Abellán, Marc Henri Derron, Alex Loye, Richard Metzger, and Andrea Pedrazzini. 2012. <span>“<span class="nocase">Use of LIDAR in landslide investigations: A review</span>.”</span> <em>Natural Hazards</em> 61 (1): 5–28. <a href="https://doi.org/10.1007/s11069-010-9634-2">https://doi.org/10.1007/s11069-010-9634-2</a>.
+</div>
+<div id="ref-Jakubowski2013" class="csl-entry">
+Jakubowski, Marek K., Wenkai Li, Qinghua Guo, and Maggi Kelly. 2013. <span>“<span class="nocase">Delineating individual trees from lidar data: A comparison of vector- and raster-based segmentation approaches</span>.”</span> <em>Remote Sensing</em> 5 (9): 4163–86. <a href="https://doi.org/10.3390/rs5094163">https://doi.org/10.3390/rs5094163</a>.
+</div>
+<div id="ref-Lim2003" class="csl-entry">
+Lim, Kevin, Paul Treitz, Michael Wulder, Benoît St-Ongé, and Martin Flood. 2003. <span>“<span class="nocase">LiDAR remote sensing of forest structure</span>.”</span> <em>Progress in Physical Geography</em> 27 (1): 88–106. <a href="https://doi.org/10.1191/0309133303pp360ra">https://doi.org/10.1191/0309133303pp360ra</a>.
+</div>
+<div id="ref-Marek91342012" class="csl-entry">
+Marek9134. 2012. <span>“<span class="nocase">LiDAR-i lend</span>.”</span> <a href="https://commons.wikimedia.org/wiki/File:LiDAR-i_lend.gif">https://commons.wikimedia.org/wiki/File:LiDAR-i_lend.gif</a>.
+</div>
+<div id="ref-Clapurhands2019" class="csl-entry">
+Mc Clapurhands. 2019. <span>“<span>LiDARUSA Snoopy 120 LiDAR</span>.”</span> <a href="https://commons.wikimedia.org/wiki/File:Yellowscan_LIDAR_on_OnyxStar_FOX-C8_HD.jpg">https://commons.wikimedia.org/wiki/File:Yellowscan_LIDAR_on_OnyxStar_FOX-C8_HD.jpg</a>.
+</div>
+<div id="ref-Monniaux" class="csl-entry">
+Monniaux, David. 2007. <span>“<span class="nocase">Lidar P1270901.jpg</span>.”</span> <a href="https://commons.wikimedia.org/wiki/File:Lidar_P1270901.jpg">https://commons.wikimedia.org/wiki/File:Lidar_P1270901.jpg</a>.
+</div>
+<div id="ref-Morsy2017" class="csl-entry">
+Morsy, Salem, Ahmed Shaker, and Ahmed El-Rabbany. 2017. <span>“<span class="nocase">Multispectral lidar data for land cover classification of urban areas</span>.”</span> <em>Sensors (Switzerland)</em> 17 (5). <a href="https://doi.org/10.3390/s17050958">https://doi.org/10.3390/s17050958</a>.
+</div>
+<div id="ref-NASA2021a" class="csl-entry">
+NASA, and Tom Neumann. 2021. <span>“<span>IceSat-2; Ice, Cloud, AND LAND ELEVATION SATELLITE-2</span>.”</span> <a href="https://icesat-2.gsfc.nasa.gov/">https://icesat-2.gsfc.nasa.gov/</a>.
+</div>
+<div id="ref-NASA2021" class="csl-entry">
+NASA, and University of Maryland. 2021. <span>“<span>GEDI Ecosystem LiDAR</span>.”</span> <a href="https://gedi.umd.edu/">https://gedi.umd.edu/</a>.
+</div>
+<div id="ref-Nelson2013" class="csl-entry">
+Nelson, Ross. 2013. <span>“<span class="nocase">How did we get here? An early history of forestry lidar</span>.”</span> <em>Canadian Journal of Remote Sensing</em> 39 (SUPPL.1). <a href="https://doi.org/10.5589/m13-011">https://doi.org/10.5589/m13-011</a>.
+</div>
+<div id="ref-NEONEducation2014" class="csl-entry">
+NEON Education. 2014. <span>“<span class="nocase">A key component of a lidar system is a GPS</span>.”</span> <a href="https://www.flickr.com/photos/128087132@N06/15408803390">https://www.flickr.com/photos/128087132@N06/15408803390</a>.
+</div>
+<div id="ref-Næsset2002" class="csl-entry">
+Næsset, Erik. 2002. <span>“<span class="nocase">Predicting forest stand characteristics with airborne scanning laser using a practical two-stage procedure and field data</span>.”</span> <em>Remote Sensing of Environment</em> 80 (1): 88–99. <a href="https://doi.org/10.1016/S0034-4257(01)00290-5">https://doi.org/10.1016/S0034-4257(01)00290-5</a>.
+</div>
+<div id="ref-OregonDepartmentofTransportation2016" class="csl-entry">
+Oregon Department of Transportation. 2016. <span>“<span class="nocase">3D mobile mapping unit</span>.”</span> <a href="https://www.flickr.com/photos/oregondot/24784201084/in/photostream/">https://www.flickr.com/photos/oregondot/24784201084/in/photostream/</a>.
+</div>
+<div id="ref-Roussel2020" class="csl-entry">
+Roussel, Jean Romain, David Auty, Nicholas C. Coops, Piotr Tompalski, Tristan R. H. Goodbody, Andrew Sánchez Meador, Jean François Bourdon, Florian de Boissieu, and Alexis Achim. 2020. <span>“<span class="nocase">lidR: An R package for analysis of Airborne Laser Scanning (ALS) data</span>.”</span> <em>Remote Sensing of Environment</em> 251 (August): 112061. <a href="https://doi.org/10.1016/j.rse.2020.112061">https://doi.org/10.1016/j.rse.2020.112061</a>.
+</div>
+<div id="ref-Roussel2021" class="csl-entry">
+Roussel, Jean-Romain, Tristan R. H. Goodbody, and Piotr Tompalski. 2021. <span>“<span class="nocase">lidR Book</span>.”</span> <a href="https://jean-romain.github.io/lidRbook/">https://jean-romain.github.io/lidRbook/</a>.
+</div>
+<div id="ref-Swatantran2016" class="csl-entry">
+Swatantran, Anu, Hao Tang, Terence Barrett, Phil Decola, and Ralph Dubayah. 2016. <span>“<span class="nocase">Rapid, high-resolution forest structure and terrain mapping over large areas using single photon lidar</span>.”</span> <em>Scientific Reports</em> 6 (June): 1–12. <a href="https://doi.org/10.1038/srep28277">https://doi.org/10.1038/srep28277</a>.
+</div>
+<div id="ref-TheCenterforInternationalForestryResearchCIFOR2014" class="csl-entry">
+The Center for International Forestry Research (CIFOR). 2014. <span>“<span class="nocase">LiDAR machine</span>.”</span> <a href="https://www.flickr.com/photos/cifor/36019786455/">https://www.flickr.com/photos/cifor/36019786455/</a>.
+</div>
+<div id="ref-Tompalski2019" class="csl-entry">
+Tompalski, Piotr, Joanne C. White, Nicholas C. Coops, and Michael A. Wulder. 2019. <span>“<span class="nocase">Demonstrating the transferability of forest inventory attribute models derived using airborne laser scanning data</span>.”</span> <em>Remote Sensing of Environment</em> 227 (September 2018): 110–24. <a href="https://doi.org/10.1016/j.rse.2019.04.006">https://doi.org/10.1016/j.rse.2019.04.006</a>.
+</div>
+<div id="ref-UFGeomatics-FortLauderdale2016" class="csl-entry">
+UF Geomatics - Fort Lauderdale. 2016a. <span>“<span>LiDAR Remote Sensing Part 1: Principles</span>.”</span> EcoLearnIT. <a href="https://youtu.be/T5hFrS57LGo">https://youtu.be/T5hFrS57LGo</a>.
+</div>
+<div id="ref-UFGeomatics-FortLauderdale2016a" class="csl-entry">
+———. 2016b. <span>“<span>LiDAR Remote Sensing Part 2: Systems &amp; Data Collection</span>.”</span> EcoLearnIT. <a href="https://youtu.be/jS0lI-ZMSSo">https://youtu.be/jS0lI-ZMSSo</a>.
+</div>
+<div id="ref-UFGeomatics-FortLauderdale2016c" class="csl-entry">
+———. 2016c. <span>“<span>LiDAR Remote Sensing Part 3: Data Analysis</span>.”</span> EcoLearnIT. <a href="https://youtu.be/wpW1cx7WMXQ">https://youtu.be/wpW1cx7WMXQ</a>.
+</div>
+<div id="ref-White2013" class="csl-entry">
+White, Joanne C., Michael A. Wulder, Andrés Varhola, Mikko Vastaranta, Nicholas C. Coops, Bruce D Cook, Doug Pitt, and Murray Woods. 2013. <span>“<span class="nocase">A best practices guide for generating forest inventory attributes from airborne laser scanning data using an area-based approach. Information Report FI-X-010</span>.”</span> Victoria, BC, Canada: Canadian Forest Service, Canadian Wood Fibre Centre, Pacific Forestry Centre. <a href="https://doi.org/10.5558/tfc2013-132">https://doi.org/10.5558/tfc2013-132</a>.
+</div>
+<div id="ref-Wilkes2015" class="csl-entry">
+Wilkes, Phil, Simon D. Jones, Lola Suarez, Andrew Haywood, William Woodgate, Mariela Soto-Berelov, Andrew Mellor, and Andrew K. Skidmore. 2015. <span>“<span class="nocase">Understanding the Effects of ALS Pulse Density for Metric Retrieval across Diverse Forest Types</span>.”</span> <em>Photogrammetric Engineering &amp; Remote Sensing</em> 81 (8): 625–35. <a href="https://doi.org/10.14358/PERS.81.8.625">https://doi.org/10.14358/PERS.81.8.625</a>.
+</div>
+<div id="ref-Zurqani2020" class="csl-entry">
+Zurqani, Hamdi A., Christopher J. Post, Elena A. Mikhailova, Michael P. Cope, Jeffery S. Allen, and Blake A. Lytle. 2020. <span>“<span class="nocase">Evaluating the integrity of forested riparian buffers over a large area using LiDAR data and Google Earth Engine</span>.”</span> <em>Scientific Reports</em> 10 (1): 1–16. <a href="https://doi.org/10.1038/s41598-020-69743-z">https://doi.org/10.1038/s41598-020-69743-z</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="image-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-integration.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

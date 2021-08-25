@@ -319,13 +319,27 @@ $$
 
 ###	Viewsheds
 
+A **viewshed** is an analysis that simulates a physical line-of-sight using a DEM to identify pixels that can be seen from an observer point or set of points. The result of a viewshed is usually a raster with the same dimensions as an input DEM that has pixels encoded with values of 1 indicating the pixel can be seen from the observer point. In other words, the elevations for each pixel in the DEM is used to calculate whether a line-of-sight would pass through it given some other observer location at another elevation. 
+
+Figure 9.X shows an example of a viewshed that can be seen from a slope near the top of Mount Assiniboine. Viewsheds can be useful for incorporating landscape aesthetics into GIS workflows where an area may be visually sensitive. For example, forest harvests can be designed and planned to mitigate the visual impact at nearby towns or highways. As well, observing pull-outs along scenic highways can be identified using viewsheds.
+
+![Figure 9.X Viewshed from a high observer location on Mount Assiniboine at the border of Alberta and British Columbia, Canada. Data from Canadian Digital Elevation Model.](images/09-00-mount-assiniboine-viewshed.png){.center}
+
 ###	Extrusion
+
+**Extrusion** is the process of taking 2-dimensional features such as points, lines, or polygons and assigning an elevation to each feature so that it can be visualized in 3-dimensions. An extrusion is often performed using the values of an attribute in a feature class. In this way, extrusion can be used to create 3D buildings from 2D polygons of building footprints that contain an attribute of height (Figure 9.X). 
+
+![Figure 9.X Animation showing building polygons in Vancouver, British Columbia extruded by a height attribute. Building data (2009) from City of Vancouver, licensed under Open Government License - Vancouver. Base map © OpenStreetMap contributors, licensed under Open Data Commons Open Database License.](images/09-00-vancouver-building-height-extruded.gif){.center}
+
+Extrusion is also frequently used to visualize non-height attributes. For example, population density can be extruded as a "height" value to give a unique perspective of the relative change in this attribute across space that may otherwise be difficult to appreciate from a 2D map with colour alone.
+
+![Figure 9.X Census dissemination areas extruded by population density (2016) for Vancouver, British Columbia. Census data from Statistics Canada, licensed under Open Government License. Base map © OpenStreetMap contributors, licensed under Open Data Commons Open Database License. .](images/09-00-vancouver-population-density-2016.png){.center}
 
 ###	Exaggeration
 
-###	Lighting and shadowing
+**Exaggeration** is the process of multiplying real height or elevation values by a constant factor in order create a larger range of values so that vertical features and patterns are made more apparent. Figure 9.X illustrates an example of exaggeration of a DEM for Mount Logan, the highest peak in Canada (5,959 m), located in the Yukon Territory.
 
-###	Symbologies for relief
+![Figure 9.X Elevation exaggeration of Mount Logan elevation, Yukon Terrotiry, Canada. Digital Elevation Model by Natural Resources Canada, licensed under the Open Government Licence – Canada.](images/09-00-mount-logan-exaggeration.png){.center}
 
 ## Summary
 

@@ -1,0 +1,615 @@
+# Raster Analysis and Terrain Modelling {#raster-analysis-and-terrain-modelling}
+
+Elevation data are frequently collected in a raster format. In this chapter, we will look at how rasters can be analyzed with a specific focus on deriving terrain information from elevation rasters. We will explore some useful properties of the raster structure that can be exploited for insightful analysis of land and water alike. Image-based raster analysis will be a later topic of Chapter 14.
+
+:::: {.box-content .learning-objectives-content}
+
+::: {.box-title .learning-objectives-top}
+#### Learning Objectives {-}
+::: 
+
+1. Understand the principles of raster analysis
+2. Recognize the types of digital vertical models and their uses
+3. Synthesize the terrain and hydrological information that can be derived from a digital elevation model
+4. Apply raster functions in terrain and hydrology workflows
+5. Visualize terrain with 3D geovisualization methods
+
+::::
+
+### Key Terms {-}
+
+Digital Elevation Model, Digital Vertical Model, Digital Terrain Model, Digital Surface Model, Anaglyph, High-Pass Filter, Low-Pass Filter, Focal Function, Local Function, Global Function, Zonal Function
+
+## Raster analysis
+
+### Base data
+
+### Derived data
+
+### Classified data
+
+### Combined data
+
+## Digital vertical models
+
+```{r, echo=FALSE}
+library(raster)
+x <- raster(nrow=3,ncol=3,vals=1:9,crs="+proj=utm +zone=10 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",xmn=0,xmx=300,ymn=0,ymx=300)
+writeRaster(x,"saddle.tif",overwrite=T,format='GTiff',datatype='INT1U')
+```
+
+### Digital Elevation Models (DEM)
+
+As the name suggests, a **Digital Elevation Model (DEM)** is a digital representation of elevation data or heights above a vertical datum. We call it a _model_ because, as you know from reading Chapter 3, all spatial data formats are inherently spatial data models. As is the case for all rasters, DEMs represent sampled data. That is, the elevations that are represented continuously in the raster DEM are in fact samples of elevation at the raster cell centres. For this reason, a DEM is a model that is simplifying elevation to some degree depending on the cell size. 
+
+Figure 9.X shows a DEM for Mount Assiniboine near the Alberta and British Columbia border. Mount Assiniboine has a distinctive pyramidal peak that is not immediately apparent from the bird's-eye view of a DEM. It is common to see DEMs displayed in this black and white colour scheme, where black represents lower elevations and white represents higher elevations. Can you tell where the peak is? We will look at more sophisticated colour schemes and geovisualizations of terrain in a later section.
+
+![Figure 9.X Digital Elevation Model of Mount Assiniboine at the border of Alberta and British Columbia, Canada. Data from Canadian Digital Elevation Model.](images/09-00-mount-assiniboine-dem.png){.center}
+Figure 9.X shows another DEM, but this time for some the flattest terrain in Canada over 1,600 km away from Mount Assiniboine on the Canadian Shield at the mouth of the Nelson River in Manitoba. The Nelson River drains an area of more than 1 million km^2 of land across much of the Canadian prairie provinces and pours into Hudson Bay. The Canadian Shield is home to the oldest terrain on Earth and millions of years of erosion have reduced it to rolling hills and flattened horizons. 
+
+![Figure 9.X Digital Elevation Model of Nelson River pouring into Hudson Bay, Manitoba, Canada. Data from Shuttle Radar Topography Mission .](images/09-00-nelson-river-dem.png){.center}
+
+Over an entire extent of 3,300 km^2, the Nelson River DEM in Figure 9.X only varies by 44 m. Compare that with the 1,328 m of difference from the white peak of Mount Assiniboine to the black valleys of the Rocky Mountains over about 5 km^2 in Figure 9.X. Throughout the remainder of this chapter, we will look at raster analysis applied to these two extreme examples of terrain.
+
+### Digital Terrain Models (DTM)
+
+A **Digital Terrain Model (DTM)** represents elevation through points and lines and is often erroneously confused with a DEM. The vector-based data format allows elevation to be sampled at a higher density in areas where elevation changes quickly in space (e.g., Mount Assiniboine) and at lower density in areas where elevation changes gradually (e.g., Nelson River). Lines can be used to model mountain ridges, river banks, fault lines, and coast lines where elevation might be constant and it would be useful to represent the elevation as a line feature instead of a point of elevation. It is important to recognize that DTMs can be converted to DEMs through a process of interpolation (more on that in Chapter 10), but a DEM cannot be converted to a DTM because a DEM is a regular grid or equally-spaced elevation samples.
+
+### Digital Surface Models (DSM)
+
+Up to this point, we have been looking digital vertical models of _bare Earth_, that is, just plain old elevation of terrain above a vertical datum. If you want to represent the height of features above the bare Earth, like houses and trees, then you would need to use a **Digital Surface Model (DSM)**. Whereas a DTM and DEM both represent elevation above a vertical datum, which is usually mean sea level represented by the geoid, a DSM represents height above a DTM or DEM. In this way, we can model features on the surface and their heights. We will look at more examples of working with DSMs in Chapter 15.
+
+### Contours
+
+## Raster functions
+
+Raster functions are algorithms that perform operations on one or more cells of the raster to produce new calculations or derivatives. In the following sections we will explore four commonly used raster functions: local, focal, global, and zonal.
+
+### Local
+
+A **local function** is the simplest to understand because each cell in the input raster is operated on independently of all other cells. Simple arithmetic operations such as addition, subtraction, division, and multiplication are all examples of focal functions when applied to a raster. 
+
+```{r, echo=FALSE}
+x <- raster(nrow=5,ncol=5,crs="+proj=utm +zone=10 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",xmn=0,xmx=300,ymn=0,ymx=300)
+values(x) <- sample(1:255, ncell(x))
+par(mfrow=c(1,2))
+plot(x,xaxt="n",yaxt="n",main="Input Raster",bty="n",legend=F,col=grey.colors(255),axes=FALSE,box=FALSE)
+text(x)
+plot(x+5,xaxt="n",yaxt="n",main="Input Raster + 5",bty="n",legend=F,col=grey.colors(255),axes=FALSE,box=FALSE)
+text(x+5)
+```
+
+### Focal
+
+A **focal function** takes full advantage of the raster data model by moving a window or kernel over the raster in order to calculate new values. The kernel must always be a square with odd-numbered dimensions such as 3x3 or 11x11. This ensures that there is a focal cell at the centre of the kernel that determines which cell in the output will take on the value of the operation. In practice, the kernel is moved column-by-column, row-by-row over the entire raster and a calculation is performed using the values of the input raster that coincide with the kernel. The kernel itself is also comprised of weights that, when multiplied against the input raster at a given location, yields a set of values that can be summed or averaged. Thus, the operation of the focal function can take many different forms such as calculating the mean, minimum, maximum or any other operation over the kernel. As a simple example, a mean focal function with a 3x3 kernel will calculate the mean value of all 3x3 cell neighborhoods in the raster yielding the result below.
+
+```{r, echo=FALSE}
+y <- focal(x, w=matrix(1,nrow=3,ncol=3), fun=mean)
+par(mfrow=c(1,2))
+plot(x,xaxt="n",yaxt="n",main="Input Raster",bty="n",legend=F,col=grey.colors(255),axes=FALSE,box=FALSE)
+text(x)
+plot(y,xaxt="n",yaxt="n",main="3x3 Low-Pass Filter",bty="n",legend=F,col=grey.colors(255),axes=FALSE,box=FALSE)
+text(y)
+```
+
+Mathematically, the weights of the 3x3 kernel are all 1's so that when it is multiplied against a particular location on the input raster the values of the input raster are returned.
+
+$$k = \begin{bmatrix}1 & 1 & 1\\
+1 & 1 & 1\\
+1 & 1 & 1
+\end{bmatrix}$$
+
+The mean is then calculated by adding all the values together and dividing by the number of cells in the kernel. You will see that our input raster has shrunk down from dimensions of 5x5 to 3x3 after applying the 3x3 kernel. This is due to the fact that there are insufficient cells along the edge and corners of the raster to divide by the number of cells in the kernel. One solution is to use padding, which simply adds 0's along the outside of the input raster. Padding is not always an elegant solution because you will still have edge effects, but you will at least maintain the dimensions of your input raster in the output. Below is the result of the same focal function, but with padding of 0's.
+
+```{r, echo=FALSE}
+y <- focal(x, w=matrix(1,nrow=3,ncol=3), fun=mean, pad=T, padValue=0)
+par(mfrow=c(1,2))
+plot(x,xaxt="n",yaxt="n",main="Input Raster",bty="n",legend=F,col=grey.colors(255),axes=FALSE,box=FALSE)
+text(x)
+plot(y,xaxt="n",yaxt="n",main="3x3 Low-Pass Filter (Padding)",bty="n",legend=F,col=grey.colors(255),axes=FALSE,box=FALSE)
+text(y)
+```
+
+You might recognize that a mean focal function has the property of smoothing out the variation in extreme values from cell-to-cell in the input raster. In fact, a mean focal function is special and also known as a **low-pass filter**, which has the effect of "blurring" a raster or image. On the other hand, we can apply a **high-pass filter** that performs edge enhancement. The kernel of a high-pass filter takes on a specific pattern of weights that usually involves a large weight to the focal (centre) cell of the kernel and negative weights to the neighbouring cells. Below is a common example of a high-pass kernel:
+
+$$k = \begin{bmatrix}-0.7 & -1 & -0.7\\
+-1 & 6.8 & -1\\
+-0.7 & -1 & -0.7
+\end{bmatrix}$$
+
+The operation of a high-pass filter is to multiply the kernel weights above against the input raster cell values and then sum the result. The following is the result of applying the high-pass kernel weights above to our input raster with padding:
+
+```{r, echo=FALSE}
+y <- focal(x, w=matrix(c(-0.7,-1,-0.7,-1,6.8,-1,-0.7,-1,-0.7),nrow=3,ncol=3), fun=sum, pad=T, padValue=0)
+par(mfrow=c(1,2))
+plot(x,xaxt="n",yaxt="n",main="Input Raster",bty="n",legend=F,col=grey.colors(255),axes=FALSE,box=FALSE)
+text(x)
+plot(y,xaxt="n",yaxt="n",main="3x3 High-Pass Filter (Padding)",bty="n",legend=F,col=grey.colors(255),axes=FALSE,box=FALSE)
+text(y)
+```
+
+### Global
+
+**Global functions** apply some operation to all cells in the raster. These are usually simply referred to as summary statistics of the raster since we usually want to know what the minimum, maximum, and average values are of all cells in a given raster. As a result, global functions do not return a raster as an output, but rather individual values, depending on the operation. Below are the summary statistics for our input raster:
+
+```{r, echo=FALSE}
+t <- data.frame(Operation=c("Minimum","Maximum","Mean","Standard Deviation"),Value=c(min(values(x)),max(values(x)),mean(values(x)),sd(values(x))))
+knitr::kable(
+  t, booktabs = TRUE, row.names = FALSE
+)
+```
+
+### Zonal
+
+Lastly, **zonal functions** perform an operation over some subset of cells defined by a zonal raster. Again, the operation can be any calculation of interest: mean, minimum, sum, etc. Zonal functions are useful for deriving information over different regions of a raster that share some thematic classification like land cover, ecosystem type, or jurisdiction. Suppose we have the following input raster and zonal raster:
+
+```{r, echo=FALSE}
+z <- raster(nrow=5,ncol=5,crs="+proj=utm +zone=10 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",xmn=0,xmx=300,ymn=0,ymx=300)
+values(z) <- c(1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3)
+par(mfrow=c(1,2))
+plot(x,xaxt="n",yaxt="n",main="Input Raster",bty="n",legend=F,col=grey.colors(255),axes=FALSE,box=FALSE)
+text(x)
+plot(z,xaxt="n",yaxt="n",main="Zonal Raster",bty="n",legend=F,col=grey.colors(255),axes=FALSE,box=FALSE)
+text(z)
+```
+
+Like a global function, zonal functions do not return an output raster, but rather individual values for each zone:
+
+```{r, echo=FALSE}
+t <- data.frame(Zone=c(1,2,3),Minimum=c(min(values(x)[values(z)==1]),min(values(x)[values(z)==2]),min(values(x)[values(z)==3])),
+                Maximum=c(max(values(x)[values(z)==1]),max(values(x)[values(z)==2]),max(values(x)[values(z)==3])),
+                Mean=c(mean(values(x)[values(z)==1]),mean(values(x)[values(z)==2]),mean(values(x)[values(z)==3])),
+                Standard.Deviation=c(sd(values(x)[values(z)==1]),sd(values(x)[values(z)==2]),sd(values(x)[values(z)==3])))
+knitr::kable(
+  t, booktabs = TRUE, row.names = FALSE
+)
+```
+
+## Derivatives of elevation models
+
+You can probably recognize by now that if we apply a raster function to a DEM, then there is a lot of derived information that we can exploit in a raster analysis of terrain. These are further classified as first order, second order, and compound terrain derivatives. In this next section we will explore several common derivatives of a DEM and, importantly, we will see how they appear differently in the flat terrain of Nelson River and the rugged terrain of Mount Assiniboine.
+
+### Slope
+
+**Slope** is a first order terrain derivative using a focal raster function that represents the change in elevation over the distance of a cell edge. Slope can be expressed as a percentage or as angular degrees. As a percentage, a 0% slope would represent flat terrain and a 150% slope would represent steep terrain. It is worth pointing out that there is no upper bound for expressing slope as a percentage, but angular degrees are limited by an upper bound of 90°. It is mathematically impossible to achieve a slope of exactly 90° from a raster DEM because the cell size of a raster must always be great than 0 and a 90° angle would only be possible if two cells overlaid one another in the same raster, hence the impossibility. Slope is a derivative that is usually necessary in order to calculate other terrain derivatives. 
+
+Figure 9.X shows the slope of Mount Assiniboine where red represents steeper slopes and green represents flatter slopes. For the Mount Assiniboine DEM, the slope values range from 2° at the flattest to 80° at the steepest. Can you see the peak yet? 
+
+![Figure 9.X Slope of Mount Assiniboine at the border of Alberta and British Columbia, Canada. Data from Canadian Digital Elevation Model. ](images/09-00-mount-assiniboine-slope.png){.center}
+Figure 9.X shows the slope of Nelson River pouring into Hudson Bay. Again, red is steeper and green is flatter, but the slope values here only range from 0° to 9° and the vast majority of cells are less than 2°. Very flat terrain that can hardly be distinguished from the sea.
+
+![Figure 9.X Slope of Nelson River pouring into Hudson Bay, Manitoba, Canada. Data from Shuttle Radar Topography Mission .](images/09-00-nelson-river-slope.png){.center}
+
+### Aspect
+
+**Aspect** is another first order terrain derivative that represents the azimuthal direction that a slope faces. For example, an azimuth of 0° is North-facing slope, 90° is East-facing, 180° is South-facing, and 270° is West-facing with all other azimuths in between. Typically, aspect is most apparent when azimuths are dominate throughout the DEM. For example, the slope aspects are clearly visible in Figure 9.X showing Mount Assiniboine. By contrast, when slopes are very flat as is the case for the Nelson River, aspect can alternate frequently and produce a nearly random sequence except for the relatively steeper south bank of the river shown in Figure 9.X. It is possible to have an undefined aspect when the slope is 0°, which is the case for water seen coloured grey in Figure 9.X.
+
+![Figure 9.X Aspect of Mount Assiniboine at the border of Alberta and British Columbia, Canada. Data from Canadian Digital Elevation Model.](images/09-00-mount-assiniboine-aspect.png){.center}
+![Figure 9.X Aspect of Nelson River pouring into Hudson Bay, Manitoba, Canada. Data from Shuttle Radar Topography Mission .](images/09-00-nelson-river-aspect.png){.center}
+
+### Heat load index
+
+One important derivative from aspect is a **heat load index (HLI)**, which quantifies the heat from incident solar radiation on a slope. There are several variations for computing the heat load on terrain, but a commonly used calculation is the HLI proposed by McCune and Keon (2002):
+
+$$
+HLI=\frac{1-cos(aspect-45)}{2}
+$$
+
+If you imagine aspect represented by azimuths of a circle, then this calculation has the effect of "folding" that circle in half along the 45° azimuth (northeast-southwest) so that southwest-facing slopes have higher values and northeast-facing slopes have lower values. Although both southeast- and southwest-facing slopes theoretically receive the same amount of incident solar radiation, this heat load index reflects the fact that southwest-facing slopes will be significantly hotter and drier, which can help inform vegetation potential and fuel moisture content.
+
+![Figure 9.X Comparing Heat Load Index (HLI) for Mount Assiniboine and the Nelson River. Data from Canadian Digital Elevation Model and MAXAR, respectively.](images/09-00-mount-assiniboine-nelson-river-heat-load-index.png){.center}
+
+### Hillshade
+
+A **hillshade** is a DEM with a simulated light source. The values in a hillshade represent the illumination of that cell given its slope, aspect, and position in the raster relative to a simulated light source. The light source has an elevation and azimuth that can be defined to reflect a particular time of day. Thus, hillshades can be useful to show a more 3-dimensional view of terrain from the bird's-eye view of the DEM. Hillshades can also reveal fine differences in terrain that are not apparent from a simple DEM. Figure 9.X animates (online) a series of hillshades created with azimuths at 10° intervals from 0° to 350° with a light source at an elevation of 45° for Mount Assiniboine. This has the effect of rotating an approximately 9 AM high Sun on the solstice around Mount Assiniboine.
+
+![Figure 9.X Hillshade of Mount Assiniboine at the border of Alberta and British Columbia, Canada. Data from Canadian Digital Elevation Model. Online version is animated across all azimuths from 0° to 350° by 10° intervals.](images/09-00-mount-assiniboine-hillshade-animation.gif){.center}
+
+A hillshade is still a 2D raster with 3D features simulated through an illumination process. A hillshade does not reveal much for flatter terrain since there is not much variation in slopes across the entire raster, as can be seen in Figure 9.X for Nelson River, which is also animated in the same way as Figure 9.X. As you can see, there is no change over the water of the river and Hudson Bay where slope is 0° and aspect is undefined and only some minor terrain features are apparent over the land. Still, if you watch closely, some finer scale features can be made apparent that are not otherwise visible from the original DEM and other terrain derivatives.
+
+![Figure 9.X Hillshade of Nelson River pouring into Hudson Bay, Manitoba, Canada. Data from Shuttle Radar Topography Mission. Online version is animated across azimuths from 0° to 350° by 10° intervals.](images/09-00-nelson-river-hillshade-animation.gif){.center}
+
+### Sinks, peaks, and saddles oh my!
+
+**Sinks** are depressions in a DEM where the focal cell is surrounded by eight neighbouring cells with higher elevations (Figure 9.X). Sinks are often naturally occurring (e.g., lakes, ponds, and wetlands), but can also be due to random error, elevation precision, DEM cell size, or other pre-processing that may have been applied to the DEM such as mosaicking. The problem with sinks when modeling runoff is that water will enter the cell, but will not be able to exit in any direction, so they must be filled prior to using a DEM in any hydrology workflow. 
+
+![Figure 9.X Sink](images/09-00-sink.png){.center}
+
+**Peaks** are the opposite of sinks, where a focal cell is surrounded by eight neighbouring cells that share the same lower elevation (Figure 9.X). Like sinks, peaks are also naturally occurring (e.g., mountain peaks and ridge lines) and may also be artifacts of data resolution and processing. 
+
+![Figure 9.X Peak](images/09-00-peak.png){.center}
+
+**Saddles** occur when a lowland is bounded by two or more peaks (Figure 9.X). Usually, saddles identify a divide between drainage basins because they often occur along ridgelines and precipitation will runoff into one or the other drainage basin, but not both. 
+
+![Figure 9.X Saddle](images/09-00-saddle.png){.center}
+
+
+## Landform classification
+
+One of the motivations for deriving information from a DEM is to classify terrestrial landforms. Some of the derived information we have seen so far, like slope, can be used to classify landforms, but slope does not inform on geographic position. For example, a low slope value could be a plateau on top of a mountain or a river in a valley bottom. Therefore, we need more contextual information beyond these first or second terrain derivatives that we have looked at so far. There are two popular ways to derive these complex terrain derivatives by calculating terrain curvature and topographic position indices, which is what we will explore next. 
+
+### Profile and Planform curvature
+
+Curvature of terrain is described as convex, flat, or concave, which impacts the flow acceleration or deceleration of runoff over the terrain. There are two components of terrain curvature representing the x- and y-axes of geographic space. **Profile curvature** describes the downslope curvature while **plan or planform curvature** describes the curvature that is perpendicular to the downslope curvature. In this way, the vertical expression of terrain can be described by two, perpendicular curves. Figure 9.X illustrates the nine different combinations of profile and planform curvature.
+
+![Figure 9.X Conceptual diagram showing surfaces of all combinations of profile and planform curvature.](images/09-00-stacked-profile-planform.png){.center}
+There are many ways to calculate curvature, which usually take the form of a polynomial that is fit by a focal function over some neighbourhood of pixels. A 3x3 kernel is typically used to calculate profile and planform curvature, however, it is also common to increase the kernel size to counteract the effect of noise in high resolution DEMs. Figure 9.X illustrates examples of 3x3 kernels for each of the profile and planform curvature combinations. You might recognize variations of sinks, peaks, and saddles amongst the examples, which are of course not exhaustive of all possible elevation value combinations, but they are otherwise representative of the primary patterns that are indicated by profile and planform curvature.
+
+![Figure 9.X Conceptual diagram showing 3x3 kernel examples of all combinations of profile and planform curvature.](images/09-00-stacked-profile-planform-kernel.png){.center}
+
+Both profile and planform curvature are calculated as continuous floating point integers where: positive values represent convex curvature in the profile and concave curvature in the planform; zero represents no curvature; and negative values represent concave curvature in the profile and convex curvature in the planform. Figure 9.X shows the profile and planform curvature for Mount Assiniboine. What landforms can you start to identify from terrain curvature? Can you identify any sinks, peaks, or saddles in the DEM?
+
+![Figure 9.X Profile and planform curvature for Mount Assiniboine at the border of Alberta and British Columbia, Canada. Data from Canadian Digital Elevation Model.](images/09-00-mount-assiniboine-profile-planform-curvature.png){.center}
+
+### Topographic position index
+
+Another way to derive and classify landforms is through the use of a **topographic position index (TPI)**, which is a focal function that accounts for the difference between the focal cell elevation and the average elevation of the eight neighbouring cells (in the case of a 3x3 kernel). Therefore, positive TPI values indicate ridges or peaks, zero indicates either a constant slope or a flat area or a saddle, and negative TPI values indicate a valley or sink. Figure 9.X shows the TPI for Mount Assiniboine compared with the Nelson River. The TPI is sometimes also referred to as a terrain ruggedness index and there are other variations for calculating it as well (e.g., computing the standard score of the focal cell instead of the mean difference).
+
+![Figure 9.X Comparing Topographic Position Index (TPI) for Mount Assiniboine and the Nelson River. Data from Canadian Digital Elevation Model and MAXAR, respectively.](images/09-00-mount-assiniboine-nelson-river-topographic-position-index.png){.center}
+
+## Hydrology work"flows"
+
+By now, you should recognize that water can be modelled over a DEM by making the simple assumption that water will flow from higher elevations to lower elevations. We can undertake this modelling using a DEM because the continuous surface of elevation values can represent the runoff process. In this next section, we will look at how we can extract everything from runoff accumulation to stream networks and watersheds from a DEM.
+
+### Flow direction and flow accumulation
+
+Runoff is the most fundamental process that can be modelled from a DEM. In fact, modelling runoff supports nearly every subsequent derived hydrological variable of interest (e.g., flow accumulation, stream order, and watersheds). The principle assumption is that water flows from higher elevations to lower elevations. So the first step in any hydrological workflow is to calculate **flow direction** or the path that water will flow given precipitation over a focal cell in the DEM. This is made possible because we also know the eight neighbouring cell elevations. There a several algorithms for calculating and assigning flow direction, but the simplest is a focal function known as _D8_, first proposed by Greenlee (1987), that answers the question, _which neighbouring cell has the lowest elevation?_ With only eight neighbours, runoff can only travel in eight unique azimuths. Flow direction can be encoded as an azimuth with valid values of $FlowDir∈\{0,45,90,135,180,225,270,315,360\}$ (16-bit integer) where 0 is reserved for undefined flow direction, but more D8 flow direction is commonly encoded as an 8-bit integer with valid values of $FlowDir∈\{1,2,4,8,16,32,64,128,255\}$ where 255 is reserved for undefined flow direction. Once we know the flow direction we can calculate the **flow accumulation**, which is a focal function tally of the number of upslope DEM cells that flow into the focal cell. Figure 9.X illustrates how flow direction and flow accumulation work together to model runoff over a DEM surface. 
+
+![Figure 9.X Flow direction shown in arrows and flow accumulation of upslope cells shown in numbers for the D8 flow direction algorithm.](images/09-00-flow-direction-accumulation.png){.center} 
+
+Trouble arises when there are two or more neighboring cells with the same minima (e.g., a peak or saddle). This situation can arise for very flat terrain where the elevation might be the same in nearly every direction. As we have already seen, sinks can cause water to flow into but not out of the focal cell, and therefore result in an undefined flow direction. Sinks must therefore be identified and filled in a DEM before calculating flow direction. There are several algorithms for filling sinks, but generally the process involves calculating flow direction and then moving downslope from the highest elevations of the DEM to the valley bottoms and identifying depressions, which are then filled. This process continues to iterate until no more depressions are identified (Marks et al 1984).  Figure 9.X animates this iterative process of filling sinks in a cross-sectional profile of elevation, but the process is actually applied simultaneously over both geographic dimensions. Each iteration can introduce new sinks since the filling process directly modifies the DEM, so flow direction must be recalculated after each iteration in order to solve the next set of sinks. As a result, this filling process can be quite time consuming and usually stopping criteria are imposed such as a minimum depth threshold or a minimum slope for all cells in the DEM (i.e., no cells with flat slopes) to ensure that runoff is continuously downslope.
+
+![Figure 9.X Animated process of filling sinks in a DEM. Online version is animated.](images/09-00-sink-fill.gif){.center}
+
+The D8 algorithm is intuitive, fast, simple to implement and you will probably see it as the default option across many different GIS software. However, it is very sensitive to sinks, flat areas, and otherwise erroneous pixels because the D8 algorithm forces flow to a single raster pixel. If the raster pixel receiving the upslope flow is erroneous, then all downslope flow direction and, by extension, flow accumulation may also be erroneous. The D8 algorithm was developed in the the mid-1980s during a time when computers such as the AT&T 3B2/300 "mini computer" shipped with a 30 Mb hard disk drive, 1 Mb of random access memory, and a 10 Mhz central processing unit, all of which would have cost about US$10,000 in 1984. To put that in perspective, the 16-bit DEM of the Nelson River in Figure 9.X is 1.3 Mb and the combination of all the terrain derivatives that we have covered so far in this chapter (slope, aspect, HLI, hillshade, TPI, profile curvature, planform curvature, flow direction and flow accumulation) amounts to 19.5 Mb of disk space for a single, modest-sized study area (938 x 751 pixels).
+
+More sophisticated flow direction algorithms have developed since then that are more robust against erroneous pixels in the input DEM, including the D-infinity flow (DINF) algorithm proposed by Tarboton in 1997 and the multiple flow direction (MFD) algorithm developed by Qin et al in 2007. The DIF algorithm works by creating triangular facets within the 3x3 kernel, then flow direction is assigned as the azimuth of facet with the steepest slope. Calculated in this way, flow direction is represented as a continuous value between 1-360 instead of one of eight possible values with the D8 method. The MFD algorithm works by partitioning downslope flow to all eight neighbours. As a result, each neighbour receives a fraction of flow and the flow accumulation function then accumulates these fractions downslope. Figure 9.X shows the D8 flow direction and associated flow accumulation for Mount Assiniboine. Once flow direction and accumuation rasters have been generated, the floodgates open for a wide range of other derivative calculations, which are discussed in the next sections.
+
+![Figure 9.X D8 Flow direction and flow accumulation for Mount Assiniboine at the border of Alberta and British Columbia, Canada. Data from Canadian Digital Elevation Model.](images/09-00-mount-assiniboine-flow-dir-acc.png){.center}
+
+### Stream delineation
+
+Streams and rivers represent paths of accumulated flow and can be modeled from a flow accumulation raster by applying a simple threshold: values above this threshold are considered rivers or streams. The threshold that is applied to a flow accumulation raster should be selected based on expert knowledge and visual interpretation of the landscape. The actual value of the flow accumulation threshold is directly related to the extent of the flow accumulation raster. That is, larger flow accumulation rasters have more cells and therefore the accumulative values will be larger compared with a smaller flow accumulation raster. This means that a flow accumulation threshold of 100 can represent the same river that might be represented by a flow accumulation value of 10,000 in a larger raster. Thus, some initial visualization of the flow accumulation raster like in Figure 9.X is needed to determine what threshold should be applied. Once a threshold is determined, the flow accumulation raster can be reclassified to a binary (1 or 0) raster where 1 represents the presence of a stream or river channel. Usually, streams and rivers are represented using a vector data model instead of a raster, so the final step is to convert the binary raster to a set of line features that can be used in other workflows like network analysis (see Chapter 8).
+
+###	Stream order
+
+Once a stream raster has been delineated from a flow accumulation raster, then it is possible to derive stream order. **Stream order** is an ordinal value that describes the level or hierarchy of branching in a stream network. Higher stream order values generally represent larger streams that are closer to an output such as the ocean. Thus, smaller stream orders will generally be found "upstream" at higher elevations. There are two primary methods for assigning a stream order value. Both methods assign the value of 1 to segments of stream networks that are the "outermost" branches or the generally the highest in elevation. Thus, a first order stream would have relatively smaller flow accumulation values than a second order stream because it drains a smaller area. The way the Strahler and Shreve methods differ is how higher order stream values are assigned when two stream segments merge. For both methods, if two first (1-)order streams merge, then the next downstream segment is assigned a value of 2. However, if a first (1-)order and second (2-)order stream merge, then the Strahler method assigns the next downstream segment the higher of the two orders, which is 2 in this case, while the Shreve method adds together the orders of the upstream segments to assign the new value, which is 3 in this case. This pattern is repeated until all downstream segments have been labelled.
+
+In the GIS, stream order can be automatically calculated by using the binary stream delineation raster (1 = stream) and the flow direction raster. In other words, the GIS tool needs to know what the stream skeleton is and in which direction it is flowing. The output is usually a raster that contains the stream order values for the streams delineated in the binary stream raster. Again, the stream orders can be easily converted to line features for further vector-baed analysis.
+
+### Flow length 
+
+**Flow length** describes the distance of a stream path along the flow direction raster. This is calculated for all cells in the flow direction raster, not just the stream segments. In other words, each cell in the output raster takes on the value of how far water would flow downstream. Since the flow length of all cells in the output raster are known, it is possible to derive the longest flow path within a given basin. The longest flow path can be used to describe the time of concentration within a basin, which is a measure of the amount of time (i.e., a function of distance) that a precipitation event would take to exit or "flush" out of a given basin at an outlet. With some GIS software, flow length may be one of many optional outputs when calculating flow direction and flow accumulation from a DEM. You may also have the option of applying a raster of flow barriers, which modify the flow path and therefore the flow length.
+
+###	Watershed delineation
+
+**Watersheds** represent a contributing area to a particular pour point and therefore the total upslope area that flows or drains through a particular cell of the DEM. **Pour points** represent the constrained location that upslope flow must pass through and is identified as a single cell in a raster. Thus, if a set of pour points are defined, then it is possible to simply look at the neighbours of any pour point and identify which of the neighbouring cells flow into the pour point cell. If a neighbouring cell flows into the pour point, then that neighbouring cell is labelled within the same watershed as the pour point. This iterative process continues until the edge of the watershed search boundary finds a ridge, in which case the flow direction of neighbouring cells would flow opposite to the watershed and the search would end in the iteration that adds no more cells to the watershed. This process is repeated for all pour points until all cells in the DEM are classified into their respective watersheds.
+
+You might be wondering how pour points are initialized for this process. A common way to initialize pour points is to manually identify them within the context of your research objectives. Practically, pour points should be located on cells with high flow accumulation (i.e., not a random slope), so that you can be sure your watersheds will reach from ridge-to-ridge. Pour points can also be programmatically identified in several ways. For one, you could select all nodes of your stream network where the stream order transitions from a specific lower order to the next highest order number. For example, setting pour points to the transitions from third order to fourth order streams would yield a set of watersheds that contribute to fourth order streams with the caveat that you do not identify any watersheds downstream of fourth order streams. You can adjust this approach as needed if you are looking at larger darinage areas by increasing the stream order that you are considering. Typically, the transition between your highest order stream and the next lowest order represents all of the drainage areas for your DEM. If you need regularly-sized watersheds, then the flow accumulation raster conveniently indicates how many upslope cells flow into each downslope cell, so you can identify pour points along your stream network that contribute exactly 10,000 upslope cells. If your DEM cell size is 10 m, then this would be equivalent to mapping 1 km^2^ watersheds. If your goal is regularly-distributed watersheds along a particular reach of your stream network, then you could export the target stream segment and create points that are spaced at regular intervals along that stream segment. More on network analysis of hydrological networks in Chapter 8.
+
+### Topographic wetness index
+
+**Topographic Wetness Index (TWI)** is a simple calculation that can be used to identify locations where draining water is likely to collect or pool. Sometimes also referred to as the Compound Topographic Index (CTI), the calculation is as follows: 
+
+$$
+TWI=ln\frac{a}{tan(b)}
+$$
+
+where $a$ is the local upslope area for a given cell and $b$ is the local slope (radians) for a given cell. This calculation is essentially a ratio of flow entering a cell and the discharge of that flow out of the cell, represented by the tangent of the slope. Figure 9.X illustrates an overview of the components of the TWI calculation in a conceptual geographic space. 
+
+![Figure 9.X Conceptual figure showing how Topographic Wetness Index (TWI) is a function of (a) upslope area, (b) area and direction of local flow, and (c) the tangent of the local slope angle. Reproduced from Mattivi et al (2019), CC BY 4.0.](images/09-00-Mattivi-et-al-2019-figure-1.png){.center}
+
+The result is that cells with high flow accumulation and gentle slopes will have high TWI values (water pools), while cells with low accumulation and steep slopes will have low TWI values (water flows). The actual values of this ratio are unitless, but they are relative. If you are using the flow direction raster directly in your calculation, it is important to multiply $a$ by the area represented by each cell. For example, a 10 m resolution DEM would use the following calculation:
+
+$$
+TWI=ln\frac{a×100}{tan(b)}
+$$
+
+## Case Study
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(leaflet)
+library(raster)
+library(htmlwidgets)
+library(rgdal)
+library(sp)
+library(sf)
+library(leafem)
+library(geojsonio)
+
+#install.packages("DiagrammeR")
+library(DiagrammeR)
+
+#install.packages("topoDistance")
+library(topoDistance)
+
+knitr::opts_chunk$set(fig.width = 12, fig.height = 8) #make the interactive maps bigger/smaller across the document
+```
+
+#### Topographic Indices
+
+Natural processes on a landscape can be interpreted by analyzing its topography. DEMs can be used to create a wide range of topographic indices, which may be used to inform on landscape geomorphology, hydrology and biological processes in a study area (Mattivi et al., 2019). 
+
+#### Case Study - Topographic Indices for Wetland Mapping
+
+To demonstrate the applications of topographic indices, and attempt was made to predict the distribution of wetlands across a study area in the Fort St. John Timber Supply Area, in North-eastern British Columbia, Canada (see Figure 9.X).
+
+```{r map, echo=FALSE, include=FALSE}
+
+#load files
+ROI_1 <- st_read("data/09/Chowade_ROI.shp")
+ROI_2 <- st_read("data/09/FSJTSA.shp")
+
+#create leaflet
+m = leaflet() %>%
+  addProviderTiles("Esri.WorldImagery") %>% #http://leaflet-extras.github.io/leaflet-providers/preview/
+  addScaleBar(position = c("topleft")) %>%
+  
+  addFeatures(ROI_1, group = "Chowade Basin", fill = FALSE, color = "red")%>%
+  addFeatures(ROI_2, group = "Fort St. John TSA", fill = FALSE)%>%
+  
+  addLayersControl(overlayGroups = c("Chowade Basin", "Fort St. John TSA"),
+                   position = c("bottomleft"),
+                   options = layersControlOptions(collapsed = TRUE))
+
+m
+```
+
+```{r map1, echo=FALSE, fig.cap="Figure 1: The Fort St. John Timber Supply Area & Chowade Watershed Management Basin, British Columbia, Canada (Government of British Columbia, 2011a & 2011b)"}
+
+m
+
+```
+
+The use of topographic indices was employed alongside spectral indices to perform landcover classification. For the successful prediction of wetland landscape classes, a particularly promising topographic index is Topographic Wetness Index (TWI). In brief, high TWI values indicate areas with high water accumulation and low slope, whilst low TWI values indicate areas that are well drained and on steep slopes. There are several GIS platforms that provide users with TWI tools, yet not all are the same. A particular tool used in this case study was the SAGA Wetness Index tool: relative to 'regular' TWI calculations, System for Automated Geoscientific Analyses (SAGA) Wetness modifies the calculation of the contributing catchment area to a cells 'wetness', and consequently produces a more realistic prediction of soil moisture potential (Mattivi et al., 2019).The equations for SAGA Wetness ($WI_S$) (equation 1), and for it's unique computation of catchment area ($SCA_M$) (equation 2) are shown below (Böhner & Selige, 2006). Both are functions of slope angle $\beta$, and $SCA_{max}$ is defined as drainage area per unit contour width ($m^2$*$m^{-1}$) . SAGA Wetness across the study site is shown in Figure 9.X.
+
+$$
+\tag{Equation 1} 
+WI_S = ln (\frac{SCA_M}{tan\beta})
+$$
+
+
+$$
+\tag{Equation 2}
+SCA_M = SCA_{max} (\frac{1}{15})^{\beta exp(15^{\beta})}
+$$
+
+```{r Wetness, echo=FALSE, out.width = '75%', fig.cap="Figure 2: SAGA Wetness Index across the Chowade Watershed (Government of British Columbia, 2011b)"}
+knitr::include_graphics("images/SAGA_Wetness.png")
+```
+
+In addition to SAGA Wetness, another useful index that was included in the Case Study was the Multi-Resolution Valley Bottom Flatness (MRVBF) index. Introduced by Gallant & Dowling in 2003, this index identifies hillslopes and valley bottoms, and characterizes hydrological and geomorphic dynamics. This index serves to identify areas that are likely to be occupied by water, and has been used widely in remote sensing studies (Huang et al., 2017). MRVBF is derived from flatness and lowness characteristics, and is computed using slope and ranked elevation, see figure 3 (Gallant & Dowling, 2003). Note that this is a simplification of the computational process, and Gallant & Dowling (2003) may be consulted for a more in-depth breakdown of the 18 equations involved in computing MRVBF. See figure 4 for MRVBF across the study site. 
+
+```{r diagram, echo=FALSE, out.width = '75%', fig.cap="Figure 3:Multi-Resolution Valley Bottom Flatness (MRVBF) Computational Components (Gallant & Dowling, 2003"}
+
+DiagrammeR::grViz("digraph {
+  graph [layout = dot, rankdir = TB]
+  
+  node [shape = rectangle]        
+  rec1 [label = 'Component 1. Slope']
+  rec2 [label = 'Component 2. Elevation Percentile']
+  rec3 [label =  'Component 3. Nonlinear Transformation']
+  rec4 [label = 'MRVBF']
+  
+  # edge definitions with the node IDs
+  rec1 -> rec2 -> rec3 -> rec4
+  }", 
+  height = 500)
+
+```
+
+```{r MRVBF, echo=FALSE, out.width = '75%', fig.cap="Figure 4: Multi-resolution Valley Bottom Flatness (MRVBF) across the Chowade Watershed (Government of British Columbia, 2011b)"}
+ 
+knitr::include_graphics("images/MRVBF.png")
+```
+
+Figures 9.X and 9.X below demonstrate the relationship between Elevation and MRVBF through a comparison of cross sections from both layers. As is shown by the cross-sections of MRVBF and the DEM, high MRVBF values are directly correlated with low slope and elevation areas in the DEM.
+
+```{r MRVBF/DEM profile, echo=FALSE, warning=FALSE, out.width = '75%', fig.cap="Figure 9.X: Cross Section where elevation is expressed through Multi-Resolution Valley Bottom Flatness (MRVBF). High values represent valley bottoms, and low values represent steep slopes. "}
+
+MRVBF <- raster("data/09/MRVBF.tif")
+DEM <- raster("data/09/DEM.tif")
+Line <- geojson_read("data/09/Line.geojson", what = "sp")
+
+
+MRVBF_Profile <- topoProfile(MRVBF, Line, pts = 400, type = "base",
+                            singlePlot = FALSE, rows = NULL, cols = NULL, limits = NULL,
+                            legendx = "bottomright")
+title(ylab = "                               (mrvbf)")#manualy manipulate the axis title to include units. The axis titles are auto-generated by the function, so this is the only way I found to edit them. 
+```
+
+```{r DEM Profile, echo=FALSE, warning=FALSE, out.width = '75%', fig.cap="Figure 6: Elevation Cross Section."}
+DEM_Profile <- topoProfile(DEM, Line, pts = 400, type = "base",
+                             singlePlot = FALSE, rows = NULL, cols = NULL, limits = NULL,
+                             legendx = "bottomright")
+title(ylab = "                         (m)")#manualy manipulate the axis title to include units. The axis titles are auto-generated by the function, so this is the only way I found to edit them.
+```
+
+#### DEM Derivatives & Classification
+
+To exemplify the potential of topographic indices, SAGA Wetness, MRVBF, Slope and Aspect are combined with spectral information from satellite imagery in a classification algorithm. Using these layers, predictive mapping of three simple land cover classes - Alpine, Forested, and Wetland - was performed in the Chowade Watershed Management basin (Government of British Columbia, 2011b). The interactive map below allows for navigation of the classified map, as well as the input layers. An exploration of the input layers and prediction raster make it apparent how certain values in the input layers informed the prediction of wetlands, ie: low slope values, high SAGA Wetness values and valley bottoms in MRVBF. The overall accuracy from this particular classification is 84.4%, showing the value of layer derivatives in classification exercises.
+
+A more complex version of this study, at a more 'challenging' study site in the Fort St. John Timber Supply Area is available **HERE** (insert MGEM page hyperlink).
+
+```{r files 1, echo = FALSE, include=FALSE}
+#Load files
+r1 <- raster("data/09/Aspect.tif")
+r2 <- raster("data/09/MRVBF.tif")
+r3 <- raster("data/09/NDVI.tif")
+r4 <- raster("data/09/NDWI.tif")
+r5 <- raster("data/09/SAGA_Wetness.tif")
+r6 <- raster("data/09/Slope.tif")
+r7 <- as.factor(raster("data/09/Prediction_Raster.tif"))
+ROI_1 <- st_read("data/09/Chowade_ROI.shp")
+```
+
+```{r files 2, echo = FALSE, include=FALSE}
+#Set colors and legend titles
+pal1 <- colorNumeric(c("#f07f0a", "#a02837", "#1b587c", "#4e8542", "#604878"), values(r1),
+                    na.color = "transparent")
+
+pal2 <- colorNumeric(c("#0C2C84", "#41B6C4", "#FFFFCC"), values(r2),
+                    na.color = "transparent")
+
+pal3 <- colorNumeric(c("#e5f5e0", "#a1d99b", "#1b7837"), values(r3),
+                     na.color = "transparent")
+
+pal4 <- colorNumeric(c("#6e462c", "#9c8448", "#cccc66", "#9cab68", "#306466"), values(r4),
+                     na.color = "transparent")
+
+pal5 <- colorNumeric(c("#c7eae5", "#5ab4ac", "#01665e"), values(r5),
+                     na.color = "transparent")
+
+pal6 <- colorNumeric(c("#fee090", "#fc8d59", "#d73027"), values(r6),
+                     na.color = "transparent")
+
+pal7 <- colorFactor(c("#fc8d59", "#238443", "#d9f0a3"), values(r7),
+                    na.color = "transparent")
+
+```
+
+```{r files 3, echo = FALSE, include=FALSE}
+#Create labels for classified raster
+labels1 = c("Alpine", "Upland", "Wetland")
+
+#Run the leaflet
+m = leaflet() %>%
+  addProviderTiles("Esri.WorldImagery") %>% #http://leaflet-extras.github.io/leaflet-providers/preview/
+  addScaleBar(position = c("topleft")) %>%
+  
+  addRasterImage(r1, colors = pal1, group = "Aspect", opacity = 1, maxBytes = "Inf") %>%
+  addRasterImage(r2, colors = pal2, group = "MRVBF", opacity = 1, maxBytes = "Inf") %>%
+  addRasterImage(r3, colors = pal3 ,group = "NDVI(Spectral)", opacity = 1, maxBytes = "Inf") %>%
+  addRasterImage(r4, colors = pal4, group = "NDWI(Spectral)", opacity = 1, maxBytes = "Inf") %>%
+  addRasterImage(r5, colors = pal5, group = "SAGA Wetness", opacity = 1, maxBytes = "Inf") %>%
+  addRasterImage(r6, colors = pal6, group = "Slope", opacity = 1, maxBytes = "Inf") %>%
+  
+  addRasterImage(r7, colors = pal7, group = "Prediction Raster", opacity = 1, maxBytes = "Inf") %>%
+  
+  addFeatures(ROI_1, group = "Study Area Boundary", fill = FALSE, color = "red")%>%
+  
+  addLegend(pal = pal1, values = values(r1), group = "Aspect",
+            opacity = 1,
+            title = "Aspect")%>%
+  
+  addLegend(pal = pal2, values = values(r2), group = "MRVBF",
+            opacity = 1,
+            title = "MRVBF")%>%
+  
+  addLegend(pal = pal3, values = values(r3), group = "NDVI(Spectral)",
+            opacity = 1,
+            title = "NDVI")%>%
+  
+  addLegend(pal = pal4, values = values(r4), group = "NDWI(Spectral)",
+            opacity = 1,
+            title = "NDWI")%>%
+  
+  addLegend(pal = pal5, values = values(r5), group = "SAGA Wetness",
+            opacity = 1,
+            title = "SAGA Wetness")%>%
+  
+  addLegend(pal = pal6, values = values(r6), group = "Slope",
+            opacity = 1,
+            title = "Slope")%>%
+  
+  addLegend(pal = pal7, values = values(r7), group = "Prediction Raster",
+            opacity = 1,
+            title = "Chowade Land Cover Realms",
+            labFormat = function(type, cuts, p){paste0(labels1)})%>%
+  
+
+  addLayersControl(overlayGroups = c("Aspect", "MRVBF", "NDVI(Spectral)", "NDWI(Spectral)", "SAGA Wetness", "Slope", "Prediction Raster"),
+                   position = c("bottomleft"),
+                   options = layersControlOptions(collapsed = TRUE))
+
+
+```
+
+```{r map 2, echo=FALSE, fig.cap="Figure 7: Input Layers and Prediction Raster"}
+m
+```
+
+## 3D Geovisualization
+
+**Geovisualization** is simply the process of visualizing geographic information at any stage of the GIS workflow. 3D geovisualization is distinguished by the motivation to create immersive scenes that utilize an elevation, height, or z-profile. Like their 2D map counterparts, 3D geovisualizations should be thought of as spatial models. 3D geovisualizations can represent real phenomena such as landforms and buildings, but they may also be non-real representations that map some phenomenon in the traditional x and y dimensions and mapping an attribute to the z dimension that is not necessarily height or elevation. The results can be dramatic forms to convey geospatial information, sometimes requiring specialized equipment to view them such as virtual reality headsets, polarized or shutter glasses, red/cyan glasses, and 3D stereo monitors. We will focus on a few digital options in this section.
+
+### Anaglyphs
+
+**Anaglyphs** are composed of two images that are simultaneously displayed in two colours, typically red and cyan. The result when viewed through red/cyan filtered lenses is a stereographic view of the frame. Anaglyphs are among the simplest 3D geovisualizations that are frequently used to represent terrain and landforms as the effect is essentially adding depth to an otherwise 2D frame. The depth of terrain is best visualized obliquely with an anaglyph as in Figure 9.X below showing Mount Odin, the highest peak on Baffin Island in Nunavut, Canada. However, anaglyphs can also be a great way to visualize terrain overhead from a DEM as in Figure 9.X showing Mount Assiniboine at the border of Alberta and British Columbia.
+
+![Figure 9.X Anaglyph of Mount Odin on Baffin Island, Nunavut, Canada. Imagery by MAXAR.](images/09-00-baffin-island-mount-odin-1.png){.center}
+
+###	Viewsheds
+
+A **viewshed** is an analysis that simulates a physical line-of-sight using a DEM to identify pixels that can be seen from an observer point or set of points. The result of a viewshed is usually a raster with the same dimensions as an input DEM that has pixels encoded with values of 1 indicating the pixel can be seen from the observer point. In other words, the elevations for each pixel in the DEM is used to calculate whether a line-of-sight would pass through it given some other observer location at another elevation. 
+
+Figure 9.X shows an example of a viewshed that can be seen from a slope near the top of Mount Assiniboine. Viewsheds can be useful for incorporating landscape aesthetics into GIS workflows where an area may be visually sensitive. For example, forest harvests can be designed and planned to mitigate the visual impact at nearby towns or highways. As well, observing pull-outs along scenic highways can be identified using viewsheds.
+
+![Figure 9.X Viewshed from a high observer location on Mount Assiniboine at the border of Alberta and British Columbia, Canada. Data from Canadian Digital Elevation Model.](images/09-00-mount-assiniboine-viewshed.png){.center}
+
+###	Extrusion
+
+**Extrusion** is the process of taking 2-dimensional features such as points, lines, or polygons and assigning an elevation to each feature so that it can be visualized in 3-dimensions. An extrusion is often performed using the values of an attribute in a feature class. In this way, extrusion can be used to create 3D buildings from 2D polygons of building footprints that contain an attribute of height (Figure 9.X). 
+
+![Figure 9.X Animation showing building polygons in Vancouver, British Columbia extruded by a height attribute. Building data (2009) from City of Vancouver, licensed under Open Government License - Vancouver. Base map © OpenStreetMap contributors, licensed under Open Data Commons Open Database License.](images/09-00-vancouver-building-height-extruded.gif){.center}
+
+Extrusion is also frequently used to visualize non-height attributes. For example, population density can be extruded as a "height" value to give a unique perspective of the relative change in this attribute across space that may otherwise be difficult to appreciate from a 2D map with colour alone.
+
+![Figure 9.X Census dissemination areas extruded by population density (2016) for Vancouver, British Columbia. Census data from Statistics Canada, Census Profile, 2016, licensed under Statistics Canada Open License. Reproduced and distributed on an "as is" basis with the permission of Statistics Canada. Base map © OpenStreetMap contributors, licensed under Open Data Commons Open Database License. .](images/09-00-vancouver-population-density-2016.png){.center}
+
+###	Exaggeration
+
+**Exaggeration** is the process of multiplying real height or elevation values by a constant factor in order create a larger range of values so that vertical features and patterns are made more apparent. Figure 9.X illustrates an example of exaggeration of a DEM for Mount Logan, the highest peak in Canada (5,959 m), located in the Yukon Territory.
+
+![Figure 9.X Elevation exaggeration of Mount Logan elevation, Yukon Terrotiry, Canada. Digital Elevation Model by Natural Resources Canada, licensed under the Open Government Licence – Canada.](images/09-00-mount-logan-exaggeration.png){.center}
+
+## Summary
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
+
+### Reflection Questions {-}
+
+1. Explain ipsum lorem.
+2. Define ipsum lorem.
+3. What is the role of ispum lorem?
+4. How does ipsum lorem work?
+
+### Practice Questions {-}
+
+2. Given ipsum, solve for lorem.
+3. Draw ipsum lorem.
+
+`r if (knitr::is_html_output()) '
+## Recommended Readings {-}
+'`
+
+*Mattivi, P., Franci, F., Lambertini, A., and Bitelli, G. 2019. TWI computation: a comparison of different open source GISs. Open Geospatial Data, Software, and Standards, 4: 6. DOI: https://doi.org/10.1186/s40965-019-0066-y*
+
+*Shreve, R.L. 1966. Statistical law of stream numbers. Journal of Geology, 74(1): 17-37. DOI: https://doi.org/10.1086/627137*
+
+*Strahler, A.N. 1957. Quantitative analysis of watershed geomorphology. Transactions of the American Geophysical Union, 38(6): 913-920. DOI: https://doi.org/10.1029/TR038i006p00913*
+
+*Böhner, J., & Selige, T. (2006). Spatial prediction of soil attributes using terrain analysis and climate regionalisation.*
+
+*Gallant, J. C., & Dowling, T. I. (2003). A multiresolution index of valley bottom flatness for mapping depositional areas. Water Resources Research, 39(12), 1347-n/a. https://doi.org/10.1029/2002WR001426*
+
+*Government of British Columbia. (2011a). FADM - Timber Supply Area (TSA) [Data set].
+Government of British Columbia. https://catalogue.data.gov.bc.ca/dataset/fadm-timber-supply-area-tsa.*
+
+*Government of British Columbia. (2011b). OGC Water management Basins [Data set].
+Government of British Columbia. https://catalogue.data.gov.bc.ca/dataset/ogc-watermanagement-basins.*
+
+*Huang, C., Nguyen, B. D., Zhang, S., Cao, S., & Wagner, W. (2017). A comparison of terrain indices toward their ability in assisting surface water mapping from sentinel-1 data. ISPRS International Journal of Geo-Information, 6(5), 140. https://doi.org/10.3390/ijgi6050140*
+
+*Mattivi, P., Franci, F., Lambertini, A., & Bitelli, G. (2019). TWI computation: A comparison of different open source GISs. Open Geospatial Data, Software and Standards, 4(1), 1-12. https://doi.org/10.1186/s40965-019-0066-y*
+
+*Meles, M. B., Younger, S. E., Jackson, C. R., Du, E., & Drover, D. (2020). Wetness index based on landscape position and topography (WILT): Modifying TWI to reflect landscape position. Journal of Environmental Management, 255(C), 109863-109863. https://doi.org/10.1016/j.jenvman.2019.109863*
+
+```{r include=FALSE}
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'htmlwidgets', 'webshot', 'DT',
+  'miniUI', 'tufte', 'servr', 'citr', 'rticles'
+), 'packages.bib')
+```

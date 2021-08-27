@@ -104,30 +104,18 @@ underpin remote sensing science.
     knitr::include_graphics(here::here("images", "11-hermosilla-canada-landcover.png"))
 ```
 
-## Types of Energy
+## Measuring energy
 
 ### Introduction
 
-Stepping back from remote sensing for a moment, there are three general
-types of **energy** commonly used to remotely observe objects: sonic,
-thermal and electromagnetic. Sonic, or sound, **energy** is commonly
-used in environments where heat or light are inconsistent or hard to
-measure. Sonar is as example of a sonic remote sensing technique and is
-often deployed to observe objects in liquid. Thermal, or heat,
-**energy** is used in a variety of cases when changes in temperature
-indicate an underlying physiological process. An environmental example
-would be the observation of plant health via leaf temperature. Although
-both sonic and thermal energies provide useful information across a
-variety of disciplines, they are not the most common.
-
-Electromagnetic **radiation** (EMR), which is what the human sense of
-sight observes, is a popular **energy** source in remote sensing
-science. At it's most basic, this method of observation is based on the
-measurement of **photons**. Research using EMR is fundamentally
-interested in examining the interactions of EMR, or photons, and other
-particles. Before diving into the applications of EMR remote sensing
-(photography, spectroscopy, etc.) it is important to understand some
-basic theory regarding the measurement of photons.
+At it's core, remote sensing is simply the measurement of photons.
+Although simple, this description captures the essence of remote
+sensing's capacity to observe objects in our universe, from a single
+leaf to a distant sun. You see, if an object exists it has a
+temperature, and any object that has a temperature emits photons. The
+properties of those photons are determined by how hot the object is. To
+really understand remote sensing, then, we must first understand
+photons, or **electromagnetic radiation** (EMR).
 
 Essentially, photons are the smallest physical property in the
 electromagnetic field. Photons can be emitted from objects engaged in
@@ -135,31 +123,14 @@ nuclear processes (such as the sun), objects excited thermally (like a
 light bulb) or objects that reflect or emit absorbed **radiation**. The
 interactions between emitted photons and other particles can be observed
 and used to evaluate the properties of the object. A fundamental
-component of EMR is it's **wavelength**, defined as the measured space
-between two consecutive peaks of a wave (IMAGE). The wavelength of a
+component of a photon is it's **wavelength**, defined as the measured
+space between two consecutive peaks of a wave. The wavelength of a
 photon determines if and how it will interact with the particles around
 it, as well as defines the amount of **energy** it has. Measuring the
 differences in photon **energy** before and after interacting with
 another particle is the core of any remote sensing utilizing EMR.
-
-Perhaps the simplest path to understanding how the properties of photons
-(i.e. **energy**, wavelength) are used for remote sensing purposes is
-through the use of an equation. Albert Einstein explained the **energy**
-of a photon as the product of its wave frequency (the number of waves
-that pass a specific point over a certain amount of time) and Planck's
-constant (Equation \@ref(eq:energy-freq))
-
-```{=tex}
-\begin{equation}
-E = hf 
-(\#eq:energy-freq)
-\end{equation}
-```
-Where E is the **energy** of a photon, h is Planck's constant (h = 4.14
-× 10^−15^ eV/s) and f is the wave frequency. Clearly, an increase in
-frequency results in an increase of **energy**. This equation may be
-altered to include other properties, such as the speed of light and
-wavelength (Equation \@ref(eq:energy-wvl)).
+Equation \@ref(eq:energy-wvl) defines the relationship between a
+photon's energy and wavelength.
 
 ```{=tex}
 \begin{equation}
@@ -171,9 +142,57 @@ Where E is the **energy** of a photon, h is Planck's constant, c is the
 speed of light (c = 3 x10^8^ m/s) and λ is the wavelength of the
 **radiation**. This equation contains more variables, but incorporates
 wavelength and in doing so utilizes an easy to measure (hc always equals
-1240 eV/nm) and familiar characteristic. Due to the large range of
+1240 eV/nm) and familiar photon property. Due to the large range of
 wavelengths that photons can exhibit it is necessary to use a specific
 style of writing to describe them, called scientific notation.
+
+### Electromagnetic Spectrum
+
+Now that you have an understanding of how the properties of photons can
+be measured and how to write them, we can begin to explore the
+electromagnetic **spectrum** (EMS). The EMS is the continuum along
+within photons are located based on their properties (Figure
+\@ref(fig:11-EMS)). We have discussed both wavelength and frequency,
+which are inversely related and commonly used to describe EMR. Figure
+\@ref(fig:11-EMS) also depicts a thermometer laying sideways, which
+demonstrates that as an object's temperature increases, the wavelength
+of the photons emitted decreases. This follows Equation
+\@ref(eq:energy-wvl), which demonstrates that photons with shorter
+wavelengths have higher **energy**. A practical example of this would be
+that the majority of photons emitted from the sun (5,788 K) are around
+0.5 x 10^-6^ nm, while the majority of photons emitted from the human
+body (\~310 K) are around 10^-4^ nm. These measurements are theoretical
+and are calculated using theoretical object, often called a blackbody
+that allows all **energy** to enter (no reflectance, hence "black") and
+be absorbed (no transmission). The resulting EMR that is emitted would
+be generated thermally and be equal or greater than any other body at
+the same temperature. It is important to remember, however, that
+blackbodies do not exist and any real object will always emit a
+temperature less than a theoretical blackbody.
+
+```{r 11-EMS, fig.cap = fig_cap, out.width = "200%", echo = FALSE}
+    fig_cap <- paste("Electromagnetic (also known as Milton) spectrum depicting the type, wavelength, frequency and black body emission temperature. Credit: Inductiveload, NASA.")
+    knitr::include_graphics(here::here("images", "11-EMS.png"))
+```
+
+::: {.box-content .call-out-content}
+::: {.box-title .call-out-top}
+#### Call out {.unnumbered}
+:::
+
+<p>
+
+Visualizing the electromagnetic spectrum (EMS) in Figure 2 certainly
+enables a wonderful comprehension of many concepts relating to photons.
+Perhaps more astounding, however, is the truth of how the faculty of
+human vision has incorporated these properties. The portion of the EMS
+that humans can see is between 400 nm and 750 nm, which correlates with
+the peak energy emitted from the sun. Perhaps it should not be
+surprising, but of all the possible wavelengths emitted in our
+environment, human eyes have evolved to maximize solar photon emission.
+
+</p>
+:::
 
 ### Scientific Notation
 
@@ -229,54 +248,6 @@ exponents \@ref(eq:SI-divide).
 (\#eq:SI-divide)
 \end{equation}
 ```
-### Electromagnetic Spectrum
-
-Now that you have an understanding of how the properties of photons can
-be measured and how to write them, we can begin to explore the
-electromagnetic **spectrum** (EMS). The EMS is the continuum along
-within photons are located based on their properties (Figure
-\@ref(fig:11-EMS)). We have discussed both wavelength and frequency,
-which are inversely related and commonly used to describe EMR. Figure
-\@ref(fig:11-EMS) also depicts a thermometer laying sideways, which
-demonstrates that as an object's temperature increases, the wavelength
-of the photons emitted decreases. This follows Equation
-\@ref(eq:energy-wvl), which demonstrates that photons with shorter
-wavelengths have higher **energy**. A practical example of this would be
-that the majority of photons emitted from the sun (5,788 K) are around
-0.5 x 10^-6^ nm, while the majority of photons emitted from the human
-body (\~310 K) are around 10^-4^. These measurements are theoretical and
-are calculated using theoretical object, often called a blackbody that
-allows all **energy** to enter (no reflectance, hence "black") and be
-absorbed (no transmission). The resulting EMR that is emitted would be
-generated thermally and be equal or greater than any other body at the
-same temperature. It is important to remember, however, that blackbodies
-do not exist and any real object will always emit a temperature less
-than a theoretical blackbody.
-
-```{r 11-EMS, fig.cap = fig_cap, out.width = "200%", echo = FALSE}
-    fig_cap <- paste("Electromagnetic (also known as Milton) spectrum depicting the type, wavelength, frequency and black body emission temperature. Credit: Inductiveload, NASA.")
-    knitr::include_graphics(here::here("images", "11-EMS.png"))
-```
-
-::: {.box-content .call-out-content}
-::: {.box-title .call-out-top}
-#### Call out {.unnumbered}
-:::
-
-<p>
-
-Visualizing the electromagnetic spectrum (EMS) in Figure 2 certainly
-enables a wonderful comprehension of many concepts relating to photons.
-Perhaps more astounding, however, is the truth of how the faculty of
-human vision has incorporated these properties. The portion of the EMS
-that humans can see is between 400 nm and 750 nm, which correlates with
-the most common wavelengths emitted from the sun. Perhaps it should not
-be surprising, but of all the possible wavelengths emitted in our
-environment, human eyes have evolved to maximize solar photon emission.
-
-</p>
-:::
-
 ### Radiation Types
 
 Since it is possible for photon **energy** to vary widely across the
@@ -308,7 +279,7 @@ electromagnetic spectrum.
 With a solid grasp of why EMR is useful for remote sensing science and
 how EMR is categorized along the EMS, we can begin to apply this core
 knowledge with ideas and applications related to practical use. As with
-**radiation**, there are a plethora of terms used to describe the
+**radiation**, there are a number of key terms used to describe the
 fundamental concepts that make remote sensing science possible. Some of
 the most common terms have been included below. They are organized into
 three categories: **Radiation** Basics, Foundations of Measurement and
@@ -340,13 +311,13 @@ in radiant flux.
 Now that you are familiar radiant **energy** and flux, we can discuss
 irradiance. Irradiance refers to the amount of radiant **energy** that
 contacts a 1 m^-2^ area each second (W · m^-2^). This includes all
-electromagnetic **energy** that contacts our 1 m^-2^ surface, which
+electromagnetic **energy** that contacts the 1 m^-2^ surface, which
 could be a combination of **radiation** from the sun, a halogen light
 bulb overhead and your computer screen. Another important concept is
 solar irradiance, which strictly refers to the amount of solar
 **radiation** interacting with our 1 m^-2^ area. Solar irradiance is
 very important in many remote sensing applications as it determines
-which photons an optical sensor *could* record in naturally illuminated
+which photons an optical sensor *could* detect in naturally illuminated
 environments. An associate of irradiance is radiance, which refers the
 the amount of radiant flux is a specific direction. The direction in
 question is often called the *solid angle* and makes radiance a
@@ -445,15 +416,6 @@ reflects EMR isotropically is paper.
     knitr::include_graphics(here::here("images", "11-reflectors.png"))
 ```
 
-Although specular and diffuse are measured on an spectrum four general
-classifications for reflectors are accepted: perfect specular,
-near-perfect specular, near-perfect diffuse and perfect diffuse. Diffuse
-surfaces tend to be the most useful for remote sensing as they scatter
-light in all directions. This is useful because sensors can only view a
-surface from a single angle and can also be moving. Attempting to
-determine the angle at which EMR is reflected would make many projects
-unfeasible, especially those covering large areas.
-
 This is not to say that diffuse reflectors are perfect, however, as some
 issues remain related to the angle of incidence and the position of the
 sensor. For example, both back scattering and forward scattering affect
@@ -511,8 +473,8 @@ transmittance and absorption. Each of these measurements provides useful
 information for understanding the interactions between EMR and the
 environment.
 
-Reflectance refers EMR that has interacted with and effectively bounced
-back. It has emerged as a popular method of evaluating a variety of
+Reflectance refers to EMR that has interacted with and been reflected b
+a surface. It has emerged as a popular method of evaluating a variety of
 environmental properties, including land use change, plant health and
 plant diversity [@asner2011]. Another popular normalized measure of the
 interaction between photons and a surface is transmittance. A photon
@@ -561,12 +523,9 @@ Calculate:
 One of the first considerations any user must make regarding remotely
 sensed data is its quality. For most scientific research, good quality
 data needs to contain information that is relevant to the scale and time
-period of the study. It would be challenging, for example, to evaluate
-the changes in vegetation cover in Vancouver, B.C. from 2010 - 2020 by
-looking at a single image of Calgary, Alberta from 1995. Although this
-example may seem extreme, it highlights the need for data collectors and
-users to communicate about where, when and what is included in a
-dataset. Enter the Four **Resolutions**.
+period of the study. meaning that sensors are often designed for a
+specific application. The manner in which we describe a sensor is
+through four key resolutions.
 
 ### Spatial Resolution
 
@@ -592,23 +551,24 @@ from it's target. Changes in these two factors result in an increase or
 decrease in the amount of area captured by a senor and therefore a
 change in pixel size. Pixels that cover larger areas are considered to
 have lower spatial resolution, while a relatively smaller pixel is
-considered high resolution. When a sensor is in motion, collecting
-multiple pixels across space and time, the term instantaneous field of
-view (IFOV) is used to describe the FOV at the time each pixel was
-collected. We will learn more about the challenges of collecting data
-over space and time in Chapters 12 and 15.
+considered high spatial resolution. When a sensor is in motion,
+collecting multiple pixels across space and time, the term instantaneous
+field of view (IFOV) is used to describe the FOV at the time each pixel
+was collected. We will learn more about the challenges of collecting
+data over space and time in Chapters 12 and 15.
 
-To determine if a certain spatial resolution is useful, then it would
-need to be detailed enough to include the features of interest, but
-large enough to be stored and processed in a reasonable manner. It must
-also cover the entire study area, which can vary significantly depending
-on the research objectives. Each of these considerations will direct the
+It is a trade off when determining if a certain spatial resolution is
+useful for a given application, the pixel size needs to be fine enough
+to observe features of interest, but large enough to be stored and
+processed in a reasonable manner. It must also cover the entire study
+area, which can vary significantly depending on the research objectives
+and the image's pixel size. Each of these considerations will direct the
 data user to a specific sensor. From here, the user can begin to
 consider the remaining three resolutions.
 
 ### Temporal Resolution
 
-Much like spatial resolutions deals with the space that a sensor
+Much like spatial resolution deals with the space that a sensor
 observes, temporal resolution refers to the time interval between
 successive observations of a given space. Temporal resolution can span
 seconds or years and is requirement when investigating change. An
@@ -617,6 +577,17 @@ the study. For example, a study monitoring the annual urban expansion of
 Vancouver, B.C. would have a temporal resolution of 1 year. Other common
 temporal resolutions include hourly, for applications monitoring
 weather, and daily, which is often used when monitoring plant phenology.
+
+The interval between successive observations is often called *revisit
+time* and is determined by the type of platform on which a sensor is
+deployed. Sensors that remain stationary can have revisit times measured
+in seconds, while sensors moving faster or slower than their target area
+can take multiple days before they observe a location again.
+Interestingly, sensors have been designed to be both stationary and
+mobile at a variety of spatial scales. Both airborne and spaceborne
+sensors have the capacity to remain stationary over a single location or
+travel faster than the Earth rotates and capture imagery over most of
+the Earth's surface in a matter of days.
 
 ### Spectral Resolution
 
@@ -683,7 +654,7 @@ provide a plethora of relevant information relating to the composition
 of an object.
 
 ```{r 11-specsig, fig.cap = fig_cap, out.width = "200%", echo = FALSE}
-    fig_cap <- paste("Five spectral signatures of various living and non-living samples collected using an ASD FieldSpec3 Imaging Spectroradiometer.")
+    fig_cap <- paste("Five spectral signatures of various living and non-living samples collected using an ASD FieldSpec3 Imaging Spectroradiometer. Live = live broadleaf, Dead = dead broadleaf, Fir = Douglas-fir needles on branch, Rock = rock, soil = dry humus soil.")
     knitr::include_graphics(here::here("images", "11-spectralsig.png"))
 ```
 
@@ -746,16 +717,17 @@ to global forest cover [@hansen2013].
 Large-scale research projects focused at national or international
 levels have perhaps benefit the most from improved sensor deployment.
 Since the 1960s, a variety of satellites have been launched with the
-sole purpose of observing the Earth. Landsat is NASA suite of satellites
-designed specifically for this purpose. By the end of 2021, a total of
-nine Landsat missions will have been launched, eight of which have
-successfully reached orbit and provided imagery in at least 5 broad
+sole purpose of observing the Earth. Landsat, created by NASA and is now
+run by the United States Geological Survey (USGS), is a suite of
+satellites designed specifically for this purpose. By the end of 2021, a
+total of nine Landsat missions will have been launched, eight of which
+have successfully reached orbit and provided imagery in at least 5 broad
 spectral bands at 30 m-2 spatial resolution. This information has been
 used to monitor of land cover change, ecosystem services and a variety
 of other environmentally relevant metrics [@deel2012]. The case study at
 the end of this section highlights a particularly novel approach to
 optical remote sensing that has become a popular methodology to evaluate
-plant health and biodiversity [@ustin2009;@wang2018].
+plant health and biodiversity [@ustin2009; @wang2018].
 
 As far as Canada's contributions to remote sensing sensors rank,
 RADARsat is among the most important [@raney1991]. This satellite was
@@ -763,7 +735,9 @@ launched in 1995 and has grown to a constellation of three space-borne
 synthetic aperture radar (SAR) sensors that feature variable resolution.
 As an active sensor, RADARsat produces and measures EMR with wavelengths
 between 7.5 - 15 cm and is capable of penetrating clouds and smoke
-[@raney1991]. It's active nature also enables RADARsat to record
+[@raney1991]. These characteristics make RADARsat ideal for applications
+such as ecosystem monitoring, maritime surveillance and disaster
+management. It's active nature also enables RADARsat to record
 observations at night. Chapter 12 will discuss radar in more detail.
 
 Another active remote sensing technique that has become popular is light
@@ -787,20 +761,22 @@ to capture information at useful resolutions. Land cover, which is
 simply the combination of abiotic and biotic components existing in a
 defined area, is a useful metric for evaluating changes across an
 ecosystem and land cover analyses have been deployed at a variety of
-scales. These studies can be limited, however, by the resolutions at
-which information is collected. Hermosilla et al., 2018 provide an
-interesting method of land cover assessment that utilizes Landsat to
-derive land cover and land cover change across Canada over a 29 year
-span [@hermosilla2018].
+scales. Land cover is also an essential climate variable and is
+considered an important metric that can aid in the prediction of future
+climate regimes. These studies can be limited, however, by the
+resolutions at which information is collected. Hermosilla et al., 2018
+provide an interesting method of land cover assessment that utilizes
+Landsat to derive land cover and land cover change across Canada over a
+29 year span [@hermosilla2018].
 
 Before exploring the methods of this study, it is important to highlight
-the qualities of the Landsat program that enabled it. Launched in 1973,
+the qualities of the Landsat program that enabled it. Launched in 1972,
 Landsat was NASA's first satellite designated for evaluating Earth's
 surface. Although a variety of technological upgrades have been
-introduced since the 1973 launch, each Landsat satellite has a spatial
-resolution of 30m^2^. Considering the spatial coverage of this mission
-includes the majority of our planet, this spatial resolution is quite
-useful.
+introduced since the 1972 launch, the majority of Landsat sensors have a
+spatial resolution of 30m^2^. Considering the spatial coverage of this
+mission includes the majority of our planet, this spatial resolution is
+quite useful.
 
 Another important quality of Landsat is that every satellite carries a
 multi-spectral sensor with at least four bands, which enables the
@@ -828,7 +804,7 @@ on a variety of criteria that quantifies a pixels quality (Figure
 <p>
 
 For their analysis, Hermosilla et al., 2018 use imagery captured from
-Landsat 5 onward with the Thematic Mapper, which means their data
+Landsat 4 onward with the Thematic Mapper, which means their data
 contains seven unique spectral bands spanning segments between 0.45 nm
 to 2.35 nm. The ability to observe reflectance values across a
 relatively wide range of the EMS enabled land cover analysis across all

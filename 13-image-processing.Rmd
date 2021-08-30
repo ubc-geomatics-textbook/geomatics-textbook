@@ -71,27 +71,37 @@ addressed, however, it is also important to confirm the spatial accuracy
 of the data.
 
 It is also important to review the elements of an *image*, or *raster*.
-The terms image and raster are interchangeable and refer to the a
-collection of spatial adjacent *cells*, or *pixel*. The terms cell and
-pixel are also interchangeable. An empty raster, or image, would contain
-pixels with no information. To say an image has been collected would
-simply mean that a sensor has collected information and stored that
-information in adjacent pixels. Although this seems straight forward
-there are a multitude of environmental and engineering factors that can
-affect the accurate collection of information. It is these confounding
-factors that image processing attempts to resolve in hopes of generating
-a data product that can be compared across space and time.
+The term raster refers to a data type comprised of a number of cells to
+which values are assigned. An image is a raster with cells values that
+represented some function of observed electromagnetic radiation. The
+raster cells in images are often referred to as *picture elements*, or
+*pixels*. The terms cell and pixel are considered interchangeable when
+discussing imagery. An empty raster, or image, would contain pixels with
+no information. To say an image has been collected would simply mean
+that a sensor has collected information and stored that information in
+adjacent pixels. Although this seems straight forward there are a
+multitude of environmental and engineering factors that can affect the
+accurate collection of information. It is these confounding factors that
+image processing attempts to resolve in hopes of generating a data
+product that can be compared across space and time.
 
 ## Geometric correction
 
 By definition, remotely sensed data is collected by a sensor at some
-distance apart from the object(s) being observed. In many instances, the
-sensor is in motion, and at the very least it is subject to influence
-from environmental actors like wind. Interactions with phenomena like
-wind can cause the instantaneous field of view (IFOV) to move slightly
-during data collection, introducing spatial errors to the imagery. On
-top of issues relating to sensor displacement, sensors in motion may
-also observe adjacent areas with different topographic properties.
+distance apart from the object(s) being observed. The design of a sensor
+generally determines the distance at which the desired observation is to
+be made. For example, the camera in a cell phone is designed for
+relatively close range observations of electromagnetic radiation, while
+a sensor mounted on a satellite to operate relatively far from the
+target objects.
+
+In many instances, the sensor is in motion and in many cases is subject
+to influence from environmental factors like wind. Interactions with
+phenomena like wind can cause the instantaneous field of view (IFOV) to
+move slightly during data collection, introducing spatial errors to the
+imagery. On top of issues relating to sensor displacement, sensors in
+motion may also observe adjacent areas with different topographic
+properties.
 
 A combination of these two effects could be visualized by imagining an
 airplane flying over a forested hillside. As the sensor collects data
@@ -299,10 +309,11 @@ Following similar logic to that promoting the need for geometric
 correction, atmospheric correction is intended to minimize discrepancies
 in pixel values within and across images that occur due to interactions
 between observed radiation and atmosphere. The severity of impact that
-the atmosphere has on an image relates to the amount of heterogeneity
-that occurs in the atmosphere during image collection. The majority of
-impacts are caused by the three main types of scattering, which were
-presented in Chapter \@ref(fundamentals-of-remote-sensing).
+the atmosphere has on the observation of electromagnetic radition
+relates to changes in the atmosphere during collection and the specific
+wavelengths being collected. The majority of impacts are caused by the
+three main types of scattering, which were presented in Chapter
+\@ref(fundamentals-of-remote-sensing).
 
 ### **Atmospheric windows**
 
@@ -349,26 +360,21 @@ visible region of the EMS. If there was intermittent cloud cover, cloudy
 areas with no snow could be classified as having snow and snowy areas
 with cloud-shadows may be classified as no snow.
 
-Martinuzzi et al 2007 published a masking method to remove cloud and
-cloud-shadow from Landsat imagery . They proposed the utilization of
-radiation values collected in the blue (Band 1) and thermal (Band 6)
-ranges of the EMS to differentiate clouds from objects on the Earth's
-surface. To remove cloud-shadow, they suggested using information
-collected from Band 4, in the near infrared region, combined with the
-predicted location of shadows based on the spatial relationships of the
-cloud, sun and senor.
+Essentially, the removal of clouds utilizes the fact that clouds are
+cooler than the Earth's surface and can be identified using thermal
+data. Albedo, which is the capacity of a surface to reflect measured
+from 0 (no reflectance) to 1 (full, pure white reflectance), can also be
+calculated and used to identify the significantly brighter clouds. Once
+the clouds are identified and the mask is created, it is possible to
+identify and remove cloud-created shadows.
 
-Although Martinuzzi et al. 2007 presented a straightforward method for
-making cloud and cloud-shadow in an image, they did not address the
-inclusion of shadows caused by land cover structures, such as trees or
-buildings [@martinuzzi2007]. Shadows present unique problems for image
-analysis as they can shade out underlying structures and also be
-classified as separate, individual objects. The former issues presents
-problems for studies evaluating land cover, while the latter confounds
-machine learning algorithms attempting to identify unique classes in the
-image based on spectral similarities. Another confounding issue is that
-the location and size of shadows change throughout the day in accordance
-with the sun.
+Shadows present unique problems for image analysis as they can shade out
+underlying structures and also be classified as separate, individual
+objects. The former issues presents problems for studies evaluating land
+cover, while the latter confounds machine learning algorithms attempting
+to identify unique classes in the image based on spectral similarities.
+Another confounding issue is that the location and size of shadows
+change throughout the day in accordance with the sun.
 
 An important feature of any shadow is that the area shaded is still
 considered to be illuminated, but only by skylight . The exclusion of
@@ -386,14 +392,14 @@ Smoke and haze present unique issues to image processing as they tend to
 vary in presence, consistency and density. They also represent different
 types of scattering, with smoke causing Mie scattering and haze causing
 non-selective scattering. Makarau et al., 2014 demonstrated that haze
-can be removed through the creation of a haze thickness map (HTM)
+can be somewhat removed through the creation of a haze thickness map
 [@makarau2014]. This methodology is equally as complex as that of
 Finlayson (2001) and is perhaps beyond the scope of this book. It is
 important to note, though, that removal of shadows, clouds, smoke and
 haze relies on an understanding of how their respective scattering types
 affect incoming solar radiation. Successful removal, then, depends on
-using spectral bands that are not effected by the particular type of
-scattering occurring within the image.
+understanding which spectral bands relatively uneffected by the
+particular type of scattering occurring within the image.
 
 ## Radiometric correction
 
@@ -427,27 +433,6 @@ capture. It is also clear that an increase in signal leads to an
 improved SNR. What remains unclear, however, is what causes a sensor to
 observe and record undesired noise to be recorded. In reality, there are
 a variety of noise types that can affect the SNR of a sensor.
-
-**Photon shot noise**
-
-The first type of noise we will address is due to inconsistencies in the
-number of photons observed at different time intervals. Since photons
-are quantum particles (they are the smallest measurable amount of
-radiation), a sensor can only observe them as whole numbers. This,
-coupled with other random fluctuations in radiation properties, means
-that a sensor directed at the same location may observe 10 photons at
-one time interval and 12 a later interval. Over time, it is possible to
-determine the average amount of photons observed by a sensor, but
-creates inconsistencies across individual observations. Photon shot
-noise can be calculated as the square root, of the signal. This suggests
-that stronger signal leads to a relative decrease in shot noise.
-
-**Pattern noise**
-
-Also known as fixed-pattern noise, pattern noise arises in instruments
-that have multiple sensors along a single array. Pattern noise occurs
-due to one sensor collecting relatively higher values than others,
-resulting in heightened brightness in the pixels it creates.
 
 **Readout noise**
 
@@ -485,16 +470,6 @@ Calculate SNR or it's associated values for various Landsat sensors:
 3.  ETM+ = SNR: 22.3, µ: 13.4
 :::
 
-### **Radiometric normalization**
-
-As discussed in Chapter \@ref(fundamentals-of-remote-sensing), the
-normalization of radiometric values collected by a sensor enables the
-comparison of data within and across images. A common normalization
-output in remote sensing studies evaluating the environment is
-reflectance, which can be calculated simply by dividing the radiance
-value of a pixel collected when observing the object(s) of interest with
-the radiance value of a pixel observing a surface with 100% reflectance.
-
 ::: {.box-content .case-study-content}
 ::: {.box-title .case-study-top}
 #### Case Study {.unnumbered}
@@ -505,19 +480,20 @@ the radiance value of a pixel observing a surface with 100% reflectance.
 <p>
 
 The field of remote sensing has witnessed the creation of a variety of
-national programs designed to observe the Earth's surface. NASA's
-Landsat mission is one of these programs and has enabled the collection
-of terrestrial information from space for over 40 years. The imagery
-collected from Landsat sensors has proven to be highly useful for
-environmental monitoring and the mission is scheduled to continue into
-the future.
+national programs designed to observe the Earth's surface. Landsat is
+one of these programs and has enabled the collection of terrestrial
+information from space for over 40 years. Initiated by NASA, Landsat is
+now run by the United States Geological Survey (USGS) who provide the
+data they collect to users for free. The imagery collected from Landsat
+sensors has proven to be highly useful for environmental monitoring and
+the mission is scheduled to continue into the future.
 
 Despite its success, however, the imagery collected by Landsat sensors
 continues to face the same processing issues as most other sensors.
 Variations in geometric and atmospheric characteristics exist within and
 across images, and radiometric inconsistencies also occur. To combat
-these issues, the United States Geological Survey (USGS) has implemented
-a tiered image processing structure.
+these issues, the USGS has implemented a tiered image processing
+structure.
 
 </p>
 
@@ -557,7 +533,7 @@ standard can be observed
 </p>
 
 ```{r 13-landsat-c2-l2, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-    fig_cap <- paste("Three unqiue Landsat 8 Colleciton 2 images. In order from left to right: Level-1 Top of Atmosphere reflectance image (no atmospheric correction), Level-2 atmospherically corrected surface reflectance and Level-2 surface temperature. Images were collected on May 3, 2013 over the Sapta Kosh River in Bairawa, Nepal. Created by Michelle A. Bouchard, USGS. Public domain.")
+    fig_cap <- paste("Three unique Landsat 8 Collection 2 images. In order from left to right: Level-1 Top of Atmosphere reflectance image (no atmospheric correction), Level-2 atmospherically corrected surface reflectance and Level-2 surface temperature. Images were collected on May 3, 2013 over the Sapta Kosh River in Bairawa, Nepal. Created by Michelle A. Bouchard, USGS. Public domain.")
     knitr::include_graphics(here::here("images", "13-landsat-c2-l2.png"))
 ```
 
@@ -610,19 +586,16 @@ values.
     knitr::include_graphics(here::here("images", "13-stretch.png"))
 ```
 
-### **Sharpening**
+### **Smoothing**
 
-Image sharpening is often used to preserve the spectral information of a
-pixel while improving it's spatial resolution [@king2001]. This is
-particularly useful for applications concerned with classification, such
-as land cover evaluation, as transitions between pixels with different
-values become more clear. For example, there are a variety of studies
-demonstrating that Landsat 8 imagery can be sharpened using information
-collected by a panchromatic sensor operating in unison with the other
-multispectral sensors on board the satellite [@gilbertson2017]. This is
-made possible because the spatial resolution of the panchromatic sensor
-is 15 m^-2^, while the multispectral sensors collect information at 30
-m^-2^.
+Image smoothing is a process used to reduce the noise in an image.
+Essentially, a filter of specific window size is passed over surrounding
+cells and an output value for the center cell is determined by a
+pre-defined algorithm. Similar to the windows used for resampling,
+smoothing window sizes can be user defined to generate images that are
+useful for specific applications. Despite its usefulness as a noise
+reduction technique, smoothing can also have negative effects on image
+quality through the loss of detail.
 
 ::: {.box-content .call-out-content}
 ::: {.box-title .call-out-top}

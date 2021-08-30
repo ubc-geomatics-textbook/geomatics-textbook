@@ -7,6 +7,6 @@ assignees: ''
 
 ---
 
-## Describe the content being added
+## Description of content being added
 
-## When do you plan to submit this content?
+## Deadline for submission

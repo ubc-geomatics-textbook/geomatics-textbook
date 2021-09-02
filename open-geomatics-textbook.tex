@@ -1,0 +1,1087 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{book}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={An Open Geomatics Textbook},
+  pdfauthor={UBC},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{booktabs}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
+
+\title{An Open Geomatics Textbook}
+\author{UBC}
+\date{2021-07-08}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\hypertarget{preface}{%
+\chapter*{Preface}\label{preface}}
+\addcontentsline{toc}{chapter}{Preface}
+
+This is the very first part of the book, which will eventually include the textbook's introduction. For now, here's some useful info for you:
+
+\hypertarget{contacts}{%
+\section{Contacts}\label{contacts}}
+
+Paul Pickell, \href{mailto:paul.pickell@ubc.ca}{\nolinkurl{paul.pickell@ubc.ca}}\\
+Evan Thornberry, \href{mailto:evan.thornberry@ubc.ca}{\nolinkurl{evan.thornberry@ubc.ca}}\\
+Francois du Toit, \href{mailto:fdutoit@mail.ubc.ca}{\nolinkurl{fdutoit@mail.ubc.ca}}
+
+\hypertarget{project-wiki}{%
+\section{Project Wiki}\label{project-wiki}}
+
+\href{https://github.com/ubc-geomatics-textbook/docs/wiki}{github.com/ubc-geomatics-textbook/docs/wiki}
+
+\hypertarget{style-guide}{%
+\section{Style Guide}\label{style-guide}}
+
+\hypertarget{audience}{%
+\subsection{Audience}\label{audience}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Audience is undergraduate of graduate student studying GIS, geomatics, and remote sensing with no prior knowledge in these subject areas (i.e., introductory).
+\item
+  Assume only first year-level knowledge (or equivalent concurrent learning) of mathematics, science (biology, chemistry, physics), and geography.
+\item
+  Assume a multicultural reader who is not necessarily familiar with Canadian geography and history.
+\end{enumerate}
+
+\hypertarget{general-style}{%
+\subsection{General Style}\label{general-style}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Word spellings should follow \emph{The Oxford Canadian Dictionary (2 ed.)}.
+\item
+  Every chapter begins with 1-3 paragraphs of introductory text. The introductory text should be for general interest and not introduce any important terms that will be defined later in the chapter. The last sentence of this introductory text should summarize what students will learn.
+\item
+  Posing questions to readers is encouraged in all sections. For example, ``Have you ever wondered\ldots?'' ``How do you think X relates to Y?''
+\item
+  At every opportunity, authors should highlight Canadian examples of technology and science in geomatics. Examples of geomatics applications are highly encouraged in the Canadian context. For example, the following list of environmental management problems that are important to Canada should be discussed whenever possible:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Northern communities
+  \item
+    First Nations
+  \item
+    Climate change
+  \item
+    Boreal forest
+  \item
+    Endangered wildlife
+  \item
+    Freshwater management and ecosystems
+  \item
+    Fisheries
+  \item
+    Glaciers/ice monitoring
+  \item
+    Environmental justice
+  \item
+    Resource extraction
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{learning-objectives}{%
+\subsection{Learning Objectives}\label{learning-objectives}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Every chapter will have a numbered list of learning objectives that follow the introductory text.
+\item
+  There should be no period at the end of each listed learning objective.
+\end{enumerate}
+
+\hypertarget{summary}{%
+\subsection{Summary}\label{summary}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  All learning objectives should be addressed in the summary section.
+\item
+  The summary section should never introduce any new concepts, terms, or definitions and should never reference figures, tables, or equations.
+\end{enumerate}
+
+\hypertarget{key-terms}{%
+\subsection{Key Terms}\label{key-terms}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Every chapter will have an alphabetical, but unnumbered list of key terms.
+\item
+  At first mention in the chapter text, key terms should be boldened and defined.
+\end{enumerate}
+
+\hypertarget{headings-and-labels}{%
+\subsection{Headings and Labels}\label{headings-and-labels}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Chapter titles should use title-case and are numbered.
+\item
+  Chapter sub-titles are also numbered and in title-case. Sub-titles should go no lower than level 3 heading (i.e., 1.2.3).
+\item
+  Level 4 headings are not numbered, all letters are capitalized, and should only be used in special call-out boxes:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    LEARNING OBJECTIVES
+  \item
+    REMEMBER THIS?
+  \item
+    YOUR TURN!
+  \item
+    CASE STUDY
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{formulae}{%
+\subsection{Formulae}\label{formulae}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Do not format formulae using Microsoft Word or LaTeX. Instead, formulae should be formatted with \href{https://bookdown.org/yihui/rmarkdown/markdown-syntax.html}{RMarkdown}.
+\item
+  Coordinates and Greek letters should always be formatted as formulae with RMarkdown.
+\end{enumerate}
+
+\hypertarget{units}{%
+\subsection{Units}\label{units}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Standard International (SI) units should be used for the following:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Length = meter (m)
+  \item
+    Time = second (s)
+  \item
+    Amount of substance = mole (mole)
+  \item
+    Electric current = ampere (A)
+  \item
+    Temperature = Kelvin (K)
+  \item
+    Luminous intensity = candela (cd)
+  \item
+    Mass = Kilogram (kg)
+  \end{itemize}
+\item
+  Angle degrees are preferred over radians (rad) when referencing geographic position.
+\item
+  Rates should be expressed with a dot operator and negative exponent rather than a divisor (e.g., m·s-1 or W·m-2).
+\end{enumerate}
+
+\hypertarget{numbers}{%
+\subsection{Numbers}\label{numbers}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Scientific notation is the preferred way to represent large and small numbers and should use the × operator (not dot or asterisk) and be formatted as a formula (see Formulae): 1 × 102.
+\item
+  Scientific notation should be limited to four significant figures (e.g., 1.234 × 100) except for specific numbers where the precision is important or meaningful like the speed of light (2.99792458 × 108 m·s-1) or Planck's constant (6.62607004 × 10-34 J·s-1).
+\item
+  Constants (like above) and other physical variables should use \href{https://en.wikipedia.org/wiki/List_of_common_physics_notations}{common notations} (e.g., c for speed of light and h for Planck's constant) and be formatted as formulae (see Formulae).
+\end{enumerate}
+
+\hypertarget{dates-and-times}{%
+\subsection{Dates and times}\label{dates-and-times}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The Gregorian calendar should be adopted for recent dates. In these cases, use Common Era (C.E.) to indicate dates after 0 A.D. and Before Common Era (B.C.E.) for dates before 0 A.D.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    For specific recent dates, use the format ``20 February 2021'' and omit C.E.
+  \item
+    If many dates need to be summarized in a table, use the format ``DD-MM-YYYY''
+  \end{itemize}
+\item
+  Times should be specified in either Local Standard Time (LST) or Coordinated Universal Time (UTC) using a 24-hour clock:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    00:00 = 12 A.M. midnight LST
+  \item
+    12:00 = 12 P.M. noon LST
+  \item
+    23:00 = 11 P.M. LST
+  \end{itemize}
+\item
+  For non-recent dates or when referring to geologic time scales, use the following:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Thousands of years before present = kilo annum (ka)
+  \item
+    Millions of years before present = mega annum (Ma)
+  \item
+    Billions of years = giga annum (Ga)
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{tables}{%
+\subsection{Tables}\label{tables}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Tables are numbered in the order that they appear in text and begin with the number of the chapter:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Table 1 in Chapter 1 = 1.1
+  \end{itemize}
+\item
+  A short, descriptive caption should be written for a table.
+\item
+  Tables should only include information that is discussed or referenced in the chapter text.
+\item
+  Every table must be referenced in the chapter text.
+\end{enumerate}
+
+\hypertarget{code-blocks}{%
+\subsection{Code blocks}\label{code-blocks}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Avoid code blocks in chapter text. Instead, try to place code blocks in TRY THIS! or CASE STUDY sections.
+\item
+  Only R code blocks should be embedded using \href{https://bookdown.org/yihui/rmarkdown/r-code.html}{RMarkdown}.
+\end{enumerate}
+
+\hypertarget{abbreviations}{%
+\subsection{Abbreviations}\label{abbreviations}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Abbreviations are shortened form of a word or phrase and should be punctuated with periods:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    e.g.
+  \item
+    Dr.
+  \item
+    Ph.D.
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{initialisms}{%
+\subsection{Initialisms}\label{initialisms}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Initialisms are the first letters of several words and should always be defined at first use in the chapter text regardless if the initialism is introduced and defined in an earlier chapter.
+\item
+  Do not introduce initialisms in figure or table captions or table text.
+\item
+  Except for the specific cases in this style guide, do not punctuate initialisms with periods:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    AVHRR
+  \item
+    NDVI
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{acronyms}{%
+\subsection{Acronyms}\label{acronyms}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Acronyms are combinations of the first letters of several words and are pronounced as words. Acronyms should never be punctuated with periods.
+\item
+  Many satellites and remote sensing systems have acronyms that vary capitalization.
+\item
+  Following are some preferred acronyms:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Light Detection and Ranging = LiDAR
+  \item
+    Radio Detection and Ranging = RADAR
+  \item
+    Moderate Resolution Imaging Spectroradiometer = MODIS
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{punctuation}{%
+\subsection{Punctuation}\label{punctuation}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Use serial comma (Oxford comma) in lists: Yukon, Northwest Territories, and Nunavut.
+\item
+  Use italics for internal dialogue or when you infer what the reader might be thinking:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ``At this point, you might be wondering, \emph{why am I reading this sentence?}''
+  \end{itemize}
+\item
+  Avoid the use of semi-colons.
+\item
+  Use and punctuate common Latin abbreviations with periods:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ``For example'' = exempli gratia (e.g.)
+  \item
+    ``That is'' = is est (i.e.)
+  \item
+    ``And other similar things'' = et cetera (etc.)
+  \end{itemize}
+\item
+  Avoid phrases in parentheses () or brackets {[}{]}. Instead, place the phrase in a proper sentence.
+\item
+  Use single spaces between sentences.
+\item
+  Use double quotation marks for direct quotes, but avoid reproducing verbatim large texts. Paraphrasing with proper citation is preferred to direct quotation.
+\item
+  Bullet points are preferred over long lists in sentences.
+\end{enumerate}
+
+\hypertarget{citations}{%
+\subsection{Citations}\label{citations}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Style should follow American Psychological Association (APA) format.
+\item
+  In-text references are encouraged where necessary, especially in case studies.
+\item
+  References and Recommended Readings section is placed at end of each chapter. Where possible, Recommended Readings should be populated with Open Educational Resources.
+\end{enumerate}
+
+\hypertarget{chapter-template}{%
+\chapter{Chapter Title}\label{chapter-template}}
+
+\textbf{Lorem ipsum dolor sit amet}, \emph{consectetur adipiscing elit.} Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
+
+\hypertarget{learning-objectives-1}{%
+\subsubsection*{Learning Objectives}\label{learning-objectives-1}}
+\addcontentsline{toc}{subsubsection}{Learning Objectives}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Objective one
+\item
+  Objective two
+\item
+  Objective three
+\end{enumerate}
+
+\hypertarget{key-terms-1}{%
+\subsection*{Key Terms}\label{key-terms-1}}
+\addcontentsline{toc}{subsection}{Key Terms}
+
+Ipsum lorem, Phasellus, sollicitudin, finibus
+
+\hypertarget{first-section-header}{%
+\section{First Section Header}\label{first-section-header}}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
+
+\begin{figure}
+\centering
+\includegraphics{images/01-image.png}
+\caption{Figure caption text is also alt text.}
+\end{figure}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
+
+\hypertarget{your-turn}{%
+\subsubsection*{Your turn!}\label{your-turn}}
+\addcontentsline{toc}{subsubsection}{Your turn!}
+
+Your browser does not support iframes
+
+\hypertarget{second-section-header}{%
+\section{Second Section Header}\label{second-section-header}}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
+
+\hypertarget{case-study}{%
+\subsubsection*{Case Study}\label{case-study}}
+\addcontentsline{toc}{subsubsection}{Case Study}
+
+\hypertarget{box-text}{%
+\subsubsection*{Case study title max of forty characters}\label{box-text}}
+\addcontentsline{toc}{subsubsection}{Case study title max of forty characters}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent non magna non nunc auctor eleifend. Etiam fringilla fermentum nisl at volutpat. Duis sodales lorem interdum, posuere neque sollicitudin, malesuada nisl. Sed laoreet commodo dui et cursus. Curabitur vel porta mauris. In lacinia ac ex ac varius. Nullam at vulputate ligula. Nunc sed faucibus urna, eget placerat sapien. Fusce ut lorem a ante congue consequat et sed tortor. Integer neque urna, vehicula at aliquam non, luctus non mi. Pellentesque et massa vehicula, cursus erat id, aliquet sapien. Sed rhoncus vehicula risus, vel aliquam eros porta eget. Etiam maximus, massa in pretium semper, est libero feugiat ipsum, quis tempor nunc libero in nibh. Nunc sollicitudin mattis metus ut rutrum. Donec urna purus, sodales id nibh in, ultricies tincidunt nibh. Proin porta accumsan aliquet.
+
+Cras convallis erat ante, ut tristique est tempor elementum. Nam mollis, ipsum at vehicula vestibulum, est magna finibus nisl, et laoreet metus massa et ipsum. Proin eget eros ac odio euismod volutpat et ac diam. Cras viverra ut libero vel pulvinar. Duis nisi magna, sagittis id ligula ac, efficitur commodo eros. Nulla tincidunt id nulla in lobortis. Sed non mi eu mi fermentum cursus. In elit velit, semper sed gravida at, imperdiet sed nibh. Aliquam quis massa malesuada, venenatis nunc sed, malesuada nulla. Vestibulum malesuada purus ut ex ullamcorper, ut blandit lacus lobortis. Curabitur scelerisque velit justo, quis porttitor purus efficitur ut. Phasellus nec arcu vestibulum, consequat ante id, elementum velit. Proin arcu tortor, cursus vitae sem id, congue semper urna. Integer tempus in est eu consequat. Donec sodales, quam vel finibus faucibus, leo ante dictum quam, id tempus ligula dolor quis erat. Curabitur non elementum sem. Mauris placerat fermentum orci non lacinia. Ut imperdiet dui lectus, ac malesuada felis euismod sed. Nulla non volutpat dui, in suscipit turpis.
+
+Case studies should have at least one image or map (no more than 2 total) and the written length should be around 300 words (shown above). Any references to external literature should by hyperlinked with the Digitial Object Identifier (DOI) permanent URL and \href{https://bookdown.org/yihui/bookdown/citations.html}{entered into the bibliography}. Avoid linking to external resources without a DOI and permanent URL. Contact Paul or try using the Leaflet package in R if you want to add an interactive web map.
+
+\hypertarget{third-section-header}{%
+\section{Third Section Header}\label{third-section-header}}
+
+\href{https://google.com}{This is how we link to something. \{target="\_blank"\} ensures that this link opens in a new window rather than navigating away from the textbook.}
+
+\hypertarget{your-turn-1}{%
+\subsubsection*{Your turn!}\label{your-turn-1}}
+\addcontentsline{toc}{subsubsection}{Your turn!}
+
+Ask the reader to undertake some activity or exercise. Have them explore data, an interactive tool, a web map. Avoid referencing, relying on, or using external URLs. If it can be built, coded, or hosted by us, then it should be.
+
+Your browser does not support iframes
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
+
+\hypertarget{call-out}{%
+\subsubsection*{Call out}\label{call-out}}
+\addcontentsline{toc}{subsubsection}{Call out}
+
+This is a call out. Put some important concept or fact in here.
+
+\hypertarget{summary-1}{%
+\section{Summary}\label{summary-1}}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
+
+\hypertarget{reflection-questions}{%
+\subsection*{Reflection Questions}\label{reflection-questions}}
+\addcontentsline{toc}{subsection}{Reflection Questions}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Explain ipsum lorem.
+\item
+  Define ipsum lorem.
+\item
+  What is the role of ispum lorem?
+\item
+  How does ipsum lorem work?
+\end{enumerate}
+
+\hypertarget{practice-questions}{%
+\subsection*{Practice Questions}\label{practice-questions}}
+\addcontentsline{toc}{subsection}{Practice Questions}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Given ipsum, solve for lorem.
+\item
+  Draw ipsum lorem.
+\end{enumerate}
+
+Ensure all inline citations are properly referenced here.
+
+\hypertarget{types-of-data}{%
+\chapter{Types of Data}\label{types-of-data}}
+
+\textbf{Data Types}, Any entity we wish to represent in a Geographic Information System can be described with three pieces of information What, When, and Where? In the previous chapter, we introduced how to represent the where on the earth an entity occurs inside a GIS. In this chapter we will introduce how we can describe what an entity is or when it occurs. Then we will cover how we use spatial data models to link the what and when to the where using spatial data models. Then we will wrap up by introducing some of the specific file types we use in GIS to represent spatial data.
+
+\hypertarget{learning-objectives-2}{%
+\subsubsection*{Learning Objectives}\label{learning-objectives-2}}
+\addcontentsline{toc}{subsubsection}{Learning Objectives}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Learn about the various scales we use to measure data
+\item
+  Learn about spatial data models and how they work
+\item
+  Learn about the different file types we use in GIS
+\end{enumerate}
+
+\hypertarget{key-terms-2}{%
+\subsection*{Key Terms}\label{key-terms-2}}
+\addcontentsline{toc}{subsection}{Key Terms}
+
+Attribute, Qualitative, Quantitative, Vector, Raster
+
+\hypertarget{attribute-data}{%
+\section{Attribute Data}\label{attribute-data}}
+
+Spatial data is the foundation of Geographic Information Science, but spatial coordinates are meaningless unless they are linked with descriptive information about the location. Any non-spatial data relating to a spatial entity is known as an attribute. This non-spatial data can broadly be classified as either qualitative or quantitative. Data that is strictly descriptive and lacks any numeric quantity is qualitative. Data with numerical values that are separated by some meaningful interval is quantitative. The types of analysis we can conduct with qualitative data is more limited than quantitative data, but that does not necessarily mean quantitative is ``better'' than qualitative.
+
+Should I have subsections to introduce quantitative vs.~qualitative?
+
+\begin{figure}
+\centering
+\includegraphics{images/03-scales.png}
+\caption{From my lectures. IDK the original source, but it'd be easy enough to just ``recreate'' my own.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{images/03-operations.png}
+\caption{From my lectures. IDK the original source, but it'd be easy enough to just ``recreate'' my own.}
+\end{figure}
+
+\hypertarget{nominal}{%
+\subsection{Nominal}\label{nominal}}
+
+Qualitative data that just consists of a name/category with no ranking or direction is known as Nominal data. One category is not more or less, better or worse than another, they are just different. A good example would be flower types (see fig). Other examples would be zoning categories, colors, flavors of ice cream, place names, etc. The only arithmetic operations we can do with nominal data are checking for equality (True/False), count occurrences, and calculate the mode (most frequent occurrence).
+
+\begin{figure}
+\centering
+\includegraphics{images/03-flowers-nominal.png}
+\caption{My own images, can update text/font/styling as necessary}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{images/03-nominal-opperations.png}
+\caption{My own images, can update text/font/styling as necessary}
+\end{figure}
+
+\hypertarget{ordinal}{%
+\subsection{Ordinal}\label{ordinal}}
+
+Qualitative that has some sort of ranking, but no numerical scale associated with that ranking is known as Ordinal. A good example would be relative sizes (see fig). We can see Yarrow is taller than her sister Shamsa, so we can rank these dogs by height. However, we haven't measured their heights, so we don't know how much taller Yarrow is than Shamsa. Some other good examples of Ordinal data include spice levels (mild, medium, hot), residential zoning density (low, medium, high), and survey responses. With ordinal data, we can do all operations we can do with nominal data, plus a few more. We can check the order/rank (greater than, less than) and in some circumstances we can calculate the median (see figure).
+
+\begin{figure}
+\centering
+\includegraphics{images/03-dogs-ordinal.png}
+\caption{My own images, can update text/font/styling as necessary}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{images/03-ordinal-operatons.png}
+\caption{My own images, can update text/font/styling as necessary}
+\end{figure}
+
+\hypertarget{graded-membership}{%
+\subsection{Graded membership}\label{graded-membership}}
+
+\ldots{} necessary? Related to ambiguity, is this the right place to talk about it??
+
+\hypertarget{interval}{%
+\subsection{Interval}\label{interval}}
+
+Quantitative data on a fixed scale but with an arbitrary zero point is known as interval data. A good example of this type of data is temperature in degrees Celsius.\\
+* Time (3PM)
+* Dates (2021)
+* Temperature (Celsius/Fahrenheit)
+* 20 ˚C is not ``twice as warm'' as 10 ˚
+* 293.15 ˚K vs as 283.15 ˚K
+* 200 ˚K is ``twice as warm'' as 100 ˚K
+
+Might be better to introduce ratio first?
+
+\begin{figure}
+\centering
+\includegraphics{images/03-interval-temperature.png}
+\caption{My own images, can update text/font/styling as necessary. Very rough draft}
+\end{figure}
+
+Log-Interval was listed - is it necessary? I don't think it needs its own section?
+
+\hypertarget{ratio}{%
+\subsection{Ratio}\label{ratio}}
+
+Quantitative data with an absolute zero point (no negative value). A good example of this type of data is population (see figure). A population of 200 is 2x a population of 100. Other examples are, temperature (in Kelvin), precipitation, height, income, rental cost. With ratio data we can do any kind of arithmetic operation. Add/subtract, multiply/divide, along with calculating measures of central tendency (mean, median).
+
+(Figure idea) - population map or simple chart with stick figures highlighting population counts.
+
+What are these: Extensive Ratio, Cyclical Ratio, Derived Ratio (normalization?)
+I think all these can just be lumped in with Ratio Above\^{}
+
+\hypertarget{counts}{%
+\subsection{Counts}\label{counts}}
+
+\ldots. this is more an operation? Can be done to any data type? I don't think it merits its own section.
+\#\#\#\# Absolute
+????
+
+\hypertarget{spatial-data-models}{%
+\section{Spatial data models}\label{spatial-data-models}}
+
+\hypertarget{vector-data}{%
+\subsection{Vector data}\label{vector-data}}
+
+Vectors use points, lines, and polygons to represent objects
+Data attributes are stored in a separate database table and linked using simple identification numbers
+
+\begin{figure}
+\centering
+\includegraphics{images/03-vector-example.png}
+\caption{\url{https://www.oercommons.org/courses/introduction-to-geospatial-concepts/view} - might be easier to recreate our own if the logo is an issue?}
+\end{figure}
+
+\hypertarget{points}{%
+\subsubsection{Points}\label{points}}
+
+Points are ``zero-dimensional'':
+They don't have length, width, or height in the system
+Points have an (𝒙,𝒚) coordinate pair describing their location
+
+\begin{figure}
+\centering
+\includegraphics{images/03-vector-points.png}
+\caption{Very rough draft.}
+\end{figure}
+
+\hypertarget{lines}{%
+\subsubsection{Lines}\label{lines}}
+
+Lines are one-dimensional:
+They have length, but no width or height
+Lines have at least two points, a beginning point and an end point
+Lines may also have any number of middle points, called vertices
+
+\begin{figure}
+\centering
+\includegraphics{images/03-vector-points.png}
+\caption{I'll make something similar for lines.}
+\end{figure}
+
+\hypertarget{polygons}{%
+\subsubsection{Polygons}\label{polygons}}
+
+Polygons are two-dimensional:
+They may have length and width
+Polygons have at least three points
+The beginning and end points must be the same
+Polygons have straight or curved line segments, sometimes called ``edges''
+
+\begin{figure}
+\centering
+\includegraphics{images/03-vector-points.png}
+\caption{I'll make something similar for polygons.}
+\end{figure}
+
+\hypertarget{tabular-data-attributes}{%
+\subsubsection{Tabular Data (Attributes)}\label{tabular-data-attributes}}
+
+Information about a point, line, or area
+Only one data type per column
+Data type limits what kind and how much information
+Text
+Numeric: Float/Double, Long/Short Integer
+Object
+One entry per cell
+Rows are distinct
+Null values possible
+
+\begin{figure}
+\centering
+\includegraphics{images/03-vector-attributes.png}
+\caption{Simple diagram from my lecture notes, I can recreate a better one if needed.}
+\end{figure}
+
+\hypertarget{raster-data}{%
+\subsection{Raster data}\label{raster-data}}
+
+Space represented with a grid of equally sized pixels/grid cells.
+A single value is assigned to each cell
+In GIS, rasters are most commonly encountered as:
+Satellite imagery
+Drone imagery
+Elevation models
+Bathymetric models
+Scanned maps
+
+Numeric data value assigned to each grid cell at each location, corresponding to the entity being modelled.
+Typically used to represent surfaces, since every grid cell is assigned a data value.
+
+Multiple layers can be combined
+Each layer represents a different field
+Raster Math:
+Layers can be combined with expressions get new information
+A = Average July Temperature
+B = Average January Temperature
+C = A -- B
+Average Temperature Range
+
+\begin{figure}
+\centering
+\includegraphics{images/03-raster-example.png}
+\caption{\url{https://www.oercommons.org/courses/introduction-to-geospatial-concepts/view} - I think this one is pretty good, I use it in my lecture notes.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{images/03-raster-resolution.png}
+\caption{\url{https://www.oercommons.org/courses/introduction-to-geospatial-concepts/view} - I think this one is pretty good, I use it in my lecture notes.}
+\end{figure}
+
+\hypertarget{cell-data}{%
+\subsubsection{Cell data}\label{cell-data}}
+
+\hypertarget{digital-numbers}{%
+\subsubsection{Digital numbers}\label{digital-numbers}}
+
+\hypertarget{triangulated-irregular-networks}{%
+\subsection{Triangulated Irregular Networks}\label{triangulated-irregular-networks}}
+
+Are these worth more than a passing mention?
+
+\hypertarget{case-study-1}{%
+\subsubsection*{Case Study}\label{case-study-1}}
+\addcontentsline{toc}{subsubsection}{Case Study}
+
+:::
+
+\hypertarget{box-text}{%
+\subsubsection*{Police Involved Deaths in Canada}\label{box-text}}
+\addcontentsline{toc}{subsubsection}{Police Involved Deaths in Canada}
+
+I'll fill this in later. Here is a link to the github org where I'll be hosting the data. I'll give an interactive map \& a brief discussion the data types used (nominal) ratio (police involved death rate and how they can be used together. I think this is a good example of how qualitative data and descriptor can be very useful. But its also super depressing.
+
+Your browser does not support iframes
+
+Case studies should have at least one image or map (no more than 2 total) and the written length should be around 300 words (shown above). Any references to external literature should by hyperlinked with the Digitial Object Identifier (DOI) permanent URL and \href{https://bookdown.org/yihui/bookdown/citations.html}{entered into the bibliography}. Avoid linking to external resources without a DOI and permanent URL. Contact Paul or try using the Leaflet package in R if you want to add an interactive web map.
+
+::::
+
+\hypertarget{how-is-data-represented-in-a-computer}{%
+\section{How is Data Represented in a Computer}\label{how-is-data-represented-in-a-computer}}
+
+Before we talk about the different types of data, lets briefly discuss how information is represented inside a computer, the
+
+\hypertarget{bits-bytes}{%
+\subsection{Bits \& Bytes}\label{bits-bytes}}
+
+Bits are singluar pieces of information, representing 1's and 0's. A circut is either on or off. The next step up from that, is the byte. ``The byte is a unit of digital information that most commonly consists of eight bits. Historically, the byte was the number of bits used to encode a single character of text in a computer and for this reason it is the smallest addressable unit of memory in many computer architectures.'' - copy pasta from Wikipedia
+
+\hypertarget{types-of-numbers}{%
+\subsection{Types of Numbers}\label{types-of-numbers}}
+
+Integer vs.~Floating-point Discreet vs.~Continuous
+
+\hypertarget{other-types-of-information}{%
+\subsection{Other types of information}\label{other-types-of-information}}
+
+Text, Boolean, Dates
+
+\hypertarget{common-file-types}{%
+\section{Common file types}\label{common-file-types}}
+
+\hypertarget{shapefile-.shp}{%
+\subsection{Shapefile (.shp)}\label{shapefile-.shp}}
+
+\hypertarget{geodatabase-.gdb}{%
+\subsection{Geodatabase (.gdb)}\label{geodatabase-.gdb}}
+
+This isn't really a file type? Might this go better in chapter 5?
+
+\hypertarget{las-.las}{%
+\subsection{LAS (.las)}\label{las-.las}}
+
+\hypertarget{comma-separated-values-.csv}{%
+\subsection{Comma Separated Values (.csv)}\label{comma-separated-values-.csv}}
+
+\hypertarget{gps-data-.gpx}{%
+\subsection{GPS data (.gpx)}\label{gps-data-.gpx}}
+
+\hypertarget{keyhole-markup-language-.kml}{%
+\subsection{Keyhole Markup Language (.kml)}\label{keyhole-markup-language-.kml}}
+
+\hypertarget{ascii-images-.asc}{%
+\subsection{ASCII images (.asc)}\label{ascii-images-.asc}}
+
+\hypertarget{envi-format-images-.dat}{%
+\subsection{ENVI-format images (.dat)}\label{envi-format-images-.dat}}
+
+\hypertarget{geotiff-images-.tif}{%
+\subsection{GeoTiff images (.tif)}\label{geotiff-images-.tif}}
+
+\hypertarget{your-turn-2}{%
+\subsubsection*{Your turn!}\label{your-turn-2}}
+\addcontentsline{toc}{subsubsection}{Your turn!}
+
+I'll do some exercise building on the case study.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
+
+\hypertarget{call-out-1}{%
+\subsubsection*{Call out}\label{call-out-1}}
+\addcontentsline{toc}{subsubsection}{Call out}
+
+This is a call out. Put some important concept or fact in here.
+
+\hypertarget{summary-2}{%
+\section{Summary}\label{summary-2}}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
+
+\hypertarget{reflection-questions-1}{%
+\subsection*{Reflection Questions}\label{reflection-questions-1}}
+\addcontentsline{toc}{subsection}{Reflection Questions}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Explain ipsum lorem.
+\item
+  Define ipsum lorem.
+\item
+  What is the role of ispum lorem?
+\item
+  How does ipsum lorem work?
+\end{enumerate}
+
+\hypertarget{practice-questions-1}{%
+\subsection*{Practice Questions}\label{practice-questions-1}}
+\addcontentsline{toc}{subsection}{Practice Questions}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Given ipsum, solve for lorem.
+\item
+  Draw ipsum lorem.
+\end{enumerate}
+
+Ensure all inline citations are properly referenced here.
+
+\hypertarget{data-integration}{%
+\chapter{Chapter Title}\label{data-integration}}
+
+\textbf{Frogs}, This chapter is about Frogs
+
+\hypertarget{learning-objectives-3}{%
+\subsubsection*{Learning Objectives}\label{learning-objectives-3}}
+\addcontentsline{toc}{subsubsection}{Learning Objectives}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Objective one
+\item
+  Objective two
+\item
+  Objective three
+\end{enumerate}
+
+\hypertarget{key-terms-3}{%
+\subsection*{Key Terms}\label{key-terms-3}}
+\addcontentsline{toc}{subsection}{Key Terms}
+
+Ipsum lorem, Phasellus, sollicitudin, finibus
+
+16.1 Problems with data integration\\
+16.1.1 Data types, sources, formats\\
+16.1.2 Datums, extents, scales\\
+16.1.3 Data resolutions\\
+\#\# Integrating vector and raster data
+
+\begin{itemize}
+\tightlist
+\item
+  Chris Liang - Is this already written up? How/where to we intend to include it?
+\end{itemize}
+
+16.2.1 Rasterization\\
+16.2.2 Vectorization\\
+- Could make a cool little visualization showing how to go between the two. Either static images an animation, or video screen share.
+
+16.2.5 Smoothing\\
+16.2.6 Simplifying
+
+\hypertarget{spatial-data-errors}{%
+\section{Spatial data errors}\label{spatial-data-errors}}
+
+\hypertarget{accuracy-vs.-precision}{%
+\subsection{Accuracy vs.~Precision}\label{accuracy-vs.-precision}}
+
+Measurement Errors
+Accuracy:
+The degree to which a set of measurements correctly matches the real world values. How close are we to the real value?
+If there is a consistent (systematic) offset from that real world value, our measurements are inaccurate. They have a bias.
+Precision:
+The degree of agreement between multiple measurements of the same real world phenomena. How repeatable is a measurement?
+If you take five measurements of the same feature, how likely are they to be similar? Lack of precision can be attributed to random errors.
+
+\begin{figure}
+\centering
+\includegraphics{images/16-accuracy-vs-precision.png}
+\caption{Source}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{images/16-accuracy-vs-precision2.png}
+\caption{Source}
+\end{figure}
+
+\hypertarget{vaugeness-and-ambiguity}{%
+\subsection{Vaugeness and Ambiguity}\label{vaugeness-and-ambiguity}}
+
+Vaugeness - Victoria \ldots{} does it mean Victoria BC vs.~Victoria AU
+
+Ambiguity - coastline - is it the high water line? Low water line? mean water level?
+
+\hypertarget{quantifying-spatial-errors-rmse-euclids-distance}{%
+\subsection{Quantifying spatial errors RMSE, Euclid's distance}\label{quantifying-spatial-errors-rmse-euclids-distance}}
+
+\hypertarget{logical-errors}{%
+\subsection{Logical Errors}\label{logical-errors}}
+
+\begin{itemize}
+\tightlist
+\item
+  Ecological Fallacy, Atomistic Fallacy, MAUP etc. Its important to include these, whether here or elsewhere?
+\end{itemize}
+
+\hypertarget{other-errors}{%
+\subsection{Other Errors?}\label{other-errors}}
+
+\begin{itemize}
+\tightlist
+\item
+  source data errors, out of date data, data entry \& digitization?
+\end{itemize}
+
+::::
+
+\hypertarget{case-study-2}{%
+\subsubsection*{Case Study}\label{case-study-2}}
+\addcontentsline{toc}{subsubsection}{Case Study}
+
+\hypertarget{box-text}{%
+\subsubsection*{Large Scale}\label{box-text}}
+\addcontentsline{toc}{subsubsection}{Large Scale}
+
+I'll discuss some footprint mapping work I've done. Here is the article. I'll an overview of combining raster data (drone imagery \& flux footprint) with vector data (landscape classification boundaries) to get the flux contribution of the major vegetation types at Illisarvik. I can create some illustrative figures..
+
+Your browser does not support iframes
+
+Case studies should have at least one image or map (no more than 2 total) and the written length should be around 300 words (shown above). Any references to external literature should by hyperlinked with the Digitial Object Identifier (DOI) permanent URL and \href{https://bookdown.org/yihui/bookdown/citations.html}{entered into the bibliography}. Avoid linking to external resources without a DOI and permanent URL. Contact Paul or try using the Leaflet package in R if you want to add an interactive web map.
+
+  \bibliography{book.bib}
+
+\end{document}

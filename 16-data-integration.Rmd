@@ -1,0 +1,190 @@
+# Data Integration {#data-integration}
+
+**Data Integration**, This chapter is about some of the more practical aspects implementing GIS in a workflow.  What type of problems and pitfalls might you encounter and how do you account for them?
+
+This chapter will walk you through a number of things you will encounter when working in GIS, using an an applied example as a guide.  Then you will be presented with two other case studies showing you example workflow.  One will show how the police involved deaths data presented in Chapter 3 was compiled.  The second will show (forest stuff - second case study - need guidance on how to include).
+ (Skeeter et al. 2021 - Arctic Science).    
+
+:::: {.box-content .learning-objectives-content}
+
+::: {.box-title .learning-objectives-top}
+#### Learning Objectives {-}
+::: 
+
+1. Objective one
+2. Objective two
+3. Objective three
+
+::::
+
+### Key Terms {-}
+
+Data, Integration, Other Stuff
+
+
+## Problems with data integration 
+
+Most GIS projects require us to analyze multiple data layers, sometimes from disparate sources to answer our research question.  When working with different layers from different sources you are likely to encounter multiple incongruousness.  What do you do if some of your layers are in vector format and some in raster?  What if one of your datasets is 10 years older than another?  How do you handle data that were collected at different resolutions or scales stored in different file types?  These are questions that pop up every day when working in GIS.
+
+We will discuss what to do when you encounter different:
+1) Data types, sources, formats   
+2) Data resolutions
+3) Datum, extents, scales
+4) Time periods, collection dates
+
+## Framing the problem
+
+For millennia, wetlands in the Canadian Arctic have been accumulating large stockpiles of Carbon.  Permafrost (frozen ground) and short growing seasons in these landscapes cause dead organic matter freezes into the soil before it can fully decompose.  Climate change in the Arctic is causing permafrost to degrade, at rapid rates in some regions.  This will speed up decomposition of these large Carbon stockpiles and could potential result in a large pulse of greenhouse gasses (Carbon Dioxide and Methane) being released into the atmosphere.  Creating a positive feedback mechanism that further exacerbates warming.  At the same time, climate change is causing trees and shrubs to encroach on the tundra and leading to longer growing seasons.  Increased plant growth sequesters Carbon Dioxide and serves as a negative feedback mechanism ("Remediating" climate change).
+
+[Find/make and insert diagram]
+
+Monitoring Carbon balances of Arctic ecosystems is especially difficult and expensive due to the harsh conditions and inaccessible nature of most locations.  Because of this, very little is known about how these systems are and will continue responding to climate change relative to other biomes.  Figuring out the Carbon balance of these can help fill a "big knowledge gap" and improve the accuracy of global climate models.
+
+### About the data
+
+The MacKenzie Delta (xx km2) is the second largest Arctic Delta in the world.  It is a patchwork of river channels, lakes, boreal forests, and Carbon rich wetlands.  It is very much understudied from the perspective of climate sciences.  To date, only one ground based observation of landscape level Carbon exchange has been made anywhere in the Mackenzie Delta.  In 2017, an intensive study was conducted using a method known as Eddy Covariance to measure the uptake/emission of Carbon Dioxide and Methane across a wetland (xx m2) in real-time (30-minute intervals) at a site in the Delta known as Fish Island (Skeeter et al. 2021). 
+
+![The Eddy Covariance system at Fish Island J. Skeeter (2017)](images/16-ec-site.jpg){.center}
+
+![Maybe insert Web-map showing site instead](images/16-fig1.jpg){.center}
+
+In the site was a strong sink for Carbon during the growing season in 2017.  But, Arctic climates are characterized by extreme inter-annual variation so one year alone cannot be used determine the average carbon balance.  Unfortunately, due to funding issues, what was supposed to be a multi-year research campaign, was shutdown after just one season.
+
+
+Regardless ...
+
+How can we use this one year of data from one point location to get a better idea of the Carbon balances in the Arctic?  We can pull in data from other sources, do a bit of fancy modelling, and a few "back of the envelope" calculations to come up with some ballpark guesses.
+
+<!-- 
+1) Data types, sources, formats   
+2) Data resolutions
+3) Datum, extents, scales
+4) Time periods, collection dates -->
+
+## Data Resolution
+
+What do you do if your data are collected at different resolutions?
+
+
+
+##  Integrating vector and raster data
+
+How can you work with both raster and vector data and when might you want to switch between data types?
+
+Evey Eddy Covariance observation has a "footprint" or upwind source area for the Carbon.  It is calculated using some complicated calculus that is well beyond the scope of this class, but 
+
+### Rasterization
+
+Say you have a vector layer of landscape classification scheme and need to intersect it with a source area raster 
+
+###  Vectorization  
+
+Say you have a model that outputs a raster layer representing an upwind source area for an Eddy Covariance observation and you want to display it in a more human friendly format.
+
+### Zonal Statistics
+
+Say you have a raster layer (e.g. maximum annual NDVI) and you want to describe it over a certain region.  
+
+
+###  Smoothing   
+
+
+###  Simplifying   
+
+
+##  Spatial data errors   
+
+###  Accuracy vs. Precision  
+
+Measurement Errors
+Accuracy:
+The degree to which a set of measurements correctly matches the real world values.  How close are we to the real value?
+If there is a consistent (systematic) offset from that real world value, our measurements are inaccurate. They have a bias.
+Precision:
+The degree of agreement between multiple measurements of the same real world phenomena. How repeatable is a measurement? 
+If you take five measurements of the same feature, how likely are they to be similar?  Lack of precision can be attributed to random errors.
+
+![Source](images/16-accuracy-vs-precision.png){.center}
+
+![Source](images/16-accuracy-vs-precision2.png){.center}
+
+### Vagueness and Ambiguity
+Vagueness - Victoria ... does it mean Victoria BC vs. Victoria AU
+
+Ambiguity - coastline - is it the high water line? Low water line? mean water level?
+
+###  Quantifying spatial errors    RMSE, Euclid's distance
+
+
+
+### Logical Errors
+
+Data incongruousness
+
+### Ecological Fallacy, Atomistic Fallacy, MAUP etc.  Its important to include these, whether here or elsewhere?
+
+### Other Errors?
+- source data errors, out of date data, data entry & digitization?
+
+::::
+
+
+:::: {.box-content .case-study-content}
+
+::: {.box-title .case-study-top}
+#### Case Study {-}
+:::
+
+#### Large Scale {#box-text -}
+
+<p id="box-text">Footprint mapping, temporal upscaling.  I'll fill in more text here later, these figs are just grabbed from my thesis chapters.  The gist of it - Measured NEE in one year.  Have 10 years of climate data + Reanalysis data + satellite data.  Combine these data sources & train a model to do a temporal upscale/sensitivity analysis to see how inter-annual climate variability impacts NEE.  Then do a landscape classification with a greenest pixel NDVI image, intersecting with the flux footprint.  Use that to find the representative areas to do a "back of the envelope" spatial upscaling. </p>
+
+![Rough flowchart draft](images/16-flux-upscaling-estiamte.png){.center}
+
+
+![Reference map showing the Mackenzie Delta (Currently from chapter 2, I'll change it to a full delta NDVI map) ](images/16-fig1.jpg){.center}
+
+![Landscape classification and drone imagery](images/16-fig2.jpg){.center}
+
+![Footprint NDVI profile](images/16-fig3.jpg){.center}
+
+![Climate Data](images/16-fig4.jpg){.center}
+
+![Temporally upscaled flux estimate](images/16-fig5.jpg){.center}
+
+![Landscape classification based on fig 3](images/16-fig6.jpg){.center}
+
+
+
+::::
+
+
+
+
+
+::::
+
+
+:::: {.box-content .case-study-content}
+
+::: {.box-title .case-study-top}
+#### Case Study {-}
+:::
+
+#### Small Scale {#box-text -}
+
+<p id="box-text">Case Study: UBC Trees in a Changing Climate</p>
+
+
+
+<p id="box-text">The file structure for this case study doesn't match the structure of the template, so I've left it out for now, until I can get a bit more guidance on it.</p>
+
+::::
+
+
+```{r include=FALSE}
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'htmlwidgets', 'webshot', 'DT',
+  'miniUI', 'tufte', 'servr', 'citr', 'rticles'
+), 'packages.bib')
+```

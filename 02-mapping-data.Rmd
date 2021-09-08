@@ -38,6 +38,7 @@ System, Geographic Coordinate System, Projected Coordinate System, Map
 Projection, Tissot's Indicatrix
 
 ## Introduction to geodesy
+
 **Geodesy** is the fascinating science of measuring the shape,
 orientation, and gravity of Earth. Naturally, some of the questions that
 come to mind when thinking about such a grand topic are *I thought the
@@ -66,11 +67,7 @@ noticed a shadow. He measured the angle of the shadow and inferred the
 circumference of Earth, which was already known to be spherical. The
 calculation goes something like this:
 
-```{r 2-Eratosthenes, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Diagram showing how Eratosthenes estimated the circumference of Earth by observing the angle of a shadow that was cast about 800 km north of Syene in present-day Egypt. David Monniaux, CC-BY-SA-4.0.")
-    knitr::include_graphics(here::here("images", "02-Eratosthenes.png"))
-```
-<br/>
+[insert circumference calculation here]
 
 Pretty simple, right? Turns out, Eratosthenes was off by only 75 km or
 less than 0.2% in his calculation! The actual North-South circumference
@@ -288,7 +285,7 @@ It turns out that Halifax referenced to CGVD2013 is 64 centimeters
 
 <p id="box-text">
 
-### Case Study: The Canadian Geodetic Vertical Datum of 2013
+
 
 It should be evident by now that the reference surface that you choose
 as a vertical datum will determine the measured elevation of Earth's
@@ -303,12 +300,9 @@ height between an ellipsoid and Earth's surface is referred to as
 the geoid and the Earth's surface is called **orthometric height (H)**
 (Figure 2.6), and is given as:
 
-``` {r echo=F, message=F}
-library(rgdal)
-library(leaflet)
-library(RColorBrewer)
-library(raster)
-```
+$$
+H = h - N
+$$
 
 ![Figure 2.6 Orthometric Height (H) is the ellipsoidal height (h) less
 the geoid height (N)](images/02-H-h-N.png){.center} <br/>
@@ -732,13 +726,9 @@ Indicatrices in red](images/02-BC-Albers-map.png){.center} <br/>
 
 #### Azimuthal
 
-Azimuthal projections use a flat circular plane to project the Earth onto a map. This plane is usually oriented so that it is tangent at a single point, usually the North or South Pole. In the case of a polar azimuthal projection, meridians radiate outward as straight lines from the pole to the edge of the circular plane and the parallels are represented as concentric circles. As a result, distortion increases as you move away from the centre point of the map with the outer edge of the plane representing an **antipode** or an opposite point on Earth. The primary benefit of azimuthal projections is that they preserve direction and distance between the centre point and any other point in the map (Figure \@ref(fig:2-Azimuthal-map)). The shortest geographic distance between the centre point and any other point creates a line known as a **great circle**, which divides the Earth into two equal portions. So another benefit of an Azimuthal project is that great circles can be mapped as straight lines. Azimuthal projections are commonly used when distance and direction are important, such as weather RADAR stations or air traffic control towers. It is important to realize that the centre point for an azimuthal projection can be any point on Earth and the equidistant property can be exploited for a number of applications.
+Azimuthal projections use a flat circular plane to project the Earth onto a map. This plane is usually oriented so that it is tangent at a single point, usually the North or South Pole. In the case of a polar azimuthal projection, meridians radiate outward as straight lines from the pole to the edge of the circular plane and the parallels are represented as concentric circles. As a result, distortion increases as you move away from the centre point of the map with the outer edge of the plane representing an **antipode** or an opposite point on Earth. The primary benefit of azimuthal projections is that they preserve direction and distance between the centre point and any other point in the map (Figure 2.18). The shortest geographic distance between the centre point and any other point creates a line known as a **great circle**, which divides the Earth into two equal portions. So another benefit of an Azimuthal project is that great circles can be mapped as straight lines. Azimuthal projections are commonly used when distance and direction are important, such as weather RADAR stations or air traffic control towers. It is important to realize that the centre point for an azimuthal projection can be any point on Earth and the equidistant property can be exploited for a number of applications.
 
-```{r 2-Azimuthal-map, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("North Pole Azimuthal map projection with Tissot's Indicatrices in red. Pickell, CC-BY-SA-4.0.")
-    knitr::include_graphics(here::here("images", "02-Azimuthal-map.png"))
-```
-<br/>
+![Figure 2.18 North Pole Azimuthal map projection with Tissot's Indicatrices in red](images/02-Azimuthal-map.png){.center}
 
 ## Summary
 

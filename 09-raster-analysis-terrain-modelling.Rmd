@@ -438,9 +438,7 @@ $$
 SCA_M = SCA_{max} (\frac{1}{15})^{\beta exp(15^{\beta})}
 $$
 
-```{r Wetness, echo=FALSE, out.width = '75%', fig.cap="Figure 2: SAGA Wetness Index across the Chowade Watershed (Government of British Columbia, 2011b)"}
-knitr::include_graphics("images/09-SAGA-Wetness.png")
-```
+Both are functions of slope angle $\beta$, and $SCA_{max}$ is defined as drainage area per unit contour width ($m^2$*$m^{-1}$). SAGA Wetness across the study site is shown in Figure \@ref(fig:9-SAGA-Wetness).
 
 ```{r 9-SAGA-Wetness, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste("System for Automated Geoscientific Analyses (SAGA) Wetness Index across the Chowade Watershed. Data from Government of British Columbia 2011b. Melser, CC-BY-SA-4.0.")
@@ -464,8 +462,8 @@ DiagrammeR::grViz("digraph {
   height = 500)
 ```
 
-```{r MRVBF, echo=FALSE, out.width = '75%', fig.cap="Figure 4: Multi-resolution Valley Bottom Flatness (MRVBF) across the Chowade Watershed (Government of British Columbia, 2011b)"}
- 
+```{r 9-MRVBF, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste("Multi-resolution Valley Bottom Flatness (MRVBF) across the Chowade Watershed. Data from Government of British Columbia 2011b. Melser, CC-BY-SA-4.0.")
 knitr::include_graphics("images/09-MRVBF.png")
 ```
 

@@ -1,13 +1,3 @@
----
-editor_options:
-  markdown:
-    wrap: 72
-output:
-  word_document: default
-  html_document:
-    df_print: paged
----
-
 # Fundamentals of remote sensing {#fundamentals-of-remote-sensing}
 
 At some point in your life you may have wondered why the sky is blue.
@@ -25,17 +15,17 @@ questions.
 
 ::: {.box-content .learning-objectives-content}
 ::: {.box-title .learning-objectives-top}
-#### Learning Objectives {.unnumbered}
+#### Learning Objectives {-}
 :::
 
 1.  Understand key principles underpinning remote sensing science
-2.  Become familiar with specific types of energy used in RS
+2.  Become familiar with specific types of energy used in remote sensing
 3.  Define key interactions between energy and surface materials that
-    enable RS
-4.  Comprehend various considerations that effect the use of RS
+    enable remote sensing
+4.  Comprehend various considerations that effect the use of remote sensing
 :::
 
-### Key Terms {.unnumbered}
+### Key Terms {-}
 
 Electromagnetic, Energy, Photons, Pixel, Radiation, Resolution,
 Spectrum, Wavelength
@@ -46,10 +36,10 @@ Simply put, remote sensing is any method of gathering information about
 an object, or objects, without physical contact. Over the course of
 human history, a variety of remote sensing techniques have been used. In
 fact, one could argue that any organism capable of observing
-**electromagnetic** **radiation** has a built in optical remote sensing
+**electromagnetic radiation (EMR)** has a built in optical remote sensing
 system, such as human vision. Similar arguments could be made for other
 senses, such as smell or hearing, but this chapter will focus strictly
-on techniques that capture and record electromagnetic **radiation**.
+on techniques that capture and record electromagnetic radiation.
 
 One of the first recorded conceptualizations of remote sensing was
 presented by Plato in the Allegory of a Cave, where he philosophized
@@ -57,7 +47,7 @@ that the sense of sight is simply a contracted version of reality from
 which the observer can interpret facts presented through transient
 images created by light. Over the next few centuries a variety of
 photosensitive chemicals were discovered which enabled the transient
-images humans see to be recorded . This technology was called
+images humans see to be recorded. This technology was called
 photography (see [A History of
 Photography](https://www.scienceandmediamuseum.org.uk/objects-and-stories/history-photography)).
 The ability to record the interaction of light and specific objects
@@ -110,24 +100,24 @@ underpin remote sensing science.
 
 At it's core, remote sensing is simply the measurement of photons.
 Although simple, this description captures the essence of remote
-sensing's capacity to observe objects in our universe, from a single
-leaf to a distant sun. You see, if an object exists it has a
+sensing as the capacity to observe objects in our universe, from a single
+leaf to a distant star You see, if an object exists it has a
 temperature, and any object that has a temperature emits photons. The
 properties of those photons are determined by how hot the object is. To
 really understand remote sensing, then, we must first understand
-photons, or **electromagnetic radiation** (EMR).
+photons, or electromagnetic radiation.
 
 Essentially, photons are the smallest physical property in the
 electromagnetic field. Photons can be emitted from objects engaged in
 nuclear processes (such as the sun), objects excited thermally (like a
-light bulb) or objects that reflect or emit absorbed **radiation**. The
+light bulb) or objects that reflect or emit absorbed radiation. The
 interactions between emitted photons and other particles can be observed
 and used to evaluate the properties of the object. A fundamental
 component of a photon is it's **wavelength**, defined as the measured
 space between two consecutive peaks of a wave. The wavelength of a
 photon determines if and how it will interact with the particles around
 it, as well as defines the amount of **energy** it has. Measuring the
-differences in photon **energy** before and after interacting with
+differences in photon energy before and after interacting with
 another particle is the core of any remote sensing utilizing EMR.
 Equation \@ref(eq:energy-wvl) defines the relationship between a
 photon's energy and wavelength.
@@ -138,11 +128,11 @@ E = hc/λ
 (\#eq:energy-wvl)
 \end{equation}
 ```
-Where E is the **energy** of a photon, h is Planck's constant, c is the
-speed of light (c = 3 x10^8^ m/s) and λ is the wavelength of the
-**radiation**. This equation contains more variables, but incorporates
+Where E is the energy of a photon, h is Planck's constant, c is the
+speed of light (c = 3 x 10^8^ m·s^-1^) and λ is the wavelength of the
+radiation. This equation contains more variables, but incorporates
 wavelength and in doing so utilizes an easy to measure (hc always equals
-1240 eV/nm) and familiar photon property. Due to the large range of
+1240 eV·nm^-1^) and familiar photon property. Due to the large range of
 wavelengths that photons can exhibit it is necessary to use a specific
 style of writing to describe them, called scientific notation.
 
@@ -150,7 +140,7 @@ style of writing to describe them, called scientific notation.
 
 Now that you have an understanding of how the properties of photons can
 be measured and how to write them, we can begin to explore the
-electromagnetic **spectrum** (EMS). The EMS is the continuum along
+**electromagnetic spectrum (EMS)**. The EMS is the continuum along
 within photons are located based on their properties (Figure
 \@ref(fig:11-EMS)). We have discussed both wavelength and frequency,
 which are inversely related and commonly used to describe EMR. Figure
@@ -158,12 +148,12 @@ which are inversely related and commonly used to describe EMR. Figure
 demonstrates that as an object's temperature increases, the wavelength
 of the photons emitted decreases. This follows Equation
 \@ref(eq:energy-wvl), which demonstrates that photons with shorter
-wavelengths have higher **energy**. A practical example of this would be
+wavelengths have higher energy. A practical example of this would be
 that the majority of photons emitted from the sun (5,788 K) are around
 0.5 x 10^-6^ nm, while the majority of photons emitted from the human
 body (\~310 K) are around 10^-4^ nm. These measurements are theoretical
 and are calculated using theoretical object, often called a blackbody
-that allows all **energy** to enter (no reflectance, hence "black") and
+that allows all energy to enter (no reflectance, hence "black") and
 be absorbed (no transmission). The resulting EMR that is emitted would
 be generated thermally and be equal or greater than any other body at
 the same temperature. It is important to remember, however, that
@@ -177,12 +167,12 @@ temperature less than a theoretical blackbody.
 
 ::: {.box-content .call-out-content}
 ::: {.box-title .call-out-top}
-#### Call out {.unnumbered}
+#### Call out {-}
 :::
 
 <p>
 
-Visualizing the electromagnetic spectrum (EMS) in Figure 2 certainly
+Visualizing the electromagnetic spectrum (EMS) in Figure \@ref(fig:11-EMS) certainly
 enables a wonderful comprehension of many concepts relating to photons.
 Perhaps more astounding, however, is the truth of how the faculty of
 human vision has incorporated these properties. The portion of the EMS
@@ -219,6 +209,7 @@ in scientific notation, respectively.
 (\#eq:SI-small)
 \end{equation}
 ```
+
 It is common to use mathematical operators to add, subtract, divide or
 multiply large numbers written in scientific notation. Addition and
 subtraction require the number with the smallest exponent to be altered
@@ -248,9 +239,10 @@ exponents \@ref(eq:SI-divide).
 (\#eq:SI-divide)
 \end{equation}
 ```
+
 ### Radiation Types
 
-Since it is possible for photon **energy** to vary widely across the
+Since it is possible for photon energy to vary widely across the
 EMS, it can be useful to group photons based on their wavelength.
 Generally, there are seven accepted categories. it is important to note
 that these categories have gradual boundaries, rather than sharp
@@ -279,43 +271,43 @@ electromagnetic spectrum.
 With a solid grasp of why EMR is useful for remote sensing science and
 how EMR is categorized along the EMS, we can begin to apply this core
 knowledge with ideas and applications related to practical use. As with
-**radiation**, there are a number of key terms used to describe the
+radiation, there are a number of key terms used to describe the
 fundamental concepts that make remote sensing science possible. Some of
 the most common terms have been included below. They are organized into
-three categories: **Radiation** Basics, Foundations of Measurement and
+three categories: Radiation Basics, Foundations of Measurement and
 Methods of Normalization.
 
 ### **Radiation Basics**
 
-The use of **radiation** to quantify properties of an object is
+The use of radiation to quantify properties of an object is
 inherently linked with relatively complex theories of physics. To
 minimize both confusion and workload, we will highlight a select number
 of key concepts that support the use of the EMS for remote sensing. The
-first concepts to become familiar with are radiant **energy** and
+first concepts to become familiar with are radiant energy and
 radiant flux
 
-Radiant **energy** is essentially the **energy** carried by photons,
+Radiant energy is essentially the energy carried by photons,
 which is measured in Joules (J). Recall that the amount photon
-**energy** defines what wavelength (Equation \@ref(eq:energy-wvl).
+energy defines what wavelength (Equation \@ref(eq:energy-wvl).
 Radiant flux, which is interchangeable with radiant power, is the amount
-of radiant **energy** that is emitted, reflected, transmitted or
-absorbed by an object per unit time. Radiant flux considers **energy**
+of radiant energy that is emitted, reflected, transmitted or
+absorbed by an object per unit time. Radiant flux considers energy
 at all wavelengths and is often measured per second, making it's SI
-Watts (W), which is simply Joules per second (J/s) . Spectral flux is an
-associate of radiant flux and simply reports the amount of **energy**
-per wavelength (W/nm) or (W/Hz). Combined, these two terms allow us to
-describe the interaction with electromagnetic **radiation** and it's
-environment; radiant **energy** interacts with an object, which results
+Watts (W), which is simply Joules per second (J·s^-1^) . Spectral flux is an
+associate of radiant flux and simply reports the amount of energy
+per wavelength (W·nm^-1^) or (W·Hz^-1^). Combined, these two terms allow us to
+describe the interaction with electromagnetic radiation and it is
+environment; radiant energy interacts with an object, which results
 in radiant flux.
 
-Now that you are familiar radiant **energy** and flux, we can discuss
-irradiance. Irradiance refers to the amount of radiant **energy** that
+Now that you are familiar radiant energy and flux, we can discuss
+irradiance. Irradiance refers to the amount of radiant energy that
 contacts a 1 m^-2^ area each second (W · m^-2^). This includes all
-electromagnetic **energy** that contacts the 1 m^-2^ surface, which
-could be a combination of **radiation** from the sun, a halogen light
+electromagnetic energy that contacts the 1 m^-2^ surface, which
+could be a combination of radiation from the sun, a halogen light
 bulb overhead and your computer screen. Another important concept is
 solar irradiance, which strictly refers to the amount of solar
-**radiation** interacting with our 1 m^-2^ area. Solar irradiance is
+radiation interacting with our 1 m^-2^ area. Solar irradiance is
 very important in many remote sensing applications as it determines
 which photons an optical sensor *could* detect in naturally illuminated
 environments. An associate of irradiance is radiance, which refers the
@@ -323,55 +315,55 @@ the amount of radiant flux is a specific direction. The direction in
 question is often called the *solid angle* and makes radiance a
 directional quantity. You could imagine holding a DLSR camera 90 degrees
 above a flat leaf so that the only item visible to the shutter is the
-leaf. The camera would capture the radiance reflected from the leafs
+leaf. The camera would capture the radiance reflected from the leaf's
 surface and the solid angle would be 90 degrees. Essentially, irradiance
-is used to measure the radiant **energy** that contacts a 1 m^-2^ area,
+is used to measure the radiant energy that contacts a 1 m^-2^ area,
 while radiance measures the radiant flux of an object from a specific
 angle.
 
-Another key idea central to understanding **radiation** is the
+Another key idea central to understanding radiation is the
 theoretical blackbody. We discussed theoretical blackbodies in Section
 \@ref(electromagnetic-spectrum) and outlined that they are essentially
-an ideal body that perfectly absorbs all **energy** it interacts with.
+an ideal body that perfectly absorbs all energy it interacts with.
 Blackbodies can reach thermal equilibrium and therefore can emit thermal
-**energy** in amounts directly related to their temperature. These
+energy in amounts directly related to their temperature. These
 characteristics enable the estimation of spectral emission and can be
 used to determine the expected spectral emission of other objects.
 
 There are three important physical laws related to theoretical
 blackbodies. Plank's Law describes that an increase in a bodies
-temperature causes both an increase in the total **radiation** from the
+temperature causes both an increase in the total radiation from the
 body and shift in the peak of the emitted spectrum to shorter
 wavelengths. Wein's Law highlights the inverse relationship between
 temperature and wavelength and enables the estimation of the wavelength
 at which the peak of the emitted spectrum will occur. A third important
 law relevant to blackbodies is the Stefan-Boltzmann Law, which
 demonstrates that the temperature of a blackbody is four powers greater
-than the total **energy** it emits. Combined, these three laws
-demonstrate a fundamental concept of electromagnetic **radiation**: the
-temperature of a body determines how much **energy** is emitted and at
+than the total energy it emits. Combined, these three laws
+demonstrate a fundamental concept of electromagnetic radiation: the
+temperature of a body determines how much energy is emitted and at
 what wavelength the spectrum peak will occur.
 
-So far we have discussed radiant **energy** and flux as basic concepts
+So far we have discussed radiant energy and flux as basic concepts
 interacting with a single object (leaf) or 1 m^-2^ surface. In reality,
-radiant **energy** from the sun begins interacting with objects as soon
-as it enters earth's atmosphere. The process by which **radiation** is
+radiant energy from the sun begins interacting with objects as soon
+as it enters Earth's atmosphere. The process by which radiation is
 reflected by other particles is called scattering. Scattering occurs
 throughout the atmosphere and is generally separated into three
 categories: Rayleigh, Mie and non-selective.
 
 The three categories of atmospheric scattering are defined by the
-**energy**'s wavelength and the size of the interacting particle. When
-the wavelength of incoming **radiation** is larger than the particles
+energy's wavelength and the size of the interacting particle. When
+the wavelength of incoming radiation is larger than the particles
 (gases and water vapor) with which it interacts, Rayleigh scattering
 occurs. Phenomenon related to Rayleigh scattering include Earth's sky
 appearing blue (Figure \@ref(fig:11-scattering)). When the wavelength of
-incoming **radiation** is similar to that of the particles with which it
+incoming radiation is similar to that of the particles with which it
 interacts Mie scattering occurs. The size of particles generally
 considered to similar is between 0.1 - 10 times that of the wavelength
 (Figure \@ref(fig:11-scattering)). Smoke and dust are common causes of
 Mie scattering. A third type of scattering occurs when the particles
-involved are lager than the wavelength of the incoming **radiation**.
+involved are lager than the wavelength of the incoming radiation.
 This is called non-selective scattering and results in the uniform
 scattering of light regardless of the wavelength (Figure
 \@ref(fig:11-scattering)). Examples of non-selective scattering are
@@ -386,11 +378,11 @@ The combination of these three scattering types leads to drastic
 differences between the amount of solar irradiance at the top of the
 atmosphere and at sea level (Figure \@ref(fig:11-solar-radiation)).
 There are also a variety of wavelengths at which ozone, oxygen, water
-and carbon dioxide absorb incoming **radiation**, precluding entire
+and carbon dioxide absorb incoming radiation, precluding entire
 sections of the EMS from reaching the surface. Overall, only a small
-portion of **energy** emitted from the sun reaches the Earth's surface
+portion of energy emitted from the sun reaches the Earth's surface
 (\~1360 W · m^-2^), depending on the time of day and year. Most
-**energy** is absorbed or scattered by particles in the Earth's
+energy is absorbed or scattered by particles in the Earth's
 atmosphere.
 
 ```{r 11-solar-radiation, fig.cap = fig_cap, echo = FALSE}
@@ -430,14 +422,14 @@ regards to capturing reflected EMR.
 
 ### **Foundations of Measurement**
 
-Now that we have discussed radiant **energy** and the concepts
+Now that we have discussed radiant energy and the concepts
 underpinning its interactions with other objects, we can begin to
 explore the measurements that our sensors record. One of the most
 important concepts to understand is that of the spectral signature, or
 spectra. A spectral signature refers to the amount of electromagnetic
-**energy** recorded across a defined section of the EMS. A nice example
+energy recorded across a defined section of the EMS. A nice example
 of a spectral signature is Figure \@ref(fig:11-solar-radiation), which
-presents the sun's **radiation** between 250 - 2500 nm in the units of
+presents the sun's radiation between 250 - 2500 nm in the units of
 solar irradiance (W/m-2/nm). Similar graphs are common throughout remote
 sensing and can employ different units of measure.
 
@@ -454,7 +446,7 @@ values.
 
 There are two common reference measurements used to determine minimum
 and maximum radiance: dark and white reference. A dark reference is
-often taken by measuring the amount of **energy** recorded by a sensor
+often taken by measuring the amount of energy recorded by a sensor
 when the input device is ignored. In theory, this would be the internal
 darkness of the machine and is considered to be the minimum radiance
 value in practice. The maximum radiance value is slight more challenging
@@ -479,13 +471,13 @@ environmental properties, including land use change, plant health and
 plant diversity [@asner2011]. Another popular normalized measure of the
 interaction between photons and a surface is transmittance. A photon
 that is transmitted has passed through the surface with which it
-interacted and provides insight regarding how much **energy** can reach
+interacted and provides insight regarding how much energy can reach
 other surfaces below. In a forestry context, this information can be
-particularly useful when determining the amount of **radiation** that
+particularly useful when determining the amount of radiation that
 reaches below the upper canopy (cite LAI, etc.). Absorptance is a third,
-related measurement that refers to the amount of **energy** absorbed by
+related measurement that refers to the amount of energy absorbed by
 the cells within a surface and is roughly equal to the amount of
-**energy** not captured as reflectance or transmittance (Equation
+energy not captured as reflectance or transmittance (Equation
 \@ref(eq:absorptance)).
 
 ```{=tex}
@@ -494,6 +486,7 @@ Absorptance = 1 - Reflectance - Transmittance
 (\#eq:absorptance)
 \end{equation}
 ```
+
 Although relatively straight forward, these definitions allow us to
 start exploring a variety of remote sensing applications. In fact, most
 optical remote sensing techniques employ at least one of reflectance,
@@ -502,21 +495,6 @@ the next section, please review the work flow below highlighting what we
 have learned so far. In our next steps we will move from theory to
 application and begin to explore the factors that define the quality,
 and therefore capability, of remotely sensed data.
-
-::: {.box-content .your-turn-content}
-::: {.box-title .your-turn-top}
-#### Your turn! {.unnumbered}
-:::
-
-Calculate:
-
-1.  The number of zeros in 2.5 x 10-7
-
-2.  The **energy** (E) of a photon with a wavelength of 450 nm.
-
-3.  The absorptance value for a surface with a reflectance of 0.4 and a
-    transmittance of 0.35
-:::
 
 ## The Four Resolutions
 
@@ -540,7 +518,7 @@ digital element and basic unit of remotely sensed data. When multiple
 pixels are collected in adjacent areas, perhaps using an instrument with
 multiple sensors on it, the output is called an image. In short, an
 image is a collection of pixels, which represent mean values of
-reflected or transmitted **radiation** over some area. Spatial
+reflected or transmitted radiation over some area. Spatial
 resolution, then, is the ground area represented by a pixel.
 
 There are a variety of factors that affect spatial resolution, or the
@@ -611,14 +589,14 @@ definition. In scientific literature, it is not uncommon to find
 Each of these components plays a role is describing the spectral
 resolution of a pixel and enables users to identify appropriate sensors
 for their application. It is also important to consider the laws
-associated with the **energy** of EMR. Recall that shorter wavelengths
-have more **energy**, which makes it easier to detect. The implications
+associated with the energy of EMR. Recall that shorter wavelengths
+have more energy, which makes it easier to detect. The implications
 of this is that longer wavelengths require larger bandwidths for the
 sensor to observe them. An easy visualization of this concept involves
 selecting two wavelengths along the EMS. If we select the first
 wavelength at 0.4 nm and the second wavelength at 0.8 nm, we can use
 Equation \@ref(eq:energy-wvl) to demonstrate that the first wavelength
-has twice as much **energy** as the second. This is an important theory
+has twice as much energy as the second. This is an important theory
 to note as the consequences of a decrease in energy is a decrease in
 spatial resolution (a larger number of bands need to be combined to
 collect enough information).
@@ -661,27 +639,27 @@ of an object.
 ### Radiometric Resolution
 
 In short, radiometric resolution is the quantification of a sensors
-ability to detect differences in **energy**. Photons enter a sensor
-through a filter that only permits specific wavelengths.The **energy**
+ability to detect differences in energy. Photons enter a sensor
+through a filter that only permits specific wavelengths.The energy
 of the photon is recorded as a digital number (DN) and the digital
 number is assigned to a pixel.
 
 A simple visualization of radiometric resolution would be to think of
-three colors: red, green and blue (Figure Cambridge in color). A sensor
-detecting **energy** in the ranges of these three wavelengths would
+three colors: red, green and blue. A sensor
+detecting energy in the ranges of these three wavelengths would
 contain three separate detectors. Each detector is specialized to record
-**energy** in a single, unique range, say red (\~700 nm). The amount of
-**energy** that is recorded while observing an area is stored in a pixel
+energy in a single, unique range, say red (\~700 nm). The amount of
+energy that is recorded while observing an area is stored in a pixel
 as a DN, with the lowest DN number representing zero sensor detected
-**energy** in this wavelength range and the highest DN representing
-maximum sensor detected **energy**.
+energy in this wavelength range and the highest DN representing
+maximum sensor detected energy.
 
 The radiometric resolution of a detector, then, is the number of
 discernible values, or segments, present between zero and maximum DN
 values. These segments are usually referred to as bits and can be
 mathematically represented as an exponent of 2 (Equation
 \@ref(eq:bits)). The number of bits in that a detector can resolve may
-also be called the *color depth* of the image. Figure
+also be called the *colour depth* of the image. Figure
 \@ref(fig:11-radiometric) clearly presents the increase in detail
 provided by additional bits, but recall that increasing any resolution
 generally increases storage and processing time. As such, it is
@@ -722,7 +700,7 @@ run by the United States Geological Survey (USGS), is a suite of
 satellites designed specifically for this purpose. By the end of 2021, a
 total of nine Landsat missions will have been launched, eight of which
 have successfully reached orbit and provided imagery in at least 5 broad
-spectral bands at 30 m-2 spatial resolution. This information has been
+spectral bands at 30 m^2 spatial resolution. This information has been
 used to monitor of land cover change, ecosystem services and a variety
 of other environmentally relevant metrics [@deel2012]. The case study at
 the end of this section highlights a particularly novel approach to
@@ -747,14 +725,7 @@ components of the environment, such as forest canopies and elevation
 [@coops2007]. More details regarding the theories and applications of
 LIDAR will be presented in Chapter 15.
 
-::: {.box-content .case-study-content}
-::: {.box-title .case-study-top}
-#### Case Study {.unnumbered}
-:::
-
-#### Optical remote sensing to evaluate land cover in Canada {.unnumbered}
-
-<p>
+## Case Study: Optical remote sensing to evaluate land cover in Canada
 
 The capacity to evaluate change in an environment relies on the ability
 to capture information at useful resolutions. Land cover, which is
@@ -794,39 +765,32 @@ on a variety of criteria that quantifies a pixels quality (Figure
 \@ref(fig:11-hermo-false)). You can learn more about Landsat BAP in
 [@thompson2015].
 
-</p>
-
 ```{r 11-hermo-false, fig.cap = fig_cap, out.width="90%", echo = FALSE}
     fig_cap <- paste("False colour composite (bands: shortwave infrared, near infrared and red) for 2010. Each pixel in this image was selected based on its classification as a Best Available Pixel (BAP).")
     knitr::include_graphics(here::here("images", "11-hermosilla-false-colour.png"))
 ```
 
-<p>
-
-For their analysis, Hermosilla et al., 2018 use imagery captured from
-Landsat 4 onward with the Thematic Mapper, which means their data
-contains seven unique spectral bands spanning segments between 0.45 nm
+For their analysis, the authors [@hermosilla2018] used imagery captured from
+Landsat 5 onward with the Thematic Mapper, which means their data
+contained seven unique spectral bands spanning segments between 0.45 nm
 to 2.35 nm. The ability to observe reflectance values across a
 relatively wide range of the EMS enabled land cover analysis across all
 forested eco-regions in Canada. After applying a masking model, the
-authors were provided a framework to generate annual land cover maps for
+authors devised a framework to generate annual land cover maps for
 all of Canada's forested areas, which were presented at the beginning of
 this chapter (Figure \@ref(fig:11-hermosilla-canada-landcover)). From
 these annual composites, it was also possible for the authors to
-indentify land cover change over time and quantify the effects of
+identify land cover change over time and quantify the effects of
 specific disturbance types, such as harvesting and fire (Figure
 \@ref(fig:11-hermo-disturb)). These comprehensive maps demonstrate the
 capability of well-designed remote sensing technologies to obtain
 scientifically relevant information and highlight the potential of
 remote sensing in environmental assessment.
 
-</p>
-
 ```{r 11-hermo-disturb, fig.cap = fig_cap, out.width="90%", echo = FALSE}
     fig_cap <- paste("Temporal sequences depicting landcover before and after (a) harvesting and (b) fire. The year of change is represented by 'Y'. Adapted from Hermosilla et al., 2018.")
     knitr::include_graphics(here::here("images", "11-hermo-disturbance.png"))
 ```
-:::
 
 ## Summary
 

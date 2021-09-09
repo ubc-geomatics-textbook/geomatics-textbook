@@ -1,8 +1,4 @@
 ```{r, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-```{r, include=FALSE}
 library("dplyr")
 library("rgdal")
 library("leaflet")
@@ -39,9 +35,13 @@ Suppose you have collected some data about some trees. You might have organized 
 
 ## Relational databases
 
-Within a RDBMS, we find **relational databases**, which are highly structured tables comprised of rows and columns. In fact, a table in a relational database is called a **relation**, a row is a **tuple**, and a column is an **attribute**. Relational databases are a great way to store simple data structures that can be organized into a relation with tuples and attributes. When we say that a table or relation is "structured", we are referring to the fact that the data are organized according to a database **schema**, which is a set of constraints that ensure data integrity and consistency. For example, our set of trees likely all contain the same types of information and this can be easily organized into a relation. Suppose we measured the height, diameter at breast height (DBH), and species of each tree, then our relation would look like Figure 5.1.
+Within a RDBMS, we find **relational databases**, which are highly structured tables comprised of rows and columns. In fact, a table in a relational database is called a **relation**, a row is a **tuple**, and a column is an **attribute**. Relational databases are a great way to store simple data structures that can be organized into a relation with tuples and attributes. When we say that a table or relation is "structured", we are referring to the fact that the data are organized according to a database **schema**, which is a set of constraints that ensure data integrity and consistency. For example, our set of trees likely all contain the same types of information and this can be easily organized into a relation. Suppose we measured the height, diameter at breast height (DBH), and species of each tree, then our relation would look like Figure \@ref(fig:5-tabular-data-spatial-data).
 
-![Figure 5.1 Tabular and spatial data are related by a Relational Database Management System (RDBMS) in a Geographic Information System (GIS). Images of Douglas-Fir and Western Hemlock trees by Natural Resources Canada, Canadian Forest Service, modified with permission. ](images/05-01-tabular-data-spatial-data.png){.center}
+```{r 5-tabular-data-spatial-data, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+    fig_cap <- paste("Tabular and spatial data are related by a Relational Database Management System (RDBMS) in a Geographic Information System (GIS). Images of Douglas-Fir and Western Hemlock trees by Natural Resources Canada, Canadian Forest Service, modified with permission.")
+    knitr::include_graphics(here::here("images", "05-tabular-data-spatial-data.png"))
+```
+<br/>
 
 As you can see from the example above, there are two components to geospatial data: the tabular data containing tuples and attributes and the spatial data that contain the coordinate pairs for a projected or geographic coordinate system. This structure is known generically as the **georelational data model**. Many formats of geospatial data conform to the georelational data model, which stores a relation of tuples and attributes separately from another relation containing the geometry and coordinates. These two tables are then dynamically related to one another in a RDBMS using GIS software. You will almost never interact or see the relation that stores the geometry and coordinates of features contained in a relational database. Instead, the GIS software manages those files in the background for the purpose of displaying a set of features on a map, and you primarily interact with the tabular data stored in the relation of tuples and attributes.
 
@@ -49,7 +49,11 @@ The schema for the very simple example above would include the constraint and ex
 
 More formally, a relation $R$ is a _subset_ of two sets, $A$ (tuples) and $B$ (attributes). The product of these sets $A×B$ is called the **Cartesian product**. In the same way that Cartesian coordinates are ordered pairs of values from two axes, the Cartesian product of two sets gives us an ordered pair of elements $(a,b)$ from sets $A$ and $B$, where $a$ is an element in the set $A$, written as $a∈A$, and $b$ is an element of set $B$, written as $b∈B$. Therefore, $R$ is both the Cartesian product as well as any subset of $A×B$.
 
-![Figure 5.2 Cartesian product A×B of A (tuples) and B (attributes). Image by [Quartl](https://en.wikipedia.org/wiki/Cartesian_product#/media/File:Cartesian_Product_qtl1.svg), CC BY-SA 3.0.](images/05-02-cartesian-product.png){.center}
+```{r 5-cartesian-product, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+    fig_cap <- paste("Cartesian product A×B of A (tuples) and B (attributes). Image by [Quartl](https://en.wikipedia.org/wiki/Cartesian_product#/media/File:Cartesian_Product_qtl1.svg), CC BY-SA 3.0.")
+    knitr::include_graphics(here::here("images", "05-cartesian-product.png"))
+```
+<br/>
 
 There are some important rules to be followed for organizing data into a relation:
 
@@ -67,7 +71,7 @@ One of the fundamental jobs of a RDBMS is to apply relational algebra operations
 
 ### Selection
 
-**Selection** is the simplest operation to understand and is probably the most-used in day-to-day GIS work. It does exactly what it sounds like, it retrieves a subset of a relation given some predicate or condition. For example, we could select all tree IDs from our relation $R$ in Figure 5.1 that have a height greater than 20 m. This would yield tree ID=5. Formally, selection is expressed as $σ_{predicate}(R)$ and the example above would be written as $σ_{height>20}(R)$, which evaluates to the following:
+**Selection** is the simplest operation to understand and is probably the most-used in day-to-day GIS work. It does exactly what it sounds like, it retrieves a subset of a relation given some predicate or condition. For example, we could select all tree IDs from our relation $R$ in Figure \@ref(fig:5-tabular-data-spatial-data) that have a height greater than 20 m. This would yield tree ID=5. Formally, selection is expressed as $σ_{predicate}(R)$ and the example above would be written as $σ_{height>20}(R)$, which evaluates to the following:
 
 ```{r, echo=FALSE}
 ID <- 1:5
@@ -408,9 +412,13 @@ knitr::kable(
 )
 ```
 
-Figure 5.3 illustrates what is going on here, we are only returning the tuples that evaluate $true$ for both statements. Hence, Boolean $AND$ is equivalent to multiplying two Boolean truth values together. You should also recognize that a Boolean $AND$ is equivalent to what a set intersection $A∩B$ achieves between two relations.
+Figure \@ref(fig:5-boolean-and) illustrates what is going on here, we are only returning the tuples that evaluate $true$ for both statements. Hence, Boolean $AND$ is equivalent to multiplying two Boolean truth values together. You should also recognize that a Boolean $AND$ is equivalent to what a set intersection $A∩B$ achieves between two relations.
 
-![Figure 5.3 Boolean A AND B returns the area shaded blue.](images/05-03-boolean-and.png){.center}
+```{r 5-boolean-and, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+    fig_cap <- paste("Boolean A AND B returns the area shaded blue. Pickell, CC-BY-SA-4.0.")
+    knitr::include_graphics(here::here("images", "05-boolean-and.png"))
+```
+<br/>
 
 If we do not want to be so restrictive, we could use Boolean $OR$ such as $(height>15)OR(species=WesternHemlock)$, which evaluates to:
 
@@ -421,9 +429,13 @@ knitr::kable(
 )
 ```
 
-Figure 5.4 illustrates the case of the Boolean $OR$. As you can see, it returns everything where either of the statements evaluate to $true$, regardless if the other statement is $false$. You should also recognize that a Boolean $OR$ is equivalent to what a set union $A∪B$ achieves between two relations. 
+Figure \@ref(fig:5-boolean-or) illustrates the case of the Boolean $OR$. As you can see, it returns everything where either of the statements evaluate to $true$, regardless if the other statement is $false$. You should also recognize that a Boolean $OR$ is equivalent to what a set union $A∪B$ achieves between two relations. 
 
-![Figure 5.4 Boolean A OR B returns the area shaded blue.](images/05-04-boolean-or.png){.center}
+```{r 5-boolean-or, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+    fig_cap <- paste("Boolean A OR B returns the area shaded blue. Pickell, CC-BY-SA-4.0.")
+    knitr::include_graphics(here::here("images", "05-boolean-or.png"))
+```
+<br/>
 
 Suppose we want to identify all the trees that are greater than 15 m, but not Western Hemlock. In this case, we would use the expression $(height>15)NOT(species=WesternHemlock)$, which evaluates to:
 
@@ -434,9 +446,13 @@ knitr::kable(
 )
 ```
 
-Figure 5.5 illustrates how Boolean $NOT$ essentially negates or inverts the statement that follows. In this case, instead of returning the Western Hemlock tuples, $NOT(species=WesternHemlock)$ returns "everything except" Western Hemlock, which is also equivalent to $species≠WesternHemlock$.
+Figure \@ref(fig:5-boolean-not) illustrates how Boolean $NOT$ essentially negates or inverts the statement that follows. In this case, instead of returning the Western Hemlock tuples, $NOT(species=WesternHemlock)$ returns "everything except" Western Hemlock, which is also equivalent to $species≠WesternHemlock$.
 
-![Figure 5.5 Boolean $A NOT B$ returns the area shaded blue.](images/05-05-boolean-not.png){.center}
+```{r 5-boolean-not, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+    fig_cap <- paste("Boolean A NOT B returns the area shaded blue.. Pickell, CC-BY-SA-4.0.")
+    knitr::include_graphics(here::here("images", "05-boolean-not.png"))
+```
+<br/>
 
 Finally, the case of Boolean $XOR$ returns any tuples that are not $true$ for both statements, but are $true$ individually. This is known as the "e**X**clusive **OR**" because we are only returning the tuples that are exclusive based on both statements. For example, $(height>15)XOR(species=WesternHemlock)$ evaluates to:
 
@@ -447,9 +463,13 @@ knitr::kable(
 )
 ```
 
-Figure 5.6 illustrates how Boolean $XOR$ excludes all the tuples that evaluate to $true$ for both statements. In the example above, tuples ID=2 and ID=3 are excluded because both of the statements for height and species are $true$. 
+Figure \@ref(fig:5-boolean-xor) illustrates how Boolean $XOR$ excludes all the tuples that evaluate to $true$ for both statements. In the example above, tuples ID=2 and ID=3 are excluded because both of the statements for height and species are $true$. 
 
-![Figure 5.6 Boolean A XOR B returns the area shaded blue.](images/05-06-boolean-xor.png){.center}
+```{r 5-boolean-xor, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+    fig_cap <- paste("Boolean A XOR B returns the area shaded blue. Pickell, CC-BY-SA-4.0.")
+    knitr::include_graphics(here::here("images", "05-boolean-xor.png"))
+```
+<br/>
 
 ## Joining relations
 
@@ -538,9 +558,13 @@ knitr::kable(
 
 ### Cardinality of Joins
 
-Depending on the schema of the two relations being joined, the number of tuples joined from one relation to another can vary and is known as **cardinality**. In the simplest case, one tuple in $R$ is joined to one tuple in $S$, and this cardinality is known as **one-to-one** usually expressed as 1:1. The natural join example above, $R⋈S$, is an example of **one-to-many** (1:M) or **many-to-one** (M:1) cardinality because one species tuple found in $S$ corresponds to many species tuples in $R$. Finally, **many-to-many** (M:M) cardinality describes the case where there are multiple tuples in $R$ that correspond to multiple tuples in $S$. An example of a many-to-many relationship might be many species of trees in $R$ that correspond to many forest stands in $S$. In other words, a forest stand might be comprised of many species and any particular species might be found in many forest stands. Figure 5.7 illustrates how cardinality might emerge depending on the relational schema and problem at hand.
+Depending on the schema of the two relations being joined, the number of tuples joined from one relation to another can vary and is known as **cardinality**. In the simplest case, one tuple in $R$ is joined to one tuple in $S$, and this cardinality is known as **one-to-one** usually expressed as 1:1. The natural join example above, $R⋈S$, is an example of **one-to-many** (1:M) or **many-to-one** (M:1) cardinality because one species tuple found in $S$ corresponds to many species tuples in $R$. Finally, **many-to-many** (M:M) cardinality describes the case where there are multiple tuples in $R$ that correspond to multiple tuples in $S$. An example of a many-to-many relationship might be many species of trees in $R$ that correspond to many forest stands in $S$. In other words, a forest stand might be comprised of many species and any particular species might be found in many forest stands. Figure \@ref(fig:5-join-cardinality) illustrates how cardinality might emerge depending on the relational schema and problem at hand.
 
-![Figure 5.7 Cardinality of joins between relations R and S.](images/05-07-join-cardinality.png){.center}
+```{r 5-join-cardinality, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+    fig_cap <- paste("Cardinality of joins between relations R and S. Pickell, CC-BY-SA-4.0.")
+    knitr::include_graphics(here::here("images", "05-join-cardinality.png"))
+```
+<br/>
 
 ### Structured Query Language
 
@@ -606,13 +630,13 @@ knitr::kable(
 
 Your natural reaction to this problem might be to write a long SQL statement like `SELECT * FROM S WHERE code="BB" OR code="CW" OR code="FD" OR code="HW" OR code="YC";`. This is perfectly fine, but you can write this more economically with `IN` such as `SELECT * FROM S WHERE code IN("BB","CW","FD","HW","YC");`. Be aware that a common mistake is to write a long predicate using `OR` like `code="BB" OR "CW" OR "FD" OR "HW" OR "YC"`, but this is incorrect syntax in SQL. Remember that each side of an `OR` or `AND` operator is an _expression_ that evaluates to a Boolean truth value. So `code="BB" OR "CW"` will return an error because `"CW"` alone cannot be evaluated to a Boolean truth value.
 
-#### TITLE HERE {#box-text -}
+### Case Study: Combining Socioeconomic and Vegetation Information for Assessing Population Vulnerability
 
-#### Introduction {-}
+*Case Study Author: Taelynn Lam (CC BY 4.0. unless otherwise indicated), University of British Columbia, Master of Geomatics for Environmental Management graduate, 2021*
 
-Vegetation diversity in urban landscapes is important to support urban forest biodiversity and residents’ mental health. The aim of this case study is to link together socioeconomical data and vegetation information to identify areas to prioritize intervention in the City of Vancouver. [The Canadian Index of Multiple Deprivation (CIMD)](https://www150.statcan.gc.ca/n1/pub/45-20-0001/452000012019001-eng.htm) data has four dimensions of population vulnerability scores and we will aggregate these scores to obtain an overall vulnerability score for each dissemination area (DA) in Vancouver. We will compute the vegetation diversity score using [street trees data](https://opendata.vancouver.ca/explore/dataset/street-trees/) and vegetation type cover richness data^[Obtained from reclassifying [Land Cover Classification 2014 - 2m Raster](http://www.metrovancouver.org/data) to one vegetation class and five vegetation classes and counted the number of vegetation type cover classes using the `Zonal Histogram` Tool.] and then use query to identify priority areas.
+Vegetation diversity in urban landscapes is important to support urban forest biodiversity and residents’ mental health. The aim of this case study is to link together socioeconomic data and vegetation information to identify areas to prioritize intervention in the City of Vancouver. [The Canadian Index of Multiple Deprivation (CIMD)](https://www150.statcan.gc.ca/n1/pub/45-20-0001/452000012019001-eng.htm) data has four dimensions of population vulnerability scores and we will aggregate these scores to obtain an overall vulnerability score for each dissemination area (DA) in Vancouver. We will compute the vegetation diversity score using [street trees data](https://opendata.vancouver.ca/explore/dataset/street-trees/) and vegetation type cover richness data^[Obtained from reclassifying [Land Cover Classification 2014 - 2m Raster](http://www.metrovancouver.org/data) to one vegetation class and five vegetation classes and counted the number of vegetation type cover classes using the `Zonal Histogram` Tool.] and then use query to identify priority areas.
 
-#### Join {-}
+#### Join
 
 The raw CIMD tabular data includes the DA code and the corresponding vulnerability scores (table 1). In order to visualize these scores on a map, we will need to relate these scores to spatial data that include the information about the DA polygons and the coordinate pairs associated with each DA. Hence, a polygon shapefile of the DAs in Vancouver^[Extracted by clipping the [Canada-wide dissemination areas boundary](https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm) to the [City of Vancouver's municipality boundary](https://opendata.vancouver.ca/explore/dataset/city-boundary).] is obtained, and its attributes are shown in Table 2.
 
@@ -636,7 +660,7 @@ knitr::kable(
 )
 ```
 
-The tabular data of the CIMD scores are related to the DAs polygon by the DA code. The cardinality of the relationship between these two tables is one-to-one as each DA is described by one set of the CIMD scores. To join the CIMD scores to the Vancouver DA polygons, we would use the `PRCDDA` attribute in the CIMD table as the foreign key to perform a join on the `DAUID` attribute in the Vancouver DA polygon relation. Now that the CIMD scores are joined to the Vancouver DA polygon attribute table, we can create choropleth maps to display the vulnerability scores of the DAs (Figure 5.8).
+The tabular data of the CIMD scores are related to the DAs polygon by the DA code. The cardinality of the relationship between these two tables is one-to-one as each DA is described by one set of the CIMD scores. To join the CIMD scores to the Vancouver DA polygons, we would use the `PRCDDA` attribute in the CIMD table as the foreign key to perform a join on the `DAUID` attribute in the Vancouver DA polygon relation. Now that the CIMD scores are joined to the Vancouver DA polygon attribute table, we can create choropleth maps to display the vulnerability scores of the DAs (Figure \@ref(fig:5-situational-vulnerability-leaflet)).
 
 ```{r, include=FALSE}
 
@@ -678,11 +702,11 @@ m <- leaflet(DA_CIMD_proj) %>%
             position = "bottomleft")
 ```
 
-```{r, echo=FALSE, out.width = '100%', fig.align = 'center', fig.cap = 'Figure 5.8. An example of choropleth map displaying the situational vulnerability scores in the City of Vancouver at DA level. Higher score represents the DA has higher situational vulnerable population (e.g., population lacking a high school diploma, low-income population).'}
-
+```{r 5-situational-vulnerability-leaflet, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+fig_cap <- paste("An example of choropleth map displaying the situational vulnerability scores in the City of Vancouver at DA level. Higher score represents the DA has higher situational vulnerable population (e.g., population lacking a high school diploma, low-income population.")
 m
-
 ```
+<br/>
 
 #### Calculation
 
@@ -741,11 +765,13 @@ m1 <- leaflet(full.results_proj) %>%
             position = "bottomleft")
 ```
 
-Figure 5.9 shows a map of the vegetation diversity score at the DA level in Vancouver. The vegetation diversity score and the normalized aggregated vulnerability score are linked to each DA and can be viewed as you hover o-ver the DA.
+Figure \@ref(fig:5-vegetation-diversity-leaflet) shows a map of the vegetation diversity score at the DA level in Vancouver. The vegetation diversity score and the normalized aggregated vulnerability score are linked to each DA and can be viewed as you hover o-ver the DA.
 
-```{r, echo=FALSE, out.width = '100%', fig.align = 'center'}
+```{r 5-vegetation-diversity-leaflet, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+fig_cap <- paste("An example of choropleth map displaying vegetation diversity for each dissemination area in Vancouver. Lam, CC-BY-SA-4.0.")
 m1
 ```
+<br/>
 
 #### Query  
 

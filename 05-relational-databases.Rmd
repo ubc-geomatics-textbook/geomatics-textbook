@@ -344,14 +344,14 @@ You are probably already familiar with the basic equality operators used in Bool
 
 All of the equality operators above evaluate to logical $true$ or $false$ values. They are quite elementary, so we will not go into much detail except to show that these equality operators are the basis for forming more complex Boolean expressions. Basic arithmetic expressions can also be applied to Boolean truth values and it can be helpful to rewrite Boolean values with values of $1$ and $0$:
 
-$true+true=2$
-$true+false=1$
-$false+false=0$
-$true-true=0$
-$true÷false=undefined$
-$false÷true=0$
-$true×true=1=true$
-$5×false=0=false$
+- $true+true=2$
+- $true+false=1$
+- $false+false=0$
+- $true-true=0$
+- $true÷false=undefined$
+- $false÷true=0$
+- $true×true=1=true$
+- $5×false=0=false$
 
 Multiplication of Boolean values is a special case where the expression will always result in a Boolean value. That is, multiplying any combination of $1$ and $0$ will always return $1$ or $0$. In other words, the domain of the input $[0,1]$ is equivalent to the domain of the output $[0,1]$, which is a property that is frequently exploited in GIS in order to concatenate more complex expressions. For example, the statement $true×(1+2=3)×(4>3)$ can be rewritten as $1×1×1$ and evaluates to $true$, while $true×(1+2=3)×(4<3)$ can be rewritten as $1×1×0$ and evaluates to $false$. 
 

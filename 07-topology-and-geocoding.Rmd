@@ -1,7 +1,173 @@
----
-editor_options:
-  markdown:
-    wrap: 72
----
-
 # Topology and Geocoding {#topology-and-geocoding}
+
+Frequently, we need spatial data to behave and relate and in specific and predictable ways. Many types of analyses may expect spatial data to be represented and interact in a standard form. In this chapter, we will extend our knowledge of data models using topology, which unlocks many advanced spatial analyses. We will look at a specific example of an analysis that requires topology, geocoding, which will be a convenient segue into network analysis discussed in the following chapter.
+
+:::: {.box-content .learning-objectives-content}
+
+::: {.box-title .learning-objectives-top}
+#### Learning Objectives {-}
+::: 
+
+1. Understand the role of topology in governing data behaviour
+2. Recognize some examples and uses of 2D topologies
+3. Practice solving topological errors
+4. Identify spatial data models that support topology
+5. Understand the process of geocoding
+6. Practice geocoding addresses and reverse geocoding addresses to other coordinate systems
+7. Analyze attributes of census data
+
+::::
+
+### Key Terms {-}
+
+Vertex, Node, Pseudonode, Dangle, Planar Topology, Non-Planar Topology, Geocoding, Adjacency, Overlap, Connect, Inside, Reverse Geocoding
+
+## Topology
+
+**Topology** describes the relationships of spatial data. This is a very broad definition that encompasses the wide range of possible arrangements of spatial data in practice. If we drill down into this concept, topology is really what allows us undertake specific types of analysis that requires or expects spatial data to behave in a certain way. If you think about the feature geometries that we have at our disposal, then there are no fewer than nine combinations of how these geometries can interact as illustrated in Figure 7.X below.
+
+[Chart showing combinations of point, line, and polygon geometries.]
+```{r 7-geometry-combinations, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste("Caption here. Author, CC-BY-SA-4.0.")
+knitr::include_graphics("images/07-geometry-combinations.png")
+```
+
+It is important to recognize that there may be cases where we "expect" that a given combination of features will conform to a specific interaction. For example, the provinces and territories of Canada are typically represented as polygons that share adjacent boundaries. That is, the adjacent boundaries shared between any two provinces or territories cannot logically overlap as this representation (model) would contravene the legal definitions of the provinces and territories. In another case, a human technician may erroneously digitize a road that crosses another road without indicating that the two roads share an intersection, which could have consequences for how traffic flow can be modeled between the two roads. These are both examples of situations where topology is needed. Topology applies logic to define how features are expected to relate to other features in order to conform to knowledge systems like legal definitions of land and traffic flow. In short, topology ensures data integrity for other types of analysis.
+
+## Planar vs. non-planar topology
+
+In the context of topology, **planar** refers to the concept that all vertices of feature vector geometry are mapped onto the same plane. So in a planar world-view, all lines and polygons share coincident vertices. For example, if two polygons overlap, then the overlapping area forms a new polygon with a boundary of vertices defined by the union of the two other polygons. Also, if two lines overlap, then the two lines are divided into four new segments and a new vertex is formed at the intersection. In other words, planar topology does not allow polygons or lines to lay "underneath" or "on top" of another line or polygon and feature geometries must always be distinct.
+
+On the other hand, **non-planar** topology is the concept that vertices of feature vector geometry can be mapped to different planes. It is important to emphasize here that when we are talking about planes that we are not referring to projected coordinate systems. It is generally assumed that any two spatial data layers containing feature geometries are interacting within the same projected coordinate system. Non-planar topology allows for other knowledge systems to be represented in spatial data. The case where a pipeline runs underneath a river or a territory that was traditionally used by several Indigenous peoples (e.g., [native-land.ca](https://native-land.ca/)) are examples of valid non-planar topology.
+
+## Implementing planar topology
+
+Implementing planar topology involves defining specific rules for how features should relate to one another given some analytical context. This process also requires that the spatial data are housed a relational database or data model that supports topology. In other words, topology is enforced only by data models that support topological rules. When a topological rule is violated, the relational database identifies the contravening features and displays them on the map and in the attribute table. Then, it is up to an expert GIS technician to decide how the error should be corrected. For example, some errors like intersecting lines can automatically be split at the intersection while overlapping polygons might need to be manually edited to reflect the correct adjacency. Thus, the process of applying topology is first to work within a data model that supports topology, then choose the topological rules that reinforce a particular knowledge system, and finally to inspect and decide how to deal with any contraventions. Since planar topology is only supported by certain data models, and some data models are proprietary to certain software, the exact topological rules that can be implemented in a GIS are mostly dependent on the software that you are using. Instead of examining a specific GIS software package, we will discuss the "fundamental" planar topological relationships that are common across nearly all implementations of topology. (If you want to know more about how topology is implemented within specific data model, skip ahead to the "Data models supporting planar topology" section.)
+
+So far, we have seen that there are nine ways to combine feature geometries (points, lines, and polygons). We can extend this understanding to include at least six different ways that they can relate to one another: adjacent; overlap; intersect; connect; cover; and inside. Some of these relationships can be modeled *between* two different spatial layers (e.g., two point layers) or *within* a single spatial layer. In the following sections, we will look at different planar topological rules that apply both between and within feature geometries.
+
+### Adjacency and overlap
+
+There are times when we need to ensure that two polygons are **adjacent** to one another by sharing a common edge. If two polygons are not adjacent to one another, then a gap, known as a **sliver**, exists between them or they must **overlap**. Consider the case where we are mapping land covers. If we have a formal scheme that describes all possible land covers, then we expect that a map of land covers will have perfect adjacency between all polygons so that there are no areas that are not mapped (i.e., slivers) and that no area has multiple, overlapping land covers. Since lines are also 2-dimensional, lines can overlap other lines. Depending on the context, a topological rule may be needed to promote or prevent this relationship. For example, if you are modeling bus routes, then one road might support several different routes.
+
+Some examples of adjacency and overlap topological rules:
+- Polygons within the same layer must not have gaps
+- Polygons within the same layer must not overlap
+- Polygons must not overlap other polygons
+- Lines must not overlap other lines
+- Lines must not self-overlap
+
+### Intersect and connect
+
+As we have seen from Chapter 3, lines are often used to represent phenomena that flow, so intersection and connection are important concepts for these representations. Important to understanding how connection and intersection work in planar topology, we need to understand that lines are comprised of a set of vertices and nodes. A **node** is simply the terminating vertex in a set of vertices for a line. For example, suppose the line segment $A$ has a set of vertices, $[[1,0],[1,3],[1,5]]$. Then the nodes for $A$ are $[1,0]$ and $[1,5]$. Since nodes define the end points of a line segment, they are key to enforcing connection rules. We will look at network analysis in more detail in the next chapter. For now, let us consider two different networks that can help us conceptualize some fundamental line topology using nodes.
+
+[plot showing line segment A]
+```{r 7-, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste("Caption here. Author, CC-BY-SA-4.0.")
+knitr::include_graphics("images/07-.png")
+```
+
+A network of streams and rivers is based on the hydrological knowledge system that explains how water moves over a terrain surface. In both theory and practice, we know that water flows from higher elevations to lower elevations with limited expections. Thus, we expect that streams will connect with other streams and continue to flow towards some outlet such as an ocean. **Connection** refers to the fact that the endpoint node of one stream will fall somewhere on another stream segment. Where two line segments come together, it is possible for one segment $A$ to "undershoot" the other segment $B$, resulting in the end node of segment $A$ appropriately named a **dangle** and a loss of connection. As well, **pseudonodes** can occur when a node does not actually terminate a line segment at a junction, for example, between two streams or roads.
+
+[image showing pseudonode, connection, dangle]
+```{r 7-, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste("Caption here. Author, CC-BY-SA-4.0.")
+knitr::include_graphics("images/07-.png")
+```
+
+Dangles are the opposite case to **intersections**, which occur when two line segments cross each other. With planar topology, intersections must be modeled with a shared node representing the intersection location. For example, suppose line segment $B$ has a set of vertices, $[[0,1],[2,1],[4,1]]$. If line segments $A$ (defined above) and $B$ are mapped together, then they will intersect at $[1,1]$, which is not a vertex represented in either segment. Thus, the intersection of $A$ and $B$ with planar topology would yield four new segments: $C=[[1,0],[1,1]]$, $D=[[0,1],[1,1]]$, $E=[[1,1],[1,3],[1,5]]$, and $E=[[1,1],[2,1],[4,1]]$. Figure \@ref(fig:7-intersection) illustrates how all four of these new segments share the same node $[1,1]$ at the intersection of $A$ and $B$.
+
+[plot showing A and B crossing and the resulting intersection described above]
+```{r 7-, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste("Caption here. Author, CC-BY-SA-4.0.")
+knitr::include_graphics("images/07-.png")
+```
+
+Some examples of intersection and connection topological rules:
+- Lines must not intersect other lines
+- Lines must intersect other lines
+- Lines must not self-intersect
+- Lines within a same layer must not self-intersect
+- Lines must not have dangles
+
+### Coincident and Disjoint
+
+Point features can be either **coincident** or **disjoint** with other point features. Point features that need to be disjoint may be representing trees, mountain peaks, or any similar type of feature that would be expected to be discrete in geographic space. There are also instances where we might need one set of point features to be coincident with another such as oil and gas well sites such as where oil and gas well sites 
+
+Some examples of coincident and disjoint topological rules:
+- Points must be disjoint with other points
+- Points must by coincident with other points
+
+### Cover
+
+**Cover** refers to planar topology where a feature lays on or within another feature. For example, dams represented as point features must be covered by a line representing a river. As well, property parcels must be covered by the municipal or regional tax authority. Lines representing rivers must be covered by watersheds.
+
+Some examples of cover topological rules:
+- Point must be covered by a line
+- Point must be covered by a polygon
+- Line must be covered by a polygon
+
+### Multipart geometrics
+
+### Multipatch features
+
+### Convex hull
+
+### Delauney triangles
+
+### Duplicates
+
+### Gaps and slivers
+
+### Data models supporting planar topology
+
+## Geocoding
+
+**Geocoding** is the process of converting addresses to geographic coordinates, while **reverse geocoding** is the process of converting geographic coordinates to addresses. In order to achieve this conversion, an **address locator** uses reference spatial data that are mapped to a geographic or projected coordinate system in order to locate new addresses or coordinates. Usually, an address locator relies on several pieces of reference spatial data such as maps of road networks, postal codes, cities, provinces or states, and countries. If you  It is important that the city, province, and country are mapped and specified because road names frequently repeat in different cities (e.g., Main Street). If you are aiming to geocode addresses in a single city, then it is feasible to manually specify your own address locator using available data such as roads, parcels, neighborhoods, and postal codes. However, for geocoding across large areas, this may not be feasible and you should instead rely on geocoding services that use large databases of reference spatial data.
+
+### Street addresses
+
+left/right side of street
+
+### Postal codes
+
+Standards for postal codes vary from country to country. In Canada, postal codes are six characters and alphanumeric. For example, the postal code for the University of British Columbia is V6T 1Z4. Whenever you are geocoding, you need to ensure that you are paying special attention to formatting, especially for Canadian postal codes, which are sometimes separated by a spacing character like V6T 1Z4 or no spacing character like V6T1Z4. Postal codes can be useful to include into an address locator because they are always unique, unlike placenames or street addresses. However, postal codes usually cover large areas, so they must be used in concert with more specific, local information when geocoding.
+
+### Geocoding services
+
+matching
+
+
+## Case study: Working with Canadian census data
+
+[Download 2016 Census Profile data](https://www12.statcan.gc.ca/census-recensement/2016/dp-pd/prof/details/download-telecharger/comp/page_dl-tc.cfm?Lang=E)
+
+[Download 2016 Census Boundaries](https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm)
+
+## Summary
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
+
+### Reflection Questions {-}
+
+1. Give some examples of situations where you might use planar and non-planar
+2. Define ipsum lorem. 
+3. What is the role of ispum lorem?
+4. How does ipsum lorem work?
+
+### Practice Questions {-}
+
+1. Draw a convex hull for the points below.
+2. Given ipsum, solve for lorem.
+3. Draw ipsum lorem.
+
+## Recommended Readings {-}
+
+Ensure all inline citations are properly referenced here.
+
+```{r include=FALSE}
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'htmlwidgets', 'webshot', 'DT',
+  'miniUI', 'tufte', 'servr', 'citr', 'rticles'
+), 'packages.bib')
+```

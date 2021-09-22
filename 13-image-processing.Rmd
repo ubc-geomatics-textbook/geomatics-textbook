@@ -85,7 +85,7 @@ accurate collection of information. It is these confounding factors that
 image processing attempts to resolve in hopes of generating a data
 product that can be compared across space and time.
 
-## Geometric correction
+## Geometric Correction
 
 By definition, remotely sensed data is collected by a sensor at some
 distance apart from the object(s) being observed. The design of a sensor
@@ -149,7 +149,7 @@ camera is constant, the effect of the undulating terrain is to zoom in
 and out. The effect of continuously-varying scale is to distort the
 geometry of the aerial photo. This effect is called relief displacement.
 
-### **Relief displacement**
+### **Relief Displacement**
 
 An important component of geometric correction deals with the effects of
 elevation on the pixels in an image. Changes in the terrain over which
@@ -260,7 +260,7 @@ a variety of process that can be used to assign cell values to the empty
 raster and we will discuss three in hopes of clarifying this
 methodology.
 
-**Nearest neighbor**
+**Nearest Neighbor**
 
 Nearest neighbor (NN) is the most simple method of resampling as it
 looks only at one pixel from the transformed raster. This pixel is
@@ -271,7 +271,7 @@ data, like land cover or aspect, but struggles to capture transitions
 between cells and can result in output rasters that appear somewhat
 crude and blockish.
 
-**Bilinear interpolation**
+**Bilinear Interpolation**
 
 In contrast to NN resampling, bilinear interpolation (BI) uses the
 values of multiple neighboring cells in the transformed raster to
@@ -285,7 +285,7 @@ the input values, but remains within their range. These features make BI
 ideal for datasets with continuous variables, like elevation, rather
 than categorical ones.
 
-**Cubic convolution**
+**Cubic Convolution**
 
 Similar to bilinear interpolation, cubic convolution (CC) uses multiple
 cells in the transformed raster to generate the output for a single cell
@@ -303,7 +303,7 @@ the range of the 16 input cell values.
     knitr::include_graphics(here::here("images", "13-cubic_convolution.png"))
 ```
 
-## Atmospheric correction
+## Atmospheric Correction
 
 Following similar logic to that promoting the need for geometric
 correction, atmospheric correction is intended to minimize discrepancies
@@ -315,7 +315,7 @@ wavelengths being collected. The majority of impacts are caused by the
 three main types of scattering, which were presented in Chapter
 \@ref(fundamentals-of-remote-sensing).
 
-### **Atmospheric windows**
+### **Atmospheric Windows**
 
 A key characteristic of the earth's atmosphere that impacts the
 collection of passive remotely sensed data is the impediment of certain
@@ -328,7 +328,7 @@ observation of these regions that remote sensing relies on. Upon
 reaching the Earth's surface, however, there are a variety of
 atmospheric constituents that can affect image quality.
 
-### **Clouds and shadows**
+### **Clouds and Shadows**
 
 Two of the most common culprits in the disturbance of remotely sensed
 imagery are clouds and shadows. Both are relatively transient, making
@@ -401,7 +401,7 @@ affect incoming solar radiation. Successful removal, then, depends on
 understanding which spectral bands relatively uneffected by the
 particular type of scattering occurring within the image.
 
-## Radiometric correction
+## Radiometric Correction
 
 We have discussed how the creation of an image by a remote sensor leads
 to slight variations in spatial and atmospheric properties between
@@ -434,7 +434,7 @@ improved SNR. What remains unclear, however, is what causes a sensor to
 observe and record undesired noise to be recorded. In reality, there are
 a variety of noise types that can affect the SNR of a sensor.
 
-**Readout noise**
+**Readout Noise**
 
 Readout noise is created through the inconsistencies relating to the
 interaction of multiple physical measurement electronic devices. Since
@@ -448,7 +448,7 @@ learning more about readout noise, check out this
 [webpage](http://spiff.rit.edu/classes/phys445/lectures/readout/readout.html "Readout Noise by Michael Richmond")
 created by Michael Richmond.
 
-**Thermal noise**
+**Thermal Noise**
 
 Another inherent type of sensor noise is thermal noise. Thermal noise
 occurs in any device using electricity and is caused by the vibrations
@@ -554,7 +554,7 @@ you consider in your work.
 </p>
 :::
 
-## Image enhancement
+## Image Enhancement
 
 So far, in this Chapter, we have discussed methods of correcting
 spatial, atmospheric and radiometric errors that are commonly present in

@@ -29,11 +29,11 @@ You have almost certainly used a relational database in some form during your li
 
 Relational Database Management Systems, Tables, Relations, Rows, Tuples, Records, Columns, Attributes, Items, Structured Query Language, Boolean Logic, Relational Algebra, Entity-Relationship Model, Cartesian Product, Schema, Unary, Binary, Georelational Data Model, Domain
 
-## Relational database management systems
+## Relational Database Management Systems
 
 Suppose you have collected some data about some trees. You might have organized these data into a table, where each row represents a different plot, and each column represents some quantitative or qualitative measure about each record. How do you *manage* these data in order to extract useful information from your trees? This is where Relational Database Management Systems can help. A **Relational Database Management System (RDBMS)** is a software that allows the user to interact with tabular data. The basic services provided by a RDBMS include storing, querying, and manipulating relational databases. We say the databases are *relational* because they are based on a relational model first developed by Edgar Codd in the 1970s at IBM. The relational model for database management is distinguished from non-relational models by the fact that data are stored in highly structured tables instead of some other format like documents. This distinction is important, because the vast majority of GIS software utilize the relational model for database management.
 
-## Relational databases
+## Relational Databases
 
 Within a RDBMS, we find **relational databases**, which are highly structured tables comprised of rows and columns. In fact, a table in a relational database is called a **relation**, a row is a **tuple**, and a column is an **attribute**. Relational databases are a great way to store simple data structures that can be organized into a relation with tuples and attributes. When we say that a table or relation is "structured", we are referring to the fact that the data are organized according to a database **schema**, which is a set of constraints that ensure data integrity and consistency. For example, our set of trees likely all contain the same types of information and this can be easily organized into a relation. Suppose we measured the height, diameter at breast height (DBH), and species of each tree, then our relation would look like Figure \@ref(fig:5-tabular-data-spatial-data).
 
@@ -65,7 +65,7 @@ There are some important rules to be followed for organizing data into a relatio
 
 If any of the above rules are broken, then $R≠A×B$ and you are just looking at a plain-old table instead of a relation. In fact, Codd described a total of 13 rules for a RDBMS, but since this chapter is only a cursory introduction of RDBMS for GIS, you only need to be familiar with the five rules above. In this way, relational databases are comprised of relations that are highly structured by a schema, which allows the user to query, retrieve, update, and delete data using a RDBMS. At this point, you should understand that relational databases are highly structured so that we can apply logical expressions and languages to interact with the information contained within and between the relations. In the next two sections, we will look at how to apply two branches of mathematical logic to relations in order to extract useful information.
 
-## Relational algebra
+## Relational Algebra
 
 One of the fundamental jobs of a RDBMS is to apply relational algebra operations to relations stored in a relational database. Remember that we defined a relation as $R=A×B$ and that any subset of $A×B$ is also a relation. This transitive property of relations combined with the fact that relations are just sets allows us to apply set algebra. In other words, relational algebra operations take one relation as input and produce a new relation as an output without modifying the input relation. This new output relation can then be used as an input to another operation because it is also a relation.
 
@@ -328,11 +328,11 @@ knitr::kable(
 
 We have now considered the eight primary relational algebra operators (selection, projection, rename, set union, set intersection, set difference, Cartesian product, and set division) that can be applied to relations in a RDBMS. In the next section, we will look at another set of logical operators known as Boolean algebra, which give rise to logical languages for interacting with a RDBMS.
 
-## Boolean algebra
+## Boolean Algebra
 
 Whenever we create and solve an arithmetic or relational algebra expression, we usually focus on the _value_ of the output. In other words, $1+1$ evaluates to a value of $2$. But we often need to evaluate the _truth_ of a statement. For example, $1+1=2$ is a $true$ statement and $1+1=1$ is a $false$ statement. **Boolean algebra** seeks to express mathematical expressions in terms of _truth values_. Boolean truth values are usually expressed as $true$ or $false$, but it is also common in computer programming languages and GIS to see these encoded with values of $1$ for $true$ and $0$ for $false$. Attributes can also take on Boolean values of $true$ or $false$ as a data type. Boolean algebra uses equality and conditional operators, which we will consider next.
 
-### Equality operators
+### Equality Operators
 
 You are probably already familiar with the basic equality operators used in Boolean algebra:
 - $=$ "exactly equal to" (usually expressed with $==$)
@@ -399,7 +399,7 @@ knitr::kable(
 )
 ```
 
-### Conditional operators
+### Conditional Operators
 
 Now that we have a good understanding of equivalency operators, let us turn to consider conditional operators, which are also known as Boolean operators. Boolean operators are, in some ways, similar to some arithmetic operators except that they are based on natural language. There are three primary Boolean operators: $AND$, $OR$, $XOR$, and $NOT$. These operators are commonly used for database queries and with search engines, and indeed they form an important basis for query languages that are used to interact with an RDBMS. 
 
@@ -471,7 +471,7 @@ Figure \@ref(fig:5-boolean-xor) illustrates how Boolean $XOR$ excludes all the t
 ```
 <br/>
 
-## Joining relations
+## Joining Relations
 
 More often than not, information is stored in separate relations, even if that information is about the same features like lakes, forests, or cities. Remember that a relation cannot have any duplicate tuples. This rule encourages the efficient storage and retrieval of information because information can be dynamically related as needed. For example, consider the overwhelming amount of information that is collected during a census. During the last census in 2016, there were over 14 million households in Canada. Can you imagine wielding a relation with 14 million tuples? These households can be segmented geographically by province, metropolitan areas, municipalities, and census subdivisions as well as by socioeconomic themes such as Indigenous peoples, age, sex, education, income, labour, housing, language, and others. Thus, those 14 million households can be divided up into many smaller relations, which can be accessed and summarized geographically and thematically. Since these relations represent different geographies or themes on the same set (i.e., households), we need to be more specific about how exactly two relations get combined if, for example, we want to combine themes with geographies. For this reason, we have joins. 
 
@@ -795,7 +795,7 @@ knitr::kable(
 :::: {.box-content .call-out-content}
 
 ::: {.box-title .call-out-top}
-#### Remember this? {-}
+#### Remember This? {-}
 :::
 
 <p id="box-text">Models are abstractions of reality and help us understand and communicate complex ideas.</p>

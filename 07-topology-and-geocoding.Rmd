@@ -34,19 +34,19 @@ knitr::include_graphics("images/07-geometry-combinations.png")
 
 It is important to recognize that there may be cases where we "expect" that a given combination of features will conform to a specific interaction. For example, the provinces and territories of Canada are typically represented as polygons that share adjacent boundaries. That is, the adjacent boundaries shared between any two provinces or territories cannot logically overlap as this representation (model) would contravene the legal definitions of the provinces and territories. In another case, a human technician may erroneously digitize a road that crosses another road without indicating that the two roads share an intersection, which could have consequences for how traffic flow can be modeled between the two roads. These are both examples of situations where topology is needed. Topology applies logic to define how features are expected to relate to other features in order to conform to knowledge systems like legal definitions of land and traffic flow. In short, topology ensures data integrity for other types of analysis.
 
-## Planar vs. non-planar topology
+## Planar vs. Non-Planar Topology
 
 In the context of topology, **planar** refers to the concept that all vertices of feature vector geometry are mapped onto the same plane. So in a planar world-view, all lines and polygons share coincident vertices. For example, if two polygons overlap, then the overlapping area forms a new polygon with a boundary of vertices defined by the union of the two other polygons. Also, if two lines overlap, then the two lines are divided into four new segments and a new vertex is formed at the intersection. In other words, planar topology does not allow polygons or lines to lay "underneath" or "on top" of another line or polygon and feature geometries must always be distinct.
 
 On the other hand, **non-planar** topology is the concept that vertices of feature vector geometry can be mapped to different planes. It is important to emphasize here that when we are talking about planes that we are not referring to projected coordinate systems. It is generally assumed that any two spatial data layers containing feature geometries are interacting within the same projected coordinate system. Non-planar topology allows for other knowledge systems to be represented in spatial data. The case where a pipeline runs underneath a river or a territory that was traditionally used by several Indigenous peoples (e.g., [native-land.ca](https://native-land.ca/)) are examples of valid non-planar topology.
 
-## Implementing planar topology
+## Implementing Planar Topology
 
 Implementing planar topology involves defining specific rules for how features should relate to one another given some analytical context. This process also requires that the spatial data are housed a relational database or data model that supports topology. In other words, topology is enforced only by data models that support topological rules. When a topological rule is violated, the relational database identifies the contravening features and displays them on the map and in the attribute table. Then, it is up to an expert GIS technician to decide how the error should be corrected. For example, some errors like intersecting lines can automatically be split at the intersection while overlapping polygons might need to be manually edited to reflect the correct adjacency. Thus, the process of applying topology is first to work within a data model that supports topology, then choose the topological rules that reinforce a particular knowledge system, and finally to inspect and decide how to deal with any contraventions. Since planar topology is only supported by certain data models, and some data models are proprietary to certain software, the exact topological rules that can be implemented in a GIS are mostly dependent on the software that you are using. Instead of examining a specific GIS software package, we will discuss the "fundamental" planar topological relationships that are common across nearly all implementations of topology. (If you want to know more about how topology is implemented within specific data model, skip ahead to the "Data models supporting planar topology" section.)
 
 So far, we have seen that there are nine ways to combine feature geometries (points, lines, and polygons). We can extend this understanding to include at least six different ways that they can relate to one another: adjacent; overlap; intersect; connect; cover; and inside. Some of these relationships can be modeled *between* two different spatial layers (e.g., two point layers) or *within* a single spatial layer. In the following sections, we will look at different planar topological rules that apply both between and within feature geometries.
 
-### Adjacency and overlap
+### Adjacency and Overlap
 
 There are times when we need to ensure that two polygons are **adjacent** to one another by sharing a common edge. If two polygons are not adjacent to one another, then a gap, known as a **sliver**, exists between them or they must **overlap**. Consider the case where we are mapping land covers. If we have a formal scheme that describes all possible land covers, then we expect that a map of land covers will have perfect adjacency between all polygons so that there are no areas that are not mapped (i.e., slivers) and that no area has multiple, overlapping land covers. Since lines are also 2-dimensional, lines can overlap other lines. Depending on the context, a topological rule may be needed to promote or prevent this relationship. For example, if you are modeling bus routes, then one road might support several different routes.
 
@@ -57,7 +57,7 @@ Some examples of adjacency and overlap topological rules:
 - Lines must not overlap other lines
 - Lines must not self-overlap
 
-### Intersect and connect
+### Intersect and Connect
 
 As we have seen from Chapter 3, lines are often used to represent phenomena that flow, so intersection and connection are important concepts for these representations. Important to understanding how connection and intersection work in planar topology, we need to understand that lines are comprised of a set of vertices and nodes. A **node** is simply the terminating vertex in a set of vertices for a line. For example, suppose the line segment $A$ has a set of vertices, $[[1,0],[1,3],[1,5]]$. Then the nodes for $A$ are $[1,0]$ and $[1,5]$. Since nodes define the end points of a line segment, they are key to enforcing connection rules. We will look at network analysis in more detail in the next chapter. For now, let us consider two different networks that can help us conceptualize some fundamental line topology using nodes.
 
@@ -107,38 +107,38 @@ Some examples of cover topological rules:
 - Point must be covered by a polygon
 - Line must be covered by a polygon
 
-### Multipart geometrics
+### Multipart Geometrics
 
-### Multipatch features
+### Multipatch Features
 
-### Convex hull
+### Convex Hull
 
-### Delauney triangles
+### Delauney Triangles
 
 ### Duplicates
 
-### Gaps and slivers
+### Gaps and Slivers
 
-### Data models supporting planar topology
+### Data Models Supporting Planar Topology
 
 ## Geocoding
 
 **Geocoding** is the process of converting addresses to geographic coordinates, while **reverse geocoding** is the process of converting geographic coordinates to addresses. In order to achieve this conversion, an **address locator** uses reference spatial data that are mapped to a geographic or projected coordinate system in order to locate new addresses or coordinates. Usually, an address locator relies on several pieces of reference spatial data such as maps of road networks, postal codes, cities, provinces or states, and countries. If you  It is important that the city, province, and country are mapped and specified because road names frequently repeat in different cities (e.g., Main Street). If you are aiming to geocode addresses in a single city, then it is feasible to manually specify your own address locator using available data such as roads, parcels, neighborhoods, and postal codes. However, for geocoding across large areas, this may not be feasible and you should instead rely on geocoding services that use large databases of reference spatial data.
 
-### Street addresses
+### Street Addresses
 
 left/right side of street
 
-### Postal codes
+### Postal Codes
 
 Standards for postal codes vary from country to country. In Canada, postal codes are six characters and alphanumeric. For example, the postal code for the University of British Columbia is V6T 1Z4. Whenever you are geocoding, you need to ensure that you are paying special attention to formatting, especially for Canadian postal codes, which are sometimes separated by a spacing character like V6T 1Z4 or no spacing character like V6T1Z4. Postal codes can be useful to include into an address locator because they are always unique, unlike placenames or street addresses. However, postal codes usually cover large areas, so they must be used in concert with more specific, local information when geocoding.
 
-### Geocoding services
+### Geocoding Services
 
 matching
 
 
-## Case study: Working with Canadian census data
+## Case Study: Working with Canadian Census Data
 
 [Download 2016 Census Profile data](https://www12.statcan.gc.ca/census-recensement/2016/dp-pd/prof/details/download-telecharger/comp/page_dl-tc.cfm?Lang=E)
 

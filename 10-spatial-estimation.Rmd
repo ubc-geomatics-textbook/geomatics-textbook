@@ -39,7 +39,7 @@ To overcome this limitation, one should come up with a proper **sampling** strat
 :::: {.box-content .call-out-content}
 
 ::: {.box-title .call-out-top}
-#### Recall this {-}
+#### Recall This {-}
 :::
 
 <p id="box-text"> 
@@ -48,7 +48,7 @@ To overcome this limitation, one should come up with a proper **sampling** strat
 
 Branch of statistics used to analyze and predict the values associated with spatial or spatiotemporal phenomenan often defined by the locations over a study area.
 
-**Spatial autocorrelation**
+**Spatial Autocorrelation**
 
 The measures the degree of similarity between samples at different sampled locations.
 
@@ -92,7 +92,7 @@ Before getting into the details about different types of sampling. We will make 
 :::: {.box-content .call-out-content}
 
 ::: {.box-title .call-out-top}
-#### Recall this {-}
+#### Recall This {-}
 :::
 
 <p id="box-text">
@@ -101,11 +101,11 @@ Before getting into the details about different types of sampling. We will make 
 
 Any large spatially defined entity of plots, people, trees, animals etc., from which samples are drawn and measurement of certain characteristics is conducted. 
 
-**Sampling design**
+**Sampling Design**
 
 The procedure by which the sample of units is selected from the population is called the sampling design. 
 
-**Sampling unit**
+**Sampling Unit**
 
 The smallest entity within a population from which the information about population is drawn is known as sampling unit. For example, in a survey of potential internet user over entire BC , sampling unit can be the certain number of household in each city across BC. 
 
@@ -363,7 +363,7 @@ When an attribute or variable is mapped across a study area or domain, geologist
 :::: {.box-content .call-out-content}
 
 ::: {.box-title .call-out-top}
-#### Recall this {-}
+#### Recall This {-}
 :::
 
 <p id="box-text"> 
@@ -562,7 +562,7 @@ We will calculate the Moran's I for the basal area variable pertaining to the po
 
 #### Using Contiguity {-}
 
-**Define neighborhood**
+**Define Neighborhood**
 
 The Moran’s I statistic is the correlation coefficient for the relationship between a variable and its surrounding values. But before we go about computing this correlation, we need to come up with a way to define a neighborhood. There are two ways to define neighborhood namely; contiguity for spatial **polygon data** and distance-based approach for the spatial **point data** and polygon data both. For polygon data, contiguity based neighborhood selection can be adopted using two widely used method, respectively known as ***Rook's case*** or ***Queen's case*** **Figure 10.10**.
 
@@ -631,7 +631,7 @@ grids_bs
 ```
 **Figure 10.10.** \ref{fig:figs} Rook's  (left) and Queen's (right) case for searching the neighborhood (grey unit) for the darker unit in the center.
 
-**Step 1: Build neighborhood** 
+**Step 1: Build Neighborhood** 
 
 Since we are working with the polygons, we will use the queen's contiguity to build the neighborhood list using **polyn2b** function in **spdep** package in R and plot the the linkage**
 
@@ -677,28 +677,28 @@ coords <- coordinates(filename)
 plot(w1, coords, col="grey")
 ```
 
-**Step 2: Getting a spatial weight matrix for neighborood list**
+**Step 2: Getting a Spatial Weight Matrix for Neighborhood List**
 
 ```{r, warning=FALSE, message=FALSE}
 ww <- nb2listw(w1,style='B')
 #ww
 ```
 
-**Step 3: Calculate Moran's correlation coefficient using the spatial weight matrix for neighbors**
+**Step 3: Calculate Moran's Correlation Coefficient Using the Spatial Weight Matrix for Neighbors**
 
 ```{r, warning=FALSE, message=FALSE}
 ## calculating Moran's I 
 moran(filename$Basal, ww, n=length(ww$neighbours), S0=Szero(ww))
 ```
 
-**Step 4: Conduct the significance test for the calculated Moran's I value**
+**Step 4: Conduct the Significance Test for the Calculated Moran's I Value**
 ```{r, warning=FALSE, message=FALSE}
 moran.test(filename$Basal, ww)
 ```
 
-#### Using the knearest neighborhood imputation {-}
+#### Using the Knearest Neighborhood Imputation {-}
 
-**Step 1: We will select 3 nearest neighbor using distance-based approach**
+**Step 1: We will select 3 Nearest Neighbor Using Distance-based Approach**
 
 The function knearneigh in 'spdep" package in R and build a spatial weight 
 
@@ -710,7 +710,7 @@ w<-knn2nb(col.knn,row.names = filename$id)
 coords <- coordinates(filename)
 plot(w, coords, col="grey")
 ```
-**Step 2: Build a spatial weight matrix for the neighborhood list**
+**Step 2: Build a Spatial Weight Matrix for the Neighborhood List**
 
 ```{r, warning=FALSE, message=FALSE}
 #spatial weight 
@@ -718,14 +718,14 @@ ww1 <- nb2listw(w,style='B')
 #ww1
 ```
 
-**Step 3: Calcualte the Moran's I coefficient** 
+**Step 3: Calculate the Moran's I Coefficient** 
 
 ```{r, warning=FALSE, message=FALSE}
 ## Calculating Moran's I 
 moran(filename$Basal, ww1, n=length(ww1$neighbours), S0=Szero(ww1))
 ```
 
-**Step 4: Significance test for calculated Moran's I**
+**Step 4: Significance Test for Calculated Moran's I**
 
 ```{r, warning=FALSE, message=FALSE}
 moran.test(filename$Basal, ww1)
@@ -743,7 +743,7 @@ $$ C=\frac{(n-1) \sum_{i}^n\sum_{j}^nw_{ij}(y_i-y_j)^2}{2\sum_{i}^n\sum_{j}^nw_{
 
 **Step 2: In our final step, we will use geary funtion from "spdep" package to calculate the value of Geary's** 
 
-***For queens case***
+***For Queens Case***
 
 ```{r, warning=FALSE, message=FALSE}
 ## Geary C 
@@ -752,7 +752,7 @@ geary(filename$Basal, ww, n=length(ww$neighbours),n1=length(ww$neighbours)-1, S0
 geary.test(filename$Basal, ww)
 
 ```
-***For nearest neighbour method***
+***For Nearest Neighbour Method***
 
 ```{r, warning=FALSE, message=FALSE}
 ## Geary C
@@ -1413,7 +1413,7 @@ g<-ggplot(TheVariogram,aes(x=dist,y=gamma))+geom_point()+
         axis.text.x =element_blank(),
         axis.text.y =element_text(size=14))
 
-#### Spherical variogram
+#### Spherical Variogram
 TheVariogramModel1 <- vgm(psill=2500, model="Sph", nugget=1500, range=20000)
 
 FittedModel1 <- fit.variogram(TheVariogram, model=TheVariogramModel1) 
@@ -1432,7 +1432,7 @@ h<-ggplot(TheVariogram,aes(x=dist,y=gamma))+geom_point()+
         axis.text.y =element_blank(),
         axis.ticks.y= element_blank())
 
-## Gaussian variogram
+## Gaussian Variogram
 
 TheVariogramModel2 <- vgm(psill=2500, model="Gau", nugget=1500, range=20000)
 
@@ -1451,7 +1451,7 @@ i<-ggplot(TheVariogram,aes(x=dist,y=gamma))+geom_point()+
         axis.text.x =element_text(size =14),
         axis.text.y =element_text(size=14))
 
-## circular variogram
+## circular Variogram
 TheVariogramModel3 <- vgm(psill=2500, model="Cir", nugget=1500, range=20000)
 
 FittedModel3 <- fit.variogram(TheVariogram, model=TheVariogramModel3) 
@@ -1680,12 +1680,12 @@ knitr::kable(summary, caption =NULL)
 
 From the cross validation results **(Table 10.3)**, we want root mean squared error (RMSE) to be low for greater predictive accuracy [@Tziachris2017]. We also want mean error (ME) to be as close to 0 as possible [@Tziachris2017]. And we want mean squared deviation Ratio (MSDR) to be closer to 1 for the good kriging model [@Tziachris2017]. The RMSE is lowest for simple and ordinary kriging, the ME is negative and below zero, and the MSDR of the predictions vs. the sample is low and closer to 1 for both simple and ordinary kriging (Table 10.3). This means the variability in predictions from both kriging are somewhat closer to real values than universal kriging [@Tziachris2017]. Looks like universal kriging is predicting more negative basal area for some of the location within TSA. The choice between simple and ordinary kriging may vary with researchers discretion here.
 
-###### Co-kriging
+###### Co-Kriging
 
 Co-kriging uses the information about different covariates to predict the value of the variable of interest at an unsampled location [@Cressie1994]. It utilizes the autocorrelation of the variable of interest and the cross correlations between the variable of interest with all the covariates to make the prediction [@Cressie1994]. In order to implement co-kriging we need to have a strong correlation between the covariates [@Tziachris2017]. The spatial variability of one variable should be correlated with the spatial variability of the other covariates [@Tziachris2017].
 
 
-##### Non-linear Kriging
+##### Non-Linear Kriging
 
 In principle, nonlinear kriging algorithms are linear kriging algorithms applied to nonlinear transformations of the data points into a continuous variable [@Deutsch1993GSLIBGS]. We will briefly talk about four principal non-linear kriging techniques in this chapter while our focus mostly is on linear kriging methods.
 
@@ -1741,7 +1741,7 @@ $$X=\text{matrix of observations for the predictor variables}$$
 $$\epsilon=\text{vector of error terms}$$
 
 
-##### Steps in fitting spatial lag model:
+##### Steps in Fitting Spatial Lag Model:
 
 **Step 1: Build spatial weight matrix**
 
@@ -1816,7 +1816,7 @@ $$X=\text{matrix of observations for the predictor variables}$$
 $$u=\text{indepndent errors}$$
 
 
-##### Steps in fitting spatial error model:
+##### Steps in Fitting Spatial Error Model:
 
 **Step 1 and Step 2** in fitting spatial error model is exactly similar to what we did for spatial lag model. 
 
@@ -1859,7 +1859,7 @@ When it is not so clear theoretically that either of the spatial model works for
 :::: {.box-content .call-out-content}
 
 ::: {.box-title .call-out-top}
-#### Remember this? {-}
+#### Remember This? {-}
 :::
 
 <p id="box-text"> When the question is which of the two models is better? This is an open question. The general advice is first to look for a theoretical basis to inform your choice. If there are strong substantive grounds for one model instead of the other, you should adopt it. </p>

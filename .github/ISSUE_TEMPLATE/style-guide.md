@@ -2,7 +2,7 @@
 name: Style Guide
 about: Issues or fixes related to the style guide
 title: 'Style Guide: '
-labels: 'Style'
+labels: 'aesthetics'
 assignees: 'natasha-sharma123'
 
 ---

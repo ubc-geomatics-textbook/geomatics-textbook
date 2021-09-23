@@ -1,8 +1,8 @@
 ---
-name: New/revised chapter content
-about: Facilitates contributions from chapter authors and co-authors
+name: Style Guide
+about: Issues or fixes related to the style guide
 title: ''
-labels: 'new/revised content'
+labels: 'Style'
 assignees: ''
 
 ---

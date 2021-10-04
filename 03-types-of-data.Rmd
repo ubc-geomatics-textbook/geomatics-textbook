@@ -48,7 +48,7 @@ These are data that just consists of names or categories with no ranking or dire
 
 ![Each flower is different, but no flower is "more" or "less" a flower than any of the others.](images/03-flowers-nominal.png){.center}
 
-![With nominal data, you can check for equality, and count occurenecees, but that is it.](images/03-nominal-opperations.png){.center}
+![With nominal data, you can check for equality, and count occurrences, but that is it.](images/03-nominal-opperations.png){.center}
 
 
 #### Ordinal Scale
@@ -93,10 +93,16 @@ Sometimes we want to account for the influence of one variable when analyzing an
 
 ### Summary of Data Types
 
-![From my lectures.  IDK the original source, but it'd be easy enough to just "recreate" my own.](images/03-operations.png){.center}
+|   Operation   |Nominal|Ordinal|Interval|Ratio|
+|---------------|-------|-------|--------|-----|
+|Equality       |x      |x      |x       |x    |
+|Counts/Mode    |x      |x      |x       |x    |
+|Rank/Order     |       |x      |x       |x    |
+|Median         |       |x      |x       |x    |
+|Add/Subtract   |       |       |x       |x    |
+|Mean           |       |       |x       |x    |
+|Multiply/Divide|       |       |        |x    |
 
-
-![From my lectures.  IDK the original source, but it'd be easy enough to just "recreate" my own.](images/03-scales.png){.center}
 
 ## Spatial is Special
 
@@ -121,7 +127,6 @@ There are two main types of spatial data models: the **Raster** and **Vector** m
 2) The scale at which we plan to analyze our data.
 3) How we plan to use the data.
 
-
 ![Representing space in the raster model vs. the vector model [8]](images/03-vector-v-raster.jpg){.center}
 
 
@@ -141,15 +146,13 @@ Rasters data relies on Spatial Autocorrelation and The First Law of Geography, t
 
 #### File Types
 
-Raster data can come in many different formats.  One of the most common/functional is the GeoTIFF format which has the extension .tif. A .tif file stores metadata or attributes about the file as embedded tif tags. For instance, your camera might store a tag that describes the make and model of the camera or the date the photo was taken when it saves a .tif. A GeoTIFF is a standard .tif image format with additional spatial (georeferencing) information embedded in the file as tags. These tags should include the following raster metadata:
-* Extent
-* Resolution
-* Coordinate Reference System (CRS) - we will introduce this concept in a later episode
-* Values that represent missing data (NoDataValue) - we will introduce this concept in a later lesson.
+Raster data can come in many different formats.  **GeoTIFF** which has the extension .tif is one of the most common/functional is the .  This format is based of the Tag Image File Format (TIFF), a common file type used by graphic artists and photographers.  A TIFF file stores metadata (data about the data) as tags.  For instance, your camera might store a tag that describes the make and model of the camera and another for the date the photo was taken when it saves a picture. A GeoTIFF is a standard .tif image format plus additional tags spatial tags denoting spatial information including: 
 
-^ Adapted from [4]
+* Extent (minimum x,y and maximum x,y)
+* Resolution (cell size)
+* Projection, Coordinate system, and datum
 
-Other file types you will likely encounter include:
+Other file types you will likely encounter when working with raster data include:
 * 1) IMG - A proprietary image format commonly used by ESRI products
 * 2) JPEG2000 - A geospatial version of the common .jpg image type
 * 3) ASCII - An older human readable format (simple text file) with slower performance than the types listed above.
@@ -177,20 +180,59 @@ Vector data also has a **Resolution** although it has a somewhat different defin
 
 #### File Types
 
---From [4] -- Will adapt/adjust later
+Like raster data, vector data can also come in many different formats. The **shapefile** format which has the extension .shp is one of the most common file types you will encounter.  A .shp file stores the geographic coordinates of each vertex in the vector, as well as metadata including:
 
-Like raster data, vector data can also come in many different formats. For this workshop, we will use the Shapefile format which has the extension .shp. A .shp file stores the geographic coordinates of each vertice in the vector, as well as metadata including:
-
-    Extent - the spatial extent of the shapefile (i.e. geographic area that the shapefile covers). The spatial extent for a shapefile represents the combined extent for all spatial objects in the shapefile.
-    Object type - whether the shapefile includes points, lines, or polygons.
-    Coordinate reference system (CRS)
-    Other attributes - for example, a line shapefile that contains the locations of streams, might contain the name of each stream.
+* The spatial extent of the shapefile (i.e. geographic area that the shapefile covers). The spatial extent for a shapefile represents the combined extent for all spatial objects in the shapefile.
+* Object type - whether the shapefile includes points, lines, or polygons.
+* Coordinate reference system (CRS)
+* Attributes - for example, a line shapefile that contains the locations of streams, might contain the name of each stream.
 
 Because the structure of points, lines, and polygons are different, each individual shapefile can only contain one vector type (all points, all lines or all polygons). You will not find a mixture of point, line and polygon objects in a single shapefile.
 
+**GeoJSON** is a simple, lightweight format for storing a variety of geographic data structures.  It is most commonly encountered in web mapping and other open source applications.  GeoJSON supports the following geometries: Point, Line, Polygon, MultiPoint, MultiLine, and MultiPolygon objects.  Unlike with shapefiles, one GeoJSON file can contain any mix of geometries. An objects with and its attributes are a Feature object. A set of Features is a FeatureCollection.  GeoJSON has the added benefit of allowing you to encode stylistic choices within the file.  If you'd like to explore this format a bit more, take the code below and paste it h[ere](https://geojson.io/#map=2/20.0/0.0).  You can make changes and see them reflected on your the map.
+
+```json
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#blue",
+        "marker-size": "medium",
+        "marker-symbol": "circle",
+        "Name": "Vancouver"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.04687499999999,
+          49.23912083246698
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "red",
+        "marker-size": "medium",
+        "marker-symbol": "square",
+        "Name": "Victoria"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.40942382812501,
+          48.516604348867475
+        ]
+      }
+    }
+  ]
+}
+```
 **Simple text files** are human readable file formats (.txt, .csv) that are suitable for storing point and attribute data.  You will often encounter .txt or .csv files when working with weather data for instance (see Table).  Coordinates (typically latitude and longitude) are stored in a text files along with the other attributes.  We can bring this type of file into a GIS, but we need to convert the data to point features before we can display it. 
 
-#### Canadian Weather Station File
+*Canadian Weather Station File*
 
 |          Name          |    Province    |Climate ID|Latitude (Decimal Degrees)|Longitude (Decimal Degrees)|
 |------------------------|----------------|---------:|-------------------------:|--------------------------:|
@@ -205,45 +247,20 @@ Because the structure of points, lines, and polygons are different, each individ
 |BRENTWOOD W SAANICH RD  |BRITISH COLUMBIA|   1010965|                     48.57|                    -123.43|
 |CENTRAL SAANICH VEYANESS|BRITISH COLUMBIA|   1011467|                     48.58|                    -123.42|
 
-**GeoJSON**
-```json
-{
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [100.0, 0.0], [101.0, 0.0], [101.0, 1.0],
-            [100.0, 1.0], [100.0, 0.0]
-          ]
-        ]
-      },
-      "properties": {
-        "prop0": "value0",
-        "prop1": { "this": "that" }
-      }
-    }
-  ]
-}
-```
-
 
 ## Choice of Data Model
 Vector data has some important advantages:
 
-    The geometry itself contains information about what the dataset creator thought was important
-    The geometry structures hold information in themselves - why choose point over polygon, for instance?
-    Each geometry feature can carry multiple attributes instead of just one, e.g. a database of cities can have attributes for name, country, population, etc
-    Data storage can be very efficient compared to rasters
+  The geometry itself contains information about what the dataset creator thought was important
+  The geometry structures hold information in themselves - why choose point over polygon, for instance?
+  Each geometry feature can carry multiple attributes instead of just one, e.g. a database of cities can have attributes for name, country, population, etc
+  Data storage can be very efficient compared to rasters
 
 The downsides of vector data include:
 
-    potential loss of detail compared to raster
-    potential bias in datasets - what didn’t get recorded?
-    Calculations involving multiple vector layers need to do math on the geometry as well as the attributes, so can be slow compared to raster math.
+  potential loss of detail compared to raster
+  potential bias in datasets - what didn’t get recorded?
+  Calculations involving multiple vector layers need to do math on the geometry as well as the attributes, so can be slow compared to raster math.
 
 Vector datasets are in use in many industries besides geospatial fields. For instance, computer graphics are largely vector-based, although the data structures in use tend to join points using arcs and complex curves rather than straight lines. Computer-aided design (CAD) is also vector- based. The difference is that geospatial datasets are accompanied by information tying their features to real-world locations.
 
@@ -305,14 +322,23 @@ This is a call out. Put some important concept or fact in here.
 
 ## Summary
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
-
-### Reflection Questions {-}
+This chapter has introduced you to how we represent data in a GIS.
 
 1. Explain ipsum lorem.
 2. Define ipsum lorem.
+
+### Reflection Questions {-}
+
+1. Explain the difference between continuous fields and discrete objects.
+2. Define Quantitative data and Qualitative data.
 3. What is the role of ispum lorem?
-4. How does ipsum lorem work?
+4. How do the raster and vector data models represent space differently?
+
+
+
+3. What types phenomena (continuous fields/)
+ do the raster data model and the vector data model represent spatial data?
+4. Which spatial data models are better suited to which type of phenomena?
 
 ### Practice Questions {-}
 

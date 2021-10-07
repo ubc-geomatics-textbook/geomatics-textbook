@@ -1,4 +1,4 @@
-# Spatial Estimation {#spatial-estimation}
+## Spatial Estimation {#spatial-estimation}
 
 **Geostatistics** uses the metrics based on statistical tools that are used to characterize the distribution of an event across the geographical region of interest [@Getis2004]. In context of spatial data, it is important to understand what is occurring where. Sometimes there is a detailed and precise information of an **event** (spatial phenomenon defined by its location and the characteristics that can be measured in both quantitative or qualitative scale) across the geographical area such that a continuous map can be built out of that information. While, most of the time, only discrete and unrepresentative information on the spatial event is collected, which doesnot allow to create a precise continuous surface of the event over entire geographic area of interest. In such scenario, we should focus on two things; 
 
@@ -11,7 +11,7 @@ This chapter introduces some basic ideas on different types of **sampling** stra
 :::: {.box-content .learning-objectives-content}
 
 ::: {.box-title .learning-objectives-top}
-#### Learning Objectives {-}
+## Learning Objectives {-}
 ::: 
 
 1. To be familiar with different types of spatial sampling
@@ -21,7 +21,7 @@ This chapter introduces some basic ideas on different types of **sampling** stra
 
 ::::
 
-### Key Terms {-}
+## Key Terms {-}
 
 Sampling, Spatial autocorrelation, Moran's I, Kriging, Interpolation, Spatial regression
 
@@ -39,28 +39,29 @@ To overcome this limitation, one should come up with a proper **sampling** strat
 :::: {.box-content .call-out-content}
 
 ::: {.box-title .call-out-top}
-#### Recall this {-}
+## Recall This {-}
 :::
 
 <p id="box-text"> 
 
-**Geostatistics**
+## Geostatistics
 
 Branch of statistics used to analyze and predict the values associated with spatial or spatiotemporal phenomenan often defined by the locations over a study area.
 
-**Spatial autocorrelation**
+## Spatial Autocorrelation
 
 The measures the degree of similarity between samples at different sampled locations.
 
-**Sampling**
+
+## Sampling
 
 The process of selecting a part of a population. 
 
-**Prediction**
+## Prediction
 
 Using the existing sampled data to compute the value of the variable in a unsampled location.
 
-**Estimation**
+## Estimation
 
 Using the existing data to find the best value of the coefficient while establishing the association between different variables 
 
@@ -79,7 +80,7 @@ While in geostatistics, the variance is assumed to be partly random and each poi
 
 **Sampling** can be defined as the process of selecting some part of a population (also known as **sample**) in order to make an inference, and estimate some parameters about the whole population[@thompson2012sampling]. For example, to estimate the amount of biomass of trees in Malcom Knapp Forest, BC, scientist collects the data on tree size, and height from randomly distributed 100 small plots across the forest. Based on some equations and using the tree data on height and size from 100 plots, biomass of entire Malcom Knapp Forest can be estimated. Similarly, to estimate the amount of recoverable oil in a region, a few (highly expensive) sample holes are drilled (example adapted from @thompson2012sampling). The situation is similar in a national opinion survey, in which only a sample of the people in the population is contacted, and the opinions in the sample are used to estimate the proportions with the various opinions in the whole population (example adapted from @thompson2012sampling, pp.1). 
 
-**Sampling** shouldnot be confused with **observational** study. In an observational study, one has no control over the sample while in sampling one can deliberately select samples which prevent research bias[@thompson2012sampling]. Sampling accounts on how data can be collected out of every possibilities under the control of investigator [@thompson2012sampling]. 
+**Sampling** should not be confused with **observational** study. In an observational study, one has no control over the sample while in sampling one can deliberately select samples which prevent research bias[@thompson2012sampling]. Sampling accounts on how data can be collected out of every possibilities under the control of investigator [@thompson2012sampling]. 
 
 Broadly, sampling can be categorized into two groups [@Teddlie2007]:
 
@@ -92,20 +93,20 @@ Before getting into the details about different types of sampling. We will make 
 :::: {.box-content .call-out-content}
 
 ::: {.box-title .call-out-top}
-#### Recall this {-}
+## Recall This {-}
 :::
 
 <p id="box-text">
 
-**Population**
+## Population
 
 Any large spatially defined entity of plots, people, trees, animals etc., from which samples are drawn and measurement of certain characteristics is conducted. 
 
-**Sampling design**
+## Sampling Design
 
 The procedure by which the sample of units is selected from the population is called the sampling design. 
 
-**Sampling unit**
+## Sampling Unit
 
 The smallest entity within a population from which the information about population is drawn is known as sampling unit. For example, in a survey of potential internet user over entire BC , sampling unit can be the certain number of household in each city across BC. 
 
@@ -113,11 +114,11 @@ The smallest entity within a population from which the information about populat
 
 ::::
 
-### Probability Sampling
+## Probability Sampling
 
 Probability sampling techniques are mostly used in studies that use extensive amount of quantitative analysis [@Tashakkori2010]. It involves selecting a large number of units from a population where the probability of inclusion for every member of the population is determinable [@Tashakkori2010].
 
-#### Simple Random Sampling
+## Simple Random Sampling
 
 In simple random sampling, each sampling unit within a given population has equal probability of being selected in a sample [@thompson2012sampling].For example, suppose we would like to measure the tree heights of all the trees from a simple random sample of 60 plots with their spatial locations (given by plots center co-ordinates) from a forest divided into 625 spatially defined plots as given in **Figure 10.1**.  Notice, there is no distinctive pattern on how plots are being selected for the measurement of tree heights, this justify the **random part** of the simple random sampling. 
 
@@ -175,7 +176,7 @@ p
 **Figure 10.2.** \ref{fig:figs} Another simple random sample of 60 units.
 
 
-#### Stratified Random Sampling
+## Stratified Random Sampling
 
 When a population under study is not **homogeneous** (similar in biological characteristics) across the entire study area and consists of some sort of gradient, stratified random sampling method is used [@thompson2012sampling]. The principle of stratification is to partition the population in such a way that the units within a stratum are as similar as possible [@Teddlie2007]. Random samples from each strata are drawn to ensure adequate sampling of all groups [@Teddlie2007]. Even though one stratum may differ markedly from another, a stratified sample with the desired number of units from each stratum in the population will tend to be “representative” of the population as a whole [@Howell2020].
 
@@ -244,7 +245,7 @@ p
 ```
 **Figure 10.4.** \ref{fig:figs} Stratified random sample from equal strata within a study area.
 
-#### Systematic Sampling
+## Systematic Sampling
 
 A systematic sample uses a fixed grid or array to assign plots in a regular pattern **Figure 10.5** [@McRoberts2014]. The advantage of systematic sampling is that it maximizes the average distance between the plots and therefore minimizes spatial correlation among observations and increases statistical efficiency [@McRoberts2014]. In addition, a systematic sample, which is clearly seen to be representative in some sense, can be very convincing to decision-makers who lack experience with sampling [@McRoberts2014]. Raster grids such as digital elevation models (DEM) are some examples of systematic sample.
 
@@ -307,7 +308,7 @@ p
 ```
 **Figure 10.6.** \ref{fig:figs} Sample all the observation in every second column 
 
-#### Cluster Sampling 
+## Cluster Sampling 
 
 In cluster sampling, rather than sampling individual units, which might be geographically spread over great distances, we can sample groups (clusters) of plots that occur naturally in the study area [@Teddlie2007]. Cluster sampling is employed when we want to be more efficient in terms of the use of time and money to generate a more efficient probability sample [@Teddlie2007].
 
@@ -339,19 +340,19 @@ p
 ```
 **Figure 10.7.** \ref{fig:figs} Cluster of plots selected from entire study area
 
-### Non-probability Sampling
+## Non-probability Sampling
 
 Non-probability sampling is generally used in qualitative studies. They are also know as **purposive or adaptive sampling**, and defined as selecting units (e.g.,individuals, groups of individuals, institutions) based on specific purposes associated with answering some research questions. **Purposive or Adaptive** sampling can be classified into three broad categories [@Teddlie2007]:
 
-#### Representative Sampling
+## Representative Sampling
 
 This type of sampling is used when we want to select samples that will represent broader groups as closely as possible [@Teddlie2007]. One of the example of representative sampling is selecting 100 Douglas fir and 50 Spruce tree from study area within Malcom Knapp Forest, BC consisting of 500 Douglas fir and 300 Spruce trees for the measurement of tree height.
 
-#### Unique Case Sampling
+## Unique Case Sampling
 
 In this sampling, we want to focus on more specific case which is unique and rare in terms of one or more characteristics [@Teddlie2007]. One of the example of unique case sampling could be understanding the genetic makeup of person who is not affected by Covid-19 virus. 
 
-#### Sequential Sampling
+## Sequential Sampling
 
 In this sampling method, we would pick up a single or group of cases in an interval of time, analyzes the results and then move on to the next group of cases and so on [@Teddlie2007]. The goal of the research project is to generate some theory (or broadly defined themes) [@Teddlie2007]. 
 
@@ -363,15 +364,15 @@ When an attribute or variable is mapped across a study area or domain, geologist
 :::: {.box-content .call-out-content}
 
 ::: {.box-title .call-out-top}
-#### Recall this {-}
+## Recall This {-}
 :::
 
 <p id="box-text"> 
 
-**Domain**
+## Domain
 The study area from where spatial sample is taken. 
 
-**Attributes**
+## Attributes
 The information attached to the study objects that are spatially distributed in a Domain. Often termed as variable of interest.
 
 </p>
@@ -429,7 +430,7 @@ grids_bs
 
 **Figure 10.8.** \ref{fig:figs} Example of a positive (left) and negative spatial autocorrelation (right) for a give domain.
 
-### Moran's I 
+## Moran's I 
 
 **Moran’s I** [@Moran1950], is a correlation coefficient that measures the degree of spatial autocorrelation in certain attributes of the data. It is based on the spatial covariance standardized by the variance of the data [@Moran1950]. It works based on the neighborhood list created based on spatial weight matrix [@Suryowati2018]. The value of Moran’s I ranges between -1 to 1, where 1 indicates the perfect positive spatial autocorrelation, 0 indicates the random pattern, and -1 indicates the perfect negative autocorrelation [@Moran1950]. Moran’s I is calculated using the following formula [@Moran1950]:  
 
@@ -447,8 +448,9 @@ $$w_{ij}=\text{the spatial weight matrix}$$
 :::: {.box-content .case-study-content}
 
 ::: {.box-title .case-study-top}
-#### Case Study {-}
-:::
+## Case Study: Title of Case Study Here 
+You see textual case study content here
+
 For this case study, we will use ground plot data from Change Monitoring Inventory (CMI) program [for details: @ProvinceofBC2018] for Williams Lake and 100-miles House timber supply area (TSA) in the province of British Columbia, Canada. William Lake TSA and 100-miles House TSA are divided into 18 and 8 blocks respectively **Figure 10.9**. There is a total of 456 CMI plots used in this study **Figure 10.9**. The total basal area (m2/ha) is our variable of interest in this study. For each of the polygon in Williams lake and 100-miles house TSA, total basal area was calculated by taking the sum of the basal area of each CMI plots in each polygon. For this part of exercise, we want to understand if there is any spatial relationship (autocorrelation) between the total basal area measured in each polygon of TSA. We will quantitatively measure the presence or absence of **spatial autocorrelation** using **Moran’s I** and **Geary's C**. 
 
 <p id="box-text">
@@ -555,14 +557,14 @@ t
 **Figure 10.9.** \ref{fig:figs} CMI plots location for williams lake TSA and 100 miles house TSA. Basal area has been calculated using the sum of the basal area for each plot (dot) over the given polygon.
 :::
 
-#### Calculating Moran's I {-}
+## Calculating Moran's I {-}
 
 We will calculate the Moran's I for the basal area variable pertaining to the polygon. 
 
 
-#### Using Contiguity {-}
+## Using Contiguity {-}
 
-**Define neighborhood**
+**Define Neighborhood**
 
 The Moran’s I statistic is the correlation coefficient for the relationship between a variable and its surrounding values. But before we go about computing this correlation, we need to come up with a way to define a neighborhood. There are two ways to define neighborhood namely; contiguity for spatial **polygon data** and distance-based approach for the spatial **point data** and polygon data both. For polygon data, contiguity based neighborhood selection can be adopted using two widely used method, respectively known as ***Rook's case*** or ***Queen's case*** **Figure 10.10**.
 
@@ -631,7 +633,7 @@ grids_bs
 ```
 **Figure 10.10.** \ref{fig:figs} Rook's  (left) and Queen's (right) case for searching the neighborhood (grey unit) for the darker unit in the center.
 
-**Step 1: Build neighborhood** 
+**Step 1: Build Neighborhood** 
 
 Since we are working with the polygons, we will use the queen's contiguity to build the neighborhood list using **polyn2b** function in **spdep** package in R and plot the the linkage**
 
@@ -677,28 +679,28 @@ coords <- coordinates(filename)
 plot(w1, coords, col="grey")
 ```
 
-**Step 2: Getting a spatial weight matrix for neighborood list**
+**Step 2: Getting a Spatial Weight Matrix for Neighborhood List**
 
 ```{r, warning=FALSE, message=FALSE}
 ww <- nb2listw(w1,style='B')
 #ww
 ```
 
-**Step 3: Calculate Moran's correlation coefficient using the spatial weight matrix for neighbors**
+**Step 3: Calculate Moran's Correlation Coefficient Using the Spatial Weight Matrix for Neighbors**
 
 ```{r, warning=FALSE, message=FALSE}
 ## calculating Moran's I 
 moran(filename$Basal, ww, n=length(ww$neighbours), S0=Szero(ww))
 ```
 
-**Step 4: Conduct the significance test for the calculated Moran's I value**
+**Step 4: Conduct the Significance Test for the Calculated Moran's I Value**
 ```{r, warning=FALSE, message=FALSE}
 moran.test(filename$Basal, ww)
 ```
 
-#### Using the knearest neighborhood imputation {-}
+#### Using the Knearest Neighborhood Imputation {-}
 
-**Step 1: We will select 3 nearest neighbor using distance-based approach**
+**Step 1: We will select 3 Nearest Neighbor Using Distance-based Approach**
 
 The function knearneigh in 'spdep" package in R and build a spatial weight 
 
@@ -710,7 +712,7 @@ w<-knn2nb(col.knn,row.names = filename$id)
 coords <- coordinates(filename)
 plot(w, coords, col="grey")
 ```
-**Step 2: Build a spatial weight matrix for the neighborhood list**
+**Step 2: Build a Spatial Weight Matrix for the Neighborhood List**
 
 ```{r, warning=FALSE, message=FALSE}
 #spatial weight 
@@ -718,14 +720,14 @@ ww1 <- nb2listw(w,style='B')
 #ww1
 ```
 
-**Step 3: Calcualte the Moran's I coefficient** 
+**Step 3: Calculate the Moran's I Coefficient** 
 
 ```{r, warning=FALSE, message=FALSE}
 ## Calculating Moran's I 
 moran(filename$Basal, ww1, n=length(ww1$neighbours), S0=Szero(ww1))
 ```
 
-**Step 4: Significance test for calculated Moran's I**
+**Step 4: Significance Test for Calculated Moran's I**
 
 ```{r, warning=FALSE, message=FALSE}
 moran.test(filename$Basal, ww1)
@@ -734,7 +736,7 @@ moran.test(filename$Basal, ww1)
 
 Note that the value of Moran's I changed based on how we calculated the neighborhood list using two different approach. The interpretation change here based on the way we created the neighborhood. With contiguity based neighbor, we found a negative value for I (-0.11), indicating a negative weak spatial autocorrelation. When we run the significance test we can see that the p-value < 0.05 indicating the autocorrealtion is not significant. While using nearest neighbor we found that I (0.017) indicated a weak positive spatial autocorrelation. One reason for the difference is k-nearest neighbor uses polygon within a greater distance and can include more polygons as compared to contiguous neighbor which uses either "queens" or "rooks" contiguity [@Suryowati2018].
 
-### Geary's C 
+## Geary's C 
 
 Another more local measure of spatial autocorrelation unlike Moran's I is **Geary's C** [@Geary1954]. While Moran's I is calculated by standardizing the spatial autocovariance by the variance of the data. Geary's c on the other had uses the sum of the squared differences between pairs of data values as it is a measure of covariance [@Geary1954]. However, both statistics depends on the spatial nature of data and are based on neighborhood. Both of these statistics depend on a spatial structure specified by a spatial weights matrix. The value of Geary's C ranges between 0 to some unknown positive value, where 0 indicates the spatial randomness, values less than 1 indicates the positive spatial autocorrelation, while value greater than 1 indicates negative spatial autocorrelation [@Geary1954]. It is calculated using following formula:
 $$ C=\frac{(n-1) \sum_{i}^n\sum_{j}^nw_{ij}(y_i-y_j)^2}{2\sum_{i}^n\sum_{j}^nw_{ij}\sum_{i}(y_{i}-\bar{y})^2}$$
@@ -743,7 +745,7 @@ $$ C=\frac{(n-1) \sum_{i}^n\sum_{j}^nw_{ij}(y_i-y_j)^2}{2\sum_{i}^n\sum_{j}^nw_{
 
 **Step 2: In our final step, we will use geary funtion from "spdep" package to calculate the value of Geary's** 
 
-***For queens case***
+***For Queens Case***
 
 ```{r, warning=FALSE, message=FALSE}
 ## Geary C 
@@ -752,7 +754,7 @@ geary(filename$Basal, ww, n=length(ww$neighbours),n1=length(ww$neighbours)-1, S0
 geary.test(filename$Basal, ww)
 
 ```
-***For nearest neighbour method***
+***For Nearest Neighbour Method***
 
 ```{r, warning=FALSE, message=FALSE}
 ## Geary C
@@ -838,8 +840,9 @@ g
 :::: {.box-content .case-study-content}
 
 ::: {.box-title .case-study-top}
-#### Case Study {-}
-:::
+## Case Study: Title of Case Study Here
+You see textual case study content here 
+
 For this case study, we will use the ground plot data from Young stand monitoring (YSM) program data [@ProvinceofBC2018] for Fort Saint Johns timber supply area (TSA) in the province of British Columbia, Canada. Fort Saint Johns is divided into 6 blocks respectively **Figure 10.12**. There is a total of 108 YSM plots used in this study **Figure 10.12**. The total basal area (m2/ha) is our variable of interest in this study. For each of the YSM plots, we will calculate the total basal area by adding the basal area for all trees within the plot. We will explore different type of semivariogram model with the same dataset and check which one will best fit the data. 
 
 ![**Figure 10.12**. Location of Fort Saint Johns TSA and the young stand change monitoring plots.](images/10-FSJ-plot.png){.center}
@@ -890,7 +893,7 @@ g
 ```
 **Figure 10.13.** \ref{fig:figs} A semivariogram using the Gaussian model for the basal area (m2/ha) for young stand monitoring plots.
 
-### Spherical
+## Spherical
 
 This model shows a progressive decrease of spatial autocorrelation (equivalently, an increase of semivariance) until some distance, beyond which autocorrelation is zero. The spherical model is one of the most commonly used models.
 
@@ -927,7 +930,7 @@ g
 ```
 **Figure 10.14.** \ref{fig:figs} A semivariogram using the Spherical model for the basal area (m2/ha) for for young stand monitoring plots.
 
-### Exponential
+## Exponential
 
 Exponential model is used when spatial autocorrelation decreases exponentially with increasing distance. Here, the autocorrelation disappears completely only at an infinite distance.
 
@@ -962,7 +965,7 @@ g
 ```
 **Figure 10.15.** \ref{fig:figs} A semivariogram using the exponential model for the basal area (m2/ha) for for young stand monitoring plots.
 
-### Circular
+## Circular
 
 A circular variogram means that there is no preferred orientation in the data. We are only interested in the values of the variable of interest without considering the spatial orientation of the data. 
 
@@ -1027,8 +1030,9 @@ We will discuss both method with a case study in detail.
 :::: {.box-content .case-study-content}
 
 ::: {.box-title .case-study-top}
-#### Case Study {-}
-:::
+## Case Study: Title of Case Study Here
+You see textual case study content here 
+
 For this case study, we will use ground plot data from Young stand monitoring (YSM) program data [@ProvinceofBC2018] for Fort Saint Johns timber supply area (TSA) in the province of British Columbia, Canada.Fort Saint Johns is divided into 6 blocks respectively **Figure 10.17**. There is a total of 108 YSM plots used in this study **Figure 10.17**. The total basal area (m2/ha) is our variable of interest in this study. For each of the YSM plot the total basal area was calculated by adding the basal area for all trees within the plot. We will use this dataset to explore different interpolation technique to find the variable of interest (basal area) within the unsampled locations.
 
 ![**Figure 10.17**. Location of Fort Saint Johns TSA and the young stand change monitoring plots.](images/10-FSJ-plot.png){.center}
@@ -1043,9 +1047,9 @@ For this case study, we will use ground plot data from Young stand monitoring (Y
 </p>
 ::::
 
-### Methods Without Using Semi-variogram 
+## Methods Without Using Semi-variogram 
 
-#### Nearest Neighbor
+## Nearest Neighbor
 
 Nearest neighbor interpolation approach uses the value of variable of interest from the nearest sampled location and assign the value to the unsampled location of interest [@Titus2013]. It is very simple method and is most widely used for image processing in remote sensing research [@Titus2013].
 
@@ -1121,7 +1125,7 @@ leaflet() %>% addTiles() %>%
 
 **Figure 10.20.** \ref{fig:figs} Predicted basal area over the entire Fort Saint Johns TSA using five nearest neighbor projected over the province of British Columbia.
 
-#### Thiessian Polygon
+## Thiessian Polygon
 
 In this method, the domain is determined into the area/polygons of regions containing one sampling point from the original data [@Coulston].The thiessen polygons are assigned with the same values of the variable of interest as the point sampled [@Yamada2016].
 
@@ -1280,9 +1284,9 @@ leaflet() %>% addTiles() %>%
 
 **Figure 10.23.** \ref{fig:figs} Predicted basal area over the entire Fort Saint Johns TSA using inverse distance weighing projected over the province of Brithish Columbia.
 
-### Methods Using Semi-variogram 
+## Methods Using Semi-variogram 
 
-#### Kriging 
+## Kriging 
 
 The spatial interpolation technique such as inverse distance weighing(IWD), nearest neighbor, and polygon approach are based on the surrounding neighborhood. There is another group of interpolation methods generally know as **kriging** [@Krige1951] which is based on both surrounding neighborhood and statistical models, especially **spatial autocorrelation**. Kriging uses the variogram modeling approach we studied in section **10.3** as a statistical model and incorporates the information about **spatial autocorrelation** while performing the interpolation. Since kriging uses the geostatistical model it has capacity of both prediction and provides some measure of the accuracy of prediction [@Goovaerts2008].The basic assumption of kriging is that the distance based samples reflect some degree of spatial correlation [@Goovaerts2008]. We should note one thing that kriging works with raster surfaces where variable of interest are to be interpolated using the sampled locations. Kriging works with the following basic mathematical model: 
 $$\hat{Z_{s_0}}=\sum_{i}^N \lambda_{i}Z_{s_i}$$
@@ -1298,15 +1302,16 @@ $$\hat{Z}_{s_o} = \mu_{s_o} + \epsilon_{s_o}$$
 Where,  
 $$\epsilon_{s_o} = \text{spatially autocorrelated erros}$$
 
-##### Linear Kriging
+### Linear Kriging
 
 Linear kriging are distribution free linear interpolation techniques that are in alignment with linear regression methods [@Asa2012]. There are three principle linear kriging techniques as discussed below:
 
 :::: {.box-content .case-study-content}
 
 ::: {.box-title .case-study-top}
-#### Case Study {-}
-:::
+## Case Study: Title of Case Study here 
+You see textual case study content here 
+
 For this case study, we will use ground plot data from Young stand monitoring (YSM) program data [@ProvinceofBC2018] for Fort Saint Johns timber supply area (TSA) in the province of British Columbia, Canada.Fort Saint Johns is divided into 6 blocks respectively **Figure 10.17**. There is a total of 108 YSM plots used in this study **Figure 10.17**. The total basal area (m2/ha) is our variable of interest in this study. For each of the YSM plot the total basal area was calculated by adding the basal area for all trees within the plot. We will use this dataset to explore different interpolation technique to find the variable of interest (basal area) in the unsampled locations.
 <p id="box-text">
 </p>
@@ -1318,7 +1323,7 @@ For this case study, we will use ground plot data from Young stand monitoring (Y
 </p>
 ::::
 
-###### Simple Kriging
+## Simple Kriging
 
 Simple kriging works with the assumption that the mean is known and constant over entire domain and calculated as the average of the data [@Wackernagel2002]. The number of sampled points used to make the prediction of the variable of interest in unmeasured location depends upon the range of semivariogram model used [@Burrough1998].
 
@@ -1413,7 +1418,7 @@ g<-ggplot(TheVariogram,aes(x=dist,y=gamma))+geom_point()+
         axis.text.x =element_blank(),
         axis.text.y =element_text(size=14))
 
-#### Spherical variogram
+#### Spherical Variogram
 TheVariogramModel1 <- vgm(psill=2500, model="Sph", nugget=1500, range=20000)
 
 FittedModel1 <- fit.variogram(TheVariogram, model=TheVariogramModel1) 
@@ -1432,7 +1437,7 @@ h<-ggplot(TheVariogram,aes(x=dist,y=gamma))+geom_point()+
         axis.text.y =element_blank(),
         axis.ticks.y= element_blank())
 
-## Gaussian variogram
+## Gaussian Variogram
 
 TheVariogramModel2 <- vgm(psill=2500, model="Gau", nugget=1500, range=20000)
 
@@ -1451,7 +1456,7 @@ i<-ggplot(TheVariogram,aes(x=dist,y=gamma))+geom_point()+
         axis.text.x =element_text(size =14),
         axis.text.y =element_text(size=14))
 
-## circular variogram
+## circular Variogram
 TheVariogramModel3 <- vgm(psill=2500, model="Cir", nugget=1500, range=20000)
 
 FittedModel3 <- fit.variogram(TheVariogram, model=TheVariogramModel3) 
@@ -1539,7 +1544,7 @@ mean(res^2/as.data.frame(cv_sK)$var1.var)
 
 ```
 
-###### Ordinary Kriging
+## Ordinary Kriging
 
 Ordinary krigning [@Matheron1973] is one of the most widely used method of kriging which assume that the mean for variable of interest is an unknown constant within the domain. The mean is calculated based on the sample that is within the search window, i.e.,local mean instead of assumed constant mean over entire domain [@Clark2007,@Goovaerts2008]. It assumes the following model:
 
@@ -1590,7 +1595,7 @@ mean(res^2/as.data.frame(cv_oK)$var1.var)
 
 ```
 
-###### Universal Kriging
+## Universal Kriging
 
 The universal kriging is one of the variant of ordinary kriging. This method assume that the mean varies from location to location in a deterministic way (trend or drift) while the variance is constant throughout the domain [@matheron1962trait]. One example could be measurements of temperatures, which are commonly related to elevation (at a known rate of oC by m difference).
 
@@ -1662,7 +1667,7 @@ mean(res^2/as.data.frame(cv_uK)$var1.var)
 
 ```
 
-#####  Which method is the best given our data? {-}
+##  Which method is the best given our data? {-}
 
 We will put the cross validation results together and cross compare across three methods.
 
@@ -1680,16 +1685,16 @@ knitr::kable(summary, caption =NULL)
 
 From the cross validation results **(Table 10.3)**, we want root mean squared error (RMSE) to be low for greater predictive accuracy [@Tziachris2017]. We also want mean error (ME) to be as close to 0 as possible [@Tziachris2017]. And we want mean squared deviation Ratio (MSDR) to be closer to 1 for the good kriging model [@Tziachris2017]. The RMSE is lowest for simple and ordinary kriging, the ME is negative and below zero, and the MSDR of the predictions vs. the sample is low and closer to 1 for both simple and ordinary kriging (Table 10.3). This means the variability in predictions from both kriging are somewhat closer to real values than universal kriging [@Tziachris2017]. Looks like universal kriging is predicting more negative basal area for some of the location within TSA. The choice between simple and ordinary kriging may vary with researchers discretion here.
 
-###### Co-kriging
+## Co-Kriging
 
 Co-kriging uses the information about different covariates to predict the value of the variable of interest at an unsampled location [@Cressie1994]. It utilizes the autocorrelation of the variable of interest and the cross correlations between the variable of interest with all the covariates to make the prediction [@Cressie1994]. In order to implement co-kriging we need to have a strong correlation between the covariates [@Tziachris2017]. The spatial variability of one variable should be correlated with the spatial variability of the other covariates [@Tziachris2017].
 
 
-##### Non-linear Kriging
+## Non-Linear Kriging
 
 In principle, nonlinear kriging algorithms are linear kriging algorithms applied to nonlinear transformations of the data points into a continuous variable [@Deutsch1993GSLIBGS]. We will briefly talk about four principal non-linear kriging techniques in this chapter while our focus mostly is on linear kriging methods.
 
-###### Indicator Kriging
+## Indicator Kriging
 
 Indicator kriging is a non-parametric approach of estimating a binary variable (presence absence or variables that takes 0 or 1 value) of interest at an unsampled or unmeasured location [@Journel1983]. For example, we might have a sample that consists of information on presence or absence of  Douglas-fir tree species within Williams lake timber supply area, where 0 indicates absence and 1 indicates the presence of species. Indicator kriging assumes that mean is a unknown constant over the domain. The only difference between the indicator kriging and ordinary krigging is in the use of binary variable. The basic mathematical formulation of indicator kriging is given below: 
 $$I_{s}= \mu + \epsilon_{s}$$
@@ -1697,12 +1702,11 @@ where, $$I= \text{binary variable preicated at the location s}$$
 $$\mu= \text{unknown mean}$$
 $$\epsilon_{s}=\text{spatially autocorrelated error}$$
 
-###### Probability Kriging
+## Probability Kriging
 
 Probability kriging is useful when the variable of interest is binary as in case of indicator kriging. It is a special form of co-kriging which estimate the conditional probability that the unknown value of a variable at an unsampled location is above a specified cutoff level [@Carr1993]. As in co-kriging, this method utilizes the autocorrelation of variable of interest and the cross correlations between the variable of interest with all the covariates to make the prediction [@Carr1993]
 
-
-###### Disjunctive Kriging
+## Disjunctive Kriging
 
 Disjunctive kriging allows to estimate the value of a variable of interest at an unsampled location and estimating the conditional probability that the unknown value of a variable at an unsampled location is above a specified cutoff level [@Yates1986]. Disjunctive kriging transforms the data into a normal distribution and then determine the probability that true value of variable at each location of interest exceeds the predefined threshold or cut-off probability [@Daya2015].
 
@@ -1715,8 +1719,9 @@ For classical statistics tests,**spatial autocorrelation** is problematic as ord
 :::: {.box-content .case-study-content}
 
 ::: {.box-title .case-study-top}
-#### Case Study {-}
-:::
+## Case Study: Title of case study here 
+You see textual case study content here
+
 For this case study, we will use ground plot data from Young stand monitoring (YSM) program data [@ProvinceofBC2018] for Fort Saint Johns timber supply area (TSA) in the province of British Columbia, Canada.Fort Saint Johns is divided into 6 blocks respectively **Figure 10.17**. There is a total of 108 YSM plots used in this study **Figure 10.17**. The total basal area (m2/ha) is our variable of interest or response variable in this study. For each of the YSM plot the total basal area was calculated by adding the basal area for all trees within the plot. We will use the auxiliary variables such as trees per hectare (TPH), elevation (m), site index, top height(m), and tree volume (m3/ha)
 <p id="box-text">
 </p>
@@ -1728,7 +1733,7 @@ For this case study, we will use ground plot data from Young stand monitoring (Y
 </p>
 ::::
 
-### Spatial Lag Model 
+## Spatial Lag Model 
 
 Spatial lag models assume that the spatial autocorrelation only exist in the response variable or the variable of interest [@Anselin1998]. Spatial lag model has the following general mathematical formulations:
 
@@ -1741,7 +1746,7 @@ $$X=\text{matrix of observations for the predictor variables}$$
 $$\epsilon=\text{vector of error terms}$$
 
 
-##### Steps in fitting spatial lag model:
+## Steps in Fitting Spatial Lag Model:
 
 **Step 1: Build spatial weight matrix**
 
@@ -1799,7 +1804,7 @@ Sometime, only using the p-value to assess significant variables will not be use
 
 Rho (0.16445), reflects the spatial dependence inherent in our sample data, measuring the average influence on observations by their neighboring observations. It has a positive effect and it is significant (p-value < 0.05). As a result, the general model fit improved over the linear model.
 
-### Spatial Error Model 
+## Spatial Error Model 
 
 Spatial error models assume that the spatial autocorrelation exists in the residuals or the error term of the regression equation [@Anselin1998]. The general mathematical formula for spatial error model is given below: 
 
@@ -1816,7 +1821,7 @@ $$X=\text{matrix of observations for the predictor variables}$$
 $$u=\text{indepndent errors}$$
 
 
-##### Steps in fitting spatial error model:
+## Steps in Fitting Spatial Error Model:
 
 **Step 1 and Step 2** in fitting spatial error model is exactly similar to what we did for spatial lag model. 
 
@@ -1852,21 +1857,21 @@ AIC value of model from **step 3** is 868.83 while the AIC value of model from *
 
 The lag error parameter Lambda for the model in **step 4** is positive and significant (p-value < 0.05), indicating the need to control for spatial autocorrelation in the error
 
-### Selection Between Lag and Error Model
+## Selection Between Lag and Error Model
 
 When it is not so clear theoretically that either of the spatial model works for our data, we can compare the model performance parameters: the AIC and Log likelihood. In our case, the spatial error model has lowest AIC and highest negative Log likelihood values. Hence, spatial lag model best fits our data.
 
 :::: {.box-content .call-out-content}
 
 ::: {.box-title .call-out-top}
-#### Remember this? {-}
+## Remember This? {-}
 :::
 
 <p id="box-text"> When the question is which of the two models is better? This is an open question. The general advice is first to look for a theoretical basis to inform your choice. If there are strong substantive grounds for one model instead of the other, you should adopt it. </p>
 
 ::::
 
-### Reflection Questions {-}
+## Reflection Questions {-}
 
 1. Explain probability and non-probability sampling.
 2. Define spatial autocorrelation and semivariogram.

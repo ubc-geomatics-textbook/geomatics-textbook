@@ -1,4 +1,4 @@
-# Data Integration {#data-integration}
+## Data Integration {#data-integration}
 
 **Data Integration**, This chapter is about some of the more practical aspects implementing GIS in a workflow.  What type of problems and pitfalls might you encounter and how do you account for them?
 
@@ -8,7 +8,7 @@ This chapter will walk you through a number of things you will encounter when wo
 :::: {.box-content .learning-objectives-content}
 
 ::: {.box-title .learning-objectives-top}
-#### Learning Objectives {-}
+## Learning Objectives {-}
 ::: 
 
 1. Objective one
@@ -17,12 +17,12 @@ This chapter will walk you through a number of things you will encounter when wo
 
 ::::
 
-### Key Terms {-}
+## Key Terms {-}
 
 Data, Integration, Other Stuff
 
 
-## Problems with data integration 
+## Problems with Data Integration 
 
 Most GIS projects require us to analyze multiple data layers, sometimes from disparate sources to answer our research question.  When working with different layers from different sources you are likely to encounter multiple incongruousness.  What do you do if some of your layers are in vector format and some in raster?  What if one of your datasets is 10 years older than another?  How do you handle data that were collected at different resolutions or scales stored in different file types?  These are questions that pop up every day when working in GIS.
 
@@ -32,7 +32,7 @@ We will discuss what to do when you encounter different:
 3) Datum, extents, scales
 4) Time periods, collection dates
 
-## Framing the problem
+## Framing The Problem
 
 For millennia, wetlands in the Canadian Arctic have been accumulating large stockpiles of Carbon.  Permafrost (frozen ground) and short growing seasons in these landscapes cause dead organic matter freezes into the soil before it can fully decompose.  Climate change in the Arctic is causing permafrost to degrade, at rapid rates in some regions.  This will speed up decomposition of these large Carbon stockpiles and could potential result in a large pulse of greenhouse gasses (Carbon Dioxide and Methane) being released into the atmosphere.  Creating a positive feedback mechanism that further exacerbates warming.  At the same time, climate change is causing trees and shrubs to encroach on the tundra and leading to longer growing seasons.  Increased plant growth sequesters Carbon Dioxide and serves as a negative feedback mechanism ("Remediating" climate change).
 
@@ -40,7 +40,7 @@ For millennia, wetlands in the Canadian Arctic have been accumulating large stoc
 
 Monitoring Carbon balances of Arctic ecosystems is especially difficult and expensive due to the harsh conditions and inaccessible nature of most locations.  Because of this, very little is known about how these systems are and will continue responding to climate change relative to other biomes.  Figuring out the Carbon balance of these can help fill a "big knowledge gap" and improve the accuracy of global climate models.
 
-### About the data
+## About The Data
 
 The MacKenzie Delta (xx km2) is the second largest Arctic Delta in the world.  It is a patchwork of river channels, lakes, boreal forests, and Carbon rich wetlands.  It is very much understudied from the perspective of climate sciences.  To date, only one ground based observation of landscape level Carbon exchange has been made anywhere in the Mackenzie Delta.  In 2017, an intensive study was conducted using a method known as Eddy Covariance to measure the uptake/emission of Carbon Dioxide and Methane across a wetland (xx m2) in real-time (30-minute intervals) at a site in the Delta known as Fish Island (Skeeter et al. 2021). 
 
@@ -67,34 +67,34 @@ What do you do if your data are collected at different resolutions?
 
 
 
-##  Integrating vector and raster data
+##  Integrating Vector and Raster Data
 
 How can you work with both raster and vector data and when might you want to switch between data types?
 
 Evey Eddy Covariance observation has a "footprint" or upwind source area for the Carbon.  It is calculated using some complicated calculus that is well beyond the scope of this class, but 
 
-### Rasterization
+## Rasterization
 
 Say you have a vector layer of landscape classification scheme and need to intersect it with a source area raster 
 
-###  Vectorization  
+##  Vectorization  
 
 Say you have a model that outputs a raster layer representing an upwind source area for an Eddy Covariance observation and you want to display it in a more human friendly format.
 
-### Zonal Statistics
+## Zonal Statistics
 
 Say you have a raster layer (e.g. maximum annual NDVI) and you want to describe it over a certain region.  
 
 
-###  Smoothing   
+##  Smoothing   
 
 
-###  Simplifying   
+##  Simplifying   
 
 
-##  Spatial data errors   
+##  Spatial Data Errors   
 
-###  Accuracy vs. Precision  
+##  Accuracy vs. Precision  
 
 Measurement Errors
 Accuracy:
@@ -108,22 +108,22 @@ If you take five measurements of the same feature, how likely are they to be sim
 
 ![Source](images/16-accuracy-vs-precision2.png){.center}
 
-### Vagueness and Ambiguity
+## Vagueness and Ambiguity
 Vagueness - Victoria ... does it mean Victoria BC vs. Victoria AU
 
 Ambiguity - coastline - is it the high water line? Low water line? mean water level?
 
-###  Quantifying spatial errors    RMSE, Euclid's distance
+##  Quantifying Spatial Errors    RMSE, Euclid's distance
 
 
 
-### Logical Errors
+## Logical Errors
 
 Data incongruousness
 
-### Ecological Fallacy, Atomistic Fallacy, MAUP etc.  Its important to include these, whether here or elsewhere?
+## Ecological Fallacy, Atomistic Fallacy, MAUP etc.  Its important to include these, whether here or elsewhere?
 
-### Other Errors?
+## Other Errors?
 - source data errors, out of date data, data entry & digitization?
 
 ::::
@@ -132,10 +132,10 @@ Data incongruousness
 :::: {.box-content .case-study-content}
 
 ::: {.box-title .case-study-top}
-#### Case Study {-}
-:::
+## Case Study: Title of Case Study here 
+You see textual case study content here 
 
-#### Large Scale {#box-text -}
+## Large Scale {#box-text -}
 
 <p id="box-text">Footprint mapping, temporal upscaling.  I'll fill in more text here later, these figs are just grabbed from my thesis chapters.  The gist of it - Measured NEE in one year.  Have 10 years of climate data + Reanalysis data + satellite data.  Combine these data sources & train a model to do a temporal upscale/sensitivity analysis to see how inter-annual climate variability impacts NEE.  Then do a landscape classification with a greenest pixel NDVI image, intersecting with the flux footprint.  Use that to find the representative areas to do a "back of the envelope" spatial upscaling. </p>
 
@@ -168,10 +168,10 @@ Data incongruousness
 :::: {.box-content .case-study-content}
 
 ::: {.box-title .case-study-top}
-#### Case Study {-}
-:::
+## Case Study: Title of Case Study Here
+You see textual case study content here 
 
-#### Small Scale {#box-text -}
+## Small Scale {#box-text -}
 
 <p id="box-text">Case Study: UBC Trees in a Changing Climate</p>
 

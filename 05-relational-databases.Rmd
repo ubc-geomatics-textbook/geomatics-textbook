@@ -7,14 +7,14 @@ library("plyr")
 library("dplyr")
 ```
 
-# Relational Databases {#relational-databases}
+## Relational Databases {#relational-databases}
 
 You have almost certainly used a relational database in some form during your life, probably without even realizing it. Relational databases are foundational for information management in a GIS. In this chapter, we will look at the formal construction of relational databases, how they are used across a wide range of fields, and how we can use them to analyze spatial and aspatial information for environmental management.
 
 :::: {.box-content .learning-objectives-content}
 
 ::: {.box-title .learning-objectives-top}
-#### Learning Objectives {-}
+## Learning Objectives {-}
 ::: 
 
 1. Identify the purpose of Relational Database Management Systems in GIS
@@ -25,15 +25,15 @@ You have almost certainly used a relational database in some form during your li
 
 ::::
 
-### Key Terms {-}
+## Key Terms {-}
 
 Relational Database Management Systems, Tables, Relations, Rows, Tuples, Records, Columns, Attributes, Items, Structured Query Language, Boolean Logic, Relational Algebra, Entity-Relationship Model, Cartesian Product, Schema, Unary, Binary, Georelational Data Model, Domain
 
-## Relational database management systems
+## Relational Database Management Systems
 
 Suppose you have collected some data about some trees. You might have organized these data into a table, where each row represents a different plot, and each column represents some quantitative or qualitative measure about each record. How do you *manage* these data in order to extract useful information from your trees? This is where Relational Database Management Systems can help. A **Relational Database Management System (RDBMS)** is a software that allows the user to interact with tabular data. The basic services provided by a RDBMS include storing, querying, and manipulating relational databases. We say the databases are *relational* because they are based on a relational model first developed by Edgar Codd in the 1970s at IBM. The relational model for database management is distinguished from non-relational models by the fact that data are stored in highly structured tables instead of some other format like documents. This distinction is important, because the vast majority of GIS software utilize the relational model for database management.
 
-## Relational databases
+## Relational Databases
 
 Within a RDBMS, we find **relational databases**, which are highly structured tables comprised of rows and columns. In fact, a table in a relational database is called a **relation**, a row is a **tuple**, and a column is an **attribute**. Relational databases are a great way to store simple data structures that can be organized into a relation with tuples and attributes. When we say that a table or relation is "structured", we are referring to the fact that the data are organized according to a database **schema**, which is a set of constraints that ensure data integrity and consistency. For example, our set of trees likely all contain the same types of information and this can be easily organized into a relation. Suppose we measured the height, diameter at breast height (DBH), and species of each tree, then our relation would look like Figure \@ref(fig:5-tabular-data-spatial-data).
 
@@ -65,11 +65,11 @@ There are some important rules to be followed for organizing data into a relatio
 
 If any of the above rules are broken, then $R≠A×B$ and you are just looking at a plain-old table instead of a relation. In fact, Codd described a total of 13 rules for a RDBMS, but since this chapter is only a cursory introduction of RDBMS for GIS, you only need to be familiar with the five rules above. In this way, relational databases are comprised of relations that are highly structured by a schema, which allows the user to query, retrieve, update, and delete data using a RDBMS. At this point, you should understand that relational databases are highly structured so that we can apply logical expressions and languages to interact with the information contained within and between the relations. In the next two sections, we will look at how to apply two branches of mathematical logic to relations in order to extract useful information.
 
-## Relational algebra
+## Relational Algebra
 
 One of the fundamental jobs of a RDBMS is to apply relational algebra operations to relations stored in a relational database. Remember that we defined a relation as $R=A×B$ and that any subset of $A×B$ is also a relation. This transitive property of relations combined with the fact that relations are just sets allows us to apply set algebra. In other words, relational algebra operations take one relation as input and produce a new relation as an output without modifying the input relation. This new output relation can then be used as an input to another operation because it is also a relation.
 
-### Selection
+## Selection
 
 **Selection** is the simplest operation to understand and is probably the most-used in day-to-day GIS work. It does exactly what it sounds like, it retrieves a subset of a relation given some predicate or condition. For example, we could select all tree IDs from our relation $R$ in Figure \@ref(fig:5-tabular-data-spatial-data) that have a height greater than 20 m. This would yield tree ID=5. Formally, selection is expressed as $σ_{predicate}(R)$ and the example above would be written as $σ_{height>20}(R)$, which evaluates to the following:
 
@@ -85,7 +85,7 @@ knitr::kable(
 )
 ```
 
-### Projection
+## Projection
 
 If selection is understood to operate on attributes to return tuples, then **projection** is an operation on tuples to return attributes. For example, suppose we are only interested in the height and DBH attributes for the trees. We would use projection to return this new subset of the relation. Formally, projection is expressed as $Π_{predicate}(R)$. Both projection and selection are referred to as **unary** operators because they only require a single relation as input. The example above would be expressed using the attributes that we want to preserve, so $Π_{height,dbh}(R)$, which evaluates to the following:
 
@@ -107,7 +107,7 @@ knitr::kable(
 
 Recall that the output of a relational algebra operation is also a relation. Remember the rule that a relation cannot have any duplicate tuples? Well, in the case of a 1-dimensional relation where we only have one attribute and several tuples, any duplicate values for the tuples must be eliminated, leaving us with only the two unique values "Douglas-Fir" and "Western Hemlock" when we project $R$ over $Species$. You should recognize now that this property of projection can be useful for identifying the unique values of any attribute, which is frequently needed when sorting through a relational database.
 
-### Rename
+## Rename
 
 **Rename** is an operator that allows us to assign a variable name to a relational algebra expression. This has the benefit of making it simpler to track or reuse previous operations in complex relational database algebra. For example, let $S = σ_{height>20}(R)$, then $Π_{species}(S)$ evaluates to:
 
@@ -117,7 +117,7 @@ knitr::kable(
 )
 ```
 
-### Set Union
+## Set Union
 
 Next we will introduce **binary** operators, that is, they take two relations as input. **Set Union** is one such operator that effectively appends one relation to another. The important rule for union is that both input relations must share the same number and type of attributes or "union compatible". Formally, set union is expressed as $S∪T$ where $S$ and $T$ are the two input relations. You can think of set union as simply concatenating the tuples of the two relations together. In other words, the tuples of $S$ are appended to the tuples of $T$ to generate a new output relation. For example, suppose that we make two subsets of our relation $R$ of trees:
 
@@ -139,7 +139,7 @@ knitr::kable(
 
 Formally, this would all be expressed as $σ_{height>20}(R)∪σ_{height≥20}(R)$ or $S∪T$, which in this case is also just equivalent to $R$. You should see that the result of union is an inclusion of all tuples, so semantically a union can be read as "the tuples in relation $S$ _or_ the tuples in relation $T$". 
 
-### Set Intersection
+## Set Intersection
 
 On the other hand, suppose that we want to define a new relation based on restricting the set of tuples that are in two different relations. This is known as **set intersection** and is formally expressed as $S∩T$. Just like union, intersection also requires that the two relations be union compatible. Suppose we have two relations defined by subsetting height by < 25 m and > 15 m:
 
@@ -168,7 +168,7 @@ knitr::kable(
 
 Semantically, set intersection is read as "the tuples in relation S _and_ the tuples in relation T". 
 
-### Set Difference
+## Set Difference
 
 **Set difference** returns the tuples that are unique in one relation relative to another relation, but both relations must be union compatible. Formally, difference is expressed as $S-T$, and just like mathematical subtraction, the order of relations in the set difference is important and non-commutative. For example, $σ_{height<25}(R)-σ_{height>15}(R)$ evaluates to:
 
@@ -188,7 +188,7 @@ knitr::kable(
 
 Semantically, you would read the set difference $S-T$ as "the tuples in relation $S$ minus any of the same tuples in relation $T$". 
 
-### Cartesian Product
+## Cartesian Product
 
 So far, we have seen the cases of mathematical addition (set union) and subtraction (set difference), but we can also apply multiplication and division. Multiplication of two relations is simply known as the **Cartesian product**. In the same way that a set of tuples and attributes can be multiplied to create a relation $R=A×B$, we can also multiply two relations together and they do not need to be union compatible. For example, if $S = Π_{height,dbh}(σ_{height<20}(R))$ evaluates to:
 
@@ -222,7 +222,7 @@ knitr::kable(
 )
 ```
 
-### Set Divison
+## Set Divison
 
 Finally, **set division** is an operation of division between two relations, and you can think of it semantically as, "all the values of an attribute in $R$ that are found with the tuples of $S$." Set division is expressed as $S÷T=U$ and like the Cartesian product and set difference, set division is non-commutative, so the order of $S$ and $T$ changes the value of $U$. 
 
@@ -328,11 +328,11 @@ knitr::kable(
 
 We have now considered the eight primary relational algebra operators (selection, projection, rename, set union, set intersection, set difference, Cartesian product, and set division) that can be applied to relations in a RDBMS. In the next section, we will look at another set of logical operators known as Boolean algebra, which give rise to logical languages for interacting with a RDBMS.
 
-## Boolean algebra
+## Boolean Algebra
 
 Whenever we create and solve an arithmetic or relational algebra expression, we usually focus on the _value_ of the output. In other words, $1+1$ evaluates to a value of $2$. But we often need to evaluate the _truth_ of a statement. For example, $1+1=2$ is a $true$ statement and $1+1=1$ is a $false$ statement. **Boolean algebra** seeks to express mathematical expressions in terms of _truth values_. Boolean truth values are usually expressed as $true$ or $false$, but it is also common in computer programming languages and GIS to see these encoded with values of $1$ for $true$ and $0$ for $false$. Attributes can also take on Boolean values of $true$ or $false$ as a data type. Boolean algebra uses equality and conditional operators, which we will consider next.
 
-### Equality operators
+## Equality Operators
 
 You are probably already familiar with the basic equality operators used in Boolean algebra:
 - $=$ "exactly equal to" (usually expressed with $==$)
@@ -399,7 +399,7 @@ knitr::kable(
 )
 ```
 
-### Conditional operators
+## Conditional Operators
 
 Now that we have a good understanding of equivalency operators, let us turn to consider conditional operators, which are also known as Boolean operators. Boolean operators are, in some ways, similar to some arithmetic operators except that they are based on natural language. There are three primary Boolean operators: $AND$, $OR$, $XOR$, and $NOT$. These operators are commonly used for database queries and with search engines, and indeed they form an important basis for query languages that are used to interact with an RDBMS. 
 
@@ -471,17 +471,17 @@ Figure \@ref(fig:5-boolean-xor) illustrates how Boolean $XOR$ excludes all the t
 ```
 <br/>
 
-## Joining relations
+## Joining Relations
 
 More often than not, information is stored in separate relations, even if that information is about the same features like lakes, forests, or cities. Remember that a relation cannot have any duplicate tuples. This rule encourages the efficient storage and retrieval of information because information can be dynamically related as needed. For example, consider the overwhelming amount of information that is collected during a census. During the last census in 2016, there were over 14 million households in Canada. Can you imagine wielding a relation with 14 million tuples? These households can be segmented geographically by province, metropolitan areas, municipalities, and census subdivisions as well as by socioeconomic themes such as Indigenous peoples, age, sex, education, income, labour, housing, language, and others. Thus, those 14 million households can be divided up into many smaller relations, which can be accessed and summarized geographically and thematically. Since these relations represent different geographies or themes on the same set (i.e., households), we need to be more specific about how exactly two relations get combined if, for example, we want to combine themes with geographies. For this reason, we have joins. 
 
-### Keys
+## Keys
 
 Like the Cartesian product, joins are always binary operations, requiring two relations as input. While the Cartesian product combines relations by ordering all pairs of the elements from the two relations, we need a different method for correctly linking the tuples in relation $R$ that correspond to the tuples of $S$. To do this, we rely on a common attribute called a **key**, which acts as an address between two relations. A **primary key** serves the purpose to identify the unique tuples in a relation and so it can be used to link other attribute information to those tuples. In a GIS, anytime that you create, copy or modify features such as points, lines or polygons, the newly created data layer (within the relational database) will be indexed with a primary key that counts from 1 to the number of features (tuples) $n$ or from 0 to $n-1$. For example, $ID$ in our relation $R$ serves as the primary key. There are other attributes in $R$ that also uniquely identify all the tuples, but why do you think $Height$ or $DBH$ would be a poor operational choice as a primary key for a large field campaign?
 
 While the primary key identifies the unique tuples in relation $R$, another key called the **foreign key**, serves to locate the same tuples in another relation $S$. In other words, a join is defined by a common attribute that is shared between two relations, the primary key in $R$ and the foreign key in $S$. For example, $Species$ is a foreign key in $R$ and a primary key in $S$. The case of joining two relations using a set of attributes instead of a single attribute requires a **composite key**. For example, suppose we have a spatial dataset of all the municipalities across Canada. Some of these municipalities will share the same name, though they are in different provinces. Richmond is a city in British Columbia, Ontario, and Quebec. If we need to join census data to these spatial features, we would need to use a composite key comprised of $CityName$ and $ProvinceName$.
 
-### Natural Join
+## Natural Join
 
 A **natural join ** restrictively joins two relations based on a set of common attributes. In this way, natural join is similar to a set intersection in that we are only combining tuples that share an attribute value and any tuples that do not share an attribute value in the other relation are dropped from the output. However, a natural join does not require that two relations be union compatible like a set intersection. Instead, the only requirement is that at least one attribute is shared between the two relations and has the same domain. Formally, natural join is expressed as $R⋈S$. and is sometimes referred to as an inner join. As an example, consider our example relations $R$ and $S$:
 
@@ -528,7 +528,7 @@ knitr::kable(
 )
 ```
 
-### Right and Left Outer Join
+## Right and Left Outer Join
 
 Sometimes, it may be desirable to join attributes or tuples from one relation, but not the other. For these cases, we can use either **right outer join** or **left outer join**. Formally, right outer join is expressed as $R⋉S$ and evaluates to:
 
@@ -546,7 +546,7 @@ knitr::kable(
 )
 ```
 
-### Theta Join
+## Theta Join
 
 We can also join relations conditionally and without sharing a common attribute, which is known as a **theta join** and expressed as $R⋈_θS$. To understand how a theta join works, it is useful to recognize that $R⋈_θS=σ_{θ}(R×S)$. As you can see, a theta join is simply a selection of a Cartesian product where theta $θ$ is the predicate. For example, $R⋈_{height>19}S$ evaluates to:
 
@@ -556,7 +556,7 @@ knitr::kable(
 )
 ```
 
-### Cardinality of Joins
+## Cardinality of Joins
 
 Depending on the schema of the two relations being joined, the number of tuples joined from one relation to another can vary and is known as **cardinality**. In the simplest case, one tuple in $R$ is joined to one tuple in $S$, and this cardinality is known as **one-to-one** usually expressed as 1:1. The natural join example above, $R⋈S$, is an example of **one-to-many** (1:M) or **many-to-one** (M:1) cardinality because one species tuple found in $S$ corresponds to many species tuples in $R$. Finally, **many-to-many** (M:M) cardinality describes the case where there are multiple tuples in $R$ that correspond to multiple tuples in $S$. An example of a many-to-many relationship might be many species of trees in $R$ that correspond to many forest stands in $S$. In other words, a forest stand might be comprised of many species and any particular species might be found in many forest stands. Figure \@ref(fig:5-join-cardinality) illustrates how cardinality might emerge depending on the relational schema and problem at hand.
 
@@ -566,7 +566,7 @@ Depending on the schema of the two relations being joined, the number of tuples 
 ```
 <br/>
 
-### Structured Query Language
+## Structured Query Language
 
 Throughout this chapter, we have seen the various ways that relations are manipulated through relational algebra, Boolean logic, and joins. Since a GIS relies on a RDBMS to interact with data, especially data in the attribute table, geomatics professionals literally need a language to programmatically execute relational algebra, joins, and the other functions of a RDBMS within the GIS software. Such languages are known as query languages, each with its own syntax and use. By far, the most commonly used query language for RDBMS in GIS and across other systems is **Structured Query Language** abbreviated **SQL** and pronounced "sequel". SQL has five primary language elements:
 1. Clauses state an action or operation;
@@ -630,13 +630,13 @@ knitr::kable(
 
 Your natural reaction to this problem might be to write a long SQL statement like `SELECT * FROM S WHERE code="BB" OR code="CW" OR code="FD" OR code="HW" OR code="YC";`. This is perfectly fine, but you can write this more economically with `IN` such as `SELECT * FROM S WHERE code IN("BB","CW","FD","HW","YC");`. Be aware that a common mistake is to write a long predicate using `OR` like `code="BB" OR "CW" OR "FD" OR "HW" OR "YC"`, but this is incorrect syntax in SQL. Remember that each side of an `OR` or `AND` operator is an _expression_ that evaluates to a Boolean truth value. So `code="BB" OR "CW"` will return an error because `"CW"` alone cannot be evaluated to a Boolean truth value.
 
-### Case Study: Combining Socioeconomic and Vegetation Information for Assessing Population Vulnerability
+## Case Study: Combining Socioeconomic and Vegetation Information for Assessing Population Vulnerability
 
 *Case Study Author: Taelynn Lam (CC BY 4.0. unless otherwise indicated), University of British Columbia, Master of Geomatics for Environmental Management graduate, 2021*
 
 Vegetation diversity in urban landscapes is important to support urban forest biodiversity and residents’ mental health. The aim of this case study is to link together socioeconomic data and vegetation information to identify areas to prioritize intervention in the City of Vancouver. [The Canadian Index of Multiple Deprivation (CIMD)](https://www150.statcan.gc.ca/n1/pub/45-20-0001/452000012019001-eng.htm) data has four dimensions of population vulnerability scores and we will aggregate these scores to obtain an overall vulnerability score for each dissemination area (DA) in Vancouver. We will compute the vegetation diversity score using [street trees data](https://opendata.vancouver.ca/explore/dataset/street-trees/) and vegetation type cover richness data^[Obtained from reclassifying [Land Cover Classification 2014 - 2m Raster](http://www.metrovancouver.org/data) to one vegetation class and five vegetation classes and counted the number of vegetation type cover classes using the `Zonal Histogram` Tool.] and then use query to identify priority areas.
 
-#### Join
+## Join
 
 The raw CIMD tabular data includes the DA code and the corresponding vulnerability scores (table 1). In order to visualize these scores on a map, we will need to relate these scores to spatial data that include the information about the DA polygons and the coordinate pairs associated with each DA. Hence, a polygon shapefile of the DAs in Vancouver^[Extracted by clipping the [Canada-wide dissemination areas boundary](https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm) to the [City of Vancouver's municipality boundary](https://opendata.vancouver.ca/explore/dataset/city-boundary).] is obtained, and its attributes are shown in Table 2.
 
@@ -708,7 +708,7 @@ m
 ```
 <br/>
 
-#### Calculation
+## Calculation
 
 Suppose we would like to calculate the overall vulnerability score for each DA. We would first name a new field (e.g., "aggregate_score"), set the data type to double (to allow negative values and values with decimal places), and then enter the mathematical expression to specify the calculation to sum the four dimensions of CIMD scores and divide it by four to obtain an averaged vulnerability score for each DA. Using similar steps, we could apply a min-max normalization to transform this overall vulnerability score to a range between 0 and 1 to allow for a quick interpretation of the score. The formula is as follows: $\frac{(X - X_{min})}{(X_{max} - X_{min})}$.
 
@@ -773,7 +773,7 @@ m1
 ```
 <br/>
 
-#### Query  
+## Query  
 
 Areas with a higher proportion of vulnerable populations and less variety of vegetation to support resident’s mental wellbeing are more in need for intervention. Supposed we define the priority area as DAs with a normalized aggregated vulnerability score greater than or equal to 0.5 and a vegetation diversity score less than 0.5. We could use the `Select By Attributes` tool to identify these priority areas by entering the appropriate query expression.
 
@@ -795,7 +795,7 @@ knitr::kable(
 :::: {.box-content .call-out-content}
 
 ::: {.box-title .call-out-top}
-#### Remember this? {-}
+## Remember This? {-}
 :::
 
 <p id="box-text">Models are abstractions of reality and help us understand and communicate complex ideas.</p>
@@ -806,14 +806,14 @@ knitr::kable(
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
 
-### Reflection Questions {-}
+## Reflection Questions {-}
 
 1. Explain ipsum lorem.
 2. Define ipsum lorem.
 3. What is the role of ispum lorem?
 4. How does ipsum lorem work?
 
-### Practice Questions {-}
+## Practice Questions {-}
 
 2. Given ipsum, solve for lorem.
 3. Draw ipsum lorem.

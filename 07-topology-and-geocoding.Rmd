@@ -5,7 +5,7 @@ Frequently, we need spatial data to behave and relate and in specific and predic
 :::: {.box-content .learning-objectives-content}
 
 ::: {.box-title .learning-objectives-top}
-#### Learning Objectives {-}
+## Learning Objectives {-}
 ::: 
 
 1. Understand the role of topology in governing data behaviour
@@ -18,7 +18,7 @@ Frequently, we need spatial data to behave and relate and in specific and predic
 
 ::::
 
-### Key Terms {-}
+## Key Terms {-}
 
 Vertex, Node, Pseudonode, Dangle, Planar Topology, Non-Planar Topology, Geocoding, Adjacency, Overlap, Connect, Inside, Reverse Geocoding
 
@@ -46,7 +46,7 @@ Implementing planar topology involves defining specific rules for how features s
 
 So far, we have seen that there are nine ways to combine feature geometries (points, lines, and polygons). We can extend this understanding to include at least six different ways that they can relate to one another: adjacent; overlap; intersect; connect; cover; and inside. Some of these relationships can be modeled *between* two different spatial layers (e.g., two point layers) or *within* a single spatial layer. In the following sections, we will look at different planar topological rules that apply both between and within feature geometries.
 
-### Adjacency and Overlap
+## Adjacency and Overlap
 
 There are times when we need to ensure that two polygons are **adjacent** to one another by sharing a common edge. If two polygons are not adjacent to one another, then a gap, known as a **sliver**, exists between them or they must **overlap**. Consider the case where we are mapping land covers. If we have a formal scheme that describes all possible land covers, then we expect that a map of land covers will have perfect adjacency between all polygons so that there are no areas that are not mapped (i.e., slivers) and that no area has multiple, overlapping land covers. Since lines are also 2-dimensional, lines can overlap other lines. Depending on the context, a topological rule may be needed to promote or prevent this relationship. For example, if you are modeling bus routes, then one road might support several different routes.
 
@@ -57,7 +57,7 @@ Some examples of adjacency and overlap topological rules:
 - Lines must not overlap other lines
 - Lines must not self-overlap
 
-### Intersect and Connect
+## Intersect and Connect
 
 As we have seen from Chapter 3, lines are often used to represent phenomena that flow, so intersection and connection are important concepts for these representations. Important to understanding how connection and intersection work in planar topology, we need to understand that lines are comprised of a set of vertices and nodes. A **node** is simply the terminating vertex in a set of vertices for a line. For example, suppose the line segment $A$ has a set of vertices, $[[1,0],[1,3],[1,5]]$. Then the nodes for $A$ are $[1,0]$ and $[1,5]$. Since nodes define the end points of a line segment, they are key to enforcing connection rules. We will look at network analysis in more detail in the next chapter. For now, let us consider two different networks that can help us conceptualize some fundamental line topology using nodes.
 
@@ -90,7 +90,7 @@ Some examples of intersection and connection topological rules:
 - Lines within a same layer must not self-intersect
 - Lines must not have dangles
 
-### Coincident and Disjoint
+## Coincident and Disjoint
 
 Point features can be either **coincident** or **disjoint** with other point features. Point features that need to be disjoint may be representing trees, mountain peaks, or any similar type of feature that would be expected to be discrete in geographic space. There are also instances where we might need one set of point features to be coincident with another such as oil and gas well sites such as where oil and gas well sites 
 
@@ -98,7 +98,7 @@ Some examples of coincident and disjoint topological rules:
 - Points must be disjoint with other points
 - Points must by coincident with other points
 
-### Cover
+## Cover
 
 **Cover** refers to planar topology where a feature lays on or within another feature. For example, dams represented as point features must be covered by a line representing a river. As well, property parcels must be covered by the municipal or regional tax authority. Lines representing rivers must be covered by watersheds.
 
@@ -107,33 +107,33 @@ Some examples of cover topological rules:
 - Point must be covered by a polygon
 - Line must be covered by a polygon
 
-### Multipart Geometrics
+## Multipart Geometrics
 
-### Multipatch Features
+## Multipatch Features
 
-### Convex Hull
+## Convex Hull
 
-### Delauney Triangles
+## Delauney Triangles
 
-### Duplicates
+## Duplicates
 
-### Gaps and Slivers
+## Gaps and Slivers
 
-### Data Models Supporting Planar Topology
+## Data Models Supporting Planar Topology
 
 ## Geocoding
 
 **Geocoding** is the process of converting addresses to geographic coordinates, while **reverse geocoding** is the process of converting geographic coordinates to addresses. In order to achieve this conversion, an **address locator** uses reference spatial data that are mapped to a geographic or projected coordinate system in order to locate new addresses or coordinates. Usually, an address locator relies on several pieces of reference spatial data such as maps of road networks, postal codes, cities, provinces or states, and countries. If you  It is important that the city, province, and country are mapped and specified because road names frequently repeat in different cities (e.g., Main Street). If you are aiming to geocode addresses in a single city, then it is feasible to manually specify your own address locator using available data such as roads, parcels, neighborhoods, and postal codes. However, for geocoding across large areas, this may not be feasible and you should instead rely on geocoding services that use large databases of reference spatial data.
 
-### Street Addresses
+## Street Addresses
 
 left/right side of street
 
-### Postal Codes
+## Postal Codes
 
 Standards for postal codes vary from country to country. In Canada, postal codes are six characters and alphanumeric. For example, the postal code for the University of British Columbia is V6T 1Z4. Whenever you are geocoding, you need to ensure that you are paying special attention to formatting, especially for Canadian postal codes, which are sometimes separated by a spacing character like V6T 1Z4 or no spacing character like V6T1Z4. Postal codes can be useful to include into an address locator because they are always unique, unlike placenames or street addresses. However, postal codes usually cover large areas, so they must be used in concert with more specific, local information when geocoding.
 
-### Geocoding Services
+## Geocoding Services
 
 matching
 
@@ -148,14 +148,14 @@ matching
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
 
-### Reflection Questions {-}
+## Reflection Questions {-}
 
 1. Give some examples of situations where you might use planar and non-planar
 2. Define ipsum lorem. 
 3. What is the role of ispum lorem?
 4. How does ipsum lorem work?
 
-### Practice Questions {-}
+## Practice Questions {-}
 
 1. Draw a convex hull for the points below.
 2. Given ipsum, solve for lorem.

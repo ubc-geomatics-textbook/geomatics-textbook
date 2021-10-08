@@ -662,7 +662,7 @@ knitr::kable(
 
 The tabular data of the CIMD scores are related to the DAs polygon by the DA code. The cardinality of the relationship between these two tables is one-to-one as each DA is described by one set of the CIMD scores. To join the CIMD scores to the Vancouver DA polygons, we would use the `PRCDDA` attribute in the CIMD table as the foreign key to perform a join on the `DAUID` attribute in the Vancouver DA polygon relation. Now that the CIMD scores are joined to the Vancouver DA polygon attribute table, we can create choropleth maps to display the vulnerability scores of the DAs (Figure \@ref(fig:5-situational-vulnerability-leaflet)).
 
-```{r, include=FALSE}
+```{r, include=FALSE, cache=TRUE}
 
 DA_CIMD <- readOGR(dsn = "data/05", layer = "VancouverDA_CIMD")
 

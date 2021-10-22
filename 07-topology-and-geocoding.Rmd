@@ -31,7 +31,7 @@ fig_cap <- paste("Grid showing all the combinations of how point, line and polyg
 knitr::include_graphics("images/07-topology-grid.png")
 ```
 
-It is important to recognize that there may be cases where we "expect" that a given combination of features will conform to a specific interaction. For example, the provinces and territories of Canada are typically represented as polygons that share adjacent boundaries. That is, the adjacent boundaries shared between any two provinces or territories cannot logically overlap as this representation (model) would contravene the legal definitions of the provinces and territories. In another case, a human technician may erroneously digitize a road that crosses another road without indicating that the two roads share an intersection, which could have consequences for how traffic flow can be modeled between the two roads. These are both examples of situations where topology is needed. Topology applies logic to define how features are expected to relate to other features in order to conform to knowledge systems like legal definitions of land and traffic flow. In short, topology ensures data integrity for other types of analysis.
+It is important to recognize that there may be cases where we "expect" that a given combination of features will conform to a specific interaction. For example, the provinces and territories of Canada are typically represented as polygons that share adjacent boundaries. That is, the adjacent boundaries shared between any two provinces or territories cannot logically overlap as this representation (model) would contravene the legal definitions of the provinces and territories. In another case, a human technician may erroneously digitize a road that crosses another road without indicating that the two roads share an intersection, which could have consequences for how traffic flow can be modeled between the two roads (i.e., intersection with traffic light versus overpass). These are both examples of situations where topology is needed. Topology applies logic to define how features are expected to relate to other features in order to conform to knowledge systems like legal definitions of land and traffic flow. In short, topology ensures data integrity for other types of analysis.
 
 ## Planar vs. non-planar topology
 
@@ -42,14 +42,13 @@ On the other hand, **non-planar** topology is the concept that vertices of featu
 ``` {r, native-land-data-load, echo=F}
 library(leaflet)
 library(rgdal)
-vancouver_island <- rgdal::readOGR("Data/07/07-vancouver_island.geojson", verbose=F)
 native_land <- rgdal::readOGR("Data/07/07-native_land_vancouver_island.geojson", verbose=F)
 labels <- native_land@data$Name
 ```
 
 ``` {r native-land-leaflet-setup}
 getTilesURL <- "https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=06d706f23fc4461db5db742f930174fc"
-m <- leaflet(vancouver_island) %>%
+m <- leaflet(native_land) %>%
   addTiles(getTilesURL) %>%
   addScaleBar(position = c("topleft")) %>%
   setView(lat = 49.25, lng = -125, zoom = 7) %>%
@@ -103,7 +102,7 @@ Some examples of adjacency and overlap topological rules:
 As we have seen from Chapter 3, lines are often used to represent phenomena that flow, so intersection and connection are important concepts for these representations. Important to understanding how connection and intersection work in planar topology, we need to understand that lines are comprised of a set of vertices and nodes. A **node** is simply the terminating vertex in a set of vertices for a line. For example, suppose the line segment $A$ has a set of vertices, $[[1,0],[1,3],[1,5]]$. Then the nodes for $A$ are $[1,0]$ and $[1,5]$ (Figure \@ref(fig:7-node)). Since nodes define the end points of a line segment, they are key to enforcing connection rules. We will look at network analysis in more detail in the next chapter. For now, let us consider two different networks that can help us conceptualize some fundamental line topology using nodes.
 
 ```{r, 7-node, fig.align = 'center', out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste("Caption here. Pickell, CC-BY-SA-4.0.")
+fig_cap <- paste("Lines are always comprised of two nodes. Line A shown here has nodes at [1,0] and [1,5]. Pickell, CC-BY-SA-4.0.")
 Ax <- c(1,1,1)
 Ay <- c(0,3,5)
 plot(1,1,ylim=c(-1,6),xlim=c(-1,6),type="n",xlab="",ylab="",xaxt="n",yaxt="n")
@@ -242,18 +241,11 @@ Some examples of coincident and disjoint topological rules:
 
 ### Cover
 
-**Cover** refers to planar topology where a feature lays on or within another feature. For example, dams represented as point features must be covered by a line representing a river (Figure \@ref(fig:7-dam-on-river)). Similarly, lines representing rivers must be covered by watersheds (polygons). As well, property parcels must be covered by the municipal or regional tax authority (Figure \@ref(fig:7-parcel-in-tax-region)).
+**Cover** refers to planar topology where a feature lays on or within another feature. For example, dams represented as point features must be covered by a line representing a river (Figure \@ref(fig:7-dam-river-watershed)). Similarly, lines representing rivers must be covered by polygons representing watersheds. As well, property parcel polygons must be covered by the municipal or regional tax authority polygon.
 
-[two panel plot showing dam (point) on river (line) and river (line) in watershed (polygon)]
-```{r 7-dam-on-river, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste("Caption here. Author, CC-BY-SA-4.0.")
-knitr::include_graphics("images/07-dam-on-river.png")
-```
-
-[plot showing property parcel (polygon) within tax region (polygon)]
-```{r 7-parcel-in-tax-region, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste("Caption here. Author, CC-BY-SA-4.0.")
-knitr::include_graphics("images/07-parcel-in-tax-region.png")
+```{r 7-dam-river-watershed, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste("Topological relationship between dam (point) covered by a river (line), which is covered by a watershed (polygon). Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/07-dam-river-watershed.png")
 ```
 
 Some examples of cover topological rules:
@@ -264,24 +256,41 @@ Some examples of cover topological rules:
 
 ### Multipart geometries
 
-Sometimes we need to represent several points, lines or polygons as a collection, which is known as **multipart geometries**. Multipart geometries allow us to represent several disjoint and non-adjacent geometries as a single feature. In this way, we can assign attribute values to the collection of features rather than each geometry individually. The territorial boundary of Canada is a good example of an instance where a multipart geometry can be useful because that all of the islands in the Territories, British Columbia, and Eastern Canada can be represented and associated with a single feature in the attribute table.
+Sometimes we need to represent several points, lines or polygons as a collection, which is known as **multipart geometries**. Multipart geometries allow us to represent several disjoint and non-adjacent geometries as a single feature. In this way, we can assign attribute values to the collection of features rather than each geometry individually. The territorial boundary of Canada is a good example of an instance where a multipart geometry can be useful because all of the contiguous land and non-contiguous land (i.e., islands) can be represented and associated with a single feature in the attribute table. However, if the distinction of features is important, such as identifying the names of islands in the Haida Gwaii archipelago, then a singlepart geometry should be used (Figure \@ref(fig:7-haida-gwaii-leaflet)).
 
-[leaflet map showing Canada boundary]
 ``` {r echo=FALSE, warning=FALSE, message=FALSE}
-countries <- rgdal::readOGR("Data/02/canada.geojson", verbose=F)
-
-m = leaflet(countries) %>%
-  addTiles() %>%
-  addScaleBar(position = c("topleft")) %>%
-  addPolygons(stroke = T, color="black", weight=1, smoothFactor = 0.3, fillOpacity = 0) %>%
-  addLegend(values = , group = "Singlepart", opacity = 1, title = "Canada Singlepart") %>%
-  addPolygons(stroke = T, color="Red", weight=1, smoothFactor = 0.3, fillOpacity = 0) %>%
-  addLegend(values = , group = "Multipart", opacity = 1, title = "Canada Multipart")
+haida <- rgdal::readOGR("Data/07/07-haida-gwaii-islands-names.geojson", verbose=F)
+labels2 <- haida@data$Island_Name
 ```
 
-```{r 7-canada-leaflet, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-fig_cap <- paste(". Pickell, CC-BY-SA-4.0.")
-m1
+``` {r echo=FALSE, warning=FALSE, message=FALSE}
+getTilesURL2 <- "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+m2 = leaflet(haida) %>%
+  addTiles(getTilesURL2) %>%
+  addScaleBar(position = c("topleft")) %>%
+  setView(lat = 53, lng = -132, zoom = 7) %>%
+  addPolygons(data=haida,
+              fillColor = "#993300",
+              weight = 0.6,
+              opacity = 1,
+              color = "#000000",
+              dashArray = NULL,
+              fillOpacity = 1,
+              highlight = highlightOptions(
+                weight = 1.8, 
+                color = "#7d7d7d",
+                dashArray = NULL,
+                fillOpacity = 0.7,
+                bringToFront = TRUE),
+              label = labels2,
+              labelOptions = labelOptions(
+                style = list("font-weight" = "normal", padding = "3px 8px"),
+                textsize = "12px", direction = "auto"))
+```
+
+```{r 7-haida-gwaii-leaflet, fig.cap = fig_cap, out.width= "50%", echo = FALSE}
+  fig_cap <- paste("Singlepart geometry of the Haida Gwaii archipelago off the west coast of British Columbia, Canada. Hover over the islands to see the names. Polygon data from Statistics Canada and island placenames from Natural Resources Canada. Open Government License - Canada.")
+m2
 ```
 
 Although it is possible to convert from a multipart geometry into singlepart geometries, you need to carefully consider how your features should be represented in the attribute table. For example, if you will be undertaking calculations using area or perimeter of the constituent polygons that comprise a multipart geometry of Canada, then you will return a single value for all of Canada while singlepart geometries would return values for each individual polygon. As well, area calculations can vary depending on the model you use. For example, approximately 27% of Canada's land area (including freshwater), is comprised of more than 52,000 islands, which is a statistic you could only calculate with singlepart geometry. Thus, the choice of representing a feature using singlepart or multipart geometry should be based on how the features will be used in your analysis (i.e., aggregated versus disaggregated).
@@ -298,27 +307,14 @@ Like multipart geometries, **multipatch geometries** represent several *faces* o
 
 ### Delauney triangles
 
-### Duplicates
-
-### Gaps and slivers
-
 ### Data models supporting planar topology
 
 ## Geocoding
 
-**Geocoding** is the process of converting addresses to geographic coordinates, while **reverse geocoding** is the process of converting geographic coordinates to addresses. In order to achieve this conversion, an **address locator** uses reference spatial data that are mapped to a geographic or projected coordinate system in order to locate new addresses or coordinates. Usually, an address locator relies on several pieces of reference spatial data such as maps of road networks, postal codes, cities, provinces or states, and countries. If you  It is important that the city, province, and country are mapped and specified because road names frequently repeat in different cities (e.g., Main Street). If you are aiming to geocode addresses in a single city, then it is feasible to manually specify your own address locator using available data such as roads, parcels, neighborhoods, and postal codes. However, for geocoding across large areas, this may not be feasible and you should instead rely on geocoding services that use large databases of reference spatial data.
-
-### Street addresses
-
-left/right side of street
-
-### Postal codes
-
-Standards for postal codes vary from country to country. In Canada, postal codes are six characters and alphanumeric. For example, the postal code for the University of British Columbia is V6T 1Z4. Whenever you are geocoding, you need to ensure that you are paying special attention to formatting, especially for Canadian postal codes, which are sometimes separated by a spacing character like V6T 1Z4 or no spacing character like V6T1Z4. Postal codes can be useful to include into an address locator because they are always unique, unlike placenames or street addresses. However, postal codes usually cover large areas, so they must be used together with more specific, local information when geocoding.
+**Geocoding** is the process of converting addresses to geographic coordinates, while **reverse geocoding** is the process of converting geographic coordinates to addresses (Figure \@ref(fig:07-geocoding)). In order to achieve this conversion, an **address locator** uses reference spatial data that are mapped to a geographic or projected coordinate system in order to locate new addresses or coordinates. Usually, an address locator relies on several pieces of reference spatial data such as maps of road networks, postal codes, cities, provinces or states, and countries. If you  It is important that the city, province, and country are mapped and specified because road names frequently repeat in different cities (e.g., Main Street). If you are aiming to geocode addresses in a single city, then it is feasible to manually specify your own address locator using available data such as roads, parcels, neighborhoods, and postal codes. However, for geocoding across large areas, this may not be feasible and you should instead rely on geocoding services that use large databases of reference spatial data.
 
 ### Geocoding services
 
-matching
 
 
 ## Case study: Working with Canadian census data

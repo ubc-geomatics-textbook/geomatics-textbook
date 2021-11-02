@@ -700,24 +700,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">2.4.2</span> Vector Data</h3>
 <p>The vector data model is much more well suited to represent discrete phenomena than the raster data model. A vector feature is a representation of a discrete object as a set of x,y coordinate pairs (points) linked to set of descriptive attribute about that object. A vector feature’s coordinates can consist of just one x,y pair to form a single point feature, or multiple points which can be connected to form lines or polygons (see figure). The non-spatial attribute data is typically stored in a <strong>Tabular</strong> format separate from the spatial data, and it is linked using an index. One of the key advantages of the vector model is the ability to store and retrieve many attributes them quickly. In GIS, vector data are commonly encountered as: political boundaries, cenus data, pathways (road, trails, etc.), point location (stop sign, fire hydrant), etc.</p>
 <div class="figure">
-<img src="images/03-vector-example.png" class="center" alt="" />
-<p class="caption">Vector objects (points, lines, or polygons) are stored along with any number of attribute. Point, line, and polygon data are typically stored in separate files. Each object in the map view is labeled with it’s index. This value corresponds to the row in the attribute table and is useful for locating the attributes that correspond to the object.[3]</p>
+<img src="images/03-vector-types.png" class="center" alt="" />
+<p class="caption">Vector objects (points, lines, or polygons) are stored along with any number of attribute. Point, line, and polygon data are typically stored in separate files.</p>
 </div>
 <p><strong>Points</strong> are “zero-dimensional,” they have no length, or width. A point feature is just an individual 𝒙,𝒚 coordinate pair representing a precise location, that has some linked attribute information. Points are great for representing a variety of objects, depending on the scale. Fire hydrants, light poles, and trees are suitable to be represented as points in almost any application. If you are making a map of mines in British Columbia, or cities across Canada, it’s probably acceptable to just display them as points.</p>
-<div class="figure">
-<img src="images/03-vector-example.png" class="center" alt="" />
-<p class="caption">Points</p>
-</div>
 <p><strong>Lines</strong> are one-dimensional, they have length, but no width and thus no area. A line consists of two or more points. Every line must have a start point and end point, they may also have any number of middle points, called vertices. A vertex is just any point where two or more lines meet. Lines are also great for representing a variety of objects, depending on the scale. Hiking trails, flight paths, coastlines, and power lines are suitable to be represented as lines in almost most applications. When making smaller scale maps, its often sufficient to represent rivers as lines, though at large scales we might elect to use a polygon.</p>
-<div class="figure">
-<img src="images/03-bc-raod-map.jpg" class="center" alt="" />
-<p class="caption">Points</p>
-</div>
 <p><strong>Polygons</strong> are two-dimensional, they have both a length and width and therefore we can also calculate their area. All polygons consist of a set of at three or more points (vertices) connected by line segments called “edges” that connect to form an enclosed shape. All polygons form an enclosed shape, but some can also have“holes” (think doughnuts!), these holes are sometimes called interior rings. Each interior ring is a separate set vertices and edges that is wholly contained within the polygon and no two interior rings can overlap. Polygons are useful for representing many different objects depending: political boundaries boundaries, Köppen climate zones, lakes, continents, etc. At large scales they can represent things like buildings which we might choose to represent as points at smaller scales.</p>
-<div class="figure">
-<img src="images/03-vector-model.png" class="center" alt="" />
-<p class="caption">Vector objects (points, lines, or polygons) are stored along with any number of attribute. Point, line, and polygon data are typically stored in separate files. Each object in the map view is labeled with it’s index. This value corresponds to the row in the attribute table and is useful for locating the attributes that correspond to the object.</p>
-</div>
 <div class="figure">
 <img src="images/03-vector-temp.png" class="center" alt="" />
 <p class="caption">Vector objects (points, lines, or polygons) are stored along with any number of attribute. Point, line, and polygon data are typically stored in separate files. Each object in the map view is labeled with it’s index. This value corresponds to the row in the attribute table and is useful for locating the attributes that correspond to the object.</p>

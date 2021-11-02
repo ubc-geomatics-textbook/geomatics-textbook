@@ -26,11 +26,34 @@ Attribute, Qualitative, Quantitative, Discrete, Continuous, Vector, Raster, Meas
 
 ## Types of Phenomena
 
-There are two kinds of phenomena we observe in the real world and represent in a GIS **Discrete Objects** and **Continuous Fields**.  Discrete objects have distinct, well-defined boundaries meaning their geography can be exactly measured (e.g. a building, a street, a tree).  They are also countable, meaning there are a finite number of them.  Continuous fields lack clearly-defined boundaries and can be measured at an infinite number of points (e.g. elevation, precipitation, land cover).  The values of a continuous field can vary dramatically over short distances.  Both kinds of phenomena can be represented in a GIS, but they requrie different considerations and are usually use different data models.
+**Phenomenon**, noun, plural *Phenomena*: *1* a fact or situation that is observed to exist or happen, especially one whose cause or explanation is in question. *2* a remarkable person, thing, or event [Oxford's Dictionary](https://www.google.com/search?channel=trow5&client=firefox-b-d&q=phenomena).  Basically, a phenomenon can is anything: lightning, a country, a coastline, a dog on a kayak.
+<br>
+![Yarrow enjoying the scenery at Aloutte Lake, she's quite the phenomenon indeed!](images/03-dog-on-a-boat.jpg){.center}
 
-<!--   The vector data model is typically better suited for discrete objects and the raster data model is better for continuous fields.  However, either model *can* be used to represent either type of phenomena, and there are some circumstances where one model may be preferable over the other because of the task at hand rather than the type of phenomena.  *Note* Discrete objects can continuous fields can both be described with quantitative or qualitative data depending on the context. -->
+Broadly speaking, in GIS we work with two kinds phenomena.  Both kinds of phenomena can be represented in a GIS, but they require different considerations and are usually use different data models.
 
-![One the right, we see discrete objects, on the left we see a continuous field.  These images are from my slides.  I'm not sure the original source of the DEM image, it would be easy enough to just make my own down the line though.](images/03-phenomena-types){.center}
+### Discrete Objects
+
+Discrete objects are finite and have distinct boundaries.  Each object is a unique, self contained entity whose geography can be exactly defined.  Because each object is unique and self contained, collections of objects are countable.  A concrete example of a discrete objects would be buildings.  They are real physical objects with well defined boundaries.  We can count the number of buildings on a college campus or in a city.  National and sub-national boundaries are also discrete objects.  They (typically) have well defined boundaries and we can easily count the number of nations or provinces.  They are not, however, real physical objects.  Political boundaries are arbitrary human constructs.
+
+![Provinces are clearly delineated, distinct objects, despite having no real physical presence.](images/03-vector.png){.center}
+
+### Continuous Fields
+
+Continuous fields are infinite and lack defined boundaries.  Fields can be measured at an infinite number of locations.  However, similar values tend to cluster in space so we can often make assumptions based on finite observations of continuous fields.  One of the most common examples of a continuous field is elevation.  This is a physical property associated with every location on earth.  We can't count the "number of elevations" because space is infinitely divisible and everywhere in space can have an elevation.
+
+![Elevation of the Sunshine Coast in BC, from the NRCAN DEM (google earth engine).](images/03-elevation.png){.center}
+
+### Imperfect Distinctions
+
+Few phenomena will fit perfectly and exclusively into one category or the other.  That said, its helpful for us to think about the discrete v. continuous dichotomy.  As long as we recognize that it's not a perfect classification.  Whether a phenomenon is considered discrete or continuous depends on scale (both spatial and temporal) and perspective.  Some phenomenon are a bit of both.  Take the coastlines, they can be treated as discrete or continuous.  At the scale of an individual beach over hours, tides can cause wide variations in water levels/position.  How/where does one draw the discrete line representing the "coast".  At this scale, the coast isn't really a discreet object, rather a continuous field known as the inter-tidal zone.  Zoom out a bit and those fluctuations aren't particularly relevant if you want to make a map of Pacific Rim National Park.  The coast could be considered a discrete object.  But if you change the timescale and look at sea level rise projections, then you're dealing with a continuous field.
+
+![The west coast of Vancouver Island (just a screen grab from Arc, might want something better?)](images/03-beach-small-scale.png){.center}
+
+A lightning strike is an electric discharge between the atmosphere and the ground.  A lightning strike is a discrete object.  The precise location of the strike can be pin pointed, the number of strikes during a storm can be counted.  But what about the actual lighting bolt?  That's more a continuous field, its not really possible to measure the exact boundaries of the path the electric discharge takes.  Then we can look at other things, like the probability of lighting strikes.  This is a continuous field, calculated from counting discrete objects.
+
+![Global lighting strike density per month. [12]](images/03-lightning-density.gif){.center}
+
 
 ## Types of Data
 
@@ -40,15 +63,15 @@ Within the context of a Geographic Information System, each piece of information
 
 ### Qualitative Data
 
-Qualitative data are categorical; they are strictly descriptive and lack any meaningful numeric value.  They describe the qualities of an phenomena, without giving us any numeric information.  Most qualitative data you will work with in a GIS are textual or coded numerals, but there are circumstances where you may encounter non-textual data (e.g. images, sound clips, videos) in a dataset.  Qualitative data can be "spatial" in nature (e.g. relative directional descriptors: left/right, near/far, north/south), but because they lack numeric values, they cannot be used for spatial analysis.  Qualitative data can be measured on either a **Nominal** or **Ordinal** scale.
+Qualitative data are categorical; they are strictly descriptive and lack any meaningful numeric value.  They describe the qualities of a phenomenon, without giving us any numeric information.  Most qualitative data you will work with in GIS are textual or coded numerals, but there are circumstances where you may encounter non-textual data (e.g. images, sound clips, videos) in a dataset.  Qualitative data can be "spatial" in nature (e.g. relative directional descriptors: left/right, near/far, north/south), but because they lack numeric values, they cannot be used for spatial analysis.  Qualitative data can be measured on either a **Nominal** or **Ordinal** scale.
 
 #### Nominal Scale
 
-These are data that just consists of names or categories with no ranking or direction are nominal.  One category is not more or less, better or worse than another, they are just different.  A good example would be flower types (see fig).  Other examples would be zoning categories, colors, flavors of ice cream, place names, etc.  
+These are data that just consist of names or categories with no ranking or direction are nominal.  One category is not more or less, better or worse than another, they are just different.  A good example would be flower types.  Other examples would be zoning categories, colors, flavors of ice cream, place names, etc.  With nominal data, you can check for equality between entities and you can count occurrence.  These are the only operations we can do.  You can't calculate 
 
 ![Each flower is different, but no flower is "more" or "less" a flower than any of the others.](images/03-flowers-nominal.png){.center}
 
-![With nominal data, you can check for equality, and count occurrences, but that is it.](images/03-nominal-opperations.png){.center}
+![Checking equality with flower species.](images/03-nominal-opperations.png){.center}
 
 
 #### Ordinal Scale
@@ -57,7 +80,7 @@ These data are categories that also have a some ranking or directionality.  A go
 
 ![We can see Yarrow is taller than her sister Shamsa, so we can rank these dogs by height.  However, we haven't measured their heights, so we don't know how much taller Yarrow is than Shamsa.  ](images/03-dogs-ordinal.png){.center}
 
-The only arithmetic operations we can do with nominal data are checking for equality (True/False), counting occurrences (frequencies), and calculating the mode (most frequent occurrence).  With ordinal data, we can these operations as well, plus a few more.  We can check the order/rank (greater than, less than) and in some circumstances we can calculate the median (see figure).
+The only arithmetic operations we can do with nominal data are checking for equality (True/False), counting occurrences (frequencies), and calculating the mode (most frequent occurrence).  With ordinal data, we can do these operations as well, plus a few more.  We can check the order/rank (greater than, less than) and in some circumstances we can calculate the median (see figure).
 
 ![In some circumstances, we can directly calculate the median (middle value) of an ordinal set.  With odd numbered sets (e.g. Group 1), the median, is simply the middle value of the set, when sorted lowest to highest.  We can always take the median when we have an odd number.  With even numbered sets, its a bit more complicated.  The median, is the average of the middle two values.  For Group 2, the middle values (5th and 6th) are both "Neutral", so we don't have an issue.  But for Group 3, the 5th value is "Neutral" and the 6th value is "Agree".  We can't directly average these two ordinal values.  One solution is to arbitrarily assign a numeric score to the ordinal categories (e.g. 1-5).  This would then allow you to show the median is between "Neutral" and "Agree".](images/03-ordinal-operatons.png){.center}
 
@@ -69,9 +92,9 @@ When trying to group real world phenomena into categories, there are often "exce
 
 ### Quantitative Data
 
-Quantitative data are numeric; they describe the quantities associated with an phenomena.  The numerical values that are separated by a unit that has some inherent meaning (as opposed to the arbitrary numeric codes like in the ordinal data example).  This allows us to conduct a wider range of arithmetic operations on quantitative data.  In addition to the operations we perform on Qualitative data; with numeric data we can always calculate measures of central tendency (mean/median) and we can add/subtract values to calculate differences.  
+Quantitative data are numeric; they describe the quantities associated with an phenomena.  The numerical values that are separated by a unit that has some inherent meaning (as opposed to the arbitrary numeric codes like in the ordinal data example).  This allows us to conduct a wider range of arithmetic operations on quantitative data.  In addition to the operations we perform on Qualitative data; with numeric data we can always calculate measures of central tendency (mean/median) and we can add/subtract values to calculate differences.
 
-Numeric data can be either **discrete** or **continuous**.  Discrete variables (e.g. population) are obtained by counting and values within a range cannot be infinitely subdivided.  You can have a population of 1, 37, or 179 but you cannot have a population of 2.3.  Continuous variables (e.g. temperature) can take an infinite number of values a given range, but they cannot be counted.  You can have temperatures of 10, 10.5, or 10.1167 &deg;C, but a temperature of 10&deg;C does not mean you have 10 individual degrees of temperature.  Quantitative data (both discrete and continuous) can be measured on either an **Interval** or **Ratio** scale.  These types of quantitative data are closely related, but have one important distinction.  
+Numeric data can be either **discrete** or **continuous**.  Discrete variables (e.g. population) are obtained by counting and values within a range cannot be infinitely subdivided.  You can have a population of 1, 37, or 179 but you cannot have a population of 2.3.  Continuous variables (e.g. temperature) can take an infinite number of values a given range, but they cannot be counted.  You can have temperatures of 10, 10.5, or 10.1167 &deg;C, but a temperature of 10&deg;C does not mean you have 10 individual degrees of temperature.  Quantitative data (both discrete and continuous) can be measured on either an **Interval** or **Ratio** scale.  These types of quantitative data are closely related, but have one important distinction.
 
 #### Ratio Data
 
@@ -87,9 +110,12 @@ These data on the other hand, have an arbitrarily set zero point.  This means th
 
 #### Derived Ratio: Normalizing Data
 
-Sometimes we want to account for the influence of one variable when analyzing another.  To do this, we can divide one value by by another to get the ratio of the two, also known as a **derived ratio**.  This process is sometimes referred to as **Normalizing** or **Standardizing** our data.  The basic formula is: $C=\frac{A}{B}$, where A is our variable of interest, B is our confounding variable, and C is our new derived ratio.  There are many circumstances where we might need to do this.  One common example is population density (see figure).  Another key example is housing affordability.  
+Sometimes we want to account for the influence of one variable when analyzing another.  To do this, we can divide one value by by another to get the ratio of the two, also known as a **derived ratio**.  This process is sometimes referred to as **Normalizing** or **Standardizing** our data.  The basic formula is: $C=\frac{A}{B}$, where A is our variable of interest, B is our confounding variable, and C is our new derived ratio.  There are many circumstances where we might need to do this.  One common example is population density: Canada and Poland both have populations of ~ 38 million people but Canada had 32x the land area of Poland.  Any comparison of the these two nations that fails to account for the size disparity would be seriously flawed.  Another key example are affordability indexes.  The example below shows how normalization can be applied to a households expenditures on food.  Income and household expenditures on food are strongly related (wealthy regions tend to purchase more expensive food).  An analysis of the cost of food that doesn't account for this relationship would not adequately account for the *affordability* of food in a given region.  Dividing household food expenditures by household income, we get the proportion of income spent on food.  This is a much more accurate representation of the affordability of food and highlights that the poorest communities are most severely impacted by increasing food costs.
 
-![Figure needs to be re-worked as the data from simply analytics is wrong...](images/03-Affordability.png){.center}
+![Income vs. household expenditures on Food by Census Subdivisions in BC.](images/03-income-v-food){.center}
+
+![Income vs. Fraction of Income Spent on Food by Census Subdivisions in BC.](images/03-income-v-income-on-food){.center}
+
 
 ### Summary of Data Types
 
@@ -106,16 +132,20 @@ Sometimes we want to account for the influence of one variable when analyzing an
 
 ## Spatial is Special
 
-  *"Everything is related to everything else, but near things are more related than distant things."* -
-
 You might encounter the phrase "Spatial is special" in your time studying GIS.  Spatial data is the foundation of Geographic Information Science, it is what distinguishes GIS from the broader field of data science.  This was succinctly summarized by Waldo Tobler in The First Law of Geography:
   - *"Everything is related to everything else, but near things are more related than distant things."* 
 
-This might seem obvious: people interact more if they live in the same city, orca pods in different areas develop different dialects, A hemlock on Vancouver Island are more related to its neighbors than to a hemlock in the New Brunswick.  Generally, near things are more related to one another, but it *does not guarantee similarity*.  Downtown Vancouver averages 40 cm of snow/year, but the ski resort on Grouse Mountain 15 km north gets over 9 m.  These locations are impacted by the same storm systems, but the 1200 m elevation difference causes vastly different quantities and different types of precipitation.
+![Visualization of Tobler's First Law. [8]](images/03-spatial-is-special.jpg){.center}
+
+This might seem obvious: people interact more if they live in the same city, orca pods in different areas develop different dialects, hemlocks on Vancouver Island are more related to their neighbors than to to hemlock in the New Brunswick.  Generally, near things are more related to one another, but it *does not guarantee similarity*.  Downtown Vancouver averages 40 cm of snow/year, but the ski resort on Grouse Mountain 15 km north gets over 9 m.  These locations are impacted by the same storm systems, but the 1200 m elevation difference causes vastly different quantities and different types of precipitation.
+
+
+![Screengrab from Hectares BC, can easily make into better map.](images/03-bc-snow.png){.center}
 
 The measure of similarity between objects across space called **spatial autocorrelation**.  Spatial autocorrelation allows us to make some a key assumptions when representing spatial data.  We don't have to measure a phenomena everywhere in order to represent it adequately.  We only need to measure it at specific locations or over regular intervals.  If point A is in dense forest, it is likely point B 10 m away is also in a dense forest.  We don't have to get the location of every tree in the forest.  Instead, we can look at the average presence of trees over a larger area.  
 
-![Visualization of Tobler's First Law. [8]](images/03-spatial-is-special.jpg){.center}
+![Forest coverage map.](images/03-forest-for-the-trees.png){.center}
+
 
 ## Spatial Data Models
 
@@ -132,7 +162,7 @@ There are two main types of spatial data models: the **Raster** and **Vector** m
 
 ### Raster Data Model
 
-The raster data model represents a phenomena across space as a gridded set of cell (or pixels).  The cell size determines the **Resolution** of the raster image, that is the smallest feature we can resolve with the raster.  A 10 m resolution raster has cells that are 10 x 10 m (100 m2), a 2 m resolution has cells that are 2 x 2 m (4 m2).  Along with the cell size, the number of rows and columns dictates the bounds (or extent) of a raster image.  A raster with a 2 m cell size, 15 rows, and 10 columns, will cover an area of 30 m x 20 m (600 m2).  Because of the full coverage within their bounds, raster data models are very well suited for representing *continuous phenomena* where cell values correspond to measured (or estimated) value at specific location.  In GIS, rasters are commonly encountered as: satellite and drone imagery, elevation models, climate data, model outputs, and scanned maps.  
+The raster data model represents a phenomena across space as a gridded set of cell (or pixels).  The cell size determines the **Resolution** of the raster image, that is the smallest feature we can resolve with the raster.  A 10 m resolution raster has cells that are 10 x 10 m (100 m2), a 2 m resolution has cells that are 2 x 2 m (4 m2).  Along with the cell size, the number of rows and columns dictates the extent (or bounds) of a raster image.  A raster with a 1 m cell size, 5 rows, and 5 columns, will cover an area of 5 m x 5 m (25 m2).  Because of the full coverage within their bounds, raster data models are very well suited for representing *continuous phenomena* where cell values correspond to measured (or estimated) value at specific location.  In GIS, rasters are commonly encountered as: satellite and drone imagery, elevation models, climate data, model outputs, and scanned maps.  
 
 ![I think this one is pretty good, I use it in my lecture notes. [8]](images/03-raster-example.png){.center}
 
@@ -159,15 +189,25 @@ Other file types you will likely encounter when working with raster data include
 
 ### Vector Data
 
-The vector data model is much more well suited to represent discrete phenomena than the raster data model.  A vector feature is a representation of a discrete object as a set of x,y coordinate pairs (points) linked to set of descriptive attribute about that object.  A vector feature's coordinates can consist of just one x,y pair to form a single point feature, or multiple points which can be connected to form lines or polygons (see figure).  The non-spatial attribute data is typically stored in a **Tabular** format separate from the spatial data, and it is linked using an index.  One of the key advantages of the vector model is the ability to store and retrieve many attributes them quickly.
+The vector data model is much more well suited to represent discrete phenomena than the raster data model.  A vector feature is a representation of a discrete object as a set of x,y coordinate pairs (points) linked to set of descriptive attribute about that object.  A vector feature's coordinates can consist of just one x,y pair to form a single point feature, or multiple points which can be connected to form lines or polygons (see figure).  The non-spatial attribute data is typically stored in a **Tabular** format separate from the spatial data, and it is linked using an index.  One of the key advantages of the vector model is the ability to store and retrieve many attributes them quickly.  In GIS, vector data are commonly encountered as: political boundaries, cenus data, pathways (road, trails, etc.), point location (stop sign, fire hydrant), etc.
+
+![Vector objects (points, lines, or polygons) are stored along with any number of attribute.  Point, line, and polygon data are typically stored in separate files.  Each object in the map view is labeled with it's index.  This value corresponds to the row in the attribute table and is useful for locating the attributes that correspond to the object.[3]](images/03-vector-example.png){.center}
 
 **Points** are “zero-dimensional”, they have no length, or width.  A point feature is just an individual 𝒙,𝒚 coordinate pair representing a precise location, that has some linked attribute information.  Points are great for representing a variety of objects, depending on the scale.  Fire hydrants, light poles, and trees are suitable to be represented as points in almost any application.  If you are making a map of mines in British Columbia, or cities across Canada, it's probably acceptable to just display them as points.
 
-**Lines** are one-dimensional, they have length, but no width and thus no area.  A line consists of two or more points.  Every line must have start point and an end point, but they may also have any number of middle points, called vertices.  A vertex is just any point where two or more lines meet.  Lines are also great for representing a variety of objects, depending on the scale.  Hiking trails, flight paths, coastlines, and power lines are suitable to be represented as lines in almost most applications.  When making smaller scale maps, its often sufficient to represent rivers as lines, though at large scales we might elect to use a polygon.  
+![Points](images/03-vector-example.png){.center}
+
+**Lines** are one-dimensional, they have length, but no width and thus no area.  A line consists of two or more points.  Every line must have a start point and end point, they may also have any number of middle points, called vertices.  A vertex is just any point where two or more lines meet.  Lines are also great for representing a variety of objects, depending on the scale.  Hiking trails, flight paths, coastlines, and power lines are suitable to be represented as lines in almost most applications.  When making smaller scale maps, its often sufficient to represent rivers as lines, though at large scales we might elect to use a polygon.  
+
+
+![Points](images/03-bc-raod-map.jpg){.center}
 
 **Polygons** are two-dimensional, they have both a length and width and therefore we can also calculate their area.  All polygons consist of a set of at three or more points (vertices) connected by line segments called “edges” that connect to form an enclosed shape.  All polygons form an enclosed shape, but some can also have"holes" (think doughnuts!), these holes are sometimes called interior rings.  Each interior ring is a separate set vertices and edges that is wholly contained within the polygon and no two interior rings can overlap.  Polygons are useful for representing many different objects depending: political boundaries boundaries, Köppen climate zones, lakes, continents, etc.  At large scales they can represent things like buildings which we might choose to represent as points at smaller scales.
 
 ![Vector objects (points, lines, or polygons) are stored along with any number of attribute.  Point, line, and polygon data are typically stored in separate files.  Each object in the map view is labeled with it's index.  This value corresponds to the row in the attribute table and is useful for locating the attributes that correspond to the object.](images/03-vector-model.png){.center}
+
+![Vector objects (points, lines, or polygons) are stored along with any number of attribute.  Point, line, and polygon data are typically stored in separate files.  Each object in the map view is labeled with it's index.  This value corresponds to the row in the attribute table and is useful for locating the attributes that correspond to the object.](images/03-vector-temp.png){.center}
+
 
 Sometimes, a discrete object has multiple parts, that are spatially separated.  In these circumstances, the vector model allows for multi-polygon, multi-line, or multi-point objects.  A good example of when a multi-polygon would be useful is the StatsCanada provincial boundary file (see figure).  Roads sometimes need to be stored as multi-lines as well, for example Highway 1 crosses the Georgia Straight from Vancouver to Nanaimo.  If we want the to represent the entire Highway as one object, we need to use a multi-line.
 
@@ -189,7 +229,7 @@ Like raster data, vector data can also come in many different formats. The **sha
 
 Because the structure of points, lines, and polygons are different, each individual shapefile can only contain one vector type (all points, all lines or all polygons). You will not find a mixture of point, line and polygon objects in a single shapefile.
 
-**GeoJSON** is a simple, lightweight format for storing a variety of geographic data structures.  It is most commonly encountered in web mapping and other open source applications.  GeoJSON supports the following geometries: Point, Line, Polygon, MultiPoint, MultiLine, and MultiPolygon objects.  Unlike with shapefiles, one GeoJSON file can contain any mix of geometries. An objects with and its attributes are a Feature object. A set of Features is a FeatureCollection.  GeoJSON has the added benefit of allowing you to encode stylistic choices within the file.  If you'd like to explore this format a bit more, take the code below and paste it h[ere](https://geojson.io/#map=2/20.0/0.0).  You can make changes and see them reflected on your the map.
+**GeoJSON** is a simple, lightweight format for storing a variety of geographic data structures.  It is most commonly encountered in web mapping and other open source applications.  GeoJSON supports the following geometries: Point, Line, Polygon, MultiPoint, MultiLine, and MultiPolygon objects.  Unlike with shapefiles, one GeoJSON file can contain any mix of geometries. An objects with and its attributes are a Feature object. A set of Features is a FeatureCollection.  GeoJSON has the added benefit of allowing you to encode stylistic choices within the file.  If you'd like to explore this format a bit more, take the code below and paste it [here](https://geojson.io/#map=2/20.0/0.0).  You can make changes and see them reflected on your the map.
 
 ```json
 {
@@ -249,48 +289,23 @@ Because the structure of points, lines, and polygons are different, each individ
 
 
 ## Choice of Data Model
-Vector data has some important advantages:
 
-  The geometry itself contains information about what the dataset creator thought was important
-  The geometry structures hold information in themselves - why choose point over polygon, for instance?
-  Each geometry feature can carry multiple attributes instead of just one, e.g. a database of cities can have attributes for name, country, population, etc
-  Data storage can be very efficient compared to rasters
+Some key considerations that influence which model is suited for which situations.  Images are in a separate folder.  I can bring over the ones that correspond to text I'll keep from this.
 
-The downsides of vector data include:
-
-  potential loss of detail compared to raster
-  potential bias in datasets - what didn’t get recorded?
-  Calculations involving multiple vector layers need to do math on the geometry as well as the attributes, so can be slow compared to raster math.
-
-Vector datasets are in use in many industries besides geospatial fields. For instance, computer graphics are largely vector-based, although the data structures in use tend to join points using arcs and complex curves rather than straight lines. Computer-aided design (CAD) is also vector- based. The difference is that geospatial datasets are accompanied by information tying their features to real-world locations.
+<iframe width=100% height=800px src='images/03-choice-of-model.html' frameBorder="0" >
+  <p>Your browser does not support iframes</p>
+</iframe>
 
 
 
 #### Case Study {-}
 :::
 
-#### Police Involved Deaths in Canada {#box-text -}
+#### Data Classification and Resolution: Raster and Vector Approaches {#box-text -}
 
-<p id="box-text">I'll flush this out in more depth later when I can dedicate some time to working on the actual project.Here is a <a href="https://github.com/PoliceInvolvedDeathsInCanada">link</a> to the github org where I'll be hosting the data.</p>
+I envisions making a more condensed and thought out version of this video to summarize a few key points regarding resolution, phenomena types, and data models.  This was just something I threw together last minute after I had to cancel class last minute.
 
-<p id="box-text">Data types used:
-1) Nominal (Race)
-2) Ratio (Counts & PKR)
-3) Ordinal (Ranking)
-4) Interval (PKDI)
-
-Methods Discussed:
-1) Normalization
-2) Classification
-</p>
-
-![Rough flowchart draft](images/03-police-violence.png){.center}
-
-
-<iframe width=100% height=800px src='images/03-PoliceViolenceIncidents_BC.html' frameBorder="0" >
-  <p>Your browser does not support iframes</p>
-</iframe>
-
+<iframe width="560" height="315" src="https://www.youtube.com/embed/apak726770w?start=111" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 ::::  

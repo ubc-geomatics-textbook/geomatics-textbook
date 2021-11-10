@@ -3,8 +3,7 @@ output:
   pdf_document: default
   html_document: default
 ---
-# Types of Data {#types-of-data}
-^^ Can we change the chapter name?  I think something like **Spatial Data Models & Data Types** would be more appropriate.
+# Data Types and Spatial Data Models {#types-of-data}
 
 In the previous chapter, we discussed some of the unique challenges associated with representing spatial data in a GIS, and how to account for these these with geographic coordinates systems and map projections.  In this chapter we will discuss more broadly how to represent both spatial and non-spatial data in a Geographic Information System.  We will introduce the different types of data that can represent non-spatial attributes and discuss the different scales this data can be measured on.  Then we will introduce the different *spatial data models* we use to link the spatial and non-spatial data.  Finally, we will cover some of the different file types that can be used to store data.
 
@@ -170,7 +169,7 @@ The value of a pixel can be quantitative (e.g. elevation) or qualitative (e.g. l
 
 ![Raster math illustration](images/03-raster-overlay.png){.center}
 
-Rasters data relies on Spatial Autocorrelation and The First Law of Geography, the model assumes that *all areas* within a given cell are equally represented by the cell value.  Depending on the resolution of the raster and the scale of the task at hand, this may or may not be an effective assumption.  If you are trying to represent the coastline of Nova Scotia, 100 m or even 1 km resolution cells will likely suffice (see figure).  However, 10 km cells severely degrade the quality of the representation.  At a 100 km cell size, the province is indistinguishable.
+Rasters data relies on Spatial Autocorrelation and The First Law of Geography, the model assumes that *all areas* within a given cell are equally represented by the cell value.  Depending on the resolution of the raster and the scale of the task at hand, this may or may not be an effective assumption.  If you are trying to represent the coastline of Nova Scotia, 100 m or even 1 km resolution cells will likely suffice (see figure).  However, 10 km cells severely degrade the quality of the representation.  At a 100 km cell size, the province is indistinguishable.  This is related to something known as them *mixed pixel* problem (see case study).
 
 ![Raster Resolution](images/03-raster-resolution.png){.center}
 
@@ -280,24 +279,72 @@ Because the structure of points, lines, and polygons are different, each individ
 |CENTRAL SAANICH VEYANESS|BRITISH COLUMBIA|   1011467|                     48.58|                    -123.42|
 
 
-## Choice of Data Model
+## Choice of Spatial Data Model
 
-Some key considerations that influence which model is suited for which situations.  Images are in a separate folder.  I can bring over the ones that correspond to text I'll keep from this.
-
-<iframe width=100% height=800px src='images/03-choice-of-model.html' frameBorder="0" >
-  <p>Your browser does not support iframes</p>
-</iframe>
+Some key considerations that influence which model is suited for which situations.
 
 
+### Comparing Data Models
+
+
+
+|                     Vector                     |                    Raster                     |
+|------------------------------------------------|-----------------------------------------------|
+|Usually <b>discrete objects</b>                 |Usually <b>continuous fields</b>               |
+|Points, Lines, and/or Polygons                  |Grid of cells (pixels) with continuous coverage|
+|Each object can have <b>many</b> attributes     |Each cell has <b>one</b> value per band (layer)|
+|Objects may overlap, have gaps, or be continuous|One raster image can have <b>many</b> bands    |
+
+
+### Advantages and Disadvantages
+
+#### Raster Data Model
+
+|                          Advantages                          |                                                                        Disadvantages                                                                        |
+|--------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|Well suited for continuous variables: in space <b>and</b> time|Large file size: <b>exponentially</b> proportional to resolution and <b>linearly</b> proportional to number of bands.                                        |
+|Simple data structure makes overlay is easy and efficient     |Loss of information during rasterization (mixed pixel problem, see case study).  Reductions in cell size may lead to inability to recognize spatial features.|
+
+#### Vector Data Model
+
+
+
+|                      Advantages                       |                                        Disadvantages                                        |
+|-------------------------------------------------------|---------------------------------------------------------------------------------------------|
+|Compact data structure: smaller file sizes             |Complex data structures compared to rasters                                                  |
+|A good representation of discrete objects              |Topology (connectivity) - can be a huge head ache when creating a layer                      |
+|Easy to query and select by attributes                 |Some tasks (overlay of layers) can be computationally expensive                              |
+|Graphic output is usually more aesthetically pleasing  |No variability within polygons possible                                                      |
+|Topology (connectivity) - Proximity & Network Analysis |Less suited for continuous variables (requires significant generalization) or temporal change|
+
+
+#### Which Data Model is Best?
+
+No single data model is suitable for all types of data or analysis.
+
+* Most GIS systems employ both raster and vector data structures so that the user can choose the model best suited to the representation of their data
+* It is possible to convert back and forth between models
+* However, this results in a loss of information and may introduce additional error each time a conversion is made
 
 #### Case Study {-}
 :::
 
-#### Data Classification and Resolution: Raster and Vector Approaches {#box-text -}
+#### Rater Resolution and Map Scale: The Mixed Pixel Problem {#box-text -}
 
-I envisions making a more condensed and thought out version of this video to summarize a few key points regarding resolution, phenomena types, and data models.  This was just something I threw together last minute after I had to cancel class last minute.
+Each cell in a raster can only have **one** value.  So how do you handle when the area a cell covers contains **multiple** examples.  Possible approaches are: 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/apak726770w?start=111" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+* **Majority/Mode**, the cell value is determined by the value/class covering the largest area within each cell.  This can be useful for **discrete** phenomena, but generally won't be helpful for continuous phenomena.
+
+* **Touches All**, can be useful for discrete phenomena if you need to prioritize specific class(es) you can designate it them to be assigned to any pixel the touch (eg. with flood/fire risk or most other hazards, you want to take an inclusive approach when defining risk zones.  Better safe than sorry)
+
+* **Nearest Neighbor/Center Point**, the cell value is determined by the value/class only at the center point of the cell.  This is method is quick to calculate but can under/overestimate repeating phenomena with frequencies lining up with the raster resolution (eg. City Blocks/Roads, rows in agricultural fields)  
+
+* **Average**, when working with continuous phenomena (eg. rainfall, temperature, elevation) it might be best to use the average value across the cell instead.  If multiple observations are available calculate the spatially weighted average within each cell.  If we are working with discrete phenomena, this method is generally less useful.
+
+When the data resolution is very high, relative to the scale of the map/analysis, the specific choice of method will produce negligible differences.  If you're working with a 25m resolution land cover classification and doing a continental scale analysis, the improper attribution of boundary pixels won't have a huge impact on the results.  If the data resolution is low relative to the scale of your analysis, the choice of method could have a significant impact on your results.
+
+
+*Insert Video - I envision doing a video showing a landscape classification at a very large map scale 1:1000-ish using different raster resolutions (1,2,10m +) and different cell attribution methods to highlight the differences.*
 
 
 ::::  

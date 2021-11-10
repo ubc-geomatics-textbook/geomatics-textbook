@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Types of Data | An Open Geomatics Textbook</title>
+  <title>Chapter 2 Data Types and Spatial Data Models | An Open Geomatics Textbook</title>
   <meta name="description" content="Advancing teaching and learning in geomatics at UBC" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Types of Data | An Open Geomatics Textbook" />
+  <meta property="og:title" content="Chapter 2 Data Types and Spatial Data Models | An Open Geomatics Textbook" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/ubc-geomatics-textbook/book/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="ubc-geomatics-textbook/book" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Types of Data | An Open Geomatics Textbook" />
+  <meta name="twitter:title" content="Chapter 2 Data Types and Spatial Data Models | An Open Geomatics Textbook" />
   
   <meta name="twitter:description" content="Advancing teaching and learning in geomatics at UBC" />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="UBC" />
 
 
-<meta name="date" content="2021-11-02" />
+<meta name="date" content="2021-11-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -188,7 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#recommended-readings"><i class="fa fa-check"></i>Recommended Readings</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="types-of-data.html"><a href="types-of-data.html"><i class="fa fa-check"></i><b>2</b> Types of Data</a>
+<li class="chapter" data-level="2" data-path="types-of-data.html"><a href="types-of-data.html"><i class="fa fa-check"></i><b>2</b> Data Types and Spatial Data Models</a>
 <ul>
 <li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#key-terms-2"><i class="fa fa-check"></i>Key Terms</a></li>
 <li class="chapter" data-level="2.1" data-path="types-of-data.html"><a href="types-of-data.html#types-of-phenomena"><i class="fa fa-check"></i><b>2.1</b> Types of Phenomena</a>
@@ -209,7 +209,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4.1" data-path="types-of-data.html"><a href="types-of-data.html#raster-data-model"><i class="fa fa-check"></i><b>2.4.1</b> Raster Data Model</a></li>
 <li class="chapter" data-level="2.4.2" data-path="types-of-data.html"><a href="types-of-data.html#vector-data"><i class="fa fa-check"></i><b>2.4.2</b> Vector Data</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="types-of-data.html"><a href="types-of-data.html#choice-of-data-model"><i class="fa fa-check"></i><b>2.5</b> Choice of Data Model</a></li>
+<li class="chapter" data-level="2.5" data-path="types-of-data.html"><a href="types-of-data.html#choice-of-spatial-data-model"><i class="fa fa-check"></i><b>2.5</b> Choice of Spatial Data Model</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="types-of-data.html"><a href="types-of-data.html#comparing-data-models"><i class="fa fa-check"></i><b>2.5.1</b> Comparing Data Models</a></li>
+<li class="chapter" data-level="2.5.2" data-path="types-of-data.html"><a href="types-of-data.html#advantages-and-disadvantages"><i class="fa fa-check"></i><b>2.5.2</b> Advantages and Disadvantages</a></li>
+</ul></li>
 <li class="chapter" data-level="2.6" data-path="types-of-data.html"><a href="types-of-data.html#summary-2"><i class="fa fa-check"></i><b>2.6</b> Summary</a>
 <ul>
 <li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#reflection-questions-1"><i class="fa fa-check"></i>Reflection Questions</a></li>
@@ -437,8 +441,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="types-of-data" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Types of Data</h1>
-<p>^^ Can we change the chapter name? I think something like <strong>Spatial Data Models &amp; Data Types</strong> would be more appropriate.</p>
+<h1><span class="header-section-number">Chapter 2</span> Data Types and Spatial Data Models</h1>
 <p>In the previous chapter, we discussed some of the unique challenges associated with representing spatial data in a GIS, and how to account for these these with geographic coordinates systems and map projections. In this chapter we will discuss more broadly how to represent both spatial and non-spatial data in a Geographic Information System. We will introduce the different types of data that can represent non-spatial attributes and discuss the different scales this data can be measured on. Then we will introduce the different <em>spatial data models</em> we use to link the spatial and non-spatial data. Finally, we will cover some of the different file types that can be used to store data.</p>
 <div class="box-content learning-objectives-content">
 <div id="learning-objectives-2" class="section level4 unnumbered box-title learning-objectives-top">
@@ -677,7 +680,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <img src="images/03-raster-overlay.png" class="center" alt="" />
 <p class="caption">Raster math illustration</p>
 </div>
-<p>Rasters data relies on Spatial Autocorrelation and The First Law of Geography, the model assumes that <em>all areas</em> within a given cell are equally represented by the cell value. Depending on the resolution of the raster and the scale of the task at hand, this may or may not be an effective assumption. If you are trying to represent the coastline of Nova Scotia, 100 m or even 1 km resolution cells will likely suffice (see figure). However, 10 km cells severely degrade the quality of the representation. At a 100 km cell size, the province is indistinguishable.</p>
+<p>Rasters data relies on Spatial Autocorrelation and The First Law of Geography, the model assumes that <em>all areas</em> within a given cell are equally represented by the cell value. Depending on the resolution of the raster and the scale of the task at hand, this may or may not be an effective assumption. If you are trying to represent the coastline of Nova Scotia, 100 m or even 1 km resolution cells will likely suffice (see figure). However, 10 km cells severely degrade the quality of the representation. At a 100 km cell size, the province is indistinguishable. This is related to something known as them <em>mixed pixel</em> problem (see case study).</p>
 <div class="figure">
 <img src="images/03-raster-resolution.png" class="center" alt="" />
 <p class="caption">Raster Resolution</p>
@@ -863,23 +866,130 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<div id="choice-of-data-model" class="section level2" number="2.5">
-<h2><span class="header-section-number">2.5</span> Choice of Data Model</h2>
-<p>Some key considerations that influence which model is suited for which situations. Images are in a separate folder. I can bring over the ones that correspond to text I’ll keep from this.</p>
-<iframe width="100%" height="800px" src="images/03-choice-of-model.html" frameBorder="0">
-<p>
-Your browser does not support iframes
-</p>
-</iframe>
+<div id="choice-of-spatial-data-model" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Choice of Spatial Data Model</h2>
+<p>Some key considerations that influence which model is suited for which situations.</p>
+<div id="comparing-data-models" class="section level3" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> Comparing Data Models</h3>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="49%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Vector</th>
+<th>Raster</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Usually <b>discrete objects</b></td>
+<td>Usually <b>continuous fields</b></td>
+</tr>
+<tr class="even">
+<td>Points, Lines, and/or Polygons</td>
+<td>Grid of cells (pixels) with continuous coverage</td>
+</tr>
+<tr class="odd">
+<td>Each object can have <b>many</b> attributes</td>
+<td>Each cell has <b>one</b> value per band (layer)</td>
+</tr>
+<tr class="even">
+<td>Objects may overlap, have gaps, or be continuous</td>
+<td>One raster image can have <b>many</b> bands</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="advantages-and-disadvantages" class="section level3" number="2.5.2">
+<h3><span class="header-section-number">2.5.2</span> Advantages and Disadvantages</h3>
+<div id="raster-data-model-1" class="section level4" number="2.5.2.1">
+<h4><span class="header-section-number">2.5.2.1</span> Raster Data Model</h4>
+<table>
+<colgroup>
+<col width="28%" />
+<col width="71%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Advantages</th>
+<th>Disadvantages</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Well suited for continuous variables: in space <b>and</b> time</td>
+<td>Large file size: <b>exponentially</b> proportional to resolution and <b>linearly</b> proportional to number of bands.</td>
+</tr>
+<tr class="even">
+<td>Simple data structure makes overlay is easy and efficient</td>
+<td>Loss of information during rasterization (mixed pixel problem, see case study). Reductions in cell size may lead to inability to recognize spatial features.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="vector-data-model" class="section level4" number="2.5.2.2">
+<h4><span class="header-section-number">2.5.2.2</span> Vector Data Model</h4>
+<table>
+<colgroup>
+<col width="37%" />
+<col width="62%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Advantages</th>
+<th>Disadvantages</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Compact data structure: smaller file sizes</td>
+<td>Complex data structures compared to rasters</td>
+</tr>
+<tr class="even">
+<td>A good representation of discrete objects</td>
+<td>Topology (connectivity) - can be a huge head ache when creating a layer</td>
+</tr>
+<tr class="odd">
+<td>Easy to query and select by attributes</td>
+<td>Some tasks (overlay of layers) can be computationally expensive</td>
+</tr>
+<tr class="even">
+<td>Graphic output is usually more aesthetically pleasing</td>
+<td>No variability within polygons possible</td>
+</tr>
+<tr class="odd">
+<td>Topology (connectivity) - Proximity &amp; Network Analysis</td>
+<td>Less suited for continuous variables (requires significant generalization) or temporal change</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="which-data-model-is-best" class="section level4" number="2.5.2.3">
+<h4><span class="header-section-number">2.5.2.3</span> Which Data Model is Best?</h4>
+<p>No single data model is suitable for all types of data or analysis.</p>
+<ul>
+<li>Most GIS systems employ both raster and vector data structures so that the user can choose the model best suited to the representation of their data</li>
+<li>It is possible to convert back and forth between models</li>
+<li>However, this results in a loss of information and may introduce additional error each time a conversion is made</li>
+</ul>
+</div>
 <div id="case-study-1" class="section level4 unnumbered">
 <h4>Case Study</h4>
 <p>:::</p>
 </div>
 <div id="box-text" class="section level4 unnumbered">
-<h4>Data Classification and Resolution: Raster and Vector Approaches</h4>
-<p>I envisions making a more condensed and thought out version of this video to summarize a few key points regarding resolution, phenomena types, and data models. This was just something I threw together last minute after I had to cancel class last minute.</p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/apak726770w?start=111" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-</iframe>
+<h4>Rater Resolution and Map Scale: The Mixed Pixel Problem</h4>
+<p>Each cell in a raster can only have <strong>one</strong> value. So how do you handle when the area a cell covers contains <strong>multiple</strong> examples. Possible approaches are:</p>
+<ul>
+<li><p><strong>Majority/Mode</strong>, the cell value is determined by the value/class covering the largest area within each cell. This can be useful for <strong>discrete</strong> phenomena, but generally won’t be helpful for continuous phenomena.</p></li>
+<li><p><strong>Touches All</strong>, can be useful for discrete phenomena if you need to prioritize specific class(es) you can designate it them to be assigned to any pixel the touch (eg. with flood/fire risk or most other hazards, you want to take an inclusive approach when defining risk zones. Better safe than sorry)</p></li>
+<li><p><strong>Nearest Neighbor/Center Point</strong>, the cell value is determined by the value/class only at the center point of the cell. This is method is quick to calculate but can under/overestimate repeating phenomena with frequencies lining up with the raster resolution (eg. City Blocks/Roads, rows in agricultural fields)</p></li>
+<li><p><strong>Average</strong>, when working with continuous phenomena (eg. rainfall, temperature, elevation) it might be best to use the average value across the cell instead. If multiple observations are available calculate the spatially weighted average within each cell. If we are working with discrete phenomena, this method is generally less useful.</p></li>
+</ul>
+<p>When the data resolution is very high, relative to the scale of the map/analysis, the specific choice of method will produce negligible differences. If you’re working with a 25m resolution land cover classification and doing a continental scale analysis, the improper attribution of boundary pixels won’t have a huge impact on the results. If the data resolution is low relative to the scale of your analysis, the choice of method could have a significant impact on your results.</p>
+<p><em>Insert Video - I envision doing a video showing a landscape classification at a very large map scale 1:1000-ish using different raster resolutions (1,2,10m +) and different cell attribution methods to highlight the differences.</em></p>
 <p>::::</p>
 </div>
 <div class="box-content your-turn-content">
@@ -898,6 +1008,7 @@ I’ll do some exercise building on the case study.
 <p id="box-text">
 This is a call out. Put some important concept or fact in here.
 </p>
+</div>
 </div>
 </div>
 <div id="summary-2" class="section level2" number="2.6">

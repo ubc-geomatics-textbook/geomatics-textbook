@@ -2,6 +2,7 @@
 output:
   pdf_document: default
   html_document: default
+  word_document: default
 ---
 # Data Types and Spatial Data Models {#types-of-data}
 
@@ -13,9 +14,11 @@ In the previous chapter, we discussed some of the unique challenges associated w
 #### Learning Objectives {-}
 ::: 
 
-1. Data types and measurement scales
-2. Introduce spatial data models
-3. File types we use in GIS
+1. Types of Spatial Phenomena
+2. Measurement Scales of Data: Quantitative vs. Qualitative
+3. Overview of Raster and Vector Data Models
+4. Data Resolutions
+5. Common File Types in GIS
 
 ::::
 
@@ -111,9 +114,9 @@ These data on the other hand, have an arbitrarily set zero point.  This means th
 
 Sometimes we want to account for the influence of one variable when analyzing another.  To do this, we can divide one value by by another to get the ratio of the two, also known as a **derived ratio**.  This process is sometimes referred to as **Normalizing** or **Standardizing** our data.  The basic formula is: $C=\frac{A}{B}$, where A is our variable of interest, B is our confounding variable, and C is our new derived ratio.  There are many circumstances where we might need to do this.  One common example is population density: Canada and Poland both have populations of ~ 38 million people but Canada had 32x the land area of Poland.  Any comparison of the these two nations that fails to account for the size disparity would be seriously flawed.  Another key example are affordability indexes.  The example below shows how normalization can be applied to a households expenditures on food.  Income and household expenditures on food are strongly related (wealthy regions tend to purchase more expensive food).  An analysis of the cost of food that doesn't account for this relationship would not adequately account for the *affordability* of food in a given region.  Dividing household food expenditures by household income, we get the proportion of income spent on food.  This is a much more accurate representation of the affordability of food and highlights that the poorest communities are most severely impacted by increasing food costs.
 
-![Income vs. household expenditures on Food by Census Subdivisions in BC.](images/03-income-v-food){.center}
+![Income vs. household expenditures on Food by Census Subdivisions in BC.](images/03-income-v-food.png){.center}
 
-![Income vs. Fraction of Income Spent on Food by Census Subdivisions in BC.](images/03-income-v-income-on-food){.center}
+![Income vs. Fraction of Income Spent on Food by Census Subdivisions in BC.](images/03-income-v-income-on-food.png){.center}
 
 
 ### Summary of Data Types
@@ -142,8 +145,6 @@ This might seem obvious: people interact more if they live in the same city, orc
 ![Screengrab from Hectares BC, can easily make into better map.](images/03-bc-snow.png){.center}
 
 The measure of similarity between objects across space called **spatial autocorrelation**.  Spatial autocorrelation allows us to make some a key assumptions when representing spatial data.  We don't have to measure a phenomena everywhere in order to represent it adequately.  We only need to measure it at specific locations or over regular intervals.  If point A is in dense forest, it is likely point B 10 m away is also in a dense forest.  We don't have to get the location of every tree in the forest.  Instead, we can look at the average presence of trees over a larger area.  
-
-![Forest coverage map.](images/03-forest-for-the-trees.png){.center}
 
 
 ## Spatial Data Models
@@ -326,6 +327,11 @@ No single data model is suitable for all types of data or analysis.
 * It is possible to convert back and forth between models
 * However, this results in a loss of information and may introduce additional error each time a conversion is made
 
+
+
+:::: {.box-content .case-study-content}
+
+::: {.box-title .case-study-top}
 #### Case Study {-}
 :::
 
@@ -378,8 +384,11 @@ This is a call out. Put some important concept or fact in here.
 
 This chapter has introduced you to how we represent data in a GIS.
 
-1. Explain ipsum lorem.
-2. Define ipsum lorem.
+1. Types of Phenomena
+2. Types of Data
+3. Raster Data Models
+4. Vector Data Modesl
+
 
 ### Reflection Questions {-}
 

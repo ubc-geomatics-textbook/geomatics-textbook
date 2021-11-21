@@ -783,7 +783,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="key-terms-2" class="section level3 unnumbered">
 <h3>Key Terms</h3>
-<p>Attribute, Qualitative, Quantitative, Discrete, Continuous, Vector, Raster, Measurement Scale</p>
+<p>Phenomena, Discrete Object, Continuous Field, Qualitative, Quantitative, Measurement Scale, Raster, Vector, Resolution,</p>
 </div>
 <div id="types-of-phenomena" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Types of Phenomena</h2>
@@ -1004,11 +1004,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <img src="images/03-raster-overlay.png" class="center" alt="" />
 <p class="caption">Raster math illustration</p>
 </div>
-<p>Rasters data relies on Spatial Autocorrelation and The First Law of Geography, the model assumes that <em>all areas</em> within a given cell are equally represented by the cell value. Depending on the resolution of the raster and the scale of the task at hand, this may or may not be an effective assumption. If you are trying to represent the coastline of Nova Scotia, 100 m or even 1 km resolution cells will likely suffice (see figure). However, 10 km cells severely degrade the quality of the representation. At a 100 km cell size, the province is indistinguishable. This is related to something known as them <em>mixed pixel</em> problem (see case study).</p>
+<p>Rasters data relies on Spatial Autocorrelation and The First Law of Geography, the model assumes that <em>all areas</em> within a given cell are equally represented by the cell value. Depending on the resolution of the raster and the scale of the task at hand, this may or may not be an effective assumption. If you are trying to represent the coastline of Nova Scotia, 100 m or even 1 km resolution cells will likely suffice (see figure). However, 10 km cells severely degrade the quality of the representation and at a 100 km cell size, the province is indistinguishable.</p>
 <div class="figure">
 <img src="images/03-raster-resolution.png" class="center" alt="" />
 <p class="caption">Raster Resolution</p>
 </div>
+<p>The above example is related to something known as them <em>mixed pixel</em> problem. Each cell in a raster can only have <strong>one</strong> value. So how do you handle when the area a cell covers contains <strong>multiple</strong> examples. Possible approaches are:</p>
+<ul>
+<li><p><strong>Majority/Mode</strong>, the cell value is determined by the value/class covering the largest area within each cell. This can be useful for <strong>discrete</strong> phenomena, but generally won’t be helpful for continuous phenomena.</p></li>
+<li><p><strong>Touches All</strong>, can be useful for discrete phenomena if you need to prioritize specific class(es) you can designate it them to be assigned to any pixel the touch (eg. with flood/fire risk or most other hazards, you want to take an inclusive approach when defining risk zones. Better safe than sorry)</p></li>
+<li><p><strong>Nearest Neighbor/Center Point</strong>, the cell value is determined by the value/class only at the center point of the cell. This is method is quick to calculate but can under/overestimate repeating phenomena with frequencies lining up with the raster resolution (eg. City Blocks/Roads, rows in agricultural fields)</p></li>
+<li><p><strong>Average</strong>, when working with continuous phenomena (eg. rainfall, temperature, elevation) it might be best to use the average value across the cell instead. If multiple observations are available calculate the spatially weighted average within each cell. If we are working with discrete phenomena, this method is generally less useful.</p></li>
+</ul>
+<p>When the data resolution is very high, relative to the scale of the map/analysis, the specific choice of method will produce negligible differences. If you’re working with a 25m resolution land cover classification and doing a continental scale analysis, the improper attribution of boundary pixels won’t have a huge impact on the results. If the data resolution is low relative to the scale of your analysis, the choice of method could have a significant impact on your results.</p>
 <div id="file-types" class="section level4" number="3.4.1.1">
 <h4><span class="header-section-number">3.4.1.1</span> File Types</h4>
 <p>Raster data can come in many different formats. <strong>GeoTIFF</strong> which has the extension .tif is one of the most common/functional is the . This format is based of the Tag Image File Format (TIFF), a common file type used by graphic artists and photographers. A TIFF file stores metadata (data about the data) as tags. For instance, your camera might store a tag that describes the make and model of the camera and another for the date the photo was taken when it saves a picture. A GeoTIFF is a standard .tif image format plus additional tags spatial tags denoting spatial information including:</p>
@@ -1017,10 +1025,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Resolution (cell size)</li>
 <li>Projection, Coordinate system, and datum</li>
 </ul>
-<p>Other file types you will likely encounter when working with raster data include:
-* 1) IMG - A proprietary image format commonly used by ESRI products
-* 2) JPEG2000 - A geospatial version of the common .jpg image type
-* 3) ASCII - An older human readable format (simple text file) with slower performance than the types listed above.</p>
+<p>Other file types you will likely encounter when working with raster data include:</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>IMG - A proprietary image format commonly used by ESRI products</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>JPEG2000 - A geospatial version of the common .jpg image type</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>ASCII - An older human readable format (simple text file) with slower performance than the types listed above.</li>
+</ol></li>
+</ul>
 </div>
 </div>
 <div id="vector-data" class="section level3" number="3.4.2">
@@ -1192,7 +1208,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="choice-of-spatial-data-model" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Choice of Spatial Data Model</h2>
-<p>Some key considerations that influence which model is suited for which situations.</p>
+<p>There is no “best” spatial data model. Rasters are more well suited for some applications and vector data are better suited for others. The section summarizes some of the key considerations that influence which model is suited for which situations.</p>
 <div id="comparing-data-models" class="section level3" number="3.5.1">
 <h3><span class="header-section-number">3.5.1</span> Comparing Data Models</h3>
 <table>
@@ -1305,14 +1321,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="box-text" class="section level4 unnumbered">
 <h4>Rater Resolution and Map Scale: The Mixed Pixel Problem</h4>
-<p>Each cell in a raster can only have <strong>one</strong> value. So how do you handle when the area a cell covers contains <strong>multiple</strong> examples. Possible approaches are:</p>
-<ul>
-<li><p><strong>Majority/Mode</strong>, the cell value is determined by the value/class covering the largest area within each cell. This can be useful for <strong>discrete</strong> phenomena, but generally won’t be helpful for continuous phenomena.</p></li>
-<li><p><strong>Touches All</strong>, can be useful for discrete phenomena if you need to prioritize specific class(es) you can designate it them to be assigned to any pixel the touch (eg. with flood/fire risk or most other hazards, you want to take an inclusive approach when defining risk zones. Better safe than sorry)</p></li>
-<li><p><strong>Nearest Neighbor/Center Point</strong>, the cell value is determined by the value/class only at the center point of the cell. This is method is quick to calculate but can under/overestimate repeating phenomena with frequencies lining up with the raster resolution (eg. City Blocks/Roads, rows in agricultural fields)</p></li>
-<li><p><strong>Average</strong>, when working with continuous phenomena (eg. rainfall, temperature, elevation) it might be best to use the average value across the cell instead. If multiple observations are available calculate the spatially weighted average within each cell. If we are working with discrete phenomena, this method is generally less useful.</p></li>
-</ul>
-<p>When the data resolution is very high, relative to the scale of the map/analysis, the specific choice of method will produce negligible differences. If you’re working with a 25m resolution land cover classification and doing a continental scale analysis, the improper attribution of boundary pixels won’t have a huge impact on the results. If the data resolution is low relative to the scale of your analysis, the choice of method could have a significant impact on your results.</p>
 <p><em>Insert Video - I envision doing a video showing a landscape classification at a very large map scale 1:1000-ish using different raster resolutions (1,2,10m +) and different cell attribution methods to highlight the differences.</em></p>
 </div>
 </div>
@@ -1324,7 +1332,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 I’ll do some exercise building on the case study.
 </p>
 </div>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.</p>
 <div class="box-content call-out-content">
 <div id="call-out" class="section level4 unnumbered box-title call-out-top">
 <h4>Call out</h4>
@@ -1342,23 +1349,21 @@ This is a call out. Put some important concept or fact in here.
 <li>Types of Phenomena</li>
 <li>Types of Data</li>
 <li>Raster Data Models</li>
-<li>Vector Data Modesl</li>
+<li>Vector Data Models</li>
+<li>Data Resolution</li>
 </ol>
 <div id="reflection-questions-1" class="section level3 unnumbered">
 <h3>Reflection Questions</h3>
 <ol style="list-style-type: decimal">
-<li><p>Explain the difference between continuous fields and discrete objects.</p></li>
-<li><p>Define Quantitative data and Qualitative data.</p></li>
-<li><p>What is the role of ispum lorem?</p></li>
-<li><p>How do the raster and vector data models represent space differently?</p></li>
-<li><p>What types phenomena (continuous fields/)
-do the raster data model and the vector data model represent spatial data?</p></li>
-<li><p>Which spatial data models are better suited to which type of phenomena?</p></li>
+<li>Explain the difference between continuous fields and discrete objects.</li>
+<li>Define Quantitative data and Qualitative data.</li>
+<li>What is the role of resolution in raster data?</li>
+<li>How does the vector data model differ from the raster data model?</li>
 </ol>
 </div>
 <div id="practice-questions-1" class="section level3 unnumbered">
 <h3>Practice Questions</h3>
-<ol start="2" style="list-style-type: decimal">
+<ol style="list-style-type: decimal">
 <li>Given ipsum, solve for lorem.</li>
 <li>Draw ipsum lorem.</li>
 </ol>

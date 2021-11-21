@@ -24,7 +24,7 @@ In the previous chapter, we discussed some of the unique challenges associated w
 
 ### Key Terms {-}
 
-Attribute, Qualitative, Quantitative, Discrete, Continuous, Vector, Raster, Measurement Scale
+Phenomena, Discrete Object, Continuous Field, Qualitative, Quantitative, Measurement Scale, Raster, Vector, Resolution, 
 
 ## Types of Phenomena
 
@@ -170,9 +170,21 @@ The value of a pixel can be quantitative (e.g. elevation) or qualitative (e.g. l
 
 ![Raster math illustration](images/03-raster-overlay.png){.center}
 
-Rasters data relies on Spatial Autocorrelation and The First Law of Geography, the model assumes that *all areas* within a given cell are equally represented by the cell value.  Depending on the resolution of the raster and the scale of the task at hand, this may or may not be an effective assumption.  If you are trying to represent the coastline of Nova Scotia, 100 m or even 1 km resolution cells will likely suffice (see figure).  However, 10 km cells severely degrade the quality of the representation.  At a 100 km cell size, the province is indistinguishable.  This is related to something known as them *mixed pixel* problem (see case study).
+Rasters data relies on Spatial Autocorrelation and The First Law of Geography, the model assumes that *all areas* within a given cell are equally represented by the cell value.  Depending on the resolution of the raster and the scale of the task at hand, this may or may not be an effective assumption.  If you are trying to represent the coastline of Nova Scotia, 100 m or even 1 km resolution cells will likely suffice (see figure).  However, 10 km cells severely degrade the quality of the representation and at a 100 km cell size, the province is indistinguishable.  
 
 ![Raster Resolution](images/03-raster-resolution.png){.center}
+
+The above example is related to something known as them *mixed pixel* problem.  Each cell in a raster can only have **one** value.  So how do you handle when the area a cell covers contains **multiple** examples.  Possible approaches are: 
+
+* **Majority/Mode**, the cell value is determined by the value/class covering the largest area within each cell.  This can be useful for **discrete** phenomena, but generally won't be helpful for continuous phenomena.
+
+* **Touches All**, can be useful for discrete phenomena if you need to prioritize specific class(es) you can designate it them to be assigned to any pixel the touch (eg. with flood/fire risk or most other hazards, you want to take an inclusive approach when defining risk zones.  Better safe than sorry)
+
+* **Nearest Neighbor/Center Point**, the cell value is determined by the value/class only at the center point of the cell.  This is method is quick to calculate but can under/overestimate repeating phenomena with frequencies lining up with the raster resolution (eg. City Blocks/Roads, rows in agricultural fields)  
+
+* **Average**, when working with continuous phenomena (eg. rainfall, temperature, elevation) it might be best to use the average value across the cell instead.  If multiple observations are available calculate the spatially weighted average within each cell.  If we are working with discrete phenomena, this method is generally less useful.
+
+When the data resolution is very high, relative to the scale of the map/analysis, the specific choice of method will produce negligible differences.  If you're working with a 25m resolution land cover classification and doing a continental scale analysis, the improper attribution of boundary pixels won't have a huge impact on the results.  If the data resolution is low relative to the scale of your analysis, the choice of method could have a significant impact on your results.
 
 #### File Types
 
@@ -183,6 +195,7 @@ Raster data can come in many different formats.  **GeoTIFF** which has the exten
 * Projection, Coordinate system, and datum
 
 Other file types you will likely encounter when working with raster data include:
+
 * 1) IMG - A proprietary image format commonly used by ESRI products
 * 2) JPEG2000 - A geospatial version of the common .jpg image type
 * 3) ASCII - An older human readable format (simple text file) with slower performance than the types listed above.
@@ -282,7 +295,7 @@ Because the structure of points, lines, and polygons are different, each individ
 
 ## Choice of Spatial Data Model
 
-Some key considerations that influence which model is suited for which situations.
+There is no "best" spatial data model.  Rasters are more well suited for some applications and vector data are better suited for others.  The section summarizes some of the key considerations that influence which model is suited for which situations.
 
 
 ### Comparing Data Models
@@ -337,18 +350,6 @@ No single data model is suitable for all types of data or analysis.
 
 #### Rater Resolution and Map Scale: The Mixed Pixel Problem {#box-text -}
 
-Each cell in a raster can only have **one** value.  So how do you handle when the area a cell covers contains **multiple** examples.  Possible approaches are: 
-
-* **Majority/Mode**, the cell value is determined by the value/class covering the largest area within each cell.  This can be useful for **discrete** phenomena, but generally won't be helpful for continuous phenomena.
-
-* **Touches All**, can be useful for discrete phenomena if you need to prioritize specific class(es) you can designate it them to be assigned to any pixel the touch (eg. with flood/fire risk or most other hazards, you want to take an inclusive approach when defining risk zones.  Better safe than sorry)
-
-* **Nearest Neighbor/Center Point**, the cell value is determined by the value/class only at the center point of the cell.  This is method is quick to calculate but can under/overestimate repeating phenomena with frequencies lining up with the raster resolution (eg. City Blocks/Roads, rows in agricultural fields)  
-
-* **Average**, when working with continuous phenomena (eg. rainfall, temperature, elevation) it might be best to use the average value across the cell instead.  If multiple observations are available calculate the spatially weighted average within each cell.  If we are working with discrete phenomena, this method is generally less useful.
-
-When the data resolution is very high, relative to the scale of the map/analysis, the specific choice of method will produce negligible differences.  If you're working with a 25m resolution land cover classification and doing a continental scale analysis, the improper attribution of boundary pixels won't have a huge impact on the results.  If the data resolution is low relative to the scale of your analysis, the choice of method could have a significant impact on your results.
-
 
 *Insert Video - I envision doing a video showing a landscape classification at a very large map scale 1:1000-ish using different raster resolutions (1,2,10m +) and different cell attribution methods to highlight the differences.*
 
@@ -365,8 +366,6 @@ When the data resolution is very high, relative to the scale of the map/analysis
 <p id="box-text">I'll do some exercise building on the case study.</p>
 
 ::::
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
 
 :::: {.box-content .call-out-content}
 
@@ -387,33 +386,26 @@ This chapter has introduced you to how we represent data in a GIS.
 1. Types of Phenomena
 2. Types of Data
 3. Raster Data Models
-4. Vector Data Modesl
+4. Vector Data Models
+5. Data Resolution
 
 
 ### Reflection Questions {-}
 
 1. Explain the difference between continuous fields and discrete objects.
 2. Define Quantitative data and Qualitative data.
-3. What is the role of ispum lorem?
-4. How do the raster and vector data models represent space differently?
-
-
-
-3. What types phenomena (continuous fields/)
- do the raster data model and the vector data model represent spatial data?
-4. Which spatial data models are better suited to which type of phenomena?
+3. What is the role of resolution in raster data?
+4. How does the vector data model differ from the raster data model?
 
 ### Practice Questions {-}
 
-2. Given ipsum, solve for lorem.
-3. Draw ipsum lorem.
+1. Given ipsum, solve for lorem.
+2. Draw ipsum lorem.
 
 `r if (knitr::is_html_output()) '
 ## Recommended Readings {-}
 '`
-
 Ensure all inline citations are properly referenced here.
-
 ```{r include=FALSE}
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown', 'htmlwidgets', 'webshot', 'DT',

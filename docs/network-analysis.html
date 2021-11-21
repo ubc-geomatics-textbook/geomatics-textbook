@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 Network Analysis | An Open Geomatics Textbook</title>
+  <title>Chapter 8 Network Analysis | An Open Geomatics Textbook</title>
   <meta name="description" content="Advancing teaching and learning in geomatics at UBC" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 Network Analysis | An Open Geomatics Textbook" />
+  <meta property="og:title" content="Chapter 8 Network Analysis | An Open Geomatics Textbook" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/ubc-geomatics-textbook/book/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="ubc-geomatics-textbook/book" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 Network Analysis | An Open Geomatics Textbook" />
+  <meta name="twitter:title" content="Chapter 8 Network Analysis | An Open Geomatics Textbook" />
   
   <meta name="twitter:description" content="Advancing teaching and learning in geomatics at UBC" />
   
@@ -24,16 +24,16 @@
 <meta name="author" content="UBC" />
 
 
-<meta name="date" content="2021-07-06" />
+<meta name="date" content="2021-11-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-
-<script src="libs/header-attrs-2.8/header-attrs.js"></script>
+<link rel="prev" href="topology-and-geocoding.html"/>
+<link rel="next" href="raster-analysis-and-terrain-modelling.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -53,7 +53,7 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/d3-4.5.0/d3.min.js"></script>
 <script src="libs/forceNetwork-binding-0.4/forceNetwork.js"></script>
 
@@ -123,44 +123,587 @@ div.csl-indent {
 <li class="chapter" data-level="0.3.17" data-path="index.html"><a href="index.html#citations"><i class="fa fa-check"></i><b>0.3.17</b> Citations</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="network-analysis.html"><a href="network-analysis.html"><i class="fa fa-check"></i><b>1</b> Network Analysis</a>
+<li class="chapter" data-level="1" data-path="what-is-geomatics.html"><a href="what-is-geomatics.html"><i class="fa fa-check"></i><b>1</b> What is Geomatics?</a></li>
+<li class="chapter" data-level="2" data-path="mapping-data.html"><a href="mapping-data.html"><i class="fa fa-check"></i><b>2</b> Mapping Data</a>
 <ul>
-<li class="chapter" data-level="" data-path="network-analysis.html"><a href="network-analysis.html#key-terms-1"><i class="fa fa-check"></i>Key Terms</a></li>
-<li class="chapter" data-level="1.1" data-path="network-analysis.html"><a href="network-analysis.html#introduction-to-graph-theory"><i class="fa fa-check"></i><b>1.1</b> Introduction to graph theory</a>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#key-terms-1"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="2.1" data-path="mapping-data.html"><a href="mapping-data.html#introduction-to-geodesy"><i class="fa fa-check"></i><b>2.1</b> Introduction to geodesy</a></li>
+<li class="chapter" data-level="2.2" data-path="mapping-data.html"><a href="mapping-data.html#models-of-earth"><i class="fa fa-check"></i><b>2.2</b> Models of Earth</a>
 <ul>
-<li class="chapter" data-level="1.1.1" data-path="network-analysis.html"><a href="network-analysis.html#nodes"><i class="fa fa-check"></i><b>1.1.1</b> Nodes</a></li>
-<li class="chapter" data-level="1.1.2" data-path="network-analysis.html"><a href="network-analysis.html#edges"><i class="fa fa-check"></i><b>1.1.2</b> Edges</a></li>
+<li class="chapter" data-level="2.2.1" data-path="mapping-data.html"><a href="mapping-data.html#geodetic-vertical-datums"><i class="fa fa-check"></i><b>2.2.1</b> Geodetic vertical datums</a></li>
+<li class="chapter" data-level="2.2.2" data-path="mapping-data.html"><a href="mapping-data.html#tidal-vertical-datums"><i class="fa fa-check"></i><b>2.2.2</b> Tidal Vertical Datums</a></li>
+<li class="chapter" data-level="2.2.3" data-path="mapping-data.html"><a href="mapping-data.html#gravimetric-vertical-datums"><i class="fa fa-check"></i><b>2.2.3</b> Gravimetric Vertical Datums</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="network-analysis.html"><a href="network-analysis.html#connectivity-and-order"><i class="fa fa-check"></i><b>1.2</b> Connectivity and order</a>
+<li class="chapter" data-level="2.3" data-path="mapping-data.html"><a href="mapping-data.html#referencing-location"><i class="fa fa-check"></i><b>2.3</b> Referencing Location</a>
 <ul>
-<li class="chapter" data-level="1.2.1" data-path="network-analysis.html"><a href="network-analysis.html#direct"><i class="fa fa-check"></i><b>1.2.1</b> Direct</a></li>
-<li class="chapter" data-level="1.2.2" data-path="network-analysis.html"><a href="network-analysis.html#undirect"><i class="fa fa-check"></i><b>1.2.2</b> Undirect</a></li>
+<li class="chapter" data-level="2.3.1" data-path="mapping-data.html"><a href="mapping-data.html#cartesian-coordinate-systems"><i class="fa fa-check"></i><b>2.3.1</b> Cartesian Coordinate Systems</a></li>
+<li class="chapter" data-level="2.3.2" data-path="mapping-data.html"><a href="mapping-data.html#celestial-coordinate-systems"><i class="fa fa-check"></i><b>2.3.2</b> Celestial Coordinate Systems</a></li>
+<li class="chapter" data-level="2.3.3" data-path="mapping-data.html"><a href="mapping-data.html#geographic-coordinate-systems"><i class="fa fa-check"></i><b>2.3.3</b> Geographic Coordinate Systems</a></li>
+<li class="chapter" data-level="2.3.4" data-path="mapping-data.html"><a href="mapping-data.html#projected-coordinate-systems"><i class="fa fa-check"></i><b>2.3.4</b> Projected Coordinate Systems</a></li>
+<li class="chapter" data-level="2.3.5" data-path="mapping-data.html"><a href="mapping-data.html#measuring-map-projection-distortion"><i class="fa fa-check"></i><b>2.3.5</b> Measuring map projection distortion</a></li>
+<li class="chapter" data-level="2.3.6" data-path="mapping-data.html"><a href="mapping-data.html#map-projections-for-environmental-management"><i class="fa fa-check"></i><b>2.3.6</b> Map projections for environmental management</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="network-analysis.html"><a href="network-analysis.html#network-topologies"><i class="fa fa-check"></i><b>1.3</b> Network topologies</a>
+<li class="chapter" data-level="2.4" data-path="mapping-data.html"><a href="mapping-data.html#summary-1"><i class="fa fa-check"></i><b>2.4</b> Summary</a>
 <ul>
-<li class="chapter" data-level="1.3.1" data-path="network-analysis.html"><a href="network-analysis.html#physical-versus-logical-topology"><i class="fa fa-check"></i><b>1.3.1</b> Physical versus logical topology</a></li>
-<li class="chapter" data-level="1.3.2" data-path="network-analysis.html"><a href="network-analysis.html#lines"><i class="fa fa-check"></i><b>1.3.2</b> Lines</a></li>
-<li class="chapter" data-level="1.3.3" data-path="network-analysis.html"><a href="network-analysis.html#rings"><i class="fa fa-check"></i><b>1.3.3</b> Rings</a></li>
-<li class="chapter" data-level="1.3.4" data-path="network-analysis.html"><a href="network-analysis.html#meshes"><i class="fa fa-check"></i><b>1.3.4</b> Meshes</a></li>
-<li class="chapter" data-level="1.3.5" data-path="network-analysis.html"><a href="network-analysis.html#stars"><i class="fa fa-check"></i><b>1.3.5</b> Stars</a></li>
-<li class="chapter" data-level="1.3.6" data-path="network-analysis.html"><a href="network-analysis.html#trees"><i class="fa fa-check"></i><b>1.3.6</b> Trees</a></li>
-<li class="chapter" data-level="1.3.7" data-path="network-analysis.html"><a href="network-analysis.html#buses"><i class="fa fa-check"></i><b>1.3.7</b> Buses</a></li>
-<li class="chapter" data-level="1.3.8" data-path="network-analysis.html"><a href="network-analysis.html#fully-connected"><i class="fa fa-check"></i><b>1.3.8</b> Fully connected</a></li>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#reflection-questions"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#practice-questions"><i class="fa fa-check"></i>Practice Questions</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="network-analysis.html"><a href="network-analysis.html#spatial-network-analysis"><i class="fa fa-check"></i><b>1.4</b> Spatial Network Analysis</a>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#recommended-readings"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="types-of-data.html"><a href="types-of-data.html"><i class="fa fa-check"></i><b>3</b> Data Types and Spatial Data Models</a>
 <ul>
-<li class="chapter" data-level="1.4.1" data-path="network-analysis.html"><a href="network-analysis.html#network-tracing"><i class="fa fa-check"></i><b>1.4.1</b> Network tracing</a></li>
-<li class="chapter" data-level="1.4.2" data-path="network-analysis.html"><a href="network-analysis.html#linear-referencing"><i class="fa fa-check"></i><b>1.4.2</b> Linear referencing</a></li>
-<li class="chapter" data-level="1.4.3" data-path="network-analysis.html"><a href="network-analysis.html#routing"><i class="fa fa-check"></i><b>1.4.3</b> Routing</a></li>
-<li class="chapter" data-level="1.4.4" data-path="network-analysis.html"><a href="network-analysis.html#least-cost-paths"><i class="fa fa-check"></i><b>1.4.4</b> Least cost paths</a></li>
-<li class="chapter" data-level="1.4.5" data-path="network-analysis.html"><a href="network-analysis.html#least-cost-corridors"><i class="fa fa-check"></i><b>1.4.5</b> Least cost corridors</a></li>
-</ul></li>
-<li class="chapter" data-level="1.5" data-path="network-analysis.html"><a href="network-analysis.html#network-centrality"><i class="fa fa-check"></i><b>1.5</b> Network Centrality</a>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#key-terms-2"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="3.1" data-path="types-of-data.html"><a href="types-of-data.html#types-of-phenomena"><i class="fa fa-check"></i><b>3.1</b> Types of Phenomena</a>
 <ul>
-<li class="chapter" data-level="1.5.1" data-path="network-analysis.html"><a href="network-analysis.html#degree-centrality"><i class="fa fa-check"></i><b>1.5.1</b> Degree centrality</a></li>
-<li class="chapter" data-level="1.5.2" data-path="network-analysis.html"><a href="network-analysis.html#closeness-centrality"><i class="fa fa-check"></i><b>1.5.2</b> Closeness centrality</a></li>
-<li class="chapter" data-level="1.5.3" data-path="network-analysis.html"><a href="network-analysis.html#betweenness-centrality"><i class="fa fa-check"></i><b>1.5.3</b> Betweenness centrality</a></li>
+<li class="chapter" data-level="3.1.1" data-path="types-of-data.html"><a href="types-of-data.html#discrete-objects"><i class="fa fa-check"></i><b>3.1.1</b> Discrete Objects</a></li>
+<li class="chapter" data-level="3.1.2" data-path="types-of-data.html"><a href="types-of-data.html#continuous-fields"><i class="fa fa-check"></i><b>3.1.2</b> Continuous Fields</a></li>
+<li class="chapter" data-level="3.1.3" data-path="types-of-data.html"><a href="types-of-data.html#imperfect-distinctions"><i class="fa fa-check"></i><b>3.1.3</b> Imperfect Distinctions</a></li>
 </ul></li>
+<li class="chapter" data-level="3.2" data-path="types-of-data.html"><a href="types-of-data.html#types-of-data-1"><i class="fa fa-check"></i><b>3.2</b> Types of Data</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="types-of-data.html"><a href="types-of-data.html#qualitative-data"><i class="fa fa-check"></i><b>3.2.1</b> Qualitative Data</a></li>
+<li class="chapter" data-level="3.2.2" data-path="types-of-data.html"><a href="types-of-data.html#quantitative-data"><i class="fa fa-check"></i><b>3.2.2</b> Quantitative Data</a></li>
+<li class="chapter" data-level="3.2.3" data-path="types-of-data.html"><a href="types-of-data.html#summary-of-data-types"><i class="fa fa-check"></i><b>3.2.3</b> Summary of Data Types</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="types-of-data.html"><a href="types-of-data.html#spatial-is-special"><i class="fa fa-check"></i><b>3.3</b> Spatial is Special</a></li>
+<li class="chapter" data-level="3.4" data-path="types-of-data.html"><a href="types-of-data.html#spatial-data-models"><i class="fa fa-check"></i><b>3.4</b> Spatial Data Models</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="types-of-data.html"><a href="types-of-data.html#raster-data-model"><i class="fa fa-check"></i><b>3.4.1</b> Raster Data Model</a></li>
+<li class="chapter" data-level="3.4.2" data-path="types-of-data.html"><a href="types-of-data.html#vector-data"><i class="fa fa-check"></i><b>3.4.2</b> Vector Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="types-of-data.html"><a href="types-of-data.html#choice-of-spatial-data-model"><i class="fa fa-check"></i><b>3.5</b> Choice of Spatial Data Model</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="types-of-data.html"><a href="types-of-data.html#comparing-data-models"><i class="fa fa-check"></i><b>3.5.1</b> Comparing Data Models</a></li>
+<li class="chapter" data-level="3.5.2" data-path="types-of-data.html"><a href="types-of-data.html#advantages-and-disadvantages"><i class="fa fa-check"></i><b>3.5.2</b> Advantages and Disadvantages</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="types-of-data.html"><a href="types-of-data.html#summary-2"><i class="fa fa-check"></i><b>3.6</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#reflection-questions-1"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#practice-questions-1"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#recommended-readings-1"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html"><i class="fa fa-check"></i><b>4</b> Collecting and Editing Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#learning-objectives-3"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#key-terms-3"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="4.1" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#open-data"><i class="fa fa-check"></i><b>4.1</b> Open data</a></li>
+<li class="chapter" data-level="4.2" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#finding-data"><i class="fa fa-check"></i><b>4.2</b> Finding Data</a></li>
+<li class="chapter" data-level="4.3" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#data-in-academia"><i class="fa fa-check"></i><b>4.3</b> Data in Academia</a></li>
+<li class="chapter" data-level="4.4" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#government-data"><i class="fa fa-check"></i><b>4.4</b> Government Data</a></li>
+<li class="chapter" data-level="" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#your-turn-2"><i class="fa fa-check"></i>Your Turn!</a></li>
+<li class="chapter" data-level="4.5" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#census-data"><i class="fa fa-check"></i><b>4.5</b> Census Data</a></li>
+<li class="chapter" data-level="4.6" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#census-of-canada-geographic-levels"><i class="fa fa-check"></i><b>4.6</b> Census of Canada Geographic Levels</a></li>
+<li class="chapter" data-level="" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#call-out-1"><i class="fa fa-check"></i>Call Out</a></li>
+<li class="chapter" data-level="4.7" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#accessing-census-data"><i class="fa fa-check"></i><b>4.7</b> Accessing Census Data</a></li>
+<li class="chapter" data-level="4.8" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#non-governmental-organization-data"><i class="fa fa-check"></i><b>4.8</b> Non-Governmental Organization Data</a></li>
+<li class="chapter" data-level="4.9" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#citizen-science"><i class="fa fa-check"></i><b>4.9</b> Citizen Science</a></li>
+<li class="chapter" data-level="" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#your-turn-4"><i class="fa fa-check"></i>Your Turn!</a></li>
+<li class="chapter" data-level="4.10" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#international-data"><i class="fa fa-check"></i><b>4.10</b> International Data</a></li>
+<li class="chapter" data-level="4.11" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#unpublished-data-and-the-data-request"><i class="fa fa-check"></i><b>4.11</b> Unpublished Data and the Data Request</a></li>
+<li class="chapter" data-level="4.12" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#metadata"><i class="fa fa-check"></i><b>4.12</b> Metadata</a></li>
+<li class="chapter" data-level="4.13" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#historical-data-collections"><i class="fa fa-check"></i><b>4.13</b> Historical Data Collections</a></li>
+<li class="chapter" data-level="4.14" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#historical-aerial-photographs"><i class="fa fa-check"></i><b>4.14</b> Historical Aerial Photographs</a></li>
+<li class="chapter" data-level="4.15" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#accessing-historical-aerial-photograph-collections"><i class="fa fa-check"></i><b>4.15</b> Accessing Historical Aerial Photograph Collections</a></li>
+<li class="chapter" data-level="" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#your-turn-5"><i class="fa fa-check"></i>Your Turn!</a></li>
+<li class="chapter" data-level="4.16" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#natural-resource-administrative-data"><i class="fa fa-check"></i><b>4.16</b> Natural Resource Administrative Data</a></li>
+<li class="chapter" data-level="4.17" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#historical-maps"><i class="fa fa-check"></i><b>4.17</b> Historical Maps</a></li>
+<li class="chapter" data-level="4.18" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#georeferencing-historical-maps"><i class="fa fa-check"></i><b>4.18</b> Georeferencing Historical Maps</a></li>
+<li class="chapter" data-level="4.19" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#control-points-on-maps-with-grids-or-graticule."><i class="fa fa-check"></i><b>4.19</b> Control Points on Maps with Grids or Graticule.</a></li>
+<li class="chapter" data-level="4.20" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#grid-and-graticule-as-control-points"><i class="fa fa-check"></i><b>4.20</b> Grid and Graticule as Control Points</a></li>
+<li class="chapter" data-level="4.21" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#rubbersheeting"><i class="fa fa-check"></i><b>4.21</b> Rubbersheeting</a></li>
+<li class="chapter" data-level="4.22" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#documenting-georeferencing"><i class="fa fa-check"></i><b>4.22</b> Documenting Georeferencing</a></li>
+<li class="chapter" data-level="4.23" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#data-transformations"><i class="fa fa-check"></i><b>4.23</b> Data Transformations</a></li>
+<li class="chapter" data-level="4.24" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#affine"><i class="fa fa-check"></i><b>4.24</b> Affine</a></li>
+<li class="chapter" data-level="4.25" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#similarity"><i class="fa fa-check"></i><b>4.25</b> Similarity</a></li>
+<li class="chapter" data-level="4.26" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#projective"><i class="fa fa-check"></i><b>4.26</b> Projective</a></li>
+<li class="chapter" data-level="4.27" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#reflection-questions-2"><i class="fa fa-check"></i><b>4.27</b> Reflection Questions</a></li>
+<li class="chapter" data-level="4.28" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#practice-questions-2"><i class="fa fa-check"></i><b>4.28</b> Practice Questions</a></li>
+<li class="chapter" data-level="4.29" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#summary-3"><i class="fa fa-check"></i><b>4.29</b> Summary</a></li>
+<li class="chapter" data-level="4.30" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#references"><i class="fa fa-check"></i><b>4.30</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="relational-databases.html"><a href="relational-databases.html"><i class="fa fa-check"></i><b>5</b> Relational Databases</a>
+<ul>
+<li class="chapter" data-level="" data-path="relational-databases.html"><a href="relational-databases.html#key-terms-4"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="5.1" data-path="relational-databases.html"><a href="relational-databases.html#relational-database-management-systems"><i class="fa fa-check"></i><b>5.1</b> Relational database management systems</a></li>
+<li class="chapter" data-level="5.2" data-path="relational-databases.html"><a href="relational-databases.html#relational-databases-1"><i class="fa fa-check"></i><b>5.2</b> Relational databases</a></li>
+<li class="chapter" data-level="5.3" data-path="relational-databases.html"><a href="relational-databases.html#relational-algebra"><i class="fa fa-check"></i><b>5.3</b> Relational algebra</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="relational-databases.html"><a href="relational-databases.html#selection"><i class="fa fa-check"></i><b>5.3.1</b> Selection</a></li>
+<li class="chapter" data-level="5.3.2" data-path="relational-databases.html"><a href="relational-databases.html#projection"><i class="fa fa-check"></i><b>5.3.2</b> Projection</a></li>
+<li class="chapter" data-level="5.3.3" data-path="relational-databases.html"><a href="relational-databases.html#rename"><i class="fa fa-check"></i><b>5.3.3</b> Rename</a></li>
+<li class="chapter" data-level="5.3.4" data-path="relational-databases.html"><a href="relational-databases.html#set-union"><i class="fa fa-check"></i><b>5.3.4</b> Set Union</a></li>
+<li class="chapter" data-level="5.3.5" data-path="relational-databases.html"><a href="relational-databases.html#set-intersection"><i class="fa fa-check"></i><b>5.3.5</b> Set Intersection</a></li>
+<li class="chapter" data-level="5.3.6" data-path="relational-databases.html"><a href="relational-databases.html#set-difference"><i class="fa fa-check"></i><b>5.3.6</b> Set Difference</a></li>
+<li class="chapter" data-level="5.3.7" data-path="relational-databases.html"><a href="relational-databases.html#cartesian-product"><i class="fa fa-check"></i><b>5.3.7</b> Cartesian Product</a></li>
+<li class="chapter" data-level="5.3.8" data-path="relational-databases.html"><a href="relational-databases.html#set-divison"><i class="fa fa-check"></i><b>5.3.8</b> Set Divison</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="relational-databases.html"><a href="relational-databases.html#boolean-algebra"><i class="fa fa-check"></i><b>5.4</b> Boolean algebra</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="relational-databases.html"><a href="relational-databases.html#equality-operators"><i class="fa fa-check"></i><b>5.4.1</b> Equality operators</a></li>
+<li class="chapter" data-level="5.4.2" data-path="relational-databases.html"><a href="relational-databases.html#conditional-operators"><i class="fa fa-check"></i><b>5.4.2</b> Conditional operators</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="relational-databases.html"><a href="relational-databases.html#joining-relations"><i class="fa fa-check"></i><b>5.5</b> Joining relations</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="relational-databases.html"><a href="relational-databases.html#keys"><i class="fa fa-check"></i><b>5.5.1</b> Keys</a></li>
+<li class="chapter" data-level="5.5.2" data-path="relational-databases.html"><a href="relational-databases.html#natural-join"><i class="fa fa-check"></i><b>5.5.2</b> Natural Join</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="relational-databases.html"><a href="relational-databases.html#outer-join"><i class="fa fa-check"></i><b>5.6</b> Outer Join</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="relational-databases.html"><a href="relational-databases.html#right-and-left-outer-join"><i class="fa fa-check"></i><b>5.6.1</b> Right and Left Outer Join</a></li>
+<li class="chapter" data-level="5.6.2" data-path="relational-databases.html"><a href="relational-databases.html#theta-join"><i class="fa fa-check"></i><b>5.6.2</b> Theta Join</a></li>
+<li class="chapter" data-level="5.6.3" data-path="relational-databases.html"><a href="relational-databases.html#cardinality-of-joins"><i class="fa fa-check"></i><b>5.6.3</b> Cardinality of Joins</a></li>
+<li class="chapter" data-level="5.6.4" data-path="relational-databases.html"><a href="relational-databases.html#structured-query-language"><i class="fa fa-check"></i><b>5.6.4</b> Structured Query Language</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="relational-databases.html"><a href="relational-databases.html#summary-4"><i class="fa fa-check"></i><b>5.7</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="relational-databases.html"><a href="relational-databases.html#reflection-questions-3"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="relational-databases.html"><a href="relational-databases.html#practice-questions-3"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="relational-databases.html"><a href="relational-databases.html#recommended-readings-2"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html"><i class="fa fa-check"></i><b>6</b> Overlay and Proximity Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#learning-objectives-5"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#key-terms-5"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="6.1" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#cartographic-modelling"><i class="fa fa-check"></i><b>6.1</b> Cartographic Modelling</a></li>
+<li class="chapter" data-level="6.2" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#geoprocessing"><i class="fa fa-check"></i><b>6.2</b> Geoprocessing</a></li>
+<li class="chapter" data-level="6.3" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#capability-modelling"><i class="fa fa-check"></i><b>6.3</b> Capability Modelling</a></li>
+<li class="chapter" data-level="6.4" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#suitability-modelling"><i class="fa fa-check"></i><b>6.4</b> Suitability modelling</a></li>
+<li class="chapter" data-level="6.5" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#overlay-methods"><i class="fa fa-check"></i><b>6.5</b> Overlay Methods</a></li>
+<li class="chapter" data-level="6.6" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#attribute-transfer"><i class="fa fa-check"></i><b>6.6</b> Attribute Transfer</a></li>
+<li class="chapter" data-level="6.7" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#boolean-algebra-1"><i class="fa fa-check"></i><b>6.7</b> Boolean Algebra</a></li>
+<li class="chapter" data-level="6.8" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#spatial-join"><i class="fa fa-check"></i><b>6.8</b> Spatial Join</a></li>
+<li class="chapter" data-level="6.9" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#clip"><i class="fa fa-check"></i><b>6.9</b> Clip</a></li>
+<li class="chapter" data-level="6.10" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#intersect"><i class="fa fa-check"></i><b>6.10</b> Intersect</a></li>
+<li class="chapter" data-level="6.11" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#line-intersection"><i class="fa fa-check"></i><b>6.11</b> Line Intersection</a></li>
+<li class="chapter" data-level="6.12" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#union"><i class="fa fa-check"></i><b>6.12</b> Union</a></li>
+<li class="chapter" data-level="6.13" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#identity"><i class="fa fa-check"></i><b>6.13</b> Identity</a></li>
+<li class="chapter" data-level="6.14" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#erase"><i class="fa fa-check"></i><b>6.14</b> Erase</a></li>
+<li class="chapter" data-level="6.15" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#split"><i class="fa fa-check"></i><b>6.15</b> Split</a></li>
+<li class="chapter" data-level="6.16" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#symmetrical-difference"><i class="fa fa-check"></i><b>6.16</b> Symmetrical Difference</a></li>
+<li class="chapter" data-level="6.17" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#update"><i class="fa fa-check"></i><b>6.17</b> Update</a></li>
+<li class="chapter" data-level="6.18" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#proximity-methods"><i class="fa fa-check"></i><b>6.18</b> Proximity Methods</a></li>
+<li class="chapter" data-level="6.19" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#buffer"><i class="fa fa-check"></i><b>6.19</b> Buffer</a></li>
+<li class="chapter" data-level="6.20" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#near-distance"><i class="fa fa-check"></i><b>6.20</b> Near Distance</a></li>
+<li class="chapter" data-level="6.21" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#summary-5"><i class="fa fa-check"></i><b>6.21</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#reflection-questions-4"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#practice-questions-4"><i class="fa fa-check"></i>Practice Questions</a></li>
+<li class="chapter" data-level="" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#recommended-readings-3"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html"><i class="fa fa-check"></i><b>7</b> Topology and Geocoding</a>
+<ul>
+<li class="chapter" data-level="" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#learning-objectives-6"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#key-terms-6"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="7.1" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#topology"><i class="fa fa-check"></i><b>7.1</b> Topology</a></li>
+<li class="chapter" data-level="7.2" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#planar-vs.-non-planar-topology"><i class="fa fa-check"></i><b>7.2</b> Planar vs. Non-Planar Topology</a></li>
+<li class="chapter" data-level="7.3" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#implementing-planar-topology"><i class="fa fa-check"></i><b>7.3</b> Implementing Planar Topology</a></li>
+<li class="chapter" data-level="7.4" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#adjacency-and-overlap"><i class="fa fa-check"></i><b>7.4</b> Adjacency and Overlap</a></li>
+<li class="chapter" data-level="7.5" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#intersect-and-connect"><i class="fa fa-check"></i><b>7.5</b> Intersect and Connect</a></li>
+<li class="chapter" data-level="7.6" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#coincident-and-disjoint"><i class="fa fa-check"></i><b>7.6</b> Coincident and Disjoint</a></li>
+<li class="chapter" data-level="7.7" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#cover"><i class="fa fa-check"></i><b>7.7</b> Cover</a>
+<ul>
+<li class="chapter" data-level="7.7.1" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#multipart-geometries"><i class="fa fa-check"></i><b>7.7.1</b> Multipart geometries</a></li>
+</ul></li>
+<li class="chapter" data-level="7.8" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#d-topologies"><i class="fa fa-check"></i><b>7.8</b> 3D topologies</a>
+<ul>
+<li class="chapter" data-level="7.8.1" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#multipatch-geometries"><i class="fa fa-check"></i><b>7.8.1</b> Multipatch geometries</a></li>
+<li class="chapter" data-level="7.8.2" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#convex-hull"><i class="fa fa-check"></i><b>7.8.2</b> Convex hull</a></li>
+<li class="chapter" data-level="7.8.3" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#delauney-triangles"><i class="fa fa-check"></i><b>7.8.3</b> Delauney triangles</a></li>
+<li class="chapter" data-level="7.8.4" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#data-models-supporting-planar-topology"><i class="fa fa-check"></i><b>7.8.4</b> Data models supporting planar topology</a></li>
+</ul></li>
+<li class="chapter" data-level="7.9" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#geocoding"><i class="fa fa-check"></i><b>7.9</b> Geocoding</a></li>
+<li class="chapter" data-level="7.10" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#geocoding-services"><i class="fa fa-check"></i><b>7.10</b> Geocoding Services</a></li>
+<li class="chapter" data-level="7.11" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#case-study-working-with-canadian-census-data"><i class="fa fa-check"></i><b>7.11</b> Case Study: Working with Canadian Census Data</a></li>
+<li class="chapter" data-level="7.12" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#summary-6"><i class="fa fa-check"></i><b>7.12</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#reflection-questions-5"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#practice-questions-5"><i class="fa fa-check"></i>Practice Questions</a></li>
+<li class="chapter" data-level="" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#recommended-readings-4"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="network-analysis.html"><a href="network-analysis.html"><i class="fa fa-check"></i><b>8</b> Network Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="network-analysis.html"><a href="network-analysis.html#key-terms-7"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="8.1" data-path="network-analysis.html"><a href="network-analysis.html#introduction-to-graph-theory"><i class="fa fa-check"></i><b>8.1</b> Introduction to graph theory</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="network-analysis.html"><a href="network-analysis.html#nodes"><i class="fa fa-check"></i><b>8.1.1</b> Nodes</a></li>
+<li class="chapter" data-level="8.1.2" data-path="network-analysis.html"><a href="network-analysis.html#edges"><i class="fa fa-check"></i><b>8.1.2</b> Edges</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="network-analysis.html"><a href="network-analysis.html#connectivity-and-order"><i class="fa fa-check"></i><b>8.2</b> Connectivity and order</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="network-analysis.html"><a href="network-analysis.html#direct"><i class="fa fa-check"></i><b>8.2.1</b> Direct</a></li>
+<li class="chapter" data-level="8.2.2" data-path="network-analysis.html"><a href="network-analysis.html#undirect"><i class="fa fa-check"></i><b>8.2.2</b> Undirect</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="network-analysis.html"><a href="network-analysis.html#network-topologies"><i class="fa fa-check"></i><b>8.3</b> Network topologies</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="network-analysis.html"><a href="network-analysis.html#physical-versus-logical-topology"><i class="fa fa-check"></i><b>8.3.1</b> Physical versus logical topology</a></li>
+<li class="chapter" data-level="8.3.2" data-path="network-analysis.html"><a href="network-analysis.html#lines"><i class="fa fa-check"></i><b>8.3.2</b> Lines</a></li>
+<li class="chapter" data-level="8.3.3" data-path="network-analysis.html"><a href="network-analysis.html#rings"><i class="fa fa-check"></i><b>8.3.3</b> Rings</a></li>
+<li class="chapter" data-level="8.3.4" data-path="network-analysis.html"><a href="network-analysis.html#meshes"><i class="fa fa-check"></i><b>8.3.4</b> Meshes</a></li>
+<li class="chapter" data-level="8.3.5" data-path="network-analysis.html"><a href="network-analysis.html#stars"><i class="fa fa-check"></i><b>8.3.5</b> Stars</a></li>
+<li class="chapter" data-level="8.3.6" data-path="network-analysis.html"><a href="network-analysis.html#trees"><i class="fa fa-check"></i><b>8.3.6</b> Trees</a></li>
+<li class="chapter" data-level="8.3.7" data-path="network-analysis.html"><a href="network-analysis.html#buses"><i class="fa fa-check"></i><b>8.3.7</b> Buses</a></li>
+<li class="chapter" data-level="8.3.8" data-path="network-analysis.html"><a href="network-analysis.html#fully-connected"><i class="fa fa-check"></i><b>8.3.8</b> Fully connected</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="network-analysis.html"><a href="network-analysis.html#spatial-network-analysis"><i class="fa fa-check"></i><b>8.4</b> Spatial Network Analysis</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="network-analysis.html"><a href="network-analysis.html#network-tracing"><i class="fa fa-check"></i><b>8.4.1</b> Network tracing</a></li>
+<li class="chapter" data-level="8.4.2" data-path="network-analysis.html"><a href="network-analysis.html#linear-referencing"><i class="fa fa-check"></i><b>8.4.2</b> Linear referencing</a></li>
+<li class="chapter" data-level="8.4.3" data-path="network-analysis.html"><a href="network-analysis.html#routing"><i class="fa fa-check"></i><b>8.4.3</b> Routing</a></li>
+<li class="chapter" data-level="8.4.4" data-path="network-analysis.html"><a href="network-analysis.html#least-cost-paths"><i class="fa fa-check"></i><b>8.4.4</b> Least cost paths</a></li>
+<li class="chapter" data-level="8.4.5" data-path="network-analysis.html"><a href="network-analysis.html#least-cost-corridors"><i class="fa fa-check"></i><b>8.4.5</b> Least cost corridors</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="network-analysis.html"><a href="network-analysis.html#network-centrality"><i class="fa fa-check"></i><b>8.5</b> Network Centrality</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="network-analysis.html"><a href="network-analysis.html#degree-centrality"><i class="fa fa-check"></i><b>8.5.1</b> Degree centrality</a></li>
+<li class="chapter" data-level="8.5.2" data-path="network-analysis.html"><a href="network-analysis.html#closeness-centrality"><i class="fa fa-check"></i><b>8.5.2</b> Closeness centrality</a></li>
+<li class="chapter" data-level="8.5.3" data-path="network-analysis.html"><a href="network-analysis.html#betweenness-centrality"><i class="fa fa-check"></i><b>8.5.3</b> Betweenness centrality</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html"><i class="fa fa-check"></i><b>9</b> Raster Analysis and Terrain Modelling</a>
+<ul>
+<li class="chapter" data-level="" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#learning-objectives-8"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#key-terms-8"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="9.1" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#raster-analysis"><i class="fa fa-check"></i><b>9.1</b> Raster Analysis</a></li>
+<li class="chapter" data-level="9.2" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#digital-vertical-models"><i class="fa fa-check"></i><b>9.2</b> Digital Vertical Models</a></li>
+<li class="chapter" data-level="9.3" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#digital-elevation-models-dem"><i class="fa fa-check"></i><b>9.3</b> Digital Elevation Models (DEM)</a></li>
+<li class="chapter" data-level="9.4" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#digital-terrain-models-dtm"><i class="fa fa-check"></i><b>9.4</b> Digital Terrain Models (DTM)</a></li>
+<li class="chapter" data-level="9.5" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#digital-surface-models-dsm"><i class="fa fa-check"></i><b>9.5</b> Digital Surface Models (DSM)</a></li>
+<li class="chapter" data-level="9.6" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#contours"><i class="fa fa-check"></i><b>9.6</b> Contours</a></li>
+<li class="chapter" data-level="9.7" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#raster-functions"><i class="fa fa-check"></i><b>9.7</b> Raster Functions</a></li>
+<li class="chapter" data-level="9.8" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#local"><i class="fa fa-check"></i><b>9.8</b> Local</a></li>
+<li class="chapter" data-level="9.9" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#focal"><i class="fa fa-check"></i><b>9.9</b> Focal</a></li>
+<li class="chapter" data-level="9.10" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#global"><i class="fa fa-check"></i><b>9.10</b> Global</a></li>
+<li class="chapter" data-level="9.11" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#zonal"><i class="fa fa-check"></i><b>9.11</b> Zonal</a></li>
+<li class="chapter" data-level="9.12" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#derivatives-of-elevation-models"><i class="fa fa-check"></i><b>9.12</b> Derivatives of Elevation Models</a></li>
+<li class="chapter" data-level="9.13" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#slope"><i class="fa fa-check"></i><b>9.13</b> Slope</a></li>
+<li class="chapter" data-level="9.14" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#aspect"><i class="fa fa-check"></i><b>9.14</b> Aspect</a></li>
+<li class="chapter" data-level="9.15" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#heat-load-index"><i class="fa fa-check"></i><b>9.15</b> Heat Load Index</a></li>
+<li class="chapter" data-level="9.16" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#hillshade"><i class="fa fa-check"></i><b>9.16</b> Hillshade</a></li>
+<li class="chapter" data-level="9.17" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#sinks-peaks-and-saddles-oh-my"><i class="fa fa-check"></i><b>9.17</b> Sinks, Peaks, and Saddles Oh My!</a></li>
+<li class="chapter" data-level="9.18" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#landform-classification"><i class="fa fa-check"></i><b>9.18</b> Landform Classification</a></li>
+<li class="chapter" data-level="9.19" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#profile-and-planform-curvature"><i class="fa fa-check"></i><b>9.19</b> Profile and Planform Curvature</a></li>
+<li class="chapter" data-level="9.20" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#topographic-position-index"><i class="fa fa-check"></i><b>9.20</b> Topographic Position Index</a></li>
+<li class="chapter" data-level="9.21" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#hydrology-work-flows"><i class="fa fa-check"></i><b>9.21</b> Hydrology Work “flows”</a></li>
+<li class="chapter" data-level="9.22" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#flow-direction-and-flow-accumulation"><i class="fa fa-check"></i><b>9.22</b> Flow Direction and Flow Accumulation</a></li>
+<li class="chapter" data-level="9.23" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#stream-delineation"><i class="fa fa-check"></i><b>9.23</b> Stream Delineation</a></li>
+<li class="chapter" data-level="9.24" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#flow-length"><i class="fa fa-check"></i><b>9.24</b> Flow Length</a></li>
+<li class="chapter" data-level="9.25" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#topographic-wetness-index"><i class="fa fa-check"></i><b>9.25</b> Topographic Wetness Index</a></li>
+<li class="chapter" data-level="9.26" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#case-study-topographic-indices-for-wetland-mapping"><i class="fa fa-check"></i><b>9.26</b> Case Study: Topographic Indices for Wetland Mapping</a></li>
+<li class="chapter" data-level="9.27" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#dem-derivatives-and-classification"><i class="fa fa-check"></i><b>9.27</b> DEM Derivatives and Classification</a></li>
+<li class="chapter" data-level="9.28" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#d-geovisualization"><i class="fa fa-check"></i><b>9.28</b> 3D Geovisualization</a></li>
+<li class="chapter" data-level="9.29" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#anaglyphs"><i class="fa fa-check"></i><b>9.29</b> Anaglyphs</a></li>
+<li class="chapter" data-level="9.30" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#summary-7"><i class="fa fa-check"></i><b>9.30</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#reflection-questions-6"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#practice-questions-6"><i class="fa fa-check"></i>Practice Questions</a></li>
+<li class="chapter" data-level="" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#recommended-readings-5"><i class="fa fa-check"></i>Recommended Readings</a></li>
+<li class="chapter" data-level="9.31" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#spatial-estimation"><i class="fa fa-check"></i><b>9.31</b> Spatial Estimation</a></li>
+<li class="chapter" data-level="" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#learning-objectives-9"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#key-terms-9"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="9.32" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#introduction-1"><i class="fa fa-check"></i><b>9.32</b> Introduction</a></li>
+<li class="chapter" data-level="" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#recall-this"><i class="fa fa-check"></i>Recall This</a></li>
+<li class="chapter" data-level="9.33" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#geostatistics"><i class="fa fa-check"></i><b>9.33</b> Geostatistics</a></li>
+<li class="chapter" data-level="9.34" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#spatial-autocorrelation"><i class="fa fa-check"></i><b>9.34</b> Spatial Autocorrelation</a></li>
+<li class="chapter" data-level="9.35" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#sampling"><i class="fa fa-check"></i><b>9.35</b> Sampling</a></li>
+<li class="chapter" data-level="9.36" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#prediction"><i class="fa fa-check"></i><b>9.36</b> Prediction</a></li>
+<li class="chapter" data-level="9.37" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#estimation"><i class="fa fa-check"></i><b>9.37</b> Estimation</a></li>
+<li class="chapter" data-level="9.38" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#classical-vs.-geostatistical-inferences"><i class="fa fa-check"></i><b>9.38</b> Classical vs. Geostatistical Inferences</a></li>
+<li class="chapter" data-level="9.39" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#sampling-1"><i class="fa fa-check"></i><b>9.39</b> Sampling</a></li>
+<li class="chapter" data-level="" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#recall-this-1"><i class="fa fa-check"></i>Recall This</a></li>
+<li class="chapter" data-level="9.40" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#population"><i class="fa fa-check"></i><b>9.40</b> Population</a></li>
+<li class="chapter" data-level="9.41" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#sampling-design"><i class="fa fa-check"></i><b>9.41</b> Sampling Design</a></li>
+<li class="chapter" data-level="9.42" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#sampling-unit"><i class="fa fa-check"></i><b>9.42</b> Sampling Unit</a></li>
+<li class="chapter" data-level="9.43" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#probability-sampling"><i class="fa fa-check"></i><b>9.43</b> Probability Sampling</a></li>
+<li class="chapter" data-level="9.44" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#simple-random-sampling"><i class="fa fa-check"></i><b>9.44</b> Simple Random Sampling</a></li>
+<li class="chapter" data-level="9.45" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#stratified-random-sampling"><i class="fa fa-check"></i><b>9.45</b> Stratified Random Sampling</a></li>
+<li class="chapter" data-level="9.46" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#systematic-sampling"><i class="fa fa-check"></i><b>9.46</b> Systematic Sampling</a></li>
+<li class="chapter" data-level="9.47" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#cluster-sampling"><i class="fa fa-check"></i><b>9.47</b> Cluster Sampling</a></li>
+<li class="chapter" data-level="9.48" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#non-probability-sampling"><i class="fa fa-check"></i><b>9.48</b> Non-probability Sampling</a></li>
+<li class="chapter" data-level="9.49" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#representative-sampling"><i class="fa fa-check"></i><b>9.49</b> Representative Sampling</a></li>
+<li class="chapter" data-level="9.50" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#unique-case-sampling"><i class="fa fa-check"></i><b>9.50</b> Unique Case Sampling</a></li>
+<li class="chapter" data-level="9.51" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#sequential-sampling"><i class="fa fa-check"></i><b>9.51</b> Sequential Sampling</a></li>
+<li class="chapter" data-level="9.52" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#spatial-autocorrelation-1"><i class="fa fa-check"></i><b>9.52</b> Spatial Autocorrelation</a></li>
+<li class="chapter" data-level="" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#recall-this-2"><i class="fa fa-check"></i>Recall This</a></li>
+<li class="chapter" data-level="9.53" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#domain"><i class="fa fa-check"></i><b>9.53</b> Domain</a></li>
+<li class="chapter" data-level="9.54" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#attributes"><i class="fa fa-check"></i><b>9.54</b> Attributes</a></li>
+<li class="chapter" data-level="9.55" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#morans-i"><i class="fa fa-check"></i><b>9.55</b> Moran’s I</a></li>
+<li class="chapter" data-level="9.56" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#case-study-title-of-case-study-here"><i class="fa fa-check"></i><b>9.56</b> Case Study: Title of Case Study Here</a></li>
+<li class="chapter" data-level="" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#calculating-morans-i"><i class="fa fa-check"></i>Calculating Moran’s I</a></li>
+<li class="chapter" data-level="" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#using-contiguity"><i class="fa fa-check"></i>Using Contiguity</a></li>
+<li class="chapter" data-level="9.57" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#gearys-c"><i class="fa fa-check"></i><b>9.57</b> Geary’s C</a></li>
+<li class="chapter" data-level="9.58" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#semivariogram-modeling"><i class="fa fa-check"></i><b>9.58</b> Semivariogram Modeling</a></li>
+<li class="chapter" data-level="9.59" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#case-study-title-of-case-study-here-1"><i class="fa fa-check"></i><b>9.59</b> Case Study: Title of Case Study Here</a>
+<ul>
+<li class="chapter" data-level="9.59.1" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#gaussian"><i class="fa fa-check"></i><b>9.59.1</b> Gaussian</a></li>
+</ul></li>
+<li class="chapter" data-level="9.60" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#spherical"><i class="fa fa-check"></i><b>9.60</b> Spherical</a></li>
+<li class="chapter" data-level="9.61" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#exponential"><i class="fa fa-check"></i><b>9.61</b> Exponential</a></li>
+<li class="chapter" data-level="9.62" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#circular"><i class="fa fa-check"></i><b>9.62</b> Circular</a></li>
+<li class="chapter" data-level="9.63" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#spatial-interpolation"><i class="fa fa-check"></i><b>9.63</b> Spatial Interpolation</a></li>
+<li class="chapter" data-level="9.64" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#case-study-title-of-case-study-here-2"><i class="fa fa-check"></i><b>9.64</b> Case Study: Title of Case Study Here</a></li>
+<li class="chapter" data-level="9.65" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#methods-without-using-semi-variogram"><i class="fa fa-check"></i><b>9.65</b> Methods Without Using Semi-variogram</a></li>
+<li class="chapter" data-level="9.66" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#nearest-neighbor"><i class="fa fa-check"></i><b>9.66</b> Nearest Neighbor</a></li>
+<li class="chapter" data-level="9.67" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#thiessian-polygon"><i class="fa fa-check"></i><b>9.67</b> Thiessian Polygon</a></li>
+<li class="chapter" data-level="9.68" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#methods-using-semi-variogram"><i class="fa fa-check"></i><b>9.68</b> Methods Using Semi-variogram</a></li>
+<li class="chapter" data-level="9.69" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#kriging"><i class="fa fa-check"></i><b>9.69</b> Kriging</a>
+<ul>
+<li class="chapter" data-level="9.69.1" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#linear-kriging"><i class="fa fa-check"></i><b>9.69.1</b> Linear Kriging</a></li>
+</ul></li>
+<li class="chapter" data-level="9.70" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#case-study-title-of-case-study-here-3"><i class="fa fa-check"></i><b>9.70</b> Case Study: Title of Case Study here</a></li>
+<li class="chapter" data-level="9.71" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#simple-kriging"><i class="fa fa-check"></i><b>9.71</b> Simple Kriging</a></li>
+<li class="chapter" data-level="9.72" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#ordinary-kriging"><i class="fa fa-check"></i><b>9.72</b> Ordinary Kriging</a></li>
+<li class="chapter" data-level="9.73" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#universal-kriging"><i class="fa fa-check"></i><b>9.73</b> Universal Kriging</a></li>
+<li class="chapter" data-level="" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#which-method-is-the-best-given-our-data"><i class="fa fa-check"></i>Which method is the best given our data?</a></li>
+<li class="chapter" data-level="9.74" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#co-kriging"><i class="fa fa-check"></i><b>9.74</b> Co-Kriging</a></li>
+<li class="chapter" data-level="9.75" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#non-linear-kriging"><i class="fa fa-check"></i><b>9.75</b> Non-Linear Kriging</a></li>
+<li class="chapter" data-level="9.76" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#indicator-kriging"><i class="fa fa-check"></i><b>9.76</b> Indicator Kriging</a></li>
+<li class="chapter" data-level="9.77" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#probability-kriging"><i class="fa fa-check"></i><b>9.77</b> Probability Kriging</a></li>
+<li class="chapter" data-level="9.78" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#disjunctive-kriging"><i class="fa fa-check"></i><b>9.78</b> Disjunctive Kriging</a></li>
+<li class="chapter" data-level="9.79" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#spatial-regression-models"><i class="fa fa-check"></i><b>9.79</b> Spatial Regression Models</a></li>
+<li class="chapter" data-level="9.80" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#case-study-title-of-case-study-here-4"><i class="fa fa-check"></i><b>9.80</b> Case Study: Title of case study here</a></li>
+<li class="chapter" data-level="9.81" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#spatial-lag-model"><i class="fa fa-check"></i><b>9.81</b> Spatial Lag Model</a></li>
+<li class="chapter" data-level="9.82" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#steps-in-fitting-spatial-lag-model"><i class="fa fa-check"></i><b>9.82</b> Steps in Fitting Spatial Lag Model:</a></li>
+<li class="chapter" data-level="9.83" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#spatial-error-model"><i class="fa fa-check"></i><b>9.83</b> Spatial Error Model</a></li>
+<li class="chapter" data-level="9.84" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#steps-in-fitting-spatial-error-model"><i class="fa fa-check"></i><b>9.84</b> Steps in Fitting Spatial Error Model:</a></li>
+<li class="chapter" data-level="9.85" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#selection-between-lag-and-error-model"><i class="fa fa-check"></i><b>9.85</b> Selection Between Lag and Error Model</a></li>
+<li class="chapter" data-level="" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#remember-this-2"><i class="fa fa-check"></i>Remember This?</a></li>
+<li class="chapter" data-level="" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#reflection-questions-7"><i class="fa fa-check"></i>Reflection Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html"><i class="fa fa-check"></i><b>10</b> Fundamentals of remote sensing</a>
+<ul>
+<li class="chapter" data-level="" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#key-terms-10"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="10.1" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#what-is-remote-sensing"><i class="fa fa-check"></i><b>10.1</b> What is remote sensing?</a></li>
+<li class="chapter" data-level="10.2" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#types-of-energy"><i class="fa fa-check"></i><b>10.2</b> Types of Energy</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#introduction-2"><i class="fa fa-check"></i><b>10.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="10.2.2" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#scientific-notation"><i class="fa fa-check"></i><b>10.2.2</b> Scientific Notation</a></li>
+<li class="chapter" data-level="10.2.3" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#electromagnetic-spectrum"><i class="fa fa-check"></i><b>10.2.3</b> Electromagnetic Spectrum</a></li>
+<li class="chapter" data-level="10.2.4" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#radiation-types"><i class="fa fa-check"></i><b>10.2.4</b> Radiation Types</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#physical-laws-of-radiation"><i class="fa fa-check"></i><b>10.3</b> Physical laws of radiation</a></li>
+<li class="chapter" data-level="10.4" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#the-four-resolutions"><i class="fa fa-check"></i><b>10.4</b> The Four Resolutions</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#spatial-resolution"><i class="fa fa-check"></i><b>10.4.1</b> Spatial Resolution</a></li>
+<li class="chapter" data-level="10.4.2" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#temporal-resolution"><i class="fa fa-check"></i><b>10.4.2</b> Temporal Resolution</a></li>
+<li class="chapter" data-level="10.4.3" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#spectral-resolution"><i class="fa fa-check"></i><b>10.4.3</b> Spectral Resolution</a></li>
+<li class="chapter" data-level="10.4.4" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#radiometric-resolution"><i class="fa fa-check"></i><b>10.4.4</b> Radiometric Resolution</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#key-applications"><i class="fa fa-check"></i><b>10.5</b> Key Applications</a></li>
+<li class="chapter" data-level="10.6" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#summary-8"><i class="fa fa-check"></i><b>10.6</b> Summary</a>
+<ul>
+<li class="chapter" data-level="10.6.1" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#reflection-questions-8"><i class="fa fa-check"></i><b>10.6.1</b> Reflection Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="chapter-template.html"><a href="chapter-template.html"><i class="fa fa-check"></i><b>11</b> Remote Sensing Systems</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#key-terms-11"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="11.1" data-path="chapter-template.html"><a href="chapter-template.html#optical-system-basics"><i class="fa fa-check"></i><b>11.1</b> Optical System Basics</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="chapter-template.html"><a href="chapter-template.html#lenses"><i class="fa fa-check"></i><b>11.1.1</b> Lenses</a></li>
+<li class="chapter" data-level="11.1.2" data-path="chapter-template.html"><a href="chapter-template.html#focal-length"><i class="fa fa-check"></i><b>11.1.2</b> Focal Length</a></li>
+<li class="chapter" data-level="11.1.3" data-path="chapter-template.html"><a href="chapter-template.html#principle-points"><i class="fa fa-check"></i><b>11.1.3</b> Principle Points</a></li>
+<li class="chapter" data-level="11.1.4" data-path="chapter-template.html"><a href="chapter-template.html#field-of-view"><i class="fa fa-check"></i><b>11.1.4</b> Field of View</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#did-you-know"><i class="fa fa-check"></i>Did You Know?</a></li>
+<li class="chapter" data-level="11.2" data-path="chapter-template.html"><a href="chapter-template.html#perspectives"><i class="fa fa-check"></i><b>11.2</b> Perspectives</a></li>
+<li class="chapter" data-level="11.3" data-path="chapter-template.html"><a href="chapter-template.html#aerial-perspective"><i class="fa fa-check"></i><b>11.3</b> Aerial Perspective</a></li>
+<li class="chapter" data-level="11.4" data-path="chapter-template.html"><a href="chapter-template.html#nadir-perpsective"><i class="fa fa-check"></i><b>11.4</b> Nadir Perpsective</a></li>
+<li class="chapter" data-level="11.5" data-path="chapter-template.html"><a href="chapter-template.html#oblique-perspective"><i class="fa fa-check"></i><b>11.5</b> Oblique Perspective</a></li>
+<li class="chapter" data-level="11.6" data-path="chapter-template.html"><a href="chapter-template.html#hemispherical-perspective"><i class="fa fa-check"></i><b>11.6</b> Hemispherical Perspective</a></li>
+<li class="chapter" data-level="11.7" data-path="chapter-template.html"><a href="chapter-template.html#sensors"><i class="fa fa-check"></i><b>11.7</b> Sensors</a></li>
+<li class="chapter" data-level="11.8" data-path="chapter-template.html"><a href="chapter-template.html#detectors"><i class="fa fa-check"></i><b>11.8</b> Detectors</a></li>
+<li class="chapter" data-level="11.9" data-path="chapter-template.html"><a href="chapter-template.html#analog-to-digital-converters"><i class="fa fa-check"></i><b>11.9</b> Analog-to-Digital Converters</a></li>
+<li class="chapter" data-level="11.10" data-path="chapter-template.html"><a href="chapter-template.html#panchromatic-sensors"><i class="fa fa-check"></i><b>11.10</b> Panchromatic Sensors</a></li>
+<li class="chapter" data-level="11.11" data-path="chapter-template.html"><a href="chapter-template.html#multispectral-sensors"><i class="fa fa-check"></i><b>11.11</b> Multispectral Sensors</a></li>
+<li class="chapter" data-level="11.12" data-path="chapter-template.html"><a href="chapter-template.html#hyperspectral-sensors"><i class="fa fa-check"></i><b>11.12</b> Hyperspectral Sensors</a></li>
+<li class="chapter" data-level="11.13" data-path="chapter-template.html"><a href="chapter-template.html#platforms"><i class="fa fa-check"></i><b>11.13</b> Platforms</a></li>
+<li class="chapter" data-level="11.14" data-path="chapter-template.html"><a href="chapter-template.html#terrestrial-systems"><i class="fa fa-check"></i><b>11.14</b> Terrestrial Systems</a></li>
+<li class="chapter" data-level="11.15" data-path="chapter-template.html"><a href="chapter-template.html#aerial-systems"><i class="fa fa-check"></i><b>11.15</b> Aerial systems</a></li>
+<li class="chapter" data-level="11.16" data-path="chapter-template.html"><a href="chapter-template.html#satellite-systems"><i class="fa fa-check"></i><b>11.16</b> Satellite Systems</a></li>
+<li class="chapter" data-level="11.17" data-path="chapter-template.html"><a href="chapter-template.html#orbital-physics"><i class="fa fa-check"></i><b>11.17</b> Orbital Physics</a></li>
+<li class="chapter" data-level="11.18" data-path="chapter-template.html"><a href="chapter-template.html#low-earth-orbit"><i class="fa fa-check"></i><b>11.18</b> Low Earth Orbit</a></li>
+<li class="chapter" data-level="11.19" data-path="chapter-template.html"><a href="chapter-template.html#medium-earth-orbit"><i class="fa fa-check"></i><b>11.19</b> Medium Earth Orbit</a></li>
+<li class="chapter" data-level="11.20" data-path="chapter-template.html"><a href="chapter-template.html#polar-and-sun-synchronous-orbit"><i class="fa fa-check"></i><b>11.20</b> Polar and Sun-synchronous Orbit</a></li>
+<li class="chapter" data-level="11.21" data-path="chapter-template.html"><a href="chapter-template.html#geostationary-orbit"><i class="fa fa-check"></i><b>11.21</b> Geostationary Orbit</a></li>
+<li class="chapter" data-level="11.22" data-path="chapter-template.html"><a href="chapter-template.html#lagrange-points"><i class="fa fa-check"></i><b>11.22</b> Lagrange Points</a></li>
+<li class="chapter" data-level="11.23" data-path="chapter-template.html"><a href="chapter-template.html#important-satellite-systems-for-environmental-management"><i class="fa fa-check"></i><b>11.23</b> Important Satellite Systems for Environmental Management</a></li>
+<li class="chapter" data-level="11.24" data-path="chapter-template.html"><a href="chapter-template.html#landsat"><i class="fa fa-check"></i><b>11.24</b> LANDSAT</a></li>
+<li class="chapter" data-level="11.25" data-path="chapter-template.html"><a href="chapter-template.html#radarsat"><i class="fa fa-check"></i><b>11.25</b> RADARSAt</a></li>
+<li class="chapter" data-level="11.26" data-path="chapter-template.html"><a href="chapter-template.html#advanced-very-high-resolution-radiometer-avhrr"><i class="fa fa-check"></i><b>11.26</b> Advanced Very High Resolution Radiometer (AVHRR)</a></li>
+<li class="chapter" data-level="11.27" data-path="chapter-template.html"><a href="chapter-template.html#moderate-resolution-spectroradiometer-modis"><i class="fa fa-check"></i><b>11.27</b> Moderate Resolution Spectroradiometer (MODIS)</a></li>
+<li class="chapter" data-level="11.28" data-path="chapter-template.html"><a href="chapter-template.html#icesat"><i class="fa fa-check"></i><b>11.28</b> ICESat</a></li>
+<li class="chapter" data-level="11.29" data-path="chapter-template.html"><a href="chapter-template.html#advanced-spaceborne-thermal-emission-and-reflection-radiometer-aster"><i class="fa fa-check"></i><b>11.29</b> Advanced Spaceborne Thermal Emission and Reflection Radiometer (ASTER)</a></li>
+<li class="chapter" data-level="11.30" data-path="chapter-template.html"><a href="chapter-template.html#defense-meteorology-satellite-program-dmsp"><i class="fa fa-check"></i><b>11.30</b> Defense Meteorology Satellite Program (DMSP)</a></li>
+<li class="chapter" data-level="11.31" data-path="chapter-template.html"><a href="chapter-template.html#visible-infrared-imaging-radiometer-suite-viirs"><i class="fa fa-check"></i><b>11.31</b> Visible Infrared Imaging Radiometer Suite (VIIRS)</a></li>
+<li class="chapter" data-level="11.32" data-path="chapter-template.html"><a href="chapter-template.html#wildfiresat"><i class="fa fa-check"></i><b>11.32</b> WildfireSat</a></li>
+<li class="chapter" data-level="11.33" data-path="chapter-template.html"><a href="chapter-template.html#case-study-title-of-case-study-here-5"><i class="fa fa-check"></i><b>11.33</b> Case Study: Title of Case Study Here</a></li>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#box-text"><i class="fa fa-check"></i>Case Study Title Max of Forty Characters</a></li>
+<li class="chapter" data-level="11.34" data-path="chapter-template.html"><a href="chapter-template.html#summary-9"><i class="fa fa-check"></i><b>11.34</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#reflection-questions-9"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#practice-questions-7"><i class="fa fa-check"></i>Practice Questions</a></li>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#recommended-readings-6"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="image-processing.html"><a href="image-processing.html"><i class="fa fa-check"></i><b>12</b> Image Processing</a>
+<ul>
+<li class="chapter" data-level="" data-path="image-processing.html"><a href="image-processing.html#key-terms-12"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="12.1" data-path="image-processing.html"><a href="image-processing.html#overview"><i class="fa fa-check"></i><b>12.1</b> Overview</a></li>
+<li class="chapter" data-level="12.2" data-path="image-processing.html"><a href="image-processing.html#geometric-correction"><i class="fa fa-check"></i><b>12.2</b> Geometric correction</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="image-processing.html"><a href="image-processing.html#relief-displacement"><i class="fa fa-check"></i><b>12.2.1</b> <strong>Relief displacement</strong></a></li>
+<li class="chapter" data-level="12.2.2" data-path="image-processing.html"><a href="image-processing.html#georeferencing"><i class="fa fa-check"></i><b>12.2.2</b> <strong>Georeferencing</strong></a></li>
+<li class="chapter" data-level="12.2.3" data-path="image-processing.html"><a href="image-processing.html#georegistration-georectification"><i class="fa fa-check"></i><b>12.2.3</b> <strong>Georegistration (georectification)</strong></a></li>
+<li class="chapter" data-level="12.2.4" data-path="image-processing.html"><a href="image-processing.html#resampling"><i class="fa fa-check"></i><b>12.2.4</b> <strong>Resampling</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="image-processing.html"><a href="image-processing.html#atmospheric-correction"><i class="fa fa-check"></i><b>12.3</b> Atmospheric correction</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="image-processing.html"><a href="image-processing.html#atmospheric-windows"><i class="fa fa-check"></i><b>12.3.1</b> <strong>Atmospheric windows</strong></a></li>
+<li class="chapter" data-level="12.3.2" data-path="image-processing.html"><a href="image-processing.html#clouds-and-shadows"><i class="fa fa-check"></i><b>12.3.2</b> <strong>Clouds and shadows</strong></a></li>
+<li class="chapter" data-level="12.3.3" data-path="image-processing.html"><a href="image-processing.html#smoke-and-haze"><i class="fa fa-check"></i><b>12.3.3</b> <strong>Smoke and Haze</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="image-processing.html"><a href="image-processing.html#radiometric-correction"><i class="fa fa-check"></i><b>12.4</b> Radiometric correction</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="image-processing.html"><a href="image-processing.html#signal-to-noise"><i class="fa fa-check"></i><b>12.4.1</b> <strong>Signal-to-noise</strong></a></li>
+<li class="chapter" data-level="12.4.2" data-path="image-processing.html"><a href="image-processing.html#radiometric-normalization"><i class="fa fa-check"></i><b>12.4.2</b> <strong>Radiometric normalization</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="image-processing.html"><a href="image-processing.html#image-enhancement"><i class="fa fa-check"></i><b>12.5</b> Image enhancement</a>
+<ul>
+<li class="chapter" data-level="12.5.1" data-path="image-processing.html"><a href="image-processing.html#stretching"><i class="fa fa-check"></i><b>12.5.1</b> <strong>Stretching</strong></a></li>
+<li class="chapter" data-level="12.5.2" data-path="image-processing.html"><a href="image-processing.html#sharpening"><i class="fa fa-check"></i><b>12.5.2</b> <strong>Sharpening</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="12.6" data-path="image-processing.html"><a href="image-processing.html#summary-10"><i class="fa fa-check"></i><b>12.6</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="image-processing.html"><a href="image-processing.html#reflection-questions-10"><i class="fa fa-check"></i>Reflection Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="image-analysis.html"><a href="image-analysis.html"><i class="fa fa-check"></i><b>13</b> Image Analysis</a></li>
+<li class="chapter" data-level="14" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html"><i class="fa fa-check"></i><b>14</b> LiDAR Acquisition and Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#key-terms-13"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="14.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#what-is-lidar"><i class="fa fa-check"></i><b>14.1</b> What is LiDAR?</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#how-does-it-work"><i class="fa fa-check"></i><b>14.1.1</b> How does it Work?</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#components-of-lidar-systems"><i class="fa fa-check"></i><b>14.2</b> Components of LiDAR Systems</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#lasers"><i class="fa fa-check"></i><b>14.2.1</b> Lasers</a></li>
+<li class="chapter" data-level="14.2.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#position-and-orientation"><i class="fa fa-check"></i><b>14.2.2</b> Position and Orientation</a></li>
+<li class="chapter" data-level="14.2.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#platform"><i class="fa fa-check"></i><b>14.2.3</b> Platform</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#types-of-lidar"><i class="fa fa-check"></i><b>14.3</b> Types of LiDAR</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#discrete-return"><i class="fa fa-check"></i><b>14.3.1</b> Discrete Return</a></li>
+<li class="chapter" data-level="14.3.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#full-waveform"><i class="fa fa-check"></i><b>14.3.2</b> Full Waveform</a></li>
+<li class="chapter" data-level="14.3.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#multispectral"><i class="fa fa-check"></i><b>14.3.3</b> Multispectral</a></li>
+<li class="chapter" data-level="14.3.4" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#single-photon-lidar"><i class="fa fa-check"></i><b>14.3.4</b> Single Photon Lidar</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#lidar-derivatives-and-analysis"><i class="fa fa-check"></i><b>14.4</b> LiDAR Derivatives and Analysis</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#bare-earth-elevation"><i class="fa fa-check"></i><b>14.4.1</b> Bare Earth Elevation</a></li>
+<li class="chapter" data-level="14.4.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#canopy-height-model"><i class="fa fa-check"></i><b>14.4.2</b> Canopy Height Model</a></li>
+<li class="chapter" data-level="14.4.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#canopy-surface-model"><i class="fa fa-check"></i><b>14.4.3</b> Canopy Surface Model</a></li>
+<li class="chapter" data-level="14.4.4" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#grid-metrics"><i class="fa fa-check"></i><b>14.4.4</b> Grid Metrics</a></li>
+<li class="chapter" data-level="14.4.5" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#tree-segmentation"><i class="fa fa-check"></i><b>14.4.5</b> Tree Segmentation</a></li>
+<li class="chapter" data-level="14.4.6" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#software"><i class="fa fa-check"></i><b>14.4.6</b> Software</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#summary-11"><i class="fa fa-check"></i><b>14.5</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#reflection-questions-11"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#practice-questions-8"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="data-integration.html"><a href="data-integration.html"><i class="fa fa-check"></i><b>15</b> Chapter Title</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-integration.html"><a href="data-integration.html#key-terms-14"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="15.1" data-path="data-integration.html"><a href="data-integration.html#the-gis-research-process"><i class="fa fa-check"></i><b>15.1</b> The GIS Research Process</a></li>
+<li class="chapter" data-level="15.2" data-path="data-integration.html"><a href="data-integration.html#problems-with-data-integration"><i class="fa fa-check"></i><b>15.2</b> Problems with data integration</a></li>
+<li class="chapter" data-level="15.3" data-path="data-integration.html"><a href="data-integration.html#frame-the-problem"><i class="fa fa-check"></i><b>15.3</b> Frame the Problem</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="data-integration.html"><a href="data-integration.html#identify-and-acquire-data"><i class="fa fa-check"></i><b>15.3.1</b> Identify and Acquire Data</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="data-integration.html"><a href="data-integration.html#data-resolution"><i class="fa fa-check"></i><b>15.4</b> Data Resolution</a></li>
+<li class="chapter" data-level="15.5" data-path="data-integration.html"><a href="data-integration.html#integrating-vector-and-raster-data"><i class="fa fa-check"></i><b>15.5</b> Integrating vector and raster data</a>
+<ul>
+<li class="chapter" data-level="15.5.1" data-path="data-integration.html"><a href="data-integration.html#rasterization"><i class="fa fa-check"></i><b>15.5.1</b> Rasterization</a></li>
+<li class="chapter" data-level="15.5.2" data-path="data-integration.html"><a href="data-integration.html#vectorization"><i class="fa fa-check"></i><b>15.5.2</b> Vectorization</a></li>
+<li class="chapter" data-level="15.5.3" data-path="data-integration.html"><a href="data-integration.html#zonal-statistics"><i class="fa fa-check"></i><b>15.5.3</b> Zonal Statistics</a></li>
+<li class="chapter" data-level="15.5.4" data-path="data-integration.html"><a href="data-integration.html#smoothing"><i class="fa fa-check"></i><b>15.5.4</b> Smoothing</a></li>
+<li class="chapter" data-level="15.5.5" data-path="data-integration.html"><a href="data-integration.html#simplifying"><i class="fa fa-check"></i><b>15.5.5</b> Simplifying</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="data-integration.html"><a href="data-integration.html#spatial-data-errors"><i class="fa fa-check"></i><b>15.6</b> Spatial data errors</a>
+<ul>
+<li class="chapter" data-level="15.6.1" data-path="data-integration.html"><a href="data-integration.html#accuracy-vs.-precision"><i class="fa fa-check"></i><b>15.6.1</b> Accuracy vs. Precision</a></li>
+<li class="chapter" data-level="15.6.2" data-path="data-integration.html"><a href="data-integration.html#vagueness-and-ambiguity"><i class="fa fa-check"></i><b>15.6.2</b> Vagueness and Ambiguity</a></li>
+<li class="chapter" data-level="15.6.3" data-path="data-integration.html"><a href="data-integration.html#quantifying-spatial-errors-rmse-euclids-distance"><i class="fa fa-check"></i><b>15.6.3</b> Quantifying spatial errors RMSE, Euclid’s distance</a></li>
+<li class="chapter" data-level="15.6.4" data-path="data-integration.html"><a href="data-integration.html#logical-errors"><i class="fa fa-check"></i><b>15.6.4</b> Logical Errors</a></li>
+<li class="chapter" data-level="15.6.5" data-path="data-integration.html"><a href="data-integration.html#ecological-fallacy-atomistic-fallacy-maup-etc.-its-important-to-include-these-whether-here-or-elsewhere"><i class="fa fa-check"></i><b>15.6.5</b> Ecological Fallacy, Atomistic Fallacy, MAUP etc. Its important to include these, whether here or elsewhere?</a></li>
+<li class="chapter" data-level="15.6.6" data-path="data-integration.html"><a href="data-integration.html#other-errors"><i class="fa fa-check"></i><b>15.6.6</b> Other Errors?</a></li>
+</ul></li>
+<li class="chapter" data-level="15.7" data-path="data-integration.html"><a href="data-integration.html#making-beautiful-maps"><i class="fa fa-check"></i><b>15.7</b> Making Beautiful Maps</a></li>
+<li class="chapter" data-level="" data-path="data-integration.html"><a href="data-integration.html#learning-objectives-15"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="data-integration.html"><a href="data-integration.html#key-terms-15"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="15.8" data-path="data-integration.html"><a href="data-integration.html#types-of-maps"><i class="fa fa-check"></i><b>15.8</b> Types of Maps</a></li>
+<li class="chapter" data-level="15.9" data-path="data-integration.html"><a href="data-integration.html#thematic-maps"><i class="fa fa-check"></i><b>15.9</b> Thematic Maps</a></li>
+<li class="chapter" data-level="15.10" data-path="data-integration.html"><a href="data-integration.html#choropleth-maps"><i class="fa fa-check"></i><b>15.10</b> Choropleth Maps</a></li>
+<li class="chapter" data-level="15.11" data-path="data-integration.html"><a href="data-integration.html#dot-density-maps"><i class="fa fa-check"></i><b>15.11</b> Dot Density Maps</a></li>
+<li class="chapter" data-level="15.12" data-path="data-integration.html"><a href="data-integration.html#isoline-maps"><i class="fa fa-check"></i><b>15.12</b> Isoline Maps</a></li>
+<li class="chapter" data-level="15.13" data-path="data-integration.html"><a href="data-integration.html#diagrammatic-maps"><i class="fa fa-check"></i><b>15.13</b> Diagrammatic Maps</a></li>
+<li class="chapter" data-level="15.14" data-path="data-integration.html"><a href="data-integration.html#cartograms"><i class="fa fa-check"></i><b>15.14</b> Cartograms</a></li>
+<li class="chapter" data-level="15.15" data-path="data-integration.html"><a href="data-integration.html#additional-resources-on-types-of-maps"><i class="fa fa-check"></i><b>15.15</b> Additional Resources on Types of Maps</a></li>
+<li class="chapter" data-level="15.16" data-path="data-integration.html"><a href="data-integration.html#map-composition"><i class="fa fa-check"></i><b>15.16</b> Map Composition</a></li>
+<li class="chapter" data-level="15.17" data-path="data-integration.html"><a href="data-integration.html#figure"><i class="fa fa-check"></i><b>15.17</b> Figure</a></li>
+<li class="chapter" data-level="15.18" data-path="data-integration.html"><a href="data-integration.html#ground"><i class="fa fa-check"></i><b>15.18</b> Ground</a></li>
+<li class="chapter" data-level="15.19" data-path="data-integration.html"><a href="data-integration.html#frame"><i class="fa fa-check"></i><b>15.19</b> Frame</a></li>
+<li class="chapter" data-level="15.20" data-path="data-integration.html"><a href="data-integration.html#elements-of-maps"><i class="fa fa-check"></i><b>15.20</b> Elements of Maps</a></li>
+<li class="chapter" data-level="15.21" data-path="data-integration.html"><a href="data-integration.html#text"><i class="fa fa-check"></i><b>15.21</b> Text</a></li>
+<li class="chapter" data-level="15.22" data-path="data-integration.html"><a href="data-integration.html#legend"><i class="fa fa-check"></i><b>15.22</b> Legend</a></li>
+<li class="chapter" data-level="15.23" data-path="data-integration.html"><a href="data-integration.html#scale-and-north-arrow"><i class="fa fa-check"></i><b>15.23</b> Scale and North Arrow</a></li>
+<li class="chapter" data-level="15.24" data-path="data-integration.html"><a href="data-integration.html#measured-grid"><i class="fa fa-check"></i><b>15.24</b> Measured Grid</a></li>
+<li class="chapter" data-level="15.25" data-path="data-integration.html"><a href="data-integration.html#citation"><i class="fa fa-check"></i><b>15.25</b> Citation</a></li>
+<li class="chapter" data-level="15.26" data-path="data-integration.html"><a href="data-integration.html#symbolization"><i class="fa fa-check"></i><b>15.26</b> Symbolization</a></li>
+<li class="chapter" data-level="15.27" data-path="data-integration.html"><a href="data-integration.html#separable"><i class="fa fa-check"></i><b>15.27</b> Separable</a></li>
+<li class="chapter" data-level="15.28" data-path="data-integration.html"><a href="data-integration.html#integral"><i class="fa fa-check"></i><b>15.28</b> Integral</a></li>
+<li class="chapter" data-level="15.29" data-path="data-integration.html"><a href="data-integration.html#graduated"><i class="fa fa-check"></i><b>15.29</b> Graduated</a></li>
+<li class="chapter" data-level="15.30" data-path="data-integration.html"><a href="data-integration.html#configurable"><i class="fa fa-check"></i><b>15.30</b> Configurable</a></li>
+<li class="chapter" data-level="15.31" data-path="data-integration.html"><a href="data-integration.html#proportional"><i class="fa fa-check"></i><b>15.31</b> Proportional</a></li>
+<li class="chapter" data-level="15.32" data-path="data-integration.html"><a href="data-integration.html#line-weight"><i class="fa fa-check"></i><b>15.32</b> Line Weight</a></li>
+<li class="chapter" data-level="15.33" data-path="data-integration.html"><a href="data-integration.html#additional-resources"><i class="fa fa-check"></i><b>15.33</b> Additional Resources</a></li>
+<li class="chapter" data-level="15.34" data-path="data-integration.html"><a href="data-integration.html#colour"><i class="fa fa-check"></i><b>15.34</b> Colour</a></li>
+<li class="chapter" data-level="15.35" data-path="data-integration.html"><a href="data-integration.html#hue"><i class="fa fa-check"></i><b>15.35</b> Hue</a></li>
+<li class="chapter" data-level="15.36" data-path="data-integration.html"><a href="data-integration.html#chroma"><i class="fa fa-check"></i><b>15.36</b> Chroma</a></li>
+<li class="chapter" data-level="15.37" data-path="data-integration.html"><a href="data-integration.html#lightness"><i class="fa fa-check"></i><b>15.37</b> Lightness</a></li>
+<li class="chapter" data-level="15.38" data-path="data-integration.html"><a href="data-integration.html#bivariate-colour-schemes"><i class="fa fa-check"></i><b>15.38</b> Bivariate Colour Schemes</a></li>
+<li class="chapter" data-level="15.39" data-path="data-integration.html"><a href="data-integration.html#colour-pickers"><i class="fa fa-check"></i><b>15.39</b> Colour Pickers</a></li>
+<li class="chapter" data-level="15.40" data-path="data-integration.html"><a href="data-integration.html#additional-resources-1"><i class="fa fa-check"></i><b>15.40</b> Additional Resources</a></li>
+<li class="chapter" data-level="15.41" data-path="data-integration.html"><a href="data-integration.html#classification-schemes"><i class="fa fa-check"></i><b>15.41</b> Classification Schemes</a></li>
+<li class="chapter" data-level="15.42" data-path="data-integration.html"><a href="data-integration.html#qualitative"><i class="fa fa-check"></i><b>15.42</b> Qualitative</a></li>
+<li class="chapter" data-level="15.43" data-path="data-integration.html"><a href="data-integration.html#sequential"><i class="fa fa-check"></i><b>15.43</b> Sequential</a></li>
+<li class="chapter" data-level="15.44" data-path="data-integration.html"><a href="data-integration.html#intervals"><i class="fa fa-check"></i><b>15.44</b> Intervals</a></li>
+<li class="chapter" data-level="15.45" data-path="data-integration.html"><a href="data-integration.html#quantiles"><i class="fa fa-check"></i><b>15.45</b> Quantiles</a></li>
+<li class="chapter" data-level="15.46" data-path="data-integration.html"><a href="data-integration.html#natural-breaks-jenna"><i class="fa fa-check"></i><b>15.46</b> Natural Breaks (Jenna)</a></li>
+<li class="chapter" data-level="15.47" data-path="data-integration.html"><a href="data-integration.html#standard-deviation"><i class="fa fa-check"></i><b>15.47</b> Standard Deviation</a></li>
+<li class="chapter" data-level="15.48" data-path="data-integration.html"><a href="data-integration.html#additional-resources-2"><i class="fa fa-check"></i><b>15.48</b> Additional Resources</a></li>
+<li class="chapter" data-level="15.49" data-path="data-integration.html"><a href="data-integration.html#generalization"><i class="fa fa-check"></i><b>15.49</b> Generalization</a></li>
+<li class="chapter" data-level="15.50" data-path="data-integration.html"><a href="data-integration.html#select"><i class="fa fa-check"></i><b>15.50</b> Select</a></li>
+<li class="chapter" data-level="15.51" data-path="data-integration.html"><a href="data-integration.html#amalgamate"><i class="fa fa-check"></i><b>15.51</b> Amalgamate</a></li>
+<li class="chapter" data-level="15.52" data-path="data-integration.html"><a href="data-integration.html#exaggerate"><i class="fa fa-check"></i><b>15.52</b> Exaggerate</a></li>
+<li class="chapter" data-level="15.53" data-path="data-integration.html"><a href="data-integration.html#displace"><i class="fa fa-check"></i><b>15.53</b> Displace</a></li>
+<li class="chapter" data-level="15.54" data-path="data-integration.html"><a href="data-integration.html#refine"><i class="fa fa-check"></i><b>15.54</b> Refine</a></li>
+<li class="chapter" data-level="15.55" data-path="data-integration.html"><a href="data-integration.html#simplify"><i class="fa fa-check"></i><b>15.55</b> Simplify</a></li>
+<li class="chapter" data-level="15.56" data-path="data-integration.html"><a href="data-integration.html#aggregate"><i class="fa fa-check"></i><b>15.56</b> Aggregate</a></li>
+<li class="chapter" data-level="15.57" data-path="data-integration.html"><a href="data-integration.html#typify"><i class="fa fa-check"></i><b>15.57</b> Typify</a></li>
+<li class="chapter" data-level="15.58" data-path="data-integration.html"><a href="data-integration.html#smooth"><i class="fa fa-check"></i><b>15.58</b> Smooth</a></li>
+<li class="chapter" data-level="15.59" data-path="data-integration.html"><a href="data-integration.html#enhance"><i class="fa fa-check"></i><b>15.59</b> Enhance</a></li>
+<li class="chapter" data-level="15.60" data-path="data-integration.html"><a href="data-integration.html#collapse"><i class="fa fa-check"></i><b>15.60</b> Collapse</a></li>
+<li class="chapter" data-level="15.61" data-path="data-integration.html"><a href="data-integration.html#merge"><i class="fa fa-check"></i><b>15.61</b> Merge</a></li>
+<li class="chapter" data-level="15.62" data-path="data-integration.html"><a href="data-integration.html#additional-resources-3"><i class="fa fa-check"></i><b>15.62</b> Additional Resources</a></li>
+<li class="chapter" data-level="15.63" data-path="data-integration.html"><a href="data-integration.html#map-design"><i class="fa fa-check"></i><b>15.63</b> Map Design</a></li>
+<li class="chapter" data-level="15.64" data-path="data-integration.html"><a href="data-integration.html#subject"><i class="fa fa-check"></i><b>15.64</b> Subject</a></li>
+<li class="chapter" data-level="15.65" data-path="data-integration.html"><a href="data-integration.html#projection-and-orientation"><i class="fa fa-check"></i><b>15.65</b> Projection and Orientation</a></li>
+<li class="chapter" data-level="15.66" data-path="data-integration.html"><a href="data-integration.html#hierarchy"><i class="fa fa-check"></i><b>15.66</b> Hierarchy</a></li>
+<li class="chapter" data-level="15.67" data-path="data-integration.html"><a href="data-integration.html#balance"><i class="fa fa-check"></i><b>15.67</b> Balance</a></li>
+<li class="chapter" data-level="15.68" data-path="data-integration.html"><a href="data-integration.html#summary-12"><i class="fa fa-check"></i><b>15.68</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="data-integration.html"><a href="data-integration.html#reflection-questions-12"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="data-integration.html"><a href="data-integration.html#practice-questions-9"><i class="fa fa-check"></i>Practice Questions</a></li>
+<li class="chapter" data-level="" data-path="data-integration.html"><a href="data-integration.html#recommended-readings-7"><i class="fa fa-check"></i>Recommended Readings</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -182,11 +725,11 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="network-analysis" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Network Analysis</h1>
+<div id="network-analysis" class="section level1" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Network Analysis</h1>
 <p>Networks are abstract structures used to represent patterns of relationships among sets of various “things” <span class="citation">(<a href="#ref-ajorlouIntroductionNetworkModels2018" role="doc-biblioref">Ajorlou 2018</a>)</span>. Such structures can be used to represent social connections, spatial patterns, ecological relationships, etc. In GIS, the elements that compose geospatial networks are geolocated – in other words: they have latitude and longitude values attached to them. Network analysis encompasses a series of techniques used to interpret information from those networks. This chapter introduces basic concepts for building, analyzing and applying spatial networks to real-world problems.</p>
 <div class="box-content learning-objectives-content">
-<div id="learning-objectives-1" class="section level4 unnumbered box-title learning-objectives-top">
+<div id="learning-objectives-7" class="section level4 unnumbered box-title learning-objectives-top">
 <h4>Learning Objectives</h4>
 </div>
 <p id="box-text">
@@ -199,118 +742,118 @@ By the end of the chapter, students will be able:
 <li>To extract relevant information from spatial networks about the relationship between their elements, such as routes, distances and centralities.</li>
 </ol>
 </div>
-<div id="key-terms-1" class="section level3 unnumbered">
+<div id="key-terms-7" class="section level3 unnumbered">
 <h3>Key Terms</h3>
 <p>Network analysis, Spatial networks, Graph theory</p>
 </div>
-<div id="introduction-to-graph-theory" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Introduction to graph theory</h2>
+<div id="introduction-to-graph-theory" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Introduction to graph theory</h2>
 <p>Graphs are the abstract language of networks <span class="citation">(<a href="#ref-systemsinnovationGraphTheoryOverview2015" role="doc-biblioref">Systems Innovation 2015a</a>)</span>. Graph theory is the area of mathematics that study graphs. By abstracting networks into graphs, one is able to measure different kinds of indicators that represents information about relationships that exist within a certain system. This is especially useful to assess the state of complex adaptive systems such as societies, cities, ecosystems, etc. All graphs are composed of two parts: nodes and edges.</p>
-<div id="nodes" class="section level3" number="1.1.1">
-<h3><span class="header-section-number">1.1.1</span> Nodes</h3>
+<div id="nodes" class="section level3" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> Nodes</h3>
 <p>A node (or vertex) may represent any thing that can be connected with other things. For example, it can represent people in social networks, street intersections in road networks, or chemical compounds in molecular networks, among others.</p>
 </div>
-<div id="edges" class="section level3" number="1.1.2">
-<h3><span class="header-section-number">1.1.2</span> Edges</h3>
+<div id="edges" class="section level3" number="8.1.2">
+<h3><span class="header-section-number">8.1.2</span> Edges</h3>
 <p>Edges, on the other hand, represent how vertices are interconnected to each other. So it may represent the vertices’ social connections, street segments, molecular bindings, etc. The graph below represents rapid and frequent transit lines in Metro Vancouver. Each node represents a transit line and the edges represents connections between those lines.</p>
-<div id="htmlwidget-420b3bfafb44b28b8a0d" style="width:672px;height:480px;" class="forceNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-420b3bfafb44b28b8a0d">{"x":{"links":{"source":[2,0,7,1,7,3,3,9,9,9,2,7,10,10,8,8,10,3,10,10],"target":[0,1,1,2,2,2,0,1,2,5,4,0,2,3,2,1,6,6,9,1],"value":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"colour":["#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666"]},"nodes":{"name":["99-B Line","Canada Line","Expo Line","Millenium Line","R1","R2","R3","R4","R5","Seabus","West Coast Express"],"group":[1,1,1,1,1,1,1,1,1,1,1],"nodesize":[8,8,8,8,8,8,8,8,8,8,8]},"options":{"NodeID":"name","Group":"group","colourScale":"d3.scaleOrdinal(['#3182bd'])","fontSize":10,"fontFamily":"serif","clickTextSize":25,"linkDistance":50,"linkWidth":"'1.5px'.toString()","charge":-500,"opacity":0.6,"zoom":false,"legend":false,"arrows":false,"nodesize":true,"radiusCalculation":"d.nodesize","bounded":false,"opacityNoHover":1,"clickAction":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-9f343828224c8e07e626" style="width:672px;height:480px;" class="forceNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9f343828224c8e07e626">{"x":{"links":{"source":[2,0,7,1,7,3,3,9,9,9,2,7,10,10,8,8,10,3,10,10],"target":[0,1,1,2,2,2,0,1,2,5,4,0,2,3,2,1,6,6,9,1],"value":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"colour":["#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666"]},"nodes":{"name":["99-B Line","Canada Line","Expo Line","Millenium Line","R1","R2","R3","R4","R5","Seabus","West Coast Express"],"group":[1,1,1,1,1,1,1,1,1,1,1],"nodesize":[8,8,8,8,8,8,8,8,8,8,8]},"options":{"NodeID":"name","Group":"group","colourScale":"d3.scaleOrdinal(['#3182bd'])","fontSize":10,"fontFamily":"serif","clickTextSize":25,"linkDistance":50,"linkWidth":"'1.5px'.toString()","charge":-500,"opacity":0.6,"zoom":false,"legend":false,"arrows":false,"nodesize":true,"radiusCalculation":"d.nodesize","bounded":false,"opacityNoHover":1,"clickAction":null}},"evals":[],"jsHooks":[]}</script>
 <p class="codeblock-label">
 Graph representing Metro Vancouver rapid and frequent transit network
 </p>
 <p><img src="https://www.pittmeadows.ca/sites/default/files/docs/23-07-2019_2-47-50_pm.jpg" alt="Rapid and frequent transit network in Metro Vancouver. Source: City of Pitt Meadows" />.(images/metro_vancouver_transit_network.jpeg){.center}</p>
 </div>
 </div>
-<div id="connectivity-and-order" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Connectivity and order</h2>
+<div id="connectivity-and-order" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Connectivity and order</h2>
 <p>There are two major types of connections within the graphs: directed and undirected. Connections are directed when they have a specific node of origin and destination.</p>
-<div id="direct" class="section level3" number="1.2.1">
-<h3><span class="header-section-number">1.2.1</span> Direct</h3>
+<div id="direct" class="section level3" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Direct</h3>
 <p>Directed graphs are networks where the order of elements change relationships between them. We represent directed connections with an arrow. For example, in the case of the transit network we could use a directed graph to represent the path one has to take in order to shift from one line to another.</p>
 </div>
-<div id="undirect" class="section level3" number="1.2.2">
-<h3><span class="header-section-number">1.2.2</span> Undirect</h3>
+<div id="undirect" class="section level3" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> Undirect</h3>
 <p>On the other hand, in an undirected graph, connections are represented as simple lines instead of arrows. The order of elements does not matter.</p>
 </div>
 </div>
-<div id="network-topologies" class="section level2" number="1.3">
-<h2><span class="header-section-number">1.3</span> Network topologies</h2>
+<div id="network-topologies" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> Network topologies</h2>
 <p>Topology is the study of how network elements are arranged. The same elements arranged in different ways can change the network structure and dynamics. A very common example is the arrangement of computer networks <span class="citation">(<a href="#ref-wikibooksCommunicationNetworksNetwork2018" role="doc-biblioref">Wikibooks 2018</a>)</span>.</p>
-<div id="physical-versus-logical-topology" class="section level3" number="1.3.1">
-<h3><span class="header-section-number">1.3.1</span> Physical versus logical topology</h3>
+<div id="physical-versus-logical-topology" class="section level3" number="8.3.1">
+<h3><span class="header-section-number">8.3.1</span> Physical versus logical topology</h3>
 </div>
-<div id="lines" class="section level3" number="1.3.2">
-<h3><span class="header-section-number">1.3.2</span> Lines</h3>
+<div id="lines" class="section level3" number="8.3.2">
+<h3><span class="header-section-number">8.3.2</span> Lines</h3>
 <p>Nodes are arranged in series where every node has no more than two connections.
 (Example: Skytrain transit line)</p>
 </div>
-<div id="rings" class="section level3" number="1.3.3">
-<h3><span class="header-section-number">1.3.3</span> Rings</h3>
+<div id="rings" class="section level3" number="8.3.3">
+<h3><span class="header-section-number">8.3.3</span> Rings</h3>
 <p>Every node has no mode than two connections and the “first” and “last” nodes are connected to each other forming a circle.
 (Example: Stanley park seawall trail)</p>
 </div>
-<div id="meshes" class="section level3" number="1.3.4">
-<h3><span class="header-section-number">1.3.4</span> Meshes</h3>
+<div id="meshes" class="section level3" number="8.3.4">
+<h3><span class="header-section-number">8.3.4</span> Meshes</h3>
 <p>Every node is connected to more than one node.
 (Example: Tree canopy)</p>
 </div>
-<div id="stars" class="section level3" number="1.3.5">
-<h3><span class="header-section-number">1.3.5</span> Stars</h3>
+<div id="stars" class="section level3" number="8.3.5">
+<h3><span class="header-section-number">8.3.5</span> Stars</h3>
 <p>Two or more nodes arranged around a central node.
 (Example: Courtyard apartment)</p>
 </div>
-<div id="trees" class="section level3" number="1.3.6">
-<h3><span class="header-section-number">1.3.6</span> Trees</h3>
+<div id="trees" class="section level3" number="8.3.6">
+<h3><span class="header-section-number">8.3.6</span> Trees</h3>
 <p>Nodes are structured from a root node arranged into a number of smaller nodes.
 (Example: Boat marinas)</p>
 </div>
-<div id="buses" class="section level3" number="1.3.7">
-<h3><span class="header-section-number">1.3.7</span> Buses</h3>
+<div id="buses" class="section level3" number="8.3.7">
+<h3><span class="header-section-number">8.3.7</span> Buses</h3>
 <p>Nodes are structured with one connection around a central path.
 (Example: Building-street connections)</p>
 </div>
-<div id="fully-connected" class="section level3" number="1.3.8">
-<h3><span class="header-section-number">1.3.8</span> Fully connected</h3>
+<div id="fully-connected" class="section level3" number="8.3.8">
+<h3><span class="header-section-number">8.3.8</span> Fully connected</h3>
 <p>Every node is connected to every other node.
 (Example: Soccer field visibility)</p>
 </div>
 </div>
-<div id="spatial-network-analysis" class="section level2" number="1.4">
-<h2><span class="header-section-number">1.4</span> Spatial Network Analysis</h2>
-<div id="network-tracing" class="section level3" number="1.4.1">
-<h3><span class="header-section-number">1.4.1</span> Network tracing</h3>
+<div id="spatial-network-analysis" class="section level2" number="8.4">
+<h2><span class="header-section-number">8.4</span> Spatial Network Analysis</h2>
+<div id="network-tracing" class="section level3" number="8.4.1">
+<h3><span class="header-section-number">8.4.1</span> Network tracing</h3>
 </div>
-<div id="linear-referencing" class="section level3" number="1.4.2">
-<h3><span class="header-section-number">1.4.2</span> Linear referencing</h3>
+<div id="linear-referencing" class="section level3" number="8.4.2">
+<h3><span class="header-section-number">8.4.2</span> Linear referencing</h3>
 <p><span class="citation">(<a href="#ref-ramsey23LinearReferencing2012" role="doc-biblioref">Ramsey 2012</a>)</span>.</p>
 </div>
-<div id="routing" class="section level3" number="1.4.3">
-<h3><span class="header-section-number">1.4.3</span> Routing</h3>
+<div id="routing" class="section level3" number="8.4.3">
+<h3><span class="header-section-number">8.4.3</span> Routing</h3>
 <p><span class="citation">(<a href="#ref-systemsinnovationNetworkDiffusionContagion2015" role="doc-biblioref">Systems Innovation 2015b</a>)</span>.</p>
 </div>
-<div id="least-cost-paths" class="section level3" number="1.4.4">
-<h3><span class="header-section-number">1.4.4</span> Least cost paths</h3>
+<div id="least-cost-paths" class="section level3" number="8.4.4">
+<h3><span class="header-section-number">8.4.4</span> Least cost paths</h3>
 </div>
-<div id="least-cost-corridors" class="section level3" number="1.4.5">
-<h3><span class="header-section-number">1.4.5</span> Least cost corridors</h3>
+<div id="least-cost-corridors" class="section level3" number="8.4.5">
+<h3><span class="header-section-number">8.4.5</span> Least cost corridors</h3>
 </div>
 </div>
-<div id="network-centrality" class="section level2" number="1.5">
-<h2><span class="header-section-number">1.5</span> Network Centrality</h2>
+<div id="network-centrality" class="section level2" number="8.5">
+<h2><span class="header-section-number">8.5</span> Network Centrality</h2>
 <p><span class="citation">(<a href="#ref-ajorlouIntroductionNetworkModels2018" role="doc-biblioref">Ajorlou 2018</a>)</span>.</p>
-<div id="degree-centrality" class="section level3" number="1.5.1">
-<h3><span class="header-section-number">1.5.1</span> Degree centrality</h3>
+<div id="degree-centrality" class="section level3" number="8.5.1">
+<h3><span class="header-section-number">8.5.1</span> Degree centrality</h3>
 <p>The number of connections of each node.</p>
 </div>
-<div id="closeness-centrality" class="section level3" number="1.5.2">
-<h3><span class="header-section-number">1.5.2</span> Closeness centrality</h3>
+<div id="closeness-centrality" class="section level3" number="8.5.2">
+<h3><span class="header-section-number">8.5.2</span> Closeness centrality</h3>
 <p>How close the node is to every other node of the graph in logical distance.</p>
 </div>
-<div id="betweenness-centrality" class="section level3" number="1.5.3">
-<h3><span class="header-section-number">1.5.3</span> Betweenness centrality</h3>
+<div id="betweenness-centrality" class="section level3" number="8.5.3">
+<h3><span class="header-section-number">8.5.3</span> Betweenness centrality</h3>
 <p>How likely a node is to be passed through when going from every node to every other node of the graph.</p>
 <div class="box-content case-study-content">
-<div id="case-study" class="section level4 unnumbered box-title case-study-top">
+<div id="case-study-2" class="section level4 unnumbered box-title case-study-top">
 <h4>Case Study</h4>
 </div>
 <div id="box-text" class="section level4 unnumbered">
@@ -325,26 +868,6 @@ Graph representing Metro Vancouver rapid and frequent transit network
 </div>
 </div>
 
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div class="csl-entry">
-Ajorlou, Amir. 2018. <span>“Introduction to <span>Network Models</span>.”</span> Course. <em>MIT OpenCourseWare</em>. https://ocw.mit.edu/courses/civil-and-environmental-engineering/1-022-introduction-to-network-models-fall-2018/.
-</div>
-<div class="csl-entry">
-Mantegna, Nicholas. 2021. <span>“<span>UBC In A Changing Climate</span>: <span>Soft Landscape Communities Design Strategy</span>.”</span> Student {{Research Report}}.
-</div>
-<div class="csl-entry">
-Ramsey, Paul. 2012. <span>“23. <span>Linear Referencing</span> <span></span> <span>Introduction</span> to <span>PostGIS</span>.”</span> http://postgis.net/workshops/postgis-intro/linear_referencing.html.
-</div>
-<div class="csl-entry">
-Systems Innovation. 2015a. <span>“Graph <span>Theory Overview</span>.”</span> https://youtu.be/82zlRaRUsaY.
-</div>
-<div class="csl-entry">
-———. 2015b. <span>“Network <span>Diffusion</span> &amp; <span>Contagion</span>.”</span> https://youtu.be/bTXUJQhEqL0.
-</div>
-<div class="csl-entry">
-Wikibooks. 2018. <span>“Communication <span>Networks</span>/<span>Network Topologies</span>.”</span> https://en.wikibooks.org/wiki/Communication_Networks/Network_Topologies.
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -357,7 +880,7 @@ Ajorlou, Amir. 2018. <span>“Introduction to <span>Network Models</span>.”</s
 Mantegna, Nicholas. 2021. <span>“<span>UBC In A Changing Climate</span>: <span>Soft Landscape Communities Design Strategy</span>.”</span> Student {{Research Report}}.
 </div>
 <div id="ref-ramsey23LinearReferencing2012" class="csl-entry">
-Ramsey, Paul. 2012. <span>“23. <span>Linear Referencing</span> <span></span> <span>Introduction</span> to <span>PostGIS</span>.”</span> http://postgis.net/workshops/postgis-intro/linear_referencing.html.
+Ramsey, Paul. 2012. <span>“23. <span>Linear Referencing</span>  <span>Introduction</span> to <span>PostGIS</span>.”</span> http://postgis.net/workshops/postgis-intro/linear_referencing.html.
 </div>
 <div id="ref-systemsinnovationGraphTheoryOverview2015" class="csl-entry">
 Systems Innovation. 2015a. <span>“Graph <span>Theory Overview</span>.”</span> https://youtu.be/82zlRaRUsaY.
@@ -374,8 +897,8 @@ Wikibooks. 2018. <span>“Communication <span>Networks</span>/<span>Network Topo
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="topology-and-geocoding.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="raster-analysis-and-terrain-modelling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

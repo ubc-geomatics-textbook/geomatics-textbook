@@ -299,25 +299,6 @@ early as 2025.
 
 </p>
 
-```{r echo=F, message=F, warning=F}
-library(rgdal)
-library(leaflet)
-library(RColorBrewer)
-library(raster)
-
-countries <- rgdal::readOGR("data/canada.geojson")
-r <- raster("data/CGG2013_minus_HT21997_meters.tif")
-p <- brewer.pal(11,"RdYlBu")
-pal <- colorNumeric(p, values(r), na.color = "transparent")
-
-m <- leaflet(countries) %>%
-  addTiles() %>%
-  addScaleBar(position = c("topleft")) %>%
-  addRasterImage(r, colors = pal, group = "Difference", opacity = 1, maxBytes = "Inf") %>%
-  addPolygons(stroke = T, color="black", weight=1, smoothFactor = 0.3, fillOpacity = 0) %>%
-  addLegend(pal = pal, values = values(r), group = "Difference", opacity = 1, title = "CGVD2013 minus CGVD28 (meters)")
-m
-```
 :::
 
 It should be evident by now that the reference surface that you choose

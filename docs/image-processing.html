@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Image Processing | An Open Geomatics Textbook</title>
+  <title>Chapter 13 Image Processing | An Open Geomatics Textbook</title>
   <meta name="description" content="Advancing teaching and learning in geomatics at UBC" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Image Processing | An Open Geomatics Textbook" />
+  <meta property="og:title" content="Chapter 13 Image Processing | An Open Geomatics Textbook" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/ubc-geomatics-textbook/book/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="ubc-geomatics-textbook/book" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Image Processing | An Open Geomatics Textbook" />
+  <meta name="twitter:title" content="Chapter 13 Image Processing | An Open Geomatics Textbook" />
   
   <meta name="twitter:description" content="Advancing teaching and learning in geomatics at UBC" />
   
@@ -24,16 +24,16 @@
 <meta name="author" content="UBC" />
 
 
-<meta name="date" content="2021-07-30" />
+<meta name="date" content="2021-11-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="fundamentals-of-remote-sensing.html"/>
-
-<script src="libs/header-attrs-2.8/header-attrs.js"></script>
+<link rel="prev" href="chapter-template.html"/>
+<link rel="next" href="image-analysis.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -120,22 +120,10 @@ div.csl-indent {
 <li class="chapter" data-level="0.3.17" data-path="index.html"><a href="index.html#citations"><i class="fa fa-check"></i><b>0.3.17</b> Citations</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="chapter-template.html"><a href="chapter-template.html"><i class="fa fa-check"></i><b>1</b> Chapter Title</a>
-<ul>
-<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#key-terms-1"><i class="fa fa-check"></i>Key Terms</a></li>
-<li class="chapter" data-level="1.1" data-path="chapter-template.html"><a href="chapter-template.html#first-section-header"><i class="fa fa-check"></i><b>1.1</b> First Section Header</a></li>
-<li class="chapter" data-level="1.2" data-path="chapter-template.html"><a href="chapter-template.html#second-section-header"><i class="fa fa-check"></i><b>1.2</b> Second Section Header</a></li>
-<li class="chapter" data-level="1.3" data-path="chapter-template.html"><a href="chapter-template.html#third-section-header"><i class="fa fa-check"></i><b>1.3</b> Third Section Header</a></li>
-<li class="chapter" data-level="1.4" data-path="chapter-template.html"><a href="chapter-template.html#summary-1"><i class="fa fa-check"></i><b>1.4</b> Summary</a>
-<ul>
-<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#reflection-questions"><i class="fa fa-check"></i>Reflection Questions</a></li>
-<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#practice-questions"><i class="fa fa-check"></i>Practice Questions</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#recommended-readings"><i class="fa fa-check"></i>Recommended Readings</a></li>
-</ul></li>
+<li class="chapter" data-level="1" data-path="what-is-geomatics.html"><a href="what-is-geomatics.html"><i class="fa fa-check"></i><b>1</b> What is Geomatics?</a></li>
 <li class="chapter" data-level="2" data-path="mapping-data.html"><a href="mapping-data.html"><i class="fa fa-check"></i><b>2</b> Mapping Data</a>
 <ul>
-<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#key-terms-2"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#key-terms-1"><i class="fa fa-check"></i>Key Terms</a></li>
 <li class="chapter" data-level="2.1" data-path="mapping-data.html"><a href="mapping-data.html#introduction-to-geodesy"><i class="fa fa-check"></i><b>2.1</b> Introduction to geodesy</a></li>
 <li class="chapter" data-level="2.2" data-path="mapping-data.html"><a href="mapping-data.html#models-of-earth"><i class="fa fa-check"></i><b>2.2</b> Models of Earth</a>
 <ul>
@@ -152,70 +140,570 @@ div.csl-indent {
 <li class="chapter" data-level="2.3.5" data-path="mapping-data.html"><a href="mapping-data.html#measuring-map-projection-distortion"><i class="fa fa-check"></i><b>2.3.5</b> Measuring map projection distortion</a></li>
 <li class="chapter" data-level="2.3.6" data-path="mapping-data.html"><a href="mapping-data.html#map-projections-for-environmental-management"><i class="fa fa-check"></i><b>2.3.6</b> Map projections for environmental management</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="mapping-data.html"><a href="mapping-data.html#summary-2"><i class="fa fa-check"></i><b>2.4</b> Summary</a>
+<li class="chapter" data-level="2.4" data-path="mapping-data.html"><a href="mapping-data.html#summary-1"><i class="fa fa-check"></i><b>2.4</b> Summary</a>
 <ul>
-<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#reflection-questions-1"><i class="fa fa-check"></i>Reflection Questions</a></li>
-<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#practice-questions-1"><i class="fa fa-check"></i>Practice Questions</a></li>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#reflection-questions"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#practice-questions"><i class="fa fa-check"></i>Practice Questions</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#recommended-readings-1"><i class="fa fa-check"></i>Recommended Readings</a></li>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#recommended-readings"><i class="fa fa-check"></i>Recommended Readings</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html"><i class="fa fa-check"></i><b>3</b> Fundamentals of remote sensing</a>
+<li class="chapter" data-level="3" data-path="types-of-data.html"><a href="types-of-data.html"><i class="fa fa-check"></i><b>3</b> Data Types and Spatial Data Models</a>
 <ul>
-<li class="chapter" data-level="" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#key-terms-3"><i class="fa fa-check"></i>Key Terms</a></li>
-<li class="chapter" data-level="3.1" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#what-is-remote-sensing"><i class="fa fa-check"></i><b>3.1</b> What is remote sensing?</a></li>
-<li class="chapter" data-level="3.2" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#types-of-energy"><i class="fa fa-check"></i><b>3.2</b> Types of Energy</a>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#key-terms-2"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="3.1" data-path="types-of-data.html"><a href="types-of-data.html#types-of-phenomena"><i class="fa fa-check"></i><b>3.1</b> Types of Phenomena</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#introduction"><i class="fa fa-check"></i><b>3.2.1</b> Introduction</a></li>
-<li class="chapter" data-level="3.2.2" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#scientific-notation"><i class="fa fa-check"></i><b>3.2.2</b> Scientific Notation</a></li>
-<li class="chapter" data-level="3.2.3" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#electromagnetic-spectrum"><i class="fa fa-check"></i><b>3.2.3</b> Electromagnetic Spectrum</a></li>
-<li class="chapter" data-level="3.2.4" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#radiation-types"><i class="fa fa-check"></i><b>3.2.4</b> Radiation Types</a></li>
+<li class="chapter" data-level="3.1.1" data-path="types-of-data.html"><a href="types-of-data.html#discrete-objects"><i class="fa fa-check"></i><b>3.1.1</b> Discrete Objects</a></li>
+<li class="chapter" data-level="3.1.2" data-path="types-of-data.html"><a href="types-of-data.html#continuous-fields"><i class="fa fa-check"></i><b>3.1.2</b> Continuous Fields</a></li>
+<li class="chapter" data-level="3.1.3" data-path="types-of-data.html"><a href="types-of-data.html#imperfect-distinctions"><i class="fa fa-check"></i><b>3.1.3</b> Imperfect Distinctions</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#physical-laws-of-radiation"><i class="fa fa-check"></i><b>3.3</b> Physical laws of radiation</a></li>
-<li class="chapter" data-level="3.4" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#the-four-resolutions"><i class="fa fa-check"></i><b>3.4</b> The Four Resolutions</a>
+<li class="chapter" data-level="3.2" data-path="types-of-data.html"><a href="types-of-data.html#types-of-data-1"><i class="fa fa-check"></i><b>3.2</b> Types of Data</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#spatial-resolution"><i class="fa fa-check"></i><b>3.4.1</b> Spatial Resolution</a></li>
-<li class="chapter" data-level="3.4.2" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#temporal-resolution"><i class="fa fa-check"></i><b>3.4.2</b> Temporal Resolution</a></li>
-<li class="chapter" data-level="3.4.3" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#spectral-resolution"><i class="fa fa-check"></i><b>3.4.3</b> Spectral Resolution</a></li>
-<li class="chapter" data-level="3.4.4" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#radiometric-resolution"><i class="fa fa-check"></i><b>3.4.4</b> Radiometric Resolution</a></li>
+<li class="chapter" data-level="3.2.1" data-path="types-of-data.html"><a href="types-of-data.html#qualitative-data"><i class="fa fa-check"></i><b>3.2.1</b> Qualitative Data</a></li>
+<li class="chapter" data-level="3.2.2" data-path="types-of-data.html"><a href="types-of-data.html#quantitative-data"><i class="fa fa-check"></i><b>3.2.2</b> Quantitative Data</a></li>
+<li class="chapter" data-level="3.2.3" data-path="types-of-data.html"><a href="types-of-data.html#summary-of-data-types"><i class="fa fa-check"></i><b>3.2.3</b> Summary of Data Types</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#key-applications"><i class="fa fa-check"></i><b>3.5</b> Key Applications</a></li>
-<li class="chapter" data-level="3.6" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#summary-3"><i class="fa fa-check"></i><b>3.6</b> Summary</a>
+<li class="chapter" data-level="3.3" data-path="types-of-data.html"><a href="types-of-data.html#spatial-is-special"><i class="fa fa-check"></i><b>3.3</b> Spatial is Special</a></li>
+<li class="chapter" data-level="3.4" data-path="types-of-data.html"><a href="types-of-data.html#spatial-data-models"><i class="fa fa-check"></i><b>3.4</b> Spatial Data Models</a>
 <ul>
-<li class="chapter" data-level="3.6.1" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#reflection-questions-2"><i class="fa fa-check"></i><b>3.6.1</b> Reflection Questions</a></li>
+<li class="chapter" data-level="3.4.1" data-path="types-of-data.html"><a href="types-of-data.html#raster-data-model"><i class="fa fa-check"></i><b>3.4.1</b> Raster Data Model</a></li>
+<li class="chapter" data-level="3.4.2" data-path="types-of-data.html"><a href="types-of-data.html#vector-data"><i class="fa fa-check"></i><b>3.4.2</b> Vector Data</a></li>
 </ul></li>
-<li class="chapter" data-level="3.7" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#section"><i class="fa fa-check"></i><b>3.7</b> —</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="image-processing.html"><a href="image-processing.html"><i class="fa fa-check"></i><b>4</b> Image Processing</a>
+<li class="chapter" data-level="3.5" data-path="types-of-data.html"><a href="types-of-data.html#choice-of-spatial-data-model"><i class="fa fa-check"></i><b>3.5</b> Choice of Spatial Data Model</a>
 <ul>
-<li class="chapter" data-level="" data-path="image-processing.html"><a href="image-processing.html#key-terms-4"><i class="fa fa-check"></i>Key Terms</a></li>
-<li class="chapter" data-level="4.1" data-path="image-processing.html"><a href="image-processing.html#overview"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
-<li class="chapter" data-level="4.2" data-path="image-processing.html"><a href="image-processing.html#geometric-correction"><i class="fa fa-check"></i><b>4.2</b> Geometric correction</a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="image-processing.html"><a href="image-processing.html#relief-displacement"><i class="fa fa-check"></i><b>4.2.1</b> <strong>Relief displacement</strong></a></li>
-<li class="chapter" data-level="4.2.2" data-path="image-processing.html"><a href="image-processing.html#georeferencing"><i class="fa fa-check"></i><b>4.2.2</b> <strong>Georeferencing</strong></a></li>
-<li class="chapter" data-level="4.2.3" data-path="image-processing.html"><a href="image-processing.html#georegistration-georectification"><i class="fa fa-check"></i><b>4.2.3</b> <strong>Georegistration (georectification)</strong></a></li>
-<li class="chapter" data-level="4.2.4" data-path="image-processing.html"><a href="image-processing.html#resampling"><i class="fa fa-check"></i><b>4.2.4</b> <strong>Resampling</strong></a></li>
+<li class="chapter" data-level="3.5.1" data-path="types-of-data.html"><a href="types-of-data.html#comparing-data-models"><i class="fa fa-check"></i><b>3.5.1</b> Comparing Data Models</a></li>
+<li class="chapter" data-level="3.5.2" data-path="types-of-data.html"><a href="types-of-data.html#advantages-and-disadvantages"><i class="fa fa-check"></i><b>3.5.2</b> Advantages and Disadvantages</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="image-processing.html"><a href="image-processing.html#atmospheric-correction"><i class="fa fa-check"></i><b>4.3</b> Atmospheric correction</a>
+<li class="chapter" data-level="3.6" data-path="types-of-data.html"><a href="types-of-data.html#summary-2"><i class="fa fa-check"></i><b>3.6</b> Summary</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="image-processing.html"><a href="image-processing.html#atmospheric-windows"><i class="fa fa-check"></i><b>4.3.1</b> <strong>Atmospheric windows</strong></a></li>
-<li class="chapter" data-level="4.3.2" data-path="image-processing.html"><a href="image-processing.html#clouds-and-shadows"><i class="fa fa-check"></i><b>4.3.2</b> <strong>Clouds and shadows</strong></a></li>
-<li class="chapter" data-level="4.3.3" data-path="image-processing.html"><a href="image-processing.html#smoke-and-haze"><i class="fa fa-check"></i><b>4.3.3</b> <strong>Smoke and Haze</strong></a></li>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#reflection-questions-1"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#practice-questions-1"><i class="fa fa-check"></i>Practice Questions</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="image-processing.html"><a href="image-processing.html#radiometric-correction"><i class="fa fa-check"></i><b>4.4</b> Radiometric correction</a>
+<li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#recommended-readings-1"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html"><i class="fa fa-check"></i><b>4</b> Collecting and Editing Data</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="image-processing.html"><a href="image-processing.html#signal-to-noise"><i class="fa fa-check"></i><b>4.4.1</b> <strong>Signal-to-noise</strong></a></li>
-<li class="chapter" data-level="4.4.2" data-path="image-processing.html"><a href="image-processing.html#radiometric-normalization"><i class="fa fa-check"></i><b>4.4.2</b> <strong>Radiometric normalization</strong></a></li>
+<li class="chapter" data-level="" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#learning-objectives-3"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#key-terms-3"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="4.1" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#open-data"><i class="fa fa-check"></i><b>4.1</b> Open data</a></li>
+<li class="chapter" data-level="4.2" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#finding-data"><i class="fa fa-check"></i><b>4.2</b> Finding Data</a></li>
+<li class="chapter" data-level="4.3" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#data-in-academia"><i class="fa fa-check"></i><b>4.3</b> Data in Academia</a></li>
+<li class="chapter" data-level="4.4" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#government-data"><i class="fa fa-check"></i><b>4.4</b> Government Data</a></li>
+<li class="chapter" data-level="" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#your-turn-2"><i class="fa fa-check"></i>Your Turn!</a></li>
+<li class="chapter" data-level="4.5" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#census-data"><i class="fa fa-check"></i><b>4.5</b> Census Data</a></li>
+<li class="chapter" data-level="4.6" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#census-of-canada-geographic-levels"><i class="fa fa-check"></i><b>4.6</b> Census of Canada Geographic Levels</a></li>
+<li class="chapter" data-level="" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#call-out-1"><i class="fa fa-check"></i>Call Out</a></li>
+<li class="chapter" data-level="4.7" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#accessing-census-data"><i class="fa fa-check"></i><b>4.7</b> Accessing Census Data</a></li>
+<li class="chapter" data-level="4.8" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#non-governmental-organization-data"><i class="fa fa-check"></i><b>4.8</b> Non-Governmental Organization Data</a></li>
+<li class="chapter" data-level="4.9" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#citizen-science"><i class="fa fa-check"></i><b>4.9</b> Citizen Science</a></li>
+<li class="chapter" data-level="" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#your-turn-4"><i class="fa fa-check"></i>Your Turn!</a></li>
+<li class="chapter" data-level="4.10" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#international-data"><i class="fa fa-check"></i><b>4.10</b> International Data</a></li>
+<li class="chapter" data-level="4.11" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#unpublished-data-and-the-data-request"><i class="fa fa-check"></i><b>4.11</b> Unpublished Data and the Data Request</a></li>
+<li class="chapter" data-level="4.12" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#metadata"><i class="fa fa-check"></i><b>4.12</b> Metadata</a></li>
+<li class="chapter" data-level="4.13" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#historical-data-collections"><i class="fa fa-check"></i><b>4.13</b> Historical Data Collections</a></li>
+<li class="chapter" data-level="4.14" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#historical-aerial-photographs"><i class="fa fa-check"></i><b>4.14</b> Historical Aerial Photographs</a></li>
+<li class="chapter" data-level="4.15" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#accessing-historical-aerial-photograph-collections"><i class="fa fa-check"></i><b>4.15</b> Accessing Historical Aerial Photograph Collections</a></li>
+<li class="chapter" data-level="" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#your-turn-5"><i class="fa fa-check"></i>Your Turn!</a></li>
+<li class="chapter" data-level="4.16" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#natural-resource-administrative-data"><i class="fa fa-check"></i><b>4.16</b> Natural Resource Administrative Data</a></li>
+<li class="chapter" data-level="4.17" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#historical-maps"><i class="fa fa-check"></i><b>4.17</b> Historical Maps</a></li>
+<li class="chapter" data-level="4.18" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#georeferencing-historical-maps"><i class="fa fa-check"></i><b>4.18</b> Georeferencing Historical Maps</a></li>
+<li class="chapter" data-level="4.19" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#control-points-on-maps-with-grids-or-graticule."><i class="fa fa-check"></i><b>4.19</b> Control Points on Maps with Grids or Graticule.</a></li>
+<li class="chapter" data-level="4.20" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#grid-and-graticule-as-control-points"><i class="fa fa-check"></i><b>4.20</b> Grid and Graticule as Control Points</a></li>
+<li class="chapter" data-level="4.21" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#rubbersheeting"><i class="fa fa-check"></i><b>4.21</b> Rubbersheeting</a></li>
+<li class="chapter" data-level="4.22" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#documenting-georeferencing"><i class="fa fa-check"></i><b>4.22</b> Documenting Georeferencing</a></li>
+<li class="chapter" data-level="4.23" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#data-transformations"><i class="fa fa-check"></i><b>4.23</b> Data Transformations</a></li>
+<li class="chapter" data-level="4.24" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#affine"><i class="fa fa-check"></i><b>4.24</b> Affine</a></li>
+<li class="chapter" data-level="4.25" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#similarity"><i class="fa fa-check"></i><b>4.25</b> Similarity</a></li>
+<li class="chapter" data-level="4.26" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#projective"><i class="fa fa-check"></i><b>4.26</b> Projective</a></li>
+<li class="chapter" data-level="4.27" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#reflection-questions-2"><i class="fa fa-check"></i><b>4.27</b> Reflection Questions</a></li>
+<li class="chapter" data-level="4.28" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#practice-questions-2"><i class="fa fa-check"></i><b>4.28</b> Practice Questions</a></li>
+<li class="chapter" data-level="4.29" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#summary-3"><i class="fa fa-check"></i><b>4.29</b> Summary</a></li>
+<li class="chapter" data-level="4.30" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html#references"><i class="fa fa-check"></i><b>4.30</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="image-processing.html"><a href="image-processing.html#image-enhancement"><i class="fa fa-check"></i><b>4.5</b> Image enhancement</a>
+<li class="chapter" data-level="5" data-path="relational-databases.html"><a href="relational-databases.html"><i class="fa fa-check"></i><b>5</b> Relational Databases</a>
 <ul>
-<li class="chapter" data-level="4.5.1" data-path="image-processing.html"><a href="image-processing.html#stretching"><i class="fa fa-check"></i><b>4.5.1</b> <strong>Stretching</strong></a></li>
-<li class="chapter" data-level="4.5.2" data-path="image-processing.html"><a href="image-processing.html#sharpening"><i class="fa fa-check"></i><b>4.5.2</b> <strong>Sharpening</strong></a></li>
-</ul></li>
-<li class="chapter" data-level="4.6" data-path="image-processing.html"><a href="image-processing.html#summary-4"><i class="fa fa-check"></i><b>4.6</b> Summary</a>
+<li class="chapter" data-level="" data-path="relational-databases.html"><a href="relational-databases.html#key-terms-4"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="5.1" data-path="relational-databases.html"><a href="relational-databases.html#relational-database-management-systems"><i class="fa fa-check"></i><b>5.1</b> Relational database management systems</a></li>
+<li class="chapter" data-level="5.2" data-path="relational-databases.html"><a href="relational-databases.html#relational-databases-1"><i class="fa fa-check"></i><b>5.2</b> Relational databases</a></li>
+<li class="chapter" data-level="5.3" data-path="relational-databases.html"><a href="relational-databases.html#relational-algebra"><i class="fa fa-check"></i><b>5.3</b> Relational algebra</a>
 <ul>
-<li class="chapter" data-level="" data-path="image-processing.html"><a href="image-processing.html#reflection-questions-3"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="5.3.1" data-path="relational-databases.html"><a href="relational-databases.html#selection"><i class="fa fa-check"></i><b>5.3.1</b> Selection</a></li>
+<li class="chapter" data-level="5.3.2" data-path="relational-databases.html"><a href="relational-databases.html#projection"><i class="fa fa-check"></i><b>5.3.2</b> Projection</a></li>
+<li class="chapter" data-level="5.3.3" data-path="relational-databases.html"><a href="relational-databases.html#rename"><i class="fa fa-check"></i><b>5.3.3</b> Rename</a></li>
+<li class="chapter" data-level="5.3.4" data-path="relational-databases.html"><a href="relational-databases.html#set-union"><i class="fa fa-check"></i><b>5.3.4</b> Set Union</a></li>
+<li class="chapter" data-level="5.3.5" data-path="relational-databases.html"><a href="relational-databases.html#set-intersection"><i class="fa fa-check"></i><b>5.3.5</b> Set Intersection</a></li>
+<li class="chapter" data-level="5.3.6" data-path="relational-databases.html"><a href="relational-databases.html#set-difference"><i class="fa fa-check"></i><b>5.3.6</b> Set Difference</a></li>
+<li class="chapter" data-level="5.3.7" data-path="relational-databases.html"><a href="relational-databases.html#cartesian-product"><i class="fa fa-check"></i><b>5.3.7</b> Cartesian Product</a></li>
+<li class="chapter" data-level="5.3.8" data-path="relational-databases.html"><a href="relational-databases.html#set-divison"><i class="fa fa-check"></i><b>5.3.8</b> Set Divison</a></li>
 </ul></li>
+<li class="chapter" data-level="5.4" data-path="relational-databases.html"><a href="relational-databases.html#boolean-algebra"><i class="fa fa-check"></i><b>5.4</b> Boolean algebra</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="relational-databases.html"><a href="relational-databases.html#equality-operators"><i class="fa fa-check"></i><b>5.4.1</b> Equality operators</a></li>
+<li class="chapter" data-level="5.4.2" data-path="relational-databases.html"><a href="relational-databases.html#conditional-operators"><i class="fa fa-check"></i><b>5.4.2</b> Conditional operators</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="relational-databases.html"><a href="relational-databases.html#joining-relations"><i class="fa fa-check"></i><b>5.5</b> Joining relations</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="relational-databases.html"><a href="relational-databases.html#keys"><i class="fa fa-check"></i><b>5.5.1</b> Keys</a></li>
+<li class="chapter" data-level="5.5.2" data-path="relational-databases.html"><a href="relational-databases.html#natural-join"><i class="fa fa-check"></i><b>5.5.2</b> Natural Join</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="relational-databases.html"><a href="relational-databases.html#outer-join"><i class="fa fa-check"></i><b>5.6</b> Outer Join</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="relational-databases.html"><a href="relational-databases.html#right-and-left-outer-join"><i class="fa fa-check"></i><b>5.6.1</b> Right and Left Outer Join</a></li>
+<li class="chapter" data-level="5.6.2" data-path="relational-databases.html"><a href="relational-databases.html#theta-join"><i class="fa fa-check"></i><b>5.6.2</b> Theta Join</a></li>
+<li class="chapter" data-level="5.6.3" data-path="relational-databases.html"><a href="relational-databases.html#cardinality-of-joins"><i class="fa fa-check"></i><b>5.6.3</b> Cardinality of Joins</a></li>
+<li class="chapter" data-level="5.6.4" data-path="relational-databases.html"><a href="relational-databases.html#structured-query-language"><i class="fa fa-check"></i><b>5.6.4</b> Structured Query Language</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="relational-databases.html"><a href="relational-databases.html#summary-4"><i class="fa fa-check"></i><b>5.7</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="relational-databases.html"><a href="relational-databases.html#reflection-questions-3"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="relational-databases.html"><a href="relational-databases.html#practice-questions-3"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="relational-databases.html"><a href="relational-databases.html#recommended-readings-2"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html"><i class="fa fa-check"></i><b>6</b> Overlay and Proximity Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#learning-objectives-5"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#key-terms-5"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="6.1" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#cartographic-modelling"><i class="fa fa-check"></i><b>6.1</b> Cartographic Modelling</a></li>
+<li class="chapter" data-level="6.2" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#geoprocessing"><i class="fa fa-check"></i><b>6.2</b> Geoprocessing</a></li>
+<li class="chapter" data-level="6.3" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#capability-modelling"><i class="fa fa-check"></i><b>6.3</b> Capability Modelling</a></li>
+<li class="chapter" data-level="6.4" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#suitability-modelling"><i class="fa fa-check"></i><b>6.4</b> Suitability modelling</a></li>
+<li class="chapter" data-level="6.5" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#overlay-methods"><i class="fa fa-check"></i><b>6.5</b> Overlay Methods</a></li>
+<li class="chapter" data-level="6.6" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#attribute-transfer"><i class="fa fa-check"></i><b>6.6</b> Attribute Transfer</a></li>
+<li class="chapter" data-level="6.7" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#boolean-algebra-1"><i class="fa fa-check"></i><b>6.7</b> Boolean Algebra</a></li>
+<li class="chapter" data-level="6.8" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#spatial-join"><i class="fa fa-check"></i><b>6.8</b> Spatial Join</a></li>
+<li class="chapter" data-level="6.9" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#clip"><i class="fa fa-check"></i><b>6.9</b> Clip</a></li>
+<li class="chapter" data-level="6.10" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#intersect"><i class="fa fa-check"></i><b>6.10</b> Intersect</a></li>
+<li class="chapter" data-level="6.11" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#line-intersection"><i class="fa fa-check"></i><b>6.11</b> Line Intersection</a></li>
+<li class="chapter" data-level="6.12" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#union"><i class="fa fa-check"></i><b>6.12</b> Union</a></li>
+<li class="chapter" data-level="6.13" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#identity"><i class="fa fa-check"></i><b>6.13</b> Identity</a></li>
+<li class="chapter" data-level="6.14" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#erase"><i class="fa fa-check"></i><b>6.14</b> Erase</a></li>
+<li class="chapter" data-level="6.15" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#split"><i class="fa fa-check"></i><b>6.15</b> Split</a></li>
+<li class="chapter" data-level="6.16" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#symmetrical-difference"><i class="fa fa-check"></i><b>6.16</b> Symmetrical Difference</a></li>
+<li class="chapter" data-level="6.17" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#update"><i class="fa fa-check"></i><b>6.17</b> Update</a></li>
+<li class="chapter" data-level="6.18" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#proximity-methods"><i class="fa fa-check"></i><b>6.18</b> Proximity Methods</a></li>
+<li class="chapter" data-level="6.19" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#buffer"><i class="fa fa-check"></i><b>6.19</b> Buffer</a></li>
+<li class="chapter" data-level="6.20" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#near-distance"><i class="fa fa-check"></i><b>6.20</b> Near Distance</a></li>
+<li class="chapter" data-level="6.21" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#summary-5"><i class="fa fa-check"></i><b>6.21</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#reflection-questions-4"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#practice-questions-4"><i class="fa fa-check"></i>Practice Questions</a></li>
+<li class="chapter" data-level="" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#recommended-readings-3"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html"><i class="fa fa-check"></i><b>7</b> Topology and Geocoding</a>
+<ul>
+<li class="chapter" data-level="" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#learning-objectives-6"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#key-terms-6"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="7.1" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#topology"><i class="fa fa-check"></i><b>7.1</b> Topology</a></li>
+<li class="chapter" data-level="7.2" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#planar-vs.-non-planar-topology"><i class="fa fa-check"></i><b>7.2</b> Planar vs. Non-Planar Topology</a></li>
+<li class="chapter" data-level="7.3" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#implementing-planar-topology"><i class="fa fa-check"></i><b>7.3</b> Implementing Planar Topology</a></li>
+<li class="chapter" data-level="7.4" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#adjacency-and-overlap"><i class="fa fa-check"></i><b>7.4</b> Adjacency and Overlap</a></li>
+<li class="chapter" data-level="7.5" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#intersect-and-connect"><i class="fa fa-check"></i><b>7.5</b> Intersect and Connect</a></li>
+<li class="chapter" data-level="7.6" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#coincident-and-disjoint"><i class="fa fa-check"></i><b>7.6</b> Coincident and Disjoint</a></li>
+<li class="chapter" data-level="7.7" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#cover"><i class="fa fa-check"></i><b>7.7</b> Cover</a>
+<ul>
+<li class="chapter" data-level="7.7.1" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#multipart-geometries"><i class="fa fa-check"></i><b>7.7.1</b> Multipart geometries</a></li>
+</ul></li>
+<li class="chapter" data-level="7.8" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#d-topologies"><i class="fa fa-check"></i><b>7.8</b> 3D topologies</a>
+<ul>
+<li class="chapter" data-level="7.8.1" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#multipatch-geometries"><i class="fa fa-check"></i><b>7.8.1</b> Multipatch geometries</a></li>
+<li class="chapter" data-level="7.8.2" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#convex-hull"><i class="fa fa-check"></i><b>7.8.2</b> Convex hull</a></li>
+<li class="chapter" data-level="7.8.3" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#delauney-triangles"><i class="fa fa-check"></i><b>7.8.3</b> Delauney triangles</a></li>
+<li class="chapter" data-level="7.8.4" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#data-models-supporting-planar-topology"><i class="fa fa-check"></i><b>7.8.4</b> Data models supporting planar topology</a></li>
+</ul></li>
+<li class="chapter" data-level="7.9" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#geocoding"><i class="fa fa-check"></i><b>7.9</b> Geocoding</a></li>
+<li class="chapter" data-level="7.10" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#geocoding-services"><i class="fa fa-check"></i><b>7.10</b> Geocoding Services</a></li>
+<li class="chapter" data-level="7.11" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#case-study-working-with-canadian-census-data"><i class="fa fa-check"></i><b>7.11</b> Case Study: Working with Canadian Census Data</a></li>
+<li class="chapter" data-level="7.12" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#summary-6"><i class="fa fa-check"></i><b>7.12</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#reflection-questions-5"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#practice-questions-5"><i class="fa fa-check"></i>Practice Questions</a></li>
+<li class="chapter" data-level="" data-path="topology-and-geocoding.html"><a href="topology-and-geocoding.html#recommended-readings-4"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="network-analysis.html"><a href="network-analysis.html"><i class="fa fa-check"></i><b>8</b> Network Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="network-analysis.html"><a href="network-analysis.html#key-terms-7"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="8.1" data-path="network-analysis.html"><a href="network-analysis.html#introduction-to-graph-theory"><i class="fa fa-check"></i><b>8.1</b> Introduction to graph theory</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="network-analysis.html"><a href="network-analysis.html#nodes"><i class="fa fa-check"></i><b>8.1.1</b> Nodes</a></li>
+<li class="chapter" data-level="8.1.2" data-path="network-analysis.html"><a href="network-analysis.html#edges"><i class="fa fa-check"></i><b>8.1.2</b> Edges</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="network-analysis.html"><a href="network-analysis.html#connectivity-and-order"><i class="fa fa-check"></i><b>8.2</b> Connectivity and order</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="network-analysis.html"><a href="network-analysis.html#direct"><i class="fa fa-check"></i><b>8.2.1</b> Direct</a></li>
+<li class="chapter" data-level="8.2.2" data-path="network-analysis.html"><a href="network-analysis.html#undirect"><i class="fa fa-check"></i><b>8.2.2</b> Undirect</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="network-analysis.html"><a href="network-analysis.html#network-topologies"><i class="fa fa-check"></i><b>8.3</b> Network topologies</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="network-analysis.html"><a href="network-analysis.html#physical-versus-logical-topology"><i class="fa fa-check"></i><b>8.3.1</b> Physical versus logical topology</a></li>
+<li class="chapter" data-level="8.3.2" data-path="network-analysis.html"><a href="network-analysis.html#lines"><i class="fa fa-check"></i><b>8.3.2</b> Lines</a></li>
+<li class="chapter" data-level="8.3.3" data-path="network-analysis.html"><a href="network-analysis.html#rings"><i class="fa fa-check"></i><b>8.3.3</b> Rings</a></li>
+<li class="chapter" data-level="8.3.4" data-path="network-analysis.html"><a href="network-analysis.html#meshes"><i class="fa fa-check"></i><b>8.3.4</b> Meshes</a></li>
+<li class="chapter" data-level="8.3.5" data-path="network-analysis.html"><a href="network-analysis.html#stars"><i class="fa fa-check"></i><b>8.3.5</b> Stars</a></li>
+<li class="chapter" data-level="8.3.6" data-path="network-analysis.html"><a href="network-analysis.html#trees"><i class="fa fa-check"></i><b>8.3.6</b> Trees</a></li>
+<li class="chapter" data-level="8.3.7" data-path="network-analysis.html"><a href="network-analysis.html#buses"><i class="fa fa-check"></i><b>8.3.7</b> Buses</a></li>
+<li class="chapter" data-level="8.3.8" data-path="network-analysis.html"><a href="network-analysis.html#fully-connected"><i class="fa fa-check"></i><b>8.3.8</b> Fully connected</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="network-analysis.html"><a href="network-analysis.html#spatial-network-analysis"><i class="fa fa-check"></i><b>8.4</b> Spatial Network Analysis</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="network-analysis.html"><a href="network-analysis.html#network-tracing"><i class="fa fa-check"></i><b>8.4.1</b> Network tracing</a></li>
+<li class="chapter" data-level="8.4.2" data-path="network-analysis.html"><a href="network-analysis.html#linear-referencing"><i class="fa fa-check"></i><b>8.4.2</b> Linear referencing</a></li>
+<li class="chapter" data-level="8.4.3" data-path="network-analysis.html"><a href="network-analysis.html#routing"><i class="fa fa-check"></i><b>8.4.3</b> Routing</a></li>
+<li class="chapter" data-level="8.4.4" data-path="network-analysis.html"><a href="network-analysis.html#least-cost-paths"><i class="fa fa-check"></i><b>8.4.4</b> Least cost paths</a></li>
+<li class="chapter" data-level="8.4.5" data-path="network-analysis.html"><a href="network-analysis.html#least-cost-corridors"><i class="fa fa-check"></i><b>8.4.5</b> Least cost corridors</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="network-analysis.html"><a href="network-analysis.html#network-centrality"><i class="fa fa-check"></i><b>8.5</b> Network Centrality</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="network-analysis.html"><a href="network-analysis.html#degree-centrality"><i class="fa fa-check"></i><b>8.5.1</b> Degree centrality</a></li>
+<li class="chapter" data-level="8.5.2" data-path="network-analysis.html"><a href="network-analysis.html#closeness-centrality"><i class="fa fa-check"></i><b>8.5.2</b> Closeness centrality</a></li>
+<li class="chapter" data-level="8.5.3" data-path="network-analysis.html"><a href="network-analysis.html#betweenness-centrality"><i class="fa fa-check"></i><b>8.5.3</b> Betweenness centrality</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html"><i class="fa fa-check"></i><b>9</b> Raster Analysis and Terrain Modelling</a>
+<ul>
+<li class="chapter" data-level="" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#learning-objectives-8"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#key-terms-8"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="9.1" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#raster-analysis"><i class="fa fa-check"></i><b>9.1</b> Raster Analysis</a></li>
+<li class="chapter" data-level="9.2" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#digital-vertical-models"><i class="fa fa-check"></i><b>9.2</b> Digital Vertical Models</a></li>
+<li class="chapter" data-level="9.3" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#digital-elevation-models-dem"><i class="fa fa-check"></i><b>9.3</b> Digital Elevation Models (DEM)</a></li>
+<li class="chapter" data-level="9.4" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#digital-terrain-models-dtm"><i class="fa fa-check"></i><b>9.4</b> Digital Terrain Models (DTM)</a></li>
+<li class="chapter" data-level="9.5" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#digital-surface-models-dsm"><i class="fa fa-check"></i><b>9.5</b> Digital Surface Models (DSM)</a></li>
+<li class="chapter" data-level="9.6" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#contours"><i class="fa fa-check"></i><b>9.6</b> Contours</a></li>
+<li class="chapter" data-level="9.7" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#raster-functions"><i class="fa fa-check"></i><b>9.7</b> Raster Functions</a></li>
+<li class="chapter" data-level="9.8" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#local"><i class="fa fa-check"></i><b>9.8</b> Local</a></li>
+<li class="chapter" data-level="9.9" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#focal"><i class="fa fa-check"></i><b>9.9</b> Focal</a></li>
+<li class="chapter" data-level="9.10" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#global"><i class="fa fa-check"></i><b>9.10</b> Global</a></li>
+<li class="chapter" data-level="9.11" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#zonal"><i class="fa fa-check"></i><b>9.11</b> Zonal</a></li>
+<li class="chapter" data-level="9.12" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#derivatives-of-elevation-models"><i class="fa fa-check"></i><b>9.12</b> Derivatives of Elevation Models</a></li>
+<li class="chapter" data-level="9.13" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#slope"><i class="fa fa-check"></i><b>9.13</b> Slope</a></li>
+<li class="chapter" data-level="9.14" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#aspect"><i class="fa fa-check"></i><b>9.14</b> Aspect</a></li>
+<li class="chapter" data-level="9.15" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#heat-load-index"><i class="fa fa-check"></i><b>9.15</b> Heat Load Index</a></li>
+<li class="chapter" data-level="9.16" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#hillshade"><i class="fa fa-check"></i><b>9.16</b> Hillshade</a></li>
+<li class="chapter" data-level="9.17" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#sinks-peaks-and-saddles-oh-my"><i class="fa fa-check"></i><b>9.17</b> Sinks, Peaks, and Saddles Oh My!</a></li>
+<li class="chapter" data-level="9.18" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#landform-classification"><i class="fa fa-check"></i><b>9.18</b> Landform Classification</a></li>
+<li class="chapter" data-level="9.19" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#profile-and-planform-curvature"><i class="fa fa-check"></i><b>9.19</b> Profile and Planform Curvature</a></li>
+<li class="chapter" data-level="9.20" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#topographic-position-index"><i class="fa fa-check"></i><b>9.20</b> Topographic Position Index</a></li>
+<li class="chapter" data-level="9.21" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#hydrology-work-flows"><i class="fa fa-check"></i><b>9.21</b> Hydrology Work “flows”</a></li>
+<li class="chapter" data-level="9.22" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#flow-direction-and-flow-accumulation"><i class="fa fa-check"></i><b>9.22</b> Flow Direction and Flow Accumulation</a></li>
+<li class="chapter" data-level="9.23" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#stream-delineation"><i class="fa fa-check"></i><b>9.23</b> Stream Delineation</a></li>
+<li class="chapter" data-level="9.24" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#flow-length"><i class="fa fa-check"></i><b>9.24</b> Flow Length</a></li>
+<li class="chapter" data-level="9.25" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#topographic-wetness-index"><i class="fa fa-check"></i><b>9.25</b> Topographic Wetness Index</a></li>
+<li class="chapter" data-level="9.26" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#case-study-topographic-indices-for-wetland-mapping"><i class="fa fa-check"></i><b>9.26</b> Case Study: Topographic Indices for Wetland Mapping</a></li>
+<li class="chapter" data-level="9.27" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#dem-derivatives-and-classification"><i class="fa fa-check"></i><b>9.27</b> DEM Derivatives and Classification</a></li>
+<li class="chapter" data-level="9.28" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#d-geovisualization"><i class="fa fa-check"></i><b>9.28</b> 3D Geovisualization</a></li>
+<li class="chapter" data-level="9.29" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#anaglyphs"><i class="fa fa-check"></i><b>9.29</b> Anaglyphs</a></li>
+<li class="chapter" data-level="9.30" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#summary-7"><i class="fa fa-check"></i><b>9.30</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#reflection-questions-6"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#practice-questions-6"><i class="fa fa-check"></i>Practice Questions</a></li>
+<li class="chapter" data-level="" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html#recommended-readings-5"><i class="fa fa-check"></i>Recommended Readings</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="spatial-estimation.html"><a href="spatial-estimation.html"><i class="fa fa-check"></i><b>10</b> Spatial Estimation</a>
+<ul>
+<li class="chapter" data-level="" data-path="spatial-estimation.html"><a href="spatial-estimation.html#learning-objectives-9"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="spatial-estimation.html"><a href="spatial-estimation.html#key-terms-9"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="10.1" data-path="spatial-estimation.html"><a href="spatial-estimation.html#introduction-1"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
+<li class="chapter" data-level="" data-path="spatial-estimation.html"><a href="spatial-estimation.html#recall-this"><i class="fa fa-check"></i>Recall This</a></li>
+<li class="chapter" data-level="10.2" data-path="spatial-estimation.html"><a href="spatial-estimation.html#geostatistics"><i class="fa fa-check"></i><b>10.2</b> Geostatistics</a></li>
+<li class="chapter" data-level="10.3" data-path="spatial-estimation.html"><a href="spatial-estimation.html#spatial-autocorrelation"><i class="fa fa-check"></i><b>10.3</b> Spatial Autocorrelation</a></li>
+<li class="chapter" data-level="10.4" data-path="spatial-estimation.html"><a href="spatial-estimation.html#sampling"><i class="fa fa-check"></i><b>10.4</b> Sampling</a></li>
+<li class="chapter" data-level="10.5" data-path="spatial-estimation.html"><a href="spatial-estimation.html#prediction"><i class="fa fa-check"></i><b>10.5</b> Prediction</a></li>
+<li class="chapter" data-level="10.6" data-path="spatial-estimation.html"><a href="spatial-estimation.html#estimation"><i class="fa fa-check"></i><b>10.6</b> Estimation</a></li>
+<li class="chapter" data-level="10.7" data-path="spatial-estimation.html"><a href="spatial-estimation.html#classical-vs.-geostatistical-inferences"><i class="fa fa-check"></i><b>10.7</b> Classical vs. Geostatistical Inferences</a></li>
+<li class="chapter" data-level="10.8" data-path="spatial-estimation.html"><a href="spatial-estimation.html#sampling-1"><i class="fa fa-check"></i><b>10.8</b> Sampling</a></li>
+<li class="chapter" data-level="" data-path="spatial-estimation.html"><a href="spatial-estimation.html#recall-this-1"><i class="fa fa-check"></i>Recall This</a></li>
+<li class="chapter" data-level="10.9" data-path="spatial-estimation.html"><a href="spatial-estimation.html#population"><i class="fa fa-check"></i><b>10.9</b> Population</a></li>
+<li class="chapter" data-level="10.10" data-path="spatial-estimation.html"><a href="spatial-estimation.html#sampling-design"><i class="fa fa-check"></i><b>10.10</b> Sampling Design</a></li>
+<li class="chapter" data-level="10.11" data-path="spatial-estimation.html"><a href="spatial-estimation.html#sampling-unit"><i class="fa fa-check"></i><b>10.11</b> Sampling Unit</a></li>
+<li class="chapter" data-level="10.12" data-path="spatial-estimation.html"><a href="spatial-estimation.html#probability-sampling"><i class="fa fa-check"></i><b>10.12</b> Probability Sampling</a></li>
+<li class="chapter" data-level="10.13" data-path="spatial-estimation.html"><a href="spatial-estimation.html#simple-random-sampling"><i class="fa fa-check"></i><b>10.13</b> Simple Random Sampling</a></li>
+<li class="chapter" data-level="10.14" data-path="spatial-estimation.html"><a href="spatial-estimation.html#stratified-random-sampling"><i class="fa fa-check"></i><b>10.14</b> Stratified Random Sampling</a></li>
+<li class="chapter" data-level="10.15" data-path="spatial-estimation.html"><a href="spatial-estimation.html#systematic-sampling"><i class="fa fa-check"></i><b>10.15</b> Systematic Sampling</a></li>
+<li class="chapter" data-level="10.16" data-path="spatial-estimation.html"><a href="spatial-estimation.html#cluster-sampling"><i class="fa fa-check"></i><b>10.16</b> Cluster Sampling</a></li>
+<li class="chapter" data-level="10.17" data-path="spatial-estimation.html"><a href="spatial-estimation.html#non-probability-sampling"><i class="fa fa-check"></i><b>10.17</b> Non-probability Sampling</a></li>
+<li class="chapter" data-level="10.18" data-path="spatial-estimation.html"><a href="spatial-estimation.html#representative-sampling"><i class="fa fa-check"></i><b>10.18</b> Representative Sampling</a></li>
+<li class="chapter" data-level="10.19" data-path="spatial-estimation.html"><a href="spatial-estimation.html#unique-case-sampling"><i class="fa fa-check"></i><b>10.19</b> Unique Case Sampling</a></li>
+<li class="chapter" data-level="10.20" data-path="spatial-estimation.html"><a href="spatial-estimation.html#sequential-sampling"><i class="fa fa-check"></i><b>10.20</b> Sequential Sampling</a></li>
+<li class="chapter" data-level="10.21" data-path="spatial-estimation.html"><a href="spatial-estimation.html#spatial-autocorrelation-1"><i class="fa fa-check"></i><b>10.21</b> Spatial Autocorrelation</a></li>
+<li class="chapter" data-level="" data-path="spatial-estimation.html"><a href="spatial-estimation.html#recall-this-2"><i class="fa fa-check"></i>Recall This</a></li>
+<li class="chapter" data-level="10.22" data-path="spatial-estimation.html"><a href="spatial-estimation.html#domain"><i class="fa fa-check"></i><b>10.22</b> Domain</a></li>
+<li class="chapter" data-level="10.23" data-path="spatial-estimation.html"><a href="spatial-estimation.html#attributes"><i class="fa fa-check"></i><b>10.23</b> Attributes</a></li>
+<li class="chapter" data-level="10.24" data-path="spatial-estimation.html"><a href="spatial-estimation.html#morans-i"><i class="fa fa-check"></i><b>10.24</b> Moran’s I</a></li>
+<li class="chapter" data-level="10.25" data-path="spatial-estimation.html"><a href="spatial-estimation.html#case-study-title-of-case-study-here"><i class="fa fa-check"></i><b>10.25</b> Case Study: Title of Case Study Here</a></li>
+<li class="chapter" data-level="" data-path="spatial-estimation.html"><a href="spatial-estimation.html#calculating-morans-i"><i class="fa fa-check"></i>Calculating Moran’s I</a></li>
+<li class="chapter" data-level="" data-path="spatial-estimation.html"><a href="spatial-estimation.html#using-contiguity"><i class="fa fa-check"></i>Using Contiguity</a></li>
+<li class="chapter" data-level="10.26" data-path="spatial-estimation.html"><a href="spatial-estimation.html#gearys-c"><i class="fa fa-check"></i><b>10.26</b> Geary’s C</a></li>
+<li class="chapter" data-level="10.27" data-path="spatial-estimation.html"><a href="spatial-estimation.html#semivariogram-modeling"><i class="fa fa-check"></i><b>10.27</b> Semivariogram Modeling</a></li>
+<li class="chapter" data-level="10.28" data-path="spatial-estimation.html"><a href="spatial-estimation.html#case-study-title-of-case-study-here-1"><i class="fa fa-check"></i><b>10.28</b> Case Study: Title of Case Study Here</a>
+<ul>
+<li class="chapter" data-level="10.28.1" data-path="spatial-estimation.html"><a href="spatial-estimation.html#gaussian"><i class="fa fa-check"></i><b>10.28.1</b> Gaussian</a></li>
+</ul></li>
+<li class="chapter" data-level="10.29" data-path="spatial-estimation.html"><a href="spatial-estimation.html#spherical"><i class="fa fa-check"></i><b>10.29</b> Spherical</a></li>
+<li class="chapter" data-level="10.30" data-path="spatial-estimation.html"><a href="spatial-estimation.html#exponential"><i class="fa fa-check"></i><b>10.30</b> Exponential</a></li>
+<li class="chapter" data-level="10.31" data-path="spatial-estimation.html"><a href="spatial-estimation.html#circular"><i class="fa fa-check"></i><b>10.31</b> Circular</a></li>
+<li class="chapter" data-level="10.32" data-path="spatial-estimation.html"><a href="spatial-estimation.html#spatial-interpolation"><i class="fa fa-check"></i><b>10.32</b> Spatial Interpolation</a></li>
+<li class="chapter" data-level="10.33" data-path="spatial-estimation.html"><a href="spatial-estimation.html#case-study-title-of-case-study-here-2"><i class="fa fa-check"></i><b>10.33</b> Case Study: Title of Case Study Here</a></li>
+<li class="chapter" data-level="10.34" data-path="spatial-estimation.html"><a href="spatial-estimation.html#methods-without-using-semi-variogram"><i class="fa fa-check"></i><b>10.34</b> Methods Without Using Semi-variogram</a></li>
+<li class="chapter" data-level="10.35" data-path="spatial-estimation.html"><a href="spatial-estimation.html#nearest-neighbor"><i class="fa fa-check"></i><b>10.35</b> Nearest Neighbor</a></li>
+<li class="chapter" data-level="10.36" data-path="spatial-estimation.html"><a href="spatial-estimation.html#thiessian-polygon"><i class="fa fa-check"></i><b>10.36</b> Thiessian Polygon</a></li>
+<li class="chapter" data-level="10.37" data-path="spatial-estimation.html"><a href="spatial-estimation.html#methods-using-semi-variogram"><i class="fa fa-check"></i><b>10.37</b> Methods Using Semi-variogram</a></li>
+<li class="chapter" data-level="10.38" data-path="spatial-estimation.html"><a href="spatial-estimation.html#kriging"><i class="fa fa-check"></i><b>10.38</b> Kriging</a>
+<ul>
+<li class="chapter" data-level="10.38.1" data-path="spatial-estimation.html"><a href="spatial-estimation.html#linear-kriging"><i class="fa fa-check"></i><b>10.38.1</b> Linear Kriging</a></li>
+</ul></li>
+<li class="chapter" data-level="10.39" data-path="spatial-estimation.html"><a href="spatial-estimation.html#case-study-title-of-case-study-here-3"><i class="fa fa-check"></i><b>10.39</b> Case Study: Title of Case Study here</a></li>
+<li class="chapter" data-level="10.40" data-path="spatial-estimation.html"><a href="spatial-estimation.html#simple-kriging"><i class="fa fa-check"></i><b>10.40</b> Simple Kriging</a></li>
+<li class="chapter" data-level="10.41" data-path="spatial-estimation.html"><a href="spatial-estimation.html#ordinary-kriging"><i class="fa fa-check"></i><b>10.41</b> Ordinary Kriging</a></li>
+<li class="chapter" data-level="10.42" data-path="spatial-estimation.html"><a href="spatial-estimation.html#universal-kriging"><i class="fa fa-check"></i><b>10.42</b> Universal Kriging</a></li>
+<li class="chapter" data-level="" data-path="spatial-estimation.html"><a href="spatial-estimation.html#which-method-is-the-best-given-our-data"><i class="fa fa-check"></i>Which method is the best given our data?</a></li>
+<li class="chapter" data-level="10.43" data-path="spatial-estimation.html"><a href="spatial-estimation.html#co-kriging"><i class="fa fa-check"></i><b>10.43</b> Co-Kriging</a></li>
+<li class="chapter" data-level="10.44" data-path="spatial-estimation.html"><a href="spatial-estimation.html#non-linear-kriging"><i class="fa fa-check"></i><b>10.44</b> Non-Linear Kriging</a></li>
+<li class="chapter" data-level="10.45" data-path="spatial-estimation.html"><a href="spatial-estimation.html#indicator-kriging"><i class="fa fa-check"></i><b>10.45</b> Indicator Kriging</a></li>
+<li class="chapter" data-level="10.46" data-path="spatial-estimation.html"><a href="spatial-estimation.html#probability-kriging"><i class="fa fa-check"></i><b>10.46</b> Probability Kriging</a></li>
+<li class="chapter" data-level="10.47" data-path="spatial-estimation.html"><a href="spatial-estimation.html#disjunctive-kriging"><i class="fa fa-check"></i><b>10.47</b> Disjunctive Kriging</a></li>
+<li class="chapter" data-level="10.48" data-path="spatial-estimation.html"><a href="spatial-estimation.html#spatial-regression-models"><i class="fa fa-check"></i><b>10.48</b> Spatial Regression Models</a></li>
+<li class="chapter" data-level="10.49" data-path="spatial-estimation.html"><a href="spatial-estimation.html#case-study-title-of-case-study-here-4"><i class="fa fa-check"></i><b>10.49</b> Case Study: Title of case study here</a></li>
+<li class="chapter" data-level="10.50" data-path="spatial-estimation.html"><a href="spatial-estimation.html#spatial-lag-model"><i class="fa fa-check"></i><b>10.50</b> Spatial Lag Model</a></li>
+<li class="chapter" data-level="10.51" data-path="spatial-estimation.html"><a href="spatial-estimation.html#steps-in-fitting-spatial-lag-model"><i class="fa fa-check"></i><b>10.51</b> Steps in Fitting Spatial Lag Model:</a></li>
+<li class="chapter" data-level="10.52" data-path="spatial-estimation.html"><a href="spatial-estimation.html#spatial-error-model"><i class="fa fa-check"></i><b>10.52</b> Spatial Error Model</a></li>
+<li class="chapter" data-level="10.53" data-path="spatial-estimation.html"><a href="spatial-estimation.html#steps-in-fitting-spatial-error-model"><i class="fa fa-check"></i><b>10.53</b> Steps in Fitting Spatial Error Model:</a></li>
+<li class="chapter" data-level="10.54" data-path="spatial-estimation.html"><a href="spatial-estimation.html#selection-between-lag-and-error-model"><i class="fa fa-check"></i><b>10.54</b> Selection Between Lag and Error Model</a></li>
+<li class="chapter" data-level="" data-path="spatial-estimation.html"><a href="spatial-estimation.html#remember-this-2"><i class="fa fa-check"></i>Remember This?</a></li>
+<li class="chapter" data-level="" data-path="spatial-estimation.html"><a href="spatial-estimation.html#reflection-questions-7"><i class="fa fa-check"></i>Reflection Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html"><i class="fa fa-check"></i><b>11</b> Fundamentals of remote sensing</a>
+<ul>
+<li class="chapter" data-level="" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#key-terms-10"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="11.1" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#what-is-remote-sensing"><i class="fa fa-check"></i><b>11.1</b> What is remote sensing?</a></li>
+<li class="chapter" data-level="11.2" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#types-of-energy"><i class="fa fa-check"></i><b>11.2</b> Types of Energy</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#introduction-2"><i class="fa fa-check"></i><b>11.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="11.2.2" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#scientific-notation"><i class="fa fa-check"></i><b>11.2.2</b> Scientific Notation</a></li>
+<li class="chapter" data-level="11.2.3" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#electromagnetic-spectrum"><i class="fa fa-check"></i><b>11.2.3</b> Electromagnetic Spectrum</a></li>
+<li class="chapter" data-level="11.2.4" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#radiation-types"><i class="fa fa-check"></i><b>11.2.4</b> Radiation Types</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#physical-laws-of-radiation"><i class="fa fa-check"></i><b>11.3</b> Physical laws of radiation</a></li>
+<li class="chapter" data-level="11.4" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#the-four-resolutions"><i class="fa fa-check"></i><b>11.4</b> The Four Resolutions</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#spatial-resolution"><i class="fa fa-check"></i><b>11.4.1</b> Spatial Resolution</a></li>
+<li class="chapter" data-level="11.4.2" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#temporal-resolution"><i class="fa fa-check"></i><b>11.4.2</b> Temporal Resolution</a></li>
+<li class="chapter" data-level="11.4.3" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#spectral-resolution"><i class="fa fa-check"></i><b>11.4.3</b> Spectral Resolution</a></li>
+<li class="chapter" data-level="11.4.4" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#radiometric-resolution"><i class="fa fa-check"></i><b>11.4.4</b> Radiometric Resolution</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#key-applications"><i class="fa fa-check"></i><b>11.5</b> Key Applications</a></li>
+<li class="chapter" data-level="11.6" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#summary-8"><i class="fa fa-check"></i><b>11.6</b> Summary</a>
+<ul>
+<li class="chapter" data-level="11.6.1" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html#reflection-questions-8"><i class="fa fa-check"></i><b>11.6.1</b> Reflection Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="chapter-template.html"><a href="chapter-template.html"><i class="fa fa-check"></i><b>12</b> Remote Sensing Systems</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#key-terms-11"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="12.1" data-path="chapter-template.html"><a href="chapter-template.html#optical-system-basics"><i class="fa fa-check"></i><b>12.1</b> Optical System Basics</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="chapter-template.html"><a href="chapter-template.html#lenses"><i class="fa fa-check"></i><b>12.1.1</b> Lenses</a></li>
+<li class="chapter" data-level="12.1.2" data-path="chapter-template.html"><a href="chapter-template.html#focal-length"><i class="fa fa-check"></i><b>12.1.2</b> Focal Length</a></li>
+<li class="chapter" data-level="12.1.3" data-path="chapter-template.html"><a href="chapter-template.html#principle-points"><i class="fa fa-check"></i><b>12.1.3</b> Principle Points</a></li>
+<li class="chapter" data-level="12.1.4" data-path="chapter-template.html"><a href="chapter-template.html#field-of-view"><i class="fa fa-check"></i><b>12.1.4</b> Field of View</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#did-you-know"><i class="fa fa-check"></i>Did You Know?</a></li>
+<li class="chapter" data-level="12.2" data-path="chapter-template.html"><a href="chapter-template.html#perspectives"><i class="fa fa-check"></i><b>12.2</b> Perspectives</a></li>
+<li class="chapter" data-level="12.3" data-path="chapter-template.html"><a href="chapter-template.html#aerial-perspective"><i class="fa fa-check"></i><b>12.3</b> Aerial Perspective</a></li>
+<li class="chapter" data-level="12.4" data-path="chapter-template.html"><a href="chapter-template.html#nadir-perpsective"><i class="fa fa-check"></i><b>12.4</b> Nadir Perpsective</a></li>
+<li class="chapter" data-level="12.5" data-path="chapter-template.html"><a href="chapter-template.html#oblique-perspective"><i class="fa fa-check"></i><b>12.5</b> Oblique Perspective</a></li>
+<li class="chapter" data-level="12.6" data-path="chapter-template.html"><a href="chapter-template.html#hemispherical-perspective"><i class="fa fa-check"></i><b>12.6</b> Hemispherical Perspective</a></li>
+<li class="chapter" data-level="12.7" data-path="chapter-template.html"><a href="chapter-template.html#sensors"><i class="fa fa-check"></i><b>12.7</b> Sensors</a></li>
+<li class="chapter" data-level="12.8" data-path="chapter-template.html"><a href="chapter-template.html#detectors"><i class="fa fa-check"></i><b>12.8</b> Detectors</a></li>
+<li class="chapter" data-level="12.9" data-path="chapter-template.html"><a href="chapter-template.html#analog-to-digital-converters"><i class="fa fa-check"></i><b>12.9</b> Analog-to-Digital Converters</a></li>
+<li class="chapter" data-level="12.10" data-path="chapter-template.html"><a href="chapter-template.html#panchromatic-sensors"><i class="fa fa-check"></i><b>12.10</b> Panchromatic Sensors</a></li>
+<li class="chapter" data-level="12.11" data-path="chapter-template.html"><a href="chapter-template.html#multispectral-sensors"><i class="fa fa-check"></i><b>12.11</b> Multispectral Sensors</a></li>
+<li class="chapter" data-level="12.12" data-path="chapter-template.html"><a href="chapter-template.html#hyperspectral-sensors"><i class="fa fa-check"></i><b>12.12</b> Hyperspectral Sensors</a></li>
+<li class="chapter" data-level="12.13" data-path="chapter-template.html"><a href="chapter-template.html#platforms"><i class="fa fa-check"></i><b>12.13</b> Platforms</a></li>
+<li class="chapter" data-level="12.14" data-path="chapter-template.html"><a href="chapter-template.html#terrestrial-systems"><i class="fa fa-check"></i><b>12.14</b> Terrestrial Systems</a></li>
+<li class="chapter" data-level="12.15" data-path="chapter-template.html"><a href="chapter-template.html#aerial-systems"><i class="fa fa-check"></i><b>12.15</b> Aerial systems</a></li>
+<li class="chapter" data-level="12.16" data-path="chapter-template.html"><a href="chapter-template.html#satellite-systems"><i class="fa fa-check"></i><b>12.16</b> Satellite Systems</a></li>
+<li class="chapter" data-level="12.17" data-path="chapter-template.html"><a href="chapter-template.html#orbital-physics"><i class="fa fa-check"></i><b>12.17</b> Orbital Physics</a></li>
+<li class="chapter" data-level="12.18" data-path="chapter-template.html"><a href="chapter-template.html#low-earth-orbit"><i class="fa fa-check"></i><b>12.18</b> Low Earth Orbit</a></li>
+<li class="chapter" data-level="12.19" data-path="chapter-template.html"><a href="chapter-template.html#medium-earth-orbit"><i class="fa fa-check"></i><b>12.19</b> Medium Earth Orbit</a></li>
+<li class="chapter" data-level="12.20" data-path="chapter-template.html"><a href="chapter-template.html#polar-and-sun-synchronous-orbit"><i class="fa fa-check"></i><b>12.20</b> Polar and Sun-synchronous Orbit</a></li>
+<li class="chapter" data-level="12.21" data-path="chapter-template.html"><a href="chapter-template.html#geostationary-orbit"><i class="fa fa-check"></i><b>12.21</b> Geostationary Orbit</a></li>
+<li class="chapter" data-level="12.22" data-path="chapter-template.html"><a href="chapter-template.html#lagrange-points"><i class="fa fa-check"></i><b>12.22</b> Lagrange Points</a></li>
+<li class="chapter" data-level="12.23" data-path="chapter-template.html"><a href="chapter-template.html#important-satellite-systems-for-environmental-management"><i class="fa fa-check"></i><b>12.23</b> Important Satellite Systems for Environmental Management</a></li>
+<li class="chapter" data-level="12.24" data-path="chapter-template.html"><a href="chapter-template.html#landsat"><i class="fa fa-check"></i><b>12.24</b> LANDSAT</a></li>
+<li class="chapter" data-level="12.25" data-path="chapter-template.html"><a href="chapter-template.html#radarsat"><i class="fa fa-check"></i><b>12.25</b> RADARSAt</a></li>
+<li class="chapter" data-level="12.26" data-path="chapter-template.html"><a href="chapter-template.html#advanced-very-high-resolution-radiometer-avhrr"><i class="fa fa-check"></i><b>12.26</b> Advanced Very High Resolution Radiometer (AVHRR)</a></li>
+<li class="chapter" data-level="12.27" data-path="chapter-template.html"><a href="chapter-template.html#moderate-resolution-spectroradiometer-modis"><i class="fa fa-check"></i><b>12.27</b> Moderate Resolution Spectroradiometer (MODIS)</a></li>
+<li class="chapter" data-level="12.28" data-path="chapter-template.html"><a href="chapter-template.html#icesat"><i class="fa fa-check"></i><b>12.28</b> ICESat</a></li>
+<li class="chapter" data-level="12.29" data-path="chapter-template.html"><a href="chapter-template.html#advanced-spaceborne-thermal-emission-and-reflection-radiometer-aster"><i class="fa fa-check"></i><b>12.29</b> Advanced Spaceborne Thermal Emission and Reflection Radiometer (ASTER)</a></li>
+<li class="chapter" data-level="12.30" data-path="chapter-template.html"><a href="chapter-template.html#defense-meteorology-satellite-program-dmsp"><i class="fa fa-check"></i><b>12.30</b> Defense Meteorology Satellite Program (DMSP)</a></li>
+<li class="chapter" data-level="12.31" data-path="chapter-template.html"><a href="chapter-template.html#visible-infrared-imaging-radiometer-suite-viirs"><i class="fa fa-check"></i><b>12.31</b> Visible Infrared Imaging Radiometer Suite (VIIRS)</a></li>
+<li class="chapter" data-level="12.32" data-path="chapter-template.html"><a href="chapter-template.html#wildfiresat"><i class="fa fa-check"></i><b>12.32</b> WildfireSat</a></li>
+<li class="chapter" data-level="12.33" data-path="chapter-template.html"><a href="chapter-template.html#case-study-title-of-case-study-here-5"><i class="fa fa-check"></i><b>12.33</b> Case Study: Title of Case Study Here</a></li>
+<li class="chapter" data-level="" data-path="mapping-data.html"><a href="mapping-data.html#box-text"><i class="fa fa-check"></i>Case Study Title Max of Forty Characters</a></li>
+<li class="chapter" data-level="12.34" data-path="chapter-template.html"><a href="chapter-template.html#summary-9"><i class="fa fa-check"></i><b>12.34</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#reflection-questions-9"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#practice-questions-7"><i class="fa fa-check"></i>Practice Questions</a></li>
+<li class="chapter" data-level="" data-path="chapter-template.html"><a href="chapter-template.html#recommended-readings-6"><i class="fa fa-check"></i>Recommended Readings</a></li>
+<li class="chapter" data-level="12.35" data-path="chapter-template.html"><a href="chapter-template.html#section"><i class="fa fa-check"></i><b>12.35</b> —</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="image-processing.html"><a href="image-processing.html"><i class="fa fa-check"></i><b>13</b> Image Processing</a>
+<ul>
+<li class="chapter" data-level="" data-path="image-processing.html"><a href="image-processing.html#key-terms-12"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="13.1" data-path="image-processing.html"><a href="image-processing.html#overview"><i class="fa fa-check"></i><b>13.1</b> Overview</a></li>
+<li class="chapter" data-level="13.2" data-path="image-processing.html"><a href="image-processing.html#geometric-correction"><i class="fa fa-check"></i><b>13.2</b> Geometric correction</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="image-processing.html"><a href="image-processing.html#relief-displacement"><i class="fa fa-check"></i><b>13.2.1</b> <strong>Relief displacement</strong></a></li>
+<li class="chapter" data-level="13.2.2" data-path="image-processing.html"><a href="image-processing.html#georeferencing"><i class="fa fa-check"></i><b>13.2.2</b> <strong>Georeferencing</strong></a></li>
+<li class="chapter" data-level="13.2.3" data-path="image-processing.html"><a href="image-processing.html#georegistration-georectification"><i class="fa fa-check"></i><b>13.2.3</b> <strong>Georegistration (georectification)</strong></a></li>
+<li class="chapter" data-level="13.2.4" data-path="image-processing.html"><a href="image-processing.html#resampling"><i class="fa fa-check"></i><b>13.2.4</b> <strong>Resampling</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="image-processing.html"><a href="image-processing.html#atmospheric-correction"><i class="fa fa-check"></i><b>13.3</b> Atmospheric correction</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="image-processing.html"><a href="image-processing.html#atmospheric-windows"><i class="fa fa-check"></i><b>13.3.1</b> <strong>Atmospheric windows</strong></a></li>
+<li class="chapter" data-level="13.3.2" data-path="image-processing.html"><a href="image-processing.html#clouds-and-shadows"><i class="fa fa-check"></i><b>13.3.2</b> <strong>Clouds and shadows</strong></a></li>
+<li class="chapter" data-level="13.3.3" data-path="image-processing.html"><a href="image-processing.html#smoke-and-haze"><i class="fa fa-check"></i><b>13.3.3</b> <strong>Smoke and Haze</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="image-processing.html"><a href="image-processing.html#radiometric-correction"><i class="fa fa-check"></i><b>13.4</b> Radiometric correction</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="image-processing.html"><a href="image-processing.html#signal-to-noise"><i class="fa fa-check"></i><b>13.4.1</b> <strong>Signal-to-noise</strong></a></li>
+<li class="chapter" data-level="13.4.2" data-path="image-processing.html"><a href="image-processing.html#radiometric-normalization"><i class="fa fa-check"></i><b>13.4.2</b> <strong>Radiometric normalization</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="image-processing.html"><a href="image-processing.html#image-enhancement"><i class="fa fa-check"></i><b>13.5</b> Image enhancement</a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="image-processing.html"><a href="image-processing.html#stretching"><i class="fa fa-check"></i><b>13.5.1</b> <strong>Stretching</strong></a></li>
+<li class="chapter" data-level="13.5.2" data-path="image-processing.html"><a href="image-processing.html#sharpening"><i class="fa fa-check"></i><b>13.5.2</b> <strong>Sharpening</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="image-processing.html"><a href="image-processing.html#summary-10"><i class="fa fa-check"></i><b>13.6</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="image-processing.html"><a href="image-processing.html#reflection-questions-10"><i class="fa fa-check"></i>Reflection Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="image-analysis.html"><a href="image-analysis.html"><i class="fa fa-check"></i><b>14</b> Image Analysis</a></li>
+<li class="chapter" data-level="15" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html"><i class="fa fa-check"></i><b>15</b> LiDAR Acquisition and Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#key-terms-13"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="15.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#what-is-lidar"><i class="fa fa-check"></i><b>15.1</b> What is LiDAR?</a>
+<ul>
+<li class="chapter" data-level="15.1.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#how-does-it-work"><i class="fa fa-check"></i><b>15.1.1</b> How does it Work?</a></li>
+</ul></li>
+<li class="chapter" data-level="15.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#components-of-lidar-systems"><i class="fa fa-check"></i><b>15.2</b> Components of LiDAR Systems</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#lasers"><i class="fa fa-check"></i><b>15.2.1</b> Lasers</a></li>
+<li class="chapter" data-level="15.2.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#position-and-orientation"><i class="fa fa-check"></i><b>15.2.2</b> Position and Orientation</a></li>
+<li class="chapter" data-level="15.2.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#platform"><i class="fa fa-check"></i><b>15.2.3</b> Platform</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#types-of-lidar"><i class="fa fa-check"></i><b>15.3</b> Types of LiDAR</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#discrete-return"><i class="fa fa-check"></i><b>15.3.1</b> Discrete Return</a></li>
+<li class="chapter" data-level="15.3.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#full-waveform"><i class="fa fa-check"></i><b>15.3.2</b> Full Waveform</a></li>
+<li class="chapter" data-level="15.3.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#multispectral"><i class="fa fa-check"></i><b>15.3.3</b> Multispectral</a></li>
+<li class="chapter" data-level="15.3.4" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#single-photon-lidar"><i class="fa fa-check"></i><b>15.3.4</b> Single Photon Lidar</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#lidar-derivatives-and-analysis"><i class="fa fa-check"></i><b>15.4</b> LiDAR Derivatives and Analysis</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#bare-earth-elevation"><i class="fa fa-check"></i><b>15.4.1</b> Bare Earth Elevation</a></li>
+<li class="chapter" data-level="15.4.2" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#canopy-height-model"><i class="fa fa-check"></i><b>15.4.2</b> Canopy Height Model</a></li>
+<li class="chapter" data-level="15.4.3" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#canopy-surface-model"><i class="fa fa-check"></i><b>15.4.3</b> Canopy Surface Model</a></li>
+<li class="chapter" data-level="15.4.4" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#grid-metrics"><i class="fa fa-check"></i><b>15.4.4</b> Grid Metrics</a></li>
+<li class="chapter" data-level="15.4.5" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#tree-segmentation"><i class="fa fa-check"></i><b>15.4.5</b> Tree Segmentation</a></li>
+<li class="chapter" data-level="15.4.6" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#software"><i class="fa fa-check"></i><b>15.4.6</b> Software</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#summary-11"><i class="fa fa-check"></i><b>15.5</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#reflection-questions-11"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="LiDAR-acquisition-and-analysis.html"><a href="LiDAR-acquisition-and-analysis.html#practice-questions-8"><i class="fa fa-check"></i>Practice Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="data-integration.html"><a href="data-integration.html"><i class="fa fa-check"></i><b>16</b> Chapter Title</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-integration.html"><a href="data-integration.html#key-terms-14"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="16.1" data-path="data-integration.html"><a href="data-integration.html#the-gis-research-process"><i class="fa fa-check"></i><b>16.1</b> The GIS Research Process</a></li>
+<li class="chapter" data-level="16.2" data-path="data-integration.html"><a href="data-integration.html#problems-with-data-integration"><i class="fa fa-check"></i><b>16.2</b> Problems with data integration</a></li>
+<li class="chapter" data-level="16.3" data-path="data-integration.html"><a href="data-integration.html#frame-the-problem"><i class="fa fa-check"></i><b>16.3</b> Frame the Problem</a>
+<ul>
+<li class="chapter" data-level="16.3.1" data-path="data-integration.html"><a href="data-integration.html#identify-and-acquire-data"><i class="fa fa-check"></i><b>16.3.1</b> Identify and Acquire Data</a></li>
+</ul></li>
+<li class="chapter" data-level="16.4" data-path="data-integration.html"><a href="data-integration.html#data-resolution"><i class="fa fa-check"></i><b>16.4</b> Data Resolution</a></li>
+<li class="chapter" data-level="16.5" data-path="data-integration.html"><a href="data-integration.html#integrating-vector-and-raster-data"><i class="fa fa-check"></i><b>16.5</b> Integrating vector and raster data</a>
+<ul>
+<li class="chapter" data-level="16.5.1" data-path="data-integration.html"><a href="data-integration.html#rasterization"><i class="fa fa-check"></i><b>16.5.1</b> Rasterization</a></li>
+<li class="chapter" data-level="16.5.2" data-path="data-integration.html"><a href="data-integration.html#vectorization"><i class="fa fa-check"></i><b>16.5.2</b> Vectorization</a></li>
+<li class="chapter" data-level="16.5.3" data-path="data-integration.html"><a href="data-integration.html#zonal-statistics"><i class="fa fa-check"></i><b>16.5.3</b> Zonal Statistics</a></li>
+<li class="chapter" data-level="16.5.4" data-path="data-integration.html"><a href="data-integration.html#smoothing"><i class="fa fa-check"></i><b>16.5.4</b> Smoothing</a></li>
+<li class="chapter" data-level="16.5.5" data-path="data-integration.html"><a href="data-integration.html#simplifying"><i class="fa fa-check"></i><b>16.5.5</b> Simplifying</a></li>
+</ul></li>
+<li class="chapter" data-level="16.6" data-path="data-integration.html"><a href="data-integration.html#spatial-data-errors"><i class="fa fa-check"></i><b>16.6</b> Spatial data errors</a>
+<ul>
+<li class="chapter" data-level="16.6.1" data-path="data-integration.html"><a href="data-integration.html#accuracy-vs.-precision"><i class="fa fa-check"></i><b>16.6.1</b> Accuracy vs. Precision</a></li>
+<li class="chapter" data-level="16.6.2" data-path="data-integration.html"><a href="data-integration.html#vagueness-and-ambiguity"><i class="fa fa-check"></i><b>16.6.2</b> Vagueness and Ambiguity</a></li>
+<li class="chapter" data-level="16.6.3" data-path="data-integration.html"><a href="data-integration.html#quantifying-spatial-errors-rmse-euclids-distance"><i class="fa fa-check"></i><b>16.6.3</b> Quantifying spatial errors RMSE, Euclid’s distance</a></li>
+<li class="chapter" data-level="16.6.4" data-path="data-integration.html"><a href="data-integration.html#logical-errors"><i class="fa fa-check"></i><b>16.6.4</b> Logical Errors</a></li>
+<li class="chapter" data-level="16.6.5" data-path="data-integration.html"><a href="data-integration.html#ecological-fallacy-atomistic-fallacy-maup-etc.-its-important-to-include-these-whether-here-or-elsewhere"><i class="fa fa-check"></i><b>16.6.5</b> Ecological Fallacy, Atomistic Fallacy, MAUP etc. Its important to include these, whether here or elsewhere?</a></li>
+<li class="chapter" data-level="16.6.6" data-path="data-integration.html"><a href="data-integration.html#other-errors"><i class="fa fa-check"></i><b>16.6.6</b> Other Errors?</a></li>
+</ul></li>
+<li class="chapter" data-level="16.7" data-path="data-integration.html"><a href="data-integration.html#making-beautiful-maps"><i class="fa fa-check"></i><b>16.7</b> Making Beautiful Maps</a></li>
+<li class="chapter" data-level="" data-path="data-integration.html"><a href="data-integration.html#learning-objectives-15"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="data-integration.html"><a href="data-integration.html#key-terms-15"><i class="fa fa-check"></i>Key Terms</a></li>
+<li class="chapter" data-level="16.8" data-path="data-integration.html"><a href="data-integration.html#types-of-maps"><i class="fa fa-check"></i><b>16.8</b> Types of Maps</a></li>
+<li class="chapter" data-level="16.9" data-path="data-integration.html"><a href="data-integration.html#thematic-maps"><i class="fa fa-check"></i><b>16.9</b> Thematic Maps</a></li>
+<li class="chapter" data-level="16.10" data-path="data-integration.html"><a href="data-integration.html#choropleth-maps"><i class="fa fa-check"></i><b>16.10</b> Choropleth Maps</a></li>
+<li class="chapter" data-level="16.11" data-path="data-integration.html"><a href="data-integration.html#dot-density-maps"><i class="fa fa-check"></i><b>16.11</b> Dot Density Maps</a></li>
+<li class="chapter" data-level="16.12" data-path="data-integration.html"><a href="data-integration.html#isoline-maps"><i class="fa fa-check"></i><b>16.12</b> Isoline Maps</a></li>
+<li class="chapter" data-level="16.13" data-path="data-integration.html"><a href="data-integration.html#diagrammatic-maps"><i class="fa fa-check"></i><b>16.13</b> Diagrammatic Maps</a></li>
+<li class="chapter" data-level="16.14" data-path="data-integration.html"><a href="data-integration.html#cartograms"><i class="fa fa-check"></i><b>16.14</b> Cartograms</a></li>
+<li class="chapter" data-level="16.15" data-path="data-integration.html"><a href="data-integration.html#additional-resources-on-types-of-maps"><i class="fa fa-check"></i><b>16.15</b> Additional Resources on Types of Maps</a></li>
+<li class="chapter" data-level="16.16" data-path="data-integration.html"><a href="data-integration.html#map-composition"><i class="fa fa-check"></i><b>16.16</b> Map Composition</a></li>
+<li class="chapter" data-level="16.17" data-path="data-integration.html"><a href="data-integration.html#figure"><i class="fa fa-check"></i><b>16.17</b> Figure</a></li>
+<li class="chapter" data-level="16.18" data-path="data-integration.html"><a href="data-integration.html#ground"><i class="fa fa-check"></i><b>16.18</b> Ground</a></li>
+<li class="chapter" data-level="16.19" data-path="data-integration.html"><a href="data-integration.html#frame"><i class="fa fa-check"></i><b>16.19</b> Frame</a></li>
+<li class="chapter" data-level="16.20" data-path="data-integration.html"><a href="data-integration.html#elements-of-maps"><i class="fa fa-check"></i><b>16.20</b> Elements of Maps</a></li>
+<li class="chapter" data-level="16.21" data-path="data-integration.html"><a href="data-integration.html#text"><i class="fa fa-check"></i><b>16.21</b> Text</a></li>
+<li class="chapter" data-level="16.22" data-path="data-integration.html"><a href="data-integration.html#legend"><i class="fa fa-check"></i><b>16.22</b> Legend</a></li>
+<li class="chapter" data-level="16.23" data-path="data-integration.html"><a href="data-integration.html#scale-and-north-arrow"><i class="fa fa-check"></i><b>16.23</b> Scale and North Arrow</a></li>
+<li class="chapter" data-level="16.24" data-path="data-integration.html"><a href="data-integration.html#measured-grid"><i class="fa fa-check"></i><b>16.24</b> Measured Grid</a></li>
+<li class="chapter" data-level="16.25" data-path="data-integration.html"><a href="data-integration.html#citation"><i class="fa fa-check"></i><b>16.25</b> Citation</a></li>
+<li class="chapter" data-level="16.26" data-path="data-integration.html"><a href="data-integration.html#symbolization"><i class="fa fa-check"></i><b>16.26</b> Symbolization</a></li>
+<li class="chapter" data-level="16.27" data-path="data-integration.html"><a href="data-integration.html#separable"><i class="fa fa-check"></i><b>16.27</b> Separable</a></li>
+<li class="chapter" data-level="16.28" data-path="data-integration.html"><a href="data-integration.html#integral"><i class="fa fa-check"></i><b>16.28</b> Integral</a></li>
+<li class="chapter" data-level="16.29" data-path="data-integration.html"><a href="data-integration.html#graduated"><i class="fa fa-check"></i><b>16.29</b> Graduated</a></li>
+<li class="chapter" data-level="16.30" data-path="data-integration.html"><a href="data-integration.html#configurable"><i class="fa fa-check"></i><b>16.30</b> Configurable</a></li>
+<li class="chapter" data-level="16.31" data-path="data-integration.html"><a href="data-integration.html#proportional"><i class="fa fa-check"></i><b>16.31</b> Proportional</a></li>
+<li class="chapter" data-level="16.32" data-path="data-integration.html"><a href="data-integration.html#line-weight"><i class="fa fa-check"></i><b>16.32</b> Line Weight</a></li>
+<li class="chapter" data-level="16.33" data-path="data-integration.html"><a href="data-integration.html#additional-resources"><i class="fa fa-check"></i><b>16.33</b> Additional Resources</a></li>
+<li class="chapter" data-level="16.34" data-path="data-integration.html"><a href="data-integration.html#colour"><i class="fa fa-check"></i><b>16.34</b> Colour</a></li>
+<li class="chapter" data-level="16.35" data-path="data-integration.html"><a href="data-integration.html#hue"><i class="fa fa-check"></i><b>16.35</b> Hue</a></li>
+<li class="chapter" data-level="16.36" data-path="data-integration.html"><a href="data-integration.html#chroma"><i class="fa fa-check"></i><b>16.36</b> Chroma</a></li>
+<li class="chapter" data-level="16.37" data-path="data-integration.html"><a href="data-integration.html#lightness"><i class="fa fa-check"></i><b>16.37</b> Lightness</a></li>
+<li class="chapter" data-level="16.38" data-path="data-integration.html"><a href="data-integration.html#bivariate-colour-schemes"><i class="fa fa-check"></i><b>16.38</b> Bivariate Colour Schemes</a></li>
+<li class="chapter" data-level="16.39" data-path="data-integration.html"><a href="data-integration.html#colour-pickers"><i class="fa fa-check"></i><b>16.39</b> Colour Pickers</a></li>
+<li class="chapter" data-level="16.40" data-path="data-integration.html"><a href="data-integration.html#additional-resources-1"><i class="fa fa-check"></i><b>16.40</b> Additional Resources</a></li>
+<li class="chapter" data-level="16.41" data-path="data-integration.html"><a href="data-integration.html#classification-schemes"><i class="fa fa-check"></i><b>16.41</b> Classification Schemes</a></li>
+<li class="chapter" data-level="16.42" data-path="data-integration.html"><a href="data-integration.html#qualitative"><i class="fa fa-check"></i><b>16.42</b> Qualitative</a></li>
+<li class="chapter" data-level="16.43" data-path="data-integration.html"><a href="data-integration.html#sequential"><i class="fa fa-check"></i><b>16.43</b> Sequential</a></li>
+<li class="chapter" data-level="16.44" data-path="data-integration.html"><a href="data-integration.html#intervals"><i class="fa fa-check"></i><b>16.44</b> Intervals</a></li>
+<li class="chapter" data-level="16.45" data-path="data-integration.html"><a href="data-integration.html#quantiles"><i class="fa fa-check"></i><b>16.45</b> Quantiles</a></li>
+<li class="chapter" data-level="16.46" data-path="data-integration.html"><a href="data-integration.html#natural-breaks-jenna"><i class="fa fa-check"></i><b>16.46</b> Natural Breaks (Jenna)</a></li>
+<li class="chapter" data-level="16.47" data-path="data-integration.html"><a href="data-integration.html#standard-deviation"><i class="fa fa-check"></i><b>16.47</b> Standard Deviation</a></li>
+<li class="chapter" data-level="16.48" data-path="data-integration.html"><a href="data-integration.html#additional-resources-2"><i class="fa fa-check"></i><b>16.48</b> Additional Resources</a></li>
+<li class="chapter" data-level="16.49" data-path="data-integration.html"><a href="data-integration.html#generalization"><i class="fa fa-check"></i><b>16.49</b> Generalization</a></li>
+<li class="chapter" data-level="16.50" data-path="data-integration.html"><a href="data-integration.html#select"><i class="fa fa-check"></i><b>16.50</b> Select</a></li>
+<li class="chapter" data-level="16.51" data-path="data-integration.html"><a href="data-integration.html#amalgamate"><i class="fa fa-check"></i><b>16.51</b> Amalgamate</a></li>
+<li class="chapter" data-level="16.52" data-path="data-integration.html"><a href="data-integration.html#exaggerate"><i class="fa fa-check"></i><b>16.52</b> Exaggerate</a></li>
+<li class="chapter" data-level="16.53" data-path="data-integration.html"><a href="data-integration.html#displace"><i class="fa fa-check"></i><b>16.53</b> Displace</a></li>
+<li class="chapter" data-level="16.54" data-path="data-integration.html"><a href="data-integration.html#refine"><i class="fa fa-check"></i><b>16.54</b> Refine</a></li>
+<li class="chapter" data-level="16.55" data-path="data-integration.html"><a href="data-integration.html#simplify"><i class="fa fa-check"></i><b>16.55</b> Simplify</a></li>
+<li class="chapter" data-level="16.56" data-path="data-integration.html"><a href="data-integration.html#aggregate"><i class="fa fa-check"></i><b>16.56</b> Aggregate</a></li>
+<li class="chapter" data-level="16.57" data-path="data-integration.html"><a href="data-integration.html#typify"><i class="fa fa-check"></i><b>16.57</b> Typify</a></li>
+<li class="chapter" data-level="16.58" data-path="data-integration.html"><a href="data-integration.html#smooth"><i class="fa fa-check"></i><b>16.58</b> Smooth</a></li>
+<li class="chapter" data-level="16.59" data-path="data-integration.html"><a href="data-integration.html#enhance"><i class="fa fa-check"></i><b>16.59</b> Enhance</a></li>
+<li class="chapter" data-level="16.60" data-path="data-integration.html"><a href="data-integration.html#collapse"><i class="fa fa-check"></i><b>16.60</b> Collapse</a></li>
+<li class="chapter" data-level="16.61" data-path="data-integration.html"><a href="data-integration.html#merge"><i class="fa fa-check"></i><b>16.61</b> Merge</a></li>
+<li class="chapter" data-level="16.62" data-path="data-integration.html"><a href="data-integration.html#additional-resources-3"><i class="fa fa-check"></i><b>16.62</b> Additional Resources</a></li>
+<li class="chapter" data-level="16.63" data-path="data-integration.html"><a href="data-integration.html#map-design"><i class="fa fa-check"></i><b>16.63</b> Map Design</a></li>
+<li class="chapter" data-level="16.64" data-path="data-integration.html"><a href="data-integration.html#subject"><i class="fa fa-check"></i><b>16.64</b> Subject</a></li>
+<li class="chapter" data-level="16.65" data-path="data-integration.html"><a href="data-integration.html#projection-and-orientation"><i class="fa fa-check"></i><b>16.65</b> Projection and Orientation</a></li>
+<li class="chapter" data-level="16.66" data-path="data-integration.html"><a href="data-integration.html#hierarchy"><i class="fa fa-check"></i><b>16.66</b> Hierarchy</a></li>
+<li class="chapter" data-level="16.67" data-path="data-integration.html"><a href="data-integration.html#balance"><i class="fa fa-check"></i><b>16.67</b> Balance</a></li>
+<li class="chapter" data-level="16.68" data-path="data-integration.html"><a href="data-integration.html#summary-12"><i class="fa fa-check"></i><b>16.68</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="data-integration.html"><a href="data-integration.html#reflection-questions-12"><i class="fa fa-check"></i>Reflection Questions</a></li>
+<li class="chapter" data-level="" data-path="data-integration.html"><a href="data-integration.html#practice-questions-9"><i class="fa fa-check"></i>Practice Questions</a></li>
+<li class="chapter" data-level="" data-path="data-integration.html"><a href="data-integration.html#recommended-readings-7"><i class="fa fa-check"></i>Recommended Readings</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -237,11 +725,11 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="image-processing" class="section level1" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Image Processing</h1>
+<div id="image-processing" class="section level1" number="13">
+<h1><span class="header-section-number">Chapter 13</span> Image Processing</h1>
 <p>The collection of imagery is challenging and time consuming, with sensor design and deployment often requiring the development of new technologies. Driven by the growing demand for relevant information about environmental change, great emphasis is placed on the creation of “the next new satellite” or “a smaller, yet more powerful drone.” Although innovation in these physical technologies is critical for the advancement of image collection, they don’t guarantee that the imagery will be useful. In reality, the pixel values collected by a sensor are not purely the reflectance values from the surface of interest. Depending on the wavelengths being observed, there may be variations in the amount of photons emitted from the light source and a variety of atmospheric effects, such as scattering. There may also be slight inconsistencies in images collected by the same sensor on the same day or adjacent areas, which would affect the quality of analyses.</p>
 <div class="box-content learning-objectives-content">
-<div id="learning-objectives-4" class="section level4 unnumbered box-title learning-objectives-top">
+<div id="learning-objectives-12" class="section level4 unnumbered box-title learning-objectives-top">
 <h4>Learning Objectives</h4>
 </div>
 <ol style="list-style-type: decimal">
@@ -250,31 +738,31 @@ div.csl-indent {
 <li>Explore a variety of processing methodologies employed by published research.</li>
 </ol>
 </div>
-<div id="key-terms-4" class="section level3 unnumbered">
+<div id="key-terms-12" class="section level3 unnumbered">
 <h3>Key Terms</h3>
 <p>pixel, spatial resolution, temporal resolution, radiometric resolution, spectral resolution, geometric correction, atmospheric correction,</p>
 </div>
-<div id="overview" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> Overview</h2>
+<div id="overview" class="section level2" number="13.1">
+<h2><span class="header-section-number">13.1</span> Overview</h2>
 <p>The application of correction methods that address these inconsistencies are often described generally as “image processing.” In this chapter we will explore a variety of common image processing techniques and strive to understand the logic behind employing one, or more, to remote sensed imagery. Before diving into specific processing workflows that render imagery scientifically useful, however, it is important to review some key terms.</p>
 <p>First and foremost, <em>image processing,</em> or <em>digital image analysis,</em> refers to any actions taken to improve the accuracy of one or more component of raw imagery. In remote sensing science, the goal of image processing is to generate a <em>product</em> that provides accurate and useful information for scientific pursuit. This is in contrast to image processing for artistic purposes, which could include many similar steps, but focus on generating a product that is visually appealing.</p>
 <p><em>Noise</em> is another common term associated with image processing and it refers to any element of the data that is not wanted. There are a variety of noise types, which we will discuss later. In contrast to noise, <em>signal</em> describes wanted components of the imagery. Combined, signal and noise provide guidance on what specific steps should be taken in relation to the data during image processing. Before they are addressed, however, it is also important to confirm the spatial accuracy of the data.</p>
 <p>It is also important to review the elements of an <em>image</em>, or <em>raster</em>. The terms image and raster are interchangeable and refer to the a collection of spatial adjacent <em>cells</em>, or <em>pixel</em>. The terms cell and pixel are also interchangeable. An empty raster, or image, would contain pixels with no information. To say an image has been collected would simply mean that a sensor has collected information and stored that information in adjacent pixels. Although this seems straight forward there are a multitude of environmental and engineering factors that can affect the accurate collection of information. It is these confounding factors that image processing attempts to resolve in hopes of generating a data product that can be compared across space and time.</p>
 </div>
-<div id="geometric-correction" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> Geometric correction</h2>
+<div id="geometric-correction" class="section level2" number="13.2">
+<h2><span class="header-section-number">13.2</span> Geometric correction</h2>
 <p>By definition, remotely sensed data is collected by a sensor at some distance apart from the object(s) being observed. In many instances, the sensor is in motion, and at the very least it is subject to influence from environmental actors like wind. Interactions with phenomena like wind can cause the instantaneous field of view (IFOV) to move slightly during data collection, introducing spatial errors to the imagery. On top of issues relating to sensor displacement, sensors in motion may also observe adjacent areas with different topographic properties.</p>
 <p>A combination of these two effects could be visualized by imagining an airplane flying over a forested hillside. As the sensor collects data the plane can be buffeted with wind, changing the direction of a sensor’s IFOV to an location that is not the original target. On top of issues with sensor movement, the elevation of the ground is constantly undulating, altering the distance at which the sensors observes the landscape below. These two issues that affect the spatial components of image collection compromise the accuracy of an image and need to be corrected. The general term used to refer to the spatial correction of an image is geometric correction.</p>
-<div id="relief-displacement" class="section level3" number="4.2.1">
-<h3><span class="header-section-number">4.2.1</span> <strong>Relief displacement</strong></h3>
+<div id="relief-displacement" class="section level3" number="13.2.1">
+<h3><span class="header-section-number">13.2.1</span> <strong>Relief displacement</strong></h3>
 <p>The first component of geometric correction we will discuss deals with the terrain being observed. Changes in the terrain over which an image is collected lead to inconsistencies in the distances at which information is collected. These differences lead to objects in the image appearing in location inaccurate with reality and can be rectified using the spatial information of the sensor, datum and object. Examples of this effect can be observed in any photograph containing tall structures, which would appear to be leaning outward from the center of the image, or principal point. The rectification of relief displacement can be represented by the equation:</p>
 <span class="math display" id="eq:ortho">\[\begin{equation}
 d = rh/H
-\tag{4.1}
+\tag{13.1}
 \end{equation}\]</span>
 <p>where d = relief displacement, r = distance from the principal point to the image point of interest, h = difference in height between the datum and the point of interest and H = the height of the sensor above the datum.</p>
 <div class="box-content your-turn-content">
-<div id="your-turn-4" class="section level4 unnumbered box-title your-turn-top">
+<div id="your-turn-10" class="section level4 unnumbered box-title your-turn-top">
 <h4>Your turn!</h4>
 </div>
 <p>
@@ -282,17 +770,17 @@ d = rh/H
 </p>
 </div>
 </div>
-<div id="georeferencing" class="section level3" number="4.2.2">
-<h3><span class="header-section-number">4.2.2</span> <strong>Georeferencing</strong></h3>
+<div id="georeferencing" class="section level3" number="13.2.2">
+<h3><span class="header-section-number">13.2.2</span> <strong>Georeferencing</strong></h3>
 <p>The removal of inaccuracies in the spatial location of an image can be conducted using a technique called georeferencing. The basic concept of georeferencing is to alter the coordinates of an image through the association of highly precise coordinates collected on site using a GPS. Coordinates collected in the field are often called ground, or control points, and form the base of successful georeferencing. In general, increasing the amount and accuracy of ground points leads to increased spatial accuracy of the image.</p>
 <p>There are a variety of techniques used to transform the coordinates of an image based on control points, all of which are require some level of mathematics. The complexity of the polynomials used to transform the dataset, the more accurate the output spatial coordinates will be. Of course, the overall accuracy of the transformation depends on how accurate the control points are. Upon transforming a rasters coordinates it is important to evaluate how accurate the output raster is compared to the input raster. A common method of evaluating the success is through the calculating the square root of the mean of the square of all error, often called the Root Mean Squared Error (RMSE). In short, RMSE represents the average distance at which the output raster is from the ground or control points. The smaller the RMSE, the more accurate the transformation.</p>
 </div>
-<div id="georegistration-georectification" class="section level3" number="4.2.3">
-<h3><span class="header-section-number">4.2.3</span> <strong>Georegistration (georectification)</strong></h3>
+<div id="georegistration-georectification" class="section level3" number="13.2.3">
+<h3><span class="header-section-number">13.2.3</span> <strong>Georegistration (georectification)</strong></h3>
 <p>Similar to georeferencing, georegistration involves adjusting the raw coordinates of an image to match more accurate ones. In the case of georegistration, however, ground points collected in the field are replaced with coordinates from a map or image that has been verified as spatially accurate. This method could be considered a matching of two products, enabling the two products to be analyzed together. An example would be matching two images collected one year apart. If the first image is georeferenced accurately the second image can simply be georegistered by identifying shared features, such as intersections or buildings, and linking them through the creation of control points in each image.</p>
 </div>
-<div id="resampling" class="section level3" number="4.2.4">
-<h3><span class="header-section-number">4.2.4</span> <strong>Resampling</strong></h3>
+<div id="resampling" class="section level3" number="13.2.4">
+<h3><span class="header-section-number">13.2.4</span> <strong>Resampling</strong></h3>
 <p>Despite all the efforts to accurately place an image in space, it is likely that any spatial alterations also change the shape or alignment of the image’s pixels. This dislocation between pixel sizes within the image, as well as potential changes in their directionality alter the capacity to evaluate the radiation values stored within them. Imagine that a raw image is represented by a table cloth. On top of the table cloth are thousands of pixels, all of uniform height and width. The corners of this table cloth each have X and Y coordinates. Now imagine that you have to match these coordinates (the corners) to the four more accurate ground points that don’t match the table cloth. Completion of this task requires you to stretch one corner of the table cloth outwards, while the other three corners are shifted inside, leading the table cloth to alter it’s shape and, in doing so, altering the location and shape of the raw pixels.</p>
 <p>This lack of uniformity in pixel size and shape could compromise future image analysis and need to be corrected for. To do so, users can implement a variety of methods to reassign the spatially accurate values to spatially uniform pixels. This process of transforming an image from one set of coordinates to another is called resampling (Parker 1983 Zotero not working).</p>
 <p>The most important concept to understand about resampling is also the first step in the process, which is the creation of a new, empty raster in which all cells are of equal size and are aligned North (Insert demo image). The transformed raster is overlaid with the empty raster with a user defined cell size before each empty cell is assigned a value based on values from the transformed raster. Confusing? Perhaps, but there are a variety of process that can be used to assign cell values to the empty raster and we will discuss three in hopes of clarifying this methodology.</p>
@@ -305,44 +793,44 @@ d = rh/H
 <div class="figure"><span id="fig:13-cubic"></span>
 <img src="images/13-cubic_convolution.PNG" alt="Demonstration of neighbour selection (red) using cubic convolution resampling to determine the value of a single cell (yellow) in an empty raster." width="100%" />
 <p class="caption">
-Figure 4.1: Demonstration of neighbour selection (red) using cubic convolution resampling to determine the value of a single cell (yellow) in an empty raster.
+Figure 13.1: Demonstration of neighbour selection (red) using cubic convolution resampling to determine the value of a single cell (yellow) in an empty raster.
 </p>
 </div>
 </div>
 </div>
-<div id="atmospheric-correction" class="section level2" number="4.3">
-<h2><span class="header-section-number">4.3</span> Atmospheric correction</h2>
-<p>Following similar logic to that promoting the need for geometric correction, atmospheric correction is intended to minimize discrepancies in pixel values within and across images that occur due to interactions between observed radiation and atmosphere. The severity of impact that the atmosphere has on an image relates to the amount of heterogeneity that occurs in the atmosphere during image collection. The majority of impacts are caused by the three main types of scattering, which were presented in Chapter <a href="fundamentals-of-remote-sensing.html#fundamentals-of-remote-sensing">3</a>.</p>
-<div id="atmospheric-windows" class="section level3" number="4.3.1">
-<h3><span class="header-section-number">4.3.1</span> <strong>Atmospheric windows</strong></h3>
+<div id="atmospheric-correction" class="section level2" number="13.3">
+<h2><span class="header-section-number">13.3</span> Atmospheric correction</h2>
+<p>Following similar logic to that promoting the need for geometric correction, atmospheric correction is intended to minimize discrepancies in pixel values within and across images that occur due to interactions between observed radiation and atmosphere. The severity of impact that the atmosphere has on an image relates to the amount of heterogeneity that occurs in the atmosphere during image collection. The majority of impacts are caused by the three main types of scattering, which were presented in Chapter <a href="fundamentals-of-remote-sensing.html#fundamentals-of-remote-sensing">11</a>.</p>
+<div id="atmospheric-windows" class="section level3" number="13.3.1">
+<h3><span class="header-section-number">13.3.1</span> <strong>Atmospheric windows</strong></h3>
 <p>A key characteristic of the earth’s atmosphere that impacts the collection of passive remotely sensed data is the impediment of certain wavelengths. If solar radiation of a specific wavelength cannot reach Earth’s surface, it is impossible for a sensor to detect the radiance of that wavelength. There are, however, certain regions of the electromagnetic spectrum (EMS), called atmospheric windows, that are less effected by absorption and scattering than others and it is the observation of these regions that remote sensing relies on. Upon reaching the Earth’s surface, however, there are a variety of atmospheric constituents that can affect image quality.</p>
 </div>
-<div id="clouds-and-shadows" class="section level3" number="4.3.2">
-<h3><span class="header-section-number">4.3.2</span> <strong>Clouds and shadows</strong></h3>
+<div id="clouds-and-shadows" class="section level3" number="13.3.2">
+<h3><span class="header-section-number">13.3.2</span> <strong>Clouds and shadows</strong></h3>
 <p>Two of the most common culprits in the disturbance of remotely sensed imagery are clouds and shadows. Both are relatively transient, making the prediction of their inclusion in an image difficult and rendering their effects within an image relatively inconsistent. On top of issues of presence, each introduces unique challenges for image correction.</p>
 <p>Clouds are an inherent component of Earth’s atmosphere and therefore should warrant respect and care in image processing, rather than sighs of frustration. You could imagine that a single image with 30% cloud cover may not be entirely useful, but their aforementioned permanent transience means that data users must work to reduce their effects, if not remove them entirely.</p>
-<p>When approaching the removal of clouds, it is important to recall the physics that drive Mie scattering (Chapter <a href="fundamentals-of-remote-sensing.html#fundamentals-of-remote-sensing">3</a>. Essentially, water vapors in the atmosphere scatter visible and near infrared light and generate what appears to be white objects in the sky. Since the visible and near infrared regions of the EMS fall within an atmospheric window in which many sensor detect radiation, clouds can be recorded as part of an image.</p>
+<p>When approaching the removal of clouds, it is important to recall the physics that drive Mie scattering (Chapter <a href="fundamentals-of-remote-sensing.html#fundamentals-of-remote-sensing">11</a>. Essentially, water vapors in the atmosphere scatter visible and near infrared light and generate what appears to be white objects in the sky. Since the visible and near infrared regions of the EMS fall within an atmospheric window in which many sensor detect radiation, clouds can be recorded as part of an image.</p>
 <p>The removal of clouds is often referred to as masking and can prove challenging depending on the region in question as they also generate cloud-shadows. You could imagine a study attempting to evaluate snow cover over a landscape using imagery comprised of wavelengths in the visible region of the EMS. If there was intermittent cloud cover, cloudy areas with no snow could be classified as having snow and snowy areas with cloud-shadows may be classified as no snow.</p>
 <p>Martinuzzi et al 2007 published a masking method to remove cloud and cloud-shadow from Landsat imagery . They proposed the utilization of radiation values collected in the blue (Band 1) and thermal (Band 6) ranges of the EMS to differentiate clouds from objects on the Earth’s surface. To remove cloud-shadow, they suggested using information collected from Band 4, in the near infrared region, combined with the predicted location of shadows based on the spatial relationships of the cloud, sun and senor.</p>
 <p>Although Martinuzzi et al. 2007 presented a straightforward method for making cloud and cloud-shadow in an image, they did not address the inclusion of shadows caused by landcover structures, such as trees or buildings <span class="citation">(<a href="#ref-martinuzzi2007" role="doc-biblioref">Martinuzzi, Gould, and Gonzalez 2007</a>)</span>. Shadows present unique problems for image analysis as they can shade out underlying structures and also be classified as seperate, individual objects. The former issues presents problems for studies evaluating land cover, while the latter confounds machine learning algorithms attempting to identify unique classes in the image based on spectral similarities. Another confounding issue is that the location and size of shadows change throughout the day in accordance with the sun.</p>
 <p>An important feature of any shadow is that the area shaded is still considered to be illuminated, but only by skylight . The exclusion of sunlight from the area creates a unique opportunity for shadow identification and removal <span class="citation">(<a href="#ref-finlayson2001" role="doc-biblioref">Finlayson and Hordley 2001</a>)</span>. Finlayson et al.’s method of shadow removal is complex, using derivative calculus to capitalize on the fact that a illumination invariant function can be recognized based solely on surface reflectance. Although more complicated that Martinuzzi et al.’s approach, it may be worth reviewing <span class="citation">(<a href="#ref-finlayson2001" role="doc-biblioref">Finlayson and Hordley 2001</a>)</span> if you are interested in learning more about shadow removal.</p>
 </div>
-<div id="smoke-and-haze" class="section level3" number="4.3.3">
-<h3><span class="header-section-number">4.3.3</span> <strong>Smoke and Haze</strong></h3>
+<div id="smoke-and-haze" class="section level3" number="13.3.3">
+<h3><span class="header-section-number">13.3.3</span> <strong>Smoke and Haze</strong></h3>
 <p>Smoke and haze present unique issues to image processing as they tend to vary in presence, consistency and density. They also represent different types of scattering, with smoke causing Mie scattering and haze causing non-selective scattering. Makarau et al., 2014 demonstrated that haze can be removed through the creation of a haze thickness map (HTM) <span class="citation">(<a href="#ref-makarau2014" role="doc-biblioref">Makarau et al. 2014</a>)</span>. This methodology is equally as complex as that of <span class="citation">(<a href="#ref-finlayson2001" role="doc-biblioref">Finlayson and Hordley 2001</a>)</span> and is perhaps beyond the scope of this book. It is important to note, though, that removal of shadows, clouds, smoke and haze relies on an understanding of how their respective scattering types affect incoming solar radiation. Successful removal, then, depends on using spectral bands that are not effected by the particular type of scattering occurring within the image.</p>
 </div>
 </div>
-<div id="radiometric-correction" class="section level2" number="4.4">
-<h2><span class="header-section-number">4.4</span> Radiometric correction</h2>
+<div id="radiometric-correction" class="section level2" number="13.4">
+<h2><span class="header-section-number">13.4</span> Radiometric correction</h2>
 <p>We have discussed how the creation of an image by a remote sensor leads to slight variations in spatial and atmospheric properties between pixels and that these inconsistencies must be corrected for. In this section, we will discuss some issues affecting the information within a pixel and some common remedies. In essence, we will explore how the raw digital numbers collected by a sensor can be converted to radiance and reflectance.</p>
-<div id="signal-to-noise" class="section level3" number="4.4.1">
-<h3><span class="header-section-number">4.4.1</span> <strong>Signal-to-noise</strong></h3>
-<p>A key concept of radiometric correction is the ratio of desired information, or signal to background information (noise) within a pixel. The signal-to-noise ratio (SNR) is a common method of presenting this information and provides an overall statement about image quality. A common method of calculating SNR is to divide the mean (µ) signal value of the sensor by its standard deviation (𝛔), where signal represents an optical intensity. (Equation <a href="#eq:snr">(4.2)</a>)</p>
+<div id="signal-to-noise" class="section level3" number="13.4.1">
+<h3><span class="header-section-number">13.4.1</span> <strong>Signal-to-noise</strong></h3>
+<p>A key concept of radiometric correction is the ratio of desired information, or signal to background information (noise) within a pixel. The signal-to-noise ratio (SNR) is a common method of presenting this information and provides an overall statement about image quality. A common method of calculating SNR is to divide the mean (µ) signal value of the sensor by its standard deviation (𝛔), where signal represents an optical intensity. (Equation <a href="#eq:snr">(13.2)</a>)</p>
 <span class="math display" id="eq:snr">\[\begin{equation}
 SNR = µ _{signal} /𝛔 _{signal}
-\tag{4.2}
+\tag{13.2}
 \end{equation}\]</span>
-<p>It is clear, through Equation <a href="image-processing.html#eq:snr">(4.2)</a>, that the average signal value of an instrument represents the value that its designers desire to capture. It is also clear that an increase in signal leads to an improved SNR. What remains unclear, however, is what causes a sensor to observe and record undesired noise to be recorded. In reality, there are a variety of noise types that can affect the SNR of a sensor.</p>
+<p>It is clear, through Equation <a href="image-processing.html#eq:snr">(13.2)</a>, that the average signal value of an instrument represents the value that its designers desire to capture. It is also clear that an increase in signal leads to an improved SNR. What remains unclear, however, is what causes a sensor to observe and record undesired noise to be recorded. In reality, there are a variety of noise types that can affect the SNR of a sensor.</p>
 <p><strong>Photon shot noise</strong></p>
 <p>The first type of noise we will address is due to inconsistencies in the number of photons observed at different time intervals. Since photons are quantum particles (they are the smallest measurable amount of radiation), a sensor can only observe them as whole numbers. This, coupled with other random fluctuations in radiation properties, means that a sensor directed at the same location may observe 10 photons at one time interval and 12 a later interval. Over time, it is possible to determine the average amount of photons observed by a sensor, but creates inconsistencies across individual observations. Photon shot noise can be calculated as the square root, of the signal. This suggests that stronger signal leads to a relative decrease in shot noise.</p>
 <p><strong>Pattern noise</strong></p>
@@ -352,7 +840,7 @@ SNR = µ _{signal} /𝛔 _{signal}
 <p><strong>Thermal noise</strong></p>
 <p>Another inherent type of sensor noise is thermal noise. Thermal noise occurs in any device using electricity and is caused by the vibrations of the devices charge carriers. This means that thermal noise can never fully be removed from an image, although it can be reduced by lowering the temperature of the environment at which the sensor is operating.</p>
 <div class="box-content your-turn-content">
-<div id="your-turn-5" class="section level4 unnumbered box-title your-turn-top">
+<div id="your-turn-11" class="section level4 unnumbered box-title your-turn-top">
 <h4>Your turn!</h4>
 </div>
 <p>Calculate SNR or it’s associated values for various Landsat sensors:</p>
@@ -363,17 +851,17 @@ SNR = µ _{signal} /𝛔 _{signal}
 </ol>
 </div>
 </div>
-<div id="radiometric-normalization" class="section level3" number="4.4.2">
-<h3><span class="header-section-number">4.4.2</span> <strong>Radiometric normalization</strong></h3>
-<p>As discussed in Chapter <a href="fundamentals-of-remote-sensing.html#fundamentals-of-remote-sensing">3</a>, the normalization of radiometric values collected by a sensor enables the comparison of data within and across images. A common normalization output in remote sensing studies evaluating the environment is reflectance, which can be calculated simply by dividing the radiance value of a pixel collected when observing the object(s) of interest with the radiance value of a pixel observing a surface with 100% reflectance.</p>
+<div id="radiometric-normalization" class="section level3" number="13.4.2">
+<h3><span class="header-section-number">13.4.2</span> <strong>Radiometric normalization</strong></h3>
+<p>As discussed in Chapter <a href="fundamentals-of-remote-sensing.html#fundamentals-of-remote-sensing">11</a>, the normalization of radiometric values collected by a sensor enables the comparison of data within and across images. A common normalization output in remote sensing studies evaluating the environment is reflectance, which can be calculated simply by dividing the radiance value of a pixel collected when observing the object(s) of interest with the radiance value of a pixel observing a surface with 100% reflectance.</p>
 <div class="box-content case-study-content">
-<div id="case-study-walk-through-the-steps-that-generate-landsat-tiers" class="section level4 unnumbered box-title case-study-top">
-<h4>Case Study: Walk through the steps that generate Landsat tiers</h4>
+<div id="case-study-an-overview-of-landsat-processing" class="section level4 unnumbered box-title case-study-top">
+<h4>Case Study: An overview of Landsat Processing</h4>
 </div>
 <div id="box-text" class="section level4 unnumbered">
 <h4>Case study title max of forty characters</h4>
 <p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent non magna non nunc auctor eleifend. Etiam fringilla fermentum nisl at volutpat. Duis sodales lorem interdum, posuere neque sollicitudin, malesuada nisl. Sed laoreet commodo dui et cursus. Curabitur vel porta mauris. In lacinia ac ex ac varius. Nullam at vulputate ligula. Nunc sed faucibus urna, eget placerat sapien. Fusce ut lorem a ante congue consequat et sed tortor. Integer neque urna, vehicula at aliquam non, luctus non mi. Pellentesque et massa vehicula, cursus erat id, aliquet sapien. Sed rhoncus vehicula risus, vel aliquam eros porta eget. Etiam maximus, massa in pretium semper, est libero feugiat ipsum, quis tempor nunc libero in nibh. Nunc sollicitudin mattis metus ut rutrum. Donec urna purus, sodales id nibh in, ultricies tincidunt nibh. Proin porta accumsan aliquet.</p>
+<p>The Landsat program has proven to be a great success for NASA, providing global datasets that can be used to observe Earth.</p>
 </p>
 <p>
 <p>Cras convallis erat ante, ut tristique est tempor elementum. Nam mollis, ipsum at vehicula vestibulum, est magna finibus nisl, et laoreet metus massa et ipsum. Proin eget eros ac odio euismod volutpat et ac diam. Cras viverra ut libero vel pulvinar. Duis nisi magna, sagittis id ligula ac, efficitur commodo eros. Nulla tincidunt id nulla in lobortis. Sed non mi eu mi fermentum cursus. In elit velit, semper sed gravida at, imperdiet sed nibh. Aliquam quis massa malesuada, venenatis nunc sed, malesuada nulla. Vestibulum malesuada purus ut ex ullamcorper, ut blandit lacus lobortis. Curabitur scelerisque velit justo, quis porttitor purus efficitur ut. Phasellus nec arcu vestibulum, consequat ante id, elementum velit. Proin arcu tortor, cursus vitae sem id, congue semper urna. Integer tempus in est eu consequat. Donec sodales, quam vel finibus faucibus, leo ante dictum quam, id tempus ligula dolor quis erat. Curabitur non elementum sem. Mauris placerat fermentum orci non lacinia. Ut imperdiet dui lectus, ac malesuada felis euismod sed. Nulla non volutpat dui, in suscipit turpis.</p>
@@ -385,24 +873,24 @@ SNR = µ _{signal} /𝛔 _{signal}
 </div>
 </div>
 </div>
-<div id="image-enhancement" class="section level2" number="4.5">
-<h2><span class="header-section-number">4.5</span> Image enhancement</h2>
+<div id="image-enhancement" class="section level2" number="13.5">
+<h2><span class="header-section-number">13.5</span> Image enhancement</h2>
 <p>So far, in this Chapter, we have discussed methods of correcting spatial, atmospheric and radiometric errors that are commonly present in remotely sensed images. While the removal of these artifacts is necessary, it is also important to explore some common methods of enhancing an image once these aforementioned corrections have been made. Both image stretching and sharpening have roots in spatial and radiometric correction, so keep your mind open to the inherent links that arise.</p>
-<div id="stretching" class="section level3" number="4.5.1">
-<h3><span class="header-section-number">4.5.1</span> <strong>Stretching</strong></h3>
+<div id="stretching" class="section level3" number="13.5.1">
+<h3><span class="header-section-number">13.5.1</span> <strong>Stretching</strong></h3>
 <p>Image stretching refers to the adjustment of radiometric values of the input methods to better exploit the radiometric resolution of an image. In principle, the distribution of radiometric values within a image is altered in a manner that improves it’s capacity to perform a desired task (). For instance, if an image collected with an 8-bit radiometric resolution (256 radiometric values; 0-255). appears too dark, it is likely that the distribution of pixel values is centered on a radiometric value greater than 127 (middle of a 8-bit scale). In fact, of 0 represents white and 255 represents black, it is very likely that the majority of pixels are closer to 255. In this case, the lowest value(s) observed in the image can be adjusted to 0, the relationship of this change can be determined and then applied to all other observed values.</p>
 <div class="figure"><span id="fig:13-stretch"></span>
 <img src="images/13-stretch.PNG" alt="Example of how (a) the original distribution of radiometric values in a image is (b) stretched" width="100%" />
 <p class="caption">
-Figure 4.2: Example of how (a) the original distribution of radiometric values in a image is (b) stretched
+Figure 13.2: Example of how (a) the original distribution of radiometric values in a image is (b) stretched
 </p>
 </div>
 </div>
-<div id="sharpening" class="section level3" number="4.5.2">
-<h3><span class="header-section-number">4.5.2</span> <strong>Sharpening</strong></h3>
+<div id="sharpening" class="section level3" number="13.5.2">
+<h3><span class="header-section-number">13.5.2</span> <strong>Sharpening</strong></h3>
 <p>Image sharpening is often used to preserve the spectral information of a pixel while improving it’s spatial resolution <span class="citation">(<a href="#ref-king" role="doc-biblioref">King and Jianwen Wang, n.d.</a>)</span>. This is particularly useful for applications concerned with classification, such as land cover evaluation, as transitions between pixels with different values become more clear. For example, there are a variety of studies demonstrating that Landsat 8 imagery can be sharpened using information collected by a panchromatic sensor operating in unison with the other multispectral sensors on board the satellite <span class="citation">(<a href="#ref-gilbertson2017" role="doc-biblioref">Gilbertson, Kemp, and van Niekerk 2017</a>)</span>. This is made possible because the spatial resolution of the panchromatic sensor is 15 m-2, while the multispectral sensors collect information at 30 m-2.</p>
 <div class="box-content call-out-content">
-<div id="call-out-2" class="section level4 unnumbered box-title call-out-top">
+<div id="call-out-3" class="section level4 unnumbered box-title call-out-top">
 <h4>Call out</h4>
 </div>
 <p>
@@ -411,10 +899,10 @@ Figure 4.2: Example of how (a) the original distribution of radiometric values i
 </div>
 </div>
 </div>
-<div id="summary-4" class="section level2" number="4.6">
-<h2><span class="header-section-number">4.6</span> Summary</h2>
+<div id="summary-10" class="section level2" number="13.6">
+<h2><span class="header-section-number">13.6</span> Summary</h2>
 <p>This chapter provided an overview of common image processing techniques and discussed the logic that supports their usage. Overall, each technique strives to create imagery that is consistent across time and space in order for individual pixel values to be evaluated and/or compared. Although necessary, these processes can take time and need to be applied in accordance with the desired application. Understanding the general workflow of image processing will allow you to determine what steps should be taken to create the highest quality imagery for your research.</p>
-<div id="reflection-questions-3" class="section level3 unnumbered">
+<div id="reflection-questions-10" class="section level3 unnumbered">
 <h3>Reflection Questions</h3>
 <ol style="list-style-type: decimal">
 <li>Explain ipsum lorem.</li>
@@ -423,26 +911,6 @@ Figure 4.2: Example of how (a) the original distribution of radiometric values i
 <li>How does ipsum lorem work?</li>
 </ol>
 
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div class="csl-entry">
-Finlayson, Graham D., and Steven D. Hordley. 2001. <span>“Color Constancy at a Pixel.”</span> <em>Journal of the Optical Society of America A</em> 18 (2): 253. <a href="https://doi.org/10.1364/josaa.18.000253">https://doi.org/10.1364/josaa.18.000253</a>.
-</div>
-<div class="csl-entry">
-Gilbertson, Jason Kane, Jaco Kemp, and Adriaan van Niekerk. 2017. <span>“Effect of Pan-Sharpening Multi-Temporal Landsat 8 Imagery for Crop Type Differentiation Using Different Classification Techniques.”</span> <em>Computers and Electronics in Agriculture</em> 134 (March): 151–59. <a href="https://doi.org/10.1016/j.compag.2016.12.006">https://doi.org/10.1016/j.compag.2016.12.006</a>.
-</div>
-<div class="csl-entry">
-Inamdar, Deep, Margaret Kalacska, George Leblanc, and J Pablo Arroyo Mora. 2020. <span>“Characterizing and Mitigating Sensor Generated Spatial Correlations in Airborne Hyperspectral Imaging Data.”</span> <a href="https://doi.org/10.3390/rs12040641">https://doi.org/10.3390/rs12040641</a>.
-</div>
-<div class="csl-entry">
-King, R.L., and Jianwen Wang. n.d. <span>“IGARSS 2001. Scanning the Present and Resolving the Future. Proceedings. IEEE 2001 International Geoscience and Remote Sensing Symposium.”</span> In. IEEE. <a href="https://doi.org/10.1109/igarss.2001.976657">https://doi.org/10.1109/igarss.2001.976657</a>.
-</div>
-<div class="csl-entry">
-Makarau, Aliaksei, Rudolf Richter, Rupert Müller, and Peter Reinartz. 2014. <span>“Haze Detection and Removal in Remotely Sensed Multispectral Imagery.”</span> <em>IEEE Transactions on Geoscience and Remote Sensing</em> 52 (9): 5895–905. <a href="https://doi.org/10.1109/TGRS.2013.2293662">https://doi.org/10.1109/TGRS.2013.2293662</a>.
-</div>
-<div class="csl-entry">
-Martinuzzi, Sebastián, William A. Gould, and Olga M. Ramos Gonzalez. 2007. <span>“Creating Cloud-Free Landsat ETM+ Data Sets in Tropical Landscapes: Cloud and Cloud-Shadow Removal.”</span> <em>U.S. Department of Agriculture, Forest Service, International Institute of Tropical Forestry. Gen. Tech. Rep. IITF-32.</em> 32. <a href="https://doi.org/10.2737/IITF-GTR-32">https://doi.org/10.2737/IITF-GTR-32</a>.
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -472,8 +940,8 @@ Martinuzzi, Sebastián, William A. Gould, and Olga M. Ramos Gonzalez. 2007. <spa
           </div>
         </div>
       </div>
-<a href="fundamentals-of-remote-sensing.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="chapter-template.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="image-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

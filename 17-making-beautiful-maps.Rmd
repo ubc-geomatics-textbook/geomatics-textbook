@@ -9,7 +9,7 @@ A map _is not_ the territory it represents, but, if correct, it has a _similar s
 Maps represent areas larger than we can see, usually from above, and some depict phenomena that cannot be seen (Manson and Matson 2017), such as growing seasons. They also illustrate spatial relationships, such as this map showing the percentage of the population aged 65 and over by census tract in Moncton, New Brunswick. We can deduce that those aged 65 years and over are concentrated in certain areas of the city, using census tracts as a proxy.
 
 ![Maps illustrate how variables are related in space. [Percentage of the population aged 65 and over in 2016 by census tract](https://www12.statcan.gc.ca/census-recensement/2016/geo/map-carte/ref/thematic-thematiques/as/files-fichiers/map-carte-5/2016-92173-002-305-013-02-00-eng.pdf
-) (c) [Statistics Canada](https://www-statcan-gc-ca.eu1.proxy.openathens.net/eng/about/about?MM=as), [Open Government Licence - Canada](https://open.canada.ca/en/open-government-licence-canada).](images/01-moncton.jpg){.center}
+) (c) [Statistics Canada](https://www-statcan-gc-ca.eu1.proxy.openathens.net/eng/about/about?MM=as), [Open Government Licence - Canada](https://open.canada.ca/en/open-government-licence-canada).](images/17-moncton.jpg){.center}
 
 **Cartography** is the art and science of designing maps and consists of certain principles and rules that help ensure accuracy and clarity. All maps are simplified representations of a place and reflect the particular choices and motivations of the cartographer. Cartography is as much about deciding what to omit from a map as it choosing what to include. Making beautiful maps involves the art, and science, of selecting and modifying data and portraying concepts with clarity and precision. Decisions around colour, font size, graphical hierarchies, classification themes, and legends are all elements of maps that determine how effective, and accurate, they are in conveying information. In this chapter, you will learn about what elements go into making an effective map, the different categories of maps, and the principles of map design. 
 
@@ -34,7 +34,7 @@ Map elements, symbology, classification, cartography, north arrow, scale, themat
 There are many different types of maps. Just try doing a Google search, and you will come across descriptions of thematic, cadastral, topographic, and physiographic maps, to name but a few. There is no standard agreement on how many different categories of maps exist. Although some differentiate among as many as five  types of maps based on the functions they serve (ICSM 2021), all maps can also be categorized into just two types, **reference** and **thematic**. Reference maps represent the human-made or natural features of the landscape and are sometimes thought of as basemaps. They provide information about a particular location, such as in the example below, depicting the longest rivers in the location of Canada and where they overlap with the United States. Topographic maps based on the [National Topographic System (NTS)](https://www.nrcan.gc.ca/earth-sciences/geography/topographic-information/maps/national-topographic-system-maps/9767){target="_blank"} are another example of reference maps.
 
 ![One example of a reference map. [Longest Rivers of Canada](https://en.wikipedia.org/wiki/List_of_longest_rivers_of_Canada#/media/File:Longest_Rivers_of_Canada.png
-) (c) [Shannon1](https://en.wikipedia.org/wiki/User:Shannon1), [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/).](images/02-longRivers.png){.center}
+) (c) [Shannon1](https://en.wikipedia.org/wiki/User:Shannon1), [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/).](images/17-longRivers.png){.center}
 
 ## Thematic Maps
 
@@ -43,12 +43,12 @@ Thematic maps depict the spatial distribution of particular features, which are 
 Qualitative thematic maps illustrate the spatial extent of categorical data (Anderson 2020), such as the 1956 map bedrock geology map below.
 
 ![A thematic map using qualitative categorical data. [Bedrock geology](https://www.davidrumsey.com/luna/servlet/detail/RUMSEY~8~1~323176~90092279:-16--Bedrock-geology-#
-) (c) Comtois and Nicholson, [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/).](images/03-geology.jpg){.center}
+) (c) Comtois and Nicholson, [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/).](images/17-geology.jpg){.center}
 
 Quantitative thematic maps depict the spatial patterns of numerical data, often expressed as rates or percentages, as in the map below showing the difference in population change between two periods, where the difference is expressed as a percentage.
 
 ![A thematic map depicting population data as a percentage. [Difference in population change](https://www150.statcan.gc.ca/n1/pub/92-195-x/2016001/other-autre/theme/theme-eng.htm
-) (c) [Statistics Canada](https://www-statcan-gc-ca.eu1.proxy.openathens.net/eng/about/about?MM=as), [Open Government License - Canada](https://open.canada.ca/en/open-government-licence-canada).](images/04-population.jpg){.center}
+) (c) [Statistics Canada](https://www-statcan-gc-ca.eu1.proxy.openathens.net/eng/about/about?MM=as), [Open Government License - Canada](https://open.canada.ca/en/open-government-licence-canada).](images/17-population.jpg){.center}
 
 ## Choropleth Maps
 
@@ -59,9 +59,8 @@ One of the reasons choropleth maps are so widely used is because much of the dat
 The map below represents, using percentages instead of absolute numbers, the spatial distribution of the percentage of Cantonese speakers per total population in each census tract in the city of Vancouver, British Columbia. Household population of mother tongue language speakers by census tract is an example of demographic data collected by Statistics Canada and can serve as a proxy for linguistic diversity. This map shows greater concentration of Cantonese speakers in census tracts in the East Vancouver area.
 
 ```{r 05-choropleth, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("A choropleth map representing the 
-percentage of Cantonese speakers per total population of census tracts in the City of Vancouver Animated figure can be viewed in the web browser version of the textbook. [Household Population by Mother Tongue](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm) retrieved from [SimplyAnalytics](https://simplyanalytics.com/).")
-knitr::include_graphics(here::here("images", "05-choropleth.png"))
+fig_cap <- paste("A choropleth map representing the percentage of Cantonese speakers per total population of census tracts in the City of Vancouver [Household Population by Mother Tongue](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm) retrieved from [SimplyAnalytics](https://simplyanalytics.com/).")
+knitr::include_graphics(here::here("images", "17-choropleth.png"))
 ```
 
 This map is also a good example of the potential problems with choropleth maps, which has to do with something called the [Modifiable areal unit problem](https://en.wikipedia.org/wiki/Modifiable_areal_unit_problem){target="_blank"}, or MAUP. This results when data such as population, which is the measurement of population per unit area, is aggregated into an areal unit, where the shape and scale of the unit affects the resulting rates, or values, of the data. In this map example, the areal unit is a census tract, which vary by size and population density across the city and are delineated according to factors other than number of mother tongue language speakers. Without knowing anything about census tracts, we may assume based on this map that an entire census tract contains a disproportionate percentage of Cantoneses speakers, when in reality it may be just a few households more than the census tract next to it. This map fails to convey that kind of nuance and illustrates one of the weaknesses of choropleth maps, in spite of their wide use and applicability, particularly when displaying census data.
@@ -73,15 +72,15 @@ In contrast to choropleth maps, raw data/counts (e.g. number of mother tongue la
 Also unlike choropleth maps, dot density maps do not need to be tied to enumeration units, although they can be, such as in this map example, which uses another method of mapping the same data that was used in the choropleth map above. For their part, dots are distributed randomly, and a potential misleading aspect of dot density maps is the false interpretation that the dots are placed in precise locations in space.
 
 ```{r 06-dotDensity, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Dot density map showing the distribution of Cantonese and Mandarin mother tongue language speakers by census tract Animated figure can be viewed in the web browser version of the textbook. [Household Population by Mother Tongue](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm) retrieved from [SimplyAnalytics](https://simplyanalytics.com/).")
-knitr::include_graphics(here::here("images", "06-dotDensity.png"))
+fig_cap <- paste("Dot density map showing the distribution of Cantonese and Mandarin mother tongue language speakers by census tract [Household Population by Mother Tongue](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm) retrieved from [SimplyAnalytics](https://simplyanalytics.com/).")
+knitr::include_graphics(here::here("images", "17-dotDensity.png"))
 ```
 
 ## Isoline Maps
 
 ```{r 07-isoline, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("An isoline map representing growing seasons from the _Atlas of Canada_. Isolines are lines which connect points with identical values. Animated figure can be viewed in the web browser version of the textbook. ('Growing Seasons', @Norman Leon Nicholson & Paul Comtois, CC BY-NC-SA 3.1) retrieved from [David Rumsey Map Collection](https://www.davidrumsey.com/luna/servlet/s/c68r55).")
-knitr::include_graphics(here::here("images", "07-isoline.jpg"))
+fig_cap <- paste("An isoline map representing growing seasons from the _Atlas of Canada_. Isolines are lines which connect points with identical values. ('Growing Seasons', @Norman Leon Nicholson & Paul Comtois, CC BY-NC-SA 3.1) retrieved from [David Rumsey Map Collection](https://www.davidrumsey.com/luna/servlet/s/c68r55).")
+knitr::include_graphics(here::here("images", "17-isoline.jpg"))
 ```
 
  - 07-isoline.jpg from row 23 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
@@ -94,7 +93,7 @@ _Note: I think I would combine diagrammatic and cartogram subsections._
 
 ```{r 08-cartogram, fig.cap = fig_cap, out.width="80%", echo = FALSE}
 fig_cap <- paste("A effective illustration of a cartogram representing the population (%) with no access to clean drinking water. ([@World Mapper](https://worldmapper.org/maps/no-water-access-per-capita/#&gid=1&pid=1), CC BY-NC-SA 4.0).")
-knitr::include_graphics(here::here("images", "08-cartogram.png"))
+knitr::include_graphics(here::here("images", "17-cartogram.png"))
 ```
 
 - 08-cartogram.png from row 42 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
@@ -117,7 +116,7 @@ Most effective maps comprise standard elements that help orient the map viewer i
 
 ```{r 09-figure, fig.cap = fig_cap, out.width="80%", echo = FALSE}
 fig_cap <- paste("The components of effective map composition.('Map composition.', @Steven Manson, CC BY-NC-SA 4.0) [_Mapping, Society, and Technology_](https://open.lib.umn.edu/mapping/chapter/4-design-and-symbolization/#return-footnote-399-1).")
-knitr::include_graphics(here::here("images", "09-figure.jpg"))
+knitr::include_graphics(here::here("images", "17-figure.jpg"))
 ```
 
 - 09-figure.jpg from row 32 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
@@ -141,7 +140,7 @@ Just as in writing, it is also important to provide information about the data s
 
 ```{r 10-text, fig.cap = fig_cap, out.width="80%", echo = FALSE}
 fig_cap <- paste("Typography standards for cartography.('Cartographic style guide.', @Eric Gaba, CC BY 2.5) retrieved from [Wikipedia](https://en.wikipedia.org/wiki/Typography_(cartography)#/media/File:Maps_template-en.svg).")
-knitr::include_graphics(here::here("images", "10-text.png"))
+knitr::include_graphics(here::here("images", "17-text.png"))
 ```
 
 - 10-text.png from row 43 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
@@ -153,8 +152,8 @@ knitr::include_graphics(here::here("images", "10-text.png"))
 ## Scale and North Arrow
 
 ```{r 11-scale, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Six maps of Ottowa at different scales from the _Atlas of Canada_. ('Comparison of scales', @Norman Leon Nicholson, Animated figure can be viewed in the web browser version of the textbook. CC BY-NC-SA 3.1) retrieved from [David Rumsey Map Collection](https://www.davidrumsey.com/luna/servlet/detail/RUMSEY~8~1~323156~90092341:-6--Comparison-of-scales-).")
-knitr::include_graphics(here::here("images", "11-scale.jpg"))
+fig_cap <- paste("Six maps of Ottowa at different scales from the _Atlas of Canada_. ('Comparison of scales', @Norman Leon Nicholson, CC BY-NC-SA 3.1) retrieved from [David Rumsey Map Collection](https://www.davidrumsey.com/luna/servlet/detail/RUMSEY~8~1~323156~90092341:-6--Comparison-of-scales-).")
+knitr::include_graphics(here::here("images", "17-scale.jpg"))
 ```
 
 - 11-scale.jpg from row 21 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
@@ -174,15 +173,15 @@ knitr::include_graphics(here::here("images", "11-scale.jpg"))
 There are many ways to visually alter symbols - represented by points, lines, or polygons -  to convey information and show both qualitative and quantitative differences between features in the map. These include varying symbols by size, shape, and colour, to name just a few. Using points to map the location of Canada's cities, for example, the cartographer may use different shapes to illustrate differences between cities and towns. To show variations in populations of those cities, the cartographer might vary the size of the symbols.
 
 ```{r 12-symbolization, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("The components of symbolization. Animated figure can be viewed in the web browser version of the textbook. ('Symbolization', @Steven Manson, CC BY-NC-SA 4.0) [_Mapping, Society, and Technology_](https://open.lib.umn.edu/mapping/chapter/4-design-and-symbolization/#return-footnote-399-6).")
-knitr::include_graphics(here::here("images", "12-symbolization.png"))
+fig_cap <- paste("The components of symbolization ('Symbolization', @Steven Manson, CC BY-NC-SA 4.0) [_Mapping, Society, and Technology_](https://open.lib.umn.edu/mapping/chapter/4-design-and-symbolization/#return-footnote-399-6).")
+knitr::include_graphics(here::here("images", "17-symbolization.png"))
 ```
 
 ## Separable
 
 ```{r 13-separable, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Separable and integral visual combinations delineated by value/shape and heighth/width, respectively. Animated figure can be viewed in the web browser version of the textbook. (@Martin E. Elmer) [_Symbol Considerations for Bivariate Thematic Mapping_](https://minds.wisconsin.edu/bitstream/handle/1793/67887/Elmer%20Martin%20E%202012.pdf?sequence=1&isAllowed=y).")
-knitr::include_graphics(here::here("images", "13-separable.png"))
+fig_cap <- paste("Separable and integral visual combinations delineated by value/shape and heighth/width, respectively. (@Martin E. Elmer) [_Symbol Considerations for Bivariate Thematic Mapping_](https://minds.wisconsin.edu/bitstream/handle/1793/67887/Elmer%20Martin%20E%202012.pdf?sequence=1&isAllowed=y).")
+knitr::include_graphics(here::here("images", "17-separable.png"))
 ```
 
 - 13-separable.png from row 33, page 7 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
@@ -194,8 +193,8 @@ knitr::include_graphics(here::here("images", "13-separable.png"))
 ## Graduated
 
 ```{r 14-graduated, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Graduated symbols vary symbol size representing a category of values. Animated figure can be viewed in the web browser version of the textbook. ('Proportional & Graduated Symbols', @Anthony Robinson, CC BY-NC-SA 4.1) [_Maps and the Geospatial Revolution_](https://www.e-education.psu.edu/maps/l5_p3.html).")
-knitr::include_graphics(here::here("images", "14-graduated.png"))
+fig_cap <- paste("Graduated symbols vary symbol size representing a category of values ('Proportional & Graduated Symbols', @Anthony Robinson, CC BY-NC-SA 4.1) [_Maps and the Geospatial Revolution_](https://www.e-education.psu.edu/maps/l5_p3.html).")
+knitr::include_graphics(here::here("images", "17-graduated.png"))
 ```
 
 - 14-graduated.png from row 45 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
@@ -203,8 +202,8 @@ knitr::include_graphics(here::here("images", "14-graduated.png"))
 ## Configurable
 
 ```{r 15-configurable, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Separable and integral visual combinations delineated by value/shape and heighth/width, respectively. Animated figure can be viewed in the web browser version of the textbook. (@Martin E. Elmer) [_Symbol Considerations for Bivariate Thematic Mapping_](https://minds.wisconsin.edu/bitstream/handle/1793/67887/Elmer%20Martin%20E%202012.pdf?sequence=1&isAllowed=y).")
-knitr::include_graphics(here::here("images", "15-configurable.png"))
+fig_cap <- paste("Separable and integral visual combinations delineated by value/shape and heighth/width, respectively. (@Martin E. Elmer) [_Symbol Considerations for Bivariate Thematic Mapping_](https://minds.wisconsin.edu/bitstream/handle/1793/67887/Elmer%20Martin%20E%202012.pdf?sequence=1&isAllowed=y).")
+knitr::include_graphics(here::here("images", "17-configurable.png"))
 ```
 
 - 15-configurable.png from row 33 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
@@ -213,8 +212,8 @@ knitr::include_graphics(here::here("images", "15-configurable.png"))
 ## Proportional
 
 ```{r 16-proportional, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Proportional symbols vary size of symbols in relation to their attribute value. ('Proportional & Graduated Symbols', @Anthony Robinson, CC BY-NC-SA 4.1. Animated figure can be viewed in the web browser version of the textbook.) [_Maps and the Geospatial Revolution_](https://www.e-education.psu.edu/maps/l5_p3.html).")
-knitr::include_graphics(here::here("images", "16-proportional.png"))
+fig_cap <- paste("Proportional symbols vary size of symbols in relation to their attribute value. ('Proportional & Graduated Symbols', @Anthony Robinson, CC BY-NC-SA 4.1) [_Maps and the Geospatial Revolution_](https://www.e-education.psu.edu/maps/l5_p3.html).")
+knitr::include_graphics(here::here("images", "17-proportional.png"))
 ```
 
 - 16-proportional.png from row 45 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
@@ -242,30 +241,30 @@ Colour is actually comprised of three elements: hue, chroma, and lightness, or v
 ## Hue
 
 ```{r 18-hue, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Hues are what we commonly think of as the names of colours and distinguish between qualitative data.Animated figure can be viewed in the web browser version of the textbook. ('Hue', @Adrienne Fruver, CC BY-NC-SA 3.0) [_Mapping, Society, and Technology_](https://open.lib.umn.edu/mapping/chapter/4-design-and-symbolization/#footnote-399-13).")
-knitr::include_graphics(here::here("images", "18-hue.png"))
+fig_cap <- paste("Hues are what we commonly think of as the names of colours and distinguish between qualitative data.('Hue', @Adrienne Fruver, CC BY-NC-SA 3.0) [_Mapping, Society, and Technology_](https://open.lib.umn.edu/mapping/chapter/4-design-and-symbolization/#footnote-399-13).")
+knitr::include_graphics(here::here("images", "17-hue.png"))
 ```
 
 ## Chroma
 
 ```{r 19-chroma, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Higher values represent lighter colorus while lower values refer to dark colours. Animated figure can be viewed in the web browser version of the textbook. ('Chroma', @Steven Manson, CC BY-NC-SA 4.0) [_Mapping, Society, and Technology_](https://www.e-education.psu.edu/geog486/node/606).")
-knitr::include_graphics(here::here("images", "19-chroma.png"))
+fig_cap <- paste("Higher values represent lighter colorus while lower values refer to dark colours.('Chroma', @Steven Manson, CC BY-NC-SA 4.0) [_Mapping, Society, and Technology_](https://www.e-education.psu.edu/geog486/node/606).")
+knitr::include_graphics(here::here("images", "17-chroma.png"))
 ```
 
 ## Lightness
 
 
 ```{r 20-lightness, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Higher values represent lighter colours while lower values refer to darker colours. Animated figure can be viewed in the web browser version of the textbook. ('Value', @Cary Anderson, CC BY-NC-SA 4.0) [_Geog 486: Cartography and Visualization_](https://www.e-education.psu.edu/geog486/node/606).")
-knitr::include_graphics(here::here("images", "20-lightness.png"))
+fig_cap <- paste("Higher values represent lighter colours while lower values refer to darker colours.('Value', @Cary Anderson, CC BY-NC-SA 4.0) [_Geog 486: Cartography and Visualization_](https://www.e-education.psu.edu/geog486/node/606).")
+knitr::include_graphics(here::here("images", "17-lightness.png"))
 ```
 
 ## Bivariate Colour Schemes
 
 ```{r 21-bivariate, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Different examples of bivariate legends. Animated figure can be viewed in the web browser version of the textbook. ('Bivariate', @Axis Maps, CC BY-NC-SA 4.0) [_Cartography Guide_](https://www.axismaps.com/guide/bivariate-choropleth).")
-knitr::include_graphics(here::here("images", "21-bivariate.png"))
+fig_cap <- paste("Different examples of bivariate legends.('Bivariate', @Axis Maps, CC BY-NC-SA 4.0) [_Cartography Guide_](https://www.axismaps.com/guide/bivariate-choropleth).")
+knitr::include_graphics(here::here("images", "17-bivariate.png"))
 ```
 
 ## Colour Pickers
@@ -352,70 +351,6 @@ Good map design effectively integrates map elements with design principles and s
 
 ## Balance
 
-
-
-:::: {.box-content .your-turn-content}
-
-::: {.box-title .your-turn-top}
-## Your turn! {-}
-:::
-
-<iframe width=100% height=800px src='https://paulpickell.ca/scenejs-test/' frameBorder="0" >
-  <p>Your browser does not support iframes</p>
-</iframe>
-
-::::
-
-
-
-:::: {.box-content .case-study-content}
-
-::: {.box-title .case-study-top}
-## Case Study: Title of Case Study Here 
-You see textual case study content here 
-
-## Case study Title Max of Forty Characters {#box-text -}
-
-<p id="box-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent non magna non nunc auctor eleifend. Etiam fringilla fermentum nisl at volutpat. Duis sodales lorem interdum, posuere neque sollicitudin, malesuada nisl. Sed laoreet commodo dui et cursus. Curabitur vel porta mauris. In lacinia ac ex ac varius. Nullam at vulputate ligula. Nunc sed faucibus urna, eget placerat sapien. Fusce ut lorem a ante congue consequat et sed tortor. Integer neque urna, vehicula at aliquam non, luctus non mi. Pellentesque et massa vehicula, cursus erat id, aliquet sapien. Sed rhoncus vehicula risus, vel aliquam eros porta eget. Etiam maximus, massa in pretium semper, est libero feugiat ipsum, quis tempor nunc libero in nibh. Nunc sollicitudin mattis metus ut rutrum. Donec urna purus, sodales id nibh in, ultricies tincidunt nibh. Proin porta accumsan aliquet.</p>
-
-<p id="box-text">Cras convallis erat ante, ut tristique est tempor elementum. Nam mollis, ipsum at vehicula vestibulum, est magna finibus nisl, et laoreet metus massa et ipsum. Proin eget eros ac odio euismod volutpat et ac diam. Cras viverra ut libero vel pulvinar. Duis nisi magna, sagittis id ligula ac, efficitur commodo eros. Nulla tincidunt id nulla in lobortis. Sed non mi eu mi fermentum cursus. In elit velit, semper sed gravida at, imperdiet sed nibh. Aliquam quis massa malesuada, venenatis nunc sed, malesuada nulla. Vestibulum malesuada purus ut ex ullamcorper, ut blandit lacus lobortis. Curabitur scelerisque velit justo, quis porttitor purus efficitur ut. Phasellus nec arcu vestibulum, consequat ante id, elementum velit. Proin arcu tortor, cursus vitae sem id, congue semper urna. Integer tempus in est eu consequat. Donec sodales, quam vel finibus faucibus, leo ante dictum quam, id tempus ligula dolor quis erat. Curabitur non elementum sem. Mauris placerat fermentum orci non lacinia. Ut imperdiet dui lectus, ac malesuada felis euismod sed. Nulla non volutpat dui, in suscipit turpis.</p>
-
-<p id="box-text">Case studies should have at least one image or map (no more than 2 total) and the written length should be around 300 words (shown above). Any references to external literature should by hyperlinked with the Digitial Object Identifier (DOI) permanent URL and [entered into the bibliography](https://bookdown.org/yihui/bookdown/citations.html){target="_blank"}. Avoid linking to external resources without a DOI and permanent URL. Contact Paul or try using the Leaflet package in R if you want to add an interactive web map.</p>
-
-::::
-
-## Third Section Header
-
-[This is how we link to something. {target="_blank"} ensures that this link opens in a new window rather than navigating away from the textbook.](https://google.com){target="_blank"}
-
-:::: {.box-content .your-turn-content}
-
-::: {.box-title .your-turn-top}
-## Your Turn! {-}
-:::
-
-<p id="box-text">Ask the reader to undertake some activity or exercise. Have them explore data, an interactive tool, a web map. Avoid referencing, relying on, or using external URLs. If it can be built, coded, or hosted by us, then it should be.</p>
-
-<iframe width=100% height=800px src='http://paulpickell.ca/raster-calculator/low-pass-filter.html' frameBorder="0" >
-  <p>Your browser does not support iframes</p>
-</iframe>
-
-::::
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
-
-:::: {.box-content .call-out-content}
-
-::: {.box-title .call-out-top}
-## Call Out {-}
-:::
-
-<p id="box-text">
-This is a call out. Put some important concept or fact in here.
-</p>
-
-::::
-
 ## Summary
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
@@ -432,9 +367,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem
 2. Given ipsum, solve for lorem.
 3. Draw ipsum lorem.
 
-`r if (knitr::is_html_output()) '
 ## Recommended Readings {-}
-'`
+
 Anderson, C. (2020). Types of Maps. Retrieved June 11, 2021, from _GEOG 486: Cartography and Visualization_ website: https://www.e-education.psu.edu/geog486/node/641
 
 Cote, Paul. (2021). GIS Manual: Elements of Cartographic Style. _PbcGIS_. https://www.pbcgis.com/style/.

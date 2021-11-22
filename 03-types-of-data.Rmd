@@ -28,11 +28,11 @@ Phenomena, Discrete Object, Continuous Field, Qualitative, Quantitative, Measure
 
 ## Types of Phenomena
 
-**Phenomenon**, noun, plural *Phenomena*: *1* a fact or situation that is observed to exist or happen, especially one whose cause or explanation is in question. *2* a remarkable person, thing, or event [Oxford's Dictionary](https://www.google.com/search?channel=trow5&client=firefox-b-d&q=phenomena).  Basically, a phenomenon can is anything: lightning, a country, a coastline, a dog on a kayak.
-<br>
+**Phenomenon**, noun, plural *Phenomena*: *1* a fact or situation that is observed to exist or happen, especially one whose cause or explanation is in question. *2* a remarkable person, thing, or event [Oxford's Dictionary](https://www.google.com/search?channel=trow5&client=firefox-b-d&q=phenomena).  Essentially, anything and everything are phenomenon: lightning, a country, coastlines, a dog on a kayak.  Broadly speaking, in GIS we categorize phenomena as **discrete** or **continuous**.  Both kinds of phenomena can be represented in a GIS, but they come with different considerations and cannot always be represented with the same kind of data model.
+
 ![Yarrow enjoying the scenery at Aloutte Lake, she's quite the phenomenon indeed!](images/03-dog-on-a-boat.jpg){.center}
 
-Broadly speaking, in GIS we work with two kinds phenomena.  Both kinds of phenomena can be represented in a GIS, but they require different considerations and are usually use different data models.
+<br>
 
 ### Discrete Objects
 
@@ -90,7 +90,7 @@ The only arithmetic operations we can do with nominal data are checking for equa
 
 When trying to group real world phenomena into categories, there are often "exceptions" that blur the lines a bit.  Take this example: you are trying to develop a land cover classification scheme for Garibaldi Provincial park in British Columbia.  Some of the land surface is unquestionably alpine tundra and some is certainly forest area.  However, the transition between forest and alpine meadow is not an abrupt line.  How/where do you draw the line?  Examples like this are known as fuzzy variables, and we often use a *Graded Membership* scale to assign them to categories.  With the landscape classification, a simple approach would be a "winner take all" approach.  If a plot is 5% bare rock, 40% forest, and 45% alpine meadow, the area will be classified as alpine meadow.  From that point forward, in the GIS, that area will be treated as alpine meadow, any information about the variability within the area will be lost.  In practice, many of the qualitative data we work with in GIS, especially those describing natural phenomena, are actually graded membership variables. 
 
-![Will annotate to show better example.](images/03-fuzzy.jpg){.center}
+![In this example, we see an alpine landscape in Garibalid Provinical Park, BC.  We can see patches of forest and patches of meadow.  But where, exactly, would we draw the boundary between these two landscape classes?](images/03-fuzzy.jpg){.center}
 
 ### Quantitative Data
 
@@ -145,6 +145,9 @@ This might seem obvious: people interact more if they live in the same city, orc
 ![Screengrab from Hectares BC, can easily make into better map.](images/03-bc-snow.png){.center}
 
 The measure of similarity between objects across space called **spatial autocorrelation**.  Spatial autocorrelation allows us to make some a key assumptions when representing spatial data.  We don't have to measure a phenomena everywhere in order to represent it adequately.  We only need to measure it at specific locations or over regular intervals.  If point A is in dense forest, it is likely point B 10 m away is also in a dense forest.  We don't have to get the location of every tree in the forest.  Instead, we can look at the average presence of trees over a larger area.  
+
+
+![Screengrab from Hectares BC, can easily make into better map.](images/03-bc-snow.png){.center}
 
 
 ## Spatial Data Models
@@ -208,19 +211,52 @@ The vector data model is much more well suited to represent discrete phenomena t
 
 **Points** are “zero-dimensional”, they have no length, or width.  A point feature is just an individual 𝒙,𝒚 coordinate pair representing a precise location, that has some linked attribute information.  Points are great for representing a variety of objects, depending on the scale.  Fire hydrants, light poles, and trees are suitable to be represented as points in almost any application.  If you are making a map of mines in British Columbia, or cities across Canada, it's probably acceptable to just display them as points.
 
-**Lines** are one-dimensional, they have length, but no width and thus no area.  A line consists of two or more points.  Every line must have a start point and end point, they may also have any number of middle points, called vertices.  A vertex is just any point where two or more lines meet.  Lines are also great for representing a variety of objects, depending on the scale.  Hiking trails, flight paths, coastlines, and power lines are suitable to be represented as lines in almost most applications.  When making smaller scale maps, its often sufficient to represent rivers as lines, though at large scales we might elect to use a polygon.  
+![An example of point data showing locations of trees.  The points are labeled with their index (unique ID number) which correspoonds to the attribute table below which stores more information about eacht tree.](images/03-vector-points.png){.center}
+
+
+|index|Longitude (X)|Latitude (Y)|Name |Age|Height|
+|----:|------------:|-----------:|-----|--:|-----:|
+|    0|         0.44|        0.03|Fir  | 54|   119|
+|    1|         0.55|        0.71|Fir  | 29|    56|
+|    2|         0.89|        0.33|Fir  | 82|   197|
+|    3|         0.18|        0.02|Fir  | 46|    98|
+|    4|         0.65|        0.51|Maple| 87|   212|
+|    5|         0.43|        0.81|Maple| 73|   172|
+|    6|         0.38|        0.86|Maple| 94|   233|
+|    7|         0.68|        0.04|Cedar| 34|    68|
+|    8|         0.15|        0.13|Cedar| 36|    73|
+
+**Lines** are one-dimensional, they have length, but no width and thus no area.  A line consists of two or more points.  Every line must have a start point and end point, they may also have any number of middle points, called vertices.  A vertex is just any point where two or more lines meet.  Lines are also great for representing a variety of objects, depending on the scale.  Hiking trails, flight paths, coastlines, and power lines are suitable to be represented as lines in almost most applications.  When making smaller scale maps, its often sufficient to represent rivers as lines, though at large scales we might elect to use a polygon.
+
+![Roads are typically reprented as line data.  Though they obviously have an area, unless we are making a very large scale map, we don't need (or have the room) to show that on a map.  This BC road altlas makes use of line data, representing roads a lines and using different colors to denote the type of raod.](images/03-bc-road-map.jpg){.center}
 
 **Polygons** are two-dimensional, they have both a length and width and therefore we can also calculate their area.  All polygons consist of a set of at three or more points (vertices) connected by line segments called “edges” that connect to form an enclosed shape.  All polygons form an enclosed shape, but some can also have"holes" (think doughnuts!), these holes are sometimes called interior rings.  Each interior ring is a separate set vertices and edges that is wholly contained within the polygon and no two interior rings can overlap.  Polygons are useful for representing many different objects depending: political boundaries boundaries, Köppen climate zones, lakes, continents, etc.  At large scales they can represent things like buildings which we might choose to represent as points at smaller scales.
 
-![Vector objects (points, lines, or polygons) are stored along with any number of attribute.  Point, line, and polygon data are typically stored in separate files.  Each object in the map view is labeled with it's index.  This value corresponds to the row in the attribute table and is useful for locating the attributes that correspond to the object.](images/03-vector-temp.png){.center}
-
 Sometimes, a discrete object has multiple parts, that are spatially separated.  In these circumstances, the vector model allows for multi-polygon, multi-line, or multi-point objects.  A good example of when a multi-polygon would be useful is the StatsCanada provincial boundary file (see figure).  Roads sometimes need to be stored as multi-lines as well, for example Highway 1 crosses the Georgia Straight from Vancouver to Nanaimo.  If we want the to represent the entire Highway as one object, we need to use a multi-line.
 
-![Nunavut is composed of many different islands.  We don't need to represent every island as a separate object if we only want to  ](images/03-multi-polygon.png){.center}
+![This is the official Stats Canada provincial boundary layer.  All the other coastal provinces and territories have islands.  We don't need to represent every island as a separate object, so we can "bundle" together the polygons as multipolygons.  The landlocked provinces do not have any coastlines and are represented as simple polygons reather than multipolygons.  The attribute table bellow corresponds to the map and lists the geometry type (polygon/multipolygon) ](images/03-vector.png){.center}
 
-Vector data also has a **Resolution** although it has a somewhat different definition in the context of the vector model.  
+|         PRNAME          |Province ID|Population| Area  |Geometry Type|
+|-------------------------|----------:|---------:|------:|-------------|
+|Newfoundland and Labrador|         10|    525572| 373872|MultiPolygon |
+|Prince Edward Island     |         11|    157329|   5660|MultiPolygon |
+|Nova Scotia              |         12|    971451|  53338|MultiPolygon |
+|New Brunswic             |         13|    779940|  71450|MultiPolygon |
+|Quebec                   |         24|   8536855|1365128|MultiPolygon |
+|Ontario                  |         35|  14666590| 917741|MultiPolygon |
+|Manitoba                 |         46|   1389952| 553556|MultiPolygon |
+|Saskatchewan             |         47|   1206019| 591670|Polygon      |
+|Alberta                  |         48|   4511223| 642317|Polygon      |
+|British Columbia         |         59|   5111756| 925186|MultiPolygon |
+|Yukon                    |         60|     41774| 474391|MultiPolygon |
+|Northwest Territories    |         61|     45217|1183085|MultiPolygon |
+|Nunavut                  |         62|     39419|1936113|MultiPolygon |
+
+
+
+Vector data also has a **Resolution** although it has a somewhat different definition in the context of the vector model.  Vector resolution is determined by the smallest resolvable feature.  Another way to describe vector resolution, would be the distance between verticies.  The greater the distance between vertices, the fewer vertices there are per polygon and, the lower the resolution.  If a vector object (line or polygon) has many verticies, we will have a higher resolution representation of the feature.
  
-![Vector resolution is defined a bit differently](images/03-vector-resolution.png){.center}
+![Vector image of Nova Scotia at different resolutions.  Here the original polygon (top left) has been downsampled to lower resolutions, by setting the minimum allowable distance between verticies.  As the distance beween vercicies increases, the resolution decreases and the coastline becomes less distinguishable.](images/03-vector-resolution.png){.center}
 
 
 #### File Types
@@ -348,10 +384,11 @@ No single data model is suitable for all types of data or analysis.
 #### Case Study {-}
 :::
 
-#### Rater Resolution and Map Scale: The Mixed Pixel Problem {#box-text -}
+#### Resolution: Vector vs. Raster {#box-text -}
 
+This video gives an applied example of how resolution differes between raster and vector data.  *Note* The video is just a placeholder.
 
-*Insert Video - I envision doing a video showing a landscape classification at a very large map scale 1:1000-ish using different raster resolutions (1,2,10m +) and different cell attribution methods to highlight the differences.*
+<iframe width="560" height="315" src="https://www.youtube.com/embed/apak726770w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 ::::  

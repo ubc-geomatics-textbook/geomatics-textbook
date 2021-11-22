@@ -24,7 +24,7 @@
 <meta name="author" content="UBC" />
 
 
-<meta name="date" content="2021-11-20" />
+<meta name="date" content="2021-11-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -787,10 +787,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="types-of-phenomena" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Types of Phenomena</h2>
-<p><strong>Phenomenon</strong>, noun, plural <em>Phenomena</em>: <em>1</em> a fact or situation that is observed to exist or happen, especially one whose cause or explanation is in question. <em>2</em> a remarkable person, thing, or event <a href="https://www.google.com/search?channel=trow5&amp;client=firefox-b-d&amp;q=phenomena">Oxford’s Dictionary</a>. Basically, a phenomenon can is anything: lightning, a country, a coastline, a dog on a kayak.
-<br>
-<img src="images/03-dog-on-a-boat.jpg" class="center" alt="Yarrow enjoying the scenery at Aloutte Lake, she’s quite the phenomenon indeed!" /></p>
-<p>Broadly speaking, in GIS we work with two kinds phenomena. Both kinds of phenomena can be represented in a GIS, but they require different considerations and are usually use different data models.</p>
+<p><strong>Phenomenon</strong>, noun, plural <em>Phenomena</em>: <em>1</em> a fact or situation that is observed to exist or happen, especially one whose cause or explanation is in question. <em>2</em> a remarkable person, thing, or event <a href="https://www.google.com/search?channel=trow5&amp;client=firefox-b-d&amp;q=phenomena">Oxford’s Dictionary</a>. Essentially, anything and everything are phenomenon: lightning, a country, coastlines, a dog on a kayak. Broadly speaking, in GIS we categorize phenomena as <strong>discrete</strong> or <strong>continuous</strong>. Both kinds of phenomena can be represented in a GIS, but they come with different considerations and cannot always be represented with the same kind of data model.</p>
+<div class="figure">
+<img src="images/03-dog-on-a-boat.jpg" class="center" alt="" />
+<p class="caption">Yarrow enjoying the scenery at Aloutte Lake, she’s quite the phenomenon indeed!</p>
+</div>
+<p><br></p>
 <div id="discrete-objects" class="section level3" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Discrete Objects</h3>
 <p>Discrete objects are finite and have distinct boundaries. Each object is a unique, self contained entity whose geography can be exactly defined. Because each object is unique and self contained, collections of objects are countable. A concrete example of a discrete objects would be buildings. They are real physical objects with well defined boundaries. We can count the number of buildings on a college campus or in a city. National and sub-national boundaries are also discrete objects. They (typically) have well defined boundaries and we can easily count the number of nations or provinces. They are not, however, real physical objects. Political boundaries are arbitrary human constructs.</p>
@@ -861,7 +863,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>When trying to group real world phenomena into categories, there are often “exceptions” that blur the lines a bit. Take this example: you are trying to develop a land cover classification scheme for Garibaldi Provincial park in British Columbia. Some of the land surface is unquestionably alpine tundra and some is certainly forest area. However, the transition between forest and alpine meadow is not an abrupt line. How/where do you draw the line? Examples like this are known as fuzzy variables, and we often use a <em>Graded Membership</em> scale to assign them to categories. With the landscape classification, a simple approach would be a “winner take all” approach. If a plot is 5% bare rock, 40% forest, and 45% alpine meadow, the area will be classified as alpine meadow. From that point forward, in the GIS, that area will be treated as alpine meadow, any information about the variability within the area will be lost. In practice, many of the qualitative data we work with in GIS, especially those describing natural phenomena, are actually graded membership variables.</p>
 <div class="figure">
 <img src="images/03-fuzzy.jpg" class="center" alt="" />
-<p class="caption">Will annotate to show better example.</p>
+<p class="caption">In this example, we see an alpine landscape in Garibalid Provinical Park, BC. We can see patches of forest and patches of meadow. But where, exactly, would we draw the boundary between these two landscape classes?</p>
 </div>
 </div>
 </div>
@@ -978,6 +980,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p class="caption">Screengrab from Hectares BC, can easily make into better map.</p>
 </div>
 <p>The measure of similarity between objects across space called <strong>spatial autocorrelation</strong>. Spatial autocorrelation allows us to make some a key assumptions when representing spatial data. We don’t have to measure a phenomena everywhere in order to represent it adequately. We only need to measure it at specific locations or over regular intervals. If point A is in dense forest, it is likely point B 10 m away is also in a dense forest. We don’t have to get the location of every tree in the forest. Instead, we can look at the average presence of trees over a larger area.</p>
+<div class="figure">
+<img src="images/03-bc-snow.png" class="center" alt="" />
+<p class="caption">Screengrab from Hectares BC, can easily make into better map.</p>
+</div>
 </div>
 <div id="spatial-data-models" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Spatial Data Models</h2>
@@ -1047,21 +1053,215 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p class="caption">Vector objects (points, lines, or polygons) are stored along with any number of attribute. Point, line, and polygon data are typically stored in separate files.</p>
 </div>
 <p><strong>Points</strong> are “zero-dimensional,” they have no length, or width. A point feature is just an individual 𝒙,𝒚 coordinate pair representing a precise location, that has some linked attribute information. Points are great for representing a variety of objects, depending on the scale. Fire hydrants, light poles, and trees are suitable to be represented as points in almost any application. If you are making a map of mines in British Columbia, or cities across Canada, it’s probably acceptable to just display them as points.</p>
-<p><strong>Lines</strong> are one-dimensional, they have length, but no width and thus no area. A line consists of two or more points. Every line must have a start point and end point, they may also have any number of middle points, called vertices. A vertex is just any point where two or more lines meet. Lines are also great for representing a variety of objects, depending on the scale. Hiking trails, flight paths, coastlines, and power lines are suitable to be represented as lines in almost most applications. When making smaller scale maps, its often sufficient to represent rivers as lines, though at large scales we might elect to use a polygon.</p>
-<p><strong>Polygons</strong> are two-dimensional, they have both a length and width and therefore we can also calculate their area. All polygons consist of a set of at three or more points (vertices) connected by line segments called “edges” that connect to form an enclosed shape. All polygons form an enclosed shape, but some can also have“holes” (think doughnuts!), these holes are sometimes called interior rings. Each interior ring is a separate set vertices and edges that is wholly contained within the polygon and no two interior rings can overlap. Polygons are useful for representing many different objects depending: political boundaries boundaries, Köppen climate zones, lakes, continents, etc. At large scales they can represent things like buildings which we might choose to represent as points at smaller scales.</p>
 <div class="figure">
-<img src="images/03-vector-temp.png" class="center" alt="" />
-<p class="caption">Vector objects (points, lines, or polygons) are stored along with any number of attribute. Point, line, and polygon data are typically stored in separate files. Each object in the map view is labeled with it’s index. This value corresponds to the row in the attribute table and is useful for locating the attributes that correspond to the object.</p>
+<img src="images/03-vector-points.png" class="center" alt="" />
+<p class="caption">An example of point data showing locations of trees. The points are labeled with their index (unique ID number) which correspoonds to the attribute table below which stores more information about eacht tree.</p>
 </div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">index</th>
+<th align="right">Longitude (X)</th>
+<th align="right">Latitude (Y)</th>
+<th>Name</th>
+<th align="right">Age</th>
+<th align="right">Height</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">0.44</td>
+<td align="right">0.03</td>
+<td>Fir</td>
+<td align="right">54</td>
+<td align="right">119</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">0.55</td>
+<td align="right">0.71</td>
+<td>Fir</td>
+<td align="right">29</td>
+<td align="right">56</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">0.89</td>
+<td align="right">0.33</td>
+<td>Fir</td>
+<td align="right">82</td>
+<td align="right">197</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">0.18</td>
+<td align="right">0.02</td>
+<td>Fir</td>
+<td align="right">46</td>
+<td align="right">98</td>
+</tr>
+<tr class="odd">
+<td align="right">4</td>
+<td align="right">0.65</td>
+<td align="right">0.51</td>
+<td>Maple</td>
+<td align="right">87</td>
+<td align="right">212</td>
+</tr>
+<tr class="even">
+<td align="right">5</td>
+<td align="right">0.43</td>
+<td align="right">0.81</td>
+<td>Maple</td>
+<td align="right">73</td>
+<td align="right">172</td>
+</tr>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">0.38</td>
+<td align="right">0.86</td>
+<td>Maple</td>
+<td align="right">94</td>
+<td align="right">233</td>
+</tr>
+<tr class="even">
+<td align="right">7</td>
+<td align="right">0.68</td>
+<td align="right">0.04</td>
+<td>Cedar</td>
+<td align="right">34</td>
+<td align="right">68</td>
+</tr>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">0.15</td>
+<td align="right">0.13</td>
+<td>Cedar</td>
+<td align="right">36</td>
+<td align="right">73</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Lines</strong> are one-dimensional, they have length, but no width and thus no area. A line consists of two or more points. Every line must have a start point and end point, they may also have any number of middle points, called vertices. A vertex is just any point where two or more lines meet. Lines are also great for representing a variety of objects, depending on the scale. Hiking trails, flight paths, coastlines, and power lines are suitable to be represented as lines in almost most applications. When making smaller scale maps, its often sufficient to represent rivers as lines, though at large scales we might elect to use a polygon.</p>
+<div class="figure">
+<img src="images/03-bc-road-map.jpg" class="center" alt="" />
+<p class="caption">Roads are typically reprented as line data. Though they obviously have an area, unless we are making a very large scale map, we don’t need (or have the room) to show that on a map. This BC road altlas makes use of line data, representing roads a lines and using different colors to denote the type of raod.</p>
+</div>
+<p><strong>Polygons</strong> are two-dimensional, they have both a length and width and therefore we can also calculate their area. All polygons consist of a set of at three or more points (vertices) connected by line segments called “edges” that connect to form an enclosed shape. All polygons form an enclosed shape, but some can also have“holes” (think doughnuts!), these holes are sometimes called interior rings. Each interior ring is a separate set vertices and edges that is wholly contained within the polygon and no two interior rings can overlap. Polygons are useful for representing many different objects depending: political boundaries boundaries, Köppen climate zones, lakes, continents, etc. At large scales they can represent things like buildings which we might choose to represent as points at smaller scales.</p>
 <p>Sometimes, a discrete object has multiple parts, that are spatially separated. In these circumstances, the vector model allows for multi-polygon, multi-line, or multi-point objects. A good example of when a multi-polygon would be useful is the StatsCanada provincial boundary file (see figure). Roads sometimes need to be stored as multi-lines as well, for example Highway 1 crosses the Georgia Straight from Vancouver to Nanaimo. If we want the to represent the entire Highway as one object, we need to use a multi-line.</p>
 <div class="figure">
-<img src="images/03-multi-polygon.png" class="center" alt="" />
-<p class="caption">Nunavut is composed of many different islands. We don’t need to represent every island as a separate object if we only want to</p>
+<img src="images/03-vector.png" class="center" alt="" />
+<p class="caption">This is the official Stats Canada provincial boundary layer. All the other coastal provinces and territories have islands. We don’t need to represent every island as a separate object, so we can “bundle” together the polygons as multipolygons. The landlocked provinces do not have any coastlines and are represented as simple polygons reather than multipolygons. The attribute table bellow corresponds to the map and lists the geometry type (polygon/multipolygon)</p>
 </div>
-<p>Vector data also has a <strong>Resolution</strong> although it has a somewhat different definition in the context of the vector model.</p>
+<table>
+<thead>
+<tr class="header">
+<th>PRNAME</th>
+<th align="right">Province ID</th>
+<th align="right">Population</th>
+<th align="right">Area</th>
+<th>Geometry Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Newfoundland and Labrador</td>
+<td align="right">10</td>
+<td align="right">525572</td>
+<td align="right">373872</td>
+<td>MultiPolygon</td>
+</tr>
+<tr class="even">
+<td>Prince Edward Island</td>
+<td align="right">11</td>
+<td align="right">157329</td>
+<td align="right">5660</td>
+<td>MultiPolygon</td>
+</tr>
+<tr class="odd">
+<td>Nova Scotia</td>
+<td align="right">12</td>
+<td align="right">971451</td>
+<td align="right">53338</td>
+<td>MultiPolygon</td>
+</tr>
+<tr class="even">
+<td>New Brunswic</td>
+<td align="right">13</td>
+<td align="right">779940</td>
+<td align="right">71450</td>
+<td>MultiPolygon</td>
+</tr>
+<tr class="odd">
+<td>Quebec</td>
+<td align="right">24</td>
+<td align="right">8536855</td>
+<td align="right">1365128</td>
+<td>MultiPolygon</td>
+</tr>
+<tr class="even">
+<td>Ontario</td>
+<td align="right">35</td>
+<td align="right">14666590</td>
+<td align="right">917741</td>
+<td>MultiPolygon</td>
+</tr>
+<tr class="odd">
+<td>Manitoba</td>
+<td align="right">46</td>
+<td align="right">1389952</td>
+<td align="right">553556</td>
+<td>MultiPolygon</td>
+</tr>
+<tr class="even">
+<td>Saskatchewan</td>
+<td align="right">47</td>
+<td align="right">1206019</td>
+<td align="right">591670</td>
+<td>Polygon</td>
+</tr>
+<tr class="odd">
+<td>Alberta</td>
+<td align="right">48</td>
+<td align="right">4511223</td>
+<td align="right">642317</td>
+<td>Polygon</td>
+</tr>
+<tr class="even">
+<td>British Columbia</td>
+<td align="right">59</td>
+<td align="right">5111756</td>
+<td align="right">925186</td>
+<td>MultiPolygon</td>
+</tr>
+<tr class="odd">
+<td>Yukon</td>
+<td align="right">60</td>
+<td align="right">41774</td>
+<td align="right">474391</td>
+<td>MultiPolygon</td>
+</tr>
+<tr class="even">
+<td>Northwest Territories</td>
+<td align="right">61</td>
+<td align="right">45217</td>
+<td align="right">1183085</td>
+<td>MultiPolygon</td>
+</tr>
+<tr class="odd">
+<td>Nunavut</td>
+<td align="right">62</td>
+<td align="right">39419</td>
+<td align="right">1936113</td>
+<td>MultiPolygon</td>
+</tr>
+</tbody>
+</table>
+<p>Vector data also has a <strong>Resolution</strong> although it has a somewhat different definition in the context of the vector model. Vector resolution is determined by the smallest resolvable feature. Another way to describe vector resolution, would be the distance between verticies. The greater the distance between vertices, the fewer vertices there are per polygon and, the lower the resolution. If a vector object (line or polygon) has many verticies, we will have a higher resolution representation of the feature.</p>
 <div class="figure">
 <img src="images/03-vector-resolution.png" class="center" alt="" />
-<p class="caption">Vector resolution is defined a bit differently</p>
+<p class="caption">Vector image of Nova Scotia at different resolutions. Here the original polygon (top left) has been downsampled to lower resolutions, by setting the minimum allowable distance between verticies. As the distance beween vercicies increases, the resolution decreases and the coastline becomes less distinguishable.</p>
 </div>
 <div id="file-types-1" class="section level4" number="3.4.2.1">
 <h4><span class="header-section-number">3.4.2.1</span> File Types</h4>
@@ -1320,8 +1520,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4>Case Study</h4>
 </div>
 <div id="box-text" class="section level4 unnumbered">
-<h4>Rater Resolution and Map Scale: The Mixed Pixel Problem</h4>
-<p><em>Insert Video - I envision doing a video showing a landscape classification at a very large map scale 1:1000-ish using different raster resolutions (1,2,10m +) and different cell attribution methods to highlight the differences.</em></p>
+<h4>Resolution: Vector vs. Raster</h4>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/apak726770w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
 </div>
 </div>
 <div class="box-content your-turn-content">

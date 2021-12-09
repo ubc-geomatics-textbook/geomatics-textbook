@@ -1,6 +1,6 @@
 # Topology and Geocoding {#topology-and-geocoding}
 
-``` {r 7-load-packages-and-setup}
+``` {r 7-load-packages-and-setup, echo = FALSE, include = FALSE}
 baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"
 canadalicense <- "https://open.canada.ca/en/open-government-licence-canada/"
 covlicense <- "https://opendata.vancouver.ca/pages/licence/"
@@ -8,6 +8,7 @@ library(leaflet)
 library(dplyr)
 library(rgdal)
 library(deldir)
+library(tripack)
 library(animation)
 library(alphashape3d)
 library(alphahull)
@@ -63,7 +64,7 @@ native_land <- rgdal::readOGR("Data/07/07-native_land_vancouver_island.geojson",
 labels <- native_land@data$Name
 ```
 
-``` {r 7-native-land-leaflet-setup, cached=T}
+``` {r 7-native-land-leaflet-setup, cached=T, echo = FALSE, include = FALSE}
 getTilesURL <- "https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=06d706f23fc4461db5db742f930174fc"
 m <- leaflet(native_land) %>%
   addTiles(getTilesURL) %>%
@@ -118,7 +119,7 @@ Some examples of adjacency and overlap topological rules:
 
 As we have seen from Chapter 3, lines are often used to represent phenomena that flow, so intersection and connection are important concepts for these representations. Important to understanding how connection and intersection work in planar topology, we need to understand that lines are comprised of a set of vertices and nodes. A **node** is simply the terminating vertex in a set of vertices for a line. For example, suppose the line segment $A$ has a set of vertices, $[[1,0],[1,3],[1,5]]$. Then the nodes for $A$ are $[1,0]$ and $[1,5]$ (Figure \@ref(fig:7-node)). Since nodes define the end points of a line segment, they are key to enforcing connection rules. We will look at network analysis in more detail in the next chapter. For now, let us consider two different networks that can help us conceptualize some fundamental line topology using nodes.
 
-```{r, 7-node, fig.align = 'center', out.width = '75%', fig.cap=fig_cap, cached=T}
+```{r, 7-node, fig.align = 'center', out.width = '75%', fig.cap=fig_cap, cached=T, echo = FALSE}
 fig_cap <- paste("Lines are always comprised of two nodes. Line A shown here has nodes at [1,0] and [1,5]. Pickell, CC-BY-SA-4.0.")
 Ax <- c(1,1,1)
 Ay <- c(0,3,5)
@@ -134,7 +135,7 @@ text(0.75,2.5,"A", cex=1, font=2,col="#7b3294")
 
 A network of streams and rivers is based on the hydrological knowledge system that explains how water moves over a terrain surface. In both theory and practice, we know that water flows from higher elevations to lower elevations with limited exceptions. Thus, we expect that streams will connect with other streams and continue to flow towards some outlet such as an ocean. **Connection** refers to the fact that the endpoint node of one stream will fall somewhere on another stream segment. Where two line segments come together, it is possible for one segment $A$ to "undershoot" the other segment $B$, resulting in the end node of segment $A$ appropriately named a **dangle** Figure \@ref(fig:7-dangle)) and a loss of connection.
 
-```{r, 7-dangle, fig.align = 'center', out.width = '75%', fig.cap=fig_cap, cached=T}
+```{r, 7-dangle, fig.align = 'center', out.width = '75%', fig.cap=fig_cap, cached=T, echo = FALSE}
 fig_cap <- paste("A dangle forms when a line (B) does not connect to another line (A). Pickell, CC-BY-SA-4.0.")
 Ax <- c(1,1,1)
 Ay <- c(0,3,5)
@@ -156,7 +157,7 @@ text(3.5,2.5,"B", cex=1, font=2,col="#008837")
 
 Dangles are the opposite case to **intersections**, which occur when two line segments cross each other. With planar topology, intersections must be modeled with a shared node representing the intersection location. For example, suppose line segment $B$ has a set of vertices, $[[0,1],[2,1],[4,1]]$. If line segments $A$ (defined above) and $B$ are mapped together with non-planar topology, then they will intersect at $[1,2]$, which is not a vertex represented in either segment (Figure \@ref(fig:7-intersection-A-B)). 
 
-```{r, 7-intersection-A-B, fig.align = 'center', out.width = '75%', fig.cap=fig_cap, cached=T}
+```{r, 7-intersection-A-B, fig.align = 'center', out.width = '75%', fig.cap=fig_cap, cached=T, echo = FALSE}
 fig_cap <- paste("Line A mapped with Line B in non-planar topology. Pickell, CC-BY-SA-4.0.")
 Ax <- c(1,1,1)
 Ay <- c(0,3,5)
@@ -178,7 +179,7 @@ text(3.5,2.5,"B", cex=1, font=2,col="#008837")
 
 Thus, the intersection of $A$ and $B$ with planar topology would yield four new segments: $C=[[0,2],[1,2]]$, $D=[[1,2],[1,3],[1,5]]$, $E=[[1,2],[2,2],[4,2]]$, and $F=[[1,0],[1,2]]$. Figure \@ref(fig:7-intersection-C-D-E-F) illustrates how all four of these new segments share the same node $[1,2]$ at the intersection of $A$ and $B$.
 
-```{r, 7-intersection-C-D-E-F, fig.align = 'center', out.width = '75%', fig.cap=fig_cap, cached=T}
+```{r, 7-intersection-C-D-E-F, fig.align = 'center', out.width = '75%', fig.cap=fig_cap, cached=T, echo = FALSE}
 fig_cap <- paste("Line A mapped with Line B in planar topology yields segments C, D, E, and F. All segments share (1,2) as a node. Pickell, CC-BY-SA-4.0.")
 Cx <- c(0,1)
 Cy <- c(2,2)
@@ -213,7 +214,7 @@ text(1,2-0.2,"(1,2)",pos=4,font=2,cex=0.9)
 
 As well, **pseudonodes** can occur when a node does not actually terminate a line segment at a junction, for example, between two streams or roads. In other words, a pseudonode is a node that is shared by two lines. Figure \@ref(fig:7-pseudonode) illustrates a pseudonode occurring at $[3,5]$.
 
-```{r, 7-pseudonode, fig.align = 'center', out.width = '75%', fig.cap=fig_cap, cached=T}
+```{r, 7-pseudonode, fig.align = 'center', out.width = '75%', fig.cap=fig_cap, cached=T, echo = FALSE}
 fig_cap <- paste("Lines A and B share a pseudonode at [3,5], indicated in red. Pickell, CC-BY-SA-4.0.")
 Ax <- c(0,1,3)
 Ay <- c(0,3,5)
@@ -273,7 +274,7 @@ haida <- rgdal::readOGR("Data/07/07-haida-gwaii-islands-names.geojson", verbose=
 labels2 <- haida@data$Island_Name
 ```
 
-``` {r 7-haida-leaflet-setup2, echo=FALSE, warning=FALSE, message=FALSE, cached=T}
+``` {r 7-haida-leaflet-setup2, echo=FALSE, warning=FALSE, message=FALSE, cached=T, echo = FALSE}
 getTilesURL2 <- "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
 m2 = leaflet(haida) %>%
   addTiles(getTilesURL2) %>%
@@ -322,23 +323,21 @@ Topologically, holes in polygons imply that another polygon shares an adjacent b
 
 ``` {r 7-delaunay-triangulation-circumcircles-setup, echo=FALSE, cached=T}
 ## Not run: creates image
-library(deldir)
-library(tripack)
-set.seed(7)
-x <- runif(4)
-y <- runif(4)
-tesselation <- deldir(x,y)
-png("/images/07-delaunay-triangulation-circumcircles.png",height=600,width=600)
-par(mar=c(0,0,0,0))
-plot(x,y,xlim=c(-0.25,1.25),ylim=c(-0.25,1.25),pch=19,xaxt="n",yaxt="n",ylab="",xlab="",bty="n")
-c1 <- circum(x[2:4],y[2:4])
-circles(c1$x,c1$y,c1$radius,col="grey")
-points(c1$x,c1$y,pch=19,col="red")
-c2 <- circum(x[c(1:3)],y[c(1:3)])
-circles(c2$x,c2$y,c2$radius,col="grey")
-points(c2$x,c2$y,pch=19,col="red")
-plot.deldir(tesselation,add=T,xlim=c(-0.25,1.25),ylim=c(-0.25,1.25),cmpnt_col=c("black","red","black","black","black"),pch=19,bty="n")
-dev.off()
+## set.seed(7)
+## x <- runif(4)
+## y <- runif(4)
+## tesselation <- deldir(x,y)
+## png("/images/07-delaunay-triangulation-circumcircles.png",height=600,width=600)
+## par(mar=c(0,0,0,0))
+## plot(x,y,xlim=c(-0.25,1.25),ylim=c(-0.25,1.25),pch=19,xaxt="n",yaxt="n",ylab="",xlab="",bty="n")
+## c1 <- circum(x[2:4],y[2:4])
+## circles(c1$x,c1$y,c1$radius,col="grey")
+## points(c1$x,c1$y,pch=19,col="red")
+## c2 <- circum(x[c(1:3)],y[c(1:3)])
+## circles(c2$x,c2$y,c2$radius,col="grey")
+## points(c2$x,c2$y,pch=19,col="red")
+## plot.deldir(tesselation,add=T,xlim=c(-0.25,1.25),ylim=c(-0.25,1.25),cmpnt_col=c("black","red","black","black","black"),pch=19,bty="n")
+## dev.off()
 ```
 
 ``` {r 7-delaunay-triangulation-circumcircles, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
@@ -350,16 +349,15 @@ Figure \@ref(7-delaunay-triangulation) shows a Delaunay triangulation for a set 
 
 ``` {r 7-delauney-triangulation-setup2, echo=FALSE, cached=T}
 ## Not run: creates image
-library(deldir)
-set.seed(14)
-x <- runif(50)
-y <- runif(50)
-tesselation <- deldir(x,y)
-tiles <- tile.list(tesselation)
-png("/images/07-delauney-triangulation.png",height=600,width=600)
-plot(tiles,xlim=c(-0.25,1.25),ylim=c(-0.25,1.25),border="white")
-plot.deldir(tesselation,add=T,wlines="triang",xlim=c(-0.25,1.25),ylim=c(-0.25,1.25),cmpnt_col=c("black",NA,NA,"black","black"),pch=19)
-dev.off()
+## set.seed(14)
+## x <- runif(50)
+## y <- runif(50)
+## tesselation <- deldir(x,y)
+## tiles <- tile.list(tesselation)
+## png("/images/07-delauney-triangulation.png",height=600,width=600)
+## plot(tiles,xlim=c(-0.25,1.25),ylim=c(-0.25,1.25),border="white")
+## plot.deldir(tesselation,add=T,wlines="triang",xlim=c(-0.25,1.25),ylim=c(-0.25,1.25),cmpnt_col=c("black",NA,NA,"black","black"),pch=19)
+## dev.off()
 ```
 
 ``` {r 7-delauney-triangulation, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
@@ -373,15 +371,14 @@ knitr::include_graphics("/images/07-delauney-triangulation.png")
 
 ``` {r 7-create-thiessen-polygons, echo=FALSE, cached=T}
 ## Not run: creates image
-library(deldir)
-set.seed(14)
-x <- runif(50)
-y <- runif(50)
-tesselation <- deldir(x,y)
-tiles <- tile.list(tesselation)
-png("/images/07-2d-thiessen-polygons.png",height=600,width=600)
-plot(tiles, pch=19, fillcol=hcl.colors(50, "Purple-Yellow"),xlim=c(-0.25,1.25),ylim=c(-0.25,1.25))
-dev.off()
+## set.seed(14)
+## x <- runif(50)
+## y <- runif(50)
+## tesselation <- deldir(x,y)
+## tiles <- tile.list(tesselation)
+## png("/images/07-2d-thiessen-polygons.png",height=600,width=600)
+## plot(tiles, pch=19, fillcol=hcl.colors(50, "Purple-Yellow"),xlim=c(-0.25,1.25),ylim=c(-0.25,1.25))
+## dev.off()
 ```
 
 ``` {r 7-2d-thiessen-polygons, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
@@ -393,23 +390,22 @@ Thiessen polygons are a product of Delaunay triangulation described in the previ
 
 ``` {r 7-delaunay-triangulation-circumcircles-voronoi-setup, echo=FALSE}
 ## Not run: creates image
-library(deldir)
-set.seed(7)
-x <- runif(4)
-y <- runif(4)
-tesselation <- deldir(x,y)
-png("/images/07-delaunay-triangulation-circumcircles-voronoi.png",height=600,width=600)
-par(mar=c(0,0,0,0))
-plot(x,y,xlim=c(-0.25,1.25),ylim=c(-0.25,1.25),pch=19,xaxt="n",yaxt="n",ylab="",xlab="",bty="n")
-c1 <- circum(x[2:4],y[2:4])
-circles(c1$x,c1$y,c1$radius,col="grey")
-points(c1$x,c1$y,pch=19,col="red")
-c2 <- circum(x[c(1:3)],y[c(1:3)])
-circles(c2$x,c2$y,c2$radius,col="grey")
-points(x,y,pch=19)
-points(c2$x,c2$y,pch=19,col="red")
-plot.deldir(tesselation,add=T,wlines="both",xlim=c(-0.25,1.25),ylim=c(-0.25,1.25),cmpnt_col=c("black","red","black","black","black"),pch=19,bty="n")
-dev.off()
+## set.seed(7)
+## x <- runif(4)
+## y <- runif(4)
+## tesselation <- deldir(x,y)
+## png("/images/07-delaunay-triangulation-circumcircles-voronoi.png",height=600,width=600)
+## par(mar=c(0,0,0,0))
+## plot(x,y,xlim=c(-0.25,1.25),ylim=c(-0.25,1.25),pch=19,xaxt="n",yaxt="n",ylab="",xlab="",bty="n")
+## c1 <- circum(x[2:4],y[2:4])
+## circles(c1$x,c1$y,c1$radius,col="grey")
+## points(c1$x,c1$y,pch=19,col="red")
+## c2 <- circum(x[c(1:3)],y[c(1:3)])
+## circles(c2$x,c2$y,c2$radius,col="grey")
+## points(x,y,pch=19)
+## points(c2$x,c2$y,pch=19,col="red")
+## plot.deldir(tesselation,add=T,wlines="both",xlim=c(-0.25,1.25),ylim=c(-0.25,1.25),cmpnt_col=c("black","red","black","black","black"),pch=19,bty="n")
+## dev.off()
 ```
 
 ``` {r 7-delaunay-triangulation-circumcircles-voronoi, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
@@ -419,7 +415,6 @@ knitr::include_graphics("/images/07-delaunay-triangulation-circumcircles-voronoi
 
 ``` {r 7-delaunay-triangulation-thiessen-polygons-setup, echo=FALSE, cached=T}
 ## Not run: creates image
-## library(deldir)
 ## set.seed(14)
 ## x <- runif(50)
 ## y <- runif(50)
@@ -481,8 +476,6 @@ Convex hulls can be extended to the concave case by adding a parameter
 
 ``` {r 7-create-alpha-hull, echo=F}
 ## Not run; creates images for gif
-## library(alphahull)
-## library(animation)
 ## set.seed(14)
 ## x <- runif(50)
 ## y <- runif(50)
@@ -522,10 +515,10 @@ The 3D convex hull is the smallest convex polyhedron that contains the 3D points
 
 ### 3D alpha-convex (concave) hull
 
-Figure \@ref(fig:7-3d-alpha-hull-deciduous below shows a 3D 
+Figure \@ref(fig:7-3d-alpha-hull-deciduous) below shows a 3D 
 
-```{r setup-3d-alpha-hull-fsc, echo=FALSE, cached=T}
-las <- readLAS("Data/07/fsc.las")
+```{r setup-3d-alpha-hull-fsc, echo=FALSE, cached=T, warning=F}
+las <- readLAS("Data/07/07-fsc-building.las")
 z <- las[,3]-95.01
 x <- las[,1]-481887
 y <- las[,2]-5456393
@@ -540,7 +533,7 @@ rglwidget(width = 600, height = 600, reuse=FALSE)
 ```
 
 ```{r setup-3d-alpha-hull-deciduous, echo=FALSE, cached=T}
-las <- readLAS("Data/07/fsc-tree_thinned.las")
+las <- readLAS("Data/07/07-deciduous-tree.las")
 z <- las[,3]
 x <- las[,1]
 y <- las[,2]
@@ -558,7 +551,7 @@ rglwidget(width = 600, height = 600, reuse=FALSE)
 ```
 
 ``` {r setup-3d-alpha-hull-conifer, echo=F, cached=T}
-las <- readLAS("Data/07/Geoslam_Tree_Cloud1.las")
+las <- readLAS("Data/07/07-conifer-tree.las")
 z <- las[,3]-1156
 x <- las[,1]-640600
 y <- las[,2]-5674900
@@ -567,7 +560,7 @@ ahull.c <- ashape3d(xyz,alpha=0.1)
 ```
 
 ``` {r 7-3d-alpha-hull-conifer, echo=FALSE, out.width = '75%', fig.cap=fig_cap, webgl = TRUE}
-fig_cap <- paste("3D convex alpha hull for a coniferous tree (<i>Abies lasiocarpa</i>). The alpha hull was generated using alpha = 0.1. Data collected by Yangqian 'Frederick' Qi with a terrestrial laser scanner in British Columbia, Canada. <a href='",baseurl,"#7-3d-alpha-hull-conifer'>Animated figure can be viewed in the web browser version of the textbook.</a> Pickell, CC-BY-SA-4.0.')
+fig_cap <- paste("3D convex alpha hull for a coniferous tree (<i>Abies lasiocarpa</i>). The alpha hull was generated using alpha = 0.1. Data collected by Yangqian (Frederick) Qi with a terrestrial laser scanner in British Columbia, Canada. <a href='",baseurl,"#7-3d-alpha-hull-conifer'>Animated figure can be viewed in the web browser version of the textbook.</a> Pickell, CC-BY-SA-4.0.")
 plot3d(ahull.c,xlim=c(40,64),ylim=c(21,45),col="#2D5A27")
 rglwidget(width = 600, height = 600, reuse=FALSE)
 ```
@@ -656,10 +649,3 @@ Delaunay, B.N. 1934. Sur la Sph`ere Vide. Izvestia Akademia Nauk SSSR, VII Seria
 Matematicheskii i Estestvennyka Nauk, 7:793–800.
 
 Okabe, A., Boots, B., and Sugihara, K. 2007. Nearest neighbourhood operations with generalized Voronoi diagrams: a review. International Journal of Geographical Information Systems, 8(1): 43-71. https://doi.org/10.1080/02693799408901986
-
-```{r include=FALSE}
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'htmlwidgets', 'webshot', 'DT',
-  'miniUI', 'tufte', 'servr', 'citr', 'rticles'
-), 'packages.bib')
-```

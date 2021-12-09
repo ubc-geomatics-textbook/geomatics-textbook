@@ -1,10 +1,14 @@
 # Topology and Geocoding {#topology-and-geocoding}
 
 ``` {r 7-load-packages-and-setup}
+baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"
+canadalicense <- "https://open.canada.ca/en/open-government-licence-canada/"
+covlicense <- "https://opendata.vancouver.ca/pages/licence/"
 library(leaflet)
 library(dplyr)
 library(rgdal)
 library(deldir)
+library(animation)
 library(alphashape3d)
 library(alphahull)
 library(lidR)
@@ -295,7 +299,7 @@ m2 = leaflet(haida) %>%
 ```
 
 ```{r 7-haida-gwaii-leaflet, fig.cap = fig_cap, out.width= "50%", echo = FALSE}
-  fig_cap <- paste("Singlepart geometry of the Haida Gwaii archipelago off the west coast of British Columbia, Canada. Hover over the islands to see the names. Polygon data from Statistics Canada and island placenames from Natural Resources Canada. Open Government License - Canada.")
+  fig_cap <- paste0("Singlepart geometry of the Haida Gwaii archipelago off the west coast of British Columbia, Canada. Hover over the islands to see the names. <a href='",baseurl,"#7-haida-gwaii-leaflet'>Animated figure can be viewed in the web browser version of the textbook.</a> Polygon data from Statistics Canada and island placenames from Natural Resources Canada. <a href='",canadalicense,"'>Open Government License - Canada</a>.")
 m2
 ```
 
@@ -359,7 +363,7 @@ dev.off()
 ```
 
 ``` {r 7-delauney-triangulation, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste("Delauney triangulation of the same set of points as in the previous Thiessen polygons figure. Pickell, CC-BY-SA-4.0.")
+fig_cap <- paste("Delauney triangulation of 50 random points. Pickell, CC-BY-SA-4.0.")
 knitr::include_graphics("/images/07-delauney-triangulation.png")
 ```
 
@@ -381,7 +385,7 @@ dev.off()
 ```
 
 ``` {r 7-2d-thiessen-polygons, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste("Thiessen polygons formed  Pickell, CC-BY-SA-4.0.")
+fig_cap <- paste("Thiessen polygons of 50 random points. Pickell, CC-BY-SA-4.0.")
 knitr::include_graphics("/images/07-2d-thiessen-polygons.png")
 ```
 
@@ -495,7 +499,7 @@ Convex hulls can be extended to the concave case by adding a parameter
 ```
 
 ``` {r 7-2d-alpha-hull, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste("Concave alpha hull generates an alpha shape around a set of points. Online version of the figure is animated by alpha values from 0 to 1 by increments of 0.05. Pickell, CC-BY-SA-4.0.")
+fig_cap <- paste0("Concave alpha hull generates an alpha shape around a set of points. Online version of the figure is animated by alpha values from 0 to 1 by increments of 0.05. <a href='",baseurl,"#7-2d-alpha-hull'>Animated figure can be viewed in the web browser version of the textbook.</a> Pickell, CC-BY-SA-4.0.")
 knitr::include_graphics("images/07-2d-alpha-hull.gif")
 ```
 
@@ -508,20 +512,13 @@ In this next section, a number of topologies are described that are important fo
 Similar to multipart geometries, **multipatch geometries** associate several *faces* or *facets* to a single 3D feature such as a building or tree. In order for multipatch geometries to be topologically valid, they must form a closed set of faces, known as a **polyhedron**. Polyhedrons are comprised of *flat* faces that connect 3 or more vertices. Figure \@ref(fig:7-platonic-polyhedrons illustrates the 5 Platonic polyhedrons, so-named after Plaot who initially wrote about them. The Platonic polyhedrons are a special type of *regular* polyhedron because they are the only polyhedrons that are highly symmetrical and have special transitive properties on the edges, faces, and vertices. As well, the Platonic polyhedrons are all examples of the 3-dimensional case of a convex hull (more on that in the next section). Most polyhedrons that we come across in environmental management like trees, lakes, glaciers, and buildings are very irregular and not Platonic.
 
 ``` {r 7-platonic-polyhedrons, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste("The five Platonic solids are examples of regular, convex polyhedrons and multipatch geometries. From left to right: tetrahedron (4 faces); hexahedron (6 faces); octahedron (8 faces); dodecahedron (12 faces); and icosahedron (20 faces). Online version of the figure is animated. Kjell André, CC-BY-SA-3.0.")
+fig_cap <- paste0("The five Platonic solids are examples of regular, convex polyhedrons and multipatch geometries. From left to right: tetrahedron (4 faces); hexahedron (6 faces); octahedron (8 faces); dodecahedron (12 faces); and icosahedron (20 faces). <a href='",baseurl,"#7-platonic-polyhedrons'>Animated figure can be viewed in the web browser version of the textbook.</a> Kjell André, CC-BY-SA-3.0.")
 knitr::include_graphics("images/07-platonic-polyhedrons.gif")
 ```
 
 ### 3D Convex hull
 
 The 3D convex hull is the smallest convex polyhedron that contains the 3D points (Figure \@ref(fig:7-3d-convex-hull). The 3D problem is computationally intensive and there are several popular algorithms for achieving the 3D convex hull such as Jarvis' March (Jarvis 1974), quickhull (Barber et al 1996), and CudaHull (Stein et al 2012). The 3D convex hull is frequently produced in order to generate a 3D object from a laser scan. Since points are 1-dimensional they have limited use beyond their enumeration within a volume or on a plane or on a line. By contrast, a 3D convex hull produces a polyhedron, which can be used to visualize the object that was initially scanned into a 3D point cloud. The 2D polygon faces that comprise a polyhedron can provide _shape_ and interact with a simulated light source to improve perception of _depth_, which are qualities that are not provided by 3D point clouds. 
-
-``` {r 7-tin, echo=FALSE, out.width = '75%', fig.cap=fig_cap, webgl = TRUE}
-#fig_cap <- paste("3D convex hull. Pickell, CC-BY-SA-4.0.")
-#library(mgcv)
-#library(rLiDAR)
-#las <- lidR::readLAS("data/07/fsc-building.las")
-```
 
 ### 3D alpha-convex (concave) hull
 
@@ -537,7 +534,7 @@ ahull.b <- ashape3d(xyz,alpha=1)
 ```
 
 ``` {r 7-3d-alpha-hull-fsc, echo=FALSE, out.width = '75%', fig.cap=fig_cap, webgl = TRUE}
-fig_cap <- paste("3Dalpha-convex hull for the Forest Sciences Centre building at the University of British Columbia. The alpha hull was generated using alpha = 1. Data from City of Vancouver and licensed under the Open Government License - Vancouver. Pickell, CC-BY-SA-4.0.")
+fig_cap <- paste0("3D alpha-convex hull for the Forest Sciences Centre building at the University of British Columbia. The alpha hull was generated using alpha = 1. <a href='",baseurl,"#7-3d-alpha-hull-fsc'>Animated figure can be viewed in the web browser version of the textbook.</a> Data from City of Vancouver and licensed under the <a href='",covlicense,"'>Open Government License - Vancouver</a>. Pickell, CC-BY-SA-4.0.")
 plot3d(ahull.b,xlim=c(0,90),ylim=c(0,90),zlim=c(0,90))
 rglwidget(width = 600, height = 600, reuse=FALSE)
 ```
@@ -555,7 +552,7 @@ ahull.d <- ashape3d(xyz,alpha=0.05)
 ```
 
 ``` {r 7-3d-alpha-hull-deciduous, echo=FALSE, out.width = '75%', fig.cap=fig_cap, webgl = TRUE}
-fig_cap <- paste("3D concave alpha hull for a deciduous tree (species here). The alpha hull was generated using alpha = 0.05. Data collected by Spencer Dakin Kuiper with a GeoSlam terrestrial laser scanner in Vancouver, Canada. Pickell, CC-BY-SA-4.0.")
+fig_cap <- paste0("3D concave alpha hull for a deciduous tree (species here). The alpha hull was generated using alpha = 0.05. Data collected by Spencer Dakin Kuiper with a GeoSlam terrestrial laser scanner in Vancouver, Canada. <a href='",baseurl,"#7-3d-alpha-hull-deciduous'>Animated figure can be viewed in the web browser version of the textbook.</a> Pickell, CC-BY-SA-4.0.")
 plot3d(ahull.d,col="#2D5A27")
 rglwidget(width = 600, height = 600, reuse=FALSE)
 ```
@@ -570,7 +567,7 @@ ahull.c <- ashape3d(xyz,alpha=0.1)
 ```
 
 ``` {r 7-3d-alpha-hull-conifer, echo=FALSE, out.width = '75%', fig.cap=fig_cap, webgl = TRUE}
-fig_cap <- paste('3D convex alpha hull for a coniferous tree (<i>Abies lasiocarpa</i>). The alpha hull was generated using alpha = 0.1. Data collected by Yangqian "Frederick" Qi with a terrestrial laser scanner in British Columbia, Canada. Pickell, CC-BY-SA-4.0.')
+fig_cap <- paste("3D convex alpha hull for a coniferous tree (<i>Abies lasiocarpa</i>). The alpha hull was generated using alpha = 0.1. Data collected by Yangqian 'Frederick' Qi with a terrestrial laser scanner in British Columbia, Canada. <a href='",baseurl,"#7-3d-alpha-hull-conifer'>Animated figure can be viewed in the web browser version of the textbook.</a> Pickell, CC-BY-SA-4.0.')
 plot3d(ahull.c,xlim=c(40,64),ylim=c(21,45),col="#2D5A27")
 rglwidget(width = 600, height = 600, reuse=FALSE)
 ```
@@ -611,7 +608,9 @@ knitr::kable(
 )
 ```
 
-These fields indicate the range of civic numbers and the side of the street segment that a particular range falls on. The typical convention for address assignment within municipalities in Canada is odd-numbered civic numbers are on one side and even-numbered civic numbers are on the other side. In the GIS, these are arbitrarily assigned as $RIGHT$ or $LEFT$ sides, but geographically these addresses will occur on the North, East, South, or  West "sides" of the street segment. We can see that the values on the $LEFT$ side of the street range from 101-199, which are odd-numbered, and the values on the $RIGHT$ side of the street range from 100-198, which are even-numbered. Since the civic numbers of the street segment are known at the nodes (i.g., 100 and 101 at one end and 198 and 199 at the other end), then we can simply interpolate for any other civic number along the segment and identify the location of our three addresses (Figure \@ref(fig:07-left-right-side)). This interpolation process only places an address on the line segment (i.e., the centre of the street), so the locator must also geographically place the address on the correct side of the street using some offset value (usually in meters) that is usually perpendicular to the street segment.
+These fields indicate the range of civic numbers and the side of the street segment that a particular range falls on. The typical convention for address assignment within municipalities in Canada is odd-numbered civic numbers are on one side and even-numbered civic numbers are on the other side. In the GIS, these are arbitrarily assigned as $RIGHT$ or $LEFT$ sides, but geographically these addresses will occur on the North, East, South, or  West "sides" of the street segment. 
+
+We can see that the values on the $LEFT$ side of the street range from 101-199, which are odd-numbered, and the values on the $RIGHT$ side of the street range from 100-198, which are even-numbered. Since the civic numbers of the street segment are known at the nodes (i.g., 100 and 101 at one end and 198 and 199 at the other end), then we can simply interpolate for any other civic number along the segment and identify the location of our three addresses (Figure \@ref(fig:07-left-right-side)). This interpolation process only places an address on the line segment (i.e., the centre of the street), so the locator must also geographically place the address on the correct side of the street using some offset value (usually in meters) that is usually perpendicular to the street segment.
 
 ### Geocoding Assumptions and Limitations
 

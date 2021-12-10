@@ -40,7 +40,7 @@ Frequently, we need spatial data to behave and relate and in specific and predic
 
 ### Key Terms {-}
 
-Vertex, Node, Pseudonode, Dangle, Planar Topology, Non-Planar Topology, Geocoding, Adjacency, Overlap, Connect, Inside, Reverse Geocoding, small change
+Vertex, Node, Pseudonode, Dangle, Planar Topology, Non-Planar Topology, Geocoding, Adjacency, Overlap, Connect, Inside, Reverse Geocoding, Singlepart, Multipart, Holes, Delaunay Triangulation, Thiessen Polygons, Voronoi Diagram, Centroid, Convex Hull, Convex Alpha Hull, Multipatch
 
 ## Topology
 
@@ -342,7 +342,7 @@ Topologically, holes in polygons imply that another polygon shares an adjacent b
 
 ``` {r 7-delaunay-triangulation-circumcircles, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
 fig_cap <- paste("Delaunay triangulation of four points. Black lines show the triangulation, grey lines represent the circumcircles connecting the three points of each triangle, red points represent the centres of the circumcircles, and the red dotted lines show that connecting the centres of the circumcircles forms the Voronoi diagram. Pickell, CC-BY-SA-4.0.")
-knitr::include_graphics("/images/07-delaunay-triangulation-circumcircles.png")
+knitr::include_graphics("images/07-delaunay-triangulation-circumcircles.png")
 ```
 
 Figure \@ref(7-delaunay-triangulation) shows a Delaunay triangulation for a set of 50 points. We can see that sliver triangles mostly occur on the edge of the extent of the points. Delaunay triangulations can be performed both in 2- and 3-dimensional Euclidean space and are therefore important for representing 3D surfaces as well as performing spatial estimation over 2D areas from a set of points.
@@ -362,7 +362,7 @@ Figure \@ref(7-delaunay-triangulation) shows a Delaunay triangulation for a set 
 
 ``` {r 7-delauney-triangulation, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
 fig_cap <- paste("Delauney triangulation of 50 random points. Pickell, CC-BY-SA-4.0.")
-knitr::include_graphics("/images/07-delauney-triangulation.png")
+knitr::include_graphics("images/07-delauney-triangulation.png")
 ```
 
 ### Thiessen polygons
@@ -383,7 +383,7 @@ knitr::include_graphics("/images/07-delauney-triangulation.png")
 
 ``` {r 7-2d-thiessen-polygons, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
 fig_cap <- paste("Thiessen polygons of 50 random points. Pickell, CC-BY-SA-4.0.")
-knitr::include_graphics("/images/07-2d-thiessen-polygons.png")
+knitr::include_graphics("images/07-2d-thiessen-polygons.png")
 ```
 
 Thiessen polygons are a product of Delaunay triangulation described in the previous section. Figure \@ref(7-delaunay-triangulation-thiessen-polygons) shows the relationship between the points, triangulation, circumcircles, and the Thiessen polygons. Connecting the circumcentres of the circumcircles produces the Voronoi diagram (Figure \@ref(7-delaunay-triangulation-thiessen-polygons)).
@@ -403,7 +403,7 @@ Thiessen polygons are a product of Delaunay triangulation described in the previ
 
 ``` {r 7-delaunay-triangulation-thiessen-polygons, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
 fig_cap <- paste("Delaunay triangulation (red lines) overlaid onto the Thiessen polygons. Pickell, CC-BY-SA-4.0.")
-knitr::include_graphics("/images/07-delaunay-triangulation-thiessen-polygons.png")
+knitr::include_graphics("images/07-delaunay-triangulation-thiessen-polygons.png")
 ```
 
 ### Centroids
@@ -477,7 +477,7 @@ In this next section, a number of topologies are described that are important fo
 
 ### Multipatch geometries
 
-Similar to multipart geometries, **multipatch geometries** associate several *faces* or *facets* to a single 3D feature such as a building or tree. In order for multipatch geometries to be topologically valid, they must form a closed set of faces, known as a **polyhedron**. Polyhedrons are comprised of *flat* faces that connect 3 or more vertices. Figure \@ref(fig:7-platonic-polyhedrons illustrates the 5 Platonic polyhedrons, so-named after Plaot who initially wrote about them. The Platonic polyhedrons are a special type of *regular* polyhedron because they are the only polyhedrons that are highly symmetrical and have special transitive properties on the edges, faces, and vertices. As well, the Platonic polyhedrons are all examples of the 3-dimensional case of a convex hull (more on that in the next section). Most polyhedrons that we come across in environmental management like trees, lakes, glaciers, and buildings are very irregular and not Platonic.
+Similar to multipart geometries, **multipatch geometries** associate several *faces* or *facets* to a single 3D feature such as a building or tree. In order for multipatch geometries to be topologically valid, they must form a closed set of faces, known as a **polyhedron**. Polyhedrons are comprised of *flat* faces that connect 3 or more vertices. Figure \@ref(fig:7-platonic-polyhedrons) illustrates the 5 Platonic polyhedrons, so-named after Plaot who initially wrote about them. The Platonic polyhedrons are a special type of *regular* polyhedron because they are the only polyhedrons that are highly symmetrical and have special transitive properties on the edges, faces, and vertices. As well, the Platonic polyhedrons are all examples of the 3-dimensional case of a convex hull (more on that in the next section). Most polyhedrons that we come across in environmental management like trees, lakes, glaciers, and buildings are very irregular and not Platonic.
 
 ``` {r 7-platonic-polyhedrons, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
 fig_cap <- paste0("The five Platonic solids are examples of regular, convex polyhedrons and multipatch geometries. From left to right: tetrahedron (4 faces); hexahedron (6 faces); octahedron (8 faces); dodecahedron (12 faces); and icosahedron (20 faces). <a href='",baseurl,"#7-platonic-polyhedrons'>Animated figure can be viewed in the web browser version of the textbook.</a> Kjell André, CC-BY-SA-3.0.")
@@ -492,7 +492,7 @@ The 3D convex hull is the smallest convex polyhedron that contains the 3D points
 
 Figure \@ref(fig:7-3d-alpha-hull-deciduous) below shows a 3D 
 
-```{r setup-3d-alpha-hull-fsc, echo=FALSE, cached=T, warning=F}
+```{r setup-3d-alpha-hull-fsc, echo=FALSE, cached=T, warning=F, include=F}
 las <- readLAS("Data/07/07-fsc-building.las")
 z <- las[,3]-95.01
 x <- las[,1]-481887
@@ -507,7 +507,7 @@ plot3d(ahull.b,xlim=c(0,90),ylim=c(0,90),zlim=c(0,90))
 rglwidget(width = 600, height = 600, reuse=FALSE, elementId="7-3d-alpha-hull-fsc")
 ```
 
-```{r setup-3d-alpha-hull-deciduous, echo=FALSE, cached=T}
+```{r setup-3d-alpha-hull-deciduous, echo=FALSE, cached=T, warning=F, include=F}
 las <- readLAS("Data/07/07-deciduous-tree.las")
 z <- las[,3]
 x <- las[,1]
@@ -525,7 +525,7 @@ plot3d(ahull.d,col="#2D5A27")
 rglwidget(width = 600, height = 600, reuse=FALSE, elementId="7-3d-alpha-hull-deciduous")
 ```
 
-``` {r setup-3d-alpha-hull-conifer, echo=F, cached=T}
+``` {r setup-3d-alpha-hull-conifer, echo=F, cached=T, warning=F, include=F}
 las <- readLAS("Data/07/07-conifer-tree.las")
 z <- las[,3]-1156
 x <- las[,1]-640600
@@ -578,7 +578,7 @@ knitr::kable(
 
 These fields indicate the range of civic numbers and the side of the street segment that a particular range falls on. The typical convention for address assignment within municipalities in Canada is odd-numbered civic numbers are on one side and even-numbered civic numbers are on the other side. In the GIS, these are arbitrarily assigned as $RIGHT$ or $LEFT$ sides, but geographically these addresses will occur on the North, East, South, or  West "sides" of the street segment. 
 
-We can see that the values on the $LEFT$ side of the street range from 101-199, which are odd-numbered, and the values on the $RIGHT$ side of the street range from 100-198, which are even-numbered. Since the civic numbers of the street segment are known at the nodes (i.g., 100 and 101 at one end and 198 and 199 at the other end), then we can simply interpolate for any other civic number along the segment and identify the location of our three addresses (Figure \@ref(fig:07-left-right-side)). This interpolation process only places an address on the line segment (i.e., the centre of the street), so the locator must also geographically place the address on the correct side of the street using some offset value (usually in meters) that is usually perpendicular to the street segment.
+We can see that the values on the $LEFT$ side of the street range from 101-199, which are odd-numbered, and the values on the $RIGHT$ side of the street range from 100-198, which are even-numbered. Since the civic numbers of the street segment are known at the nodes (i.g., 100 and 101 at one end and 198 and 199 at the other end), then we can simply interpolate for any other civic number along the segment and identify the location of our three addresses (Figure \@ref(fig:7-left-right-side)). This interpolation process only places an address on the line segment (i.e., the centre of the street), so the locator must also geographically place the address on the correct side of the street using some offset value (usually in meters) that is usually perpendicular to the street segment.
 
 ### Geocoding Assumptions and Limitations
 

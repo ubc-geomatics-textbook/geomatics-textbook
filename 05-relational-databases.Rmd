@@ -27,7 +27,7 @@ You have almost certainly used a relational database in some form during your li
 
 ## Key Terms {-}
 
-Relational Database Management Systems, Tables, Relations, Rows, Tuples, Records, Columns, Attributes, Items, Structured Query Language, Boolean Logic, Relational Algebra, Entity-Relationship Model, Cartesian Product, Schema, Unary, Binary, Georelational Data Model, Domain
+Relational Database Management Systems, Tables, Relations, Rows, Tuples, Records, Columns, Attributes, Items, Structured Query Language, Boolean Logic, Relational Algebra, Entity-Relationship Model, Cartesian Product, Schema, Unary, Binary, Georelational Data Model, Domain, Symmetric Difference
 
 ## Relational Database Management Systems
 
@@ -122,7 +122,7 @@ knitr::kable(
 Next we will introduce **binary** operators, that is, they take two relations as input. **Set Union** is one such operator that effectively appends one relation to another. The important rule for union is that both input relations must share the same number and type of attributes or "union compatible". Formally, set union is expressed as $S∪T$ where $S$ and $T$ are the two input relations. You can think of set union as simply concatenating the tuples of the two relations together. In other words, the tuples of $S$ are appended to the tuples of $T$ to generate a new output relation. For example, suppose that we make two subsets of our relation $R$ of trees:
 
 $$
-S = σ_{height>20}(R)
+S = σ_{height<20}(R)
 $$
 
 $$
@@ -137,7 +137,7 @@ knitr::kable(
 )
 ```
 
-Formally, this would all be expressed as $σ_{height>20}(R)∪σ_{height≥20}(R)$ or $S∪T$, which in this case is also just equivalent to $R$. You should see that the result of union is an inclusion of all tuples, so semantically a union can be read as "the tuples in relation $S$ _or_ the tuples in relation $T$". 
+Formally, this would all be expressed as $σ_{height<20}(R)∪σ_{height≥20}(R)$ or $S∪T$, which in this case is also just equivalent to $R$. You should see that the result of union is an inclusion of all tuples, so semantically a union can be read as "the tuples in relation $S$ _or_ the tuples in relation $T$". 
 
 ## Set Intersection
 
@@ -186,7 +186,7 @@ knitr::kable(
 )
 ```
 
-Semantically, you would read the set difference $S-T$ as "the tuples in relation $S$ minus any of the same tuples in relation $T$". 
+Semantically, you would read the set difference $S-T$ as "the tuples in relation $S$ minus any of the same tuples in relation $T$".
 
 ## Cartesian Product
 
@@ -454,7 +454,7 @@ Figure \@ref(fig:5-boolean-not) illustrates how Boolean $NOT$ essentially negate
 ```
 <br/>
 
-Finally, the case of Boolean $XOR$ returns any tuples that are not $true$ for both statements, but are $true$ individually. This is known as the "e**X**clusive **OR**" because we are only returning the tuples that are exclusive based on both statements. For example, $(height>15)XOR(species=WesternHemlock)$ evaluates to:
+Finally, the case of Boolean $XOR$ returns any tuples that are not $true$ for both statements, but are $true$ individually. This is known as the **symmetric difference** and "e**X**clusive **OR**" because we are only returning the tuples that are exclusive based on both statements. For example, $(height>15)XOR(species=WesternHemlock)$ evaluates to:
 
 ```{r, echo=FALSE}
 Rtf$Boolean <- (R$`Height (m)`>15 | R$Species=="Western Hemlock") & !(R$Species=="Western Hemlock"&R$`Height (m)`>15)

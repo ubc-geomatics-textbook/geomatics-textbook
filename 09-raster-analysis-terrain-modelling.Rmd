@@ -1,5 +1,19 @@
 # Raster Analysis and Terrain Modelling {#raster-analysis-and-terrain-modelling}
 
+```{r 9-load-packages-and-setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(leaflet)
+library(raster)
+library(htmlwidgets)
+library(rgdal)
+library(sp)
+library(sf)
+library(leafem)
+library(geojsonio)
+library(DiagrammeR)
+library(topoDistance)
+```
+
 Many data are frequently collected and represented in a raster format. In this chapter, we will look at how rasters can be analyzed with a specific focus on deriving terrain information from elevation rasters. We will explore some useful properties of the raster structure that can be exploited for insightful analysis of land and water alike. Image-based raster analysis will be a later topic of Chapter 14.
 
 :::: {.box-content .learning-objectives-content}
@@ -52,7 +66,6 @@ Figure \@ref(fig:9-mount-assiniboine-dem) shows another DEM, but this time for s
     fig_cap <- paste("Digital Elevation Model of Nelson River pouring into Hudson Bay, Manitoba, Canada. Animated figure can be viewed in the web browser version of the textbook. Data from Shuttle Radar Topography Mission. Pickell, CC-BY-4.0.")
     knitr::include_graphics(here::here("images", "09-nelson-river-dem.png"))
 ```
-</br>?
 
 Over an entire extent of 3,300 km^2, the Nelson River DEM in Figure \@ref(fig:9-nelson-river-dem) only varies by 44 m. Compare that with the 1,328 m of difference from the white peak of Mount Assiniboine to the black valleys of the Rocky Mountains over about 5 km^2 in Figure \@ref(fig:9-mount-assiniboine-dem). Throughout the remainder of this chapter, we will look at raster analysis applied to these two extreme examples of terrain.
 
@@ -64,8 +77,6 @@ A **Digital Terrain Model (DTM)** represents elevation through points and lines 
 
 Up to this point, we have been looking digital vertical models of _bare Earth_, that is, just plain old elevation of terrain above a vertical datum. If you want to represent the height of features above the bare Earth, like houses and trees, then you would need to use a **Digital Surface Model (DSM)**. Whereas a DTM and DEM both represent elevation above a vertical datum, which is usually mean sea level represented by the geoid, a DSM represents height above a DTM or DEM. In this way, we can model features on the surface and their heights. We will look at more examples of working with DSMs in Chapter 15.
 
-## Contours
-
 ## Raster Functions
 
 Raster functions are algorithms that perform operations on one or more cells of the raster to produce new calculations or derivatives. In the following sections we will explore four commonly used raster functions: local, focal, global, and zonal.
@@ -74,7 +85,7 @@ Raster functions are algorithms that perform operations on one or more cells of 
 
 A **local function** is the simplest to understand because each cell in the input raster is operated on independently of all other cells. Simple arithmetic operations such as addition, subtraction, division, and multiplication are all examples of focal functions when applied to a raster. 
 
-```{r, echo=FALSE}
+```{r 9-local-function-raster, echo=FALSE}
 x <- raster(nrow=5,ncol=5,crs="+proj=utm +zone=10 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",xmn=0,xmx=300,ymn=0,ymx=300)
 values(x) <- sample(1:255, ncell(x))
 par(mfrow=c(1,2))
@@ -88,7 +99,7 @@ text(x+5)
 
 A **focal function** takes full advantage of the raster data model by moving a window or kernel over the raster in order to calculate new values. The kernel must always be a square with odd-numbered dimensions such as 3x3 or 11x11. This ensures that there is a focal cell at the centre of the kernel that determines which cell in the output will take on the value of the operation. In practice, the kernel is moved column-by-column, row-by-row over the entire raster and a calculation is performed using the values of the input raster that coincide with the kernel. The kernel itself is also comprised of weights that, when multiplied against the input raster at a given location, yields a set of values that can be summed or averaged. Thus, the operation of the focal function can take many different forms such as calculating the mean, minimum, maximum or any other operation over the kernel. As a simple example, a mean focal function with a 3x3 kernel will calculate the mean value of all 3x3 cell neighborhoods in the raster yielding the result below.
 
-```{r, echo=FALSE}
+```{r 9-focal-function-raster, echo=FALSE}
 y <- focal(x, w=matrix(1,nrow=3,ncol=3), fun=mean)
 par(mfrow=c(1,2))
 plot(x,xaxt="n",yaxt="n",main="Input Raster",bty="n",legend=F,col=grey.colors(255),axes=FALSE,box=FALSE)
@@ -106,7 +117,7 @@ $$k = \begin{bmatrix}1 & 1 & 1\\
 
 The mean is then calculated by adding all the values together and dividing by the number of cells in the kernel. You will see that our input raster has shrunk down from dimensions of 5x5 to 3x3 after applying the 3x3 kernel. This is due to the fact that there are insufficient cells along the edge and corners of the raster to divide by the number of cells in the kernel. One solution is to use padding, which simply adds 0's along the outside of the input raster. Padding is not always an elegant solution because you will still have edge effects, but you will at least maintain the dimensions of your input raster in the output. Below is the result of the same focal function, but with padding of 0's.
 
-```{r, echo=FALSE}
+```{r 9-low-pass-function-raster, echo=FALSE}
 y <- focal(x, w=matrix(1,nrow=3,ncol=3), fun=mean, pad=T, padValue=0)
 par(mfrow=c(1,2))
 plot(x,xaxt="n",yaxt="n",main="Input Raster",bty="n",legend=F,col=grey.colors(255),axes=FALSE,box=FALSE)
@@ -124,7 +135,7 @@ $$k = \begin{bmatrix}-0.7 & -1 & -0.7\\
 
 The operation of a high-pass filter is to multiply the kernel weights above against the input raster cell values and then sum the result. The following is the result of applying the high-pass kernel weights above to our input raster with padding:
 
-```{r, echo=FALSE}
+```{r 9-high-pass-function-raster, echo=FALSE}
 y <- focal(x, w=matrix(c(-0.7,-1,-0.7,-1,6.8,-1,-0.7,-1,-0.7),nrow=3,ncol=3), fun=sum, pad=T, padValue=0)
 par(mfrow=c(1,2))
 plot(x,xaxt="n",yaxt="n",main="Input Raster",bty="n",legend=F,col=grey.colors(255),axes=FALSE,box=FALSE)
@@ -137,7 +148,7 @@ text(y)
 
 **Global functions** apply some operation to all cells in the raster. These are usually simply referred to as summary statistics of the raster since we usually want to know what the minimum, maximum, and average values are of all cells in a given raster. As a result, global functions do not return a raster as an output, but rather individual values, depending on the operation. Below are the summary statistics for our input raster:
 
-```{r, echo=FALSE}
+```{r 9-global-function-table, echo=FALSE}
 t <- data.frame(Operation=c("Minimum","Maximum","Mean","Standard Deviation"),Value=c(min(values(x)),max(values(x)),mean(values(x)),sd(values(x))))
 knitr::kable(
   t, booktabs = TRUE, row.names = FALSE
@@ -148,7 +159,7 @@ knitr::kable(
 
 Lastly, **zonal functions** perform an operation over some subset of cells defined by a zonal raster. Again, the operation can be any calculation of interest: mean, minimum, sum, etc. Zonal functions are useful for deriving information over different regions of a raster that share some thematic classification like land cover, ecosystem type, or jurisdiction. Suppose we have the following input raster and zonal raster:
 
-```{r, echo=FALSE}
+```{r 9-zonal-function-raster, echo=FALSE}
 z <- raster(nrow=5,ncol=5,crs="+proj=utm +zone=10 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",xmn=0,xmx=300,ymn=0,ymx=300)
 values(z) <- c(1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3)
 par(mfrow=c(1,2))
@@ -160,7 +171,7 @@ text(z)
 
 Like a global function, zonal functions do not return an output raster, but rather individual values for each zone:
 
-```{r, echo=FALSE}
+```{r 9-zonal-function-table, echo=FALSE}
 t <- data.frame(Zone=c(1,2,3),Minimum=c(min(values(x)[values(z)==1]),min(values(x)[values(z)==2]),min(values(x)[values(z)==3])),
                 Maximum=c(max(values(x)[values(z)==1]),max(values(x)[values(z)==2]),max(values(x)[values(z)==3])),
                 Mean=c(mean(values(x)[values(z)==1]),mean(values(x)[values(z)==2]),mean(values(x)[values(z)==3])),
@@ -251,7 +262,6 @@ A hillshade is still a 2D raster with 3D features simulated through an illuminat
     fig_cap <- paste("A sink is shown in 3D for an array of 3x3 pixels. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-sink.png"))
 ```
-</br>
 
 **Peaks** are the opposite of sinks, where a focal cell is surrounded by eight neighbouring cells that share the same lower elevation (Figure \@ref(fig:9-peak)). Like sinks, peaks are also naturally occurring (e.g., mountain peaks and ridge lines) and may also be artifacts of data resolution and processing. 
 
@@ -259,7 +269,6 @@ A hillshade is still a 2D raster with 3D features simulated through an illuminat
     fig_cap <- paste("A peak is shown in 3D for an array of 3x3 pixels. Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-peak.png"))
 ```
-</br>
 
 **Saddles** occur when a lowland is bounded by two or more peaks (Figure \@ref(fig:9-saddle)). Usually, saddles identify a divide between drainage basins because they often occur along ridgelines and precipitation will runoff into one or the other drainage basin, but not both. 
 
@@ -267,7 +276,6 @@ A hillshade is still a 2D raster with 3D features simulated through an illuminat
     fig_cap <- paste("A saddle is shown in 3D for an array of 3x3 pixels. Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-saddle.png"))
 ```
-</br>
 
 ## Landform Classification
 
@@ -281,7 +289,6 @@ Curvature of terrain is described as convex, flat, or concave, which impacts the
     fig_cap <- paste("Conceptual diagram showing surfaces of all combinations of profile and planform curvature. Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-stacked-profile-planform.png"))
 ```
-</br>
 
 There are many ways to calculate curvature, which usually take the form of a polynomial that is fit by a focal function over some neighbourhood of pixels. A 3x3 kernel is typically used to calculate profile and planform curvature, however, it is also common to increase the kernel size to counteract the effect of noise in high resolution DEMs. Figure \@ref(fig:9-stacked-profile-planform-kernel) illustrates examples of 3x3 kernels for each of the profile and planform curvature combinations. You might recognize variations of sinks, peaks, and saddles amongst the examples, which are of course not exhaustive of all possible elevation value combinations, but they are otherwise representative of the primary patterns that are indicated by profile and planform curvature.
 
@@ -289,7 +296,6 @@ There are many ways to calculate curvature, which usually take the form of a pol
     fig_cap <- paste("Conceptual diagram showing 3x3 kernel examples of all combinations of profile and planform curvature. Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-stacked-profile-planform-kernel.png"))
 ```
-</br>
 
 Both profile and planform curvature are calculated as continuous floating point integers where: positive values represent convex curvature in the profile and concave curvature in the planform; zero represents no curvature; and negative values represent concave curvature in the profile and convex curvature in the planform. Figure \@ref(fig:9-mount-assiniboine-profile-planform-curvature) shows the profile and planform curvature for Mount Assiniboine. What landforms can you start to identify from terrain curvature? Can you identify any sinks, peaks, or saddles in the DEM?
 
@@ -297,7 +303,6 @@ Both profile and planform curvature are calculated as continuous floating point 
     fig_cap <- paste("Profile and planform curvature for Mount Assiniboine at the border of Alberta and British Columbia, Canada. Animated figure can be viewed in the web browser version of the textbook. Data from Canadian Digital Elevation Model. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-mount-assiniboine-profile-planform-curvature.png"))
 ```
-</br>
 
 ## Topographic Position Index
 
@@ -307,9 +312,8 @@ Another way to derive and classify landforms is through the use of a **topograph
     fig_cap <- paste("Comparing Topographic Position Index (TPI) for Mount Assiniboine and the Nelson River. Animated figure can be viewed in the web browser version of the textbook. Data from Canadian Digital Elevation Model and MAXAR, respectively. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-mount-assiniboine-nelson-river-topographic-position-index.png"))
 ```
-</br>
 
-## Hydrology Work "flows"
+## Hydrology Work"flows"
 
 By now, you should recognize that water can be modelled over a DEM by making the simple assumption that water will flow from higher elevations to lower elevations. We can undertake this modelling using a DEM because the continuous surface of elevation values can represent the runoff process. In this next section, we will look at how we can extract everything from runoff accumulation to stream networks and watersheds from a DEM.
 
@@ -321,7 +325,6 @@ Runoff is the most fundamental process that can be modelled from a DEM. In fact,
     fig_cap <- paste("Flow direction shown in arrows and flow accumulation of upslope cells shown in numbers for the D8 flow direction algorithm. Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-flow-direction-accumulation.png"))
 ```
-</br>
 
 Trouble arises when there are two or more neighboring cells with the same minima (e.g., a peak or saddle). This situation can arise for very flat terrain where the elevation might be the same in nearly every direction. As we have already seen, sinks can cause water to flow into but not out of the focal cell, and therefore result in an undefined flow direction. Sinks must therefore be identified and filled in a DEM before calculating flow direction. There are several algorithms for filling sinks, but generally the process involves calculating flow direction and then moving downslope from the highest elevations of the DEM to the valley bottoms and identifying depressions, which are then filled. This process continues to iterate until no more depressions are identified (Marks et al 1984).  Figure \@ref(fig:9-sink-fill) animates this iterative process of filling sinks in a cross-sectional profile of elevation, but the process is actually applied simultaneously over both geographic dimensions. Each iteration can introduce new sinks since the filling process directly modifies the DEM, so flow direction must be recalculated after each iteration in order to solve the next set of sinks. As a result, this filling process can be quite time consuming and usually stopping criteria are imposed such as a minimum depth threshold or a minimum slope for all cells in the DEM (i.e., no cells with flat slopes) to ensure that runoff is continuously downslope.
 
@@ -329,7 +332,6 @@ Trouble arises when there are two or more neighboring cells with the same minima
     fig_cap <- paste("Animated process of filling sinks in a DEM. Online version is animated. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-sink-fill.gif"))
 ```
-</br>
 
 The D8 algorithm is intuitive, fast, simple to implement and you will probably see it as the default option across many different GIS software. However, it is very sensitive to sinks, flat areas, and otherwise erroneous pixels because the D8 algorithm forces flow to a single raster pixel. If the raster pixel receiving the upslope flow is erroneous, then all downslope flow direction and, by extension, flow accumulation may also be erroneous. The D8 algorithm was developed in the the mid-1980s during a time when computers such as the AT&T 3B2/300 "mini computer" shipped with a 30 Mb hard disk drive, 1 Mb of random access memory, and a 10 Mhz central processing unit, all of which would have cost about US$10,000 in 1984. To put that in perspective, the 16-bit DEM of the Nelson River in Figure \@ref(fig:9-mount-assiniboine-dem) is 1.3 Mb and the combination of all the terrain derivatives that we have covered so far in this chapter (slope, aspect, HLI, hillshade, TPI, profile curvature, planform curvature, flow direction and flow accumulation) amounts to 19.5 Mb of disk space for a single, modest-sized study area (938 x 751 pixels).
 
@@ -339,7 +341,6 @@ More sophisticated flow direction algorithms have developed since then that are 
     fig_cap <- paste("D8 Flow direction and flow accumulation for Mount Assiniboine at the border of Alberta and British Columbia, Canada. Data from Canadian Digital Elevation Model. Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-mount-assiniboine-flow-dir-acc.png"))
 ```
-</br>
 
 ## Stream Delineation
 
@@ -382,20 +383,6 @@ The result is that cells with high flow accumulation and gentle slopes will have
 $$
 TWI=ln\frac{a×100}{tan(b)}
 $$
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-library(leaflet)
-library(raster)
-library(htmlwidgets)
-library(rgdal)
-library(sp)
-library(sf)
-library(leafem)
-library(geojsonio)
-library(DiagrammeR)
-library(topoDistance)
-```
 
 ## Case Study: Topographic Indices for Wetland Mapping
 
@@ -543,7 +530,6 @@ m2
     fig_cap <- paste("Anaglyph of Mount Odin on Baffin Island, Nunavut, Canada. Imagery by MAXAR. Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-baffin-island-mount-odin-1.png"))
 ```
-</br>
 
 ##	Viewsheds
 
@@ -557,7 +543,6 @@ A **viewshed** is an analysis that simulates a physical line-of-sight using a DE
     fig_cap <- paste("Animation showing building polygons in Vancouver, British Columbia extruded by a height attribute. Animated figure can be viewed in the web browser version of the textbook. Building data (2009) from City of Vancouver, licensed under Open Government License - Vancouver. Base map © OpenStreetMap contributors, licensed under Open Data Commons Open Database License. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-vancouver-building-height-extruded.gif"))
 ```
-</br>
 
 Extrusion is also frequently used to visualize non-height attributes. For example, population density can be extruded as a "height" value to give a unique perspective of the relative change in this attribute across space that may otherwise be difficult to appreciate from a 2D map with colour alone (Figure \@ref(fig:9-vancouver-population-density-2016)).
 
@@ -565,7 +550,6 @@ Extrusion is also frequently used to visualize non-height attributes. For exampl
     fig_cap <- paste("Census dissemination areas extruded by population density (2016) for Vancouver, British Columbia. Animated figure can be viewed in the web browser version of the textbook. Census data from Statistics Canada, Census Profile, 2016, licensed under Statistics Canada Open License. Reproduced and distributed on an 'as is' basis with the permission of Statistics Canada. Base map © OpenStreetMap contributors, licensed under Open Data Commons Open Database License. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-vancouver-population-density-2016.png"))
 ```
-</br>
 
 ##	Exaggeration
 
@@ -575,7 +559,6 @@ Extrusion is also frequently used to visualize non-height attributes. For exampl
     fig_cap <- paste("Elevation exaggeration of Mount Logan elevation, Yukon Terrotiry, Canada. Animated figure can be viewed in the web browser version of the textbook. Digital Elevation Model by Natural Resources Canada, licensed under the Open Government Licence – Canada. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-mount-logan-exaggeration.png"))
 ```
-</br>
 
 ## Summary
 
@@ -594,10 +577,3 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem
 3. Draw ipsum lorem.
 
 ## Recommended Readings {-}
-
-```{r include=FALSE}
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'htmlwidgets', 'webshot', 'DT',
-  'miniUI', 'tufte', 'servr', 'citr', 'rticles'
-), 'packages.bib')
-```

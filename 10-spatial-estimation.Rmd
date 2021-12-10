@@ -379,7 +379,7 @@ The information attached to the study objects that are spatially distributed in 
 
 ::::
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE, cache=TRUE}
 n<- matrix(c(1:400), nrow=20, ncol=20)
 
 # Create row indicator
@@ -461,7 +461,7 @@ For this case study, we will use ground plot data from Change Monitoring Invento
 
 <p id="box-text">
 </p>
-```{r , echo=FALSE, warning=FALSE, message=FALSE}
+```{r , echo=FALSE, warning=FALSE, message=FALSE, cache=TRUE}
 ###Morans'I using spdep'#########################################
 library(raster)
 library(rgdal)
@@ -568,7 +568,7 @@ We will calculate the Moran's I for the basal area variable pertaining to the po
 
 The Moran’s I statistic is the correlation coefficient for the relationship between a variable and its surrounding values. But before we go about computing this correlation, we need to come up with a way to define a neighborhood. There are two ways to define neighborhood namely; contiguity for spatial **polygon data** and distance-based approach for the spatial **point data** and polygon data both. For polygon data, contiguity based neighborhood selection can be adopted using two widely used method, respectively known as ***Rook's case*** or ***Queen's case*** **Figure 10.10**.
 
-```{r, echo=FALSE, Message=FALSE, Warinig=FALSE}
+```{r, echo=FALSE, Message=FALSE, Warinig=FALSE, cache=TRUE}
 library(plotly)
 library(ggplot2)
 library(scales)
@@ -794,7 +794,7 @@ $$S_{i}= S-R$$
 Partial sill to total sill ratio: This is the structural variance explained by the fitted semivariogram model [@Rossi1992]. Amount of variance that is spatially autocorrelated [@Rossi1992].
 $$ Ratio =\frac {S_{i}}{S+R}$$
 
-```{r , echo=FALSE, warning=FALSE, message=FALSE}
+```{r , echo=FALSE, warning=FALSE, message=FALSE, cache=TRUE}
 library(sp)
 library(gstat)
 data(fulmar)
@@ -1123,7 +1123,7 @@ leaflet() %>% addTiles() %>%
     title = "Predicted basal area")
 ```
 
-**Figure 10.20.** \ref{fig:figs} Predicted basal area over the entire Fort Saint Johns TSA using five nearest neighbor projected over the province of British Columbia.
+**Figure 10.20.** \ref{fig:figs} Predicted basal area over the entire Fort Saint Johns TSA using five nearest neighbor projected over the province of British Columbia. Data from City of Vancouver and licensed under the Open Government License - Vancouver. 
 
 ## Thiessian Polygon
 
@@ -1246,7 +1246,7 @@ proj4string(dta) <- proj4string(dta) # Temp fix until new proj env is adopted
 proj4string(grd) <- proj4string(dta)
 ```
 
-**Step 3: Interpolate the grid cells using a power value of 2 **
+**Step 3: Interpolate the grid cells using a power value of 2**
 
 Power values can be adjusted depending on characteristics of variable being interpolated
 
@@ -1396,7 +1396,7 @@ basal
 
 Start by fitting the semivariogram model for the variable of interest (basal area) and see which model best fit the data
 
-```{r  warning=FALSE, message=FALSE}
+```{r  warning=FALSE, message=FALSE, cache=TRUE}
 #### Exponential variogram ###############
 TheVariogram=variogram(total~1, data=dta)
 

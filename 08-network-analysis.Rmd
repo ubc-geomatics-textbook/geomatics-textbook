@@ -9,7 +9,7 @@ library(networkD3)
 ```
 
 
-# Network Analysis
+## Network Analysis
 
 Networks are **abstract structures** commonly used to represent patterns of relationships among sets of various *things* [@ajorlouIntroductionNetworkModels2018]. Such structures can be used to represent social connections, spatial patterns, ecological relationships, etc. In GIS, the elements that compose geospatial networks are **geolocated** -- in other words: they have latitude and longitude values attached to them. Network analysis encompasses a series of techniques used to interpret information from those networks. This chapter introduces basic concepts for building, analyzing and applying spatial networks to real-world problems.
 
@@ -18,7 +18,7 @@ Networks are **abstract structures** commonly used to represent patterns of rela
 
 ::: {.box-title .learning-objectives-top}
 
-#### Learning Objectives {-}
+## Learning Objectives {-}
 
 :::
 <p id="box-text">By the end of the chapter, students will be able:</p>
@@ -30,17 +30,17 @@ Networks are **abstract structures** commonly used to represent patterns of rela
 1. To extract relevant information from spatial networks about the relationship between their elements, such as routes, distances and centralities.
 :::
 
-### Key Terms {-}
+## Key Terms {-}
 Network analysis, Spatial networks, Graph theory
 
 ## Introduction to Graph Theory
 Graphs are the abstract language of networks [@systemsinnovationGraphTheoryOverview2015]. Graph theory is the area of mathematics that study graphs. By abstracting networks into graphs, one is able to measure different kinds of indicators that represents information about relationships that exist within a certain system. Why abstracting real-world elements into networks can be useful? Network analysis facilitates the study of data sets that demand information about their behaviour in terms of connectivity, flows, direction or paths. This is especially useful to understand the behaviour of complex adaptive systems such as societies, cities, ecosystems, etc. All graphs are composed of two parts: **nodes** and **edges** (or links).
 
 
-### Nodes
+## Nodes
 A **node** (or vertex) may represent any thing that can be *connected* with other things. For example, it can represent people in social networks, street intersections in road networks, or chemical compounds in molecular networks, among others.
 
-### Edges
+## Edges
 **Edges** (or links), on the other hand, represent how vertices are interconnected to each other. So it may represent the vertices' social connections, street segments, molecular bindings, etc. The graph below represents rapid and frequent transit lines in Metro Vancouver. Each node represents a transit line and the edges represents connections between those lines.
 
 ```{r, echo=FALSE, fig.cap="Graph representing connection between Metro Vancouver rapid and frequent transit lines. Interactive figure in the online format of the textbook."}
@@ -59,7 +59,7 @@ knitr::include_graphics("images/08-metro_vancouver_transit_network.png")
 ## Connectivity and Order
 There are two major types of connections within the graphs: **directed** and **undirected**. Connections are directed when they have a specific node of origin and destination.
 
-### Direct
+## Direct
 Directed graphs are networks where the order of elements change relationships between them. We represent directed connections with an arrow. The network below represents relationships between characters of Les Miserables.
 
 <!-- For example, in the case of the transit network we could use a directed graph to represent the path one has to take in order to shift from one line to another. -->
@@ -81,7 +81,7 @@ forceNetwork(Links = MisLinks, Nodes = MisNodes, Source = "source", Value="value
              Group = "group", opacity=0.8, zoom=TRUE, arrow=TRUE)
 ```
 
-### Undirect
+## Undirect
 On the other hand, in an undirected graph, connections are represented as simple lines instead of arrows. The order of elements does not matter.
 
 ## Network Topologies
@@ -91,11 +91,11 @@ Topology is the study of how network elements are arranged. The same elements ar
 knitr::include_graphics("images/08-network_topologies.png")
 ```
 
-### Physical vs. Logical Topology
+## Physical vs. Logical Topology
 In GIS we use networks to represent spatial structures of various kinds. While all networks can be represented in an abstract space - this is, without a defined position in the real-world - some network analysis might be more useful when we attach physical properties to them, such as latitude and longitude coordinates. We call **logical topology** the study of how network elements are arranged in this abstract space. On the other hand, **physical topology** refers to the arrangemet of networks in the physical space. We can then classify "types" of networks according to the way their nodes is arranged.
 
-### Non-Hierarchical Topologies
-#### Lines
+## Non-Hierarchical Topologies
+## Lines
 Lines are when nodes are arranged in series where every node has *no more than two connections*, except for the two end nodes. A rail transit line, for example, can be represented as a line network. The map below portrays the SkyTrain Millenium Line in Vancouver. Each node represents a stop and the lines  the connections between those stops.
 
 ```{r, echo=FALSE, fig.cap="Rail transit line in Vancouver. Interactive figure in the online format of the textbook."}
@@ -109,7 +109,7 @@ leaflet(height=200, width="80%") %>% setView(lng=-122.9220614617343, lat=49.2658
   addCircles(data=nodeData, radius=20)
 ```
 
-#### Rings
+## Rings
 Rings are similar to lines except that there are no end nodes. So each and every node has *two connections and the "first" and "last" nodes are connected to each other* forming a circle. The spatial structure of the Stanley park seawall trail in Vancouver resembles a ring. In this example, nodes stand for intersections and view spots and edges are the connections between these spots along the seawall.
 
 ```{r, echo=FALSE, fig.cap="Ring of the Stanley Park seawall. Interactive figure in the online format of the textbook."}
@@ -123,7 +123,7 @@ leaflet(height=400, width="80%") %>% setView(lng=-123.14051382816635, lat=49.303
   addCircles(data=nodeData)
 ```
 
-#### Meshes
+## Meshes
 In a mesh, *every node is also connected to more than one node*. However, in this case nodes can be connected to more than two nodes. Connections in a mesh are non-hierarchical. Contrary to rings and lines where there is only one possible route from one node to another, in a mesh there are multiple routes to access other nodes in the network. A common way to generate a mesh network is using **Delaunay triangulation** [@wikimediaDelaunayTriangulation2021], where nodes are connected in order to form triangles and maximize the minimum angle of all triangles. Mesh configurations are commonly used in decentralized structures such as the internet.
 
 ```{r, echo=FALSE, fig.cap="Tree canopy mesh. Interactive figure in the online format of the textbook."}
@@ -140,7 +140,7 @@ leaflet(height=300, width="80%") %>% setView(lng=-123.13264678513188, lat=49.239
 ```
 
 
-#### Fully Connected
+## Fully Connected
 As the name suggests, in fully connected networks *every node is connected to every other node*. The graph representing all possible origin-destination commutes among Metro Vancouver municipalities is a type of fully connected network.
 
 ```{r, echo=FALSE, fig.cap="Possible origin-destination commutes between municipalities within Metro Vancouver. Interactive figure in the online format of the textbook."}
@@ -155,11 +155,11 @@ leaflet(height=420, width="80%") %>% setView(lng=-122.89050696548136, lat=49.194
   addCircles(data=nodeData, radius=1)
 ```
 
-### Hierarchical Topologies
+## Hierarchical Topologies
 Different from non-hierarchical topologies, hierarchical configurations are structured around a central node or link.
 <!-- By looking into hierarchical topologies it becomes easier to understand the notion of depth. The more distant a node is from the central node or link, the more depth it has. Hover the mouse over the nodes in the following maps to check out their depth. -->
 
-#### Stars
+## Stars
 Stars are hierarchical structures where *two or more nodes are directly connected to a central node*. This concentric garden at the University of British Columbia, UBC, can be represented according to a star topology.
 
 ```{r, echo=FALSE, fig.cap="Spatial structure of a concentric garden at UBC. Interactive figure in the online format of the textbook."}
@@ -173,7 +173,7 @@ leaflet(height=200, width="80%") %>% setView(lng=-123.24650254301488, lat=49.253
   addCircles(data=nodeData, radius=1)
 ```
 
-#### Buses
+## Buses
 Buses are structures where *every path from one node to another passes through a central path or corridor*. If we isolate a street segment from an urban street network, the connections between buildings and streets depict a bus topology.
 
 ```{r, echo=FALSE, fig.cap="Connections between houses and streets. Interactive figure in the online format of the textbook."}
@@ -187,7 +187,7 @@ leaflet(height=200, width="80%") %>% setView(lng=-123.17161003346679, lat=49.254
   addCircles(data=nodeData, radius=1)
 ```
 
-#### Trees
+## Trees
 In tree topologies, nodes are *structured from a root node and arranged into edges* that are similar to branches of a tree. This highly hierarchical structure create a sort of **parent - child** relationship amongst nodes. The spatial configuration of boat marinas are usually structures in tree-like topologies. By definition, all tree network structures will always have more than one terminal nodes (a node that only has one connection to the network).
 
 ```{r, echo=FALSE, fig.cap="Tree spatial structure of a boat marina. Interactive figure in the online format of the textbook."}
@@ -204,7 +204,7 @@ leaflet(height=500, width="80%") %>% setView(lng=-123.1270252730915, lat=49.2953
 ## Spatial Network Analysis
 Networks can then be arranged according to various different configurations. Aside from classifying networks into different types according to their topologies, some of the most useful features of spatial network analysis refers to how to **extract information** from these structures given certain parameters.
 
-### Network Tracing
+## Network Tracing
 The act of modelling spatial networks is called *network tracing*. When tracing a network it is important to bear in mind the **direction** with which information is added to the network, especially when this orientation information is important to further analyze **flows** and relationships within such structure. For example, when mapping hydrological networks to study its flows it might be useful to model the direction of streams coherently as this might be an important information to represent the dynamics of the network.
 
 ```{r, echo=FALSE, fig.cap="Graph representing Fraser River flows. Interactive figure in the online format of the textbook."}
@@ -219,7 +219,7 @@ leaflet(links, height=500, width="80%") %>% addTiles() %>%
 
 ```
 
-### Linear Referencing
+## Linear Referencing
 Linear referencing is a method of using geographic locations for measuring relative positions along a linear feature. In network analysis, linear referencing techniques can be used for finding the length of paths along the network [@ramsey23LinearReferencing2012]. In this method, the graph elements are defined in terms of their physical location and edges are used to calculate distances among parts of the network.
 
 ``` {r, echo=FALSE, fig.cap="Example of using linear referencing to measure distance between points.", out.width="80%"}
@@ -228,10 +228,10 @@ knitr::include_graphics("images/08-linear_referencing.png")
 
 In the above figure we can see how linear referencing systems work. Considering one would like to measure distances from node *a* along a network link *L*, distance measures can be used to locate, for example, points *b*, *c* and *d* along line *L*.
 
-### Routing
+## Routing
 One application of linear referencing is to find routes between nodes is an useful application of spatial networks. This is how mapping tools help us navigate the world by finding the most efficient route to move around the city, for example. [@systemsinnovationNetworkDiffusionContagion2015].
 
-#### Least Cost Paths
+## Least Cost Paths
 Usually multiple paths can be traced along a network to go from one point to another. The notion of **cost** allow us compare the degree of *difficulty* needed to cross such paths. With this information, it is possible to rank different routes. In spatial networks, cost usually relate to the necessary distance (either physically or logically) to go from a certain node to another, but they might also represent other aspects such as time, traffic, elevation, current flows, etc. For example, way finding tools that are commonly used to help us to locate and move around in the city usually takes into account multiple costs such as distance, traffic and/or elevation. The **least cost path** is the *easiest* way to go from one point of the network to another.
 
 It can be found by associating the costs with elements of the network (either nodes or edges) and summarizing the total cost of certain routes. Usually **linear referencing** techniques are used to calculate costs by storing locations along measured linear features. The map below displays the least cost path in terms of physical distance (shortest path) between two points.
@@ -249,10 +249,10 @@ map %>%
 
 ```
 
-#### Least Cost Corridors
+## Least Cost Corridors
 Although most network analysis techniques are suitable for vector data, raster layers can also be analyzed. One application of using network analysis with **raster data** is the finding of least cost corridors. While least cost paths helps to find linear paths along the network between two points, least cost corridors are based on the overlay of two *cost accumulative* rasters.
 
-#### Reach Analysis
+## Reach Analysis
 Reach techniques are commonly used to find the incidence of defined elements *within a certain radius from a chosen node*. All possible routes are modeled. The number of **terminal nodes** varies according to the network structure. Urban walkability indices usually uses reach techniques to assess the intensity of certain indicators (such as intersection density or non-residential land uses) given a walkable radius [@martinoSpatialNetworkAnalysis2020]. In the map below we portray the network reach from a given origin point into the Pacific Spirit Regional Park within 400m (red), 800m (yellow), 1200m (green) and 1600m (blue) radii.
 
 ```{r, echo=FALSE, fig.cap="Reachable segments within multiple distance radii. Interactive figure in the online format of the textbook."}
@@ -275,10 +275,10 @@ leaflet(net_1600, height=500, width="80%") %>% setView(lng=-123.22165125449455, 
 
 ```
 
-### Network Centrality
+## Network Centrality
 Nodes and edges of a graph can also be ranked in terms of how **important** they are to the overall network. Network centrality measures represent whether elements of a graph are more central or peripheral to the overall system. Such measures can then be interpreted as indicators of importance. Applications are endless. Centrality measures are used for ranking search engine pages [@wikimediaPageRank2021], for finding persons of interest in social networks [@ajorlouIntroductionNetworkModels2018] and for modelling movement in street network [@hillierNaturalMovementConfiguration1993]. There are several **centrality measures** that serve to the most various purposes. Some of the most commonly used ones are Closeness and Betweenness centrality.
 
-#### Closeness Centrality
+## Closeness Centrality
 Closeness centrality measures *how close each node is to every other node of the graph* in terms of topological distances. It highlights nodes located in easily accessible spaces. For example when analyzing the closeness of street intersections at the University of British Columbia (UBC), intersections in core streets such as the Main Mall, Agronomy Road and Northwest Marine Drive are ranked as highly central whereas more residential and segregated areas such as Acadia Road are ranked with lower closeness centrality.
 
 ```{r, echo=FALSE, fig.cap="Closeness centrality of the street intersections at UBC. Interactive figure in the online format of the textbook."}
@@ -300,7 +300,7 @@ $c_i = \sum\limits_{j} \frac{1}{d_{ij}}$
 
 where $d_{ij}$ means the logical distance from $i$ to $j$.
 
-#### Betweenness Centrality
+## Betweenness Centrality
 Betweenness centrality measures *how likely a node or an edge is to be passed through* when going from every node to every other node of the graph. If we imagine agents travelling from each node to every other node and back, betweenness centrality would be the trail left by those agents. While closeness highlights central spaces, betweenness highlights pathways that lead to those central spaces. Using the same street network at UBC we can calculate the betweenness of segments.
 
 ```{r, echo=FALSE, fig.cap="Betweenness centrality of street segments at UBC. Interactive figure in the online format of the textbook."}
@@ -327,10 +327,10 @@ where $(v)$ ${\sigma_{st}}$ represents the number of shortest paths from node $s
 :::: {.box-content .case-study-content}
 
 ::: {.box-title .case-study-top}
-#### Case Study {-}
-:::
+## Case Study: Title of Case Study Here 
+You see textual case study content here
 
-#### Central and peripheral green spaces in Vancouver? {#box-text -}
+## Central and Peripheral Green Spaces in Vancouver? {#box-text -}
 <p id="box-text"></p>
 Are green spaces evenly accessible throughout the whole city? Which parks are topologically *closer* to the city as a whole? Centrality analysis of the street network can be used to answer these questions.
 
@@ -369,7 +369,7 @@ Results show parks located in the middle of the city have **higher closeness** t
 :::: {.box-content .case-study-content}
 
 ::: {.box-title .case-study-top}
-#### Practice & Reflection {-}
+## Practice & Reflection {-}
 :::
 
 Some questions to reflect and better understand the basic concepts and applications of network analysis explained in this chapter:

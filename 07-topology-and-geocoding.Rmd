@@ -28,13 +28,11 @@ Frequently, we need spatial data to behave and relate and in specific and predic
 #### Learning Objectives {-}
 ::: 
 
-1. Understand the role of topology in governing data behaviour
-2. Recognize some examples and uses of 2D topologies
-3. Practice solving topological errors
-4. Identify spatial data models that support topology
-5. Understand the process of geocoding
-6. Practice geocoding addresses and reverse geocoding addresses to other coordinate systems
-7. Analyze attributes of census data
+1. Understand the role of topology in governing data behaviour and data organization
+2. Recognize some examples and uses of 2D and 3D topologies
+3. Understand the role of bounding a set of points from triangulation and convex hulls
+4. Synthesize the process of geocoding
+5. Practice geocoding addresses and reverse geocoding addresses to other coordinate systems
 
 ::::
 
@@ -347,22 +345,22 @@ knitr::include_graphics("images/07-delaunay-triangulation-circumcircles.png")
 
 Figure \@ref(7-delaunay-triangulation) shows a Delaunay triangulation for a set of 50 points. We can see that sliver triangles mostly occur on the edge of the extent of the points. Delaunay triangulations can be performed both in 2- and 3-dimensional Euclidean space and are therefore important for representing 3D surfaces as well as performing spatial estimation over 2D areas from a set of points.
 
-``` {r 7-delauney-triangulation-setup2, echo=FALSE, cached=T}
+``` {r 7-delaunay-triangulation-setup2, echo=FALSE, cached=T}
 ## Not run: creates image
 ## set.seed(14)
 ## x <- runif(50)
 ## y <- runif(50)
 ## tesselation <- deldir(x,y)
 ## tiles <- tile.list(tesselation)
-## png("/images/07-delauney-triangulation.png",height=600,width=600)
+## png("/images/07-delaunay-triangulation.png",height=600,width=600)
 ## plot(tiles,xlim=c(-0.25,1.25),ylim=c(-0.25,1.25),border="white")
 ## plot.deldir(tesselation,add=T,wlines="triang",xlim=c(-0.25,1.25),ylim=c(-0.25,1.25),cmpnt_col=c("black",NA,NA,"black","black"),pch=19)
 ## dev.off()
 ```
 
-``` {r 7-delauney-triangulation, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste("Delauney triangulation of 50 random points. Pickell, CC-BY-SA-4.0.")
-knitr::include_graphics("images/07-delauney-triangulation.png")
+``` {r 7-delaunay-triangulation, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste("Delaunay triangulation of 50 random points. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/07-delaunay-triangulation.png")
 ```
 
 ### Thiessen polygons
@@ -422,7 +420,7 @@ knitr::include_graphics("images/07-circle-polygon-centroid.png")
 
 ### Convex hull
 
-A **convex hull** is the smallest polygon that contains some set of points. It is sometimes also referred to as a "convex envelope" or "convex closure" because the perimeter of the polygon is formed by connecting the outermost points and closing or enveloping the remaining points. The convex hull is therefore the mathematical implementation of **topological closure**, where closure refers to the smallest closed set of points that contain the set of points. In practice, the convex hull is a bit like applying a rubber band around the outermost points so that the tension of the rubber band forms straight lines between the pairs of points in the closed set (Figure \@ref(fig:7-2d-convex-hull).
+A **convex hull** is the smallest polygon that contains some set of points. It is sometimes also referred to as a "convex envelope" or "convex closure" because the perimeter of the polygon is formed by connecting the outermost points and closing or enveloping the remaining points. The convex hull is therefore the mathematical implementation of **topological closure**, where closure refers to the smallest closed set of points that contain the set of points. In practice, the convex hull is a bit like applying a rubber band around the outermost points so that the tension of the rubber band forms straight lines between the pairs of points in the closed set (Figure \@ref(fig:7-2d-convex-hull)). There are several algorithms for computing the convex hull, including Jarvis' March (Jarvis 1974), Graham's Scan (Graham 1972), quickhull (Barber et al 1996), and CudaHull (Stein et al 2012).
 
 ``` {r 7-create-convex-hull, echo=FALSE}
 ## Not run: creates image
@@ -445,9 +443,9 @@ knitr::include_graphics("images/07-2d-convex-hull.png")
 
 Convex hulls are easily drawn by hand and are used for identifying a natural boundary for a sample set of points. Formally, the calculation is 
 
-### Convex alpha hull
+### Convex alpha hulls and alpha shapes
 
-Convex hulls can be extended to the concave case by adding a parameter 
+Convex hulls can be generalized to the concave case, called **convex alpha hulls** or **α-shapes (alpha shapes)**, by adjusting the maximum radius of the circumcircles through a parameter, alpha $α$. The objective of a convex alpha hull is to minimize the α-shape formed by circumcircles of radius less than or equal to $α$. Similar to the Delaunay triangulation, the circumcircles must be _open_, meaning they contain no other points in the set. Defined in this way, the final α-shape may not result in closure of the full set of points and can result in holes where the distance between points exceeds $2α$. Surprisingly, α-shapes are prone to not existing at all. For the case of $α=0$, applying circumcircles of radius 0 results in an empty α-shape and only the input set of points are returned without any boundaries. For $α=∞$, the α-shape is equivalent to the convex hull because if we use circumcircles with an infinitely large radius, then all points in the set are bound to be enclosed by the resulting α-shape, which like the convex hull must also minimize the bounding area. Figure \@ref(fig:7-2d-alpha-hull) shows an animation of the α-shapes for $α=1$ to $α=0$ for our set of 50 points.
 
 ``` {r 7-create-alpha-hull, echo=F}
 ## Not run; creates images for gif
@@ -486,26 +484,11 @@ knitr::include_graphics("images/07-platonic-polyhedrons.gif")
 
 ### 3D Convex hull
 
-The 3D convex hull is the smallest convex polyhedron that contains the 3D points (Figure \@ref(fig:7-3d-convex-hull). The 3D problem is computationally intensive and there are several popular algorithms for achieving the 3D convex hull such as Jarvis' March (Jarvis 1974), quickhull (Barber et al 1996), and CudaHull (Stein et al 2012). The 3D convex hull is frequently produced in order to generate a 3D object from a laser scan. Since points are 1-dimensional they have limited use beyond their enumeration within a volume or on a plane or on a line. By contrast, a 3D convex hull produces a polyhedron, which can be used to visualize the object that was initially scanned into a 3D point cloud. The 2D polygon faces that comprise a polyhedron can provide _shape_ and interact with a simulated light source to improve perception of _depth_, which are qualities that are not provided by 3D point clouds. 
+The 3D convex hull is the smallest convex polyhedron that contains a set of 3D points (Figure \@ref(fig:7-3d-convex-hull). The 3D problem is not unlike the 2D problem for finding the 2D convex hull, except instead of using 2D circumcircles we use 3D circumscribed spheres. Otherwise, the overall objective is the same, minimize the 3D polyherdron that encloses the 3D set of points. The 3D convex hull is frequently produced in order to generate a 3D object from a laser scan. Since points are 1-dimensional they have limited use beyond their enumeration within a volume or on a plane or on a line. By contrast, a 3D convex hull produces a polyhedron, which can be used to visualize the object that was initially scanned into a 3D point cloud. The 2D polygon faces that comprise a polyhedron can provide _shape_ and interact with a simulated light source to improve perception of _depth_, which are qualities that are not provided by 3D points alone.  
 
-### 3D alpha-convex (concave) hull
+### 3D Convex alpha hull
 
-Figure \@ref(fig:7-3d-alpha-hull-deciduous) below shows a 3D 
-
-```{r setup-3d-alpha-hull-fsc, echo=FALSE, cached=T, warning=F, include=F}
-las <- readLAS("Data/07/07-fsc-building.las")
-z <- las[,3]-95.01
-x <- las[,1]-481887
-y <- las[,2]-5456393
-xyz <- cbind(x,y,z)
-ahull.b <- ashape3d(xyz,alpha=1)
-```
-
-``` {r 7-3d-alpha-hull-fsc, echo=FALSE, out.width = '75%', fig.cap=fig_cap, webgl = TRUE}
-fig_cap <- paste0("3D alpha-convex hull for the Forest Sciences Centre building at the University of British Columbia. The alpha hull was generated using alpha = 1. <a href='",baseurl,"#7-3d-alpha-hull-fsc'>Animated figure can be viewed in the web browser version of the textbook.</a> Data from City of Vancouver and licensed under the <a href='",covlicense,"'>Open Government License - Vancouver</a>. Pickell, CC-BY-SA-4.0.")
-plot3d(ahull.b,xlim=c(0,90),ylim=c(0,90),zlim=c(0,90))
-rglwidget(width = 600, height = 600, reuse=FALSE, elementId="7-3d-alpha-hull-fsc")
-```
+The 3D convex alpha hull is Figure \@ref(fig:7-3d-alpha-hull-deciduous) below shows a 3D convex alpha hull for a deciduous tree near the 
 
 ```{r setup-3d-alpha-hull-deciduous, echo=FALSE, cached=T, warning=F, include=F}
 las <- readLAS("Data/07/07-deciduous-tree.las")
@@ -542,12 +525,12 @@ rglwidget(width = 600, height = 600, reuse=FALSE, elementId="7-3d-alpha-hull-con
 
 We can derive some useful information from these 3D convex alpha hulls. One obvious use of a polyhedron such as this is to calculate the volume, which for a tree might inform the amount of merchantable wood in the stem or the size of the canopy. Also, the polyhedron has replaced the points with polygon faces, which can be used to model shadowing and shading by simulating the position of the Sun in the sky. 
 
-### 3D Voronoi tesselation
+### 3D Voronoi tessellation
 
-Similar to Thiessen polygons, Voronoi tessellations can be undertaken for 3D point clouds. 3D Voronoi tessellations produce nearest neighbour polyhedrons around the space of each 3D point. These 3D Voronoi tessellations can be used to    
+Similar to Thiessen polygons, Voronoi tessellations can be undertaken for 3D point clouds. 3D Voronoi tessellations produce nearest neighbour polyhedrons around the space of each 3D point. Just as in the 2D case, these 3D Voronoi tessellations can be used to partition the 3D space. Figure \@ref(fig:7-neper) shows the use of a 3D Voronoi tessellation for use in mapping and visualizing polycrystals.
 
 ```{r 7-neper, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste("3D Voronoi tesselation. Neper, GPL 3.0")
+fig_cap <- paste("3D Voronoi tesselation of simulated polycrystals. <a href='https://github.com/rquey/neper' target='_blank'>Neper</a>, GPL 3.0")
 knitr::include_graphics("images/07-neper.png")
 ```
 
@@ -616,11 +599,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem
 
 Barber, C.B., Dobkin, D.P., and Huhdanpaa, H. 1996. The quickhull algorithm for convex hulls. ACM Transactions on Mathematical Software, 22(4): 469-483. https://doi.org/10.1145/235815.235821
 
-Jarvis, R.A. 1974. On the identification of the convex hull of a finite set of points in the plane. Information Processing Letters, 2(1):18-21. https://doi.org/10.1016/0020-0190(73)90020-3
-
-Stein, A., Geva, E., and El-Sana, J. 2012. CudaHull: Fast parallel 3D convex hull on the GPU. Computers and Graphics, 36(4): 265-271. https://doi.org/10.1016/j.cag.2012.02.012
-
 Delaunay, B.N. 1934. Sur la Sph`ere Vide. Izvestia Akademia Nauk SSSR, VII Seria, Otdelenie
 Matematicheskii i Estestvennyka Nauk, 7:793–800.
 
+Graham, R.L. 1972. An Efficient Algorithm for Determining the Convex Hull of a Finite Planar Set. Information Processing Letters, 1(4): 132–133. doi:10.1016/0020-0190(72)90045-2.
+
+Jarvis, R.A. 1974. On the identification of the convex hull of a finite set of points in the plane. Information Processing Letters, 2(1):18-21. https://doi.org/10.1016/0020-0190(73)90020-3
+
 Okabe, A., Boots, B., and Sugihara, K. 2007. Nearest neighbourhood operations with generalized Voronoi diagrams: a review. International Journal of Geographical Information Systems, 8(1): 43-71. https://doi.org/10.1080/02693799408901986
+
+Stein, A., Geva, E., and El-Sana, J. 2012. CudaHull: Fast parallel 3D convex hull on the GPU. Computers and Graphics, 36(4): 265-271. https://doi.org/10.1016/j.cag.2012.02.012

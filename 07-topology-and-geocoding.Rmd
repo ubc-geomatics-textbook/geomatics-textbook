@@ -386,32 +386,7 @@ fig_cap <- paste("Thiessen polygons of 50 random points. Pickell, CC-BY-SA-4.0."
 knitr::include_graphics("/images/07-2d-thiessen-polygons.png")
 ```
 
-Thiessen polygons are a product of Delaunay triangulation described in the previous section. Figure \@ref(7-delaunay-triangulation-circumcircles-voronoi) shows the relationship between the points, triangulation, circumcircles, and the Thiessen polygons. Connecting the circumcentres of the circumcircles produces the Voronoi diagram or Thiessen polygons (Figure \@ref(7-delaunay-triangulation-thiessen-polygons))
-
-``` {r 7-delaunay-triangulation-circumcircles-voronoi-setup, echo=FALSE}
-## Not run: creates image
-## set.seed(7)
-## x <- runif(4)
-## y <- runif(4)
-## tesselation <- deldir(x,y)
-## png("/images/07-delaunay-triangulation-circumcircles-voronoi.png",height=600,width=600)
-## par(mar=c(0,0,0,0))
-## plot(x,y,xlim=c(-0.25,1.25),ylim=c(-0.25,1.25),pch=19,xaxt="n",yaxt="n",ylab="",xlab="",bty="n")
-## c1 <- circum(x[2:4],y[2:4])
-## circles(c1$x,c1$y,c1$radius,col="grey")
-## points(c1$x,c1$y,pch=19,col="red")
-## c2 <- circum(x[c(1:3)],y[c(1:3)])
-## circles(c2$x,c2$y,c2$radius,col="grey")
-## points(x,y,pch=19)
-## points(c2$x,c2$y,pch=19,col="red")
-## plot.deldir(tesselation,add=T,wlines="both",xlim=c(-0.25,1.25),ylim=c(-0.25,1.25),cmpnt_col=c("black","red","black","black","black"),pch=19,bty="n")
-## dev.off()
-```
-
-``` {r 7-delaunay-triangulation-circumcircles-voronoi, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste("Delaunay triangulation of four points. Black lines show the triangulation, grey lines represent the circumcircles connecting the three points of each triangle, red points represent the circumcentres, and the red dotted lines show that connecting the circumcentres forms the Voronoi diagram. Pickell, CC-BY-SA-4.0.")
-knitr::include_graphics("/images/07-delaunay-triangulation-circumcircles-voronoi.png")
-```
+Thiessen polygons are a product of Delaunay triangulation described in the previous section. Figure \@ref(7-delaunay-triangulation-thiessen-polygons) shows the relationship between the points, triangulation, circumcircles, and the Thiessen polygons. Connecting the circumcentres of the circumcircles produces the Voronoi diagram (Figure \@ref(7-delaunay-triangulation-thiessen-polygons)).
 
 ``` {r 7-delaunay-triangulation-thiessen-polygons-setup, echo=FALSE, cached=T}
 ## Not run: creates image
@@ -451,16 +426,16 @@ A **convex hull** is the smallest polygon that contains some set of points. It i
 
 ``` {r 7-create-convex-hull, echo=FALSE}
 ## Not run: creates image
-set.seed(14)
-x <- runif(50)
-y <- runif(50)
-xy <- cbind(x,y)
-hpts <- chull(x,y)
-hpts <- c(hpts, hpts[1])
-png("/images/07-2d-convex-hull.png",height=600,width=600)
-plot(x,y,pch = 19,xlab="x-coordinate",ylab="y-coordinate",xlim=c(-0.1,1.1),ylim=c(-0.1,1.1))
-lines(xy[hpts,],lwd=2)
-dev.off()
+## set.seed(14)
+## x <- runif(50)
+## y <- runif(50)
+## xy <- cbind(x,y)
+## hpts <- chull(x,y)
+## hpts <- c(hpts, hpts[1])
+## png("/images/07-2d-convex-hull.png",height=600,width=600)
+## plot(x,y,pch = 19,xlab="x-coordinate",ylab="y-coordinate",xlim=c(-0.1,1.1),ylim=c(-0.1,1.1))
+## lines(xy[hpts,],lwd=2)
+## dev.off()
 ```
 
 ``` {r 7-2d-convex-hull, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
@@ -529,7 +504,7 @@ ahull.b <- ashape3d(xyz,alpha=1)
 ``` {r 7-3d-alpha-hull-fsc, echo=FALSE, out.width = '75%', fig.cap=fig_cap, webgl = TRUE}
 fig_cap <- paste0("3D alpha-convex hull for the Forest Sciences Centre building at the University of British Columbia. The alpha hull was generated using alpha = 1. <a href='",baseurl,"#7-3d-alpha-hull-fsc'>Animated figure can be viewed in the web browser version of the textbook.</a> Data from City of Vancouver and licensed under the <a href='",covlicense,"'>Open Government License - Vancouver</a>. Pickell, CC-BY-SA-4.0.")
 plot3d(ahull.b,xlim=c(0,90),ylim=c(0,90),zlim=c(0,90))
-rglwidget(width = 600, height = 600, reuse=FALSE)
+rglwidget(width = 600, height = 600, reuse=FALSE, elementId="7-3d-alpha-hull-fsc")
 ```
 
 ```{r setup-3d-alpha-hull-deciduous, echo=FALSE, cached=T}
@@ -547,7 +522,7 @@ ahull.d <- ashape3d(xyz,alpha=0.05)
 ``` {r 7-3d-alpha-hull-deciduous, echo=FALSE, out.width = '75%', fig.cap=fig_cap, webgl = TRUE}
 fig_cap <- paste0("3D concave alpha hull for a deciduous tree (species here). The alpha hull was generated using alpha = 0.05. Data collected by Spencer Dakin Kuiper with a GeoSlam terrestrial laser scanner in Vancouver, Canada. <a href='",baseurl,"#7-3d-alpha-hull-deciduous'>Animated figure can be viewed in the web browser version of the textbook.</a> Pickell, CC-BY-SA-4.0.")
 plot3d(ahull.d,col="#2D5A27")
-rglwidget(width = 600, height = 600, reuse=FALSE)
+rglwidget(width = 600, height = 600, reuse=FALSE, elementId="7-3d-alpha-hull-deciduous")
 ```
 
 ``` {r setup-3d-alpha-hull-conifer, echo=F, cached=T}
@@ -562,7 +537,7 @@ ahull.c <- ashape3d(xyz,alpha=0.1)
 ``` {r 7-3d-alpha-hull-conifer, echo=FALSE, out.width = '75%', fig.cap=fig_cap, webgl = TRUE}
 fig_cap <- paste("3D convex alpha hull for a coniferous tree (<i>Abies lasiocarpa</i>). The alpha hull was generated using alpha = 0.1. Data collected by Yangqian (Frederick) Qi with a terrestrial laser scanner in British Columbia, Canada. <a href='",baseurl,"#7-3d-alpha-hull-conifer'>Animated figure can be viewed in the web browser version of the textbook.</a> Pickell, CC-BY-SA-4.0.")
 plot3d(ahull.c,xlim=c(40,64),ylim=c(21,45),col="#2D5A27")
-rglwidget(width = 600, height = 600, reuse=FALSE)
+rglwidget(width = 600, height = 600, reuse=FALSE, elementId="7-3d-alpha-hull-conifer")
 ```
 
 We can derive some useful information from these 3D convex alpha hulls. One obvious use of a polyhedron such as this is to calculate the volume, which for a tree might inform the amount of merchantable wood in the stem or the size of the canopy. Also, the polyhedron has replaced the points with polygon faces, which can be used to model shadowing and shading by simulating the position of the Sun in the sky. 
@@ -592,7 +567,7 @@ fig_cap <- paste("The 100-block of Main Street represents all civic addresses in
 knitr::include_graphics("images/07-left-right-side.png")
 ```
 
-Suppose we have three addresses that we want to locate geographically along this segment: 101 Main Street; 150 Main Street; and 198 Main Street. If this segment of Main Street is mapped in a GIS, then we know the exact geographic coordinates (i.e., latitude and longitude) of the vertices and nodes (ends) of the street segment. Within the attribute table for this segment, we would find four fields: $FROM_LEFT$; $TO_LEFT$; $FROM_RIGHT$; and $TO_RIGHT$ (shown below).
+Suppose we have three addresses that we want to locate geographically along this segment: 101 Main Street; 150 Main Street; and 198 Main Street. If this segment of Main Street is mapped in a GIS, then we know the exact geographic coordinates (i.e., latitude and longitude) of the vertices and nodes (ends) of the street segment. Within the attribute table for this segment, we would find four fields: FROM_LEFT; TO_LEFT; FROM_RIGHT; and TO_RIGHT (shown below).
 
 ```{r, echo=FALSE}
 R <- data.frame(STREET_NAME="Main Street",FROM_LEFT=101,TO_LEFT=199,FROM_RIGHT=100,TO_RIGHT=199)

@@ -120,9 +120,9 @@ Airplanes and helicopters are still the most common platforms for LiDAR data col
 
 As laser units have decreased in size, we have been able to mount LiDAR units to smaller platforms. Drones (also known as unmanned aerial vehicles (UAV) or remotely piloted aerial systems (RPAS)) are extremely convenient to collect high density point clouds over small areas. They typically fly relatively close to the forest (e.g. 50 m above the trees) and fly a pre-defined flight route so ensure evenly spaced data collection. Typical point densities range from hundreds to thousands of points per meter squared. A major limitation of drones is currently battery life, as acquisition campaigns are limited by how long the drone can fly for (approximately 20 - 30 minutes). This means that collecting large amounts of data is difficult in remote locations.
 
-```{r 15-LiDAR-on-Drone-2, fig.cap = fig_cap, out.width="70%", echo = FALSE}
+```{r 15-LiDAR-on-Drone, fig.cap = fig_cap, out.width="70%", echo = FALSE}
 fig_cap <- paste("Drone mounted LiDAR. This technology is rapidly developing, with many companies working towards creating units capable of acquiring high density datasets over large areas. Animated figure can be viewed in the web browser version of the textbook. ('LiDARUSA Snoopy 120 LiDAR', @Clapurhands2019,  CC-BY-SA-4.0).")
-knitr::include_graphics(here::here("images", "15-LiDAR-on-Drone-2.png"))
+knitr::include_graphics(here::here("images", "15-LiDAR-on-Drone.png"))
 ```
 
 ## Mobile Laser Scanning
@@ -138,7 +138,7 @@ Terrestrial Laser Scanning (TLS) is a static system, meaning that is is placed i
 Satellites are a relatively new platform for LiDAR sensors. Two current satellite sensors are highlighted here; ICESat-2 (Ice, Cloud and land Elevation Satellite) and GEDI (Global Ecosystem Dynamics Investigation). Both are examples of large-footprint, profiling LiDAR systems. ICESat-2 was launched in 2018, with the objectives to determine sea-ice thickness and measure vegetation canopy height for large scale biomass estimation [@NASA2021a]. The ICESat-2 LiDAR sensor is composed of 6 beams in 3 pairs, each with a footprint size of 13 m [@NASA2021a]. GEDI is a LiDAR sensor that was installed on the International Space Station in 2018, with 3 lasers producing 10 parallel tracks of observations, and a footprint size of 25 m [@NASA2021]. The GEDI sensor can be seen in panel 4 of Figure \@ref(fig:15-LiDAR-Platforms).
 
 ```{r 15-LiDAR-Platforms, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste("LiDAR Platforms 1: A terrestrial laser scanner (TLS). ('Lidar P1270901.png', @Monniaux, CC-BY-SA-3.0). 2: A hand-held moblie laser scanner (MLS). (Du Toit, CC-BY-4.0). 3: Car mounted MLS. ('3D mobile mapping unit', @OregonDepartmentofTransportation2016, CC-BY-2.0)'. 4: GEDI, a spaceborne LiDAR sensor. Animated figure can be viewed in the web browser version of the textbook. ('A New Hope: GEDI to Yield 3D Forest Carbon Map', @NEONEducation2014, CC-BY-2.0).")
+fig_cap <- paste("LiDAR Platforms 1: A terrestrial laser scanner (TLS). ('Lidar P1270901.jpg', @Monniaux, CC-BY-SA-3.0). 2: A hand-held moblie laser scanner (MLS). (Du Toit, CC-BY-4.0). 3: Car mounted MLS. ('3D mobile mapping unit', @OregonDepartmentofTransportation2016, CC-BY-2.0)'. 4: GEDI, a spaceborne LiDAR sensor. Animated figure can be viewed in the web browser version of the textbook. ('A New Hope: GEDI to Yield 3D Forest Carbon Map', @NEONEducation2014, CC-BY-2.0).")
 knitr::include_graphics(here::here("images", "15-LiDAR-Platforms.png"))
 ```
 

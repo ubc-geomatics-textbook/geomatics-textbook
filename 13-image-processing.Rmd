@@ -53,29 +53,29 @@ imagery. Before diving into specific processing workflows that render
 imagery scientifically useful, however, it is important to review some
 key terms.
 
-First and foremost, *image processing,* or *digital image analysis,*
+First and foremost, **image processing,** or **digital image analysis,**
 refers to any actions taken to improve the accuracy of one or more
 component of raw imagery. In remote sensing science, the goal of image
-processing is to generate a *product* that provides accurate and useful
+processing is to generate a **product** that provides accurate and useful
 information for scientific pursuit. This is in contrast to image
 processing for artistic purposes, which could include many similar
 steps, but focus on generating a product that is visually appealing.
 
-*Noise* is another common term associated with image processing and it
+**Noise** is another common term associated with image processing and it
 refers to any element of the data that is not wanted. There are a
 variety of noise types, which we will discuss later. In contrast to
-noise, *signal* describes wanted components of the imagery. Combined,
+noise, **signal** describes wanted components of the imagery. Combined,
 signal and noise provide guidance on what specific steps should be taken
 in relation to the data during image processing. Before they are
 addressed, however, it is also important to confirm the spatial accuracy
 of the data.
 
-It is also important to review the elements of an *image*, or *raster*.
+It is also important to review the elements of an **image**, or **raster**.
 The term raster refers to a data type comprised of a number of cells to
 which values are assigned. An image is a raster with cells values that
 represented some function of observed electromagnetic radiation. The
-raster cells in images are often referred to as *picture elements*, or
-*pixels*. The terms cell and pixel are considered interchangeable when
+raster cells in images are often referred to as *picture elements**, or
+**pixels**. The terms cell and pixel are considered interchangeable when
 discussing imagery. An empty raster, or image, would contain pixels with
 no information. To say an image has been collected would simply mean
 that a sensor has collected information and stored that information in
@@ -299,7 +299,7 @@ smoothing effect, however, as the output value of a cell may be outside
 the range of the 16 input cell values.
 
 ```{r 13-cubic, fig.cap = fig_cap, out.width = "75%", out.height="75%", echo = FALSE}
-    fig_cap <- paste("Demonstration of neighbour selection (red) using cubic convolution resampling to determine the value of a single cell (yellow) in an empty raster. (Hacker, CC-BY-4.0")
+    fig_cap <- paste("Demonstration of neighbour selection (red) using cubic convolution resampling to determine the value of a single cell (yellow) in an empty raster. Animated figure can be viewed in the web browser version of the textbook. (Hacker, CC-BY-4.0")
     knitr::include_graphics(here::here("images", "13-cubic_convolution.png"))
 ```
 
@@ -533,7 +533,7 @@ standard can be observed
 </p>
 
 ```{r 13-landsat-c2-l2, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-    fig_cap <- paste("Three unique Landsat 8 Collection 2 images. In order from left to right: Level-1 Top of Atmosphere reflectance image (no atmospheric correction), Level-2 atmospherically corrected surface reflectance and Level-2 surface temperature. Images were collected on May 3, 2013 over the Sapta Kosh River in Bairawa, Nepal. Created by Michelle A. Bouchard, USGS. Public domain.")
+    fig_cap <- paste("Three unique Landsat 8 Collection 2 images. In order from left to right: Level-1 Top of Atmosphere reflectance image (no atmospheric correction), Level-2 atmospherically corrected surface reflectance and Level-2 surface temperature. Images were collected on May 3, 2013 over the Sapta Kosh River in Bairawa, Nepal. Animated figure can be viewed in the web browser version of the textbook. Created by Michelle A. Bouchard, USGS. Public domain.")
     knitr::include_graphics(here::here("images", "13-landsat-c2-l2.png"))
 ```
 

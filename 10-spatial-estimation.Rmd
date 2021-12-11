@@ -1,5 +1,36 @@
 ## Spatial Estimation {#spatial-estimation}
 
+``` {r 10-load-packages-and-setup, echo = FALSE, include = FALSE}
+baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"
+library(broom)
+library(cowplot)
+library(dismo)
+library(dplyr)
+library(ggplot2)
+library(ggpubr)
+library(ggsn)
+library(ggspatial)
+library(gridExtra)
+library(gstat)
+library(knitr)
+library(leaflet)
+library(mapproj)
+library(maptools)
+library(plotly)
+library(raster)
+library(RColorBrewer)
+library(rgdal)
+library(rgeos)
+library(scales)
+library(sf)
+library(sp)
+library(spatialreg)
+library(spatstat)
+library(spdep)
+library(tmap)
+knitr::knit_hooks$set(webgl = hook_webgl)
+```
+
 **Geostatistics** uses the metrics based on statistical tools that are used to characterize the distribution of an event across the geographical region of interest [@Getis2004]. In context of spatial data, it is important to understand what is occurring where. Sometimes there is a detailed and precise information of an **event** (spatial phenomenon defined by its location and the characteristics that can be measured in both quantitative or qualitative scale) across the geographical area such that a continuous map can be built out of that information. While, most of the time, only discrete and unrepresentative information on the spatial event is collected, which doesnot allow to create a precise continuous surface of the event over entire geographic area of interest. In such scenario, we should focus on two things; 
 
 1) How can we best utilize the available discrete information to represent the event across entire area using the appropriate sampling strategies. 
@@ -126,11 +157,7 @@ As an investigator, when we make a sequence of selections from a population, at 
 
 For example, when we take another sample of 60 plots as in **Figure 10.2**, we can see that different **sampling units (plots)** are being selected from what we obtained in **Figure 10.1.**, this represent the **equal probability** of each sampling unit being selected.
 
-
-```{r , echo=FALSE, warning=FALSE, message=FALSE}
-library(plotly)
-library(ggplot2)
-library(scales)
+```{r 10-simple-random-sampling, echo=FALSE, warning=FALSE, message=FALSE}
 m <- matrix(c(1:625), nrow=25, ncol=25)
 df <- expand.grid(x=1:ncol(m),y=1:nrow(m))
 df$val <- m[as.matrix(df[c('y','x')])]
@@ -150,11 +177,7 @@ p
 
 **Figure 10.1.** \ref{fig:figs} Simple random sample of 60 units from a population of 625 units.
 
-
-```{r, echo=FALSE,warning=FALSE}
-library(plotly)
-library(ggplot2)
-library(scales)
+```{r 10-simple-random-sampling-2, echo=FALSE,warning=FALSE}
 m <- matrix(c(1:625), nrow=25, ncol=25)
 df2 <- expand.grid(x=1:ncol(m),y=1:nrow(m))
 df2$val <- m[as.matrix(df[c('y','x')])]
@@ -183,10 +206,7 @@ When a population under study is not **homogeneous** (similar in biological char
 For example, a forest under study is divided **(stratified)** into similar  regions  **Figure 10.3** defined by elevation, soil moisture, and soil nutrient gradient and random samples are taken within each strata. The stratification of a study region despite of its size can help to spread the sample over the entire study area.
 
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library(plotly)
-library(ggplot2)
-library(scales)
+```{r 10-stratified-random-sampling, echo=FALSE, warning=FALSE, message=FALSE}
 m <- matrix(c(1:400), nrow=20, ncol=20)
 df3 <- expand.grid(x=1:ncol(m),y=1:nrow(m))
 df3$val <- m[as.matrix(df3[c('y','x')])]
@@ -212,11 +232,7 @@ p
 
 **Figure 10.3.** \ref{fig:figs} Stratified random sample within unequal strata within a study area.
 
-
-```{r, echo=FALSE,warning=FALSE}
-library(plotly)
-library(ggplot2)
-library(scales)
+```{r 10-stratified-random-sampling-2, echo=FALSE,warning=FALSE}
 m <- matrix(c(1:400), nrow=20, ncol=20)
 df <- expand.grid(x=1:ncol(m),y=1:nrow(m))
 df$val <- m[as.matrix(df[c('y','x')])]
@@ -241,18 +257,15 @@ p<-ggplot(n,aes(x=x, y=y, label=val)) +
         axis.ticks = element_blank(),
         axis.title = element_blank())
 p
-
 ```
+
 **Figure 10.4.** \ref{fig:figs} Stratified random sample from equal strata within a study area.
 
 ## Systematic Sampling
 
 A systematic sample uses a fixed grid or array to assign plots in a regular pattern **Figure 10.5** [@McRoberts2014]. The advantage of systematic sampling is that it maximizes the average distance between the plots and therefore minimizes spatial correlation among observations and increases statistical efficiency [@McRoberts2014]. In addition, a systematic sample, which is clearly seen to be representative in some sense, can be very convincing to decision-makers who lack experience with sampling [@McRoberts2014]. Raster grids such as digital elevation models (DEM) are some examples of systematic sample.
 
-```{r, echo=FALSE,warning=FALSE,message=FALSE}
-library(ggplot2)
-library(scales)
-library(dplyr)
+```{r 10-systematic-sampling, echo=FALSE,warning=FALSE,message=FALSE}
 m <- matrix(c(1:400), nrow=20, ncol=20)
 
 # Create row indicator
@@ -263,7 +276,6 @@ col_odd<- seq_len(ncol(df)) %% 2
 data_row_odd <- df[row_odd == 0,] 
 data_col_odd <- df[col_odd == 0,]
 # Subset odd rows
-
 p<-ggplot(data_col_odd,aes(x=x, y=y, label=val)) + 
   geom_tile(data=df, fill='transparent', colour = 'black') + 
   geom_rect(data=data_col_odd,aes(xmin = x, ymin = y, xmax = x + 0.3, ymax = y + 0.6),fill='black')+
@@ -275,15 +287,11 @@ p<-ggplot(data_col_odd,aes(x=x, y=y, label=val)) +
         axis.ticks = element_blank(),
         axis.title = element_blank())
 p
-
 ```
 
 **Figure 10.5.** \ref{fig:figs} Sample every second observation in the row 
 
-```{r, echo=FALSE,warning=FALSE}
-library(ggplot2)
-library(scales)
-library(dplyr)
+```{r 10-systematic-sampling-2, echo=FALSE,warning=FALSE}
 m <- matrix(c(1:400), nrow=20, ncol=20)
 
 # Create row indicator
@@ -292,7 +300,6 @@ df$val <- m[as.matrix(df[c('y','x')])]
 row_odd <- seq_len(nrow(df)) %% 2 
 data_row_odd <- df[row_odd == 0,] 
 # Subset odd rows
-
 p<-ggplot(data_row_odd,aes(x=x, y=y, label=val)) + 
   geom_tile(data=df, fill='transparent', colour = 'black') + 
   geom_rect(data=data_row_odd,aes(xmin = x, ymin = y, xmax = x + 0.3, ymax = y + 0.6),fill='black')+
@@ -304,7 +311,6 @@ p<-ggplot(data_row_odd,aes(x=x, y=y, label=val)) +
         axis.ticks = element_blank(),
         axis.title = element_blank())
 p
-
 ```
 **Figure 10.6.** \ref{fig:figs} Sample all the observation in every second column 
 
@@ -312,10 +318,7 @@ p
 
 In cluster sampling, rather than sampling individual units, which might be geographically spread over great distances, we can sample groups (clusters) of plots that occur naturally in the study area [@Teddlie2007]. Cluster sampling is employed when we want to be more efficient in terms of the use of time and money to generate a more efficient probability sample [@Teddlie2007].
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library(plotly)
-library(ggplot2)
-library(scales)
+```{r 10-cluster-sampling, echo=FALSE, warning=FALSE, message=FALSE}
 m <- matrix(c(1:400), nrow=20, ncol=20)
 df <- expand.grid(x=1:ncol(m),y=1:nrow(m))
 df$val <- m[as.matrix(df[c('y','x')])]
@@ -338,6 +341,7 @@ p<-ggplot(df,aes(x=x, y=y,label=val)) +
         axis.title = element_blank())
 p 
 ```
+
 **Figure 10.7.** \ref{fig:figs} Cluster of plots selected from entire study area
 
 ## Non-probability Sampling
@@ -355,7 +359,6 @@ In this sampling, we want to focus on more specific case which is unique and rar
 ## Sequential Sampling
 
 In this sampling method, we would pick up a single or group of cases in an interval of time, analyzes the results and then move on to the next group of cases and so on [@Teddlie2007]. The goal of the research project is to generate some theory (or broadly defined themes) [@Teddlie2007]. 
-
 
 ## Spatial Autocorrelation
 
@@ -379,7 +382,8 @@ The information attached to the study objects that are spatially distributed in 
 
 ::::
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, cache=TRUE}
+```{r 10-spatial-autocorrelation, echo=FALSE, warning=FALSE, message=FALSE}
+
 n<- matrix(c(1:400), nrow=20, ncol=20)
 
 # Create row indicator
@@ -422,8 +426,6 @@ q <- ggplot(df3)+ geom_tile(aes(x, y, fill = ifelse(val > 0,val, NA)),
         axis.ticks = element_blank(),
         axis.title = element_blank())
 
-library(cowplot)
-
 grids_bs <- plot_grid(p,q,ncol = 2, labels = c('Positive autocorrelation', 'Negative autocorrelation'), align = "h")
 grids_bs
 ```
@@ -461,31 +463,23 @@ For this case study, we will use ground plot data from Change Monitoring Invento
 
 <p id="box-text">
 </p>
-```{r , echo=FALSE, warning=FALSE, message=FALSE, cache=TRUE}
-###Morans'I using spdep'#########################################
-library(raster)
-library(rgdal)
+
+```{r 10-morans-I-load-data-and-setup, echo=F, warning=F, message=F}
+options(stringsAsFactors = FALSE)
 filename <- readOGR(dsn="data/10",layer="Block_basa_area")
+plots<- read.csv("data/10/CMI.csv",header=T)
+```
+
+```{r 10-morans-I, echo=FALSE, warning=FALSE, message=FALSE}
+###Morans'I using spdep'#########################################
 
 ####################### Plot the data #######################
-
-library(sf)
-library(ggplot2)
-library(broom)
-library(RColorBrewer)
-library(rgeos)
-library(dplyr)
-library(ggspatial)
 # note that you don't need to call maptools to run the code below but it needs to be installed.
-library(maptools)
-# to add a north arrow and a scale bar to the map
-library(ggsn)
-library(mapproj)
+# to add a north arrow and a scale bar to the map libraries: ggsn and mapproj
 # set factors to false
-options(stringsAsFactors = FALSE)
+
 
 ### Convert the spatial data into ata frame ##########
-
 filename_df <- tidy(filename)
 # make sure the shapefile attribute table has an id column
 filename$id <- rownames(filename@data)
@@ -506,14 +500,9 @@ will_df <- left_join(will_df,
                          will@data,
                          by = "id")
 
-
-
 ###################### Bringing the CMI plots over williams lake block and 100 miles block
 
-plots<- read.csv("data/10/CMI.csv",header=T)
-
 ##################### Creating the map using ggplot###################
-
 
 t<-ggplot() +
   geom_polygon(data = filename_df,
@@ -554,6 +543,7 @@ t<-ggplot() +
         legend.title=element_text(size=10))
 t
 ```
+
 **Figure 10.9.** \ref{fig:figs} CMI plots location for williams lake TSA and 100 miles house TSA. Basal area has been calculated using the sum of the basal area for each plot (dot) over the given polygon.
 :::
 
@@ -568,17 +558,12 @@ We will calculate the Moran's I for the basal area variable pertaining to the po
 
 The Moran’s I statistic is the correlation coefficient for the relationship between a variable and its surrounding values. But before we go about computing this correlation, we need to come up with a way to define a neighborhood. There are two ways to define neighborhood namely; contiguity for spatial **polygon data** and distance-based approach for the spatial **point data** and polygon data both. For polygon data, contiguity based neighborhood selection can be adopted using two widely used method, respectively known as ***Rook's case*** or ***Queen's case*** **Figure 10.10**.
 
-```{r, echo=FALSE, Message=FALSE, Warinig=FALSE, cache=TRUE}
-library(plotly)
-library(ggplot2)
-library(scales)
+```{r 10-using-contiguity, echo=FALSE, Message=FALSE, Warinig=FALSE}
 m <- matrix(c(1:9), nrow=3, ncol=3)
 df3 <- expand.grid(x=1:ncol(m),y=1:nrow(m))
 df3$val <- m[as.matrix(df3[c('y','x')])]
-#n <- df3[sample(nrow(df3), 40, replace = FALSE, prob = NULL),]
 p<-ggplot(df3,aes(x=x, y=y, label=val)) + 
   geom_tile(data=df3, fill='transparent', colour = 'black') + 
-  #geom_tile(data=n,fill='black')+
   geom_rect(aes(xmin =1.5,xmax = 2.5,ymin = 1.5, ymax = 2.5),
             fill = 'black',alpha=0.5,color = "black",size = 2)+
   geom_rect(aes(xmin =0.5,xmax = 1.5,ymin = 2.5, ymax = 3.5),
@@ -599,7 +584,6 @@ p<-ggplot(df3,aes(x=x, y=y, label=val)) +
 
 q<-ggplot(df3,aes(x=x, y=y, label=val)) + 
   geom_tile(data=df3, fill='transparent', colour = 'black') + 
-  #geom_tile(data=n,fill='black')+
   geom_rect(aes(xmin =1.5,xmax = 2.5,ymin = 1.5, ymax = 2.5),
             fill = 'black',alpha=0.5,color = "black",size = 2)+
   geom_rect(aes(xmin =0.5,xmax = 1.5,ymin = 2.5, ymax = 3.5),
@@ -625,41 +609,18 @@ q<-ggplot(df3,aes(x=x, y=y, label=val)) +
         axis.line  = element_blank(),
         axis.ticks = element_blank(),
         axis.title = element_blank())
-
-library(cowplot)
-
 grids_bs <- plot_grid(p,q,ncol = 2, labels = c('Rooks contiguity', 'Queens contiguity'), align = "h")
 grids_bs
 ```
+
 **Figure 10.10.** \ref{fig:figs} Rook's  (left) and Queen's (right) case for searching the neighborhood (grey unit) for the darker unit in the center.
 
 **Step 1: Build Neighborhood** 
 
 Since we are working with the polygons, we will use the queen's contiguity to build the neighborhood list using **polyn2b** function in **spdep** package in R and plot the the linkage**
 
-```{r, warning=FALSE, message=FALSE}
-############################################ read in the shape file ###
-library(raster)
-library(rgdal)
-filename <- readOGR(dsn="data/10",layer="Block_basa_area")
-
+```{r 10-using-contiguity-2, warning=FALSE, message=FALSE}
 ####################### Plot the data #######################
-
-library(sf)
-library(ggplot2)
-library(broom)
-library(RColorBrewer)
-library(rgeos)
-library(dplyr)
-library(ggspatial)
-# note that you don't need to call maptools to run the code below but it needs to be installed.
-library(maptools)
-# to add a north arrow and a scale bar to the map
-library(ggsn)
-library(mapproj)
-# set factors to false
-options(stringsAsFactors = FALSE)
-
 ### Convert the spatial data into data frame ##########
 
 filename_df <- tidy(filename)
@@ -671,30 +632,27 @@ filename_df <- left_join(filename_df,
                          filename@data,
                          by = "id")
 
-library(spdep)
 #Searching neighborhood
 w1 <- poly2nb(filename,row.names=filename$id,queen=T) ###### queens case
 coords <- coordinates(filename)
-
 plot(w1, coords, col="grey")
 ```
 
 **Step 2: Getting a Spatial Weight Matrix for Neighborhood List**
 
-```{r, warning=FALSE, message=FALSE}
+```{r 10-using-contiguity-3, warning=FALSE, message=FALSE}
 ww <- nb2listw(w1,style='B')
-#ww
 ```
 
 **Step 3: Calculate Moran's Correlation Coefficient Using the Spatial Weight Matrix for Neighbors**
 
-```{r, warning=FALSE, message=FALSE}
+```{r 10-using-contiguity-4, warning=FALSE, message=FALSE}
 ## calculating Moran's I 
 moran(filename$Basal, ww, n=length(ww$neighbours), S0=Szero(ww))
 ```
 
 **Step 4: Conduct the Significance Test for the Calculated Moran's I Value**
-```{r, warning=FALSE, message=FALSE}
+```{r 10-using-contiguity-5, warning=FALSE, message=FALSE}
 moran.test(filename$Basal, ww)
 ```
 
@@ -704,7 +662,7 @@ moran.test(filename$Basal, ww)
 
 The function knearneigh in 'spdep" package in R and build a spatial weight 
 
-```{r, warning=FALSE, message=FALSE}
+```{r 10-using-contiguity-6, warning=FALSE, message=FALSE}
 # Searching neighborhood
 col.knn <- knearneigh(coords, k=3)
 w<-knn2nb(col.knn,row.names = filename$id)
@@ -714,7 +672,7 @@ plot(w, coords, col="grey")
 ```
 **Step 2: Build a Spatial Weight Matrix for the Neighborhood List**
 
-```{r, warning=FALSE, message=FALSE}
+```{r 10-using-contiguity-7, warning=FALSE, message=FALSE}
 #spatial weight 
 ww1 <- nb2listw(w,style='B')
 #ww1
@@ -722,16 +680,15 @@ ww1 <- nb2listw(w,style='B')
 
 **Step 3: Calculate the Moran's I Coefficient** 
 
-```{r, warning=FALSE, message=FALSE}
+```{r 10-using-contiguity-8, warning=FALSE, message=FALSE}
 ## Calculating Moran's I 
 moran(filename$Basal, ww1, n=length(ww1$neighbours), S0=Szero(ww1))
 ```
 
 **Step 4: Significance Test for Calculated Moran's I**
 
-```{r, warning=FALSE, message=FALSE}
+```{r 10-using-contiguity-9, warning=FALSE, message=FALSE}
 moran.test(filename$Basal, ww1)
-
 ```
 
 Note that the value of Moran's I changed based on how we calculated the neighborhood list using two different approach. The interpretation change here based on the way we created the neighborhood. With contiguity based neighbor, we found a negative value for I (-0.11), indicating a negative weak spatial autocorrelation. When we run the significance test we can see that the p-value < 0.05 indicating the autocorrealtion is not significant. While using nearest neighbor we found that I (0.017) indicated a weak positive spatial autocorrelation. One reason for the difference is k-nearest neighbor uses polygon within a greater distance and can include more polygons as compared to contiguous neighbor which uses either "queens" or "rooks" contiguity [@Suryowati2018].
@@ -747,16 +704,15 @@ $$ C=\frac{(n-1) \sum_{i}^n\sum_{j}^nw_{ij}(y_i-y_j)^2}{2\sum_{i}^n\sum_{j}^nw_{
 
 ***For Queens Case***
 
-```{r, warning=FALSE, message=FALSE}
+```{r 10-gearys-c, warning=FALSE, message=FALSE}
 ## Geary C 
 geary(filename$Basal, ww, n=length(ww$neighbours),n1=length(ww$neighbours)-1, S0=Szero(ww))
 ## Significance test for Geary C
 geary.test(filename$Basal, ww)
-
 ```
 ***For Nearest Neighbour Method***
 
-```{r, warning=FALSE, message=FALSE}
+```{r 10-gearys-c-2, warning=FALSE, message=FALSE}
 ## Geary C
 geary(filename$Basal, ww1, n=length(ww1$neighbours),n1=length(ww1$neighbours)-1, S0=Szero(ww1))
 ## Significance test for Geary C
@@ -794,9 +750,7 @@ $$S_{i}= S-R$$
 Partial sill to total sill ratio: This is the structural variance explained by the fitted semivariogram model [@Rossi1992]. Amount of variance that is spatially autocorrelated [@Rossi1992].
 $$ Ratio =\frac {S_{i}}{S+R}$$
 
-```{r , echo=FALSE, warning=FALSE, message=FALSE, cache=TRUE}
-library(sp)
-library(gstat)
+```{r 10-semivariogram-modelling, echo=FALSE, warning=FALSE, message=FALSE}
 data(fulmar)
 fulmar.spdf <- SpatialPointsDataFrame(cbind(fulmar$x,fulmar$y),
                                       fulmar)
@@ -833,8 +787,8 @@ g<-ggplot(evgm,aes(x=dist,y=gamma))+geom_point()+
   labs(x = "lag distance (h)", y = "Semi-variance")+
   theme_bw()
 g
-
 ```
+
 **Figure 10.11.** \ref{fig:figs} An example semivariogram with all the components using the "Fulmar" [see details @Pebesma2005] data from "gstat" package in R.
 
 :::: {.box-content .case-study-content}
@@ -861,28 +815,24 @@ For this case study, we will use the ground plot data from Young stand monitorin
 
 In actual application, Gaussian model usually suggest that at shorter lag distance the correlation is extremely high and it drops faster compared to any other variogram models.
 
-```{r , warning=FALSE, message=FALSE}
-#load the libraries and data
-library(sp)
-library(gstat)
-library(ggplot2)
-data<-read.csv("data/10/FSJ.csv",header=T) ## plot data in the raw format
-library(dplyr) ## for data manupulation
+```{r 10-semivariogram-modelling-load-data-and-setup, echo=F, message=F, warning=F}
+data<-read.csv("data/10/FSJ.csv",header=T)
+```
+
+
+```{r 10-gaussian, warning=FALSE, message=FALSE}
 ## summarize the basal area at plot level
 data1<- data%>% 
   group_by(utm_easting,utm_northing) %>%
   summarise(Basal=sum(baha_L))
 coordinates(data1)= ~ utm_easting+utm_northing
-#bubble(data1, zcol='Basal', fill=TRUE, do.sqrt=FALSE, maxsize=3)
 
 ## Model formula
-
 TheVariogram=variogram(Basal~1, data=data1)
 ## Initiating the parameters for the variogram , starting search window
 TheVariogramModel <- vgm(psill=3000, model="Gau", nugget=100, range=20000)
 ## fitting a variogram model (Gaussian)
 FittedModel <- fit.variogram(TheVariogram, model=TheVariogramModel) 
-
 preds = variogramLine(FittedModel, maxdist = max(TheVariogram$dist))
 
 ## Making some nice plots
@@ -891,35 +841,27 @@ g<-ggplot(TheVariogram,aes(x=dist,y=gamma))+geom_point()+
   labs(x = "lag distance (h)", y = "Semi-variance")
 g
 ```
+
 **Figure 10.13.** \ref{fig:figs} A semivariogram using the Gaussian model for the basal area (m2/ha) for young stand monitoring plots.
 
 ## Spherical
 
 This model shows a progressive decrease of spatial autocorrelation (equivalently, an increase of semivariance) until some distance, beyond which autocorrelation is zero. The spherical model is one of the most commonly used models.
 
-```{r , warning=FALSE, message=FALSE}
-#load the libraries and data
-library(sp)
-library(gstat)
-library(ggplot2)
-data<-read.csv("data/10/FSJ.csv",header=T) ## plot data in the raw format
-library(dplyr) ## for data manupulation
+```{r 10-spherical, warning=FALSE, message=FALSE}
 ## summarize the basal area at plot level
 data1<- data%>% 
   group_by(utm_easting,utm_northing) %>%
   summarise(Basal=sum(baha_L))
 coordinates(data1)= ~ utm_easting+utm_northing
-#bubble(data1, zcol='Basal', fill=TRUE, do.sqrt=FALSE, maxsize=3)
 
 ## Model formula
-
 TheVariogram=variogram(Basal~1, data=data1)
 ## Initiating parameters
 TheVariogramModel <- vgm(psill=3000, model="Sph", nugget=60, range=20000)
 
 ## Fitting and predicting 
 FittedModel <- fit.variogram(TheVariogram, model=TheVariogramModel) 
-
 preds = variogramLine(FittedModel, maxdist = max(TheVariogram$dist))
 
 ## Some nice graph
@@ -928,83 +870,62 @@ g<-ggplot(TheVariogram,aes(x=dist,y=gamma))+geom_point()+
   labs(x = "lag distance (h)", y = "Semi-variance")
 g
 ```
+
 **Figure 10.14.** \ref{fig:figs} A semivariogram using the Spherical model for the basal area (m2/ha) for for young stand monitoring plots.
 
 ## Exponential
 
 Exponential model is used when spatial autocorrelation decreases exponentially with increasing distance. Here, the autocorrelation disappears completely only at an infinite distance.
 
-```{r ,  warning=FALSE, message=FALSE}
-#load the libraries and data
-library(sp)
-library(gstat)
-library(ggplot2)
-data<-read.csv("data/10/FSJ.csv",header=T) ## plot data in the raw format
-library(dplyr) ## for data manupulation
+```{r 10-exponential,  warning=FALSE, message=FALSE}
 ## summarize the basal area at plot level
 data1<- data%>% 
   group_by(utm_easting,utm_northing) %>%
   summarise(Basal=sum(baha_L))
 coordinates(data1)= ~ utm_easting+utm_northing
-#bubble(data1, zcol='Basal', fill=TRUE, do.sqrt=FALSE, maxsize=3)
 
 ## Model formula
-
 TheVariogram=variogram(Basal~1, data=data1)
-
 TheVariogramModel <- vgm(psill=3000, model="Exp", nugget=60, range=20000)
-
 FittedModel <- fit.variogram(TheVariogram, model=TheVariogramModel) 
-
 preds = variogramLine(FittedModel, maxdist = max(TheVariogram$dist))
-
 g<-ggplot(TheVariogram,aes(x=dist,y=gamma))+geom_point()+
   geom_line(data = preds)+ theme_classic()+ 
   labs(x = "lag distance (h)", y = "Semi-variance")
 g
 ```
+
 **Figure 10.15.** \ref{fig:figs} A semivariogram using the exponential model for the basal area (m2/ha) for for young stand monitoring plots.
 
 ## Circular
 
 A circular variogram means that there is no preferred orientation in the data. We are only interested in the values of the variable of interest without considering the spatial orientation of the data. 
 
-```{r ,  warning=FALSE, message=FALSE}
-#load the libraries and data
-library(sp)
-library(gstat)
-library(ggplot2)
-data<-read.csv("data/10/FSJ.csv",header=T) ## plot data in the raw format
-library(dplyr) ## for data manupulation
+```{r 10-circular,  warning=FALSE, message=FALSE}
 ## summarize the basal area at plot level
 data1<- data%>% 
   group_by(utm_easting,utm_northing) %>%
   summarise(Basal=sum(baha_L))
 coordinates(data1)= ~ utm_easting+utm_northing
-#bubble(data1, zcol='Basal', fill=TRUE, do.sqrt=FALSE, maxsize=3)
 
 ## Model formula
-
 TheVariogram=variogram(Basal~1, data=data1)
-
 TheVariogramModel <- vgm(psill=3000, model="Cir", nugget=60, range=20000)
-
 FittedModel <- fit.variogram(TheVariogram, model=TheVariogramModel) 
-
 preds = variogramLine(FittedModel, maxdist = max(TheVariogram$dist))
-
 g<-ggplot(TheVariogram,aes(x=dist,y=gamma))+geom_point()+
   geom_line(data = preds)+ theme_classic()+ 
   labs(x = "lag distance (h)", y = "Semi-variance")
 g
 ```
+
 **Figure 10.16.** \ref{fig:figs} A semivariogram using the circular model for the basal area (m2/ha) for for young stand monitoring plots.
 
 Just looking at the variograms, it appears that all of the four models fit our data well and indicates there is a strong correlation in basal area per hectare of live trees between the plots. However, we will use all the components of semivariogram models to pick our best fitting variogram.
 
 **Table 10.1** Summary of various component of variogram for four different models.
-```{r, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE}
-library(knitr)
+
+```{r 10-circular-2, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE}
 Model<-c("Circular", "Gaussian", "Spherical", "Exponential")
 Range<-c("7433.68", "4446.62","9729.37", "3871.76")
 Nugget<-c("552.71","0.00","14.13","0.00")
@@ -1037,17 +958,14 @@ For this case study, we will use ground plot data from Young stand monitoring (Y
 
 ![**Figure 10.17**. Location of Fort Saint Johns TSA and the young stand change monitoring plots.](images/10-FSJ-plot.png){.center}
 
-<p id="box-text">
-</p>
-
-<p id="box-text">
-</p>
-
-<p id="box-text">
-</p>
 ::::
 
 ## Methods Without Using Semi-variogram 
+
+```{r 10-semivariogram-load-data-and-setup}
+filename <-read_sf(dsn="data/10",layer="Fort_St_Jh")
+plot1<- read.csv("data/10/FJS_plots.csv",header=T)
+```
 
 ## Nearest Neighbor
 
@@ -1055,20 +973,12 @@ Nearest neighbor interpolation approach uses the value of variable of interest f
 
 **Step 1:Match the projection of plot data with the study area boundary**
 
-```{r  warning=FALSE, message=FALSE}
+```{r 10-nearest-neighbor, warning=FALSE, message=FALSE}
 rm(list=ls())
-
-library(spatstat)  # Used for the dirichlet tessellation function
-library(maptools)  # Used for conversion from SPDF to ppp
-library(raster)    # Used to clip out thiessen polygons
-library(tmap)
-library(sp)
-library(gstat) # Use gstat's idw routine
-library(sp) 
-library(sf)
-filename <-read_sf(dsn="data/10",layer="Fort_St_Jh")
+# spatstat Used for the dirichlet tessellation function
+# maptools Used for conversion from SPDF to ppp
+# raster Used to clip out thiessen polygons
 spdf <- as_Spatial(filename)
-plot1<- read.csv("data/10/FJS_plots.csv",header=T)
 dsp <- SpatialPoints(plot1[,14:15], proj4string=CRS("+proj=utm +zone=10 +ellps=GRS80 +datum=NAD83"))
 dsp <- SpatialPointsDataFrame(dsp, plot1)
 ###############
@@ -1081,8 +991,7 @@ cata <- spTransform(spdf, TA)
 
 **Step 2: Create polygons throughout the study area where interpolation is to be done and rasterize the polygons**
 
-```{r  warning=FALSE, message=FALSE}
-library(dismo)
+```{r 10-nearest-neighbor-2, warning=FALSE, message=FALSE}
 v <- voronoi(dta)
 plot(v)
 vca <- intersect(v, cata)
@@ -1090,31 +999,27 @@ spplot(vca, 'baha_L', col.regions=rev(get_col_regions()))
 ################### rasterize the data ####################
 r <- raster(cata, res=100)
 vr <- rasterize(vca, r, 'baha_L')
-#plot(vr)
 ```
 
 **Figure 10.18.** \ref{fig:figs} An intermediate step in creating polygon and rasterizing it over the entire Fort Saint Johns TSA.
 
 **Step 3: Nearest neighbor with five unsampled points to be interpolated at a time and plot the results**
 
-```{r  warning=FALSE, message=FALSE}
-library(gstat)##package to create semivariogram model, kriging an dinterpolation
+```{r 10-nearest-neighbor-3, warning=FALSE, message=FALSE}
+## gstat package to create semivariogram model, kriging an dinterpolation
 gs <- gstat(formula=baha_L~1, locations=dta, nmax=5, set=list(idp = 0))
 nn <- interpolate(r, gs)
 nnmsk <- mask(nn,vr)
-#plot(nnmsk)
-
 tm_shape(nnmsk) +
   tm_raster(n=8,palette = "RdBu", auto.palette.mapping = FALSE,title="Predicted basal area") +
   tm_legend(legend.outside=FALSE)
 ```
+
 **Figure 10.19.** \ref{fig:figs} Predicted basal area over the entire Fort Saint Johns TSA using five nearest neighbor.
 
 **Step 4: Leaflet map for some interactions**
 
-```{r echo=FALSE, warning=FALSE, message=FALSE}
-library(leaflet)
-
+```{r 10-nearest-neighbor-4, echo=FALSE, warning=FALSE, message=FALSE}
 pal <- colorNumeric(c("#fef0d9","#fdcc8a","#fc8d59","#e34a33","#b30000"), values(nnmsk),
   na.color = "transparent")
 leaflet() %>% addTiles() %>%
@@ -1131,40 +1036,21 @@ In this method, the domain is determined into the area/polygons of regions conta
 
 **Step 1: Match the projection of the Shape file and the plot data**
 
-```{r warning=FALSE, message=FALSE}
-#load the library needed
-library(spatstat)  # Used for the dirichlet tessellation function
-library(maptools)  # Used for conversion from SPDF to ppp
-library(raster)    # Used to clip out thiessen polygons
-library(tmap)
-library(gstat) # Use gstat's idw routine
-library(sf)
-library(raster)    # Used to clip out thiessen polygons
-library(sp)
-filename <-read_sf(dsn="data/10",layer="Fort_St_Jh")
-spdf <- as_Spatial(filename)
-
-# read in the plot data
-plot1<- read.csv("data/10/FJS_plots.csv",header=T)
-
+```{r 10-nearest-neighbor-5, warning=FALSE, message=FALSE}
 # project the plot data based to UTM zone 10 and NAD83
-
 dsp <- SpatialPoints(plot1[,14:15], proj4string=CRS("+proj=utm +zone=10 +ellps=GRS80 +datum=NAD83"))
 # convert the data into spatial object
 dsp <- SpatialPointsDataFrame(dsp, plot1)
-
 ## change the projection of both shape file and plot data
-
 TA <- CRS("+proj=utm +zone=10 +ellps=GRS80 +datum=NAD83")
 library(rgdal)
 dta <- spTransform(dsp, TA)
 cata <- spTransform(spdf, TA)
-
 ```
 
 **Step 2: Create the thiessian polygon around the sample points for entire TSA using**
 
-```{r  warning=FALSE, message=FALSE}
+```{r 10-nearest-neighbor-6, warning=FALSE, message=FALSE}
 #"dirichlet" function from "spatstat" package
 # Create a tessellated surface
 th  <-  as(dirichlet(as.ppp(dta)), "SpatialPolygons")
@@ -1172,12 +1058,11 @@ th  <-  as(dirichlet(as.ppp(dta)), "SpatialPolygons")
 # The dirichlet function does not carry over projection information
 # requiring that this information be added manually to the thiessian polygons
 proj4string(th) <- proj4string(dta)
-
 ```
 
 **Step 3: The tessellated surface does not store attribute information from the point data layer. Hence, the information from the data layer should be carried over to tesselllated surface **
 
-```{r  warning=FALSE, message=FALSE}
+```{r 10-nearest-neighbor-7, warning=FALSE, message=FALSE}
 #We'll use the over() function from the "sp" package to join the point attributes to the thiessian polygon via spatial join
 th.z     <- over(th,dta, fn=mean)
 th.spdf  <-  SpatialPolygonsDataFrame(th, th.z)
@@ -1188,7 +1073,7 @@ th.clp   <- raster::intersect(cata,th.spdf)
 
 **Step 4: Visualize the results**
 
-```{r  warning=FALSE, message=FALSE}
+```{r 10-nearest-neighbor-8, warning=FALSE, message=FALSE}
 # Map the data
 #using package "tmap"
 tm_shape(th.clp) +
@@ -1203,21 +1088,7 @@ tm_shape(th.clp) +
 
 **Step 1: Fix the projections between data points and shape file**
 
-```{r  warning=FALSE, message=FALSE}
-#load the library needed
-library(sp)    # Used for the spsample function
-library(spatstat)  # Used for the dirichlet tessellation function
-library(maptools)  # Used for conversion from SPDF to ppp
-library(raster)    # Used to clip out thiessen polygons
-library(tmap)
-library(gstat) # Use gstat's idw routine
-library(sf)
-library(raster)    # Used to clip out thiessen polygons
-filename <-read_sf(dsn="data/10",layer="Fort_St_Jh")
-spdf <- as_Spatial(filename)
-
-# read in the plot data
-plot1<- read.csv("data/10/FJS_plots.csv",header=T)
+```{r 10-idw warning=FALSE, message=FALSE}
 # project the data based on the colorado plateau boundry projection
 
 dsp <- SpatialPoints(plot1[,14:15], proj4string=CRS("+proj=utm +zone=10 +ellps=GRS80 +datum=NAD83"))
@@ -1234,7 +1105,7 @@ cata <- spTransform(spdf, TA)
 
 An empty grid over Fort Saint Johns TSA is created, where n is the total number of cells over which interpolation is to be done.
 
-```{r  warning=FALSE, message=FALSE}
+```{r 10-idw-2, warning=FALSE, message=FALSE}
 grd              <- as.data.frame(spsample(dta, "regular", n=5000))
 names(grd)       <- c("X", "Y")
 coordinates(grd) <- c("X", "Y")
@@ -1250,7 +1121,7 @@ proj4string(grd) <- proj4string(dta)
 
 Power values can be adjusted depending on characteristics of variable being interpolated
 
-```{r  warning=FALSE, message=FALSE}
+```{r 10-idw-3, warning=FALSE, message=FALSE}
 P.idw <- gstat::idw(baha_L ~ 1, dta, newdata=grd, idp=2.0)
 
 # Convert to raster object then clip to Texas
@@ -1260,7 +1131,7 @@ r.m     <- mask(r, cata)
 
 **Step 4: Plot the results from inverse distance weighing interpolation using**
 
-```{r  warning=FALSE, message=FALSE}
+```{r 10-idw-4, warning=FALSE, message=FALSE}
 tm_shape(r.m) + 
   tm_raster(n=8,palette = "RdBu", auto.palette.mapping = FALSE,
             title="Predicted basal area") + 
@@ -1271,9 +1142,7 @@ tm_shape(r.m) +
 
 **Step 5: Leaflet map for some interaction**
 
-```{r echo=FALSE, warning=FALSE, message=FALSE}
-library(leaflet)
-
+```{r 10-idw-5, echo=FALSE, warning=FALSE, message=FALSE}
 pal <- colorNumeric(c("#fef0d9","#fdcc8a","#fc8d59","#e34a33","#b30000"), values(r.m),
   na.color = "transparent")
 leaflet() %>% addTiles() %>%
@@ -1333,26 +1202,7 @@ $$\mu_{s_o}=\text{an known constant mean} $$
 
 **Step 1: Make sure the projection of the point data and shape file is same**
 
-```{r  warning=FALSE, message=FALSE}
-#### load the libraries needed
-#setwd("C:\\Users\\adamp\\Desktop\\chapter-10\\data")
-library(spatstat)  # Used for the dirichlet tessellation function
-library(maptools)  # Used for conversion from SPDF to ppp
-library(raster)    # Used to clip out the raster to polygon extent
-library(tmap)
-library(sp)
-library(gstat) ### for variaogram modeling and krigging
-library(dplyr) ## summarize the data 
-
-### load the TSA polygon Fort Saint Johns
-
-filename <-read_sf(dsn="data/10",layer="Fort_St_Jh")
-#convert into spatial object
-
-spdf <- as_Spatial(filename)
-
-### lod the plot data for TSA plots
-plot1<- read.csv("data/10/FJS_plots.csv",header=T)
+```{r 10-simple-kriging, warning=FALSE, message=FALSE}
 # summarize the data to individual plots
 data<-plot1 %>% 
   group_by(utm_eastin,utm_northi) %>%
@@ -1362,9 +1212,7 @@ dsp <- SpatialPoints(data[,1:2], proj4string=CRS("+proj=utm +zone=10 +ellps=GRS8
 dsp <- SpatialPointsDataFrame(dsp, data)
 
 # Make the projection similar for plot and polygon data
-
 TA <- CRS("+proj=utm +zone=10 +ellps=GRS80 +datum=NAD83")
-library(rgdal)
 dta <- spTransform(dsp, TA)
 cata <- spTransform(spdf, TA)
 ```
@@ -1372,7 +1220,7 @@ cata <- spTransform(spdf, TA)
 
 A grid with the total number of n cells where basal area is to be predicted is overlaid over Forty Saint Johns. The grid will be a raster
 
-```{r  warning=FALSE, message=FALSE}
+```{r 10-simple-kriging-2, warning=FALSE, message=FALSE}
 grd              <- as.data.frame(spsample(dta, "regular", n=10000))
 names(grd)       <- c("X", "Y")
 coordinates(grd) <- c("X", "Y")
@@ -1383,11 +1231,12 @@ fullgrid(grd)    <- TRUE  # Create SpatialGrid object
 proj4string(dta) <- proj4string(dta) # Temp fix until new proj env is adopted
 proj4string(grd) <- proj4string(dta)
 ```
+
 **Step 3: Calculate the overall mean of the variable to be interpolated **
 
 Simple kriging, which assumes that mean is a known constant over entire domain need a mean value of variable of interest (basal area)
 
-```{r  warning=FALSE, message=FALSE}
+```{r 10-simple-kriging-3, warning=FALSE, message=FALSE}
 basal<-mean(data$total)
 basal
 ```
@@ -1396,18 +1245,12 @@ basal
 
 Start by fitting the semivariogram model for the variable of interest (basal area) and see which model best fit the data
 
-```{r  warning=FALSE, message=FALSE, cache=TRUE}
+```{r 10-simple-kriging-4, warning=FALSE, message=FALSE}
 #### Exponential variogram ###############
 TheVariogram=variogram(total~1, data=dta)
-
 TheVariogramModel <- vgm(psill=2500, model="Exp", nugget=1500, range=20000)
-
 FittedModel <- fit.variogram(TheVariogram, model=TheVariogramModel) 
-
-
 preds = variogramLine(FittedModel, maxdist = max(TheVariogram$dist))
-
-library(ggplot2)
 g<-ggplot(TheVariogram,aes(x=dist,y=gamma))+geom_point()+
   geom_line(data = preds)+ theme_classic()+ 
   labs(x = "lag distance (h)", y = "Semi-variance")+
@@ -1420,12 +1263,8 @@ g<-ggplot(TheVariogram,aes(x=dist,y=gamma))+geom_point()+
 
 #### Spherical Variogram
 TheVariogramModel1 <- vgm(psill=2500, model="Sph", nugget=1500, range=20000)
-
 FittedModel1 <- fit.variogram(TheVariogram, model=TheVariogramModel1) 
-
-
 preds1 = variogramLine(FittedModel1, maxdist = max(TheVariogram$dist))
-
 h<-ggplot(TheVariogram,aes(x=dist,y=gamma))+geom_point()+
   geom_line(data = preds1)+ theme_classic()+ 
   labs(x = "lag distance (h)", y = "Semi-variance")+
@@ -1438,14 +1277,9 @@ h<-ggplot(TheVariogram,aes(x=dist,y=gamma))+geom_point()+
         axis.ticks.y= element_blank())
 
 ## Gaussian Variogram
-
 TheVariogramModel2 <- vgm(psill=2500, model="Gau", nugget=1500, range=20000)
-
 FittedModel2 <- fit.variogram(TheVariogram, model=TheVariogramModel2) 
-
-
 preds2 = variogramLine(FittedModel2, maxdist = max(TheVariogram$dist))
-
 i<-ggplot(TheVariogram,aes(x=dist,y=gamma))+geom_point()+
   geom_line(data = preds2)+ theme_classic()+ 
   labs(x = "lag distance (h)", y = "Semi-variance")+
@@ -1458,12 +1292,8 @@ i<-ggplot(TheVariogram,aes(x=dist,y=gamma))+geom_point()+
 
 ## circular Variogram
 TheVariogramModel3 <- vgm(psill=2500, model="Cir", nugget=1500, range=20000)
-
 FittedModel3 <- fit.variogram(TheVariogram, model=TheVariogramModel3) 
-
-
 preds3 = variogramLine(FittedModel3, maxdist = max(TheVariogram$dist))
-
 j<-ggplot(TheVariogram,aes(x=dist,y=gamma))+geom_point()+
   geom_line(data = preds3)+ theme_classic()+ 
   labs(x = "lag distance (h)", y = "Semi-variance")+
@@ -1475,13 +1305,8 @@ j<-ggplot(TheVariogram,aes(x=dist,y=gamma))+geom_point()+
         axis.text.x =element_text(size =14),
         axis.text.y =element_blank())
 
-
-
 ########### combine all the plots together #########
 ####################################################################################
-library(cowplot)
-library(ggpubr)
-library(gridExtra)
 grids_bs <- plot_grid(g,h,i,j,ncol=2,align = "h")
 grids_bs
 ```
@@ -1491,8 +1316,8 @@ grids_bs
 **Step 5: Put all the variogram parameters in a table and see which fits best**
 
 **Table 10.2** Summary of various components of variogram fro four variogram models.
-```{r, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE}
-library(knitr)
+
+```{r 10-simple-kriging-5, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE}
 Model<-c("Exponential", "Spherical", "Gaussian", "Circular")
 Range<-c("3872.10", "9704.83","4552.88", "7801.57")
 Nugget<-c("0.00","0.00","0.00","729.25")
@@ -1507,14 +1332,13 @@ Looking into the variogram and the parameter **(Figure 10.24, Table 10.2)**, we 
 
 **Step 6: We will use beta = 95.73, as we know the assume mean is a known constant over the domain for simple kriging**
 
-```{r warning=FALSE, message=FALSE}
-simple<- krige (total ~ 1, dta, grd, model=FittedModel2,beta=95.73)
-
+```{r 10-simple-kriging-7, warning=FALSE, message=FALSE}
+simple<- krige(total ~ 1, dta, grd, model=FittedModel2,beta=95.73)
 ```
 
 **Step 6: Visualize the predicted surface**
 
-```{r warning=FALSE, message=FALSE}
+```{r 10-simple-kriging-7, warning=FALSE, message=FALSE}
 #convert the kriging results to raster
 raster_krig      <- raster(simple)
 raster_clip    <- mask(raster_krig, cata)
@@ -1531,7 +1355,7 @@ tm_shape(raster_clip) +
 
 **Step 7: Cross validation**
 
-```{r warning=FALSE, message=FALSE}
+```{r 10-simple-kriging-8, warning=FALSE, message=FALSE}
 cv_sK <- krige.cv(total~ 1, dta, model=FittedModel2, nfold=nrow(dta),
 verbose=FALSE)
 ### calculate RMSE
@@ -1541,7 +1365,6 @@ sqrt(mean(res^2))
 mean(res)
 #### Mean squared deviation of the prediction VS the sample
 mean(res^2/as.data.frame(cv_sK)$var1.var)
-
 ```
 
 ## Ordinary Kriging
@@ -1559,13 +1382,12 @@ $$\mu_{s_o}=\text{an unknown constant mean}$$
 
 Krigging model is specified only using variable of interest.  
 
-```{r  warning=FALSE, message=FALSE}
+```{r 10-ordinary-kriging, warning=FALSE, message=FALSE}
 ordinary<- krige (total ~ 1, dta, grd, model=FittedModel2)
-
 ```
 **Step 6: Visualize the predicted surface**
 
-```{r warning=FALSE, message=FALSE}
+```{r 10-ordinary-kriging-2, warning=FALSE, message=FALSE}
 #convert the kriging results to raster
 raster_Ok      <- raster(ordinary)
 Ok_clip    <- mask(raster_Ok, cata)
@@ -1582,7 +1404,7 @@ tm_shape(Ok_clip) +
 
 **Step 7: Cross validation**
 
-```{r warning=FALSE, message=FALSE}
+```{r 10-ordinary-kriging-3, warning=FALSE, message=FALSE}
 cv_oK <- krige.cv(total~ 1, dta, model=FittedModel2, nfold=nrow(dta),
 verbose=FALSE)
 ### calculate RMSE
@@ -1592,7 +1414,6 @@ sqrt(mean(res^2))
 mean(res)
 #### Mean squared deviation of the prediction VS the sample
 mean(res^2/as.data.frame(cv_oK)$var1.var)
-
 ```
 
 ## Universal Kriging
@@ -1601,25 +1422,18 @@ The universal kriging is one of the variant of ordinary kriging. This method ass
 
 **Step 1: This is similar to what we did for simple kriging and we will calculate the mean based on the drift or trend in data (more localized mean) using the spatial location of the plots**
 
-```{r warning=FALSE, message=FALSE}
+```{r 10-universal-kriging, warning=FALSE, message=FALSE}
 
 # Add X and Y to our original point dataframe, it is just how universal kriging formula takes the value of the co-ordinates.
-
 dta$X <- coordinates(dta)[,1]
 dta$Y<- coordinates(dta)[,2]
 
 ## We will model the trend or drift using the location as X and y 
-
 TheVariogram4=variogram(total~X+Y, data=dta)
-
 TheVariogramModel4 <- vgm(psill=2500, model="Gau", nugget=1500, range=20000)
-
 FittedModel4 <- fit.variogram(TheVariogram4, model=TheVariogramModel4) 
-
-
 preds4 = variogramLine(FittedModel4, maxdist = max(TheVariogram4$dist))
 
-library(ggplot2)
 g<-ggplot(TheVariogram4,aes(x=dist,y=gamma))+geom_point()+
   geom_line(data = preds4)+ theme_classic()+ 
   labs(x = "lag distance (h)", y = "Semi-variance")+
@@ -1637,7 +1451,7 @@ universal<- krige(total~X+Y,dta, grd, model=FittedModel4)
 
 **Step 2: Visualize the results as we usually**
 
-```{r warning=FALSE, message=FALSE}
+```{r 10-universal-kriging-2, warning=FALSE, message=FALSE}
 #convert the kriging results to raster
 raster_uk      <- raster(universal)
 uk_clip    <- mask(raster_uk, cata)
@@ -1648,13 +1462,13 @@ tm_shape(uk_clip) +
             title="Predicted basal area using universal kriging") + 
   tm_shape(dta) + tm_dots(size=0.2) +
   tm_legend(legend.outside=FALSE)
-
 ```
+
 **Figure 10.27.** \ref{fig:figs} Predicted basal area using universal kriging.
 
 **Step 3: Cross validation**
 
-```{r  warning=FALSE, message=FALSE}
+```{r 10-universal-kriging-3, warning=FALSE, message=FALSE}
 cv_uK <- krige.cv(total~ X+Y, dta, model=FittedModel4, nfold=nrow(dta),
 verbose=FALSE)
 ### calculate RMSE
@@ -1664,7 +1478,6 @@ sqrt(mean(res^2))
 mean(res)
 #### Mean squared deviation of the prediction VS the sample
 mean(res^2/as.data.frame(cv_uK)$var1.var)
-
 ```
 
 ##  Which method is the best given our data? {-}
@@ -1672,13 +1485,12 @@ mean(res^2/as.data.frame(cv_uK)$var1.var)
 We will put the cross validation results together and cross compare across three methods.
 
 **Table 10.3** Cross-validation results for different type of kriging.
-```{r, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE}
-library(knitr)
+
+```{r 10-universal-kriging-4, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE}
 Method<-c("Simple", "Ordinary", "Universal")
 RMSE<-c("60.42", "60.42","68.48")
 ME<-c("-0.69","-0.69","-1.37")
 MSDR<-c("5.25","5.25","10.97")
-
 summary<-data.frame(Method,RMSE,ME,MSDR)
 knitr::kable(summary, caption =NULL)
 ```
@@ -1688,7 +1500,6 @@ From the cross validation results **(Table 10.3)**, we want root mean squared er
 ## Co-Kriging
 
 Co-kriging uses the information about different covariates to predict the value of the variable of interest at an unsampled location [@Cressie1994]. It utilizes the autocorrelation of the variable of interest and the cross correlations between the variable of interest with all the covariates to make the prediction [@Cressie1994]. In order to implement co-kriging we need to have a strong correlation between the covariates [@Tziachris2017]. The spatial variability of one variable should be correlated with the spatial variability of the other covariates [@Tziachris2017].
-
 
 ## Non-Linear Kriging
 
@@ -1710,11 +1521,9 @@ Probability kriging is useful when the variable of interest is binary as in case
 
 Disjunctive kriging allows to estimate the value of a variable of interest at an unsampled location and estimating the conditional probability that the unknown value of a variable at an unsampled location is above a specified cutoff level [@Yates1986]. Disjunctive kriging transforms the data into a normal distribution and then determine the probability that true value of variable at each location of interest exceeds the predefined threshold or cut-off probability [@Daya2015].
 
-
 ## Spatial Regression Models
 
 For classical statistics tests,**spatial autocorrelation** is problematic as ordinary least square (regression) or analysis of variance (ANOVA) assumes that observations are independent in space and time [@Meng2009]. However, geostatistical data violates the assumptions of independence, and using regression and ANOVA might inflate the significance of t and F statistics, when, in fact, they may not be significant at all [@Meng2009]. In that case one should try to improve the regression model by adding important **auxiliary** (independent variables that are associated or important in predicting the variables of interest) and incorporating the spatial autocorrelation structure [@Meng2009] using spatial regression models [@Anselin1998]. **The whole objective of spatial regression is to understand the association of the variable of interest with the independent variables while accounting for the spatial structure present in the data.** We will show two examples of spatial regression model in this section using our familiar YSM data for Fort Saint Johns TSA. 
-
 
 :::: {.box-content .case-study-content}
 
@@ -1752,50 +1561,43 @@ $$\epsilon=\text{vector of error terms}$$
 
 We will create a **spatial weight matrix** using the **distance-based approach** usign the **nearest-neighbor** approach. This spatial weight matrix will be used in our spatial lag model to account for the spatial autocorreltion. 
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE}
-library(sf) ## read the point spatial data frame
-library(raster)
-library (spdep) ##  claculate the neighborhood list and Moran's I/
-
+```{r 10-spatial-lag-model, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE}
 YSM_pots <- read_sf(dsn="data/10",layer="YSM_point")
 YSM.coords <- st_coordinates(YSM_pots) 
 YSM.nb <- dnearneigh(YSM.coords, 0, 60000, longlat = FALSE) ## neighbors between between 0 km and 60 km distance 
-
 YSM.W<-nb2listw(YSM.nb, style = "W", zero.policy = T) # Creates a matrix W object with zero policy=TRUE as some plot might not have any neighbors
-
 ```
 
 **Step 2: Check for the spatial autocorrelation**
 
 We will check the spatial autocorrelation using the Moran's I adn Moran's test using our distance based spatial weight matrix [@Getis2010] we have just calculated. For the details on Moran's I, please refer to **section 4.3**.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE}
+```{r 10-spatial-lag-model-2, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE}
 moran.test(YSM_pots$Basal, YSM.W)
 ```
+
 Moran's I value was (I=0.065), which was significant (p-value < 0.05) indicting a positive spatial autocorrelation. It seems like a weak autocorrelation but for the purpose of demonstration in this section we will proceed further assuming there is a spatial autocorrelation.
 
 **Step 3: Fit a spatial lag model**
 
 In this step, we will fit a spatial lag model using basal area (m2/ha) as a **response variable.** While, trees per hectare (TPH), elevation (m), site index, top height(m), and tree volume (m3/ha) will be used as **predictor variable.** 
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE}
-library(spatialreg)
+```{r 10-spatial-lag-model-3, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE}
 f1<- Basal~TPH+Elevation+Volume+Height+Site_index ## formula for basal area as response and auxiliary variables as predictor  
 basal_lag<- lagsarlm(f1,data=YSM_pots,YSM.W,zero.policy = T)
 summary(basal_lag)
-
 ```
+
 **Step 4: Select auxiliary variables and refit the model** 
 
 Varieties of ways has been proposed to select the auxiliary variables to get the best spatial model. We will go through them briefly. First, we will Use the alpha=0.005 to check whether our auxiliary variables are significantly associated with the basal area. From the summary, we can see that TPH, Elevation and Volume has p-value < 0.05 indicating that they are significantly associated with basal area. 
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE}
+```{r 10-spatial-lag-model-4, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE}
 f2<- Basal~TPH+Elevation+Volume ## formula for basal area as response and auxillary variables as predictor  
 basal_lag1<- lagsarlm(f2,data=YSM_pots,YSM.W,zero.policy = T)
-
 summary(basal_lag1)
-
 ```
+
 **Step 5: Assess both models using Akaike Information Criteria (AIC)**
 
 Sometime, only using the p-value to assess significant variables will not be useful while assessing which models best fits the data as multiple models can have potential to describe the association between response and predictor variables. In the context, when we have different competing models, we can use AIC [for details see, @Akaike1973] to compare the models. For example, suppose models we have fitted in **step 3** and **step 4** were competing and potential. We can select the best model between two with lowest AIC values. AIC value of model from **step 3** is 867.44 while the AIC value of model from **step 4** is 865.65, indicating later one is the best fit to our data.
@@ -1808,7 +1610,6 @@ Rho (0.16445), reflects the spatial dependence inherent in our sample data, meas
 
 Spatial error models assume that the spatial autocorrelation exists in the residuals or the error term of the regression equation [@Anselin1998]. The general mathematical formula for spatial error model is given below: 
 
-
 $$ y=\beta X + \epsilon$$ 
 $$\epsilon= \lambda (W)\epsilon+ u$$
 
@@ -1820,7 +1621,6 @@ $$(W)\epsilon=\text{spatial weight matrix W}$$
 $$X=\text{matrix of observations for the predictor variables}$$
 $$u=\text{indepndent errors}$$
 
-
 ## Steps in Fitting Spatial Error Model:
 
 **Step 1 and Step 2** in fitting spatial error model is exactly similar to what we did for spatial lag model. 
@@ -1829,26 +1629,22 @@ $$u=\text{indepndent errors}$$
 
 We will use the function **errorsarlm** from the package **spatialreg** to fit the error model indicating that we are accounting the spatial autocorrelation that exists in the residuals or the error terms instead of the response variable (**basal area**).
 
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE}
-library(spatialreg)
-
+```{r 10-spatial-error-model, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE}
 f3<- Basal~TPH+Elevation+Volume+Height+Site_index ## formula for basal area as response and auxiliary variables as predictor  
 basal_lag2<- errorsarlm(f3,data=YSM_pots,YSM.W,zero.policy = T)
-
 summary(basal_lag2)
-
 ```
+
 **Step 4: Select auxiliary variables and refit the model** 
 
 We will use the alpha=0.05 to check whether our auxiliary variables are significantly associated with the basal area. From the summary, we can see that TPH, Elevation and Volume has p-value < 0.05 indicating that they are significantly associated with basal area. 
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE}
+```{r 10-spatial-error-model-2, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE}
 f4<- Basal~TPH+Elevation+Volume ## formula for basal area as response and auxillary variables as predictor  
 basal_lag3<- errorsarlm(f4,data=YSM_pots,YSM.W,zero.policy = T)
 summary(basal_lag3)
+```
 
-``` 
 **Step 5: Assess both models using akiekie information criteria (AIC)**
 
 AIC value of model from **step 3** is 868.83 while the AIC value of model from **step 4** is 866.04, indicating later one is the best fit to our data.
@@ -1877,4 +1673,3 @@ When it is not so clear theoretically that either of the spatial model works for
 2. Define spatial autocorrelation and semivariogram.
 3. When do you use spatial contiguity vs. nearest neighbor?
 4. What is spatial regression mostly used for? Estimation or Prediction?
-

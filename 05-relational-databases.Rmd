@@ -40,7 +40,7 @@ Suppose you have collected some data about some trees. You might have organized 
 Within a RDBMS, we find **relational databases**, which are highly structured tables comprised of rows and columns. In fact, a table in a relational database is called a **relation**, a row is a **tuple**, and a column is an **attribute**. Relational databases are a great way to store simple data structures that can be organized into a relation with tuples and attributes. When we say that a table or relation is "structured", we are referring to the fact that the data are organized according to a database **schema**, which is a set of constraints that ensure data integrity and consistency. For example, our set of trees likely all contain the same types of information and this can be easily organized into a relation. Suppose we measured the height, diameter at breast height (DBH), and species of each tree, then our relation would look like Figure \@ref(fig:5-tabular-data-spatial-data).
 
 ```{r 5-tabular-data-spatial-data, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste0("Tabular and spatial data are related by a Relational Database Management System (RDBMS) in a Geographic Information System (GIS).<a href='",baseurl,"#fig:5-tabular-data-spatial-data'>Animated figure can be viewed in the web browser version of the textbook</a>. Animated figure can be viewed in the web browser version of the textbook. Images of Douglas-Fir and Western Hemlock trees by Natural Resources Canada, Canadian Forest Service, modified with permission.")
+    fig_cap <- paste0("Tabular and spatial data are related by a Relational Database Management System (RDBMS) in a Geographic Information System (GIS). Images of Douglas-Fir and Western Hemlock trees by Natural Resources Canada, Canadian Forest Service, modified with permission.")
     knitr::include_graphics(here::here("images", "05-tabular-data-spatial-data.png"))
 ```
 <br/>
@@ -417,7 +417,7 @@ knitr::kable(
 Figure \@ref(fig:5-boolean-and) illustrates what is going on here, we are only returning the tuples that evaluate $true$ for both statements. Hence, Boolean $AND$ is equivalent to multiplying two Boolean truth values together. You should also recognize that a Boolean $AND$ is equivalent to what a set intersection $A∩B$ achieves between two relations.
 
 ```{r 5-boolean-and, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste0("Boolean A AND B returns the area shaded blue. <a href='",baseurl,"#fig:5-boolean-and'>Animated figure can be viewed in the web browser version of the textbook</a>. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Boolean A AND B returns the area shaded blue. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "05-boolean-and.png"))
 ```
 <br/>
@@ -434,7 +434,7 @@ knitr::kable(
 Figure \@ref(fig:5-boolean-or) illustrates the case of the Boolean $OR$. As you can see, it returns everything where either of the statements evaluate to $true$, regardless if the other statement is $false$. You should also recognize that a Boolean $OR$ is equivalent to what a set union $A∪B$ achieves between two relations. 
 
 ```{r 5-boolean-or, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste0("Boolean A OR B returns the area shaded blue. <a href='",baseurl,"#fig:5-boolean-or'>Animated figure can be viewed in the web browser version of the textbook</a>. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Boolean A OR B returns the area shaded blue. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "05-boolean-or.png"))
 ```
 <br/>
@@ -451,7 +451,7 @@ knitr::kable(
 Figure \@ref(fig:5-boolean-not) illustrates how Boolean $NOT$ essentially negates or inverts the statement that follows. In this case, instead of returning the Western Hemlock tuples, $NOT(species=WesternHemlock)$ returns "everything except" Western Hemlock, which is also equivalent to $species≠WesternHemlock$.
 
 ```{r 5-boolean-not, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste0("Boolean A NOT B returns the area shaded blue. <a href='",baseurl,"#fig:5-boolean-not'>Animated figure can be viewed in the web browser version of the textbook</a>. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Boolean A NOT B returns the area shaded blue. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "05-boolean-not.png"))
 ```
 <br/>
@@ -468,7 +468,7 @@ knitr::kable(
 Figure \@ref(fig:5-boolean-xor) illustrates how Boolean $XOR$ excludes all the tuples that evaluate to $true$ for both statements. In the example above, tuples ID=2 and ID=3 are excluded because both of the statements for height and species are $true$. 
 
 ```{r 5-boolean-xor, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste0("Boolean A XOR B returns the area shaded blue. <a href='",baseurl,"#fig:5-boolean-xor'>Animated figure can be viewed in the web browser version of the textbook</a>. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Boolean A XOR B returns the area shaded blue. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "05-boolean-xor.png"))
 ```
 <br/>
@@ -563,7 +563,7 @@ knitr::kable(
 Depending on the schema of the two relations being joined, the number of tuples joined from one relation to another can vary and is known as **cardinality**. In the simplest case, one tuple in $R$ is joined to one tuple in $S$, and this cardinality is known as **one-to-one** usually expressed as 1:1. The natural join example above, $R⋈S$, is an example of **one-to-many** (1:M) or **many-to-one** (M:1) cardinality because one species tuple found in $S$ corresponds to many species tuples in $R$. Finally, **many-to-many** (M:M) cardinality describes the case where there are multiple tuples in $R$ that correspond to multiple tuples in $S$. An example of a many-to-many relationship might be many species of trees in $R$ that correspond to many forest stands in $S$. In other words, a forest stand might be comprised of many species and any particular species might be found in many forest stands. Figure \@ref(fig:5-join-cardinality) illustrates how cardinality might emerge depending on the relational schema and problem at hand.
 
 ```{r 5-join-cardinality, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Cardinality of joins between relations R and S. <a href='",baseurl,"#fig:5-join-cardinality'>Animated figure can be viewed in the web browser version of the textbook</a>. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste("Cardinality of joins between relations R and S. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "05-join-cardinality.png"))
 ```
 <br/>

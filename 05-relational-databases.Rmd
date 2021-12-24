@@ -563,7 +563,7 @@ knitr::kable(
 Depending on the schema of the two relations being joined, the number of tuples joined from one relation to another can vary and is known as **cardinality**. In the simplest case, one tuple in $R$ is joined to one tuple in $S$, and this cardinality is known as **one-to-one** usually expressed as 1:1. The natural join example above, $R⋈S$, is an example of **one-to-many** (1:M) or **many-to-one** (M:1) cardinality because one species tuple found in $S$ corresponds to many species tuples in $R$. Finally, **many-to-many** (M:M) cardinality describes the case where there are multiple tuples in $R$ that correspond to multiple tuples in $S$. An example of a many-to-many relationship might be many species of trees in $R$ that correspond to many forest stands in $S$. In other words, a forest stand might be comprised of many species and any particular species might be found in many forest stands. Figure \@ref(fig:5-join-cardinality) illustrates how cardinality might emerge depending on the relational schema and problem at hand.
 
 ```{r 5-join-cardinality, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Cardinality of joins between relations R and S. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Cardinality of joins between relations R and S. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "05-join-cardinality.png"))
 ```
 <br/>

@@ -427,7 +427,7 @@ Both are functions of slope angle $\beta$, and $SCA_{max}$ is defined as drainag
 In addition to SAGA Wetness, another useful index that was included in the Case Study was the Multi-Resolution Valley Bottom Flatness (MRVBF) index. Introduced by [@gallant2003multiresolution], this index identifies hill slopes and valley bottoms, and characterizes hydrological and geomorphic dynamics. This index serves to identify areas that are likely to be occupied by water, and has been used widely in remote sensing studies [@huang2017comparison]. MRVBF is derived from flatness and lowness characteristics and is computed using slope and ranked elevation, see Figure \@ref(fig:9-MRVBF-diagram) [@gallant2003multiresolution]. Note that this is a simplification of the computational process, and [@gallant2003multiresolution] may be consulted for a more in-depth breakdown of the 18 equations involved in computing MRVBF. Figure \@ref(fig:9-MRVBF) shows MRVBF across the study site.
 
 ```{r 9-MRVBF-diagram, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste("Multi-Resolution Valley Bottom Flatness (MRVBF) Computational Components described by Gallant and Dowling 2003. Melser, CC BY 4.0.")
+fig_cap <- paste("Multi-Resolution Valley Bottom Flatness (MRVBF) Computational Components described by Gallant and Dowling 2003. Melser, CC-BY-SA-4.0.")
 DiagrammeR::grViz("digraph {
   graph [layout = dot, rankdir = TB]
   node [shape = rectangle]        

@@ -1,3 +1,13 @@
+```{r, include=FALSE}
+baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"
+covlicence <- "https://opendata.vancouver.ca/pages/licence/"
+library("dplyr")
+library("rgdal")
+library("leaflet")
+library("xtable")
+library("plyr")
+```
+
 # Remote Sensing Systems {#chapter-template}
 
 You probably know that you are using your very own organic remote sensing system to read this sentence. Our eyes take in information from the world around us by detecting changes in light and relaying that information through the optic nerve into our brains, where we make sense of what we are seeing. As you learned in Chapter 11, this is what constitutes remote sensing - gathering information (“sensing”) without directly measuring or interacting with that information (“remote”). Whereas our eyes are limited to the visible light portion of the electromagnetic spectrum and by the location of our bodies, remote sensing systems use powerful sensors and flight-equipped platforms to paint a broader and deeper picture of the world around us. The picture in figure \@ref(fig:12-GOES-1-earth) is an example of the beautiful imagery we can capture from space, taken from the GOES-1 satellite.
@@ -6,7 +16,7 @@ You probably know that you are using your very own organic remote sensing system
 
 ```{r 12-GOES-1-earth, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 
-fig_cap <- paste("North and South America as seen from the NASA GOES-1 satellite. Captured from KeepTrack.space via NASA. Animated figure can be viewed in the web browser version of the textbook. [Copyright (C) 2007 Free Software Foundation, Inc.](https://fsf.org/)")
+fig_cap <- paste0("North and South America as seen from the NASA GOES-1 satellite. Captured from KeepTrack.space via NASA. [Copyright (C) 2007 Free Software Foundation, Inc.](https://fsf.org/)")
 
 knitr::include_graphics(here::here("images", "12-GOES_1_earth.png"))
 
@@ -100,7 +110,7 @@ The lens at the front of your eyeball changes refracts light beams from varying 
 
 ```{r 12-focus-example-humaneye, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 
-fig_cap <- paste("Selected material from [How Focus Works](https://www.bhphotovideo.com/explora/photography/tips-and-solutions/how-focus-works). Animated figure can be viewed in the web browser version of the textbook. Copyright Todd Vorenkamp. Used with permission.)")
+fig_cap <- paste0("Selected material from [How Focus Works](https://www.bhphotovideo.com/explora/photography/tips-and-solutions/how-focus-works). <a href='",baseurl,"#fig:12-focus-example-humaneye'>Animated figure can be viewed in the web browser version of the textbook</a>. Copyright Todd Vorenkamp. Used with permission.)")
 
 knitr::include_graphics(here::here("images", "12-focus_example_humaneye.gif"))
 
@@ -118,7 +128,7 @@ Most, if not all, lenses on optical systems for remote sensing are **spherical l
 
 ```{r 12-RoC-convex, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 
-fig_cap <- paste("Measuring the radius of curvature for a convex optical surface. Claire Armour. Animated figure can be viewed in the web browser version of the textbook. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
+fig_cap <- paste0("Measuring the radius of curvature for a convex optical surface. Claire Armour. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
 
 knitr::include_graphics(here::here("images", "12-ROC_convex.png"))
 
@@ -128,7 +138,7 @@ knitr::include_graphics(here::here("images", "12-ROC_convex.png"))
 
 ```{r 12-RoC-concave, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 
-fig_cap <- paste("Measuring the radius of curvature for a concave optical surface. Claire Armour. Animated figure can be viewed in the web browser version of the textbook. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
+fig_cap <- paste0("Measuring the radius of curvature for a concave optical surface. Claire Armour.[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
 
 knitr::include_graphics(here::here("images", "12-ROC_concave.png"))
 
@@ -165,7 +175,7 @@ The point where the light converges or appears to converge is called the *focal 
 
 ```{r 12-convex-focal-diagram, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 
-fig_cap <- paste("Measurements in a biconvex lens. [User:DrBob](https://en.wikipedia.org/wiki/User:DrBob). [CC BY 3.0 Unported](https://creativecommons.org/licenses/by/3.0/)")
+fig_cap <- paste0("Measurements in a biconvex lens. [User:DrBob](https://en.wikipedia.org/wiki/User:DrBob). [CC BY 3.0 Unported](https://creativecommons.org/licenses/by/3.0/)")
 
 knitr::include_graphics(here::here("images", "12-convex_focal_diagram.png"))
 
@@ -175,7 +185,7 @@ knitr::include_graphics(here::here("images", "12-convex_focal_diagram.png"))
 
 ```{r 12-concave-focal-diagram, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 
-fig_cap <- paste("Measurements in a biconcave lens. [User:DrBob](https://en.wikipedia.org/wiki/User:DrBob). [CC BY 3.0 Unported](https://creativecommons.org/licenses/by/3.0/)")
+fig_cap <- paste0("Measurements in a biconcave lens. [User:DrBob](https://en.wikipedia.org/wiki/User:DrBob). [CC BY 3.0 Unported](https://creativecommons.org/licenses/by/3.0/)")
 
 knitr::include_graphics(here::here("images", "12-concave_focal_diagram.png"))
 
@@ -209,7 +219,7 @@ When you return from your trip, your friend decides to test you on your new skil
 
 ```{r 12-assiniboine-day, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 
-fig_cap <- paste("Mt Assiniboine, image one. Kyle Maguire. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
+fig_cap <- paste0("Mt Assiniboine, image one. Kyle Maguire. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
 
 knitr::include_graphics(here::here("images", "12-assiniboine_day.png"))
 
@@ -219,7 +229,7 @@ knitr::include_graphics(here::here("images", "12-assiniboine_day.png"))
 
 ```{r 12-assiniboine-sunset, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 
-fig_cap <- paste("Mt Assiniboine, image two. Kyle Maguire. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
+fig_cap <- paste0("Mt Assiniboine, image two. Kyle Maguire. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
 
 knitr::include_graphics(here::here("images", "12-assiniboine_sunset.png"))
 
@@ -249,7 +259,7 @@ Examples of optical systems with different degrees of motion are given in table 
 
 ```{r 12-DoM-table, fig.cap = fig_cap, out.width="100%", echo = FALSE}
 
-fig_cap <- paste("Table showing examples of motion in remote sensing systems")
+fig_cap <- paste0("Table showing examples of motion in remote sensing systems")
 
 table <- as.data.frame(read.csv(here::here("data", "12", "DoM-table.csv")))
 
@@ -304,7 +314,7 @@ The plane of the lens is perpendicular to the ground plane and the lens vector i
 
 ```{r 12-aerial-plane, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 
-fig_cap <- paste("[Aerial photo of forest, road, and river near Kitimat, BC](https://unsplash.com/photos/UFwW97AP0LI). [Ben den Engelsen](https://unsplash.com/@benjeeeman) on Unsplash.Animated figure can be viewed in the web browser version of the textbook. [Unsplash License](https://unsplash.com/license)")
+fig_cap <- paste0("[Aerial photo of forest, road, and river near Kitimat, BC](https://unsplash.com/photos/UFwW97AP0LI). [Ben den Engelsen](https://unsplash.com/@benjeeeman) on Unsplash.[Unsplash License](https://unsplash.com/license)")
 
 knitr::include_graphics(here::here("images", "12-aerial-plane.png"))
 
@@ -323,7 +333,7 @@ _It's important to note that the "ground plane" refers to a plane tangent to the
 
 ```{r 12-aerial-good, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 
-fig_cap <- paste("How aerial imagery should be taken. Claire Armour. Animated figure can be viewed in the web browser version of the textbook. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
+fig_cap <- paste0("How aerial imagery should be taken. Claire Armour.<a href='",baseurl,"#fig:12-aerial-good'> Animated figure can be viewed in the web browser version of the textbook</a>. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
 
 knitr::include_graphics(here::here("images", "12-aerial-good.gif"))
 
@@ -331,7 +341,7 @@ knitr::include_graphics(here::here("images", "12-aerial-good.gif"))
 
 ```{r 12-aerial-bad, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 
-fig_cap <- paste("How aerial imagery should NOT be taken. Claire Armour. Animated figure can be viewed in the web browser version of the textbook. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
+fig_cap <- paste0("How aerial imagery should NOT be taken. Claire Armour.  <a href='",baseurl,"#fig:12-aerial-bad'>Animated figure can be viewed in the web browser version of the textbook</a> --> [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
 
 knitr::include_graphics(here::here("images", "12-aerial-bad.gif"))
 
@@ -344,7 +354,7 @@ The plane of the lens is perpendicular to the ground plane and the lens vector i
 
 ```{r 12-nadir-image, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 
-fig_cap <- paste("[Looking towards the sky through the trees in a forest in Sweden](https://unsplash.com/photos/Mg1xk9i0yEU). [Joachim Bohlander](https://unsplash.com/@joacimbohlander) on Unsplash. Animated figure can be viewed in the web browser version of the textbook. [Unsplash License](https://unsplash.com/license)")
+fig_cap <- paste0("[Looking towards the sky through the trees in a forest in Sweden](https://unsplash.com/photos/Mg1xk9i0yEU). [Joachim Bohlander](https://unsplash.com/@joacimbohlander) on Unsplash.[Unsplash License](https://unsplash.com/license)")
 
 knitr::include_graphics(here::here("images", "12-nadir-image.png"))
 
@@ -370,7 +380,7 @@ The plane of the lens is _not_ perpendicular to the ground plane - essentially, 
 
 ```{r 12-oblique-louise, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 
-fig_cap <- paste("[Oblique image of mountainside trees in Lake Louise, Alberta, Canada](https://unsplash.com/photos/P36KI_ws3vs). Animated figure can be viewed in the web browser version of the textbook. [Vlad Shapochnikov](https://unsplash.com/@vladshap) on Unsplash. [Unsplash License](https://unsplash.com/license)")
+fig_cap <- paste0("[Oblique image of mountainside trees in Lake Louise, Alberta, Canada](https://unsplash.com/photos/P36KI_ws3vs). [Vlad Shapochnikov](https://unsplash.com/@vladshap) on Unsplash. [Unsplash License](https://unsplash.com/license)")
 
 knitr::include_graphics(here::here("images", "12-oblique_louise.png"))
 
@@ -392,7 +402,7 @@ A hemispherical perspective has less to do with camera positioning and more to d
 
 ```{r 12-hemisphere-view, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 
-fig_cap <- paste("Visualization of a hemispherical perspective. Animated figure can be viewed in the web browser version of the textbook. Claire Armour. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
+fig_cap <- paste0("Visualization of a hemispherical perspective. Claire Armour. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
 
 knitr::include_graphics(here::here("images", "12-hemisphere-view.png"))
 
@@ -406,7 +416,7 @@ Due to the unusual shape of the lens, it captures a much larger proportion of a 
 
 ```{r 12-hemispherical-lens, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 
-fig_cap <- paste("[Hemispherical photo taken in the Bavarian forest](https://en.wikipedia.org/wiki/File:Hemispherical_photo1.jpg). [Martin Wegmann](https://commons.wikimedia.org/wiki/User:Wegmann). Animated figure can be viewed in the web browser version of the textbook. [CC BY 3.0 Unported](https://creativecommons.org/licenses/by/3.0/)")
+fig_cap <- paste0("[Hemispherical photo taken in the Bavarian forest](https://en.wikipedia.org/wiki/File:Hemispherical_photo1.png). [Martin Wegmann](https://commons.wikimedia.org/wiki/User:Wegmann). [CC BY 3.0 Unported](https://creativecommons.org/licenses/by/3.0/)")
 
 knitr::include_graphics(here::here("images", "12-hemispherical-lens.png"))
 
@@ -416,7 +426,7 @@ knitr::include_graphics(here::here("images", "12-hemispherical-lens.png"))
 
 ```{r 12-newfoundland-from-space, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 
-fig_cap <- paste("[Picture of Newfoundland, Canada, taken by David Saint-Jacques during his space mission.] Animated figure can be viewed in the web browser version of the textbook. (https://asc-csa.gc.ca/eng/multimedia/search/image/watch/13330). [Canadian Space Agency/NASA](https://asc-csa.gc.ca/eng/terms.asp#copyright). [CC BY 3.0 Unported](https://creativecommons.org/licenses/by/3.0/)")
+fig_cap <- paste0("[Picture of Newfoundland, Canada, taken by David Saint-Jacques during his space mission.] (https://asc-csa.gc.ca/eng/multimedia/search/image/watch/13330). [Canadian Space Agency/NASA](https://asc-csa.gc.ca/eng/terms.asp#copyright). [CC BY 3.0 Unported](https://creativecommons.org/licenses/by/3.0/)")
 
 knitr::include_graphics(here::here("images", "12-newfoundland_from_space.png"))
 

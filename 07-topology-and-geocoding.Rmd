@@ -50,7 +50,7 @@ Vertex, Node, Pseudonode, Dangle, Planar Topology, Non-Planar Topology, Geocodin
 **Topology** describes the relationships of spatial data. This is a very broad definition that encompasses the wide range of possible arrangements of spatial data in practice. If we drill down into this concept, topology is really what allows us undertake specific types of analysis that requires or expects spatial data to behave in a certain way. If you think about the feature geometries that we have at our disposal, then there are no fewer than nine combinations of how these geometries can interact as illustrated in Figure \@ref(fig:7-topology-grid) below.
 
 ```{r 7-topology-grid, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste("Grid showing all the combinations of how point, line and polygon geometries can interact. Pickell, CC-BY-SA-4.0.")
+fig_cap <- paste0("Grid showing all the combinations of how point, line and polygon geometries can interact. Pickell, CC-BY-SA-4.0.")
 knitr::include_graphics("images/07-topology-grid.png")
 ```
 
@@ -123,7 +123,7 @@ Some examples of adjacency and overlap topological rules:
 As we have seen from Chapter 3, lines are often used to represent phenomena that flow, so intersection and connection are important concepts for these representations. Important to understanding how connection and intersection work in planar topology, we need to understand that lines are comprised of a set of vertices and nodes. A **node** is simply the terminating vertex in a set of vertices for a line. For example, suppose the line segment $A$ has a set of vertices, $[[1,0],[1,3],[1,5]]$. Then the nodes for $A$ are $[1,0]$ and $[1,5]$ (Figure \@ref(fig:7-node)). Since nodes define the end points of a line segment, they are key to enforcing connection rules. We will look at network analysis in more detail in the next chapter. For now, let us consider two different networks that can help us conceptualize some fundamental line topology using nodes.
 
 ```{r, 7-node, fig.align = 'center', out.width = '75%', fig.cap=fig_cap, cached=T, echo = FALSE}
-fig_cap <- paste("Lines are always comprised of two nodes. Line A shown here has nodes at [1,0] and [1,5]. Pickell, CC-BY-SA-4.0.")
+fig_cap <- paste0("Lines are always comprised of two nodes. Line A shown here has nodes at [1,0] and [1,5]. Pickell, CC-BY-SA-4.0.")
 Ax <- c(1,1,1)
 Ay <- c(0,3,5)
 plot(1,1,ylim=c(-1,6),xlim=c(-1,6),type="n",xlab="",ylab="",xaxt="n",yaxt="n")
@@ -161,7 +161,7 @@ text(3.5,2.5,"B", cex=1, font=2,col="#008837")
 Dangles are the opposite case to **intersections**, which occur when two line segments cross each other. With planar topology, intersections must be modeled with a shared node representing the intersection location. For example, suppose line segment $B$ has a set of vertices, $[[0,1],[2,1],[4,1]]$. If line segments $A$ (defined above) and $B$ are mapped together with non-planar topology, then they will intersect at $[1,2]$, which is not a vertex represented in either segment (Figure \@ref(fig:7-intersection-A-B)). 
 
 ```{r, 7-intersection-A-B, fig.align = 'center', out.width = '75%', fig.cap=fig_cap, cached=T, echo = FALSE}
-fig_cap <- paste("Line A mapped with Line B in non-planar topology. Pickell, CC-BY-SA-4.0.")
+fig_cap <- paste0("Line A mapped with Line B in non-planar topology. Pickell, CC-BY-SA-4.0.")
 Ax <- c(1,1,1)
 Ay <- c(0,3,5)
 Bx <- c(0,2,4)
@@ -218,7 +218,7 @@ text(1,2-0.2,"(1,2)",pos=4,font=2,cex=0.9)
 As well, **pseudonodes** can occur when a node does not actually terminate a line segment at a junction, for example, between two streams or roads. In other words, a pseudonode is a node that is shared by two lines. Figure \@ref(fig:7-pseudonode) illustrates a pseudonode occurring at $[3,5]$.
 
 ```{r, 7-pseudonode, fig.align = 'center', out.width = '75%', fig.cap=fig_cap, cached=T, echo = FALSE}
-fig_cap <- paste("Lines A and B share a pseudonode at [3,5], indicated in red. Pickell, CC-BY-SA-4.0.")
+fig_cap <- paste0("Lines A and B share a pseudonode at [3,5], indicated in red. Pickell, CC-BY-SA-4.0.")
 Ax <- c(0,1,3)
 Ay <- c(0,3,5)
 Bx <- c(3,4,3)
@@ -268,12 +268,7 @@ Some examples of cover topological rules:
 - Line must be covered by a polygon
 - Polygon must be covered by a polygon
 
-<<<<<<< HEAD
 ### Multipart geometry
-=======
-
-### Multipart geometries
->>>>>>> 5aa62c6c2631db4c429ad09c3a06ef3460ad6fce
 
 Sometimes we need to represent several points, lines or polygons as a collection, which is known as **multipart geometry**. Multipart geometry allow us to represent several disjoint and non-adjacent geometries as a single feature. In this way, we can assign attribute values to the collection of features rather than each geometry individually. The territorial boundary of Canada is a good example of an instance where a multipart geometry can be useful because all of the contiguous land and non-contiguous land (i.e., islands) can be represented and associated with a single feature in the attribute table. However, if the distinction of features is important, such as identifying the names of islands in the Haida Gwaii archipelago, then a singlepart geometry should be used (Figure \@ref(fig:7-haida-gwaii-leaflet)).
 
@@ -316,7 +311,6 @@ Although it is possible to convert from a multipart geometry into singlepart geo
 
 ### Holes
 
-<<<<<<< HEAD
 When dealing with polygon features, **holes** may occur, which represent discontinuity of the interior polygon space. Imagine the case of a forested land cover that surrounds a lake. If we consider the forested land cover polygon on its own, then the polygon will have a hole where the lake exists (Figure \@ref(fig:7-hole).
 
 ``` {r 7-hole, echo=FALSE, out.width = '50%', fig.cap=fig_cap}
@@ -368,9 +362,6 @@ Figure \@ref(7-delaunay-triangulation) shows a Delaunay triangulation for a set 
 ## plot.deldir(tesselation,add=T,wlines="triang",xlim=c(-0.25,1.25),ylim=c(-0.25,1.25),cmpnt_col=c("black",NA,NA,"black","black"),pch=19)
 ## dev.off()
 ```
-=======
-### Multipatch geometries
->>>>>>> 5aa62c6c2631db4c429ad09c3a06ef3460ad6fce
 
 ``` {r 7-delaunay-triangulation, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
 fig_cap <- paste("Delaunay triangulation of 50 random points. Pickell, CC-BY-SA-4.0.")

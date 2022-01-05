@@ -1,14 +1,15 @@
 baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"
 covlicence <- "https://opendata.vancouver.ca/pages/licence/"
+nrcanlicense <- "https://open.canada.ca/en/open-government-licence-canada"
 
-## Mapping Data {#mapping-data}
+# Mapping Data {#mapping-data}
 
 You probably already accept that the Earth is "round" and not "flat". You have probably held and touched a globe at some point in your life. But have you ever wondered how we describe location and measure something as large as the Earth? In this chapter, we will explore fundamental concepts for how we measure the Earth and orient ourselves with coordinate systems.
 
 :::: {.box-content .learning-objectives-content}
 
 ::: {.box-title .learning-objectives-top}
-#### Learning Objectives {-}
+## Learning Objectives {-}
 ::: 
 
 1. Understand the models of Earth's figure and shape
@@ -157,7 +158,7 @@ m = leaflet(countries) %>%
 ```
 
 ``` {r 2-CGVD-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
-fig_cap <- paste("The difference (in meters) between the Canadian Geodetic Vertical Datum of 2013 (CGVD2013) and the Canadian Geodetic Vertical Datum of 1928 (CGVD28). Data from Natural Resources Canada and licensed under the <a href='https://open.canada.ca/en/open-government-licence-canada'> Open Government Licence <a> - Canada. Animated figure can be viewed in the web broswer version of the textbook. Pickell, CC-BY-SA-4.0.")
+fig_cap <- paste("The difference (in meters) between the Canadian Geodetic Vertical Datum of 2013 (CGVD2013) and the Canadian Geodetic Vertical Datum of 1928 (CGVD28). Data from Natural Resources Canada and licensed under the <a href='",nrcanlicense,"'> Open Government Licence <a> - Canada. Animated figure can be viewed in the web broswer version of the textbook. Pickell, CC-BY-SA-4.0.")
 m
 ```
 

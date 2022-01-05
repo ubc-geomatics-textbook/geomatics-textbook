@@ -1,4 +1,4 @@
-## Making Beautiful Maps {#making-beautiful-maps}
+# Making Beautiful Maps {#making-beautiful-maps}
 
 A map _is not_ the territory it represents, but, if correct, it has a _similar structure_ to the territory, which accounts for its usefulness.
 —Alfred Korzybski, _Science and Sanity_, 1933
@@ -59,8 +59,8 @@ One of the reasons choropleth maps are so widely used is because much of the dat
 The map below represents, using percentages instead of absolute numbers, the spatial distribution of the percentage of Cantonese speakers per total population in each census tract in the city of Vancouver, British Columbia. Household population of mother tongue language speakers by census tract is an example of demographic data collected by Statistics Canada and can serve as a proxy for linguistic diversity. This map shows greater concentration of Cantonese speakers in census tracts in the East Vancouver area.
 
 ```{r 17-choropleth, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("A choropleth map representing the 
-percentage of Cantonese speakers per total population of census tracts in the City of Vancouver. [Household Population by Mother Tongue](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm) retrieved from [SimplyAnalytics](https://simplyanalytics.com/).")
+fig_cap <- paste0("A choropleth map representing the 
+percentage of Cantonese speakers per total population of census tracts in the City of Vancouver [Household Population by Mother Tongue](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm) retrieved from [SimplyAnalytics](https://simplyanalytics.com/).")
 knitr::include_graphics(here::here("images", "17-choropleth.png"))
 ```
 
@@ -73,14 +73,13 @@ In contrast to choropleth maps, raw data/counts (e.g. number of mother tongue la
 Also unlike choropleth maps, dot density maps do not need to be tied to enumeration units, although they can be, such as in this map example, which uses another method of mapping the same data that was used in the choropleth map above. For their part, dots are distributed randomly, and a potential misleading aspect of dot density maps is the false interpretation that the dots are placed in precise locations in space.
 
 ```{r 17-dotDensity, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Dot density map showing the distribution of Cantonese and Mandarin mother tongue language speakers by census tract Animated figure can be viewed in the web browser version of the textbook. [Household Population by Mother Tongue](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm) retrieved from [SimplyAnalytics](https://simplyanalytics.com/).")
+fig_cap <- paste0("Dot density map showing the distribution of Cantonese and Mandarin mother tongue language speakers by census tract [Household Population by Mother Tongue](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm) retrieved from [SimplyAnalytics](https://simplyanalytics.com/).")
 knitr::include_graphics(here::here("images", "17-dotDensity.png"))
 ```
 
 ## Isoline Maps
-
 ```{r 17-isoline, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("An isoline map representing growing seasons from the _Atlas of Canada_. Isolines are lines which connect points with identical values. Animated figure can be viewed in the web browser version of the textbook. ('Growing Seasons', @Norman Leon Nicholson & Paul Comtois, CC BY-NC-SA 3.1) retrieved from [David Rumsey Map Collection](https://www.davidrumsey.com/luna/servlet/s/c68r55).")
+fig_cap <- paste0("An isoline map representing growing seasons from the _Atlas of Canada_. Isolines are lines which connect points with identical values.  ('Growing Seasons', @Norman Leon Nicholson & Paul Comtois, CC BY-NC-SA 3.1) retrieved from [David Rumsey Map Collection](https://www.davidrumsey.com/luna/servlet/s/c68r55).")
 knitr::include_graphics(here::here("images", "17-isoline.png"))
 ```
 
@@ -93,11 +92,11 @@ _Note: I think I would combine diagrammatic and cartogram subsections._
 ## Cartograms
 
 ```{r 17-cartogram, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("A effective illustration of a cartogram representing the population (%) with no access to clean drinking water. ([@World Mapper](https://worldmapper.org/maps/no-water-access-per-capita/#&gid=1&pid=1), CC BY-NC-SA 4.0).")
+fig_cap <- paste0("A effective illustration of a cartogram representing the population (%) with no access to clean drinking water. ([@World Mapper](https://worldmapper.org/maps/no-water-access-per-capita/#&gid=1&pid=1), CC BY-NC-SA 4.0).")
 knitr::include_graphics(here::here("images", "17-cartogram.png"))
 ```
 
-- 08-cartogram.png from row 42 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
+- 17-cartogram.png from row 42 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
 
 _Note: Paul, see example interactive quiz at bottom of this [Introduction to Geomatics](https://openpress.usask.ca/introgeomatics/chapter/thematic-maps/){target="_blank"} OER textbook._
 
@@ -116,19 +115,19 @@ Most effective maps comprise standard elements that help orient the map viewer i
 ## Figure
 
 ```{r 17-figure, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("The components of effective map composition.('Map composition.', @Steven Manson, CC BY-NC-SA 4.0) [_Mapping, Society, and Technology_](https://open.lib.umn.edu/mapping/chapter/4-design-and-symbolization/#return-footnote-399-1).")
+fig_cap <- paste0("The components of effective map composition.('Map composition.', @Steven Manson, CC BY-NC-SA 4.0) [_Mapping, Society, and Technology_](https://open.lib.umn.edu/mapping/chapter/4-design-and-symbolization/#return-footnote-399-1).")
 knitr::include_graphics(here::here("images", "17-figure.png"))
 ```
 
-- 09-figure.png from row 32 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
+- 17-figure.png from row 32 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
 
 ## Ground
 
-- use 09-figure.png
+- use 17-figure.png
  
 ## Frame
 
-- use 09-figure.png
+- use 17-figure.png
 
 ## Elements of Maps
 Whereas the figure is the most prominent element of a map, most maps also contain additional elements that provide important supplementary information, without which the purpose of the map would be less clear. Thinking back to the dot density example from the previous section, it would be difficult to understand what the map was about without a title and a **legend**, which contained labeling and symbols explaining the units in the map. 
@@ -140,24 +139,24 @@ Just as in writing, it is also important to provide information about the data s
 ## Text
 
 ```{r 17-text, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Typography standards for cartography.('Cartographic style guide.', @Eric Gaba, CC BY 2.5) retrieved from [Wikipedia](https://en.wikipedia.org/wiki/Typography_(cartography)#/media/File:Maps_template-en.svg).")
+fig_cap <- paste0("Typography standards for cartography.('Cartographic style guide.', @Eric Gaba, CC BY 2.5) retrieved from [Wikipedia](https://en.wikipedia.org/wiki/Typography_(cartography)#/media/File:Maps_template-en.svg).")
 knitr::include_graphics(here::here("images", "17-text.png"))
 ```
 
-- 10-text.png from row 43 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
+- 17-text.png from row 43 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
 
 ## Legend
 
-- can use 09-figure.png
+- can use 17-figure.png
 
 ## Scale and North Arrow
 
 ```{r 17-scale, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Six maps of Ottowa at different scales from the _Atlas of Canada_. ('Comparison of scales', @Norman Leon Nicholson, Animated figure can be viewed in the web browser version of the textbook. CC BY-NC-SA 3.1) retrieved from [David Rumsey Map Collection](https://www.davidrumsey.com/luna/servlet/detail/RUMSEY~8~1~323156~90092341:-6--Comparison-of-scales-).")
+fig_cap <- paste0("Six maps of Ottowa at different scales from the _Atlas of Canada_. ('Comparison of scales', @Norman Leon Nicholson, CC BY-NC-SA 3.1) retrieved from [David Rumsey Map Collection](https://www.davidrumsey.com/luna/servlet/detail/RUMSEY~8~1~323156~90092341:-6--Comparison-of-scales-).")
 knitr::include_graphics(here::here("images", "17-scale.png"))
 ```
 
-- 11-scale.png from row 21 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
+- 17-scale.png from row 21 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
 - image is great example of both concept of scale and scale bars, not of north arrow
 
 ## Measured Grid
@@ -166,7 +165,7 @@ knitr::include_graphics(here::here("images", "17-scale.png"))
 
 ## Citation
 
-- - can use 09-figure.png
+- - can use 17-figure.png
 
 ## Symbolization
 **Symbolization** is the process by which cartographers choose how to represent the features on a map. Unless the map comprises an aerial or satellite image of the surface of the earth, all maps are representations of reality, whereby information is conveyed through the use of symbols.
@@ -174,54 +173,55 @@ knitr::include_graphics(here::here("images", "17-scale.png"))
 There are many ways to visually alter symbols - represented by points, lines, or polygons -  to convey information and show both qualitative and quantitative differences between features in the map. These include varying symbols by size, shape, and colour, to name just a few. Using points to map the location of Canada's cities, for example, the cartographer may use different shapes to illustrate differences between cities and towns. To show variations in populations of those cities, the cartographer might vary the size of the symbols.
 
 ```{r 17-symbolization, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("The components of symbolization. Animated figure can be viewed in the web browser version of the textbook. ('Symbolization', @Steven Manson, CC BY-NC-SA 4.0) [_Mapping, Society, and Technology_](https://open.lib.umn.edu/mapping/chapter/4-design-and-symbolization/#return-footnote-399-6).")
+fig_cap <- paste0("The components of symbolization. ('Symbolization', @Steven Manson, CC BY-NC-SA 4.0) [_Mapping, Society, and Technology_](https://open.lib.umn.edu/mapping/chapter/4-design-and-symbolization/#return-footnote-399-6).")
 knitr::include_graphics(here::here("images", "17-symbolization.png"))
 ```
 
 ## Separable
 
 ```{r 17-separable, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Separable and integral visual combinations delineated by value/shape and heighth/width, respectively. Animated figure can be viewed in the web browser version of the textbook. (@Martin E. Elmer) [_Symbol Considerations for Bivariate Thematic Mapping_](https://minds.wisconsin.edu/bitstream/handle/1793/67887/Elmer%20Martin%20E%202012.pdf?sequence=1&isAllowed=y).")
+fig_cap <- paste0("Separable and integral visual combinations delineated by value/shape and heighth/width, respectively. (@Martin E. Elmer) [_Symbol Considerations for Bivariate Thematic Mapping_](https://minds.wisconsin.edu/bitstream/handle/1793/67887/Elmer%20Martin%20E%202012.pdf?sequence=1&isAllowed=y).")
 knitr::include_graphics(here::here("images", "17-separable.png"))
 ```
 
-- 13-separable.png from row 33, page 7 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
+- 17-separable.png from row 33, page 7 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
 
 ## Integral
 
-- use 13-separable.png for this too
+- use 17-separable.png for this too
 
 ## Graduated
 
 ```{r 17-graduated, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Graduated symbols vary symbol size representing a category of values. Animated figure can be viewed in the web browser version of the textbook. ('Proportional & Graduated Symbols', @Anthony Robinson, CC BY-NC-SA 4.1) [_Maps and the Geospatial Revolution_](https://www.e-education.psu.edu/maps/l5_p3.html).")
+fig_cap <- paste0("Graduated symbols vary symbol size representing a category of values. ('Proportional & Graduated Symbols', @Anthony Robinson, CC BY-NC-SA 4.1) [_Maps and the Geospatial Revolution_](https://www.e-education.psu.edu/maps/l5_p3.html).")
 knitr::include_graphics(here::here("images", "17-graduated.png"))
 ```
 
-- 14-graduated.png from row 45 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
+- 17-graduated.png from row 45 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
 
 ## Configurable
+
 ```{r 17-configurable, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Separable and integral visual combinations delineated by value/shape and heighth/width, respectively. Animated figure can be viewed in the web browser version of the textbook. (@Martin E. Elmer) [_Symbol Considerations for Bivariate Thematic Mapping_](https://minds.wisconsin.edu/bitstream/handle/1793/67887/Elmer%20Martin%20E%202012.pdf?sequence=1&isAllowed=y).")
+fig_cap <- paste0("Separable and integral visual combinations delineated by value/shape and heighth/width, respectively. (@Martin E. Elmer) [_Symbol Considerations for Bivariate Thematic Mapping_](https://minds.wisconsin.edu/bitstream/handle/1793/67887/Elmer%20Martin%20E%202012.pdf?sequence=1&isAllowed=y).")
 knitr::include_graphics(here::here("images", "17-configurable.png"))
 ```
 
-- 15-configurable.png from row 33 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
+- 17-configurable.png from row 33 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
 
 
 ## Proportional
 
 ```{r 17-proportional, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Proportional symbols vary size of symbols in relation to their attribute value. ('Proportional & Graduated Symbols', @Anthony Robinson, CC BY-NC-SA 4.1. Animated figure can be viewed in the web browser version of the textbook.) [_Maps and the Geospatial Revolution_](https://www.e-education.psu.edu/maps/l5_p3.html).")
+fig_cap <- paste0("Proportional symbols vary size of symbols in relation to their attribute value. ('Proportional & Graduated Symbols', @Anthony Robinson, CC BY-NC-SA 4.1.) [_Maps and the Geospatial Revolution_](https://www.e-education.psu.edu/maps/l5_p3.html).")
 knitr::include_graphics(here::here("images", "17-proportional.png"))
 ```
 
-- 16-proportional.png from row 45 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
+- 17-proportional.png from row 45 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"}
 
 ## Line Weight
 
 ```{r 17-lineWeight, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Varying the thickness of different lines in the map can help focus attention and differentiate between map features.Animated figure can be viewed in the web browser version of the textbook. (['Map Elements and Design Principles'](https://alg.manifoldapp.org/read/introduction-to-cartography/section/b9662d0a-4926-4947-922d-a67a2cae0eec#2), @Uli Ingram, CC-BY-SA-4.0).")
+fig_cap <- paste0("Varying the thickness of different lines in the map can help focus attention and differentiate between map features. (['Map Elements and Design Principles'](https://alg.manifoldapp.org/read/introduction-to-cartography/section/b9662d0a-4926-4947-922d-a67a2cae0eec#2), @Uli Ingram, CC-BY-SA-4.0).")
 knitr::include_graphics(here::here("images", "17-lineWeight.png"))
 ```
 
@@ -239,15 +239,16 @@ Choice of colours should also take into account that some people are colourblind
 Colour is actually comprised of three elements: hue, chroma, and lightness, or value.
 
 ## Hue
+
 ```{r 17-hue, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Hues are what we commonly think of as the names of colours and distinguish between qualitative data.Animated figure can be viewed in the web browser version of the textbook. ('Hue', @Adrienne Fruver, CC BY-NC-SA 3.0) [_Mapping, Society, and Technology_](https://open.lib.umn.edu/mapping/chapter/4-design-and-symbolization/#footnote-399-13).")
+fig_cap <- paste0("Hues are what we commonly think of as the names of colours and distinguish between qualitative data. ('Hue', @Adrienne Fruver, CC BY-NC-SA 3.0) [_Mapping, Society, and Technology_](https://open.lib.umn.edu/mapping/chapter/4-design-and-symbolization/#footnote-399-13).")
 knitr::include_graphics(here::here("images", "17-hue.png"))
 ```
 
 ## Chroma
 
 ```{r 17-chroma, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Higher values represent lighter colorus while lower values refer to dark colours. Animated figure can be viewed in the web browser version of the textbook. ('Chroma', @Steven Manson, CC BY-NC-SA 4.0) [_Mapping, Society, and Technology_](https://www.e-education.psu.edu/geog486/node/606).")
+fig_cap <- paste0("Higher values represent lighter colorus while lower values refer to dark colours. ('Chroma', @Steven Manson, CC BY-NC-SA 4.0) [_Mapping, Society, and Technology_](https://www.e-education.psu.edu/geog486/node/606).")
 knitr::include_graphics(here::here("images", "17-chroma.png"))
 ```
 
@@ -255,14 +256,14 @@ knitr::include_graphics(here::here("images", "17-chroma.png"))
 
 
 ```{r 17-lightness, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Higher values represent lighter colours while lower values refer to darker colours. Animated figure can be viewed in the web browser version of the textbook. ('Value', @Cary Anderson, CC BY-NC-SA 4.0) [_Geog 486: Cartography and Visualization_](https://www.e-education.psu.edu/geog486/node/606).")
+fig_cap <- paste0("Higher values represent lighter colours while lower values refer to darker colours.('Value', @Cary Anderson, CC BY-NC-SA 4.0) [_Geog 486: Cartography and Visualization_](https://www.e-education.psu.edu/geog486/node/606).")
 knitr::include_graphics(here::here("images", "17-lightness.png"))
 ```
 
 ## Bivariate Colour Schemes
 
 ```{r 17-bivariate, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap <- paste("Different examples of bivariate legends. Animated figure can be viewed in the web browser version of the textbook. ('Bivariate', @Axis Maps, CC BY-NC-SA 4.0) [_Cartography Guide_](https://www.axismaps.com/guide/bivariate-choropleth).")
+fig_cap <- paste0("Different examples of bivariate legends. ('Bivariate', @Axis Maps, CC BY-NC-SA 4.0) [_Cartography Guide_](https://www.axismaps.com/guide/bivariate-choropleth).")
 knitr::include_graphics(here::here("images", "17-bivariate.png"))
 ```
 

@@ -1,7 +1,14 @@
+
+```{r, include=FALSE}
 baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"
 covlicence <- "https://opendata.vancouver.ca/pages/licence/"
 nrcanlicense <- "https://open.canada.ca/en/open-government-licence-canada"
-
+library("dplyr")
+library("rgdal")
+library("leaflet")
+library("xtable")
+library("plyr")
+```
 # Mapping Data {#mapping-data}
 
 You probably already accept that the Earth is "round" and not "flat". You have probably held and touched a globe at some point in your life. But have you ever wondered how we describe location and measure something as large as the Earth? In this chapter, we will explore fundamental concepts for how we measure the Earth and orient ourselves with coordinate systems.
@@ -39,7 +46,7 @@ All of these questions stem from need to represent **location**. For our purpose
 Eratosthenes accurately calculated the circumference of Earth by noticing how the Sun shone directly down the bottom of a well in Syene (modern Egypt) at noon on the summer solstice. He later made a second observation at Alexandria at noon on the summer solstice with a pole and noticed a shadow. He measured the angle of the shadow and inferred the circumference of Earth, which was already known to be spherical (Figure \@ref(fig:2-Eratosthenes)).
 
 ```{r 2-Eratosthenes, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Diagram showing how Eratosthenes estimated the circumference of Earth by observing the angle of a shadow that was cast about 800 km north of Syene in present-day Egypt. Animated figure can be viewed in the web browser version of the textbook.David Monniaux, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Diagram showing how Eratosthenes estimated the circumference of Earth by observing the angle of a shadow that was cast about 800 km north of Syene in present-day Egypt. David Monniaux, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "02-Eratosthenes.png"))
 ```
 <br/>
@@ -55,7 +62,7 @@ Here is a simple thought experiment to consider. Suppose you are trying to measu
 3. The measurement must terminate at a point along an imaginary line that is tangential to your head, and yes, that line must be perpendicular to the measuring tape and also parallel with the ground.
 
 ```{r 2-height, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Diagram for measuring height above a datum. Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Diagram for measuring height above a datum. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "02-height.png"))
 ```
 <br/>
@@ -73,7 +80,7 @@ The same rules above apply when we measure elevation. In order for elevation mea
 A **geodetic vertical datum** is one that describes the Earth's shape in the simplest possible terms using standard geometry. Despite what a globe might lead you to believe, the Earth is not perfectly spherical, but it is close to being spherical. In fact, the radius of Earth varies by no more than 22 km or 0.35%, hardly anything you would ever notice if you were holding it in your hand. That small difference is, however, significant enough to lead to mapping inaccuracies at the local level if a spherical model of Earth was adopted (Figure \@ref(fig:2-geoetic-datum)). Instead, we frequently describe Earth's shape as an oblate ellipsoid, which is essentially a sphere that has been flattened, and we define this ellipsoid with a semimajor and semiminor axis. Sometimes you will see the term *spheroid* used, which just means "sphere-like" and is interchangeable with the term *ellipsoid*.
 
 ```{r 2-geodetic-datum, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Spherical geodetic datum. Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Spherical geodetic datum. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "02-geodetic-datum.png"))
 ```
 <br/>
@@ -81,7 +88,7 @@ A **geodetic vertical datum** is one that describes the Earth's shape in the sim
 There are many different ellipsoids that have been defined and are currently in use as datums. The most commonly used ellipsoid is called the World Geodetic System of 1984 or usually abbreviated as WGS 1984 or WGS 84. In fact, there are hundreds of ellipsoids that have been defined over recent centuries to model the shape of the Earth. The reason for so many other ellipsoids is due in part to technological advances that have improved the accuracy and precision of surveying as well as estimation of the ellipsoidal parameters. Many of these ellipsoids are not **geocentric**, that is, not originating from the center of mass of Earth. These datums are known as **regional datums**, which still describe the dimensions that approximate the shape of Earth, but are instead oriented so that the surface of the ellipsoid is congruent with a particular regional surface of Earth. For example, the European Datum 1950, the South American Datum 1969, the North American Datum 1983, and the Australian Geodetic Datum 1966 conform well to their respective continents, even better than WGS 1984 in most cases, but poorly anywhere else in the world.
 
 ```{r 2-sphere-ellipsoid, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Sphere versus ellispoid. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Sphere versus ellispoid. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "02-sphere-ellipsoid.png"))
 ```
 <br/>
@@ -98,7 +105,7 @@ where $G$ is the North Pole and $A$ is a point on the Equator. The sphere, of co
 A **tidal vertical datum** is likely one that you are familiar with. The premise of a tidal vertical datum is to use mean sea level as a reference surface, above which are positive elevations and below are negative elevations. This has a lot of advantages, like it is intuitive and oceans cover more than 70% of the planet's surface so much of Earth's land mass is near an ocean. However, the disadvantages are that sea level changes over time with tides and also with climate change. The not-so-obvious problem with a tidal vertical datum is that the sea level is actually not constant around the planet not only due to tides, but also temperature, air pressure, and gravity. In other words, mean sea level measured at a gauge station in Halifax on the Atlantic Ocean will not be the same distance from the center of Earth as mean sea level measured at Victoria on the Pacific Ocean (Figure \@ref(fig:2-tidal-datum)). The primary challenge with a tidal vertical datum is extending it away from the coastline through a network of survey points using a process known as levelling, and even still, it is only meaningful during the epoch in which the mean sea level was measured at a number of tidal gauge stations.
 
 ```{r 2-tidal-datum, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Conceptual tidal datum for Canada.Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Conceptual tidal datum for Canada. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "02-tidal-datum.png"))
 ```
 <br/>
@@ -115,7 +122,7 @@ $$
 H = h - N
 $$
 ```{r 2-H-h-N, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Orthometric Height (H) is the ellipsoidal height (h) less the geoid height (N). Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Orthometric Height (H) is the ellipsoidal height (h) less the geoid height (N). Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "02-H-h-N.png"))
 ```
 <br/>
@@ -123,7 +130,7 @@ $$
 To illustrate the concept of a gravimetric datum, suppose we constructed a large, straight tunnel through the physical Earth that was tangential to the ellipsoid. If we allowed the oceans to flow freely through this tunnel, your experiences might convince you that water would flow from one end to the other. But in fact, this tunnel is so large, that the gravity field is changing. So the water would actually come to rest at the surface of the geoid or gravimetric model, as shown in Figure \@ref(fig:2-geoid-tunnel) below.
 
 ```{r 2-geoid-tunnel, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Thought experiment showing where water would be at rest within a tunnel through the geoid due to the equipotential force of gravity (g). Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Thought experiment showing where water would be at rest within a tunnel through the geoid due to the equipotential force of gravity (g).Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "02-geoid-tunnel.png"))
 ```
 <br/>
@@ -158,8 +165,8 @@ m = leaflet(countries) %>%
 ```
 
 ``` {r 2-CGVD-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
-fig_cap <- paste("The difference (in meters) between the Canadian Geodetic Vertical Datum of 2013 (CGVD2013) and the Canadian Geodetic Vertical Datum of 1928 (CGVD28). Data from Natural Resources Canada and licensed under the <a href='",nrcanlicense,"'> Open Government Licence <a> - Canada. Animated figure can be viewed in the web broswer version of the textbook. Pickell, CC-BY-SA-4.0.")
-m
+fig_cap <- paste0("The difference (in meters) between the Canadian Geodetic Vertical Datum of 2013 (CGVD2013) and the Canadian Geodetic Vertical Datum of 1928 (CGVD28).<a
+href='",baseurl,"#fig:2-CGVD-leaflet'>Animated figure can be viewed in the web browser version of the textbook</a>.Data from Natural Resources Canada and licensed under the <a href='",covlicence,">Open Government Licence - Canada </a>.Pickell, CC-BY-SA-4.0.")  
 ```
 
 ## Referencing Location
@@ -181,7 +188,7 @@ Geocentric coordinate systems are essential for global navigation and mapping. I
 For most of your life, you have probably believed that there is a singular combination of capital-L Latitude and Longitude values that absolutely define some location on Earth in perpetuity. This is perhaps the most profound geographic lie that we were taught as young school children. In fact, there are as many "types" of latitude as there are geographic coordinate systems. By now, you should be able to recognize the difference between *geocentric latitude* that is referenced to a sphere and *geodetic latitude* that is referenced to an ellipsoid. The main difference is that geocentric latitude is the angle relative to the centre of the sphere at the equatorial plane and geodetic latitude is the angle relative to the equatorial plane (i.e., not necessarily the centre). Figure \@ref(fig:2-geocentric-geodetic-latitude) illustrates how the same angle can put you in two very different places depending on the geographic coordinate system you are using.
 
 ```{r 2-geocentric-geodetic-latitude, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Geocentric versus geodetic latitude. Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Geocentric versus geodetic latitude. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "02-geocentric-geodetic-latitude.png"))
 ```
 <br/>
@@ -214,7 +221,7 @@ Some map projections can preserve several of these characteristics at once, but 
 So how do we use this tool? The quotient between a line projected onto a map $a$ and the same line on a globe $a'$ is $\frac{a}{a'}=1$ when there is no distortion on that axis of the ellipse. This quotient is also called a scale factor because it is showing how the map scale is modified locally by a map projection. Figure \@ref(fig:2-reference-indicatrix) below shows an example of a reference indicatrix that is a perfect circle on a globe with axes $a$ and $b$.
 
 ```{r 2-reference-indicatrix, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Reference Tissot Indicatrix.Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Reference Tissot Indicatrix. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "02-reference-indicatrix.png"))
 ```
 <br/>
@@ -222,7 +229,7 @@ So how do we use this tool? The quotient between a line projected onto a map $a$
 Let us assume that $a = b = 1$. Then, the reference indicatrix has the following properties: $a=b$, $a×b=1$, and $Area=πab=π^2$. If $\frac{a'}{a'}>1$, then we can conclude that the the projection is *expanding* the distance along the $a$ line. If $\frac{a'}{a'}<1$, then we can conclude that the projection is *compressing* the distance along the line $a$. For example, suppose $a=2$ and $b=0.5$, then we have modified the scale of the indicatrix along both axes, but the areal solution is the same as the reference indicatrix shown as the red dashed circle in Figure 2.10 below.
 
 ```{r 2-reference-equivalent, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Equivalent Tissot Indicatrix. Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Equivalent Tissot Indicatrix. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "02-equivalent-indicatrix.png"))
 ```
 <br/>
@@ -232,7 +239,7 @@ The indicatrix above in Figure \@ref(fig:2-equivalent-indicatrix) is an example 
 If $\frac{a}{a'}×\frac{b}{b'}>1$, then we can conclude that the projection is *inflating* the area. If $\frac{a}{a'}×\frac{b}{b'}<1$, then we can conclude that the projection is *deflating* the area. Consequently, whenever the quotients of both axes are equivalent (i.e., $\frac{a}{a'}=\frac{b}{b'}$), Tissot's Indicatrix forms a perfect circle and the ellipse is conformal with angles true to the globe. For example, suppose $a=b=2$, then we have modified the scale of the indicatrix along both axes, but with the same factor. This results in a *conformal* indicatrix that is not equivalent, shown in Figure \@ref(fig:2-conformal-indicatrix) below.
 
 ```{r 2-conformal-indicatrix, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Conformal Tissot Indicatrix. Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Conformal Tissot Indicatrix. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "02-conformal-indicatrix.png"))
 ```
 <br/>
@@ -248,7 +255,7 @@ Mercator is a cylindrical map projection that represents meridians and parallels
 The Mercator map projection is perhaps the most pervasive and reproduced projection around us (Figure \@ref(fig:2-Mercator-map)). Because angles are preserved, you can easily and accurately navigate long distances across Earth, and this was exactly the purpose that Gerardus Mercator envisioned when he first identified the projection for sea-faring Europeans in 1569. You may also recognize the Mercator projection from web mapping applications like Google Maps, which use it because it ensures that North-South roads intersect at right angles with East-West roads.
 
 ```{r 2-Mercator-map, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Mercator map projection with Tissot's Indicatrices in red. Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Mercator map projection with Tissot's Indicatrices in red. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "02-Mercator-map.png"))
 ```
 <br/>
@@ -258,7 +265,7 @@ The Mercator map projection is perhaps the most pervasive and reproduced project
 Universal Transverse Mercator (UTM) is very similar to a Mercator projection except that the cylinder is rotated or transverse by 90° so that the opening of the cylinder is perpendicular to the rotational axis of Earth. This has the effect of moving the tangent from the Equator to any Meridian. In fact, you can rotate the cylinder at any angle you want where 0° is a true Mercator, 90° is a transverse Mercator, and any other angle is considered an oblique Mercator. UTM is actually a system of 60 different transverse Mercator projections that are defined to represent 6° Longitudinal intervals of Earth's surface (60 zones x 6° = 360°). Each projection is defined as a zone, which is also divided into North and South zones depending whether you are in the Northern or Southern Hemisphere. Canada spans 15 UTM zones from Zone 7 North in the Yukon to Zone 22 North covering Newfoundland. Figure \@ref(fig:2-UTM-13N-map) below shows a map of UTM Zone 13 over Saskatchewan.
 
 ```{r 2-UTM-13N-map, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Universal Transverse Mercator Zone 13 map projection with Tissot's Indicatrices in red. Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Universal Transverse Mercator Zone 13 map projection with Tissot's Indicatrices in red.Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "02-UTM-13N-map.png"))
 ```
 <br/>
@@ -272,7 +279,7 @@ UTM uses a unique coordinate system that deserves some explanation. Just like wi
 Sinusoidal is a *pseudocylindrical* map projection, so-named because these projections approximate a true cylindrical projection except that Meridians are curved instead of straight like with Mercator or UTM. Because Meridians are curved, Sinusoidal maps represent the North and South Poles as single points instead of lines as is the case with Mercator. Thus, Sinusoidal maps are not conformal and distort shape, but they are in fact equal-area (Figure \@ref(fig:2-Sinusoidal-map)). Equal-area map projections like Sinusoidal are important for accurately accounting for land cover and other global mapping efforts. Therefore, it is common to find global datasets distributed in a Sinusoidal map projection.
 
 ```{r 2-Sinusoidal-map, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Sinusoidal map projection with Tissot's Indicatrices in red. Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Sinusoidal map projection with Tissot's Indicatrices in red. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "02-Sinusoidal-map.png"))
 ```
 <br/>
@@ -282,7 +289,7 @@ Sinusoidal is a *pseudocylindrical* map projection, so-named because these proje
 Albers is another example of an equivalent map projection, but unlike Sinusoidal, an Albers projection uses a cone as a projection surface instead of a pseudocylinder. Like the cylindrical case, the cone can be sized and oriented in any way, but the cone of an Albers projection is typically oriented so that the vertex of the cone aligns with the rotational axis of Earth. The base of the cone has a diameter that usually results in two secants, known as **standard parallels** on an Albers map. Thus, Albers projections tend to distort latitudinally as you move North-South away from the standard parallels, but even more so as you move toward the base of the cone (Figure \@ref(fig:2-BC-Albers-map)). Besides being an equal-area projection, Albers is a good choice for mapping regions because shape and scale are mostly preserved near the standard parallels. For example, the province of British Columbia has adopted a modified Albers projection that situates the standard parallels at 50° N and 58.5° N, which are near the northern and southern latitudinal limits of the province. This narrow band of latitude between the standard parallels ensures that there is relatively little distortion in shape and scale within the province, which is comparable to UTM. However, British Columbia is a longitudinally wide province, spanning 6 of Canada's 15 total UTM zones, so Albers has a distinct advantage of being able to show the entire province with little distortion. For the same reasons, you will often find Canada-wide data distributed in an Albers projection.
 
 ```{r 2-BC-Albers-map, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("British Columbia Environment Albers map projection with Tissot's Indicatrices in red. Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("British Columbia Environment Albers map projection with Tissot's Indicatrices in red. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "02-BC-Albers-map.png"))
 ```
 <br/>

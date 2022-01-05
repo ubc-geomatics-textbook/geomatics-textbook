@@ -269,12 +269,7 @@ Some examples of cover topological rules:
 - Line must be covered by a polygon
 - Polygon must be covered by a polygon
 
-<<<<<<< HEAD
 ### Multipart geometry
-=======
-
-### Multipart geometries
->>>>>>> 5aa62c6c2631db4c429ad09c3a06ef3460ad6fce
 
 Sometimes we need to represent several points, lines or polygons as a collection, which is known as **multipart geometry**. Multipart geometry allow us to represent several disjoint and non-adjacent geometries as a single feature. In this way, we can assign attribute values to the collection of features rather than each geometry individually. The territorial boundary of Canada is a good example of an instance where a multipart geometry can be useful because all of the contiguous land and non-contiguous land (i.e., islands) can be represented and associated with a single feature in the attribute table. However, if the distinction of features is important, such as identifying the names of islands in the Haida Gwaii archipelago, then a singlepart geometry should be used (Figure \@ref(fig:7-haida-gwaii-leaflet)).
 
@@ -317,7 +312,6 @@ Although it is possible to convert from a multipart geometry into singlepart geo
 
 ### Holes
 
-<<<<<<< HEAD
 When dealing with polygon features, **holes** may occur, which represent discontinuity of the interior polygon space. Imagine the case of a forested land cover that surrounds a lake. If we consider the forested land cover polygon on its own, then the polygon will have a hole where the lake exists (Figure \@ref(fig:7-hole).
 
 ``` {r 7-hole, echo=FALSE, out.width = '50%', fig.cap=fig_cap}
@@ -369,9 +363,8 @@ Figure \@ref(7-delaunay-triangulation) shows a Delaunay triangulation for a set 
 ## plot.deldir(tesselation,add=T,wlines="triang",xlim=c(-0.25,1.25),ylim=c(-0.25,1.25),cmpnt_col=c("black",NA,NA,"black","black"),pch=19)
 ## dev.off()
 ```
-=======
+
 ### Multipatch geometries
->>>>>>> 5aa62c6c2631db4c429ad09c3a06ef3460ad6fce
 
 ``` {r 7-delaunay-triangulation, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
 fig_cap <- paste("Delaunay triangulation of 50 random points. Pickell, CC-BY-SA-4.0.")

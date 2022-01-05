@@ -55,7 +55,7 @@ As the name suggests, a **Digital Elevation Model (DEM)** is a digital represent
 Figure \@ref(fig:9-mount-assiniboine-dem) shows a DEM for Mount Assiniboine near the Alberta and British Columbia border. Mount Assiniboine has a distinctive pyramidal peak that is not immediately apparent from the bird's-eye view of a DEM. It is common to see DEMs displayed in this black and white colour scheme, where black represents lower elevations and white represents higher elevations. Can you tell where the peak is? We will look at more sophisticated colour schemes and geovisualizations of terrain in a later section.
 
 ```{r 9-mount-assiniboine-dem, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Digital Elevation Model of Mount Assiniboine at the border of Alberta and British Columbia, Canada. Data from Canadian Digital Elevation Model. Pickell, CC-BY-4.0.")
+    fig_cap <- paste("Digital Elevation Model of Mount Assiniboine at the border of Alberta and British Columbia, Canada. Animated figure can be viewed in the web browser version of the textbook. Data from Canadian Digital Elevation Model. Pickell, CC-BY-4.0.")
     knitr::include_graphics(here::here("images", "09-mount-assiniboine-dem.png"))
 ```
 </br>
@@ -63,7 +63,11 @@ Figure \@ref(fig:9-mount-assiniboine-dem) shows a DEM for Mount Assiniboine near
 Figure \@ref(fig:9-mount-assiniboine-dem) shows another DEM, but this time for some the flattest terrain in Canada over 1,600 km away from Mount Assiniboine on the Canadian Shield at the mouth of the Nelson River in Manitoba. The Nelson River drains an area of more than 1 million km^2 of land across much of the Canadian prairie provinces and pours into Hudson Bay. The Canadian Shield is home to the oldest terrain on Earth and millions of years of erosion have reduced it to rolling hills and flattened horizons. 
 
 ```{r 9-nelson-river-dem, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+<<<<<<< HEAD
     fig_cap <- paste("Digital Elevation Model of Nelson River pouring into Hudson Bay, Manitoba, Canada. Data from Shuttle Radar Topography Mission. Pickell, CC-BY-SA-4.0.")
+=======
+    fig_cap <- paste("Digital Elevation Model of Nelson River pouring into Hudson Bay, Manitoba, Canada. Animated figure can be viewed in the web browser version of the textbook. Data from Shuttle Radar Topography Mission. Pickell, CC-BY-4.0.")
+>>>>>>> 7069a7d0857d1af2274e09f7a43498096f7166a1
     knitr::include_graphics(here::here("images", "09-nelson-river-dem.png"))
 ```
 
@@ -192,7 +196,7 @@ You can probably recognize by now that if we apply a raster function to a DEM, t
 Figure \@ref(fig:9-mount-assiniboine-slope) shows the slope of Mount Assiniboine where red represents steeper slopes and green represents flatter slopes. For the Mount Assiniboine DEM, the slope values range from 2° at the flattest to 80° at the steepest. Can you see the peak yet? 
 
 ```{r 9-mount-assiniboine-slope, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Slope of Mount Assiniboine at the border of Alberta and British Columbia, Canada. Data from Canadian Digital Elevation Model. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste("Slope of Mount Assiniboine at the border of Alberta and British Columbia, Canada. Animated figure can be viewed in the web browser version of the textbook. Data from Canadian Digital Elevation Model. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-mount-assiniboine-slope.png"))
 ```
 </br>
@@ -200,7 +204,7 @@ Figure \@ref(fig:9-mount-assiniboine-slope) shows the slope of Mount Assiniboine
 Figure \@ref(fig:9-nelson-river-slope) shows the slope of Nelson River pouring into Hudson Bay. Again, red is steeper and green is flatter, but the slope values here only range from 0° to 9° and the vast majority of cells are less than 2°. Very flat terrain that can hardly be distinguished from the sea.
 
 ```{r 9-nelson-river-slope, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Slope of Nelson River pouring into Hudson Bay, Manitoba, Canada. Data from Shuttle Radar Topography Mission. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste("Slope of Nelson River pouring into Hudson Bay, Manitoba, Canada. Animated figure can be viewed in the web browser version of the textbook. Data from Shuttle Radar Topography Mission. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-nelson-river-slope.png"))
 ```
 </br>
@@ -210,13 +214,13 @@ Figure \@ref(fig:9-nelson-river-slope) shows the slope of Nelson River pouring i
 **Aspect** is another first order terrain derivative that represents the azimuthal direction that a slope faces. For example, an azimuth of 0° is North-facing slope, 90° is East-facing, 180° is South-facing, and 270° is West-facing with all other azimuths in between. Typically, aspect is most apparent when azimuths are dominate throughout the DEM. For example, the slope aspects are clearly visible in Figure \@ref(fig:9-mount-assiniboine-aspect) showing Mount Assiniboine. By contrast, when slopes are very flat as is the case for the Nelson River, aspect can alternate frequently and produce a nearly random sequence except for the relatively steeper south bank of the river shown in Figure \@ref(fig:9-nelson-river-aspect). It is possible to have an undefined aspect when the slope is 0°, which is the case for water seen coloured grey in Figure \@ref(fig:9-nelson-river-aspect).
 
 ```{r 9-mount-assiniboine-aspect, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Aspect of Mount Assiniboine at the border of Alberta and British Columbia, Canada. Data from Canadian Digital Elevation Model. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste("Aspect of Mount Assiniboine at the border of Alberta and British Columbia, Canada.Animated figure can be viewed in the web browser version of the textbook. Data from Canadian Digital Elevation Model. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-mount-assiniboine-aspect.png"))
 ```
 </br>
 
 ```{r 9-nelson-river-aspect, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Aspect of Nelson River pouring into Hudson Bay, Manitoba, Canada. Data from Shuttle Radar Topography Mission. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste("Aspect of Nelson River pouring into Hudson Bay, Manitoba, Canada. Data from Shuttle Radar Topography Mission.Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-nelson-river-aspect.png"))
 ```
 </br>
@@ -266,14 +270,14 @@ A hillshade is still a 2D raster with 3D features simulated through an illuminat
 **Peaks** are the opposite of sinks, where a focal cell is surrounded by eight neighbouring cells that share the same lower elevation (Figure \@ref(fig:9-peak)). Like sinks, peaks are also naturally occurring (e.g., mountain peaks and ridge lines) and may also be artifacts of data resolution and processing. 
 
 ```{r 9-peak, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("A peak is shown in 3D for an array of 3x3 pixels. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste("A peak is shown in 3D for an array of 3x3 pixels. Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-peak.png"))
 ```
 
 **Saddles** occur when a lowland is bounded by two or more peaks (Figure \@ref(fig:9-saddle)). Usually, saddles identify a divide between drainage basins because they often occur along ridgelines and precipitation will runoff into one or the other drainage basin, but not both. 
 
 ```{r 9-saddle, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("A saddle is shown in 3D for an array of 3x3 pixels. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste("A saddle is shown in 3D for an array of 3x3 pixels. Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-saddle.png"))
 ```
 
@@ -286,21 +290,21 @@ One of the motivations for deriving information from a DEM is to classify terres
 Curvature of terrain is described as convex, flat, or concave, which impacts the flow acceleration or deceleration of runoff over the terrain. There are two components of terrain curvature representing the x- and y-axes of geographic space. **Profile curvature** describes the downslope curvature while **plan or planform curvature** describes the curvature that is perpendicular to the downslope curvature. In this way, the vertical expression of terrain can be described by two, perpendicular curves. Figure \@ref(fig:9-stacked-profile-planform) illustrates the nine different combinations of profile and planform curvature. change
 
 ```{r 9-stacked-profile-planform, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Conceptual diagram showing surfaces of all combinations of profile and planform curvature. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste("Conceptual diagram showing surfaces of all combinations of profile and planform curvature. Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-stacked-profile-planform.png"))
 ```
 
 There are many ways to calculate curvature, which usually take the form of a polynomial that is fit by a focal function over some neighbourhood of pixels. A 3x3 kernel is typically used to calculate profile and planform curvature, however, it is also common to increase the kernel size to counteract the effect of noise in high resolution DEMs. Figure \@ref(fig:9-stacked-profile-planform-kernel) illustrates examples of 3x3 kernels for each of the profile and planform curvature combinations. You might recognize variations of sinks, peaks, and saddles amongst the examples, which are of course not exhaustive of all possible elevation value combinations, but they are otherwise representative of the primary patterns that are indicated by profile and planform curvature.
 
 ```{r 9-stacked-profile-planform-kernel, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Conceptual diagram showing 3x3 kernel examples of all combinations of profile and planform curvature. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste("Conceptual diagram showing 3x3 kernel examples of all combinations of profile and planform curvature. Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-stacked-profile-planform-kernel.png"))
 ```
 
 Both profile and planform curvature are calculated as continuous floating point integers where: positive values represent convex curvature in the profile and concave curvature in the planform; zero represents no curvature; and negative values represent concave curvature in the profile and convex curvature in the planform. Figure \@ref(fig:9-mount-assiniboine-profile-planform-curvature) shows the profile and planform curvature for Mount Assiniboine. What landforms can you start to identify from terrain curvature? Can you identify any sinks, peaks, or saddles in the DEM?
 
 ```{r 9-mount-assiniboine-profile-planform-curvature, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Profile and planform curvature for Mount Assiniboine at the border of Alberta and British Columbia, Canada. Data from Canadian Digital Elevation Model. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste("Profile and planform curvature for Mount Assiniboine at the border of Alberta and British Columbia, Canada. Animated figure can be viewed in the web browser version of the textbook. Data from Canadian Digital Elevation Model. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-mount-assiniboine-profile-planform-curvature.png"))
 ```
 
@@ -309,7 +313,7 @@ Both profile and planform curvature are calculated as continuous floating point 
 Another way to derive and classify landforms is through the use of a **topographic position index (TPI)**, which is a focal function that accounts for the difference between the focal cell elevation and the average elevation of the eight neighbouring cells (in the case of a 3x3 kernel). Therefore, positive TPI values indicate ridges or peaks, zero indicates either a constant slope or a flat area or a saddle, and negative TPI values indicate a valley or sink. Figure \@ref(fig:9-mount-assiniboine-nelson-river-topographic-position-index) shows the TPI for Mount Assiniboine compared with the Nelson River. The TPI is sometimes also referred to as a terrain ruggedness index and there are other variations for calculating it as well (e.g., computing the standard score of the focal cell instead of the mean difference).
 
 ```{r 9-mount-assiniboine-nelson-river-topographic-position-index, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Comparing Topographic Position Index (TPI) for Mount Assiniboine and the Nelson River. Data from Canadian Digital Elevation Model and MAXAR, respectively. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste("Comparing Topographic Position Index (TPI) for Mount Assiniboine and the Nelson River. Animated figure can be viewed in the web browser version of the textbook. Data from Canadian Digital Elevation Model and MAXAR, respectively. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-mount-assiniboine-nelson-river-topographic-position-index.png"))
 ```
 
@@ -322,7 +326,7 @@ By now, you should recognize that water can be modelled over a DEM by making the
 Runoff is the most fundamental process that can be modelled from a DEM. In fact, modelling runoff supports nearly every subsequent derived hydrological variable of interest (e.g., flow accumulation, stream order, and watersheds). The principle assumption is that water flows from higher elevations to lower elevations. So the first step in any hydrological workflow is to calculate **flow direction** or the path that water will flow given precipitation over a focal cell in the DEM. This is made possible because we also know the eight neighbouring cell elevations. There a several algorithms for calculating and assigning flow direction, but the simplest is a focal function known as _D8_, first proposed by Greenlee (1987), that answers the question, _which neighbouring cell has the lowest elevation?_ With only eight neighbours, runoff can only travel in eight unique azimuths. Flow direction can be encoded as an azimuth with valid values of $FlowDir∈\{0,45,90,135,180,225,270,315,360\}$ (16-bit integer) where 0 is reserved for undefined flow direction, but more D8 flow direction is commonly encoded as an 8-bit integer with valid values of $FlowDir∈\{1,2,4,8,16,32,64,128,255\}$ where 255 is reserved for undefined flow direction. Once we know the flow direction we can calculate the **flow accumulation**, which is a focal function tally of the number of upslope DEM cells that flow into the focal cell. Figure \@ref(fig:9-flow-direction-accumulation) illustrates how flow direction and flow accumulation work together to model runoff over a DEM surface. 
 
 ```{r 9-flow-direction-accumulation, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Flow direction shown in arrows and flow accumulation of upslope cells shown in numbers for the D8 flow direction algorithm. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste("Flow direction shown in arrows and flow accumulation of upslope cells shown in numbers for the D8 flow direction algorithm. Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-flow-direction-accumulation.png"))
 ```
 
@@ -338,7 +342,7 @@ The D8 algorithm is intuitive, fast, simple to implement and you will probably s
 More sophisticated flow direction algorithms have developed since then that are more robust against erroneous pixels in the input DEM, including the D-infinity flow (DINF) algorithm proposed by Tarboton in 1997 and the multiple flow direction (MFD) algorithm developed by Qin et al in 2007. The DIF algorithm works by creating triangular facets within the 3x3 kernel, then flow direction is assigned as the azimuth of facet with the steepest slope. Calculated in this way, flow direction is represented as a continuous value between 1-360 instead of one of eight possible values with the D8 method. The MFD algorithm works by partitioning downslope flow to all eight neighbours. As a result, each neighbour receives a fraction of flow and the flow accumulation function then accumulates these fractions downslope. Figure \@ref(fig:9-mount-assiniboine-flow-dir-acc) shows the D8 flow direction and associated flow accumulation for Mount Assiniboine. Once flow direction and accumuation rasters have been generated, the floodgates open for a wide range of other derivative calculations, which are discussed in the next sections.
 
 ```{r 9-mount-assiniboine-flow-dir-acc, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("D8 Flow direction and flow accumulation for Mount Assiniboine at the border of Alberta and British Columbia, Canada. Data from Canadian Digital Elevation Model. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste("D8 Flow direction and flow accumulation for Mount Assiniboine at the border of Alberta and British Columbia, Canada. Data from Canadian Digital Elevation Model. Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-mount-assiniboine-flow-dir-acc.png"))
 ```
 
@@ -400,7 +404,7 @@ m = leaflet() %>%
 ```
 
 ```{r 9-fort-st-john-study-area, echo=FALSE, fig.cap=fig_cap, ouwidth="75%"}
-fig_cap <- "The Fort St. John Timber Supply Area, British Columbia, Canada. Data from Government of British Columbia and licensed under the Open Government Licence - British Columbia. Mesler, CC-BY-SA-4.0."
+fig_cap <- "The Fort St. John Timber Supply Area, British Columbia, Canada. Data from Government of British Columbia and licensed under the Open Government Licence - British Columbia. Animated figure can be viewed in the web browser version of the textbook. Mesler, CC-BY-SA-4.0."
 m
 ```
 
@@ -420,7 +424,7 @@ $$
 Both are functions of slope angle $\beta$, and $SCA_{max}$ is defined as drainage area per unit contour width ($m^2$*$m^{-1}$). SAGA Wetness across the study site is shown in Figure \@ref(fig:9-SAGA-Wetness).
 
 ```{r 9-SAGA-Wetness, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("System for Automated Geoscientific Analyses (SAGA) Wetness Index across the Chowade Watershed. Melser, CC-BY-SA-4.0.")
+    fig_cap <- paste("System for Automated Geoscientific Analyses (SAGA) Wetness Index across the Chowade Watershed. Animated figure can be viewed in the web browser version of the textbook. Melser, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-SAGA-Wetness.png"))
 ```
 
@@ -442,7 +446,7 @@ DiagrammeR::grViz("digraph {
 ```
 
 ```{r 9-MRVBF, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste("Multi-resolution Valley Bottom Flatness (MRVBF) across the Chowade Watershed. Melser, CC-BY-SA-4.0.")
+fig_cap <- paste("Multi-resolution Valley Bottom Flatness (MRVBF) across the Chowade Watershed. Animated figure can be viewed in the web browser version of the textbook. Melser, CC-BY-SA-4.0.")
 knitr::include_graphics("images/09-MRVBF.png")
 ```
 
@@ -489,7 +493,7 @@ pal6 <- colorNumeric(c("#fee090", "#fc8d59", "#d73027"), values(r6), na.color = 
 pal7 <- colorFactor(c("#fc8d59", "#238443", "#d9f0a3"), values(r7),na.color = "transparent")
 ```
 
-```{r files-3, echo = FALSE, include=FALSE}
+```{r files-3, echo = FALSE, include=FALSE, cache=TRUE}
 #Create labels for classified raster
 labels1 = c("Alpine", "Upland", "Wetland")
 #Run the leaflet
@@ -514,7 +518,7 @@ m2 = leaflet() %>%
 ```
 
 ```{r 9-leaflet-map-layers, echo=FALSE, out.width="75%", fig.cap=fig_cap}
-fig_cap <- paste("Input layers and output prediction raster for the Chowade Watershed Management basin. Melser, CC-BY-SA-4.0.")
+fig_cap <- paste("Input layers and output prediction raster for the Chowade Watershed Management basin. Animated figure can be viewed in the web browser version of the textbook.Data from City of Vancouver and licensed under the Open Government License - Vancouver. Melser, CC-BY-SA-4.0.")
 m2
 ```
 
@@ -527,7 +531,7 @@ m2
 **Anaglyphs** are composed of two images that are simultaneously displayed in two colours, typically red and cyan. The result when viewed through red/cyan filtered lenses is a stereographic view of the frame. Anaglyphs are among the simplest 3D geovisualizations that are frequently used to represent terrain and landforms as the effect is essentially adding depth to an otherwise 2D frame. The depth of terrain is best visualized obliquely with an anaglyph as in Figure \@ref(fig:9-baffin-island-mount-odin-1) below showing Mount Odin, the highest peak on Baffin Island in Nunavut, Canada.
 
 ```{r 9-baffin-island-mount-odin-1, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Anaglyph of Mount Odin on Baffin Island, Nunavut, Canada. Imagery by MAXAR. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste("Anaglyph of Mount Odin on Baffin Island, Nunavut, Canada. Imagery by MAXAR. Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-baffin-island-mount-odin-1.png"))
 ```
 
@@ -540,14 +544,14 @@ A **viewshed** is an analysis that simulates a physical line-of-sight using a DE
 **Extrusion** is the process of taking 2-dimensional features such as points, lines, or polygons and assigning an elevation to each feature so that it can be visualized in 3-dimensions. An extrusion is often performed using the values of an attribute in a feature class. In this way, extrusion can be used to create 3D buildings from 2D polygons of building footprints that contain an attribute of height (Figure \@ref(fig:9-vancouver-building-height-extruded)). 
 
 ```{r 9-vancouver-building-height-extruded, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Animation showing building polygons in Vancouver, British Columbia extruded by a height attribute. Building data (2009) from City of Vancouver, licensed under Open Government License - Vancouver. Base map © OpenStreetMap contributors, licensed under Open Data Commons Open Database License. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste("Animation showing building polygons in Vancouver, British Columbia extruded by a height attribute. Animated figure can be viewed in the web browser version of the textbook. Building data (2009) from City of Vancouver, licensed under Open Government License - Vancouver. Base map © OpenStreetMap contributors, licensed under Open Data Commons Open Database License. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-vancouver-building-height-extruded.gif"))
 ```
 
 Extrusion is also frequently used to visualize non-height attributes. For example, population density can be extruded as a "height" value to give a unique perspective of the relative change in this attribute across space that may otherwise be difficult to appreciate from a 2D map with colour alone (Figure \@ref(fig:9-vancouver-population-density-2016)).
 
 ```{r 9-vancouver-population-density-2016, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Census dissemination areas extruded by population density (2016) for Vancouver, British Columbia. Census data from Statistics Canada, Census Profile, 2016, licensed under Statistics Canada Open License. Reproduced and distributed on an 'as is' basis with the permission of Statistics Canada. Base map © OpenStreetMap contributors, licensed under Open Data Commons Open Database License. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste("Census dissemination areas extruded by population density (2016) for Vancouver, British Columbia. Animated figure can be viewed in the web browser version of the textbook. Census data from Statistics Canada, Census Profile, 2016, licensed under Statistics Canada Open License. Reproduced and distributed on an 'as is' basis with the permission of Statistics Canada. Base map © OpenStreetMap contributors, licensed under Open Data Commons Open Database License. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-vancouver-population-density-2016.png"))
 ```
 
@@ -556,7 +560,7 @@ Extrusion is also frequently used to visualize non-height attributes. For exampl
 **Exaggeration** is the process of multiplying real height or elevation values by a constant factor in order create a larger range of values so that vertical features and patterns are made more apparent. Figure \@ref(fig:9-mount-logan-exaggeration) illustrates an example of exaggeration of a DEM for Mount Logan, the highest peak in Canada (5,959 m), located in the Yukon Territory.
 
 ```{r 9-mount-logan-exaggeration, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Elevation exaggeration of Mount Logan elevation, Yukon Terrotiry, Canada. Digital Elevation Model by Natural Resources Canada, licensed under the Open Government Licence – Canada. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste("Elevation exaggeration of Mount Logan elevation, Yukon Terrotiry, Canada. Animated figure can be viewed in the web browser version of the textbook. Digital Elevation Model by Natural Resources Canada, licensed under the Open Government Licence – Canada. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "09-mount-logan-exaggeration.png"))
 ```
 

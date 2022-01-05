@@ -8,8 +8,7 @@ library("xtable")
 library("plyr")
 ```
 
-
-## Relational Databases {#relational-databases}
+# Relational Databases {#relational-databases}
 
 You have almost certainly used a relational database in some form during your life, probably without even realizing it. Relational databases are foundational for information management in a GIS. In this chapter, we will look at the formal construction of relational databases, how they are used across a wide range of fields, and how we can use them to analyze spatial and aspatial information for environmental management.
 
@@ -29,7 +28,7 @@ You have almost certainly used a relational database in some form during your li
 
 ## Key Terms {-}
 
-Relational Database Management Systems, Tables, Relations, Rows, Tuples, Records, Columns, Attributes, Items, Structured Query Language, Boolean Logic, Relational Algebra, Entity-Relationship Model, Cartesian Product, Schema, Unary, Binary, Georelational Data Model, Domain
+Relational Database Management Systems, Tables, Relations, Rows, Tuples, Records, Columns, Attributes, Items, Structured Query Language, Boolean Logic, Relational Algebra, Entity-Relationship Model, Cartesian Product, Schema, Unary, Binary, Georelational Data Model, Domain, Symmetric Difference
 
 ## Relational Database Management Systems
 
@@ -38,12 +37,10 @@ Suppose you have collected some data about some trees. You might have organized 
 ## Relational Databases
 
 Within a RDBMS, we find **relational databases**, which are highly structured tables comprised of rows and columns. In fact, a table in a relational database is called a **relation**, a row is a **tuple**, and a column is an **attribute**. Relational databases are a great way to store simple data structures that can be organized into a relation with tuples and attributes. When we say that a table or relation is "structured", we are referring to the fact that the data are organized according to a database **schema**, which is a set of constraints that ensure data integrity and consistency. For example, our set of trees likely all contain the same types of information and this can be easily organized into a relation. Suppose we measured the height, diameter at breast height (DBH), and species of each tree, then our relation would look like Figure \@ref(fig:5-tabular-data-spatial-data).
-
 ```{r 5-tabular-data-spatial-data, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Tabular and spatial data are related by a Relational Database Management System (RDBMS) in a Geographic Information System (GIS). Images of Douglas-Fir and Western Hemlock trees by Natural Resources Canada, Canadian Forest Service, modified with permission.")
     knitr::include_graphics(here::here("images", "05-tabular-data-spatial-data.png"))
 ```
-<br/>
 
 As you can see from the example above, there are two components to geospatial data: the tabular data containing tuples and attributes and the spatial data that contain the coordinate pairs for a projected or geographic coordinate system. This structure is known generically as the **georelational data model**. Many formats of geospatial data conform to the georelational data model, which stores a relation of tuples and attributes separately from another relation containing the geometry and coordinates. These two tables are then dynamically related to one another in a RDBMS using GIS software. You will almost never interact or see the relation that stores the geometry and coordinates of features contained in a relational database. Instead, the GIS software manages those files in the background for the purpose of displaying a set of features on a map, and you primarily interact with the tabular data stored in the relation of tuples and attributes.
 
@@ -75,7 +72,7 @@ One of the fundamental jobs of a RDBMS is to apply relational algebra operations
 
 **Selection** is the simplest operation to understand and is probably the most-used in day-to-day GIS work. It does exactly what it sounds like, it retrieves a subset of a relation given some predicate or condition. For example, we could select all tree IDs from our relation $R$ in Figure \@ref(fig:5-tabular-data-spatial-data) that have a height greater than 20 m. This would yield tree ID=5. Formally, selection is expressed as $σ_{predicate}(R)$ and the example above would be written as $σ_{height>20}(R)$, which evaluates to the following:
 
-```{r, echo=FALSE}
+```{r 5-selection-table, echo=FALSE}
 ID <- 1:5
 height <- c(14,18,16,25,20)
 dbh <- c(26.8,30.5,28.7,36.0,34.6)
@@ -91,7 +88,7 @@ knitr::kable(
 
 If selection is understood to operate on attributes to return tuples, then **projection** is an operation on tuples to return attributes. For example, suppose we are only interested in the height and DBH attributes for the trees. We would use projection to return this new subset of the relation. Formally, projection is expressed as $Π_{predicate}(R)$. Both projection and selection are referred to as **unary** operators because they only require a single relation as input. The example above would be expressed using the attributes that we want to preserve, so $Π_{height,dbh}(R)$, which evaluates to the following:
 
-```{r, echo=FALSE}
+```{r 5-projection-table, echo=FALSE}
 knitr::kable(
   R[,c(-1,-4)], booktabs = TRUE, row.names = FALSE
 )
@@ -99,7 +96,7 @@ knitr::kable(
 
 At this point, it is important to emphasize the case of $Π_{species}(R)$, which evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-projection-table-2, echo=FALSE}
 spu <- unique(R$Species)
 Tr <- data.frame(Species=spu)
 knitr::kable(
@@ -113,7 +110,7 @@ Recall that the output of a relational algebra operation is also a relation. Rem
 
 **Rename** is an operator that allows us to assign a variable name to a relational algebra expression. This has the benefit of making it simpler to track or reuse previous operations in complex relational database algebra. For example, let $S = σ_{height>20}(R)$, then $Π_{species}(S)$ evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-rename-table, echo=FALSE}
 knitr::kable(
   data.frame(Species=R[which(R$`Height (m)`>20),4]), booktabs = TRUE, row.names = FALSE
 )
@@ -124,7 +121,7 @@ knitr::kable(
 Next we will introduce **binary** operators, that is, they take two relations as input. **Set Union** is one such operator that effectively appends one relation to another. The important rule for union is that both input relations must share the same number and type of attributes or "union compatible". Formally, set union is expressed as $S∪T$ where $S$ and $T$ are the two input relations. You can think of set union as simply concatenating the tuples of the two relations together. In other words, the tuples of $S$ are appended to the tuples of $T$ to generate a new output relation. For example, suppose that we make two subsets of our relation $R$ of trees:
 
 $$
-S = σ_{height>20}(R)
+S = σ_{height<20}(R)
 $$
 
 $$
@@ -133,13 +130,13 @@ $$
 
 Then we can union these two relations back into our original relation $R$ as $S∪T$, which evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-set-union-table, echo=FALSE}
 knitr::kable(
   R, booktabs = TRUE, row.names = FALSE
 )
 ```
 
-Formally, this would all be expressed as $σ_{height>20}(R)∪σ_{height≥20}(R)$ or $S∪T$, which in this case is also just equivalent to $R$. You should see that the result of union is an inclusion of all tuples, so semantically a union can be read as "the tuples in relation $S$ _or_ the tuples in relation $T$". 
+Formally, this would all be expressed as $σ_{height<20}(R)∪σ_{height≥20}(R)$ or $S∪T$, which in this case is also just equivalent to $R$. You should see that the result of union is an inclusion of all tuples, so semantically a union can be read as "the tuples in relation $S$ _or_ the tuples in relation $T$". 
 
 ## Set Intersection
 
@@ -147,14 +144,14 @@ On the other hand, suppose that we want to define a new relation based on restri
 
 $$S = σ_{height<25}(R)$$
 
-```{r, echo=FALSE}
+```{r 5-set-intersection-table, echo=FALSE}
 knitr::kable(
   R[which(R$`Height (m)`<25),], booktabs = TRUE, row.names = FALSE
 )
 ```
 
 $$T = σ_{height>15}(R)$$
-```{r, echo=FALSE}
+```{r 5-set-intersection-table-2, echo=FALSE}
 knitr::kable(
   R[which(R$`Height (m)`>15),], booktabs = TRUE, row.names = FALSE
 )
@@ -162,7 +159,7 @@ knitr::kable(
 
 There are 3 tuples that appear in both of these relations, so the intersection $S∩T$ would evaluate to:
 
-```{r, echo=FALSE}
+```{r 5-set-intersection-table-3, echo=FALSE}
 knitr::kable(
   R[c(2,3,5),], booktabs = TRUE, row.names = FALSE
 )
@@ -174,7 +171,7 @@ Semantically, set intersection is read as "the tuples in relation S _and_ the tu
 
 **Set difference** returns the tuples that are unique in one relation relative to another relation, but both relations must be union compatible. Formally, difference is expressed as $S-T$, and just like mathematical subtraction, the order of relations in the set difference is important and non-commutative. For example, $σ_{height<25}(R)-σ_{height>15}(R)$ evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-set-difference-table-1, echo=FALSE}
 knitr::kable(
   R[1,], booktabs = TRUE, row.names = FALSE
 )
@@ -182,19 +179,19 @@ knitr::kable(
 
 and $σ_{height>15}(R)-σ_{height<25}(R)$ evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-set-difference-table-2, echo=FALSE}
 knitr::kable(
   R[4,], booktabs = TRUE, row.names = FALSE
 )
 ```
 
-Semantically, you would read the set difference $S-T$ as "the tuples in relation $S$ minus any of the same tuples in relation $T$". 
+Semantically, you would read the set difference $S-T$ as "the tuples in relation $S$ minus any of the same tuples in relation $T$".
 
 ## Cartesian Product
 
 So far, we have seen the cases of mathematical addition (set union) and subtraction (set difference), but we can also apply multiplication and division. Multiplication of two relations is simply known as the **Cartesian product**. In the same way that a set of tuples and attributes can be multiplied to create a relation $R=A×B$, we can also multiply two relations together and they do not need to be union compatible. For example, if $S = Π_{height,dbh}(σ_{height<20}(R))$ evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-cartesian-product-1, echo=FALSE}
 Sr <- R[1:3,2:3]
 knitr::kable(
   Sr, booktabs = TRUE, row.names = FALSE
@@ -203,7 +200,7 @@ knitr::kable(
 
 and $T = Π_{ID,Species}(σ_{dbh>34}(R))$ evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-cartesian-product-2, echo=FALSE}
 Tr <- R[4:5,c(1,4)]
 knitr::kable(
   Tr, booktabs = TRUE, row.names = FALSE
@@ -212,7 +209,7 @@ knitr::kable(
 
 then the Cartesian product of $S×T$ evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-cartesian-product-3, echo=FALSE}
 i <- rep(R[4:5,1],3)
 h <- rep(R[1:3,2],2)
 d <- rep(R[1:3,3],2)
@@ -230,7 +227,7 @@ Finally, **set division** is an operation of division between two relations, and
 
 For the next example of set division, we will introduce a new relation $S$, which is not a subset of $R$. Suppose, in addition to $R$, we have cataloged information about different tree species, some of which are in $R$ (these data are a small sample of a [full list of tree species codes](https://www.for.gov.bc.ca/hfp/publications/00026/fs708-14-appendix_d.htm#ad_02) commonly used in British Columbia, Canada):
 
-```{r, echo=FALSE}
+```{r 5-set-division-1, echo=FALSE}
 co <- c("AT","BB","CW","E","FD","HW","YC")
 sp <- c("Trembling Aspen","Balsam Fir","Western Red Cedar","Birch","Douglas-Fir","Western Hemlock","Yellow Cedar")
 S <- data.frame(Code=co,Species=sp)
@@ -241,7 +238,7 @@ knitr::kable(
 
 Suppose we want to answer the question, _What are all the species codes that are present in our plot of trees?_ We can answer this question by first projecting $Species$ over $R$ to give relation $T=Π_{species}(R)$:
 
-```{r, echo=FALSE}
+```{r 5-set-division-2, echo=FALSE}
 Pt <- data.frame(Species=unique(R$Species))
 knitr::kable(
   Pt, booktabs = TRUE, row.names = FALSE
@@ -256,7 +253,7 @@ $$
 
 We read the first term $Π_{code}(S)$ as "the projection of the attributes of $S$ that are not in $T$". In our case, there is only one attribute in $S$ not in $T$, which is $Code$, so $Π_{code}(S)$ evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-set-division-3, echo=FALSE}
 Ps <- data.frame(Code=unique(S$Code))
 knitr::kable(
   Ps, booktabs = TRUE, row.names = FALSE
@@ -265,7 +262,7 @@ knitr::kable(
 
 Then, $Π_{code}(S)×T$ is the Cartesian product of the previous projection and $T$, which yields a relation of all the combinations of $T$ with the attributes in $S$ that are not in $T$:
 
-```{r, echo=FALSE}
+```{r 5-set-division-4, echo=FALSE}
 Ct <- expand.grid(Ps$Code,Pt$Species)
 names(Ct) <- c("Code","Species")
 knitr::kable(
@@ -275,7 +272,7 @@ knitr::kable(
 
 Next, we take the set difference between the Cartesian product above and $S$, $(Π_{code(S)×T)-S$, which has the effect of removing the tuples already observed in $S$. This leaves us with a relation that has all the "incorrect" code-species combinations:
 
-```{r, echo=FALSE}
+```{r 5-set-division-5, echo=FALSE}
 Ds <- Ct[paste0(Ct$Code,Ct$Species)%in%setdiff(paste0(Ct$Code,Ct$Species),paste0(S$Code,S$Species)),]
 knitr::kable(
   Ds, booktabs = TRUE, row.names = FALSE
@@ -284,7 +281,7 @@ knitr::kable(
 
 Next, we project $Code$, which again is the only attribute in $S$ not in $T$, from the set difference above $Π_{code}((Π_{code}(S) × T) - S)$, which yields:
 
-```{r, echo=FALSE}
+```{r 5-set-division-6, echo=FALSE}
 PDs <- data.frame(Code=unique(Ds$Code))
 knitr::kable(
   PDs, booktabs = TRUE, row.names = FALSE
@@ -293,7 +290,7 @@ knitr::kable(
 
 And finally, we take the set difference between $Π_{code}(S)$ and the projection above to obtain the code for the trees in our plot:
 
-```{r, echo=FALSE}
+```{r 5-set-division-7, echo=FALSE}
 U <- data.frame(Code=S[S$Species%in%setdiff(Pt$Species,PDs$Code),1])
 knitr::kable(
   U, booktabs = TRUE, row.names = FALSE
@@ -302,7 +299,7 @@ knitr::kable(
 
 You can think of set division as the inverse of a Cartesian product. However, just like division, the Cartesian product itself is non-commutative because it is a set of _ordered_ pairs. If $S$ contains a tuple that is not in $T$, then the Cartesian product of $S×T$ has a different order than would be the case if both $S$ and $T$ were identical. As an example, $S×T$ evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-set-division-8, echo=FALSE}
 C.ut <- data.frame(do.call(expand.grid, lapply(list(U$Code,Pt$Species), unique)))
 names(C.ut) <- c("Code","Species")
 knitr::kable(
@@ -312,7 +309,7 @@ knitr::kable(
 
 and $T×S$ evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-set-division-9, echo=FALSE}
 C.tu <- data.frame(do.call(expand.grid, lapply(list(Pt$Species,U$Code), unique)))
 names(C.tu) <- c("Species","Code")
 knitr::kable(
@@ -322,7 +319,7 @@ knitr::kable(
 
 Therefore, we cannot simply rewrite $S÷T=U$ as $U×T=S$, but we could express $U÷S=T$, which evaluates to $T$:
 
-```{r, echo=FALSE}
+```{r 5-set-division-10, echo=FALSE}
 knitr::kable(
   Pt, booktabs = TRUE, row.names = FALSE
 )
@@ -367,7 +364,7 @@ $2+3=4+1$ is $true$.
 
 Next, we will look at how to apply arithmetic and equality expressions to relations and evaluate them in Boolean terms. We have already seen how predicates allow us to do set selection with relational algebra. For example, we know that q evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-equality-operators, echo=FALSE}
 knitr::kable(
   R[which(R$`Height (m)`>15),], booktabs = TRUE, row.names = FALSE
 )
@@ -375,7 +372,7 @@ knitr::kable(
 
 If we were to break this down in Boolean terms, the statement $height>15$ applied to $R$ returns the following Boolean values for each tuple:
 
-```{r, echo=FALSE}
+```{r 5-equality-operators-2, echo=FALSE}
 Rtf <- R
 Rtf$Boolean <- R$`Height (m)`>15
 knitr::kable(
@@ -385,7 +382,7 @@ knitr::kable(
 
 For another example, consider that $(height>15)×(species=WesternHemlock)$ evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-equality-operators-3, echo=FALSE}
 Rtf$Boolean <- (R$`Height (m)`>15 & R$Species=="Western Hemlock")
 knitr::kable(
   Rtf, booktabs = TRUE, row.names = FALSE
@@ -394,7 +391,7 @@ knitr::kable(
 
 We can also evaluate the equivalency between two attributes such as $height=dbh$, which evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-equality-operators-4, echo=FALSE}
 Rtf$Boolean <- R$`Height (m)`==R$`DBH (cm)`
 knitr::kable(
   Rtf, booktabs = TRUE, row.names = FALSE
@@ -407,7 +404,7 @@ Now that we have a good understanding of equivalency operators, let us turn to c
 
 Consider the statement $(height>15)AND(species=WesternHemlock)$. This statement is equivalent to $(height>15)×(species=WesternHemlock)$ and evaluates to exactly what what we saw earlier:
 
-```{r, echo=FALSE}
+```{r 5-conditional-operators, echo=FALSE}
 Rtf$Boolean <- (R$`Height (m)`>15 & R$Species=="Western Hemlock")
 knitr::kable(
   Rtf, booktabs = TRUE, row.names = FALSE
@@ -420,11 +417,10 @@ Figure \@ref(fig:5-boolean-and) illustrates what is going on here, we are only r
     fig_cap <- paste0("Boolean A AND B returns the area shaded blue. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "05-boolean-and.png"))
 ```
-<br/>
 
 If we do not want to be so restrictive, we could use Boolean $OR$ such as $(height>15)OR(species=WesternHemlock)$, which evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-conditional-operators-2, echo=FALSE}
 Rtf$Boolean <- (R$`Height (m)`>15 | R$Species=="Western Hemlock")
 knitr::kable(
   Rtf, booktabs = TRUE, row.names = FALSE
@@ -437,11 +433,10 @@ Figure \@ref(fig:5-boolean-or) illustrates the case of the Boolean $OR$. As you 
     fig_cap <- paste0("Boolean A OR B returns the area shaded blue. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "05-boolean-or.png"))
 ```
-<br/>
 
 Suppose we want to identify all the trees that are greater than 15 m, but not Western Hemlock. In this case, we would use the expression $(height>15)NOT(species=WesternHemlock)$, which evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-conditional-operators-3, echo=FALSE}
 Rtf$Boolean <- (R$`Height (m)`>15 & !R$Species=="Western Hemlock")
 knitr::kable(
   Rtf, booktabs = TRUE, row.names = FALSE
@@ -456,9 +451,9 @@ Figure \@ref(fig:5-boolean-not) illustrates how Boolean $NOT$ essentially negate
 ```
 <br/>
 
-Finally, the case of Boolean $XOR$ returns any tuples that are not $true$ for both statements, but are $true$ individually. This is known as the "e**X**clusive **OR**" because we are only returning the tuples that are exclusive based on both statements. For example, $(height>15)XOR(species=WesternHemlock)$ evaluates to:
+Finally, the case of Boolean $XOR$ returns any tuples that are not $true$ for both statements, but are $true$ individually. This is known as the **symmetric difference** and "e**X**clusive **OR**" because we are only returning the tuples that are exclusive based on both statements. For example, $(height>15)XOR(species=WesternHemlock)$ evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-conditional-operators-4, echo=FALSE}
 Rtf$Boolean <- (R$`Height (m)`>15 | R$Species=="Western Hemlock") & !(R$Species=="Western Hemlock"&R$`Height (m)`>15)
 knitr::kable(
   Rtf, booktabs = TRUE, row.names = FALSE
@@ -489,7 +484,7 @@ A **natural join** restrictively joins two relations based on a set of common at
 
 $$R$$
 
-```{r, echo=FALSE}
+```{r 5-natural-join, echo=FALSE}
 ID <- 1:5
 height <- c(14,18,16,25,20)
 dbh <- c(26.8,30.5,28.7,36.0,34.6)
@@ -503,7 +498,7 @@ knitr::kable(
 
 $$S$$
 
-```{r, echo=FALSE}
+```{r 5-natural-join-2, echo=FALSE}
 co <- c("AT","BB","CW","E","FD","HW","YC")
 sp <- c("Trembling Aspen","Balsam Fir","Western Red Cedar","Birch","Douglas-Fir","Western Hemlock","Yellow Cedar")
 S <- data.frame(Code=co,Species=sp)
@@ -514,7 +509,7 @@ knitr::kable(
 
 The natural join $R⋈S$ evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-natural-join-3, echo=FALSE}
 knitr::kable(
   inner_join(R,S), booktabs = TRUE, row.names = FALSE
 )
@@ -524,7 +519,7 @@ knitr::kable(
 
 An **outer join** joins all the tuples of two relations based on a common attribute. The result is similar to a set union, except the input relations do not need to be union compatible. Formally, an outer join or sometimes called a full join is expressed as $R⟗S$, which  evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-outer-join, echo=FALSE}
 knitr::kable(
   full_join(R,S), booktabs = TRUE, row.names = FALSE
 )
@@ -534,7 +529,7 @@ knitr::kable(
 
 Sometimes, it may be desirable to join attributes or tuples from one relation, but not the other. For these cases, we can use either **right outer join** or **left outer join**. Formally, right outer join is expressed as $R⋉S$ and evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-right-left-outer-join, echo=FALSE}
 knitr::kable(
   right_join(R,S), booktabs = TRUE, row.names = FALSE
 )
@@ -542,7 +537,7 @@ knitr::kable(
 
 Formally, left outer join is expressed as $R⋊S$ and evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-right-left-outer-join-2, echo=FALSE}
 knitr::kable(
   left_join(R,S), booktabs = TRUE, row.names = FALSE
 )
@@ -552,7 +547,7 @@ knitr::kable(
 
 We can also join relations conditionally and without sharing a common attribute, which is known as a **theta join** and expressed as $R⋈_θS$. To understand how a theta join works, it is useful to recognize that $R⋈_θS=σ_{θ}(R×S)$. As you can see, a theta join is simply a selection of a Cartesian product where theta $θ$ is the predicate. For example, $R⋈_{height>19}S$ evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-theta-join, echo=FALSE}
 knitr::kable(
   inner_join(R[which(R$Height>19),],S), booktabs = TRUE, row.names = FALSE
 )
@@ -566,7 +561,6 @@ Depending on the schema of the two relations being joined, the number of tuples 
     fig_cap <- paste0("Cardinality of joins between relations R and S. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "05-join-cardinality.png"))
 ```
-<br/>
 
 ## Structured Query Language
 
@@ -591,7 +585,7 @@ The entire form above is a statement, which is enclosed by a semi-colon at the e
 
 Suppose we want to select the trees that are greater than 15 m, like in our previous equivalency example of $σ_{height>15}(R)$. The SQL statement looks like this `SELECT * FROM R WHERE height > 15;`. If we only want to return the species for tree heights greater than 15 m, then the SQL statement looks like this `SELECT Species FROM R WHERE height > 15;` and evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-SQL, echo=FALSE}
 knitr::kable(
   data.frame(Species=R[which(R$`Height (m)`>15),4]), booktabs = TRUE, row.names = FALSE
 )
@@ -606,7 +600,7 @@ If you combine two or more Boolean operators into one statement, then they are e
 3. `OR`
 For example, `SELECT * FROM R WHERE dbh < 30 AND species="Douglas-Fir" OR species="Western Hemlock";` would evaluate to:
 
-```{r, echo=FALSE}
+```{r 5-SQL-2, echo=FALSE}
 knitr::kable(
   R[which(R$`DBH (cm)`<30 & R$Species=="Douglas-Fir" | R$Species=="Western Hemlock"),], booktabs = TRUE, row.names = FALSE
 )
@@ -614,7 +608,7 @@ knitr::kable(
 
 But if we want the `OR` to be evaluated before the `AND`, then we need to use parentheses like `SELECT * FROM R WHERE dbh < 30 AND (species="Douglas-Fir" OR species="Western Hemlock");`, which evaluates to:
 
-```{r, echo=FALSE}
+```{r 5-SQL-3, echo=FALSE}
 knitr::kable(
   R[which(R$`DBH (cm)`<30 & (R$Species=="Douglas-Fir" | R$Species=="Western Hemlock")),], booktabs = TRUE, row.names = FALSE
 )
@@ -624,7 +618,7 @@ You may notice the case of $XOR$ conspicuously missing from the order above and 
 
 Finally, a very common query that involves returning all tuples that match an attribute value in a list of values can be applied using the `IN` operator in SQL. For example, suppose we want to select all conifer tree species (codes: BB, CW, FD, HW, and YC) from $S$ below:
 
-```{r, echo=FALSE}
+```{r 5-SQL-4, echo=FALSE}
 knitr::kable(
   S, booktabs = TRUE, row.names = FALSE
 )
@@ -642,7 +636,7 @@ Vegetation diversity in urban landscapes is important to support urban forest bi
 
 The raw CIMD tabular data includes the DA code and the corresponding vulnerability scores (table 1). In order to visualize these scores on a map, we will need to relate these scores to spatial data that include the information about the DA polygons and the coordinate pairs associated with each DA. Hence, a polygon shapefile of the DAs in Vancouver^[Extracted by clipping the [Canada-wide dissemination areas boundary](https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm) to the [City of Vancouver's municipality boundary](https://opendata.vancouver.ca/explore/dataset/city-boundary).] is obtained, and its attributes are shown in Table 2.
 
-```{r, echo=FALSE}
+```{r 5-case-join, echo=FALSE}
 CIMD <- read.csv("data/05/bc_CIMD_scores.csv")
 colnames(CIMD) <- c("PRCDDA", "Province","DA population", "Ethno-cultural composition quintiles", "Ethno-cultural composition scores", "Situational vulnerability quintiles", "Situational vulnerability scores", "Economic dependency quintiles", "Economic dependency scores", "Residential instability quintiles", "Residential instability scores")
 knitr::kable(
@@ -651,11 +645,11 @@ knitr::kable(
 )
 ```
 
-```{r, include=FALSE}
+```{r 5-case-study-2, include=FALSE}
 VancouverDA <- readOGR(dsn = "data/05", layer = "VancouverDA")
 ```
 
-```{r, echo=FALSE}
+```{r 5-case-study-3, echo=FALSE}
 knitr::kable(
   head(VancouverDA@data), booktabs = TRUE,
   caption = 'An excerpt of the Vancouver DA polygon shapefile attributes.'
@@ -664,8 +658,7 @@ knitr::kable(
 
 The tabular data of the CIMD scores are related to the DAs polygon by the DA code. The cardinality of the relationship between these two tables is one-to-one as each DA is described by one set of the CIMD scores. To join the CIMD scores to the Vancouver DA polygons, we would use the `PRCDDA` attribute in the CIMD table as the foreign key to perform a join on the `DAUID` attribute in the Vancouver DA polygon relation. Now that the CIMD scores are joined to the Vancouver DA polygon attribute table, we can create choropleth maps to display the vulnerability scores of the DAs (Figure \@ref(fig:5-situational-vulnerability-leaflet)).
 
-```{r, include=FALSE, cache=TRUE}
-
+```{r 5-case-study-4, include=FALSE}
 DA_CIMD <- readOGR(dsn = "data/05", layer = "VancouverDA_CIMD")
 
 DA_CIMD@data <- DA_CIMD@data %>%
@@ -715,7 +708,7 @@ Suppose we would like to calculate the overall vulnerability score for each DA. 
 
 Using what you have learned, join the street tree data and the vegetation type cover richness data to the Vancouver DA attribute table and to compute a vegetation diversity score. The street trees data shows the number of unique street tree species at a DA. Make sure you apply a min-max normalization to obtain the street tree diversity score. The vegetation diversity score can be computed by averaging the normalized scores of the two vegetation data.
 
-```{r, include=FALSE}
+```{r 5-case-study-5, include=FALSE}
 calculated <- readOGR(dsn = "data/05", layer = "Results")
 calculated.full <- head(calculated@data[,c(1, 14, 15, 17, 16, 18, 21)])
 colnames(calculated.full) <- c("DAUID","Aggregated scores", "Normalized aggregated scores", "Species count", "Street tree diversity", "Vegetation richness", "Vegetation diversity scores")
@@ -723,14 +716,14 @@ calculated.full <- calculated.full %>%
   mutate_if(is.numeric,round, digits = 3)
 ```
 
-```{r, echo=FALSE}
+```{r 5-case-study-6, echo=FALSE}
 knitr::kable(
   calculated.full, booktabs = TRUE,
   caption = 'An excerpt of the attribute table after the joins and calculations.'
 )
 ```
 
-```{r, include=FALSE}
+```{r 5-case-study-7, include=FALSE}
 full.results <- readOGR(dsn = "data/05", layer = "Results")
 full.results_proj <- spTransform(full.results, "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
 full.results_proj$norm_aggre <- round(full.results_proj$norm_aggre, 2)
@@ -769,7 +762,7 @@ m1 <- leaflet(full.results_proj) %>%
 Figure \@ref(fig:5-vegetation-diversity-leaflet) shows a map of the vegetation diversity score at the DA level in Vancouver. The vegetation diversity score and the normalized aggregated vulnerability score are linked to each DA and can be viewed as you hover o-ver the DA.
 
 ```{r 5-vegetation-diversity-leaflet, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-fig_cap <- paste0("An example of choropleth map displaying vegetation diversity for each dissemination area in Vancouver.<a href='",baseurl,"#fig:5-vegetation-diversity-leaflet'>Animated figure can be viewed in the web browser version of the textbook</a>.Data from City of Vancouver and licensed under the <a href='",covlicence,">Open Government License - Vancouver</a>. Lam, CC-BY-SA-4.0.")
+fig_cap <- paste0("An example of choropleth map displaying vegetation diversity for each dissemination area in Vancouver. <a href='",baseurl,"#fig:5-vegetation-diversity-leaflet'>Animated figure can be viewed in the web browser version of the textbook</a>. Data from City of Vancouver and licensed under the <a href='",covlicence,"'>Open Government License - Vancouver</a>. Lam, CC-BY-SA-4.0.")
 ```
 <br/>
 
@@ -777,7 +770,7 @@ fig_cap <- paste0("An example of choropleth map displaying vegetation diversity 
 
 Areas with a higher proportion of vulnerable populations and less variety of vegetation to support resident’s mental wellbeing are more in need for intervention. Supposed we define the priority area as DAs with a normalized aggregated vulnerability score greater than or equal to 0.5 and a vegetation diversity score less than 0.5. We could use the `Select By Attributes` tool to identify these priority areas by entering the appropriate query expression.
 
-```{r, include=FALSE}
+```{r 5-case-study-8, include=FALSE}
 query.results <- calculated@data[calculated@data$norm_aggre >= 0.5 & calculated@data$veg_div_sc < 0.5,]
 query.results <- query.results[,c(1,15,16,18,21)]
 colnames(query.results) <- c("DAUID", "Normalized aggregated scores", "Street tree diversity", "Vegetation richness", "Vegetation diversity scores")
@@ -785,7 +778,7 @@ query.results <- query.results %>%
   mutate_if(is.numeric,round, digits = 3)
 ```
 
-```{r, echo=FALSE}
+```{r 5-case-study-9, echo=FALSE}
 knitr::kable(
   query.results, booktabs = TRUE,
   caption = 'Query result shows five records matched the priority area requirements.'
@@ -821,10 +814,3 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem
 ## Recommended Readings {-}
 
 Ensure all inline citations are properly referenced here.
-
-```{r include=FALSE}
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'htmlwidgets', 'webshot', 'DT',
-  'miniUI', 'tufte', 'servr', 'citr', 'rticles'
-), 'packages.bib')
-```

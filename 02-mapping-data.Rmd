@@ -1,3 +1,4 @@
+
 ```{r, include=FALSE}
 baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"
 covlicence <- "https://opendata.vancouver.ca/pages/licence/"
@@ -7,14 +8,14 @@ library("leaflet")
 library("xtable")
 library("plyr")
 ```
-## Mapping Data {#mapping-data}
+# Mapping Data {#mapping-data}
 
 You probably already accept that the Earth is "round" and not "flat". You have probably held and touched a globe at some point in your life. But have you ever wondered how we describe location and measure something as large as the Earth? In this chapter, we will explore fundamental concepts for how we measure the Earth and orient ourselves with coordinate systems.
 
 :::: {.box-content .learning-objectives-content}
 
 ::: {.box-title .learning-objectives-top}
-#### Learning Objectives {-}
+## Learning Objectives {-}
 ::: 
 
 1. Understand the models of Earth's figure and shape
@@ -83,7 +84,7 @@ A **geodetic vertical datum** is one that describes the Earth's shape in the sim
 ```
 <br/>
 
-There are many different ellipsoids that have been defined and are currently in use as datums. The most commonly used ellipsoid is called the World Geodetic System of 1984 or usually abbreviated as WGS 1984 or WGS 84. In fact, there are hundreds of ellipsoids that have been defined over recent centuries to model the shape of the Earth. The reason for so many other ellipsoids is due in part to technological advances that have improved the accuracy and precision of surveying as well as estimation of the ellipsoidal parameters. Many of these ellipsoids are not **geocentric**, that is, not originating from the center of mass of Earth. These datums are known as **regional datums**, which still describe the dimensions that approximate the shape of Earth, but are instead oriented so that the surface of the ellipsoid is congruent with a particular regional surface of Earth. For example, the European Datum 1950, the South American Datum 1969, the North American Datum 1983, and the Australian Geodetic Datum 1966 conform well to their respective continents, even better than WGS 1984 in most cases, but poorly anywhere else in the world.
+There are many different ellipsoids that have been defined and are currently in use as datums. The most commonly used ellipsoid is called the World Geodetic System of 1984 or usually abbreviated as WGS 1984 or WGS 84. In fact, there are hundreds of ellipsoids that have been defined over recent centuries to model the shape of the Earth. The reason for so many other ellipsoids is due in part to technological advances that have improved the accuracy and precision of surveying as well as estimation of the ellipsoidal parameters. Many of these ellipsoids are not *geocentric*, that is, not originating from the center of mass of Earth. These datums are known as **regional datums**, which still describe the dimensions that approximate the shape of Earth, but are instead oriented so that the surface of the ellipsoid is congruent with a particular regional surface of Earth. For example, the European Datum 1950, the South American Datum 1969, the North American Datum 1983, and the Australian Geodetic Datum 1966 conform well to their respective continents, even better than WGS 1984 in most cases, but poorly anywhere else in the world.
 
 ```{r 2-sphere-ellipsoid, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Sphere versus ellispoid. Pickell, CC-BY-SA-4.0.")
@@ -165,7 +166,6 @@ m = leaflet(countries) %>%
 ``` {r 2-CGVD-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
 fig_cap <- paste0("The difference (in meters) between the Canadian Geodetic Vertical Datum of 2013 (CGVD2013) and the Canadian Geodetic Vertical Datum of 1928 (CGVD28).<a
 href='",baseurl,"#fig:2-CGVD-leaflet'>Animated figure can be viewed in the web browser version of the textbook</a>.Data from Natural Resources Canada and licensed under the <a href='",covlicence,">Open Government Licence - Canada </a>.Pickell, CC-BY-SA-4.0.")  
-
 ```
 
 ## Referencing Location
@@ -278,7 +278,7 @@ UTM uses a unique coordinate system that deserves some explanation. Just like wi
 Sinusoidal is a *pseudocylindrical* map projection, so-named because these projections approximate a true cylindrical projection except that Meridians are curved instead of straight like with Mercator or UTM. Because Meridians are curved, Sinusoidal maps represent the North and South Poles as single points instead of lines as is the case with Mercator. Thus, Sinusoidal maps are not conformal and distort shape, but they are in fact equal-area (Figure \@ref(fig:2-Sinusoidal-map)). Equal-area map projections like Sinusoidal are important for accurately accounting for land cover and other global mapping efforts. Therefore, it is common to find global datasets distributed in a Sinusoidal map projection.
 
 ```{r 2-Sinusoidal-map, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Sinusoidal map projection with Tissot's Indicatrices in red.Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Sinusoidal map projection with Tissot's Indicatrices in red. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "02-Sinusoidal-map.png"))
 ```
 <br/>
@@ -288,7 +288,7 @@ Sinusoidal is a *pseudocylindrical* map projection, so-named because these proje
 Albers is another example of an equivalent map projection, but unlike Sinusoidal, an Albers projection uses a cone as a projection surface instead of a pseudocylinder. Like the cylindrical case, the cone can be sized and oriented in any way, but the cone of an Albers projection is typically oriented so that the vertex of the cone aligns with the rotational axis of Earth. The base of the cone has a diameter that usually results in two secants, known as **standard parallels** on an Albers map. Thus, Albers projections tend to distort latitudinally as you move North-South away from the standard parallels, but even more so as you move toward the base of the cone (Figure \@ref(fig:2-BC-Albers-map)). Besides being an equal-area projection, Albers is a good choice for mapping regions because shape and scale are mostly preserved near the standard parallels. For example, the province of British Columbia has adopted a modified Albers projection that situates the standard parallels at 50° N and 58.5° N, which are near the northern and southern latitudinal limits of the province. This narrow band of latitude between the standard parallels ensures that there is relatively little distortion in shape and scale within the province, which is comparable to UTM. However, British Columbia is a longitudinally wide province, spanning 6 of Canada's 15 total UTM zones, so Albers has a distinct advantage of being able to show the entire province with little distortion. For the same reasons, you will often find Canada-wide data distributed in an Albers projection.
 
 ```{r 2-BC-Albers-map, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("British Columbia Environment Albers map projection with Tissot's Indicatrices in red.Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("British Columbia Environment Albers map projection with Tissot's Indicatrices in red. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "02-BC-Albers-map.png"))
 ```
 <br/>

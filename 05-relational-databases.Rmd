@@ -7,7 +7,7 @@ library("plyr")
 library("dplyr")
 ```
 
-## Relational Databases {#relational-databases}
+# Relational Databases {#relational-databases}
 
 You have almost certainly used a relational database in some form during your life, probably without even realizing it. Relational databases are foundational for information management in a GIS. In this chapter, we will look at the formal construction of relational databases, how they are used across a wide range of fields, and how we can use them to analyze spatial and aspatial information for environmental management.
 
@@ -48,7 +48,7 @@ The schema for the very simple example above would include the constraint and ex
 
 More formally, a relation $R$ is a _subset_ of two sets, $A$ (tuples) and $B$ (attributes). The product of these sets $A×B$ is called the **Cartesian product**. In the same way that Cartesian coordinates are ordered pairs of values from two axes, the Cartesian product of two sets gives us an ordered pair of elements $(a,b)$ from sets $A$ and $B$, where $a$ is an element in the set $A$, written as $a∈A$, and $b$ is an element of set $B$, written as $b∈B$. Therefore, $R$ is both the Cartesian product as well as any subset of $A×B$.
 
-```{r 5-cartesian-product, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+```{r 5-cartesian-product-4, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste("Cartesian product A×B of A (tuples) and B (attributes). Image by [Quartl](https://en.wikipedia.org/wiki/Cartesian_product#/media/File:Cartesian_Product_qtl1.svg), CC BY-SA 3.0.")
     knitr::include_graphics(here::here("images", "05-cartesian-product.png"))
 ```
@@ -171,7 +171,7 @@ Semantically, set intersection is read as "the tuples in relation S _and_ the tu
 
 **Set difference** returns the tuples that are unique in one relation relative to another relation, but both relations must be union compatible. Formally, difference is expressed as $S-T$, and just like mathematical subtraction, the order of relations in the set difference is important and non-commutative. For example, $σ_{height<25}(R)-σ_{height>15}(R)$ evaluates to:
 
-```{r 5-set-difference-table, echo=FALSE}
+```{r 5-set-difference-table-1, echo=FALSE}
 knitr::kable(
   R[1,], booktabs = TRUE, row.names = FALSE
 )
@@ -179,7 +179,7 @@ knitr::kable(
 
 and $σ_{height>15}(R)-σ_{height<25}(R)$ evaluates to:
 
-```{r 5-set-difference-table, echo=FALSE}
+```{r 5-set-difference-table-2, echo=FALSE}
 knitr::kable(
   R[4,], booktabs = TRUE, row.names = FALSE
 )
@@ -191,7 +191,7 @@ Semantically, you would read the set difference $S-T$ as "the tuples in relation
 
 So far, we have seen the cases of mathematical addition (set union) and subtraction (set difference), but we can also apply multiplication and division. Multiplication of two relations is simply known as the **Cartesian product**. In the same way that a set of tuples and attributes can be multiplied to create a relation $R=A×B$, we can also multiply two relations together and they do not need to be union compatible. For example, if $S = Π_{height,dbh}(σ_{height<20}(R))$ evaluates to:
 
-```{r 5-cartesian-product, echo=FALSE}
+```{r 5-cartesian-product-1, echo=FALSE}
 Sr <- R[1:3,2:3]
 knitr::kable(
   Sr, booktabs = TRUE, row.names = FALSE
@@ -227,7 +227,7 @@ Finally, **set division** is an operation of division between two relations, and
 
 For the next example of set division, we will introduce a new relation $S$, which is not a subset of $R$. Suppose, in addition to $R$, we have cataloged information about different tree species, some of which are in $R$ (these data are a small sample of a [full list of tree species codes](https://www.for.gov.bc.ca/hfp/publications/00026/fs708-14-appendix_d.htm#ad_02) commonly used in British Columbia, Canada):
 
-```{r 5-set-division, echo=FALSE}
+```{r 5-set-division-1, echo=FALSE}
 co <- c("AT","BB","CW","E","FD","HW","YC")
 sp <- c("Trembling Aspen","Balsam Fir","Western Red Cedar","Birch","Douglas-Fir","Western Hemlock","Yellow Cedar")
 S <- data.frame(Code=co,Species=sp)
@@ -262,7 +262,7 @@ knitr::kable(
 
 Then, $Π_{code}(S)×T$ is the Cartesian product of the previous projection and $T$, which yields a relation of all the combinations of $T$ with the attributes in $S$ that are not in $T$:
 
-```{r 5-set-division-3, echo=FALSE}
+```{r 5-set-division-4, echo=FALSE}
 Ct <- expand.grid(Ps$Code,Pt$Species)
 names(Ct) <- c("Code","Species")
 knitr::kable(
@@ -272,7 +272,7 @@ knitr::kable(
 
 Next, we take the set difference between the Cartesian product above and $S$, $(Π_{code(S)×T)-S$, which has the effect of removing the tuples already observed in $S$. This leaves us with a relation that has all the "incorrect" code-species combinations:
 
-```{r 5-set-division-4, echo=FALSE}
+```{r 5-set-division-5, echo=FALSE}
 Ds <- Ct[paste0(Ct$Code,Ct$Species)%in%setdiff(paste0(Ct$Code,Ct$Species),paste0(S$Code,S$Species)),]
 knitr::kable(
   Ds, booktabs = TRUE, row.names = FALSE
@@ -281,7 +281,7 @@ knitr::kable(
 
 Next, we project $Code$, which again is the only attribute in $S$ not in $T$, from the set difference above $Π_{code}((Π_{code}(S) × T) - S)$, which yields:
 
-```{r 5-set-division-5, echo=FALSE}
+```{r 5-set-division-6, echo=FALSE}
 PDs <- data.frame(Code=unique(Ds$Code))
 knitr::kable(
   PDs, booktabs = TRUE, row.names = FALSE
@@ -290,7 +290,7 @@ knitr::kable(
 
 And finally, we take the set difference between $Π_{code}(S)$ and the projection above to obtain the code for the trees in our plot:
 
-```{r 5-set-division-6, echo=FALSE}
+```{r 5-set-division-7, echo=FALSE}
 U <- data.frame(Code=S[S$Species%in%setdiff(Pt$Species,PDs$Code),1])
 knitr::kable(
   U, booktabs = TRUE, row.names = FALSE
@@ -299,7 +299,7 @@ knitr::kable(
 
 You can think of set division as the inverse of a Cartesian product. However, just like division, the Cartesian product itself is non-commutative because it is a set of _ordered_ pairs. If $S$ contains a tuple that is not in $T$, then the Cartesian product of $S×T$ has a different order than would be the case if both $S$ and $T$ were identical. As an example, $S×T$ evaluates to:
 
-```{r 5-set-division-7, echo=FALSE}
+```{r 5-set-division-8, echo=FALSE}
 C.ut <- data.frame(do.call(expand.grid, lapply(list(U$Code,Pt$Species), unique)))
 names(C.ut) <- c("Code","Species")
 knitr::kable(
@@ -309,7 +309,7 @@ knitr::kable(
 
 and $T×S$ evaluates to:
 
-```{r 5-set-division-8, echo=FALSE}
+```{r 5-set-division-9, echo=FALSE}
 C.tu <- data.frame(do.call(expand.grid, lapply(list(Pt$Species,U$Code), unique)))
 names(C.tu) <- c("Species","Code")
 knitr::kable(
@@ -319,7 +319,7 @@ knitr::kable(
 
 Therefore, we cannot simply rewrite $S÷T=U$ as $U×T=S$, but we could express $U÷S=T$, which evaluates to $T$:
 
-```{r 5-set-division-9, echo=FALSE}
+```{r 5-set-division-10, echo=FALSE}
 knitr::kable(
   Pt, booktabs = TRUE, row.names = FALSE
 )

@@ -410,6 +410,7 @@ m = leaflet() %>%
 ```
 
 ```{r 9-fort-st-john-study-area, echo=FALSE, fig.cap=fig_cap, ouwidth="75%"}
+
 fig_cap <- paste0("The Fort St. John Timber Supply Area, British Columbia, Canada. Data from Government of British Columbia and licensed under the Open Government Licence - British Columbia. Mesler, CC-BY-SA-4.0.")
 ```
 
@@ -498,7 +499,7 @@ pal6 <- colorNumeric(c("#fee090", "#fc8d59", "#d73027"), values(r6), na.color = 
 pal7 <- colorFactor(c("#fc8d59", "#238443", "#d9f0a3"), values(r7),na.color = "transparent")
 ```
 
-```{r files-3, echo = FALSE, include=FALSE}
+```{r files-3, echo = FALSE, include=FALSE, cache=TRUE}
 #Create labels for classified raster
 labels1 = c("Alpine", "Upland", "Wetland")
 #Run the leaflet

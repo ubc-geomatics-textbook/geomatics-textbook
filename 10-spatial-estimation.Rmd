@@ -383,6 +383,7 @@ The information attached to the study objects that are spatially distributed in 
 ::::
 
 ```{r 10-spatial-autocorrelation, echo=FALSE, warning=FALSE, message=FALSE}
+
 n<- matrix(c(1:400), nrow=20, ncol=20)
 
 # Create row indicator
@@ -973,7 +974,6 @@ Nearest neighbor interpolation approach uses the value of variable of interest f
 **Step 1:Match the projection of plot data with the study area boundary**
 
 ```{r 10-nearest-neighbor, warning=FALSE, message=FALSE}
-rm(list=ls())
 # spatstat Used for the dirichlet tessellation function
 # maptools Used for conversion from SPDF to ppp
 # raster Used to clip out thiessen polygons
@@ -985,7 +985,6 @@ TA <- CRS("+proj=utm +zone=10 +ellps=GRS80 +datum=NAD83")
 library(rgdal)
 dta <- spTransform(dsp, TA)
 cata <- spTransform(spdf, TA)
-
 ```
 
 **Step 2: Create polygons throughout the study area where interpolation is to be done and rasterize the polygons**
@@ -1081,13 +1080,13 @@ tm_shape(th.clp) +
 ```
 **Figure 10.21.** \ref{fig:figs} Predicted basal area over the entire Fort Saint Johns TSA using thiessian polygon.
 
-#### Inverse Distance Weighing
+#### Inverse Distance Weighting
 
-***Inverse distance weighing (IWD)** [@Shepard1968] estimates the variable of interest by assigning more weight to closer points using the weighing function (w) based on the weighing exponent know as power (p) [@Babak2009]. The influence of one data point on the other decreases as the distance increases. Hence, higher power of the exponent will result in point of interest having less effect on the points far from it [@Babak2009]. It is a simple technique that does not require prior information to be applied to spatial prediction [@Shepard1968]. Lower value of exponents mean more averaging, and the weights are more evenly distributed among the surrounding data points [@Shepard1968].
+***Inverse distance weighting (IWD)** [@Shepard1968] estimates the variable of interest by assigning more weight to closer points using the weighting function (w) based on the weighting exponent know as power (p) [@Babak2009]. The influence of one data point on the other decreases as the distance increases. Hence, higher power of the exponent will result in point of interest having less effect on the points far from it [@Babak2009]. It is a simple technique that does not require prior information to be applied to spatial prediction [@Shepard1968]. Lower value of exponents mean more averaging, and the weights are more evenly distributed among the surrounding data points [@Shepard1968].
 
 **Step 1: Fix the projections between data points and shape file**
 
-```{r 10-idw warning=FALSE, message=FALSE}
+```{r 10-idw, warning=FALSE, message=FALSE}
 # project the data based on the colorado plateau boundry projection
 
 dsp <- SpatialPoints(plot1[,14:15], proj4string=CRS("+proj=utm +zone=10 +ellps=GRS80 +datum=NAD83"))
@@ -1116,7 +1115,7 @@ proj4string(dta) <- proj4string(dta) # Temp fix until new proj env is adopted
 proj4string(grd) <- proj4string(dta)
 ```
 
-**Step 3: Interpolate the grid cells using a power value of 2 **
+**Step 3: Interpolate the grid cells using a power value of 2**
 
 Power values can be adjusted depending on characteristics of variable being interpolated
 
@@ -1128,7 +1127,7 @@ r       <- raster(P.idw)
 r.m     <- mask(r, cata)
 ```
 
-**Step 4: Plot the results from inverse distance weighing interpolation using**
+**Step 4: Plot the results from inverse distance weighting interpolation using**
 
 ```{r 10-idw-4, warning=FALSE, message=FALSE}
 tm_shape(r.m) + 
@@ -1137,7 +1136,7 @@ tm_shape(r.m) +
   tm_shape(dta) + tm_dots(size=0.2) +
   tm_legend(legend.outside=FALSE)
 ```
-**Figure 10.22.** \ref{fig:figs} Predicted basal area over the entire Fort Saint Johns TSA using inverse distance weighing.
+**Figure 10.22.** \ref{fig:figs} Predicted basal area over the entire Fort Saint Johns TSA using inverse distance weighting.
 
 **Step 5: Leaflet map for some interaction**
 
@@ -1150,13 +1149,13 @@ leaflet() %>% addTiles() %>%
     title = "Predicted basal area")
 ```
 
-**Figure 10.23.** \ref{fig:figs} Predicted basal area over the entire Fort Saint Johns TSA using inverse distance weighing projected over the province of Brithish Columbia.
+**Figure 10.23.** \ref{fig:figs} Predicted basal area over the entire Fort Saint Johns TSA using inverse distance weighting projected over the province of Brithish Columbia.
 
 ## Methods Using Semi-variogram 
 
 ## Kriging 
 
-The spatial interpolation technique such as inverse distance weighing(IWD), nearest neighbor, and polygon approach are based on the surrounding neighborhood. There is another group of interpolation methods generally know as **kriging** [@Krige1951] which is based on both surrounding neighborhood and statistical models, especially **spatial autocorrelation**. Kriging uses the variogram modeling approach we studied in section **10.3** as a statistical model and incorporates the information about **spatial autocorrelation** while performing the interpolation. Since kriging uses the geostatistical model it has capacity of both prediction and provides some measure of the accuracy of prediction [@Goovaerts2008].The basic assumption of kriging is that the distance based samples reflect some degree of spatial correlation [@Goovaerts2008]. We should note one thing that kriging works with raster surfaces where variable of interest are to be interpolated using the sampled locations. Kriging works with the following basic mathematical model: 
+The spatial interpolation technique such as inverse distance weighting(IWD), nearest neighbor, and polygon approach are based on the surrounding neighborhood. There is another group of interpolation methods generally know as **kriging** [@Krige1951] which is based on both surrounding neighborhood and statistical models, especially **spatial autocorrelation**. Kriging uses the variogram modeling approach we studied in section **10.3** as a statistical model and incorporates the information about **spatial autocorrelation** while performing the interpolation. Since kriging uses the geostatistical model it has capacity of both prediction and provides some measure of the accuracy of prediction [@Goovaerts2008].The basic assumption of kriging is that the distance based samples reflect some degree of spatial correlation [@Goovaerts2008]. We should note one thing that kriging works with raster surfaces where variable of interest are to be interpolated using the sampled locations. Kriging works with the following basic mathematical model: 
 $$\hat{Z_{s_0}}=\sum_{i}^N \lambda_{i}Z_{s_i}$$
 
 Where, $$\hat{Z_{s_o}}=\text{variable of interest to predicted at unsampled loaction}\ s_0 $$
@@ -1331,7 +1330,7 @@ Looking into the variogram and the parameter **(Figure 10.24, Table 10.2)**, we 
 
 **Step 6: We will use beta = 95.73, as we know the assume mean is a known constant over the domain for simple kriging**
 
-```{r 10-simple-kriging-7, warning=FALSE, message=FALSE}
+```{r 10-simple-kriging-6, warning=FALSE, message=FALSE}
 simple<- krige(total ~ 1, dta, grd, model=FittedModel2,beta=95.73)
 ```
 

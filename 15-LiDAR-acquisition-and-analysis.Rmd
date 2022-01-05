@@ -85,8 +85,8 @@ All LiDAR sensors emit pulses at a certain rate (*pulse rate*), which can be giv
 Several technical aspects of lasers are recorded by the instrument (and usually provided as a flight summary or flight specifications by vendors), while some of it can also be found in the `las` file. We can usually find information that impacts the entire flight in the flight specifications, such as flight height, scan rate, and beam divergence. These aspects shouldn't change for the entire duration of the flight. In contrast, information located in the `las` file affects individual points. Here we can find information such as scan angle, return number, and intensity.
 
 ```{r 15-LiDAR-Unit, fig.cap = fig_cap, out.width="70%", echo = FALSE}
-fig_cap <- paste("An example of a LiDAR Unit. ('LiDAR machine', @TheCenterforInternationalForestryResearchCIFOR2014, CC-BY-NC-ND-2.0).")
-knitr::include_graphics(here::here("images", "15-LiDAR-Unit.jpg"))
+fig_cap <- paste("An example of a LiDAR Unit. ('LiDAR machine', @TheCenterforInternationalForestryResearchCIFOR2014, Animated figure can be viewed in the web browser version of the textbook. CC-BY-NC-ND-2.0).")
+knitr::include_graphics(here::here("images", "15-LiDAR-Unit.png"))
 ```
 
 ## Position and Orientation
@@ -96,8 +96,8 @@ knitr::include_graphics(here::here("images", "15-LiDAR-Unit.jpg"))
 In order for us to use the calculation from Figure \@ref(fig:15-Concept-of-LiDAR), we need to know the exact position of the scanner in space. For airborne and mobile platforms, we can can do this by using the **global navigation satellite system (GNSS)**, as well as post processing using a local GNSS reference station. This helps us to improve accuracy by not comparing our position to a known local position in order to ensure our location is known as accurately as possible. GNSS concepts are covered further in Chapter 4.
 
 ```{r 15-XYZ-coordinates, fig.cap = fig_cap, out.width="70%", echo = FALSE}
-fig_cap <- paste("An on board GNSS is required toprovide an accurate location of the LiDAR scanner in space. ('A key component of a lidar system is a GPS', @NEONEducation2014, CC-BY-NC-SA-2.0).")
-knitr::include_graphics(here::here("images", "15-XYZ-coordinates.jpg"))
+fig_cap <- paste("An onboard GNSS is required toprovide an accurate location of the LiDAR scanner in space. ('A key component of a lidar system is a GPS', @NEONEducation2014, CC-BY-NC-SA-2.0).")
+knitr::include_graphics(here::here("images", "15-XYZ-coordinates.png"))
 ```
 
 ## Inertial Measurement Unit (IMU)
@@ -120,9 +120,9 @@ Airplanes and helicopters are still the most common platforms for LiDAR data col
 
 As laser units have decreased in size, we have been able to mount LiDAR units to smaller platforms. Drones (also known as unmanned aerial vehicles (UAV) or remotely piloted aerial systems (RPAS)) are extremely convenient to collect high density point clouds over small areas. They typically fly relatively close to the forest (e.g. 50 m above the trees) and fly a pre-defined flight route so ensure evenly spaced data collection. Typical point densities range from hundreds to thousands of points per meter squared. A major limitation of drones is currently battery life, as acquisition campaigns are limited by how long the drone can fly for (approximately 20 - 30 minutes). This means that collecting large amounts of data is difficult in remote locations.
 
-```{r 15-LiDAR-on-Drone-2, fig.cap = fig_cap, out.width="70%", echo = FALSE}
+```{r 15-LiDAR-on-Drone, fig.cap = fig_cap, out.width="70%", echo = FALSE}
 fig_cap <- paste("Drone mounted LiDAR. This technology is rapidly developing, with many companies working towards creating units capable of acquiring high density datasets over large areas. ('LiDARUSA Snoopy 120 LiDAR', @Clapurhands2019,  CC-BY-SA-4.0).")
-knitr::include_graphics(here::here("images", "15-LiDAR-on-Drone-2.jpg"))
+knitr::include_graphics(here::here("images", "15-LiDAR-on-Drone.png"))
 ```
 
 ## Mobile Laser Scanning

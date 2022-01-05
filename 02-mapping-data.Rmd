@@ -77,7 +77,7 @@ A **geodetic vertical datum** is one that describes the Earth's shape in the sim
 ```
 <br/>
 
-There are many different ellipsoids that have been defined and are currently in use as datums. The most commonly used ellipsoid is called the World Geodetic System of 1984 or usually abbreviated as WGS 1984 or WGS 84. In fact, there are hundreds of ellipsoids that have been defined over recent centuries to model the shape of the Earth. The reason for so many other ellipsoids is due in part to technological advances that have improved the accuracy and precision of surveying as well as estimation of the ellipsoidal parameters. Many of these ellipsoids are not **geocentric**, that is, not originating from the center of mass of Earth. These datums are known as **regional datums**, which still describe the dimensions that approximate the shape of Earth, but are instead oriented so that the surface of the ellipsoid is congruent with a particular regional surface of Earth. For example, the European Datum 1950, the South American Datum 1969, the North American Datum 1983, and the Australian Geodetic Datum 1966 conform well to their respective continents, even better than WGS 1984 in most cases, but poorly anywhere else in the world.
+There are many different ellipsoids that have been defined and are currently in use as datums. The most commonly used ellipsoid is called the World Geodetic System of 1984 or usually abbreviated as WGS 1984 or WGS 84. In fact, there are hundreds of ellipsoids that have been defined over recent centuries to model the shape of the Earth. The reason for so many other ellipsoids is due in part to technological advances that have improved the accuracy and precision of surveying as well as estimation of the ellipsoidal parameters. Many of these ellipsoids are not *geocentric*, that is, not originating from the center of mass of Earth. These datums are known as **regional datums**, which still describe the dimensions that approximate the shape of Earth, but are instead oriented so that the surface of the ellipsoid is congruent with a particular regional surface of Earth. For example, the European Datum 1950, the South American Datum 1969, the North American Datum 1983, and the Australian Geodetic Datum 1966 conform well to their respective continents, even better than WGS 1984 in most cases, but poorly anywhere else in the world.
 
 ```{r 2-sphere-ellipsoid, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste("Sphere versus ellispoid. Pickell, CC-BY-SA-4.0.")
@@ -114,7 +114,7 @@ $$
 H = h - N
 $$
 ```{r 2-H-h-N, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Orthometric Height (H) is the ellipsoidal height (h) less the geoid height (N). Animated figure can be viewed in the web browser version of the textbook. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste("Orthometric Height (H) is the ellipsoidal height (h) less the geoid height (N). Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "02-H-h-N.png"))
 ```
 <br/>
@@ -122,7 +122,7 @@ $$
 To illustrate the concept of a gravimetric datum, suppose we constructed a large, straight tunnel through the physical Earth that was tangential to the ellipsoid. If we allowed the oceans to flow freely through this tunnel, your experiences might convince you that water would flow from one end to the other. But in fact, this tunnel is so large, that the gravity field is changing. So the water would actually come to rest at the surface of the geoid or gravimetric model, as shown in Figure \@ref(fig:2-geoid-tunnel) below.
 
 ```{r 2-geoid-tunnel, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste("Thought experiment showing where water would be at rest within a tunnel through the geoid due to the equipotential force of gravity (g).  Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste("Thought experiment showing where water would be at rest within a tunnel through the geoid due to the equipotential force of gravity (g). Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "02-geoid-tunnel.png"))
 ```
 <br/>
@@ -157,8 +157,8 @@ m = leaflet(countries) %>%
 ```
 
 ``` {r 2-CGVD-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
-fig_cap <- paste("The difference (in meters) between the Canadian Geodetic Vertical Datum of 2013 (CGVD2013) and the Canadian Geodetic Vertical Datum of 1928 (CGVD28). Data from Natural Resources Canada and licensed under the <a href='https://opendata.vancouver.ca/pages/licence/'> Open Government Licence <a> - Canada. Animated figure can be viewed in the web broswer version of the textbook. Pickell, CC-BY-SA-4.0.")
-
+fig_cap <- paste("The difference (in meters) between the Canadian Geodetic Vertical Datum of 2013 (CGVD2013) and the Canadian Geodetic Vertical Datum of 1928 (CGVD28). Data from Natural Resources Canada and licensed under the <a href='https://open.canada.ca/en/open-government-licence-canada'> Open Government Licence <a> - Canada. Animated figure can be viewed in the web broswer version of the textbook. Pickell, CC-BY-SA-4.0.")
+m
 ```
 
 ## Referencing Location

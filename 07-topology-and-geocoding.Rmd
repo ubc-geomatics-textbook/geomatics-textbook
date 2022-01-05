@@ -120,7 +120,6 @@ Some examples of adjacency and overlap topological rules:
 
 ## Intersect and Connect
 
-
 As we have seen from Chapter 3, lines are often used to represent phenomena that flow, so intersection and connection are important concepts for these representations. Important to understanding how connection and intersection work in planar topology, we need to understand that lines are comprised of a set of vertices and nodes. A **node** is simply the terminating vertex in a set of vertices for a line. For example, suppose the line segment $A$ has a set of vertices, $[[1,0],[1,3],[1,5]]$. Then the nodes for $A$ are $[1,0]$ and $[1,5]$ (Figure \@ref(fig:7-node)). Since nodes define the end points of a line segment, they are key to enforcing connection rules. We will look at network analysis in more detail in the next chapter. For now, let us consider two different networks that can help us conceptualize some fundamental line topology using nodes.
 
 ```{r, 7-node, fig.align = 'center', out.width = '75%', fig.cap=fig_cap, cached=T, echo = FALSE}
@@ -583,15 +582,11 @@ We can see that the values on the $LEFT$ side of the street range from 101-199, 
 
 One problem might seem obvious here: many cities have a street named Main Street. Therefore, an address locator relies on several pieces of reference spatial data such as maps of road networks, postal codes, cities, provinces or states, and countries. The address locator then works to _match_ the input address against this database of spatial reference data. Thus, geocoding is both imprecise and inaccurate because the address locator relies on several assumptions. The primary assumption is that the input address exists and contains no typos or errors. Data entry by humans is a frequent source of typos and different styles for abbreviations (e.g., "E", "E." and "East"). An address locator can still geocode an address that does not exist as long as it is specified correctly, which results in an inaccurate location. If the input address is correct, but incomplete (e.g., "Main Street, Vancouver" is missing civic number, city, and province), then the address locator must match the other provided information against the spatial database (e.g., street name and city), which results in an imprecise location. 
 
-<<<<<<< HEAD
 In addition to a set of geographic coordinates, one key result from geocoding an address is the **match score**, which is an indication of how well the address locator was able to match the address against the spatial reference database. The match score usually ranges from 0% (no match) to 100% (perfect match) and the calculation varies depending on how you want to penalize incomplete or incorrect input addresses. Although it is frequently presented as a percentage, the match score is _not an indication of accuracy_ and it really only reflects the confidence by the address locator given the reference spatial database. In other words, a completely inaccurate road network with correct names and civic numbers can conceivably "locate" an address with a 100% match score, but very low accuracy. The final limitation is that you cannot geocode addresses outside of the extent of the spatial data provided to the address locator. For geocoding over large areas, we often rely on geocoding services described in the next section.
 
 ### Geocoding Services
 
-If you are aiming to geocode addresses in a single city, then it is feasible to manually specify your own address locator using available spatial data such as roads, parcels, neighborhoods, and postal codes. However, for geocoding across large areas, this may not be feasible and you may instead rely on geocoding services that use large databases of reference spatial data. Commercially-available geocoding services are frequently used to provide routing, like Google Maps and Waze. However, these geocoding services do not provide match scores or any other indication of how confident or reliable the matches are. British Columbia has developed an address locator specifically for use in British Columbia available here: [https://bcgov.github.io/ols-devkit/ale/](https://bcgov.github.io/ols-devkit/ale/). 
-=======
-## Geocoding Services
->>>>>>> 5aa62c6c2631db4c429ad09c3a06ef3460ad6fce
+If you are aiming to geocode addresses in a single city, then it is feasible to manually specify your own address locator using available spatial data such as roads, parcels, neighborhoods, and postal codes. However, for geocoding across large areas, this may not be feasible and you may instead rely on geocoding services that use large databases of reference spatial data. Commercially-available geocoding services are frequently used to provide routing, like Google Maps and Waze. However, these geocoding services do not provide match scores or any other indication of how confident or reliable the matches are.
 
 ## Case Study: Working with Canadian Census Data
 

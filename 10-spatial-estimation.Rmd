@@ -383,7 +383,6 @@ The information attached to the study objects that are spatially distributed in 
 ::::
 
 ```{r 10-spatial-autocorrelation, echo=FALSE, warning=FALSE, message=FALSE}
-
 n<- matrix(c(1:400), nrow=20, ncol=20)
 
 # Create row indicator
@@ -1117,7 +1116,7 @@ proj4string(dta) <- proj4string(dta) # Temp fix until new proj env is adopted
 proj4string(grd) <- proj4string(dta)
 ```
 
-**Step 3: Interpolate the grid cells using a power value of 2**
+**Step 3: Interpolate the grid cells using a power value of 2 **
 
 Power values can be adjusted depending on characteristics of variable being interpolated
 

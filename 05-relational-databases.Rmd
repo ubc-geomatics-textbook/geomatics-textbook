@@ -270,7 +270,7 @@ knitr::kable(
 )
 ```
 
-Next, we take the set difference between the Cartesian product above and $S$, $(Π_{code(S)×T)-S$, which has the effect of removing the tuples already observed in $S$. This leaves us with a relation that has all the "incorrect" code-species combinations:
+Next, we take the set difference between the Cartesian product above and $S$, $(Π_{code}(S)×T)-S$, which has the effect of removing the tuples already observed in $S$. This leaves us with a relation that has all the "incorrect" code-species combinations:
 
 ```{r 5-set-division-5, echo=FALSE}
 Ds <- Ct[paste0(Ct$Code,Ct$Species)%in%setdiff(paste0(Ct$Code,Ct$Species),paste0(S$Code,S$Species)),]

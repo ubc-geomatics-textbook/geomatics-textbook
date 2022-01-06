@@ -1,14 +1,23 @@
+---
+output:
+  pdf_document:
+    latex_engine: xelatex
+---
 
 ```{r, include=FALSE}
+type <- "pdf"
 baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"
 covlicence <- "https://opendata.vancouver.ca/pages/licence/"
 nrcanlicense <- "https://open.canada.ca/en/open-government-licence-canada"
-library("dplyr")
-library("rgdal")
-library("leaflet")
-library("xtable")
-library("plyr")
+library(dplyr)
+library(rgdal)
+library(leaflet)
+library(xtable)
+library(plyr)
+library(RColorBrewer)
+library(raster)
 ```
+
 # Mapping Data {#mapping-data}
 
 You probably already accept that the Earth is "round" and not "flat". You have probably held and touched a globe at some point in your life. But have you ever wondered how we describe location and measure something as large as the Earth? In this chapter, we will explore fundamental concepts for how we measure the Earth and orient ourselves with coordinate systems.
@@ -141,13 +150,6 @@ The Canadian Geodetic Vertical Datum of 2013 (CGVD2013) is the current gravimetr
 
 For reference, CGVD2013 is 17 centimeters below mean sea level measured in Vancouver at the Pacific Ocean, 39 centimeters above mean sea level in Halifax at the Atlantic Ocean, and 36 centimeters above mean sea level in Tuktoyaktuk at the Arctic Ocean. The older CGDV28 did not have any survey benchmarks in the far north of Canada and, with the advent of more reliable satellite-based measurements, was modernized in 2015 to CGVD2013. The United States currently uses the North American Vertical Datum of 1988 (NAVD88), which was never adopted by Canada, but the United States will be modernizing their vertical datum by adopting a gravimetric model with the same gravity potential value as Canada as early as 2025.
 
-``` {r echo=F, message=F}
-library(rgdal)
-library(leaflet)
-library(RColorBrewer)
-library(raster)
-```
-
 ``` {r echo=F}
 countries <- rgdal::readOGR("Data/02/canada.geojson", verbose=F)
 r <- raster("Data/02/CGG2013_minus_HT21997_meters.tif")
@@ -165,8 +167,9 @@ m = leaflet(countries) %>%
 ```
 
 ``` {r 2-CGVD-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
-fig_cap <- paste0("The difference (in meters) between the Canadian Geodetic Vertical Datum of 2013 (CGVD2013) and the Canadian Geodetic Vertical Datum of 1928 (CGVD28).<a
-href='",baseurl,"#fig:2-CGVD-leaflet'>Animated figure can be viewed in the web browser version of the textbook</a>.Data from Natural Resources Canada and licensed under the <a href='",covlicence,">Open Government Licence - Canada </a>.Pickell, CC-BY-SA-4.0.")  
+  fig_cap <- paste0("The difference (in meters) between the Canadian Geodetic Vertical Datum of 2013 (CGVD2013) and the Canadian Geodetic Vertical Datum of 1928 (CGVD28).<a
+  href='",baseurl,"#fig:2-CGVD-leaflet'>Animated figure can be viewed in the web browser version of the textbook</a>.Data from Natural Resources Canada and licensed under the <a href='",nrcanlicense,">Open Government Licence - Canada </a>.Pickell, CC-BY-SA-4.0.")
+if (type == "pdf") { knitr::include_graphics(here::here("images", "02-CGVD-leaflet.PNG")) }
 ```
 
 ## Referencing Location
@@ -323,10 +326,3 @@ In this chapter, you learned about the science and technology of geodesy that go
 ## Recommended Readings {-}
 
 Ensure all inline citations are properly referenced here.
-
-```{r include=FALSE}
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'htmlwidgets', 'webshot', 'DT',
-  'miniUI', 'tufte', 'servr', 'citr', 'rticles'
-), 'packages.bib')
-```

@@ -985,9 +985,7 @@ TA <- CRS("+proj=utm +zone=10 +ellps=GRS80 +datum=NAD83")
 library(rgdal)
 dta <- spTransform(dsp, TA)
 cata <- spTransform(spdf, TA)
-```
-
-**Step 2: Create polygons throughout the study area where interpolation is to be done and rasterize the polygons**
+```the study area where interpolation is to be done and rasterize the polygons**
 
 ```{r 10-nearest-neighbor-2, warning=FALSE, message=FALSE}
 v <- voronoi(dta)
@@ -1523,22 +1521,9 @@ Disjunctive kriging allows to estimate the value of a variable of interest at an
 
 For classical statistics tests,**spatial autocorrelation** is problematic as ordinary least square (regression) or analysis of variance (ANOVA) assumes that observations are independent in space and time [@Meng2009]. However, geostatistical data violates the assumptions of independence, and using regression and ANOVA might inflate the significance of t and F statistics, when, in fact, they may not be significant at all [@Meng2009]. In that case one should try to improve the regression model by adding important **auxiliary** (independent variables that are associated or important in predicting the variables of interest) and incorporating the spatial autocorrelation structure [@Meng2009] using spatial regression models [@Anselin1998]. **The whole objective of spatial regression is to understand the association of the variable of interest with the independent variables while accounting for the spatial structure present in the data.** We will show two examples of spatial regression model in this section using our familiar YSM data for Fort Saint Johns TSA. 
 
-:::: {.box-content .case-study-content}
-
-::: {.box-title .case-study-top}
 ## Case Study: Title of case study here 
-You see textual case study content here
 
 For this case study, we will use ground plot data from Young stand monitoring (YSM) program data [@ProvinceofBC2018] for Fort Saint Johns timber supply area (TSA) in the province of British Columbia, Canada.Fort Saint Johns is divided into 6 blocks respectively **Figure 10.17**. There is a total of 108 YSM plots used in this study **Figure 10.17**. The total basal area (m2/ha) is our variable of interest or response variable in this study. For each of the YSM plot the total basal area was calculated by adding the basal area for all trees within the plot. We will use the auxiliary variables such as trees per hectare (TPH), elevation (m), site index, top height(m), and tree volume (m3/ha)
-<p id="box-text">
-</p>
-
-<p id="box-text">
-</p>
-
-<p id="box-text">
-</p>
-::::
 
 ## Spatial Lag Model 
 

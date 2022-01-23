@@ -24,7 +24,7 @@
 <meta name="author" content="UBC" />
 
 
-<meta name="date" content="2022-01-12" />
+<meta name="date" content="2022-01-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,8 +53,80 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
@@ -397,21 +469,10 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="10" data-path="spatial-estimation.html"><a href="spatial-estimation.html"><i class="fa fa-check"></i><b>10</b> Spatial Estimation</a>
 <ul>
-<li class="chapter" data-level="" data-path="spatial-estimation.html"><a href="spatial-estimation.html#learning-objectives-9"><i class="fa fa-check"></i>Learning Objectives</a></li>
 <li class="chapter" data-level="" data-path="spatial-estimation.html"><a href="spatial-estimation.html#key-terms-9"><i class="fa fa-check"></i>Key Terms</a></li>
 <li class="chapter" data-level="10.1" data-path="spatial-estimation.html"><a href="spatial-estimation.html#introduction"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
-<li class="chapter" data-level="" data-path="spatial-estimation.html"><a href="spatial-estimation.html#recall-this"><i class="fa fa-check"></i>Recall This</a></li>
-<li class="chapter" data-level="10.2" data-path="spatial-estimation.html"><a href="spatial-estimation.html#geostatistics"><i class="fa fa-check"></i><b>10.2</b> Geostatistics</a></li>
-<li class="chapter" data-level="10.3" data-path="spatial-estimation.html"><a href="spatial-estimation.html#spatial-autocorrelation"><i class="fa fa-check"></i><b>10.3</b> Spatial Autocorrelation</a></li>
-<li class="chapter" data-level="10.4" data-path="spatial-estimation.html"><a href="spatial-estimation.html#sampling"><i class="fa fa-check"></i><b>10.4</b> Sampling</a></li>
-<li class="chapter" data-level="10.5" data-path="spatial-estimation.html"><a href="spatial-estimation.html#prediction"><i class="fa fa-check"></i><b>10.5</b> Prediction</a></li>
-<li class="chapter" data-level="10.6" data-path="spatial-estimation.html"><a href="spatial-estimation.html#estimation"><i class="fa fa-check"></i><b>10.6</b> Estimation</a></li>
 <li class="chapter" data-level="10.7" data-path="spatial-estimation.html"><a href="spatial-estimation.html#classical-vs.-geostatistical-inferences"><i class="fa fa-check"></i><b>10.7</b> Classical vs. Geostatistical Inferences</a></li>
 <li class="chapter" data-level="10.8" data-path="spatial-estimation.html"><a href="spatial-estimation.html#sampling-1"><i class="fa fa-check"></i><b>10.8</b> Sampling</a></li>
-<li class="chapter" data-level="" data-path="spatial-estimation.html"><a href="spatial-estimation.html#recall-this-1"><i class="fa fa-check"></i>Recall This</a></li>
-<li class="chapter" data-level="10.9" data-path="spatial-estimation.html"><a href="spatial-estimation.html#population"><i class="fa fa-check"></i><b>10.9</b> Population</a></li>
-<li class="chapter" data-level="10.10" data-path="spatial-estimation.html"><a href="spatial-estimation.html#sampling-design"><i class="fa fa-check"></i><b>10.10</b> Sampling Design</a></li>
-<li class="chapter" data-level="10.11" data-path="spatial-estimation.html"><a href="spatial-estimation.html#sampling-unit"><i class="fa fa-check"></i><b>10.11</b> Sampling Unit</a></li>
 <li class="chapter" data-level="10.12" data-path="spatial-estimation.html"><a href="spatial-estimation.html#probability-sampling"><i class="fa fa-check"></i><b>10.12</b> Probability Sampling</a></li>
 <li class="chapter" data-level="10.13" data-path="spatial-estimation.html"><a href="spatial-estimation.html#simple-random-sampling"><i class="fa fa-check"></i><b>10.13</b> Simple Random Sampling</a></li>
 <li class="chapter" data-level="10.14" data-path="spatial-estimation.html"><a href="spatial-estimation.html#stratified-random-sampling"><i class="fa fa-check"></i><b>10.14</b> Stratified Random Sampling</a></li>
@@ -422,19 +483,14 @@ div.csl-indent {
 <li class="chapter" data-level="10.19" data-path="spatial-estimation.html"><a href="spatial-estimation.html#unique-case-sampling"><i class="fa fa-check"></i><b>10.19</b> Unique Case Sampling</a></li>
 <li class="chapter" data-level="10.20" data-path="spatial-estimation.html"><a href="spatial-estimation.html#sequential-sampling"><i class="fa fa-check"></i><b>10.20</b> Sequential Sampling</a></li>
 <li class="chapter" data-level="10.21" data-path="spatial-estimation.html"><a href="spatial-estimation.html#spatial-autocorrelation-1"><i class="fa fa-check"></i><b>10.21</b> Spatial Autocorrelation</a></li>
-<li class="chapter" data-level="" data-path="spatial-estimation.html"><a href="spatial-estimation.html#recall-this-2"><i class="fa fa-check"></i>Recall This</a></li>
-<li class="chapter" data-level="10.22" data-path="spatial-estimation.html"><a href="spatial-estimation.html#domain"><i class="fa fa-check"></i><b>10.22</b> Domain</a></li>
-<li class="chapter" data-level="10.23" data-path="spatial-estimation.html"><a href="spatial-estimation.html#attributes"><i class="fa fa-check"></i><b>10.23</b> Attributes</a></li>
 <li class="chapter" data-level="10.24" data-path="spatial-estimation.html"><a href="spatial-estimation.html#morans-i"><i class="fa fa-check"></i><b>10.24</b> Moran’s I</a></li>
 <li class="chapter" data-level="10.25" data-path="spatial-estimation.html"><a href="spatial-estimation.html#case-study-title-of-case-study-here-2"><i class="fa fa-check"></i><b>10.25</b> Case Study: Title of Case Study Here</a></li>
 <li class="chapter" data-level="" data-path="spatial-estimation.html"><a href="spatial-estimation.html#calculating-morans-i"><i class="fa fa-check"></i>Calculating Moran’s I</a></li>
 <li class="chapter" data-level="" data-path="spatial-estimation.html"><a href="spatial-estimation.html#using-contiguity"><i class="fa fa-check"></i>Using Contiguity</a></li>
 <li class="chapter" data-level="10.26" data-path="spatial-estimation.html"><a href="spatial-estimation.html#gearys-c"><i class="fa fa-check"></i><b>10.26</b> Geary’s C</a></li>
 <li class="chapter" data-level="10.27" data-path="spatial-estimation.html"><a href="spatial-estimation.html#semivariogram-modeling"><i class="fa fa-check"></i><b>10.27</b> Semivariogram Modeling</a></li>
-<li class="chapter" data-level="10.28" data-path="spatial-estimation.html"><a href="spatial-estimation.html#case-study-title-of-case-study-here-3"><i class="fa fa-check"></i><b>10.28</b> Case Study: Title of Case Study Here</a>
-<ul>
+<li class="chapter" data-level="10.28" data-path="spatial-estimation.html"><a href="spatial-estimation.html#case-study-title-of-case-study-here-3"><i class="fa fa-check"></i><b>10.28</b> Case Study: Title of Case Study Here</a></li>
 <li class="chapter" data-level="10.28.1" data-path="spatial-estimation.html"><a href="spatial-estimation.html#gaussian"><i class="fa fa-check"></i><b>10.28.1</b> Gaussian</a></li>
-</ul></li>
 <li class="chapter" data-level="10.29" data-path="spatial-estimation.html"><a href="spatial-estimation.html#spherical"><i class="fa fa-check"></i><b>10.29</b> Spherical</a></li>
 <li class="chapter" data-level="10.30" data-path="spatial-estimation.html"><a href="spatial-estimation.html#exponential"><i class="fa fa-check"></i><b>10.30</b> Exponential</a></li>
 <li class="chapter" data-level="10.31" data-path="spatial-estimation.html"><a href="spatial-estimation.html#circular"><i class="fa fa-check"></i><b>10.31</b> Circular</a></li>
@@ -465,7 +521,6 @@ div.csl-indent {
 <li class="chapter" data-level="10.52" data-path="spatial-estimation.html"><a href="spatial-estimation.html#spatial-error-model"><i class="fa fa-check"></i><b>10.52</b> Spatial Error Model</a></li>
 <li class="chapter" data-level="10.53" data-path="spatial-estimation.html"><a href="spatial-estimation.html#steps-in-fitting-spatial-error-model"><i class="fa fa-check"></i><b>10.53</b> Steps in Fitting Spatial Error Model:</a></li>
 <li class="chapter" data-level="10.54" data-path="spatial-estimation.html"><a href="spatial-estimation.html#selection-between-lag-and-error-model"><i class="fa fa-check"></i><b>10.54</b> Selection Between Lag and Error Model</a></li>
-<li class="chapter" data-level="" data-path="spatial-estimation.html"><a href="spatial-estimation.html#remember-this-1"><i class="fa fa-check"></i>Remember This?</a></li>
 <li class="chapter" data-level="" data-path="spatial-estimation.html"><a href="spatial-estimation.html#reflection-questions-7"><i class="fa fa-check"></i>Reflection Questions</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="fundamentals-of-remote-sensing.html"><a href="fundamentals-of-remote-sensing.html"><i class="fa fa-check"></i><b>11</b> Fundamentals of Remote Sensing</a>
@@ -544,14 +599,16 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="13" data-path="image-processing.html"><a href="image-processing.html"><i class="fa fa-check"></i><b>13</b> Image Processing</a>
 <ul>
+<li class="chapter" data-level="" data-path="image-processing.html"><a href="image-processing.html#learning-objectives-12"><i class="fa fa-check"></i>Learning Objectives</a></li>
 <li class="chapter" data-level="" data-path="image-processing.html"><a href="image-processing.html#key-terms-12"><i class="fa fa-check"></i>Key Terms</a></li>
 <li class="chapter" data-level="13.1" data-path="image-processing.html"><a href="image-processing.html#overview"><i class="fa fa-check"></i><b>13.1</b> Overview</a></li>
 <li class="chapter" data-level="13.2" data-path="image-processing.html"><a href="image-processing.html#geometric-correction"><i class="fa fa-check"></i><b>13.2</b> Geometric Correction</a></li>
 <li class="chapter" data-level="13.3" data-path="image-processing.html"><a href="image-processing.html#orthoimagery"><i class="fa fa-check"></i><b>13.3</b> Orthoimagery</a></li>
-<li class="chapter" data-level="13.4" data-path="image-processing.html"><a href="image-processing.html#relief-displacement"><i class="fa fa-check"></i><b>13.4</b> <strong>Relief Displacement</strong></a></li>
-<li class="chapter" data-level="13.5" data-path="image-processing.html"><a href="image-processing.html#georeferencing"><i class="fa fa-check"></i><b>13.5</b> <strong>Georeferencing</strong></a></li>
-<li class="chapter" data-level="13.6" data-path="image-processing.html"><a href="image-processing.html#georegistration-georectification"><i class="fa fa-check"></i><b>13.6</b> <strong>Georegistration (georectification)</strong></a></li>
-<li class="chapter" data-level="13.7" data-path="image-processing.html"><a href="image-processing.html#resampling"><i class="fa fa-check"></i><b>13.7</b> <strong>Resampling</strong></a></li>
+<li class="chapter" data-level="13.4" data-path="image-processing.html"><a href="image-processing.html#relief-displacement"><i class="fa fa-check"></i><b>13.4</b> Relief Displacement</a></li>
+<li class="chapter" data-level="" data-path="image-processing.html"><a href="image-processing.html#your-turn-8"><i class="fa fa-check"></i>Your turn!</a></li>
+<li class="chapter" data-level="13.5" data-path="image-processing.html"><a href="image-processing.html#georeferencing"><i class="fa fa-check"></i><b>13.5</b> Georeferencing</a></li>
+<li class="chapter" data-level="13.6" data-path="image-processing.html"><a href="image-processing.html#georegistration-georectification"><i class="fa fa-check"></i><b>13.6</b> Georegistration (georectification)</a></li>
+<li class="chapter" data-level="13.7" data-path="image-processing.html"><a href="image-processing.html#resampling"><i class="fa fa-check"></i><b>13.7</b> Resampling</a></li>
 <li class="chapter" data-level="13.8" data-path="image-processing.html"><a href="image-processing.html#nearest-neighbor-1"><i class="fa fa-check"></i><b>13.8</b> Nearest Neighbor</a></li>
 <li class="chapter" data-level="13.9" data-path="image-processing.html"><a href="image-processing.html#bilinear-interpolation"><i class="fa fa-check"></i><b>13.9</b> Bilinear Interpolation</a></li>
 <li class="chapter" data-level="13.10" data-path="image-processing.html"><a href="image-processing.html#cubic-convolution"><i class="fa fa-check"></i><b>13.10</b> Cubic Convolution</a></li>
@@ -563,11 +620,14 @@ div.csl-indent {
 <li class="chapter" data-level="13.16" data-path="image-processing.html"><a href="image-processing.html#signal-to-noise"><i class="fa fa-check"></i><b>13.16</b> Signal-to-noise</a></li>
 <li class="chapter" data-level="13.17" data-path="image-processing.html"><a href="image-processing.html#readout-noise"><i class="fa fa-check"></i><b>13.17</b> Readout Noise</a></li>
 <li class="chapter" data-level="13.18" data-path="image-processing.html"><a href="image-processing.html#thermal-noise"><i class="fa fa-check"></i><b>13.18</b> Thermal Noise</a></li>
+<li class="chapter" data-level="" data-path="image-processing.html"><a href="image-processing.html#your-turn-9"><i class="fa fa-check"></i>Your turn!</a></li>
+<li class="chapter" data-level="13.19" data-path="image-processing.html"><a href="image-processing.html#case-study-title-of-case-study-here-8"><i class="fa fa-check"></i><b>13.19</b> Case Study: Title of Case Study Here</a></li>
 <li class="chapter" data-level="" data-path="image-processing.html"><a href="image-processing.html#an-overview-of-landsat-processing"><i class="fa fa-check"></i>An overview of Landsat Processing</a></li>
-<li class="chapter" data-level="13.19" data-path="image-processing.html"><a href="image-processing.html#image-enhancement"><i class="fa fa-check"></i><b>13.19</b> Image Enhancement</a></li>
-<li class="chapter" data-level="13.20" data-path="image-processing.html"><a href="image-processing.html#stretching"><i class="fa fa-check"></i><b>13.20</b> Stretching</a></li>
-<li class="chapter" data-level="13.21" data-path="image-processing.html"><a href="image-processing.html#smoothing"><i class="fa fa-check"></i><b>13.21</b> Smoothing</a></li>
-<li class="chapter" data-level="13.22" data-path="image-processing.html"><a href="image-processing.html#summary-10"><i class="fa fa-check"></i><b>13.22</b> Summary</a></li>
+<li class="chapter" data-level="13.20" data-path="image-processing.html"><a href="image-processing.html#image-enhancement"><i class="fa fa-check"></i><b>13.20</b> Image Enhancement</a></li>
+<li class="chapter" data-level="13.21" data-path="image-processing.html"><a href="image-processing.html#stretching"><i class="fa fa-check"></i><b>13.21</b> Stretching</a></li>
+<li class="chapter" data-level="13.22" data-path="image-processing.html"><a href="image-processing.html#smoothing"><i class="fa fa-check"></i><b>13.22</b> Smoothing</a></li>
+<li class="chapter" data-level="" data-path="image-processing.html"><a href="image-processing.html#call-out-3"><i class="fa fa-check"></i>Call out</a></li>
+<li class="chapter" data-level="13.23" data-path="image-processing.html"><a href="image-processing.html#summary-10"><i class="fa fa-check"></i><b>13.23</b> Summary</a></li>
 <li class="chapter" data-level="" data-path="image-processing.html"><a href="image-processing.html#reflection-questions-10"><i class="fa fa-check"></i>Reflection Questions</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="image-analysis.html"><a href="image-analysis.html"><i class="fa fa-check"></i><b>14</b> Image Analysis</a></li>
@@ -629,9 +689,9 @@ div.csl-indent {
 <li class="chapter" data-level="16.15" data-path="data-integration.html"><a href="data-integration.html#logical-errors"><i class="fa fa-check"></i><b>16.15</b> Logical Errors</a></li>
 <li class="chapter" data-level="16.16" data-path="data-integration.html"><a href="data-integration.html#ecological-fallacy-atomistic-fallacy-maup-etc.-its-important-to-include-these-whether-here-or-elsewhere"><i class="fa fa-check"></i><b>16.16</b> Ecological Fallacy, Atomistic Fallacy, MAUP etc. Its important to include these, whether here or elsewhere?</a></li>
 <li class="chapter" data-level="16.17" data-path="data-integration.html"><a href="data-integration.html#other-errors"><i class="fa fa-check"></i><b>16.17</b> Other Errors?</a></li>
-<li class="chapter" data-level="16.18" data-path="data-integration.html"><a href="data-integration.html#case-study-title-of-case-study-here-8"><i class="fa fa-check"></i><b>16.18</b> Case Study: Title of Case Study here</a></li>
+<li class="chapter" data-level="16.18" data-path="data-integration.html"><a href="data-integration.html#case-study-title-of-case-study-here-9"><i class="fa fa-check"></i><b>16.18</b> Case Study: Title of Case Study here</a></li>
 <li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#box-text"><i class="fa fa-check"></i>Large Scale</a></li>
-<li class="chapter" data-level="16.19" data-path="data-integration.html"><a href="data-integration.html#case-study-title-of-case-study-here-9"><i class="fa fa-check"></i><b>16.19</b> Case Study: Title of Case Study Here</a></li>
+<li class="chapter" data-level="16.19" data-path="data-integration.html"><a href="data-integration.html#case-study-title-of-case-study-here-10"><i class="fa fa-check"></i><b>16.19</b> Case Study: Title of Case Study Here</a></li>
 <li class="chapter" data-level="" data-path="types-of-data.html"><a href="types-of-data.html#box-text"><i class="fa fa-check"></i>Small Scale</a></li>
 </ul></li>
 <li class="chapter" data-level="17" data-path="making-beautiful-maps.html"><a href="making-beautiful-maps.html"><i class="fa fa-check"></i><b>17</b> Making Beautiful Maps</a>

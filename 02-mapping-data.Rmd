@@ -47,7 +47,7 @@ Eratosthenes accurately calculated the circumference of Earth by noticing how th
 
 ```{r 2-Eratosthenes, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Diagram showing how Eratosthenes estimated the circumference of Earth by observing the angle of a shadow that was cast about 800 km north of Syene in present-day Egypt. David Monniaux, CC-BY-SA-4.0.")
-    knitr::include_graphics(here::here("images", "02-Eratosthenes.png"))
+    knitr::include_graphics("images/02-Eratosthenes.png")
 ```
 <br/>
 
@@ -63,7 +63,7 @@ Here is a simple thought experiment to consider. Suppose you are trying to measu
 
 ```{r 2-height, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Diagram for measuring height above a datum. Pickell, CC-BY-SA-4.0.")
-    knitr::include_graphics(here::here("images", "02-height.png"))
+    knitr::include_graphics("images/02-height.png")
 ```
 <br/>
 
@@ -81,7 +81,7 @@ A **geodetic vertical datum** is one that describes the Earth's shape in the sim
 
 ```{r 2-geodetic-datum, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Spherical geodetic datum. Pickell, CC-BY-SA-4.0.")
-    knitr::include_graphics(here::here("images", "02-geodetic-datum.png"))
+    knitr::include_graphics("images/02-geodetic-datum.png")
 ```
 <br/>
 
@@ -89,7 +89,7 @@ There are many different ellipsoids that have been defined and are currently in 
 
 ```{r 2-sphere-ellipsoid, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Sphere versus ellispoid. Pickell, CC-BY-SA-4.0.")
-    knitr::include_graphics(here::here("images", "02-sphere-ellipsoid.png"))
+    knitr::include_graphics("images/02-sphere-ellipsoid.png")
 ```
 <br/>
 
@@ -106,7 +106,7 @@ A **tidal vertical datum** is likely one that you are familiar with. The premise
 
 ```{r 2-tidal-datum, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Conceptual tidal datum for Canada. Pickell, CC-BY-SA-4.0.")
-    knitr::include_graphics(here::here("images", "02-tidal-datum.png"))
+    knitr::include_graphics("images/02-tidal-datum.png")
 ```
 <br/>
 
@@ -123,7 +123,7 @@ H = h - N
 $$
 ```{r 2-H-h-N, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Orthometric Height (H) is the ellipsoidal height (h) less the geoid height (N). Pickell, CC-BY-SA-4.0.")
-    knitr::include_graphics(here::here("images", "02-H-h-N.png"))
+    knitr::include_graphics("images/02-H-h-N.png")
 ```
 <br/>
 
@@ -131,7 +131,7 @@ To illustrate the concept of a gravimetric datum, suppose we constructed a large
 
 ```{r 2-geoid-tunnel, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Thought experiment showing where water would be at rest within a tunnel through the geoid due to the equipotential force of gravity (g).Pickell, CC-BY-SA-4.0.")
-    knitr::include_graphics(here::here("images", "02-geoid-tunnel.png"))
+    knitr::include_graphics("images/02-geoid-tunnel.png")
 ```
 <br/>
 
@@ -189,7 +189,7 @@ For most of your life, you have probably believed that there is a singular combi
 
 ```{r 2-geocentric-geodetic-latitude, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Geocentric versus geodetic latitude. Pickell, CC-BY-SA-4.0.")
-    knitr::include_graphics(here::here("images", "02-geocentric-geodetic-latitude.png"))
+    knitr::include_graphics("images/02-geocentric-geodetic-latitude.png")
 ```
 <br/>
 
@@ -222,15 +222,15 @@ So how do we use this tool? The quotient between a line projected onto a map $a$
 
 ```{r 2-reference-indicatrix, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Reference Tissot Indicatrix. Pickell, CC-BY-SA-4.0.")
-    knitr::include_graphics(here::here("images", "02-reference-indicatrix.png"))
+    knitr::include_graphics("images/02-reference-indicatrix.png")
 ```
 <br/>
 
-Let us assume that $a = b = 1$. Then, the reference indicatrix has the following properties: $a=b$, $a×b=1$, and $Area=πab=π^2$. If $\frac{a'}{a'}>1$, then we can conclude that the the projection is *expanding* the distance along the $a$ line. If $\frac{a'}{a'}<1$, then we can conclude that the projection is *compressing* the distance along the line $a$. For example, suppose $a=2$ and $b=0.5$, then we have modified the scale of the indicatrix along both axes, but the areal solution is the same as the reference indicatrix shown as the red dashed circle in Figure 2.10 below.
+Let us assume that $a = b = 1$. Then, the reference indicatrix has the following properties: $a=b$, $a×b=1$, and $Area=πab=π^2$. If $\frac{a'}{a'}>1$, then we can conclude that the the projection is *expanding* the distance along the $a$ line. If $\frac{a'}{a'}<1$, then we can conclude that the projection is *compressing* the distance along the line $a$. For example, suppose $a=2$ and $b=0.5$, then we have modified the scale of the indicatrix along both axes, but the areal solution is the same as the reference indicatrix shown as the red dashed circle in Figure \@ref(fig:2-reference-equivalent) below.
 
 ```{r 2-reference-equivalent, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Equivalent Tissot Indicatrix. Pickell, CC-BY-SA-4.0.")
-    knitr::include_graphics(here::here("images", "02-equivalent-indicatrix.png"))
+    knitr::include_graphics("images/02-equivalent-indicatrix.png")
 ```
 <br/>
 
@@ -240,7 +240,7 @@ If $\frac{a}{a'}×\frac{b}{b'}>1$, then we can conclude that the projection is *
 
 ```{r 2-conformal-indicatrix, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Conformal Tissot Indicatrix. Pickell, CC-BY-SA-4.0.")
-    knitr::include_graphics(here::here("images", "02-conformal-indicatrix.png"))
+    knitr::include_graphics("images/02-conformal-indicatrix.png")
 ```
 <br/>
 
@@ -256,7 +256,7 @@ The Mercator map projection is perhaps the most pervasive and reproduced project
 
 ```{r 2-Mercator-map, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Mercator map projection with Tissot's Indicatrices in red. Pickell, CC-BY-SA-4.0.")
-    knitr::include_graphics(here::here("images", "02-Mercator-map.png"))
+    knitr::include_graphics("images/02-Mercator-map.png")
 ```
 <br/>
 
@@ -266,7 +266,7 @@ Universal Transverse Mercator (UTM) is very similar to a Mercator projection exc
 
 ```{r 2-UTM-13N-map, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Universal Transverse Mercator Zone 13 map projection with Tissot's Indicatrices in red.Pickell, CC-BY-SA-4.0.")
-    knitr::include_graphics(here::here("images", "02-UTM-13N-map.png"))
+    knitr::include_graphics("images/02-UTM-13N-map.png")
 ```
 <br/>
 
@@ -280,7 +280,7 @@ Sinusoidal is a *pseudocylindrical* map projection, so-named because these proje
 
 ```{r 2-Sinusoidal-map, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Sinusoidal map projection with Tissot's Indicatrices in red. Pickell, CC-BY-SA-4.0.")
-    knitr::include_graphics(here::here("images", "02-Sinusoidal-map.png"))
+    knitr::include_graphics("images/02-Sinusoidal-map.png")
 ```
 <br/>
 
@@ -290,7 +290,7 @@ Albers is another example of an equivalent map projection, but unlike Sinusoidal
 
 ```{r 2-BC-Albers-map, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("British Columbia Environment Albers map projection with Tissot's Indicatrices in red. Pickell, CC-BY-SA-4.0.")
-    knitr::include_graphics(here::here("images", "02-BC-Albers-map.png"))
+    knitr::include_graphics("images/02-BC-Albers-map.png")
 ```
 <br/>
 
@@ -300,7 +300,7 @@ Azimuthal projections use a flat circular plane to project the Earth onto a map.
 
 ```{r 2-Azimuthal-map, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste("North Pole Azimuthal map projection with Tissot's Indicatrices in red. Pickell, CC-BY-SA-4.0.")
-    knitr::include_graphics(here::here("images", "02-Azimuthal-map.png"))
+    knitr::include_graphics("images/02-Azimuthal-map.png")
 ```
 <br/>
 

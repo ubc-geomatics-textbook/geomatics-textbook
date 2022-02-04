@@ -33,7 +33,7 @@ Light Detection and Ranging (LiDAR), Laser, Global Navigation Satellite System (
 
 ```{r 15-LiDAR-System, fig.cap = fig_cap, out.width="60%", echo = FALSE}
     fig_cap <- paste0("Overview of the components of a LiDAR System. As is common for large scale data acquisition, the laser scanning is placed on board an aircarft and scans the Earth below it. The aircraft has on on board GPS/GNSS, as well as an intertial measurement unit (IMU). A GPS base station can be used to post-process data and increase spatial accuracy.('LiDAR-i lend', @Marek91342012, CC-BY-SA-3.0).")
-    knitr::include_graphics(here::here("images","15-LiDAR-System.png"))
+    knitr::include_graphics("images/15-LiDAR-System.png")
 ```
 
 ## How Does LiDAR Work?
@@ -42,7 +42,7 @@ Typical LiDAR systems use the time of flight method to produce 3D data. A laser 
 
 ```{r 15-Concept-of-LiDAR, fig.cap = fig_cap, out.width="80%", echo = FALSE}
 fig_cap <- paste0("Concept of LiDAR. A light signal is emitted by the scanner and reflected off the target.('Concept of LiDAR', @Cartographer3d2021, CC-BY-SA-4.0).")
-knitr::include_graphics(here::here("images", "15-Concept-of-LiDAR.png"))
+knitr::include_graphics("images/15-Concept-of-LiDAR.png")
 ```
 
 Since a LiDAR point cloud is a file containing the 3D location of points representing objects on the Earth's surface, there are several parameters to take note of. It is important to know what the technical specifications of the data collection parameters were (for example, how many points per square meter do we have?), and how the data was collected (what platform was used?). A LiDAR dataset includes several pieces of information for each 3D point. $X,Y,Z$ location data tells us where each point is (usually to the centimeter scale), and a GPS time stamp is included for each point ($gpstime$). Additional information such as $return$ $number$, $scan$ $angle$, $classification$, and $intensity$ are also included with the file, which will be discussed in more detail below ([Components of a LiDAR System]).
@@ -51,7 +51,7 @@ The most common file format for LiDAR files is called the LAS file format (`.las
 
 ```{r 15-las-denoise, fig.cap = fig_cap, out.width="80%", echo = FALSE}
 fig_cap <- paste0("An example of a typical LiDAR point cloud containing 3.14 million points at approximately 80 points·m^-2^. The point cloud shows a 200 x 200 meter portion of Pacific Spirit Regional Park in Vancouver, and is part of the [2018 City of Vancouver dataset] (https://opendata.vancouver.ca/explore/dataset/lidar-2018/). (Du Toit, CC-BY-4.0).")
-knitr::include_graphics(here::here("images", "15-las-denoise.png"))
+knitr::include_graphics("images/15-las-denoise.png")
 ```
 
 ## LiDAR History and Use
@@ -60,7 +60,7 @@ LiDAR for forestry and ecology has been used to monitor vegetation structure, st
 
 ```{r 15-high-low-point-density, fig.cap = fig_cap, out.width="80%", echo = FALSE}
 fig_cap <- paste0("A cross section of a high density point cloud (A, 80 points·m^-2^), and a lower density point cloud (B, 1 point·m^-2^).(Du Toit, CC-BY-4.0).")
-knitr::include_graphics(here::here("images", "15-high-low-point-density.png"))
+knitr::include_graphics("images/15-high-low-point-density.png")
 ```
 
 Unlike passive remote sensing technologies, LiDAR has the advantage of being able penetrate forest canopies; this means that we are able to detect the ground, and also characterize both vertical and horizontal vegetation structure. Since the data is extremely accurate, surface models developed using LiDAR are used in many fields where human-made and natural environments need to be mapped. LiDAR derivatives such as surface models are used in hazard assessment (see here: @Jaboyedoff2012), forestry (read more here: @Goodbody2021), wet area mapping (here: @Eash2018 and @Zurqani2020), geologic/geomorphological mapping, and agriculture. In this chapter, we will discuss the use of LiDAR primarily in a forestry context, where raw data and derivatives are used for volume and biomass estimation, as well as individual tree crown analyses.
@@ -80,14 +80,14 @@ Unlike passive remote sensing technologies, LiDAR has the advantage of being abl
 
 ```{r 15-Beam-Divergence, fig.cap = fig_cap, out.width="60%", echo = FALSE}
 fig_cap <- paste0("Two examples of how beam divergence affects footprint size. (Du Toit, CC-BY-4.0).")
-knitr::include_graphics(here::here("images", "15-Beam-Divergence.png"))
+knitr::include_graphics("images/15-Beam-Divergence.png")
 ```
 
 The amount of energy that is reflected off an object and back to the sensor is known as **intensity**. Target reflectivity is not directly related to the LiDAR laser itself, but influences whether the return has enough intensity to register with the LiDAR sensor. In addition to surfaces having different properties, the angle of incidence of the laser also affects how much energy the sensor receives. This 'field of view' is known as **scan angle** and can be customized, but lower scan angles are generally preferred (\<25°, @White2013). The concept of scan angle is the same as discussed in Chapter 12 and illustrated in Figure \@ref(fig:15-Scan-Angle). Commercial LiDAR units on airplanes typically have stronger lasers than drone mounted or mobile laser scanners, which allows them to fly higher and cover more area.
 
 ```{r 15-Scan-Angle, fig.cap = fig_cap, out.width="60%", echo = FALSE}
 fig_cap <- paste0("Scan angle is the angle from nadir at which the laser is pointing. The scan angle and aircraft flight height together are responsible for swath width. (Du Toit, CC-BY-4.0).")
-knitr::include_graphics(here::here("images", "15-Scan-Angle.png"))
+knitr::include_graphics("images/15-Scan-Angle.png")
 ```
 
 All LiDAR sensors emit pulses at a certain rate (**pulse rate**), which can be given as pulses/second, or hertz (Hz). Pulse rate is highly variable (and often programmable on sensors), and along with **scan rate** (the number of scan lines per second) and **flight speed** is responsible for what density a point cloud can be. Pulse rates are commonly 50,000 - 200,000 Hz [@White2013]. All of this information means that each LiDAR data acquisition campaign has the potential to be rather unique, and the parameters italicized above need to be taken into account when doing analysis. All of these factors together affect how an individual pulse interacts with the target.
@@ -96,7 +96,7 @@ Several technical aspects of lasers are recorded by the instrument (and usually 
 
 ```{r 15-LiDAR-Unit, fig.cap = fig_cap, out.width="70%", echo = FALSE}
 fig_cap <- paste0("An example of a LiDAR Unit. ('LiDAR machine', @TheCenterforInternationalForestryResearchCIFOR2014, CC-BY-NC-ND-2.0).")
-knitr::include_graphics(here::here("images", "15-LiDAR-Unit.png"))
+knitr::include_graphics("images/15-LiDAR-Unit.png")
 ```
 
 ## Position and Orientation
@@ -107,7 +107,7 @@ In order for us to use the calculation from Figure \@ref(fig:15-Concept-of-LiDAR
 
 ```{r 15-XYZ-coordinates, fig.cap = fig_cap, out.width="70%", echo = FALSE}
 fig_cap <- paste0("An on board GNSS is required toprovide an accurate location of the LiDAR scanner in space. ('A key component of a lidar system is a GPS', @NEONEducation2014,CC-BY-NC-SA-2.0).")
-knitr::include_graphics(here::here("images", "15-XYZ-coordinates.png"))
+knitr::include_graphics("images/15-XYZ-coordinates.png")
 ```
 
 ## Inertial Measurement Unit (IMU)
@@ -132,7 +132,7 @@ As laser units have decreased in size, we have been able to mount LiDAR units to
 
 ```{r 15-LiDAR-on-Drone, fig.cap = fig_cap, out.width="70%", echo = FALSE}
 fig_cap <- paste("Drone mounted LiDAR. This technology is rapidly developing, with many companies working towards creating units capable of acquiring high density datasets over large areas. ('LiDARUSA Snoopy 120 LiDAR', @Clapurhands2019,  CC-BY-SA-4.0).")
-knitr::include_graphics(here::here("images", "15-LiDAR-on-Drone.png"))
+knitr::include_graphics("images/15-LiDAR-on-Drone.png")
 ```
 
 ## Mobile Laser Scanning
@@ -149,7 +149,7 @@ Satellites are a relatively new platform for LiDAR sensors. Two current satellit
 
 ```{r 15-LiDAR-Platforms, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 fig_cap <- paste0("LiDAR Platforms 1: A terrestrial laser scanner (TLS). ('Lidar P1270901.png', @Monniaux, CC-BY-SA-3.0). 2: A hand-held moblie laser scanner (MLS). (Du Toit, CC-BY-4.0). 3: Car mounted MLS. ('3D mobile mapping unit', @OregonDepartmentofTransportation2016, CC-BY-2.0)'. 4: GEDI, a spaceborne LiDAR sensor.('A New Hope: GEDI to Yield 3D Forest Carbon Map', @NEONEducation2014, CC-BY-2.0).")
-knitr::include_graphics(here::here("images", "15-LiDAR-Platforms.png"))
+knitr::include_graphics("images/15-LiDAR-Platforms.png")
 ```
 
 ## Types of LiDAR
@@ -164,7 +164,7 @@ knitr::include_graphics(here::here("images", "15-LiDAR-Platforms.png"))
 
 ```{r 15-LiDAR-Discrete-Full-Waveform, fig.cap = fig_cap, out.width="70%", echo = FALSE}
 fig_cap <- paste0("Differents in the response between discrete echo and full waveform LiDAR. 'Airborne Laser Scanning Discrete Echo and Full Waveform signal comparison', @Beck2012, CC-BY-SA-3.0).")
-knitr::include_graphics(here::here("images", "15-LiDAR-Discrete-Full-Waveform.png"))
+knitr::include_graphics("images/15-LiDAR-Discrete-Full-Waveform.png")
 ```
 
 ## Emerging Technology
@@ -197,7 +197,7 @@ When creating a DEM from a LiDAR point cloud, there are a few important consider
 
 ```{r 15-las-dem, fig.cap = fig_cap, out.width="70%", echo = FALSE}
 fig_cap <- paste0("A digital elevation model (DEM) produced from LiDAR.(Du Toit, CC-BY-4.0).")
-knitr::include_graphics(here::here("images", "15-las-dem.png"))
+knitr::include_graphics("images/15-las-dem.png")
 ```
 
 ## Digital Surface Model and Canopy Height Models
@@ -206,7 +206,7 @@ Digital surface models (DSMs) represent the height of surface features like tree
 
 ```{r 15-las-CHM-2D, fig.cap = fig_cap, out.width="70%", echo = FALSE}
 fig_cap <- paste0("A canopy height model (CHM), also known as a digital surface model (DSM) produced from LiDAR. (Du Toit, CC-BY-4.0).")
-knitr::include_graphics(here::here("images", "15-las-CHM-2D.png"))
+knitr::include_graphics("images/15-las-CHM-2D.png")
 ```
 
 ## Area Based Approach vs. Individual Tree Crown Approach
@@ -217,7 +217,7 @@ When doing either of these analyses, we typically produce **LiDAR metrics**. The
 
 ```{r 15-las-hmax-2D, fig.cap = fig_cap, out.width="70%", echo = FALSE}
 fig_cap <- paste0("Maximum heights of 10 meter cells using an area-based approach. (Du Toit, CC-BY-4.0).")
-knitr::include_graphics(here::here("images", "15-las-hmax-2D.png"))
+knitr::include_graphics("images/15-las-hmax-2D.png")
 ```
 
 ## Tree Segmentation
@@ -226,14 +226,14 @@ knitr::include_graphics(here::here("images", "15-las-hmax-2D.png"))
 
 ```{r 15-Processing-Flowchart, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 fig_cap <- paste0("A typical LiDAR processing workflow. After acquiring data, pre-processing is necessary to clean and normalize the point cloud. After this a CHM can be created to detect tree tops, before segmentating the point cloud based on these points. (Du Toit, CC-BY-4.0)." )
-knitr::include_graphics(here::here("images", "15-Processing-Flowchart.png"))
+knitr::include_graphics("images/15-Processing-Flowchart.png")
 ```
 
 Once we have segmented a point cloud, we can produce metrics for individual trees. These metrics can be used to help to identify structural traits of trees, which can then be used to identify different tree species, or to characterize different forest types. Ground based LiDAR scanners (MLS and TLS) are also used to very accurately estimate tree, trunk, and branch volumes.
 
 ```{r 15-las-treetops, fig.cap = fig_cap, out.width="80%", echo = FALSE}
 fig_cap <- paste0("Example of tree tops detected using the `find_trees` function. (Du Toit, CC-BY-4.0)." )
-knitr::include_graphics(here::here("images", "15-las-treetops.png"))
+knitr::include_graphics("images/15-las-treetops.png")
 ```
 
 ## Sources of Error
@@ -244,7 +244,7 @@ Aside from positional errors, there can also be issues with how we correct for a
 
 ```{r 15-multipath-error, fig.cap = fig_cap, out.width="70%", echo = FALSE}
 fig_cap <- paste0("Example of multipath errors that can occur. The green dot is where our point is actually located in space, while the blue point shows where the point is placed in the point cloud. The red line shows the path of the reflected pulse. (Du Toit, CC-BY-4.0)." )
-knitr::include_graphics(here::here("images", "15-Multipath-Error.png"))
+knitr::include_graphics("images/15-Multipath-Error.png")
 ```
 
 ## Software and Analysis Tools
@@ -259,14 +259,14 @@ The first step when looking at LiDAR data is to inspect it; we recommend using t
 
 ```{r 15-las-normalize, fig.cap = fig_cap, out.width="60%", echo = FALSE}
 fig_cap <- paste0("A normalized point cloud. (Du Toit, CC-BY-4.0)." )
-knitr::include_graphics(here::here("images", "15-las-normalize.png"))
+knitr::include_graphics("images/15-las-normalize.png")
 ```
 
 The normalized point cloud is used to create our CHM. It is at this point that we can analyze the point cloud in a variety of ways. We can use an area-based approach (ABA) to create metrics at the grid level (using our normalized point cloud), or we can derive metrics at the individual tree scale. In order to do this we need to first segment the trees before creating metrics. Segmentation can be tedious, as it requires the user tweak the parameters of their segmentation algorithm. Understanding your forest type, and inspecting the point cloud visually can be very useful when deciding what kind of segmentation routine you want to run. Below we can see an example of a segmented point cloud.
 
 ```{r 15-las-segmented, fig.cap = fig_cap, out.width="60%", echo = FALSE}
 fig_cap <- paste0("A segmented point cloud using the algorithm based on @Dalponte2016. (Du Toit, CC-BY-4.0).")
-knitr::include_graphics(here::here("images", "15-las-segmented.png"))
+knitr::include_graphics("images/15-las-segmented.png")
 ```
 
 Creating metrics at these two scales are the fundamental way in which we currently think about analyzing forests using LiDAR. Each tells us different things about the forest, so it is important to take scale into account when choosing what kind of analysis you want to do. Below we can see a Leaflet map of some area based metrics created for this point cloud!

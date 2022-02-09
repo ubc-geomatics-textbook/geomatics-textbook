@@ -8,7 +8,12 @@ Introduction here.
 ## Learning Objectives {-}
 ::: 
 
-1. 
+1. Recognize the role of geoprocessing in applications of cartographic modeling
+2. Understand the functions and opportunities of raster and vector overlay methods
+3. Practice map algebra in raster overlay
+4. Practice attribute transfer in vector overlay
+5. Synthesize the role of relational databases in overlay analysis
+6. 
 
 ::::
 
@@ -18,47 +23,158 @@ Overlay, Union, Intersect, Identity, Difference, Symmetrical Difference, Buffer,
 
 ## Cartographic Modelling
 
-## Geoprocessing
+### Geoprocessing
 
-## Capability Modelling
+### Capability Modelling
 
-## Suitability modelling
+The result of capability modelling is a binary classification of features or cells in a raster: 1 or 0; yes or no; true or false; capable or not capable. Recall from Chapter 3 that ordinal data scales are used to rank or order categorical or qualitative data elements. Even with just two classes, a capability map uses an ordinal data scale because 1 (capable) is better than 0 (not capable).
+
+### Suitability modelling
+
+**Suitability modelling** is an extension of capability modelling that tells us how suitable a particular activity is for a given location. In other words, capability modelling gives us the spatial options that meet some minimum criteria and suitability modelling allows us to rank those options based on some attributes in our spatial data. From our earlier example, suppose we have identified 8 areas that are possible options for conserving habitat (i.e., capable), but we might only have the budget to proactively manage a few of these areas. So where should we prioritize our conservation and management activities? This is a question for suitability modelling!
+
+Once we have calculated capability as an ordinal scale value (1 or 0), we can then use another set of attributes to calculate a **suitability score** for the capable areas. Frequently, the suitability score takes the form of a continuous ratio scale with values between $[0,1]$ or $[0,100]$ because we want to be able to place every capable feature on a spectrum from "least suitable" (0) to "most suitable" (1 or 100) based on some set of attributes. The calculation for the suitability score can take many forms and is dependent on the spatial problem that you are trying to solve. Some attributes can be used individually as a suitability score. For example, if bigger is better, then you could simply sort your capable features by area and you would have a suitability score on a continuous ratio scale, no further calculation needed. More commonly, we want to combine several attributes together in our scoring, which might represent data in different scales. Next, we will walk through an example for calculating a suitability score with nominal, ordinal, interval, and ratio data scales.
+
+Suppose bigger really is better, so the area of the capable polygons will be one of our attributes for our suitability score, which is a ratio data scale. (By the way, you can extend this logic to lines and points as well: longer lines are preferred or a higher density of points is preferred.) Our first step here is to normalize these ratio data to a range of $[0,1]$ using the following equation: 
+
+$$
+X_{normalized} = (X-X_{min})/(X_{max}-X_{min})
+$$
+
+This is also called a min-max normalization, because the maximum value will be equal to 1 and the minimum value will be equal to 0:
+
+```{r 6-area-normalization, echo=FALSE}
+ID <- 1:8
+areas <- c(9.96,7.02,6.46,6.15,5,3.33,2.8,2.23)
+areas_norm <- (areas-min(areas))/(max(areas)-min(areas))
+R <- data.frame(ID=ID,Area=areas,Normalized_Area=areas_norm)
+names(R) <- c("ID","Area (ha)","Normalized Area (unitless)")
+knitr::kable(
+  R, booktabs = TRUE, row.names = FALSE
+)
+```
+
+Maybe our species is also found in several possible habitats. Habitat cover is a nominal data scale (e.g., "forest", "wetland", "non-forest"). If we know that our species is found in "forest" 60% of the time, in "wetland" 30% of the time, and in "non-forest" 10% of the time, then we can actually convert these nominal habitat covers into a ratio scale (i.e., 0.6, 0.3 and 0.1). In the case that you do not have additional numerical data to make this conversion, you could also make an educated guess and assign weights to your classes that sum to 1. For example, based on the literature, we might hypothesize that our species has preferences for "forest", "wetland", and "non-forest" that can be quantified with the weights 0.5, 0.25, and 0.25, respectively. Either approach is sensible, as long as you are transparent about your choice.
+
+```{r 6-habitat-normalization, echo=FALSE}
+habitats <- c("Non-forest","Wetland","Forest","Non-forest","Forest","Wetland","Wetland","Forest")
+habitats_ratio <- c(0.1,0.3,0.6,0.1,0.6,0.3,0.3,0.6)
+R <- data.frame(ID=ID,Habitat=habitats,Habitat_Ratio=habitats_ratio)
+names(R) <- c("ID","Habitat (Nominal)","Habitat (Ratio)")
+knitr::kable(
+  R, booktabs = TRUE, row.names = FALSE
+)
+```
+
+Maybe we also have land use intensities representing human activity and management that are classified as "high", "medium", and "low". These land use intensities are an ordinal data scale. Frequently, ordinal data scales in geomatics are derived from some other numerical analysis. For example, land use intensity may have initially been mapped from the density of roads in an area or the frequency of a particular industrial activity, which was then classified into "high", "medium", and "low" intensity classes. It is worth looking at the documentation of the mapped data you are working with to see how the ordinal data were generated and what assumptions went into the terms used (i.e., "high", "medium", and "low"). For our example, let us assume that we know nothing numerically about these land use intensities, just that "high" is worse for the conservation of our species than "low". If we return to our original question, __where should we prioritize our conservation and management activities?__, then most likely our efforts will be best spent conserving areas that currently have high land use intensity. In this case, we can convert these ordinal data into ratio data by assigning weights that sum to 1. For example, "high" is 0.8, "medium" is 0.15, and "low" is 0.05.
+
+```{r 6-land-use-normalization, echo=FALSE}
+landuse <- c("High","Low","Medium","Medium","Medium","Low","High","High")
+landuse_ratio <- c(0.8,0.05,0.15,0.15,0.15,0.05,0.8,0.8)
+R <- data.frame(ID=ID,Land_Use=landuse,Land_Use_Ratio=landuse_ratio)
+names(R) <- c("ID","Land Use (Ordinal)","Land Use (Ratio)")
+knitr::kable(
+  R, booktabs = TRUE, row.names = FALSE
+)
+
+#do the weights for data that goes into the calculation have to sum to 1? I don't think so? I could see that for habitat type.. but for land use?  
+```
+
+Maybe we also have dates that represent the last year of a known disturbance like a fire. Dates are an interval data scale, but can easily be converted into a ratio scale by subtracting them from the current date to yield a measure of time-since something. For example, time-since last fire might be a good proxy for forage quality of our species regardless of the habitat cover. Once we have converted it to a ratio scale, we want to normalize it to a range of $[0,1]$, but suppose that more recent fire is better. In this case, we also need to reverse the range so that the oldest fire has a lower score than the most recent fire. We can achieve this by modifying the min-max equation so that we subtract $X$ from $X_{max}$:
+
+$$
+X_{normalized,reversed} = (X_{max}-X)/(X_{max}-X_{min})
+$$
+
+```{r 6-time-since-ratio, echo=FALSE}
+years <- c(1972,1975,1978,1982,1984,1999,2013,2021)
+years_ratio <- 2022-years
+years_ratio_norm <- (max(years_ratio)-years_ratio)/(max(years_ratio)-min(years_ratio))
+R <- data.frame(ID=ID,Years=years,Years_Ratio=years_ratio,Years_Normalized=years_ratio_norm)
+names(R) <- c("ID","Year of fire (Interval)","Time-since last fire (Ratio)", "Time-since last fire (Normalized)")
+knitr::kable(
+  R, booktabs = TRUE, row.names = FALSE
+)
+```
+
+Now we can put all the rescaled attributes together, add them up for each capable area, and divide by the total number of attributes that we used in our scoring process (four). This gives us an arithmetic mean that ranges between $[0,1]$ because all the other attributes also use this range. Sometimes this score is multiplied by 100 to convert the ratios into percentages. We can then sort the capable polygons in descending order by our suitability score:
+
+```{r 6-final-score, echo=FALSE}
+sum_scores <- areas_norm+habitats_ratio+landuse_ratio+years_ratio_norm
+R <- data.frame(ID=ID,Normalized_Area=areas_norm,Habitat_Ratio=habitats_ratio,Land_Use_Ratio=landuse_ratio,Years_Normalized=years_ratio_norm,Sum_Scores=sum_scores,Suitability=sum_scores/4)
+names(R) <- c("ID","Area","Habitat","Land Use","Time-since last fire","Sum of Scores","Suitability")
+knitr::kable(
+  R[order(R$Suitability, decreasing=T),], booktabs = TRUE, row.names = FALSE
+)
+```
+
+We can see from the above suitability analysis that capable polygon number 8 has the highest overall suitability. It is important to highlight two points here: the suitability score is unitless (after all, we have combined four very different data scales together); and the scores are on the same ratio scale, which means they can be directly compared. In other words, the most suitable location is more than twice as suitable as the least suitable location, based on the criteria and scoring scheme we used.
+
+Note that the choice of weights for ordinal and nominal data scales are arbitrary, but these numbers can be based on a hypothesis, other numerical data, or your project's values. You can also iterate the suitability scoring process with different weights for ordinal and nominal scale data so that you achieve your desired project outcomes such as statistical distribution of scores or frequency of scores above a particular threshold value. For example, if you are trying to simultaneously solve the related question, __I have X dollars, how should I allocate them?__, then you might run a cost analysis that uses attributes accounting for the cost of intervening at a location. If you can convert your attributes into a dollar (ratio) scale, then you can simply add everything together to get the total cost for the activity at any given location.
+
+For example, suppose that we know that our conservation intervention costs \$10,000 per hectare and we have a total budget of \$150,000 to conserve 15 total hectares. Looking at the capable areas in the earlier table, the total area that __could__ be conserved is 44.22 hectares, which exceeds our budget. We need to solve two things: __where are our conservation efforts going to have the most impact on the species?__ and __how can we allocate our budget efficiently to achieve that impact?__ We have already solved the first problem, and the second problem is a matter of relating the costs to the suitability analysis, sorting the table based on the suitability score from our solution to the first problem, and then calculating a cumulative cost field that adds up the costs of the capable features in descending order of their suitability. This produces the following table:
+
+```{r 6-final-score-and-cost, echo=FALSE}
+
+
+cost=areas*10000
+
+R <- data.frame(ID=ID,Normalized_Area=areas_norm,Area=areas,Suitability=sum_scores/4, Cost=cost)
+
+R<-R[order(-R$Suitability),]
+R$cum_cost=cumsum(R$Cost)
+
+
+names(R) <- c('ID','Area (normalized)','Area (ha)','Suitability', 'Individual Cost (\\$)', 'Cummulative Cost (\\$)')
+
+knitr::kable(
+  R, booktabs = TRUE, row.names = FALSE
+)
+
+
+```
+We can now see that prioritizing the top three suitable areas $ID = {8,7,1}$ for our conservation intervention will cost \$149,900, nearly exhausting our budget with \$100 left over for a party to celebrate the geomatics team. This is just one example of how cartographic modelling can provide powerful answers to very real spatial questions. Can you think of other mapped attributes, besides area, that could factor into this conservation cost analysis?
 
 ## Overlay Methods
+In the above example, the data was provided already compiled. However, we often have to gather the data ourselves. Overlay methods allow us to get more information about a spatial area, based on other spatial attributes. Say, for example, you are assessing the ecosystem services of your city's trees. This can be done at several scales: are you concerned with the city as a whole? Neighborhoods? Census tracts? Or are you assessing trees individually? The answer to this is dependent on the question. For the following example, we will be assessing the ecosystem services of trees by census tract.
 
-## Attribute Transfer
+### Attribute Transfer
 
-## Boolean Algebra
+### Boolean Algebra
 
-## Spatial Join
+### Spatial Join
 
-## Clip
+### Clip
 
-## Intersect
+### Intersect
 
-## Line Intersection
+### Line Intersection
 
-## Union
+### Union
 
-## Identity
+### Identity
 
-## Erase
+### Erase
 
-## Split
+### Split
 
-## Symmetrical Difference
+### Symmetrical Difference
 
-## Update
+### Update
 
 ## Proximity Methods
 
-## Buffer
+### Euclidean distance
 
-Attribute-dependent buffer
+Raster and vector
 
-## Near Distance
+### Buffer
 
-##	Thiessen Polygons
+### Attribute-dependent buffer
+
+### Near Distance
+
+###	Thiessen Polygons
 
 ## Summary
 

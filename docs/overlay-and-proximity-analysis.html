@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Overlay and Proximity Analysis | An Open Geomatics Textbook</title>
   <meta name="description" content="Advancing teaching and learning in geomatics at UBC" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 Overlay and Proximity Analysis | An Open Geomatics Textbook" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="UBC" />
 
 
-<meta name="date" content="2022-01-06" />
+<meta name="date" content="2022-02-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,9 +33,8 @@
   
 <link rel="prev" href="relational-databases.html"/>
 <link rel="next" href="topology-and-geocoding.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -43,6 +42,7 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
 
 
 
@@ -236,28 +236,36 @@
 <li class="chapter" data-level="6" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html"><i class="fa fa-check"></i><b>6</b> Overlay and Proximity Analysis</a>
 <ul>
 <li class="chapter" data-level="" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#key-terms-5"><i class="fa fa-check"></i>Key Terms</a></li>
-<li class="chapter" data-level="6.1" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#cartographic-modelling"><i class="fa fa-check"></i><b>6.1</b> Cartographic Modelling</a></li>
-<li class="chapter" data-level="6.2" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#geoprocessing"><i class="fa fa-check"></i><b>6.2</b> Geoprocessing</a></li>
-<li class="chapter" data-level="6.3" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#capability-modelling"><i class="fa fa-check"></i><b>6.3</b> Capability Modelling</a></li>
-<li class="chapter" data-level="6.4" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#suitability-modelling"><i class="fa fa-check"></i><b>6.4</b> Suitability modelling</a></li>
-<li class="chapter" data-level="6.5" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#overlay-methods"><i class="fa fa-check"></i><b>6.5</b> Overlay Methods</a></li>
-<li class="chapter" data-level="6.6" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#attribute-transfer"><i class="fa fa-check"></i><b>6.6</b> Attribute Transfer</a></li>
-<li class="chapter" data-level="6.7" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#boolean-algebra-1"><i class="fa fa-check"></i><b>6.7</b> Boolean Algebra</a></li>
-<li class="chapter" data-level="6.8" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#spatial-join"><i class="fa fa-check"></i><b>6.8</b> Spatial Join</a></li>
-<li class="chapter" data-level="6.9" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#clip"><i class="fa fa-check"></i><b>6.9</b> Clip</a></li>
-<li class="chapter" data-level="6.10" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#intersect"><i class="fa fa-check"></i><b>6.10</b> Intersect</a></li>
-<li class="chapter" data-level="6.11" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#line-intersection"><i class="fa fa-check"></i><b>6.11</b> Line Intersection</a></li>
-<li class="chapter" data-level="6.12" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#union"><i class="fa fa-check"></i><b>6.12</b> Union</a></li>
-<li class="chapter" data-level="6.13" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#identity"><i class="fa fa-check"></i><b>6.13</b> Identity</a></li>
-<li class="chapter" data-level="6.14" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#erase"><i class="fa fa-check"></i><b>6.14</b> Erase</a></li>
-<li class="chapter" data-level="6.15" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#split"><i class="fa fa-check"></i><b>6.15</b> Split</a></li>
-<li class="chapter" data-level="6.16" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#symmetrical-difference"><i class="fa fa-check"></i><b>6.16</b> Symmetrical Difference</a></li>
-<li class="chapter" data-level="6.17" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#update"><i class="fa fa-check"></i><b>6.17</b> Update</a></li>
-<li class="chapter" data-level="6.18" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#proximity-methods"><i class="fa fa-check"></i><b>6.18</b> Proximity Methods</a></li>
-<li class="chapter" data-level="6.19" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#buffer"><i class="fa fa-check"></i><b>6.19</b> Buffer</a></li>
-<li class="chapter" data-level="6.20" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#near-distance"><i class="fa fa-check"></i><b>6.20</b> Near Distance</a></li>
-<li class="chapter" data-level="6.21" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#thiessen-polygons"><i class="fa fa-check"></i><b>6.21</b> Thiessen Polygons</a></li>
-<li class="chapter" data-level="6.22" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#summary-5"><i class="fa fa-check"></i><b>6.22</b> Summary</a></li>
+<li class="chapter" data-level="6.1" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#cartographic-modelling"><i class="fa fa-check"></i><b>6.1</b> Cartographic Modelling</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#geoprocessing"><i class="fa fa-check"></i><b>6.1.1</b> Geoprocessing</a></li>
+<li class="chapter" data-level="6.1.2" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#capability-modelling"><i class="fa fa-check"></i><b>6.1.2</b> Capability Modelling</a></li>
+<li class="chapter" data-level="6.1.3" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#suitability-modelling"><i class="fa fa-check"></i><b>6.1.3</b> Suitability modelling</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#overlay-methods"><i class="fa fa-check"></i><b>6.2</b> Overlay Methods</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#attribute-transfer"><i class="fa fa-check"></i><b>6.2.1</b> Attribute Transfer</a></li>
+<li class="chapter" data-level="6.2.2" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#boolean-algebra-1"><i class="fa fa-check"></i><b>6.2.2</b> Boolean Algebra</a></li>
+<li class="chapter" data-level="6.2.3" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#spatial-join"><i class="fa fa-check"></i><b>6.2.3</b> Spatial Join</a></li>
+<li class="chapter" data-level="6.2.4" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#clip"><i class="fa fa-check"></i><b>6.2.4</b> Clip</a></li>
+<li class="chapter" data-level="6.2.5" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#intersect"><i class="fa fa-check"></i><b>6.2.5</b> Intersect</a></li>
+<li class="chapter" data-level="6.2.6" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#line-intersection"><i class="fa fa-check"></i><b>6.2.6</b> Line Intersection</a></li>
+<li class="chapter" data-level="6.2.7" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#union"><i class="fa fa-check"></i><b>6.2.7</b> Union</a></li>
+<li class="chapter" data-level="6.2.8" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#identity"><i class="fa fa-check"></i><b>6.2.8</b> Identity</a></li>
+<li class="chapter" data-level="6.2.9" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#erase"><i class="fa fa-check"></i><b>6.2.9</b> Erase</a></li>
+<li class="chapter" data-level="6.2.10" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#split"><i class="fa fa-check"></i><b>6.2.10</b> Split</a></li>
+<li class="chapter" data-level="6.2.11" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#symmetrical-difference"><i class="fa fa-check"></i><b>6.2.11</b> Symmetrical Difference</a></li>
+<li class="chapter" data-level="6.2.12" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#update"><i class="fa fa-check"></i><b>6.2.12</b> Update</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#proximity-methods"><i class="fa fa-check"></i><b>6.3</b> Proximity Methods</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#euclidean-distance"><i class="fa fa-check"></i><b>6.3.1</b> Euclidean distance</a></li>
+<li class="chapter" data-level="6.3.2" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#buffer"><i class="fa fa-check"></i><b>6.3.2</b> Buffer</a></li>
+<li class="chapter" data-level="6.3.3" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#attribute-dependent-buffer"><i class="fa fa-check"></i><b>6.3.3</b> Attribute-dependent buffer</a></li>
+<li class="chapter" data-level="6.3.4" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#near-distance"><i class="fa fa-check"></i><b>6.3.4</b> Near Distance</a></li>
+<li class="chapter" data-level="6.3.5" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#thiessen-polygons"><i class="fa fa-check"></i><b>6.3.5</b> Thiessen Polygons</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#summary-5"><i class="fa fa-check"></i><b>6.4</b> Summary</a></li>
 <li class="chapter" data-level="" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#reflection-questions-4"><i class="fa fa-check"></i>Reflection Questions</a></li>
 <li class="chapter" data-level="" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#practice-questions-4"><i class="fa fa-check"></i>Practice Questions</a></li>
 <li class="chapter" data-level="" data-path="overlay-and-proximity-analysis.html"><a href="overlay-and-proximity-analysis.html#recommended-readings-3"><i class="fa fa-check"></i>Recommended Readings</a></li>
@@ -714,6 +722,11 @@
 <h2>Learning Objectives</h2>
 </div>
 <ol style="list-style-type: decimal">
+<li>Recognize the role of geoprocessing in applications of cartographic modeling</li>
+<li>Understand the functions and opportunities of raster and vector overlay methods</li>
+<li>Practice map algebra in raster overlay</li>
+<li>Practice attribute transfer in vector overlay</li>
+<li>Synthesize the role of relational databases in overlay analysis</li>
 <li></li>
 </ol>
 </div>
@@ -723,70 +736,488 @@
 </div>
 <div id="cartographic-modelling" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> Cartographic Modelling</h2>
+<div id="geoprocessing" class="section level3" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> Geoprocessing</h3>
 </div>
-<div id="geoprocessing" class="section level2" number="6.2">
-<h2><span class="header-section-number">6.2</span> Geoprocessing</h2>
+<div id="capability-modelling" class="section level3" number="6.1.2">
+<h3><span class="header-section-number">6.1.2</span> Capability Modelling</h3>
+<p>The result of capability modelling is a binary classification of features or cells in a raster: 1 or 0; yes or no; true or false; capable or not capable. Recall from Chapter 3 that ordinal data scales are used to rank or order categorical or qualitative data elements. Even with just two classes, a capability map uses an ordinal data scale because 1 (capable) is better than 0 (not capable).</p>
 </div>
-<div id="capability-modelling" class="section level2" number="6.3">
-<h2><span class="header-section-number">6.3</span> Capability Modelling</h2>
+<div id="suitability-modelling" class="section level3" number="6.1.3">
+<h3><span class="header-section-number">6.1.3</span> Suitability modelling</h3>
+<p><strong>Suitability modelling</strong> is an extension of capability modelling that tells us how suitable a particular activity is for a given location. In other words, capability modelling gives us the spatial options that meet some minimum criteria and suitability modelling allows us to rank those options based on some attributes in our spatial data. From our earlier example, suppose we have identified 8 areas that are possible options for conserving habitat (i.e., capable), but we might only have the budget to proactively manage a few of these areas. So where should we prioritize our conservation and management activities? This is a question for suitability modelling!</p>
+<p>Once we have calculated capability as an ordinal scale value (1 or 0), we can then use another set of attributes to calculate a <strong>suitability score</strong> for the capable areas. Frequently, the suitability score takes the form of a continuous ratio scale with values between <span class="math inline">\([0,1]\)</span> or <span class="math inline">\([0,100]\)</span> because we want to be able to place every capable feature on a spectrum from “least suitable” (0) to “most suitable” (1 or 100) based on some set of attributes. The calculation for the suitability score can take many forms and is dependent on the spatial problem that you are trying to solve. Some attributes can be used individually as a suitability score. For example, if bigger is better, then you could simply sort your capable features by area and you would have a suitability score on a continuous ratio scale, no further calculation needed. More commonly, we want to combine several attributes together in our scoring, which might represent data in different scales. Next, we will walk through an example for calculating a suitability score with nominal, ordinal, interval, and ratio data scales.</p>
+<p>Suppose bigger really is better, so the area of the capable polygons will be one of our attributes for our suitability score, which is a ratio data scale. (By the way, you can extend this logic to lines and points as well: longer lines are preferred or a higher density of points is preferred.) Our first step here is to normalize these ratio data to a range of <span class="math inline">\([0,1]\)</span> using the following equation:</p>
+<p><span class="math display">\[
+X_{normalized} = (X-X_{min})/(X_{max}-X_{min})
+\]</span></p>
+<p>This is also called a min-max normalization, because the maximum value will be equal to 1 and the minimum value will be equal to 0:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">ID</th>
+<th align="right">Area (ha)</th>
+<th align="right">Normalized Area (unitless)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">9.96</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">7.02</td>
+<td align="right">0.6196636</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">6.46</td>
+<td align="right">0.5472186</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">6.15</td>
+<td align="right">0.5071151</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">5.00</td>
+<td align="right">0.3583441</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">3.33</td>
+<td align="right">0.1423027</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">2.80</td>
+<td align="right">0.0737387</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">2.23</td>
+<td align="right">0.0000000</td>
+</tr>
+</tbody>
+</table>
+<p>Maybe our species is also found in several possible habitats. Habitat cover is a nominal data scale (e.g., “forest,” “wetland,” “non-forest”). If we know that our species is found in “forest” 60% of the time, in “wetland” 30% of the time, and in “non-forest” 10% of the time, then we can actually convert these nominal habitat covers into a ratio scale (i.e., 0.6, 0.3 and 0.1). In the case that you do not have additional numerical data to make this conversion, you could also make an educated guess and assign weights to your classes that sum to 1. For example, based on the literature, we might hypothesize that our species has preferences for “forest,” “wetland,” and “non-forest” that can be quantified with the weights 0.5, 0.25, and 0.25, respectively. Either approach is sensible, as long as you are transparent about your choice.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">ID</th>
+<th align="left">Habitat (Nominal)</th>
+<th align="right">Habitat (Ratio)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">Non-forest</td>
+<td align="right">0.1</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">Wetland</td>
+<td align="right">0.3</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">Forest</td>
+<td align="right">0.6</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="left">Non-forest</td>
+<td align="right">0.1</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="left">Forest</td>
+<td align="right">0.6</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="left">Wetland</td>
+<td align="right">0.3</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="left">Wetland</td>
+<td align="right">0.3</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="left">Forest</td>
+<td align="right">0.6</td>
+</tr>
+</tbody>
+</table>
+<p>Maybe we also have land use intensities representing human activity and management that are classified as “high,” “medium,” and “low.” These land use intensities are an ordinal data scale. Frequently, ordinal data scales in geomatics are derived from some other numerical analysis. For example, land use intensity may have initially been mapped from the density of roads in an area or the frequency of a particular industrial activity, which was then classified into “high,” “medium,” and “low” intensity classes. It is worth looking at the documentation of the mapped data you are working with to see how the ordinal data were generated and what assumptions went into the terms used (i.e., “high,” “medium,” and “low”). For our example, let us assume that we know nothing numerically about these land use intensities, just that “high” is worse for the conservation of our species than “low.” If we return to our original question, <strong>where should we prioritize our conservation and management activities?</strong>, then most likely our efforts will be best spent conserving areas that currently have high land use intensity. In this case, we can convert these ordinal data into ratio data by assigning weights that sum to 1. For example, “high” is 0.8, “medium” is 0.15, and “low” is 0.05.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">ID</th>
+<th align="left">Land Use (Ordinal)</th>
+<th align="right">Land Use (Ratio)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">High</td>
+<td align="right">0.80</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">Low</td>
+<td align="right">0.05</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">Medium</td>
+<td align="right">0.15</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="left">Medium</td>
+<td align="right">0.15</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="left">Medium</td>
+<td align="right">0.15</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="left">Low</td>
+<td align="right">0.05</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="left">High</td>
+<td align="right">0.80</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="left">High</td>
+<td align="right">0.80</td>
+</tr>
+</tbody>
+</table>
+<p>Maybe we also have dates that represent the last year of a known disturbance like a fire. Dates are an interval data scale, but can easily be converted into a ratio scale by subtracting them from the current date to yield a measure of time-since something. For example, time-since last fire might be a good proxy for forage quality of our species regardless of the habitat cover. Once we have converted it to a ratio scale, we want to normalize it to a range of <span class="math inline">\([0,1]\)</span>, but suppose that more recent fire is better. In this case, we also need to reverse the range so that the oldest fire has a lower score than the most recent fire. We can achieve this by modifying the min-max equation so that we subtract <span class="math inline">\(X\)</span> from <span class="math inline">\(X_{max}\)</span>:</p>
+<p><span class="math display">\[
+X_{normalized,reversed} = (X_{max}-X)/(X_{max}-X_{min})
+\]</span></p>
+<table>
+<colgroup>
+<col width="3%" />
+<col width="26%" />
+<col width="32%" />
+<col width="37%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">ID</th>
+<th align="right">Year of fire (Interval)</th>
+<th align="right">Time-since last fire (Ratio)</th>
+<th align="right">Time-since last fire (Normalized)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">1972</td>
+<td align="right">50</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">1975</td>
+<td align="right">47</td>
+<td align="right">0.0612245</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">1978</td>
+<td align="right">44</td>
+<td align="right">0.1224490</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">1982</td>
+<td align="right">40</td>
+<td align="right">0.2040816</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">1984</td>
+<td align="right">38</td>
+<td align="right">0.2448980</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">1999</td>
+<td align="right">23</td>
+<td align="right">0.5510204</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">2013</td>
+<td align="right">9</td>
+<td align="right">0.8367347</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">2021</td>
+<td align="right">1</td>
+<td align="right">1.0000000</td>
+</tr>
+</tbody>
+</table>
+<p>Now we can put all the rescaled attributes together, add them up for each capable area, and divide by the total number of attributes that we used in our scoring process (four). This gives us an arithmetic mean that ranges between <span class="math inline">\([0,1]\)</span> because all the other attributes also use this range. Sometimes this score is multiplied by 100 to convert the ratios into percentages. We can then sort the capable polygons in descending order by our suitability score:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">ID</th>
+<th align="right">Area</th>
+<th align="right">Habitat</th>
+<th align="right">Land Use</th>
+<th align="right">Time-since last fire</th>
+<th align="right">Sum of Scores</th>
+<th align="right">Suitability</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">0.0000000</td>
+<td align="right">0.6</td>
+<td align="right">0.80</td>
+<td align="right">1.0000000</td>
+<td align="right">2.4000000</td>
+<td align="right">0.6000000</td>
+</tr>
+<tr class="even">
+<td align="right">7</td>
+<td align="right">0.0737387</td>
+<td align="right">0.3</td>
+<td align="right">0.80</td>
+<td align="right">0.8367347</td>
+<td align="right">2.0104734</td>
+<td align="right">0.5026183</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">1.0000000</td>
+<td align="right">0.1</td>
+<td align="right">0.80</td>
+<td align="right">0.0000000</td>
+<td align="right">1.9000000</td>
+<td align="right">0.4750000</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">0.5472186</td>
+<td align="right">0.6</td>
+<td align="right">0.15</td>
+<td align="right">0.1224490</td>
+<td align="right">1.4196676</td>
+<td align="right">0.3549169</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">0.3583441</td>
+<td align="right">0.6</td>
+<td align="right">0.15</td>
+<td align="right">0.2448980</td>
+<td align="right">1.3532421</td>
+<td align="right">0.3383105</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">0.1423027</td>
+<td align="right">0.3</td>
+<td align="right">0.05</td>
+<td align="right">0.5510204</td>
+<td align="right">1.0433231</td>
+<td align="right">0.2608308</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">0.6196636</td>
+<td align="right">0.3</td>
+<td align="right">0.05</td>
+<td align="right">0.0612245</td>
+<td align="right">1.0308881</td>
+<td align="right">0.2577220</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">0.5071151</td>
+<td align="right">0.1</td>
+<td align="right">0.15</td>
+<td align="right">0.2040816</td>
+<td align="right">0.9611968</td>
+<td align="right">0.2402992</td>
+</tr>
+</tbody>
+</table>
+<p>We can see from the above suitability analysis that capable polygon number 8 has the highest overall suitability. It is important to highlight two points here: the suitability score is unitless (after all, we have combined four very different data scales together); and the scores are on the same ratio scale, which means they can be directly compared. In other words, the most suitable location is more than twice as suitable as the least suitable location, based on the criteria and scoring scheme we used.</p>
+<p>Note that the choice of weights for ordinal and nominal data scales are arbitrary, but these numbers can be based on a hypothesis, other numerical data, or your project’s values. You can also iterate the suitability scoring process with different weights for ordinal and nominal scale data so that you achieve your desired project outcomes such as statistical distribution of scores or frequency of scores above a particular threshold value. For example, if you are trying to simultaneously solve the related question, <strong>I have X dollars, how should I allocate them?</strong>, then you might run a cost analysis that uses attributes accounting for the cost of intervening at a location. If you can convert your attributes into a dollar (ratio) scale, then you can simply add everything together to get the total cost for the activity at any given location.</p>
+<p>For example, suppose that we know that our conservation intervention costs $10,000 per hectare and we have a total budget of $150,000 to conserve 15 total hectares. Looking at the capable areas in the earlier table, the total area that <strong>could</strong> be conserved is 44.22 hectares, which exceeds our budget. We need to solve two things: <strong>where are our conservation efforts going to have the most impact on the species?</strong> and <strong>how can we allocate our budget efficiently to achieve that impact?</strong> We have already solved the first problem, and the second problem is a matter of relating the costs to the suitability analysis, sorting the table based on the suitability score from our solution to the first problem, and then calculating a cumulative cost field that adds up the costs of the capable features in descending order of their suitability. This produces the following table:</p>
+<table>
+<colgroup>
+<col width="3%" />
+<col width="20%" />
+<col width="11%" />
+<col width="13%" />
+<col width="24%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">ID</th>
+<th align="right">Area (normalized)</th>
+<th align="right">Area (ha)</th>
+<th align="right">Suitability</th>
+<th align="right">Individual Cost ($)</th>
+<th align="right">Cummulative Cost ($)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">0.0000000</td>
+<td align="right">2.23</td>
+<td align="right">0.6000000</td>
+<td align="right">22300</td>
+<td align="right">22300</td>
+</tr>
+<tr class="even">
+<td align="right">7</td>
+<td align="right">0.0737387</td>
+<td align="right">2.80</td>
+<td align="right">0.5026183</td>
+<td align="right">28000</td>
+<td align="right">50300</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">1.0000000</td>
+<td align="right">9.96</td>
+<td align="right">0.4750000</td>
+<td align="right">99600</td>
+<td align="right">149900</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">0.5472186</td>
+<td align="right">6.46</td>
+<td align="right">0.3549169</td>
+<td align="right">64600</td>
+<td align="right">214500</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">0.3583441</td>
+<td align="right">5.00</td>
+<td align="right">0.3383105</td>
+<td align="right">50000</td>
+<td align="right">264500</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">0.1423027</td>
+<td align="right">3.33</td>
+<td align="right">0.2608308</td>
+<td align="right">33300</td>
+<td align="right">297800</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">0.6196636</td>
+<td align="right">7.02</td>
+<td align="right">0.2577220</td>
+<td align="right">70200</td>
+<td align="right">368000</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">0.5071151</td>
+<td align="right">6.15</td>
+<td align="right">0.2402992</td>
+<td align="right">61500</td>
+<td align="right">429500</td>
+</tr>
+</tbody>
+</table>
+<p>We can now see that prioritizing the top three suitable areas <span class="math inline">\(ID = {8,7,1}\)</span> for our conservation intervention will cost $149,900, nearly exhausting our budget with $100 left over for a party to celebrate the geomatics team. This is just one example of how cartographic modelling can provide powerful answers to very real spatial questions. Can you think of other mapped attributes, besides area, that could factor into this conservation cost analysis?</p>
 </div>
-<div id="suitability-modelling" class="section level2" number="6.4">
-<h2><span class="header-section-number">6.4</span> Suitability modelling</h2>
 </div>
-<div id="overlay-methods" class="section level2" number="6.5">
-<h2><span class="header-section-number">6.5</span> Overlay Methods</h2>
+<div id="overlay-methods" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Overlay Methods</h2>
+<p>In the above example, the data was provided already compiled. However, we often have to gather the data ourselves. Overlay methods allow us to get more information about a spatial area, based on other spatial attributes. Say, for example, you are assessing the ecosystem services of your city’s trees. This can be done at several scales: are you concerned with the city as a whole? Neighborhoods? Census tracts? Or are you assessing trees individually? The answer to this is dependent on the question. For the following example, we will be assessing the ecosystem services of trees by census tract.</p>
+<div id="attribute-transfer" class="section level3" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Attribute Transfer</h3>
 </div>
-<div id="attribute-transfer" class="section level2" number="6.6">
-<h2><span class="header-section-number">6.6</span> Attribute Transfer</h2>
+<div id="boolean-algebra-1" class="section level3" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> Boolean Algebra</h3>
 </div>
-<div id="boolean-algebra-1" class="section level2" number="6.7">
-<h2><span class="header-section-number">6.7</span> Boolean Algebra</h2>
+<div id="spatial-join" class="section level3" number="6.2.3">
+<h3><span class="header-section-number">6.2.3</span> Spatial Join</h3>
 </div>
-<div id="spatial-join" class="section level2" number="6.8">
-<h2><span class="header-section-number">6.8</span> Spatial Join</h2>
+<div id="clip" class="section level3" number="6.2.4">
+<h3><span class="header-section-number">6.2.4</span> Clip</h3>
 </div>
-<div id="clip" class="section level2" number="6.9">
-<h2><span class="header-section-number">6.9</span> Clip</h2>
+<div id="intersect" class="section level3" number="6.2.5">
+<h3><span class="header-section-number">6.2.5</span> Intersect</h3>
 </div>
-<div id="intersect" class="section level2" number="6.10">
-<h2><span class="header-section-number">6.10</span> Intersect</h2>
+<div id="line-intersection" class="section level3" number="6.2.6">
+<h3><span class="header-section-number">6.2.6</span> Line Intersection</h3>
 </div>
-<div id="line-intersection" class="section level2" number="6.11">
-<h2><span class="header-section-number">6.11</span> Line Intersection</h2>
+<div id="union" class="section level3" number="6.2.7">
+<h3><span class="header-section-number">6.2.7</span> Union</h3>
 </div>
-<div id="union" class="section level2" number="6.12">
-<h2><span class="header-section-number">6.12</span> Union</h2>
+<div id="identity" class="section level3" number="6.2.8">
+<h3><span class="header-section-number">6.2.8</span> Identity</h3>
 </div>
-<div id="identity" class="section level2" number="6.13">
-<h2><span class="header-section-number">6.13</span> Identity</h2>
+<div id="erase" class="section level3" number="6.2.9">
+<h3><span class="header-section-number">6.2.9</span> Erase</h3>
 </div>
-<div id="erase" class="section level2" number="6.14">
-<h2><span class="header-section-number">6.14</span> Erase</h2>
+<div id="split" class="section level3" number="6.2.10">
+<h3><span class="header-section-number">6.2.10</span> Split</h3>
 </div>
-<div id="split" class="section level2" number="6.15">
-<h2><span class="header-section-number">6.15</span> Split</h2>
+<div id="symmetrical-difference" class="section level3" number="6.2.11">
+<h3><span class="header-section-number">6.2.11</span> Symmetrical Difference</h3>
 </div>
-<div id="symmetrical-difference" class="section level2" number="6.16">
-<h2><span class="header-section-number">6.16</span> Symmetrical Difference</h2>
+<div id="update" class="section level3" number="6.2.12">
+<h3><span class="header-section-number">6.2.12</span> Update</h3>
 </div>
-<div id="update" class="section level2" number="6.17">
-<h2><span class="header-section-number">6.17</span> Update</h2>
 </div>
-<div id="proximity-methods" class="section level2" number="6.18">
-<h2><span class="header-section-number">6.18</span> Proximity Methods</h2>
+<div id="proximity-methods" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Proximity Methods</h2>
+<div id="euclidean-distance" class="section level3" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> Euclidean distance</h3>
+<p>Raster and vector</p>
 </div>
-<div id="buffer" class="section level2" number="6.19">
-<h2><span class="header-section-number">6.19</span> Buffer</h2>
-<p>Attribute-dependent buffer</p>
+<div id="buffer" class="section level3" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> Buffer</h3>
 </div>
-<div id="near-distance" class="section level2" number="6.20">
-<h2><span class="header-section-number">6.20</span> Near Distance</h2>
+<div id="attribute-dependent-buffer" class="section level3" number="6.3.3">
+<h3><span class="header-section-number">6.3.3</span> Attribute-dependent buffer</h3>
 </div>
-<div id="thiessen-polygons" class="section level2" number="6.21">
-<h2><span class="header-section-number">6.21</span> Thiessen Polygons</h2>
+<div id="near-distance" class="section level3" number="6.3.4">
+<h3><span class="header-section-number">6.3.4</span> Near Distance</h3>
 </div>
-<div id="summary-5" class="section level2" number="6.22">
-<h2><span class="header-section-number">6.22</span> Summary</h2>
+<div id="thiessen-polygons" class="section level3" number="6.3.5">
+<h3><span class="header-section-number">6.3.5</span> Thiessen Polygons</h3>
+</div>
+</div>
+<div id="summary-5" class="section level2" number="6.4">
+<h2><span class="header-section-number">6.4</span> Summary</h2>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.</p>
 </div>
 <div id="reflection-questions-4" class="section level2 unnumbered">
@@ -821,6 +1252,7 @@
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -860,10 +1292,6 @@ gitbook.start({
 "text": null
 },
 "download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
 "toc": {
 "collapse": "subsection"
 }
@@ -871,6 +1299,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

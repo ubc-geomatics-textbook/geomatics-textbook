@@ -136,7 +136,7 @@ knitr::kable(
 We can now see that prioritizing the top three suitable areas $ID = {8,7,1}$ for our conservation intervention will cost \$149,900, nearly exhausting our budget with \$100 left over for a party to celebrate the geomatics team. This is just one example of how cartographic modelling can provide powerful answers to very real spatial questions. Can you think of other mapped attributes, besides area, that could factor into this conservation cost analysis?
 
 ## Overlay Methods
-In the above example, the data was provided already compiled. However, we often have to gather the data ourselves. Overlay methods allow us to get more information about a spatial area, based on other spatial attributes. Say, for example, you are assessing the ecosystem services of your city's trees. This can be done at several scales: are you concerned with the city as a whole? Neighborhoods? Census tracts? Or are you assessing trees individually? The answer to this is dependent on the question. For the following example, we will be assessing the ecosystem services of trees by census tract.
+In the above example, the data was provided already compiled. However, we often have to gather the data ourselves. Overlay methods allow us to get more information about a spatial area, based on other spatial attributes. Say, for example, you are assessing the ecosystem services of your city's trees. This can be done at several scales: are you concerned with the city as a whole? Neighborhoods? Census tracts? Or are you assessing trees individually? The answer to this is dependent on the question. For the following example, we will be assessing the ecosystem services of trees by census tract within an Ottawa neighborhood (ward??).
 
 ### Attribute Transfer
 
@@ -145,6 +145,7 @@ In the above example, the data was provided already compiled. However, we often 
 ### Spatial Join
 
 ### Clip
+Ottawa has a lot of data, we want something easier to work with. So we are looking at Barrhaven, the most populous Ward in Ottawa. When we download data from Ottawa, we will clip it to the size of the neighborhood. (show clip example). A clip is effectively a cookie-cutter, where the boundaries of the clipping feature become the boundaries of the clipped feature. (the clipped extent is at least as small at the clipping extent)
 
 ### Intersect
 

@@ -8,77 +8,41 @@ library("xtable")
 library("plyr")
 ```
 
-# Remote Sensing Systems {#chapter-template}
+# Remote Sensing Systems {#remote-sensing-systems}
 
 You probably know that you are using your very own organic remote sensing system to read this sentence. Our eyes take in information from the world around us by detecting changes in light and relaying that information through the optic nerve into our brains, where we make sense of what we are seeing. As you learned in Chapter 11, this is what constitutes remote sensing - gathering information (“sensing”) without directly measuring or interacting with that information (“remote”). Whereas our eyes are limited to the visible light portion of the electromagnetic spectrum and by the location of our bodies, remote sensing systems use powerful sensors and flight-equipped platforms to paint a broader and deeper picture of the world around us. The picture in figure \@ref(fig:12-GOES-1-earth) is an example of the beautiful imagery we can capture from space, taken from the GOES-1 satellite.
 
-<br>
-
 ```{r 12-GOES-1-earth, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-
 fig_cap <- paste0("North and South America as seen from the NASA GOES-1 satellite. Captured from KeepTrack.space via NASA. [Copyright (C) 2007 Free Software Foundation, Inc.](https://fsf.org/)")
-
 knitr::include_graphics(here::here("images", "12-GOES_1_earth.png"))
-
 ```
+<br/>
 
-<br>
-
-Remote sensing systems range in size and complexity from a handheld camera to the Hubble telescope and capture images of areas ranging from a few metres to several kilometres in size. Though devices such as microscopes, x-ray machines, and handheld radios are technically remote sensing systems, the field of remote sensing typically refers to observing Earth on a small spatial scale (1:100 to 1:250,000).
-
-<br>
-
-:::: {.box-content .call-out-content}
-
-::: {.box-title .call-out-top}
-#### NOTE {-}
-:::
-
-<p id="box-text">
-Remember, in spatial scale, “small” means a big picture. If you want a refresher on how to read and understand map scales, check out section 2.5 in Chapter 2.
-</p>
-
-::::
-
-<br>
+Remote sensing systems range in size and complexity from a handheld camera to the Hubble telescope and capture images of areas ranging from a few meters to several kilometers in size. Though devices such as microscopes, x-ray machines, and handheld radios are technically remote sensing systems, the field of remote sensing typically refers to observing Earth on a small spatial scale (1:100 to 1:250,000).
 
 The range of uses for remote sensing platforms are dazzling in number, allowing us to monitor severe weather events, ocean currents, land cover change, natural disturbances, forest health, surface temperature, cloud cover, urban development, and so much more with high precision and accuracy. In this chapter, we will break down the how and where of remote sensing systems and discover a few different systems used for Earth observation today.
 
-<br>
-
 :::: {.box-content .your-turn-content}
-
 ::: {.box-title .your-turn-top}
 #### Your Turn! {-}
 :::
-
 <p id="box-text">
   What other “remote sensing systems” can you think of that you use day-to-day?
 </p>
-
 ::::
 
-<br>
-
 :::: {.box-content .learning-objectives-content}
-
 ::: {.box-title .learning-objectives-top}
-
-
 #### Learning Objectives {-}
 ::: 
-
 1. Break down remote sensing technology into its basic components
 2. Understand how different settings and parameters impact remote sensing system outcomes
 3. Review the key remote sensing systems used in Canada and around the world for environmental management
-
 ::::
-
-<br>
 
 ### Key Terms {-}
 
-Absorption, aerial, curvature, focus, geostationary, hyperspectral, LiDAR, multispectral, nadir, oblique, orbit, panchromatic, radiometric, reflection, refraction, resolution, spectral, sun-synchronous, thermal
+Absorption, Aerial, Curvature, Focus, Geostationary, Hyperspectral, LiDAR, Multispectral, Nadir, Oblique, Orbit, Panchromatic, Radiometric, Reflection, Refraction, Resolution, Spectral, Sun-synchronous, Thermal
 
 ## Optical System Basics
 
@@ -88,32 +52,15 @@ Remote sensing systems contain a number of common components and operate using s
 
 Picture the view from a window onto a busy street on a rainy day: you have cars driving by with headlights, traffic lights reflecting off a wet road, raindrops pouring down the windowpane and distorting the view, and hundreds of people and objects on the street scattering light beams in every possible direction from a huge range of distances. In order for us to take in any of this, these light beams need to reach the retina, the photosensitive surface at the very back of the eye.How do our relatively tiny eyeballs take in all that disparate light and produce crystal clear images for our brains? By using one of the most basic components of any optical system: a lens. A lens is a specially shaped piece of transparent material that, when light passes through it, changes the shape and direction of light waves in a desired way. 
 
-<br>
-
-:::: {.box-content .call-out-content}
-
-::: {.box-title .call-out-top}
-#### NOTE {-}
-:::
-
-<p id="box-text">
-The property of transparent mediums to change the direction of light beams is called **refraction**, or transmittance. This is why objects in moving water look all wibbly and misshapen. The arrangement of molecules within a medium disrupts both the direction and speed of the photons – the measurement of this disruption is called the refractive index.
-</p>
-
-::::
-
-<br>
+The property of transparent mediums to change the direction of light beams is called **refraction**, or transmittance. This is why objects in moving water look misshapen. The arrangement of molecules within a medium disrupts both the direction and speed of the photons – the measurement of this disruption is called the refractive index.
 
 The lens at the front of your eyeball changes refracts light beams from varying distances precisely onto your retina. The optical systems on remote sensing platforms are the same: they use a specially designed lens to focus light beams at the desired distance to onto their own recording medium. Below in figure \@ref(fig:12-focus-example-humaneye) is a simple visualization of how optical systems focus light onto a desired point to produce an in-focus image.
 
-<br>
-
 ```{r 12-focus-example-humaneye, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Selected material from [How Focus Works](https://www.bhphotovideo.com/explora/photography/tips-and-solutions/how-focus-works). <a href='",baseurl,"#fig:12-focus-example-humaneye'>Animated figure can be viewed in the web browser version of the textbook</a>. Copyright Todd Vorenkamp. Used with permission.)")
+fig_cap <- paste0("Selected material from [How Focus Works](https://www.bhphotovideo.com/explora/photography/tips-and-solutions/how-focus-works). <a href='",baseurl,"#fig:12-focus-example-humaneye'>Animated figure can be viewed in the web browser version of the textbook</a>. Copyright Todd Vorenkamp. Used with permission.")
 knitr::include_graphics(here::here("images", "12-focus_example_humaneye.gif"))
 ```
-
-<br>
+<br/>
 
 Now, picture another scene: you are scrolling through social media and you see a beautiful photo of Mt Assiniboine taken by your friend, a professional photographer based in the Canadian Rockies. You think to yourself, “Wow, that peak looks ENORMOUS! I want to visit there and see it for myself.” So, you ask your friend exactly where they went, drive to Banff National Park, hike to the very same spot, and squint skywards. Hmm…though the mountain is still imposing, it is certainly not towering over you at close range as it was in the photo. You also notice that there are several surrounding peaks that you couldn’t see before. Your friend’s picture was crystal-clear, and you have 20/20 vision, so you know its not an issue with focusing properly. Are you being deceived?
 
@@ -121,27 +68,17 @@ Actually, yes, you are – by both your eyes *and* the camera your friend used. 
 
 Most, if not all, lenses on optical systems for remote sensing are **spherical lenses**, called that because each side of the lens is spherical in shape, similar to a bowl. A **convex** optical surface curves outward from the lens centre, whereas a **concave** optical surface curves inward toward the lens centre. Though not spherical, a **planar** or flat optical surface may be used as well. A spherical lens is formed by joining two optical surfaces – concave, convex, and/or planar – back-to-back. A **biconvex** or positive lens is two convex surfaces, and a **biconcave** or negative lens is - you guessed it - two concave surfaces. The *radius of curvature* is the measure of how much an optical surface “bulges” or “caves”. If you imagine tracing the edge of the surface in an arc and continuing the curve all the way around in a circle, the radius of this imagined circle would be the radius of curvature. Biconvex and biconcave lenses can be “equiconvex”, meaning they have the same spherical curvature on each side, but may also have uneven curvatures. The lens in the human eye is an example of a lens with uneven curvatures – our radius of curvature is higher at the front. Figures \@ref(fig:12-RoC-convex) and \@ref(fig:12-RoC-concave) demonstrate how the radius of curvature is measured for both concave and convex optical surfaces.
 
-<br>
-
 ```{r 12-RoC-convex, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-
-fig_cap <- paste0("Measuring the radius of curvature for a convex optical surface. Claire Armour. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
-
+fig_cap <- paste0("Measuring the radius of curvature for a convex optical surface. Claire Armour, CC-BY-SA-4.0")
 knitr::include_graphics(here::here("images", "12-ROC_convex.png"))
-
 ```
-
-<br>
+<br/>
 
 ```{r 12-RoC-concave, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-
-fig_cap <- paste0("Measuring the radius of curvature for a concave optical surface. Claire Armour.[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
-
+fig_cap <- paste0("Measuring the radius of curvature for a concave optical surface. Claire Armour, CC-BY-SA-4.0")
 knitr::include_graphics(here::here("images", "12-ROC_concave.png"))
-
 ```
-
-<br>
+<br/>
 
 :::: {.box-content .your-turn-content}
 
@@ -155,12 +92,9 @@ knitr::include_graphics(here::here("images", "12-ROC_concave.png"))
 
 ::::
 
-<br>
-
-
 ### Focal Length
 
-So, now that we know a little bit about what lenses look like, its time to figure out exactly how influence an image’s journey from the front of the lens to the recording medium. As you might expect, different combinations of optical surfaces and radii of curvature will behave in different ways. Remember that for an image to be in-focus, we need to ensure the light beams are landing precisely on the recording medium or screen.
+Now that we know a little bit about what lenses look like, let us turn to consider how an image is projected onto the recording medium. As you might expect, different combinations of optical surfaces and radii of curvature will behave in different ways. Remember that for an image to be in-focus, we need to ensure the light beams are landing precisely on the recording medium or screen.
 
 **Convex optical surfaces cause light beams to *converge*, or focus, to a point behind the lens.** 
 
@@ -168,80 +102,46 @@ So, now that we know a little bit about what lenses look like, its time to figur
 
 The point where the light converges or appears to converge is called the *focal point*, and the distance between the focal point and the centre of the lens is called the *focal length*. For a converging lens, the focal length is positive; for a diverging lens, it is negative. Figures \@ref(fig:12-convex-focal-diagram.png) and \@ref(fig:12-concave-focal-diagram.png) illustrate the behaviour of light when travelling through a biconvex and biconcave lens. See the paragraph below the diagrams for variable labels.
 
-<br>
-
 ```{r 12-convex-focal-diagram, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-
-fig_cap <- paste0("Measurements in a biconvex lens. [User:DrBob](https://en.wikipedia.org/wiki/User:DrBob). [CC BY 3.0 Unported](https://creativecommons.org/licenses/by/3.0/)")
-
+fig_cap <- paste0("Measurements in a biconvex lens. [DrBob](https://en.wikipedia.org/wiki/User:DrBob), CC-BY-3.0 Unported.")
 knitr::include_graphics(here::here("images", "12-convex_focal_diagram.png"))
-
 ```
-
-<br>
+<br/>
 
 ```{r 12-concave-focal-diagram, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-
-fig_cap <- paste0("Measurements in a biconcave lens. [User:DrBob](https://en.wikipedia.org/wiki/User:DrBob). [CC BY 3.0 Unported](https://creativecommons.org/licenses/by/3.0/)")
-
+fig_cap <- paste0("Measurements in a biconcave lens. [DrBob](https://en.wikipedia.org/wiki/User:DrBob), CC-BY-3.0 Unported.")
 knitr::include_graphics(here::here("images", "12-concave_focal_diagram.png"))
-
 ```
-
-<br>
+<br/>
 
 The optical power of a lens – the degree to which it can converge or diverge light – is the reciprocal of focal length. Essentially, a “powerful” lens will be able to refract light beams at sharper angles from the horizontal, causing them to converge or appear to converge closer to the lens, i.e., at a smaller focal length. The **Lensmaker’s Equation** (Equation 1) allows us to calculate the focal length ($f$) and/or optical power ($\frac{1}{f}$) as a function of the radii of curvature ($R$), the thickness of the lens between the optical surfaces ($d$), and the refractive index of the lens material ($n$). Note that $R_1$ is the front surface - the side of the lens closest to the origin of the light - and $R_2$ is the back surface.
 
 Equation 1:     \[\frac{1}{f} = (n-1)[\frac{1}{R_1} - \frac{1}{R_2} + \frac{(n-1)d}{nR_1R_2}]\] 
 
-[This Wolfram-Alpha demonstration](https://demonstrations.wolfram.com/LensmakersEquation/#embed) allows you to manually adjust the parameters of the Lensmaker's Equation and see the outputs.
-
-
 We know how lenses impact focal length, but how does focal length impact a photo? Let us return to our scenario in Banff National Park where we have two mismatched images of the same mountain. You’ve done some investigating and found that the camera your friend used is very large (and expensive). The lens at the front is quite far from the recording medium in the body of the camera – many times the distance between your own eye lens and recording medium, the retina. This difference in focal length is the cause of the differing images. A low optical power lens with a long focal length will have high magnification, causing distant objects to appear larger and narrowing the field of view (see section 12.something). A high optical power lens with a short focal length, such as your eye, will have low magnification and a larger field of view by comparison. Mystery solved!
-
-<br>
+<br/>
 
 :::: {.box-content .your-turn-content}
-
 ::: {.box-title .your-turn-top}
 #### Your Turn! {-}
 :::
-
 <p id="box-text">
-
 When you return from your trip, your friend decides to test you on your new skills and shows you these additional photos they took of Mt Assiniboine in nearly identical spots on the same day. They ask you which photo was taken with a longer camera lens. How can you know?
 *Try this*: from the peak of Mt Assiniboine (the very big one), draw a line straight downwards or cover half of the photo with a piece of paper, and then do the same for the other photo. Does the line or paper edge intersect at the same points of the foreground in each photo? Can you see the same parts of the mountains in the foreground? Use the rock and snow patterns for reference. If the cameras were the same focal length, even with different cropping and lighting as seen here, the answers should both be yes. Can you tell which photo was taken with a 67mm lens and which was taken with a 105mm lens? See the answers at the end of the chapter.
-  
-<br>
-
-```{r 12-assiniboine-day, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-
-fig_cap <- paste0("Mt Assiniboine, image one. Kyle Maguire. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
-
-knitr::include_graphics(here::here("images", "12-assiniboine_day.png"))
-
-```
-
-<br>
-
-```{r 12-assiniboine-sunset, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-
-fig_cap <- paste0("Mt Assiniboine, image two. Kyle Maguire. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
-
-knitr::include_graphics(here::here("images", "12-assiniboine_sunset.png"))
-
-```
-
-
 </p>
 
+```{r 12-assiniboine-day, fig.cap = fig_cap, out.width="90%", echo = FALSE}
+fig_cap <- paste0("Mt Assiniboine, image one. Kyle Maguire, CC-BY-SA-4.0")
+knitr::include_graphics(here::here("images", "12-assiniboine_day.png"))
+```
+<br/>
+
+```{r 12-assiniboine-sunset, fig.cap = fig_cap, out.width="90%", echo = FALSE}
+fig_cap <- paste0("Mt Assiniboine, image two. Kyle Maguire, CC-BY-SA-4.0")
+knitr::include_graphics(here::here("images", "12-assiniboine_sunset.png"))
+```
+<br/>
 ::::
-
-<br>
-
-### Principle Points
-
-_Wondering if this section is necessary. In order to explain principle points, we would need to explain principle planes, which requires an in-depth explanation of lens shapes, light physics, refraction, and sign conventions of light rays, which we truncated from the previous section. I suggest removing it if you don't think it is key to the chapter._
 
 ### Field of View
 
@@ -251,28 +151,16 @@ Building and launching remote sensing systems is very costly, so its in our best
 
 Examples of optical systems with different degrees of motion are given in table \@ref(fig:12-DoM-table).
 
-<br>
-
-
 ```{r 12-DoM-table, fig.cap = fig_cap, out.width="100%", echo = FALSE}
-
-fig_cap <- paste0("Table showing examples of motion in remote sensing systems")
-
+fig_cap <- paste0("Table showing examples of motion in remote sensing systems.")
 table <- as.data.frame(read.csv(here::here("data", "12", "DoM-table.csv")))
-
 knitr::kable(table)
-
 ```
-
-<br>
+<br/>
 
 Remote sensing systems typically have zero, one, or two degrees of motion. Rarely do optical systems have all three. There are two reasons for this: first that its not necessary to have so much adjustment, and second that more moving parts means a higher possibility of malfunction, which is a real headache when the defunct system could be 700 km above the Earth's surface.
 
 When a remote sensing system has two or more degrees of motion, we introduce a second measure of FOV called the *instantaneous field of view*, or *IFOV*. The FOV tells us what the remote sensing system is capable of seeing through its entire range of motion. The IFOV tells us what the remote sensing system can detect in a single given moment in that range of motion. Frequently, the IFOV of a system is a single pixel.
-
-FOV and IFOV are measured as the angle subtended by the camera
-
-<br>
 
 :::: {.box-content .call-out-content}
 
@@ -285,7 +173,6 @@ Another hot summer day, another pesky fly buzzing around your home...and no matt
 </p>
 
 ::::
-
 
 ## Perspectives
 
@@ -310,11 +197,8 @@ There are four camera perspectives used for Earth observation discussed here: ae
 The plane of the lens is perpendicular to the ground plane and the lens vector is pointed straight downwards at the ground. Figure \@ref(fig:12-aerial-plane) is an example.
 
 ```{r 12-aerial-plane, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-
-fig_cap <- paste0("[Aerial photo of forest, road, and river near Kitimat, BC](https://unsplash.com/photos/UFwW97AP0LI). [Ben den Engelsen](https://unsplash.com/@benjeeeman) on Unsplash.[Unsplash License](https://unsplash.com/license)")
-
+fig_cap <- paste0("Aerial photo of forest, road, and river near Kitimat, British Columbia. [Ben den Engelsen](https://unsplash.com/@benjeeeman) on Unsplash. [Unsplash License.](https://unsplash.com/license)")
 knitr::include_graphics(here::here("images", "12-aerial-plane.png"))
-
 ```
 
 Aerial imagery can be taken from remotely piloted aircraft systems (RPAs), airplanes, or satellites and thus has a huge range of resolutions and area coverage. It's highly sensitive to adverse weather, cloud cover or poor air quality, and variable lighting, so it needs to be carefully timed or collected at frequent intervals to account for unusable data.
@@ -329,35 +213,25 @@ Common applications:
 _It's important to note that the "ground plane" refers to a plane tangent to the geoid and not the physical ground surface. In variable terrain such as mountains, much of the ground will be seen "at an angle", but the overall camera perspective is unchanged. See figures \@ref(fig:12-aerial-good) and \@ref(fig:12-aerial-bad) for a visualization of what this looks like with regards to aerial imagery._
 
 ```{r 12-aerial-good, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-
-fig_cap <- paste0("How aerial imagery should be taken. Claire Armour.<a href='",baseurl,"#fig:12-aerial-good'> Animated figure can be viewed in the web browser version of the textbook</a>. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
-
+fig_cap <- paste0("How aerial imagery should be taken. <a href='",baseurl,"#fig:12-aerial-good'> Animated figure can be viewed in the web browser version of the textbook</a>. Claire Armour, CC-BY-SA-4.0")
 knitr::include_graphics(here::here("images", "12-aerial-good.gif"))
-
 ```
 
 ```{r 12-aerial-bad, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-
-fig_cap <- paste0("How aerial imagery should NOT be taken. Claire Armour.  <a href='",baseurl,"#fig:12-aerial-bad'>Animated figure can be viewed in the web browser version of the textbook</a> --> [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
-
+fig_cap <- paste0("How aerial imagery should NOT be taken. <a href='",baseurl,"#fig:12-aerial-bad'>Animated figure can be viewed in the web browser version of the textbook</a> Claire Armou, CC-BY-SA-4.0")
 knitr::include_graphics(here::here("images", "12-aerial-bad.gif"))
-
 ```
+<br/>
 
 ## Nadir Perpsective
 
 The plane of the lens is perpendicular to the ground plane and the lens vector is pointed straight upwards towards the sky. Figure \@ref(fig:12-nadir-image) is an example of a nadir image.
 
-
 ```{r 12-nadir-image, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-
-fig_cap <- paste0("[Looking towards the sky through the trees in a forest in Sweden](https://unsplash.com/photos/Mg1xk9i0yEU). [Joachim Bohlander](https://unsplash.com/@joacimbohlander) on Unsplash.[Unsplash License](https://unsplash.com/license)")
-
+fig_cap <- paste0("Looking towards the sky through the trees in a forest in Sweden. [Joachim Bohlander](https://unsplash.com/@joacimbohlander) on Unsplash. [Unsplash License.](https://unsplash.com/license)")
 knitr::include_graphics(here::here("images", "12-nadir-image.png"))
-
 ```
-
-<br>
+<br/>
 
 For terrestrial ecosystem applications, nadir imagery will be taken from a terrestrial platform such as a handheld camera or LiDAR apparatus or a sub-canopy drone. Nadir imagery is less sensitive to cloud cover but will still be impacted by adverse weather and variable lighting. For example, an unmonitored camera placed on or near the ground can easily become obscured by dirt, water, or snow. Nadir perspective photos are ideally suited for capturing imagery where both the sky and structures on the ground need to be visible.
 
@@ -376,13 +250,10 @@ Common applications:
 The plane of the lens is _not_ perpendicular to the ground plane - essentially, if it's not aerial and it's not nadir, it's oblique. The vast majority of imagery you seen on social media, in the news, or on TV is from an oblique perspective. Oblique imagery is ideally suited for comparing object sizes or viewing areas which would be otherwise occluded in aerial imagery. Nearly all terrestrial platforms take oblique imagery and it is readily used for airborne and spaceborne platforms. A scanning platform will have an oblique perspective when it is not at the nadir or zenith of its scan arc. Figure \@ref(fig:12-oblique-louise) is an example of an oblique image of a natural area.
 
 ```{r 12-oblique-louise, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-
-fig_cap <- paste0("[Oblique image of mountainside trees in Lake Louise, Alberta, Canada](https://unsplash.com/photos/P36KI_ws3vs). [Vlad Shapochnikov](https://unsplash.com/@vladshap) on Unsplash. [Unsplash License](https://unsplash.com/license)")
-
+fig_cap <- paste0("Oblique image of mountainside trees in Lake Louise, Alberta, Canada. [Vlad Shapochnikov](https://unsplash.com/@vladshap) on Unsplash. [Unsplash License.](https://unsplash.com/license)")
 knitr::include_graphics(here::here("images", "12-oblique_louise.png"))
-
 ```
-
+<br/>
 
 Common applications:
 - *Viewing and measuring forest understorey and mid canopy*
@@ -395,160 +266,84 @@ Common applications:
 
 A hemispherical perspective has less to do with camera positioning and more to do with field of view, but it is still a "perspective". It captures imagery in the half-sphere (hemisphere) directly in front of the lens. The radius of the hemisphere is dependent on the lens size and optical power of the hemispherical lens used in the camera. Figure X below visualizes a hemispherical perspective.
 
-<br>
-
 ```{r 12-hemisphere-view, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-
-fig_cap <- paste0("Visualization of a hemispherical perspective. Claire Armour. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
-
+fig_cap <- paste0("Visualization of a hemispherical perspective. Claire Armour, CC-BY-SA-4.0")
 knitr::include_graphics(here::here("images", "12-hemisphere-view.png"))
-
 ```
-
-<br>
+<br/>
 
 Due to the unusual shape of the lens, it captures a much larger proportion of a scene than we could normally take in without swiveling our heads or stitching photos into a mosaic, such as a panorama. A hemispherical lens will produce a circular rather than rectilinear output. The lens curvature will cause objects in the image to be highly distorted and, unlike rectilinear photos, cannot be easily divided into pixels for analysis. However, hemispherical perspectives are uniquely suited to viewing large expanses of a scene all at once. For this reason, it is highly favourable for sports cameras, security cameras, and natural monitoring. Figures \@ref(fig:12-hemispherical-lens) and \@ref(fig:12-newfoundland-from-space) shows hemispherical perspectives from two very different angles.
 
-<br>
-
 ```{r 12-hemispherical-lens, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-
-fig_cap <- paste0("[Hemispherical photo taken in the Bavarian forest](https://en.wikipedia.org/wiki/File:Hemispherical_photo1.png). [Martin Wegmann](https://commons.wikimedia.org/wiki/User:Wegmann). [CC BY 3.0 Unported](https://creativecommons.org/licenses/by/3.0/)")
-
+fig_cap <- paste0("Hemispherical photo taken in the Bavarian forest. [Martin Wegmann](https://commons.wikimedia.org/wiki/User:Wegmann), CC-BY-3.0 Unported.")
 knitr::include_graphics(here::here("images", "12-hemispherical-lens.png"))
-
 ```
-
-<br>
+<br/>
 
 ```{r 12-newfoundland-from-space, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-
-fig_cap <- paste0("[Picture of Newfoundland, Canada, taken by David Saint-Jacques during his space mission.] (https://asc-csa.gc.ca/eng/multimedia/search/image/watch/13330). [Canadian Space Agency/NASA](https://asc-csa.gc.ca/eng/terms.asp#copyright). [CC BY 3.0 Unported](https://creativecommons.org/licenses/by/3.0/)")
-
+fig_cap <- paste0("Picture of Newfoundland, Canada, taken by David Saint-Jacques during his space mission. [Canadian Space Agency/NASA](https://asc-csa.gc.ca/eng/terms.asp#copyright), CC-BY-3.0 Unported.")
 knitr::include_graphics(here::here("images", "12-newfoundland_from_space.png"))
-
 ```
-
-<br>
+<br/>
 
 Common applications
 - *Astronomy and cosmological observation*
 - *Tracking road and trail usage by wildlife, humans, and/or transport vehicles*
 - *Measuring Leaf Area Index (LAI) for the entire canopy*
 
-
-LINE BREAK
-
-
 ## Sensors
-
-Sensor intro - Paul
 
 ## Detectors
 
-Paul
-
 ## Analog-to-Digital Converters
-
-Paul
 
 ## Panchromatic Sensors
 
-Paul
-
 ## Multispectral Sensors
-
-Paul
 
 ## Hyperspectral Sensors
 
-Paul
-
-
-
 ## Platforms
-
-*_Relocated intro text from Claire:_*
-
-The surface of the Earth is around 510 million square kilometres, or 323 billion hockey rinks, so as you can imagine, capturing even a small percentage of that area is a daunting task. Recent advancements in astrophysics and aerospace research have allowed us to conceive, build, and launch satellites from all over the globe to measure Earth from space. In fact, no fewer than 27,000 objects, including decommissioned platforms and debris, are currently whizzing through Earth’s orbit at eye-watering speeds of 7 kilometres per second or more (NASA, 2021). The image shown below is a visualization of all these objects in Earth’s orbit. If you are curious about where individual satellites are located, check out “Stuff in Space”, a website that visualizes satellite orbits all over the globe using real-time data. [Click here](http://www.stuffin.space/ "Stuff in Space") to open the webpage on your browser and try clicking some satellites to see their orbit and various parameters such as altitude, velocity, country of origin, and more.
 
 ## Terrestrial Systems
 
-Paul
-
 ## Aerial systems
-
-Paul
 
 ## Satellite Systems
 
-Paul
+The surface of the Earth is around 510 million square kilometres, or 323 billion hockey rinks, so as you can imagine, capturing even a small percentage of that area is a daunting task. Recent advancements in astrophysics and aerospace research have allowed us to conceive, build, and launch satellites from all over the globe to measure Earth from space. In fact, no fewer than 27,000 objects, including decommissioned platforms and debris, are currently whizzing through Earth’s orbit at eye-watering speeds of 7 kilometres per second or more (NASA, 2021). The image shown below is a visualization of all these objects in Earth’s orbit. If you are curious about where individual satellites are located, check out “Stuff in Space”, a website that visualizes satellite orbits all over the globe using real-time data. [Click here](http://www.stuffin.space/ "Stuff in Space") to open the webpage on your browser and try clicking some satellites to see their orbit and various parameters such as altitude, velocity, country of origin, and more.
 
-## Orbital Physics
+### Orbital Physics
 
-Paul
+### Low Earth Orbit
 
-## Low Earth Orbit
+### Medium Earth Orbit
 
-Paul
+### Polar and Sun-synchronous Orbit
 
-## Medium Earth Orbit
-
-Paul
-
-## Polar and Sun-synchronous Orbit
-
-Paul
-
-## Geostationary Orbit
-
-Paul
-
-## Lagrange Points
-
-Paul
-
-
+### Geostationary Orbit
 
 ## Important Satellite Systems for Environmental Management
 
-## LANDSAT
+### LANDSAT
 
-## RADARSAt
+### RADARSAT
 
-## Advanced Very High Resolution Radiometer (AVHRR)
+### Advanced Very High Resolution Radiometer (AVHRR)
 
-## Moderate Resolution Spectroradiometer (MODIS)
+### Moderate Resolution Spectroradiometer (MODIS)
 
-## ICESat
+### ICESat
 
-## Advanced Spaceborne Thermal Emission and Reflection Radiometer (ASTER)
+### Advanced Spaceborne Thermal Emission and Reflection Radiometer (ASTER)
 
-## Defense Meteorology Satellite Program (DMSP)
+### Defense Meteorology Satellite Program (DMSP)
 
-## Visible Infrared Imaging Radiometer Suite (VIIRS)
+### Visible Infrared Imaging Radiometer Suite (VIIRS)
 
-## WildfireSat
-
-:::: {.box-content .case-study-content}
-
-::: {.box-title .case-study-top}
-## Case Study: Title of Case Study Here 
-You see textual case study content here
-
-## Case Study Title Max of Forty Characters {#box-text -}
-
-<p id="box-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent non magna non nunc auctor eleifend. Etiam fringilla fermentum nisl at volutpat. Duis sodales lorem interdum, posuere neque sollicitudin, malesuada nisl. Sed laoreet commodo dui et cursus. Curabitur vel porta mauris. In lacinia ac ex ac varius. Nullam at vulputate ligula. Nunc sed faucibus urna, eget placerat sapien. Fusce ut lorem a ante congue consequat et sed tortor. Integer neque urna, vehicula at aliquam non, luctus non mi. Pellentesque et massa vehicula, cursus erat id, aliquet sapien. Sed rhoncus vehicula risus, vel aliquam eros porta eget. Etiam maximus, massa in pretium semper, est libero feugiat ipsum, quis tempor nunc libero in nibh. Nunc sollicitudin mattis metus ut rutrum. Donec urna purus, sodales id nibh in, ultricies tincidunt nibh. Proin porta accumsan aliquet.</p>
-
-<p id="box-text">Cras convallis erat ante, ut tristique est tempor elementum. Nam mollis, ipsum at vehicula vestibulum, est magna finibus nisl, et laoreet metus massa et ipsum. Proin eget eros ac odio euismod volutpat et ac diam. Cras viverra ut libero vel pulvinar. Duis nisi magna, sagittis id ligula ac, efficitur commodo eros. Nulla tincidunt id nulla in lobortis. Sed non mi eu mi fermentum cursus. In elit velit, semper sed gravida at, imperdiet sed nibh. Aliquam quis massa malesuada, venenatis nunc sed, malesuada nulla. Vestibulum malesuada purus ut ex ullamcorper, ut blandit lacus lobortis. Curabitur scelerisque velit justo, quis porttitor purus efficitur ut. Phasellus nec arcu vestibulum, consequat ante id, elementum velit. Proin arcu tortor, cursus vitae sem id, congue semper urna. Integer tempus in est eu consequat. Donec sodales, quam vel finibus faucibus, leo ante dictum quam, id tempus ligula dolor quis erat. Curabitur non elementum sem. Mauris placerat fermentum orci non lacinia. Ut imperdiet dui lectus, ac malesuada felis euismod sed. Nulla non volutpat dui, in suscipit turpis.</p>
-
-<p id="box-text">Case studies should have at least one image or map (no more than 2 total) and the written length should be around 300 words (shown above). Any references to external literature should by hyperlinked with the Digitial Object Identifier (DOI) permanent URL and [entered into the bibliography](https://bookdown.org/yihui/bookdown/citations.html){target="_blank"}. Avoid linking to external resources without a DOI and permanent URL. Contact Paul or try using the Leaflet package in R if you want to add an interactive web map.</p>
-
-::::
+### WildfireSat
 
 ## Summary
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
 
 ## Reflection Questions {-}
 
@@ -561,16 +356,3 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem
 
 2. Given ipsum, solve for lorem.
 3. Draw ipsum lorem.
-
-`r if (knitr::is_html_output()) '
-## Recommended Readings {-}
-'`
-
-Ensure all inline citations are properly referenced here.
-
-```{r include=FALSE}
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'htmlwidgets', 'webshot', 'DT',
-  'miniUI', 'tufte', 'servr', 'citr', 'rticles'
-), 'packages.bib')
-```

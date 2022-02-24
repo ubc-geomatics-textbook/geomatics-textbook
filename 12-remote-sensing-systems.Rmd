@@ -42,7 +42,7 @@ The range of uses for remote sensing platforms are dazzling in number, allowing 
 
 ### Key Terms {-}
 
-Absorption, Aerial, Curvature, Focus, Geostationary, Hyperspectral, LiDAR, Multispectral, Nadir, Oblique, Orbit, Panchromatic, Radiometric, Reflection, Refraction, Resolution, Spectral, Sun-synchronous, Thermal
+Absorption, Aerial, Biconcave, Biconvex, Convex, Concave, Curvature, Focus, Geosynchronous Equitorial Orbit, Hyperspectral, LiDAR, Low Earth Orbit, Multispectral, Nadir, Near-Polar Orbit, Oblique, Orbit, Panchromatic, Radiometric, Reflection, Refraction, Resolution, Spectral, Sun-Synchronous Orbit, Thermal
 
 ## Optical System Basics
 
@@ -66,7 +66,7 @@ Now, picture another scene: you are scrolling through social media and you see a
 
 Actually, yes, you are – by both your eyes *and* the camera your friend used. We like to think that our eyes show us the world as it truly is and that everything else is a facsimile, but in truth, all optical systems alter the scenes around us to show us what we need to see. From an evolution standpoint, you can see why clear resolution of close-range objects would be of vital importance for humans – think distinguishing edible plants from poisonous ones, hunting prey, reading facial expressions, etc. We can make out human-sized objects up to a distance of three kilometres in good lighting (https://www.livescience.com/33895-human-eye.html), but if you are interested in seeing something far away, such as a mountainside or a celestial body, you’ll have to trade in your natural close-range viewing abilities for a system specialized for distant details – e.g., binoculars or a telescope. The distance at which objects can be resolved and how they appear in an image lies with the lens. Read on below to learn about how different lens designs influence the appearance of a scene or object, and keep in mind how these designs may be used in various earth observation applications.
 
-Most, if not all, lenses on optical systems for remote sensing are **spherical lenses**, called that because each side of the lens is spherical in shape, similar to a bowl. A **convex** optical surface curves outward from the lens centre, whereas a **concave** optical surface curves inward toward the lens centre. Though not spherical, a **planar** or flat optical surface may be used as well. A spherical lens is formed by joining two optical surfaces – concave, convex, and/or planar – back-to-back. A **biconvex** or positive lens is two convex surfaces, and a **biconcave** or negative lens is - you guessed it - two concave surfaces. The *radius of curvature* is the measure of how much an optical surface “bulges” or “caves”. If you imagine tracing the edge of the surface in an arc and continuing the curve all the way around in a circle, the radius of this imagined circle would be the radius of curvature. Biconvex and biconcave lenses can be “equiconvex”, meaning they have the same spherical curvature on each side, but may also have uneven curvatures. The lens in the human eye is an example of a lens with uneven curvatures – our radius of curvature is higher at the front. Figures \@ref(fig:12-RoC-convex) and \@ref(fig:12-RoC-concave) demonstrate how the radius of curvature is measured for both concave and convex optical surfaces.
+Most, if not all, lenses on optical systems for remote sensing are **spherical lenses**, called that because each side of the lens is spherical in shape, similar to a bowl. A **convex** optical surface curves outward from the lens centre, whereas a **concave** optical surface curves inward toward the lens centre. Though not spherical, a planar or flat optical surface may be used as well. A spherical lens is formed by joining two optical surfaces – concave, convex, and/or planar – back-to-back. A **biconvex** or positive lens is two convex surfaces, and a **biconcave** or negative lens is - you guessed it - two concave surfaces. The *radius of curvature* is the measure of how much an optical surface “bulges” or “caves”. If you imagine tracing the edge of the surface in an arc and continuing the curve all the way around in a circle, the radius of this imagined circle would be the radius of curvature. Biconvex and biconcave lenses can be “equiconvex”, meaning they have the same spherical curvature on each side, but may also have uneven curvatures. The lens in the human eye is an example of a lens with uneven curvatures – our radius of curvature is higher at the front. Figures \@ref(fig:12-RoC-convex) and \@ref(fig:12-RoC-concave) demonstrate how the radius of curvature is measured for both concave and convex optical surfaces.
 
 ```{r 12-RoC-convex, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 fig_cap <- paste0("Measuring the radius of curvature for a convex optical surface. Claire Armour, CC-BY-SA-4.0")
@@ -247,7 +247,7 @@ Common applications:
 
 ## Oblique Perspective
 
-The plane of the lens is _not_ perpendicular to the ground plane - essentially, if it's not aerial and it's not nadir, it's oblique. The vast majority of imagery you seen on social media, in the news, or on TV is from an oblique perspective. Oblique imagery is ideally suited for comparing object sizes or viewing areas which would be otherwise occluded in aerial imagery. Nearly all terrestrial platforms take oblique imagery and it is readily used for airborne and spaceborne platforms. A scanning platform will have an oblique perspective when it is not at the nadir or zenith of its scan arc. Figure \@ref(fig:12-oblique-louise) is an example of an oblique image of a natural area.
+If the plane of the lens is _not_ perpendicular to the ground plane, then the imagery is considered **oblique**. Oblique imagery is ideally suited for comparing object sizes or viewing areas that would be otherwise occluded in aerial imagery. Nearly all terrestrial platforms take oblique imagery and it is readily used for airborne and spaceborne platforms. A scanning platform will have an oblique perspective when it is not at the nadir or zenith of its scan arc. Figure \@ref(fig:12-oblique-louise) is an example of an oblique image of a natural area.
 
 ```{r 12-oblique-louise, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 fig_cap <- paste0("Oblique image of mountainside trees in Lake Louise, Alberta, Canada. [Vlad Shapochnikov](https://unsplash.com/@vladshap) on Unsplash. [Unsplash License.](https://unsplash.com/license)")
@@ -293,61 +293,94 @@ Common applications
 
 ## Sensors
 
-## Detectors
+The sensor is the subsystem that is responsible for digitally recording the intensity of electromagnetic radiation. Sensors are  engineered in different ways to suit the type of electromagnetic radiation that needs to be recorded. However, most sensors will by comprised by three primary elements: a filter, an array of detectors, and an analog-to-digital converter. The filter is responsible for ensuring that only the desired wavelength of electromagnetic radiation enters the sensor. For example, in order to image only the near infrared part of the spectrum, a filter is needed to block out photons of all other wavelengths from entering the sensor. Once the desired wavelength of electromagnetic radiation is in the sensor, then the photons fall onto detectors, which are responsible for recording the electromagnetic radiation at a specific location in the array. Finally, the analog-to-digital converter is responsible for converting the photon energy into a measurable electrical charge that eventually becomes the digital number in the image for a given pixel. In summary, the photons enter the telescope or camera lens, are focused onto a plane through a lens, then filtered by wavelength, then they fall onto individual detectors before being converted to digital signals that represent numbers in a raster image. This whole process is illustrated in Figures \@ref(fig:12-lens-sensor-filter-detector-ADC) below.
 
-## Analog-to-Digital Converters
+```{r 12-lens-sensor-filter-detector-ADC, fig.cap = fig_cap, out.width="90%", echo = FALSE}
+fig_cap <- paste0("Electromagnetic radiation enters the lens, where it is refracted and focused onto a surface containing the digital sensor. An array of detectors are arranged on the digital sensor that represent different pixel locations in the output raster image. Filters are used to ensure only specific wavelengths are recorded by each detector. Energy from photons is converted to electrical charges and then converted to digital numbers by the analog-to-digital converter. Pickell, CC-BY-SA-4.0")
+knitr::include_graphics(here::here("images", "12-lens-sensor-filter-detector-ADC.png"))
+```
+<br/>
 
-## Panchromatic Sensors
+### Panchromatic Sensors
 
-## Multispectral Sensors
+### Multispectral Sensors
 
-## Hyperspectral Sensors
+### Hyperspectral Sensors
 
 ## Platforms
 
-## Terrestrial Systems
+### Terrestrial Systems
 
-## Aerial systems
+### Aerial Systems
 
-## Satellite Systems
+Aerial photography is covered in more detail in Chapter 14.
 
-The surface of the Earth is around 510 million square kilometres, or 323 billion hockey rinks, so as you can imagine, capturing even a small percentage of that area is a daunting task. Recent advancements in astrophysics and aerospace research have allowed us to conceive, build, and launch satellites from all over the globe to measure Earth from space. In fact, no fewer than 27,000 objects, including decommissioned platforms and debris, are currently whizzing through Earth’s orbit at eye-watering speeds of 7 kilometres per second or more (NASA, 2021). The image shown below is a visualization of all these objects in Earth’s orbit. If you are curious about where individual satellites are located, check out “Stuff in Space”, a website that visualizes satellite orbits all over the globe using real-time data. [Click here](http://www.stuffin.space/ "Stuff in Space") to open the webpage on your browser and try clicking some satellites to see their orbit and various parameters such as altitude, velocity, country of origin, and more.
+### Satellite Systems
 
-### Orbital Physics
+## Orbital Physics
 
-### Low Earth Orbit
+**Orbits** are curved paths around a celestial object like the Earth or the Moon. Sir Issac Newton observed three important Laws of Motion that are relevant for describing how orbits work:
+- The First Law of Inertia: an object will remain at rest or a constant speed of motion until acted upon by another force
+- The Second Law of Acceleration: the acceleration of an object depends on its mass and and the amount of force applied
+- The Third Law of Action and Reaction: every force acting on an object has an equal force that reacts in the opposite direction 
 
-### Medium Earth Orbit
+The First Law says that anything moving through space will continue to move through space at a constant speed forever (even if that speed is 0) unless another object exerts some force on it. The Second Law says that objects can accelerate with force, but more massive objects require more force. Finally, the Third Law constrains the other two with the fact that every interaction between two objects causes two forces to occur in opposite directions.
 
-### Polar and Sun-synchronous Orbit
+In the simplest terms, orbits form when two objects are in motion near each other in the vacuum of space. For satellites to reach orbit around Earth, they must accelerate at very high speeds to escape Earth's gravity and maintain their inertial motion (Second Law). At specific speeds, satellites can maintain their motion and continue to interact with Earth, exerting a small force on Earth that is reciprocated (Third Law). The exact path of an orbit is a function of the mass and gravitational acceleration between the two objects. In other words, objects orbit each other and are in constant free fall towards the other due to the Third Law. For example, the Earth is falling towards the Moon and the Moon is falling towards the Earth. Both objects are orbiting around the same imaginary point representing the center of mass of both objects. The same physics apply to the orbits of satellites around Earth. Since Earth has much more mass than any artificial satellite, the center of mass between Earth and any satellite is generally near the center of Earth itself, thus we see the illusion that the satellite "orbits" Earth.
 
-### Geostationary Orbit
+Consider Newton's cannonball thought experiment: you fire a cannonball perpendicular to Earth's surface at the top of a tall mountain. If the cannonball is traveling at 0 $km·s^{-2}$, then the cannonball falls to the ground due to the force of gravity. If the cannonball is traveling at 1 $km·s^{-2}$, then the cannonball travels some distance over an arc before it eventually falls back to Earth due to gravity. If the cannonball is traveling at least 7.8 $km·s^{-2}$, then the speed of the cannonball is roughly equivalent to the force of gravity that is trying to pull the cannonball back to Earth and therefore the cannonball maintains an elliptical orbit around Earth. In other words, the velocity of the  cannonball is faster over Earth than it is falling towards Earth, which results in a curved path or orbit. 
+
+Another important force is drag, which is the equal force applied in the opposite direction to acceleration (Third Law). Drag is important for satellites to reach orbit and stay there. Earth's atmosphere exerts an equal and opposite force to the direction the space vehicle is leaving the launchpad and also creates friction that can slow down satellites that are near the transition between the atmosphere and space. Thus, in order for satellites to maintain orbit, they must travel at high speeds and also high altitudes above the ground to avoid the force of drag. Generally, the speed of a satellite is inversely related to the altitude. So satellites that are closer to Earth must travel at much faster speeds than satellites that are farther from Earth. In the following sections, we will look at some examples of different types of orbits and their role in specific remote sensing systems.
+
+### Low Earth Orbit (LEO)
+
+**Low Earth Orbit (LEO)** is a critical entry point to space because it marks the transition between Earth's upper atmosphere and the vacuum of space. Many Earth-observing satellites are placed in LEO between 200-2,000 km altitude above Earth and this region comprises Earth's thermosphere and exosphere layers of the atmosphere. At the extreme of this range, Earth's atmosphere becomes so rarefied that individual atoms of hydrogen and helium can travel hundreds of kilometers without encountering another atom. Many of these atoms will be swept away by solar winds into the depths of space and the density of the atmosphere is so low that it is treated as a vacuum. Thus, drag on a satellite from Earth's atmosphere is practically nonexistent at these altitudes. 
+
+Relatively speaking, LEO is the most crowded region of near-Earth space due to decades of space vehicle launches and rare satellite collisions that have left behind debris, small particles, and whole components of past space vehicles. As a consequence, it is also the most dangerous region of near-Earth space because even the smallest space debris can be traveling at orbital speeds of up to 14 $km·s^{-2}$. Significant care is taken to track and model space debris because all satellite and human space craft must navigate LEO in order to reach higher orbital altitudes. 
+
+### Near-Polar and Sun-synchronous Orbits
+
+**Near-polar or sun-synchronous orbits** are a special type of LEO where the satellite follows a path that travels approximately from pole to pole. The special property for this orbit is that the orbital period of 96-100 minutes (the time needed to complete a full orbit around Earth) is approximately equivalent to the timing of Earth's rotation. This results in the satellite crossing the Equator (or any other parallel on Earth, depending on the inclination) twice at the same local time, once during the day and once during the night. This synchronization with the Sun is very important for many passive Earth observing satellites that require consistent illumination conditions from image to image. 
+
+:::: {.box-content .call-out-content}
+
+::: {.box-title .call-out-top}
+## Recall This {-}
+:::
+
+<p id="box-text">
+Earth is an oblate ellipsoid with a slightly shorter axis of rotation than the equatorial axis, so a polar orbiting satellite can vary in "altitude" by as much as 30 km.
+</p>
+
+::::
+
+### Medium Earth Orbit (MEO)
+
+**Medium Earth Orbit (MEO)** occurs at altitudes between 2,000-35,786 km or orbital periods more than 2 hours and less than 24 hours. This region of space is much less crowded compared with LEO and satellite activity is primarily characterized by navigation and communication services. Satellites in MEO are traveling at nearly half the speed (~4 $km·s^{-2}$) compared with LEO satellites (7.8 $km·s^{-2}$) and can therefore remain above the visible horizon of Earth for several hours, which is what makes satellite communication, TV broadcasts, and navigation possible. For example, Global Navigation Satellite Systems (GNSS) such as the Global Positioning Service (GPS) use a constellation of satellites in MEO that are oriented with different inclinations relative to Earth's Equator to ensure that several satellites are always in view for nearly any location on Earth (see Chapter 4 for more on GNSS).
+
+### Geosynchronous Equitorial Orbit (GEO)
+
+Were you wondering why MEO extends to such an exact number at the extreme altitude of 35,786 km? That is because 35,786 km is the distance from Earth at which the orbital period of a satellite at the Equator is equivalent to Earth's rotational period of 24 hours. This is known as **Geosynchronous Equatorial Orbit (GEO)** because this orbit only occurs directly above the Earth's Equator. Satellites in GEO are __geosynchronous__, meaning they are always visible in the same location of the sky no matter the time of day or the season. For this reason, these orbits are sometimes referred to as __geostationary__. The advantage of geostationary orbit is that the satellite can continuously image the same visible portion of Earth 24 hours a day. Thus, nearly all weather satellites are in geostationary orbits. Most communication satellites are also in geostationary orbit, allowing transmissions to be relayed across a network of geostationary satellites and ground antenna like a ping-pong ball.
 
 ## Important Satellite Systems for Environmental Management
 
-### LANDSAT
+### Coarse Resolution Sensors and Satellites
+MODIS, VIIRS (MODIS replacement), Sentinel 2
 
-### RADARSAT
+### Medium Resolution Sensors and Satellites
+Landsat, Sentinel 2
 
-### Advanced Very High Resolution Radiometer (AVHRR)
+### Fine Resolution Sensors and Satellites
+Cube Sats, SkySat (Planet), WildfireSat
 
-### Moderate Resolution Spectroradiometer (MODIS)
-
-### ICESat
-
-### Advanced Spaceborne Thermal Emission and Reflection Radiometer (ASTER)
-
-### Defense Meteorology Satellite Program (DMSP)
-
-### Visible Infrared Imaging Radiometer Suite (VIIRS)
-
-### WildfireSat
+### Active Sensors and Satellites
+GEDI on ISS, ICESat 1/2, RADARSAT 1/2 and Constellation RADARSAT Mission, Sentinel 1
 
 ## Summary
 
 ## Reflection Questions {-}
 
-1. Explain ipsum lorem.
+1. How do you define space? How far is space from the ground?
 2. Define ipsum lorem.
 3. What is the role of ispum lorem?
 4. How does ipsum lorem work?

@@ -22,15 +22,6 @@ Remote sensing systems range in size and complexity from a handheld camera to th
 
 The range of uses for remote sensing platforms are dazzling in number, allowing us to monitor severe weather events, ocean currents, land cover change, natural disturbances, forest health, surface temperature, cloud cover, urban development, and so much more with high precision and accuracy. In this chapter, we will break down the how and where of remote sensing systems and discover a few different systems used for Earth observation today.
 
-:::: {.box-content .your-turn-content}
-::: {.box-title .your-turn-top}
-#### Your Turn! {-}
-:::
-<p id="box-text">
-  What other “remote sensing systems” can you think of that you use day-to-day?
-</p>
-::::
-
 :::: {.box-content .learning-objectives-content}
 ::: {.box-title .learning-objectives-top}
 #### Learning Objectives {-}
@@ -209,7 +200,6 @@ Common applications:
   - *Calculating indices such as Normalized Difference Vegetation Index (NDVI) and Normalized Difference Burn Ratio (NDBR)*
   - *Collecting climate and weather data - think thermal maps, storm tracking, coastline changes, etc*
 
-
 _It's important to note that the "ground plane" refers to a plane tangent to the geoid and not the physical ground surface. In variable terrain such as mountains, much of the ground will be seen "at an angle", but the overall camera perspective is unchanged. See figures \@ref(fig:12-aerial-good) and \@ref(fig:12-aerial-bad) for a visualization of what this looks like with regards to aerial imagery._
 
 ```{r 12-aerial-good, fig.cap = fig_cap, out.width="90%", echo = FALSE}
@@ -293,7 +283,7 @@ Common applications
 
 ## Sensors
 
-The sensor is the subsystem that is responsible for digitally recording the intensity of electromagnetic radiation. Sensors are  engineered in different ways to suit the type of electromagnetic radiation that needs to be recorded. However, most sensors will by comprised by three primary elements: a filter, an array of detectors, and an analog-to-digital converter. The filter is responsible for ensuring that only the desired wavelength of electromagnetic radiation enters the sensor. For example, in order to image only the near infrared part of the spectrum, a filter is needed to block out photons of all other wavelengths from entering the sensor. Once the desired wavelength of electromagnetic radiation is in the sensor, then the photons fall onto detectors, which are responsible for recording the electromagnetic radiation at a specific location in the array. Finally, the analog-to-digital converter is responsible for converting the photon energy into a measurable electrical charge that eventually becomes the digital number in the image for a given pixel. In summary, the photons enter the telescope or camera lens, are focused onto a plane through a lens, then filtered by wavelength, then they fall onto individual detectors before being converted to digital signals that represent numbers in a raster image. This whole process is illustrated in Figures \@ref(fig:12-lens-sensor-filter-detector-ADC) below.
+The sensor is the subsystem that is responsible for digitally recording the intensity of electromagnetic radiation. Sensors are  engineered in different ways to suit the type of electromagnetic radiation that needs to be recorded. However, most sensors will by comprised by three primary elements: a filter, an array of detectors, and an analog-to-digital converter. The filter is responsible for ensuring that only the desired wavelength of electromagnetic radiation enters the sensor. For example, in order to image only the near infrared part of the spectrum, a filter is needed to block out photons of all other wavelengths from entering the sensor. Once the desired wavelength of electromagnetic radiation is in the sensor, then the photons fall onto detectors, which are responsible for recording the electromagnetic radiation at a specific location in the array. Finally, the analog-to-digital converter is responsible for converting the photon energy into a measurable electrical charge that eventually becomes the digital number in the image for a given pixel. In summary, the photons enter the telescope or camera lens, are focused onto a plane through a lens, then filtered by wavelength, then they fall onto individual detectors before being converted to digital signals that represent numbers in a raster image. This whole process is illustrated in Figure \@ref(fig:12-lens-sensor-filter-detector-ADC) below.
 
 ```{r 12-lens-sensor-filter-detector-ADC, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 fig_cap <- paste0("Electromagnetic radiation enters the lens, where it is refracted and focused onto a surface containing the digital sensor. An array of detectors are arranged on the digital sensor that represent different pixel locations in the output raster image. Filters are used to ensure only specific wavelengths are recorded by each detector. Energy from photons is converted to electrical charges and then converted to digital numbers by the analog-to-digital converter. Pickell, CC-BY-SA-4.0")
@@ -301,19 +291,42 @@ knitr::include_graphics(here::here("images", "12-lens-sensor-filter-detector-ADC
 ```
 <br/>
 
-### Panchromatic Sensors
-
-### Multispectral Sensors
-
-### Hyperspectral Sensors
-
 ## Platforms
+
+Remote sensing **platforms** are simply whatever a camera system or sensor is attached or affixed to. The platform can be stationary like a camera on a tripod or it can be mobile in the atmosphere or orbiting in space (Figure \@ref(fig:12-platforms). The choice of platform can impact everything from the type of imagery that can be collected to the scale and frequency of the imagery. As a general rule of thumb, the farther you are above Earth, the more expensive the platform becomes, but the cost per area imaged is reduced drastically. For example, a handheld camera is relatively cheap compared with a multi-million dollar satellite, but it would cost a lot of time and resources to image large areas with a handheld camera compared with a satellite. Scale or resolution of your imagery will also tend to decrease the farther that you get from Earth. This means that each pixel in an image is representing a larger area on the Earth's surface. In the following sections, we will look at some examples and applications of various platforms for remote sensing systems.
+
+```{r 12-platforms, fig.cap = fig_cap, out.width="90%", echo = FALSE}
+fig_cap <- paste0("Range of platforms for remote sensing systems. Image scale is represented on the y-axis in log scale. Pickell, CC-BY-SA-4.0")
+knitr::include_graphics(here::here("images", "12-platforms.png"))
+```
 
 ### Terrestrial Systems
 
+Terrestrial platforms describe any platform that is near the ground surface. Usually terrestrial remote sensing systems are fixed and immobile where the sensors or camera systems are attached to a tower or a tree, but they may also be attached to vehicles such as the Google™ Street View vehicles that collect imagery  from a 360 degree camera (Figure \@ref(fig:12-google-street-view-car). One of the obvious limitations for mounting sensors to vehicles is that they are limited to traveling on roads, which limits what can be seen from the camera. But the clear advantage is that this is a cheap platform that only requires a driving licence to operate.
+
+```{r 12-google-street-view-car, fig.cap = fig_cap, out.width="90%", echo = FALSE}
+fig_cap <- paste0("A 360 degree camera mounted on a vehicle is used for collecting street view imagery for Google™ Maps. [Gordon Leggett](https://commons.wikimedia.org/wiki/User:GRDN711), CC-BY-SA-4.0")
+knitr::include_graphics(here::here("images", "12-google-street-view-car.png"))
+```
+
+Many other terrestrial platforms are fixed or stationary, which means that they are either always observing the same feature or they might have a limited motorized range to pan from a fixed point. Phenological studies that aim to monitor the timing of different plant growth stages throughout the growing season such as budding, leaf-out and flowering will often use a stationary camera pointed towards the plant of interest. Figure \@ref(fig:12-phenological-camera-sequence) shows a time-lapse of images taken once per day at noon during the spring time near Grand Cache, Alberta. The changing leaf colour is clearly visible in the time lapse, which can be important for monitoring springtime wildfire risk (Pickell et al, 2017) or forage quality for wildlife such as Grizzly Bear (Bater et al, 2010).
+
+```{r 12-phenological-camera-sequence, fig.cap = fig_cap, out.width="90%", echo = FALSE}
+fig_cap <- paste0("Time lapse from a camera mounted on a tree. Each image is taken on a different day at noon. Figure is animated on the online version. Christopher Bater, CC-BY-SA-4.0")
+knitr::include_graphics(here::here("images", "12-phenological-camera-sequence.gif"))
+```
+
+Spectral responses from forest canopies can be monitored by Automated Multiangular SPectro-radiometer for Estimation of Canopy reflectance (AMSPEC) instruments that can be mounted to a tower that sits high above the forest canopy (Figure \@ref(fig:12-flux-tower-radiometer)). These "eyes above the forests" can provide important information about forest health and physiology. Since forest canopies are usually imaged from airborne and spaceborne platforms, these terrestrial observations provide a critical link for calibration with other imagery.
+
+```{r 12-flux-tower-radiometer, fig.cap = fig_cap, out.width="90%", echo = FALSE}
+fig_cap <- paste0("AMSPEC radiometer affixed to a carbon flux tower located in Buckley Bay, Vancouver Island, Canada. TBD, CC-BY-SA-4.0")
+knitr::include_graphics(here::here("images", "12-flux-tower-radiometer.png"))
+```
+
 ### Aerial Systems
 
-Aerial photography is covered in more detail in Chapter 14.
+
+Aerial photography is covered in more detail in [Chapter 14](https://ubc-geomatics-textbook.github.io/geomatics-textbook/image-analysis.html).
 
 ### Satellite Systems
 
@@ -380,10 +393,9 @@ GEDI on ISS, ICESat 1/2, RADARSAT 1/2 and Constellation RADARSAT Mission, Sentin
 
 ## Reflection Questions {-}
 
-1. How do you define space? How far is space from the ground?
-2. Define ipsum lorem.
-3. What is the role of ispum lorem?
-4. How does ipsum lorem work?
+1. What other “remote sensing systems” can you think of that you use day-to-day?
+2. How do you define space? How far is space from the ground?
+3. Search the web for any satellite or remote sensing system discussed in this chapter. What applications or research did you find? 
 
 ## Practice Questions {-}
 

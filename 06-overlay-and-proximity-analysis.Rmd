@@ -19,7 +19,7 @@ Introduction here.
 
 ## Key Terms {-}
 
-Overlay, Union, Intersect, Identity, Difference, Symmetrical Difference, Buffer, Near Distance, Thiessan Polygons
+Overlay, Union, Intersect, Identity, Difference, Symmetrical Difference, Buffer, Near Distance, Thiessan Polygons, Dissolve?
 
 ## Cartographic Modelling
 
@@ -136,26 +136,60 @@ knitr::kable(
 We can now see that prioritizing the top three suitable areas $ID = {8,7,1}$ for our conservation intervention will cost \$149,900, nearly exhausting our budget with \$100 left over for a party to celebrate the geomatics team. This is just one example of how cartographic modelling can provide powerful answers to very real spatial questions. Can you think of other mapped attributes, besides area, that could factor into this conservation cost analysis?
 
 ## Overlay Methods
-In the above example, the data was provided already compiled. However, we often have to gather the data ourselves. Overlay methods allow us to get more information about a spatial area, based on other spatial attributes. Say, for example, you are assessing the ecosystem services of your city's trees. This can be done at several scales: are you concerned with the city as a whole? Neighborhoods? Census tracts? Or are you assessing trees individually? The answer to this is dependent on the question. For the following example, we will be assessing the ecosystem services of trees by census tract within an Ottawa neighborhood (ward??).
+In the above example, the data was provided already compiled. However, we often have to gather the data ourselves. Overlay methods allow us to get more information about a spatial area, based on other spatial attributes. One example of a suitability analysis would be an equity analysis. These analyses exist for many areas all across the globe (cite?). Ottawa, ON, for example, has a Neighborhood Equity Index. We will looking at Ottawa's NEI and be using data from Ottawa's Open Data Portal for the rest of this chapter.
+
+(a highlighted box about the NEI)
+Ottawa's NEI looks at several variables to assess the equitability of Ottawa's census tracts. The Index was developed in 2020 (?? verify) with the goal of improving Ottawa's decision-making. The 17 variables used to develop the index fit into five broad domains: economic opportunity, social and human development,  physical environment, health, and community and belonging. (either list some of the specifics or maybe just link to the report?)
+
+While the NEI is valuable and answers questions about the general well-being of citizens, it could be improved by the addition of cultural components beyond citizens' closeness to community centres (in the physical environment domain).
+
+Say, for example, you aimed to include citizens' exposure to cultural services. Such services could be public art, green spaces, street trees, and other points of interest. The developers of the NEI did consider the amount of usable green space within walking distance. However, that value did not make it into the final index.
+
+For the rest of this chapter, we will develop a cultural index. The index can be developed at several scales: are you concerned with the city as a whole? Wards? Census tracts? Or are you assessing the service-providing assets individually? The answer to this is dependent on the question. For the following example, the study scale will be based on Ottawa's Wards in urban and suburban areas. We will be working with several datasets: Ottawa's Wards, Street Trees, Parks and Greenspaces, and the Neighbourhood Equity Index (NEI) in Ottawa. Additionally, we will be using points of interest from Niantic's crowd-sourced data. (more explanation? a cool box explaining?)
+
+
+###Dissolve
+Ottawa is a unique city due to its large amount of rural area. However, analysis of cultural services is substantially different in rural areas than it is in urban areas. The NEI included all areas within Ottawa, but our analysis will not. Our analysis will focus solely on the urban and suburban areas within Ottawa. Therefore, we must classify our wards (study areas) by their level of urbanization. Then, we will remove the areas that are not urban or suburban (such as rural areas and those classified as greenbelt). The NEI dataset comprehensively classifies the areas within Ottawa as urban, suburban, rural, greenbelt, etc. [image of classes] However, we do not need to have our data divided into as many polygons as the NEI dataset. Therefore, we will reduce the amount of polygons (and therefore the amount of data and processing power) by using the _dissolve_ tool. [Insert dissolved GIF] Dissolve reduces the number of polygons in a shapefile by grouping everything with the same chosen attribute together. In this example, the attribute was "URBAN_RURAL". 
+[example attribue table?]
+
+###Eliminate
+Post-dissolve, we would have expected the number of rows in the attribute table to reduce significantly. However, this wasn't the case. This is because there are many tiny slivers left. [image with zoomed in slivers] We can use eliminate to remove these slivers and clean up the dataset. (this probably happens more after the clip)
+
+###Clip
+Ottawa already has a dataset with the "urban boundaries" of the City. This shapefile consists of one polygon and no information within the attribute table. If we wished to solely work within Ottawa's urban boundaries without suburban distinctions, we would _clip_ the data we have so far to the urban boundary. A clip is effectively a cookie-cutter, where the boundaries of the clipping feature become the boundaries of the input feature. (the clipped extent is at least as small at the clipping extent). However, a clip does not transfer attributes of the clipping file to the clipped product. Additionally, fields such as "area" must be recalculated after a clip.[insert GIF of urban, then clipped]
+
+###Intersect
+However, we want to break down Ottawa into urban and suburban areas and exclude the rural ones. Therefore, it makes more sense for us to do an _intersect_.
+An intersect keeps only the polygons that overlap in the included datasets and results in a shapefile with the attributes of both shapefiles in the intersect. We will select the polygons that are classified as urban and suburban, and then intersect these with Ottawa's wards. This will give us a dataset with the urban and suburban extent of Ottawa's wards. You can see that some wards are both urban and suburban.[highlight this]
+
+
+```
+Although each neighborhood has a value from 1-100, we will use the ranking system developed by the people who created the NEI [cite who that is]. They categorized the neighbourhoods into four colour groups (from most to least equitable) -- Green, Light Green, Yellow, and Red. 
+[Insert image with all neighborhoods and their colours]. The creators of the NEI did not use the same neighborhood or ward boundaries as those used by the City of Ottawa census. For the analysis we will complete, the neighborhood boundaries developed by the creators of the NEI are not ideal. Therefore, we can reduce the amount of polygons (and therefore the amount of data and processing power) by using the _dissolve_ tool. [Insert dissolved GIF] Dissolve reduces the number of polygons in a shapefile by grouping everything with the same chosen attribute together. In this example, the attribute was "colour".
+Ottawa has created a Neighbourhood Equity Index (NEI). Each neighbourhood is given a value from 1-100 based on several factors. Greater numbers mean the neighbourhood is more equitable, lower numbers mean the neighborhood is less equitable. Some of the considerations were: walkability, income, commute time, accessibility of childcare, etc etc.  
+```
+
 
 ### Attribute Transfer
+things that support attribute transfer and things that dont
 
 ### Boolean Algebra
 
 ### Spatial Join
 
-### Clip
-Ottawa has a lot of data, we want something easier to work with. So we are looking at Barrhaven, the most populous Ward in Ottawa. When we download data from Ottawa, we will clip it to the size of the neighborhood. (show clip example). A clip is effectively a cookie-cutter, where the boundaries of the clipping feature become the boundaries of the clipped feature. (the clipped extent is at least as small at the clipping extent)
-
-### Intersect
 
 ### Line Intersection
 
 ### Union
 
+1:489,712
+
+
 ### Identity
 
+
 ### Erase
+coul dremove from greenspaces
 
 ### Split
 
@@ -164,20 +198,41 @@ Ottawa has a lot of data, we want something easier to work with. So we are looki
 ### Update
 
 ## Proximity Methods
+often in raster form
 
 ### Euclidean distance
 
 Raster and vector
 
 ### Buffer
+While we could solely assess the amount of green space compared to the amount of area in a ward, we would not be taking the number of green spaces into account. Green spaces affect the area around them through cooling, viewing, and the ability to recreate. Instead, we will look at the proportion of the ward that is within x distance of a green space. To do this, we will create x distance buffers around the green spaces. 
 
 ### Attribute-dependent buffer
+Some of the trees have DBH values. We will use those to create buffers to fake the tree crown sizes. Every tree that has a DBH of zero will be assumed to have a DBH of 10 cm. 
 
 ### Near Distance
+How many community gardens are nearest to that neighborhood. 
 
 ###	Thiessen Polygons
 
 ## Summary
+
+```
+the story:
+we want to make a green equity index
+tph in wards
+park per hectare in wards
+
+would be great if wards were classed by whether theyre urban or not (union)
+
+consider breaking up wards by the NEI colour within them
+
+urban, suburban, rural. 
+
+adjacency (do through buffer)
+
+keep wards with labels throughout images
+```
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
 

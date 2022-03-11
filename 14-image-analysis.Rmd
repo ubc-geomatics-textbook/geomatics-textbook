@@ -1,7 +1,178 @@
----
-editor_options:
-  markdown:
-    wrap: 72
----
-
 # Image Analysis {#image-analysis}
+
+```{r setup, include=FALSE}
+type <- "pdf" ## "pdf" or ""
+baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"
+knitr::opts_chunk$set(echo = TRUE)
+library(raster)
+library(leaflet)
+library(htmlwidgets)
+```
+
+Introduction here.
+
+:::: {.box-content .learning-objectives-content}
+
+::: {.box-title .learning-objectives-top}
+## Learning Objectives {-}
+::: 
+1. 
+::::
+
+## Key Terms {-}
+
+Term
+
+## Aerial Photography and Photogrammetry
+
+###	Pitch, roll, and yaw
+###	Stereo vision
+###	Shape
+###	Pattern
+###	Size
+###	Tone and colour
+###	Shadow
+###	Texture
+###	Association and context
+
+## Image classification
+###	Land cover versus land use
+###	Supervised classification
+###	Unsupervised classification
+###	Classification algorithms
+
+##	Time Series Analysis
+###	Change detection
+###	Detecting spectral trends
+###	Inferring surface activity
+
+##	Pattern Analysis
+###	Landscape pattern indices
+###	Class pattern indices
+###	Patch pattern indices
+### Case Study: Case Study Title Here
+
+Understanding the changes that occur overtime is extremely important for environmental studies. These changes can be monitored using remote sensing data and has been used in a variety of studies. This case study looks at how changes in vegetation health derived from Landsat-8 data were impacted by the burn severity of the 25 569 hectare Little Bobtail Lake wildfire in North-Central British Columbia.
+
+Four vegetation indices were calculated for each of the images in the study. The Normalized Difference Vegetation Index (NDVI, Rouse et al., 1974), and Tasseled Cap Transformation (TCT, Crist & Cicone, 1984) were calculated to measure vegetation health. NDVI is calculated as (Equation 1):
+
+\begin{equation}
+\tag{1}
+  NDVI = \frac{NIR - RED}{NIR + RED}
+\end{equation}
+
+$$\\[0.1in]$$
+Additionally, the Normalized Burn Ratio (NBR, García & Caselles, 1991), and the Difference Normalized Burn Ratio (dNBR, Key and Benson, 2006) were calculated. NBR (Equation 2) and the dNBR (Equation 3) are used to measure burn severity.
+
+\begin{equation}
+\tag{2}
+  NBR = \frac{NIR - SWIR}{NIR + SWIR}
+\end{equation}
+
+$$\\[0.1in]$$
+
+\begin{equation}
+\tag{3}
+  dNBR = NBR_{pre fire} - NBR_{post fire}
+\end{equation}
+
+$$\\[0.1in]$$
+The dNBR values were then scaled for each image to a range of 0-255 by using the following equation (Equation 4):
+
+\begin{equation}
+\tag{4}
+  dNBR_{Scaled} = \frac{(dNBR * 1000) + 275}{5}
+\end{equation}
+
+Each of the scaled dNBR images were then classified into four burn severity classes (Table 1). The classified dNBR image for right after the wildfire was polygonised and the burn severity polygons were then used to extract the NDVI and each of the TCT values for each year of the study.
+
+```{r, echo = FALSE, results='asis'}
+dnbr_table <- data.frame(dNBR = c("< 75", "75-118", "118-187", "> 187"),
+                        Classified = c("0", "1", "2", "3"), 
+                        Description = c("Unburned", 
+                                        "Low Severity", 
+                                        "Moderate Severity",
+                                        "High Severity"))
+knitr::kable(dnbr_table, caption = "Table 1: Classified Burn Severity Values based on the scaled dNBR values.")
+```
+
+The change in value of the NDVI and the TCT Greenness and Wetness based on burn severity can be seen in the box plots below (Figure 1). This shows the changes in the vegetation index values from before the wildfire and every year after. The burn severity had an impact on these values as there was a greater decrease in value immediately after the wildfire with the higher burn severity as well as a slower return to the pre-fire state. Additionally, based on the vegetation index used, it can be seen that there different rates of return to a pre-fire state. These differences are important to understand when choosing a vegetation index for a study.  
+
+
+```{r, echo=FALSE, results='asis', fig.cap = "Figure 1: Changes in the values of NDVI (a), TCT Greenness (b), and TCT Wetness(c) based on the burn severity of the Little Bobtail Lake wildfire from 2014 (before the wildfire) to 2020 (five years after the wildfire)."}
+knitr::include_graphics(here::here("images", "14-VIPlots.png"))
+```
+
+Wildfires create spatial patterns on the landscape which is a key factor in forest regrowth. Pattern metrics can be calculated and used to understand the changes in the spatial patterns overtime. Using the `calculate_lsm()` function found in the Landscape Metrics (v1.5.0) R package (Hesselbarth, Sciaini, and Nowosad, 2020), the Core Area (`lsm_p_core()`) patch metric was calculated for each of the classified dNBR images. Additionally, the NDVI images were classified into four classes (Table 2) and then the Core Area Metric was calculated.
+
+```{r, echo = FALSE, results='asis'}
+ndvi_table <- data.frame(NDVI = c("< 0.1", "0.1-0.14", "0.14-0.5", "> 0.5"),
+                        Classified = c("0", "1", "2", "3"), 
+                        Description = c("No Vegetation", 
+                                        "Sparse Vegetation", 
+                                        "Moderately Healthy Vegetation",
+                                        "Healthy Vegetation"))
+knitr::kable(ndvi_table, caption = "Table 2: Classified Vegetation Health Values based on the NDVI values.")
+```
+
+The changes in the Core Area of the burn severity classes showed that the High Severity class had a decrease of 2.6 hectares every year. The Low Severity class had a increase of 1.5 hectares every year and the Moderate and Unburned classes showed little change in Core Area. This was to be expected because as the vegetation regrows in the High Severity areas it changes to a lesser severity (See Map Below). For the vegetation health classes, the Sparse Vegetation class showed a 3.7 hectare increase in Core Area every year, while the other vegetation classes showed little change. These is due to the initial increase in the new vegetation in the first years after the wildfire.
+
+```{r, echo = FALSE, results='asis', message=FALSE, warning=FALSE}
+r1 <- as.factor(raster("data/14/dNBR_Class_2015.tif"))
+r2 <- as.factor(raster("data/14/dNBR_Class_2016.tif"))
+r3 <- as.factor(raster("data/14/dNBR_Class_2017.tif"))
+r4 <- as.factor(raster("data/14/dNBR_Class_2018.tif"))
+r5 <- as.factor(raster("data/14/dNBR_Class_2019.tif"))
+r6 <- as.factor(raster("data/14/dNBR_Class_2020.tif"))
+
+pal <- colorFactor(c("#1a9641", "#ffffbf", "#fdae61", "#d7191c"), values(r1),
+                   na.color = "transparent")
+labels = c("Unburned", "Low Severity", "Moderate Severity", "High Severity")
+
+dnbrMap = leaflet() %>%
+  addProviderTiles("Esri.WorldTopoMap") %>%
+  addRasterImage(r6, colors = pal, group = "dNBR 2020") %>%
+  addRasterImage(r5, colors = pal, group = "dNBR 2019") %>%
+  addRasterImage(r4, colors = pal, group = "dNBR 2018") %>%
+  addRasterImage(r3, colors = pal, group = "dNBR 2017") %>%
+  addRasterImage(r2, colors = pal, group = "dNBR 2016") %>%
+  addRasterImage(r1, colors = pal, group = "dNBR 2015") %>%
+  addLegend(pal = pal, values = values(r1),
+  title = "Burn Severity",
+  labFormat = function(type, cuts, p){paste0(labels)})%>%
+  addLayersControl(overlayGroups = c("dNBR 2015", "dNBR 2016", "dNBR 2017",
+                                     "dNBR 2018", "dNBR 2019", "dNBR 2020"),
+                   options = layersControlOptions(collapsed = FALSE))%>%
+  hideGroup(c("dNBR 2016", "dNBR 2017", "dNBR 2018", "dNBR 2019", "dNBR 2020"))
+#htmlwidgets:::knit_print.htmlwidget(dnbrMap)
+dnbrMap
+```
+
+``` {r 14-dnbr-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
+  fig_cap <- paste0("Classified Burn Severity images for the Little Bobtail Lake wildfire from 2015 to 2020.<a
+  href='",baseurl,"#fig:14-dnbr-leaflet'>Animated figure can be viewed in the web browser version of the textbook</a>. Data from Natural Resources Canada and licensed under the <a href='",nrcanlicense,">Open Government Licence - Canada </a>.Pickell, CC-BY-SA-4.0.")
+if (type == "pdf") { knitr::include_graphics(here::here("images", "02-CGVD-leaflet.PNG")) }
+```
+
+
+Figure 2: 
+
+$$\\[0.1in]$$
+
+#### References
+Crist, E. P., & Cicone, R. C. (1984). A physically-based transformation of Thematic Mapper
+data---The TM Tasseled Cap. IEEE Transactions on Geoscience and Remote sensing, (3),
+256-263.
+
+García, M. L., & Caselles, V. (1991). Mapping burns and natural reforestation using Thematic Mapper data. Geocarto International, 6(1), 31-37.
+
+Hesselbarth, M. H., Sciaini, M., & Nowosad, J. (2020, September 17). Landscape Metrics (Version 1.5.0) [Program documentation]. Retrieved 2020, from https://cran.r-project.org/web/packages/landscapemetrics/landscapemetrics.pdf
+
+Key C. H., Benson N. C. (2006) Landscape assessment: ground measure of severity, the
+Composite Burn Index, and remote sensing of severity, the Normalized Burn Index. In
+‘FIREMON: fire effects monitoring and inventory system’. (Eds D. C. Lutes, R. E.
+Keane, J. F. Caratti, C. H. Key, N. C. Benson, S. Sutherland, L. J. Gangi) USDA Forest
+Service, Rocky Mountain Research Station, General Technical Report RMRS-GTR-164-
+CD: LA1–51. (Ogden, UT)
+
+Rouse, J. W., Haas, R. H., Schell, J. A., & Deering, D. W. (1974). Monitoring vegetation systems in the Great Plains with ERTS. NASA special publication, 351(1974), 309.

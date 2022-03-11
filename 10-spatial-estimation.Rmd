@@ -21,6 +21,7 @@ library(raster)
 library(RColorBrewer)
 library(rgdal)
 library(rgeos)
+library(rgl)
 library(scales)
 library(sf)
 library(sp)
@@ -151,7 +152,7 @@ Probability sampling techniques are mostly used in studies that use extensive am
 
 ## Simple Random Sampling
 
-In simple random sampling, each sampling unit within a given population has equal probability of being selected in a sample [@thompson2012sampling].For example, suppose we would like to measure the tree heights of all the trees from a simple random sample of 60 plots with their spatial locations (given by plots center co-ordinates) from a forest divided into 625 spatially defined plots as given in **Figure 10.1**.  Notice, there is no distinctive pattern on how plots are being selected for the measurement of tree heights, this justify the **random part** of the simple random sampling. 
+In simple random sampling, each sampling unit within a given population has equal probability of being selected in a sample [@thompson2012sampling].For example, suppose we would like to measure the tree heights of all the trees from a simple random sample of 60 plots with their spatial locations (given by plots center co-ordinates) from a forest divided into 625 spatially defined plots as given in **Figure \@ref(fig:10-simple-random-sampling**.  Notice, there is no distinctive pattern on how plots are being selected for the measurement of tree heights, this justify the **random part** of the simple random sampling. 
 
 As an investigator, when we make a sequence of selections from a population, at each step, new and distinct set of sampling units are being selected in the sample, each having equal probability of being selected at each step.
 

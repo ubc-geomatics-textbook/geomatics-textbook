@@ -120,7 +120,7 @@ Some examples of adjacency and overlap topological rules:
 
 ## Intersect and Connect
 
-As we have seen from Chapter 3, lines are often used to represent phenomena that flow, so intersection and connection are important concepts for these representations. Important to understanding how connection and intersection work in planar topology, we need to understand that lines are comprised of a set of vertices and nodes. A **node** is simply the terminating vertex in a set of vertices for a line. For example, suppose the line segment $A$ has a set of vertices, $[[1,0],[1,3],[1,5]]$. Then the nodes for $A$ are $[1,0]$ and $[1,5]$ (Figure \@ref(fig:7-node)). Since nodes define the end points of a line segment, they are key to enforcing connection rules. We will look at network analysis in more detail in the next chapter. For now, let us consider two different networks that can help us conceptualize some fundamental line topology using nodes.
+As we have seen from [Chapter 3](https://ubc-geomatics-textbook.github.io/geomatics-textbook/types-of-data.html), lines are often used to represent phenomena that flow, so intersection and connection are important concepts for these representations. Important to understanding how connection and intersection work in planar topology, we need to understand that lines are comprised of a set of vertices and nodes. A **node** is simply the terminating vertex in a set of vertices for a line. For example, suppose the line segment $A$ has a set of vertices, $[[1,0],[1,3],[1,5]]$. Then the nodes for $A$ are $[1,0]$ and $[1,5]$ (Figure \@ref(fig:7-node)). Since nodes define the end points of a line segment, they are key to enforcing connection rules. We will look at network analysis in more detail in the next chapter. For now, let us consider two different networks that can help us conceptualize some fundamental line topology using nodes.
 
 ```{r, 7-node, fig.align = 'center', out.width = '75%', fig.cap=fig_cap, cached=T, echo = FALSE}
 fig_cap <- paste0("Lines are always comprised of two nodes. Line A shown here has nodes at [1,0] and [1,5]. Pickell, CC-BY-SA-4.0.")
@@ -318,7 +318,7 @@ fig_cap <- paste("Conceptual forest land cover polygon that contains a lake caus
 knitr::include_graphics("images/07-hole.png")
 ```
 
-Topologically, holes in polygons imply that another polygon shares an adjacent boundary where the hole exists, for example, from the union of two layers (see Chapter 6). In our example, the lake would comprise its own polygon that would completely fill the hole.
+Topologically, holes in polygons imply that another polygon shares an adjacent boundary where the hole exists, for example, from the union of two layers (see [Chapter 6](https://ubc-geomatics-textbook.github.io/geomatics-textbook/overlay-and-proximity-analysis.html)). In our example, the lake would comprise its own polygon that would completely fill the hole.
 
 ### Delaunay triangulation
 
@@ -478,7 +478,7 @@ knitr::include_graphics("images/07-2d-alpha-hull.gif")
 
 ## 3D topologies
 
-In this next section, a number of topologies are described that are important for 3D modeling and several examples are given using LiDAR (Light Detection and Ranging), which is the topic of Chapter 15. It is beyond the scope of this chapter to discuss the technology of LiDAR, so the reader is referred to Chapter 15 for a more in-depth discussion of LiDAR.
+In this next section, a number of topologies are described that are important for 3D modeling and several examples are given using LiDAR (Light Detection and Ranging), which is the topic of [Chapter 15](https://ubc-geomatics-textbook.github.io/geomatics-textbook/LiDAR-acquisition-and-analysis.html). It is beyond the scope of this chapter to discuss the technology of LiDAR, so the reader is referred to [Chapter 15](https://ubc-geomatics-textbook.github.io/geomatics-textbook/LiDAR-acquisition-and-analysis.html) for a more in-depth discussion of LiDAR.
 
 ### Multipatch geometries
 

@@ -30,39 +30,55 @@ Phenomena, Discrete Object, Continuous Field, Qualitative, Quantitative, Measure
 
 **Phenomenon**, noun, plural *Phenomena*: *1* a fact or situation that is observed to exist or happen, especially one whose cause or explanation is in question. *2* a remarkable person, thing, or event [Oxford's Dictionary](https://www.google.com/search?channel=trow5&client=firefox-b-d&q=phenomena).  Essentially, anything and everything are phenomenon: lightning, a country, coastlines, a dog on a kayak.  Broadly speaking, in GIS we categorize phenomena as **discrete** or **continuous**.  Both kinds of phenomena can be represented in a GIS, but they come with different considerations and cannot always be represented with the same kind of data model.
 
-![Yarrow enjoying the scenery at Aloutte Lake, she's quite the phenomenon indeed!](images/03-dog-on-a-boat.jpg){.center}
-
+```{r 3-dog-on-a-boat, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("Yarrow enjoying the scenery at Aloutte Lake, she's quite the phenomenon indeed. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-dog-on-a-boat.jpg")
+```
 <br>
 
 ### Discrete Objects
 
 Discrete objects are finite and have distinct boundaries.  Each object is a unique, self contained entity whose geography can be exactly defined.  Because each object is unique and self contained, collections of objects are countable.  A concrete example of a discrete objects would be buildings.  They are real physical objects with well defined boundaries.  We can count the number of buildings on a college campus or in a city.  National and sub-national boundaries are also discrete objects.  They (typically) have well defined boundaries and we can easily count the number of nations or provinces.  They are not, however, real physical objects.  Political boundaries are arbitrary human constructs.
 
-![Provinces are clearly delineated, distinct objects, despite having no real physical presence.](images/03-vector.png){.center}
+```{r 3-vector, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("Provinces are clearly delineated, distinct objects, despite having no real physical presence. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-vector.png")
+```
 
 ### Continuous Fields
 
 Continuous fields are infinite and lack defined boundaries.  Fields can be measured at an infinite number of locations.  However, similar values tend to cluster in space so we can often make assumptions based on finite observations of continuous fields.  One of the most common examples of a continuous field is elevation.  This is a physical property associated with every location on earth.  We can't count the "number of elevations" because space is infinitely divisible and everywhere in space can have an elevation.
 
-![Elevation of the Sunshine Coast in BC, from the NRCAN DEM (google earth engine).](images/03-elevation.png){.center}
+```{r 3-elevation, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("Elevation of the Sunshine Coast in BC, from the NRCAN DEM (google earth engine). Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-elevation.png")
+```
 
 ### Imperfect Distinctions
 
 Few phenomena will fit perfectly and exclusively into one category or the other.  That said, its helpful for us to think about the discrete v. continuous dichotomy.  As long as we recognize that it's not a perfect classification.  Whether a phenomenon is considered discrete or continuous depends on scale (both spatial and temporal) and perspective.  Some phenomenon are a bit of both.  Take the coastlines, they can be treated as discrete or continuous.  At the scale of an individual beach over hours, tides can cause wide variations in water levels/position.  How/where does one draw the discrete line representing the "coast".  At this scale, the coast isn't really a discreet object, rather a continuous field known as the inter-tidal zone.  Zoom out a bit and those fluctuations aren't particularly relevant if you want to make a map of Pacific Rim National Park.  The coast could be considered a discrete object.  But if you change the timescale and look at sea level rise projections, then you're dealing with a continuous field.
 
-![The west coast of Vancouver Island (just a screen grab from Arc, might want something better?)](images/03-beach-small-scale.png){.center}
+```{r 3-beach-small-scale, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("The west coast of Vancouver Island (just a screen grab from Arc, might want something better? Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-beach-small-scale.png")
+```
 
 A lightning strike is an electric discharge between the atmosphere and the ground.  A lightning strike is a discrete object.  The precise location of the strike can be pin pointed, the number of strikes during a storm can be counted.  But what about the actual lighting bolt?  That's more a continuous field, its not really possible to measure the exact boundaries of the path the electric discharge takes.  Then we can look at other things, like the probability of lighting strikes.  This is a continuous field, calculated from counting discrete objects.
 
-![Global lighting strike density per month. [12]](images/03-lightning-density.gif){.center}
+```{r 3-lightning-density, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("Global lighting strike density per month. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-lightning-density.gif")
+```
 
 
 ## Types of Data
 
 Within the context of a Geographic Information System, each piece of information pertaining to a phenomena can be referred to as an **Attribute**.  An phenomena can have many different attributes associated with it, but each attribute can broadly be said to address one of three questions: **What**, **When**, or **Where**?  Attributes that describe *where* are known as **Spatial Data** while all other attributes are **Non-Spatial Data**.  All data, spatial and non-spatial, can broadly be classified as either **qualitative** or **quantitative**.  These data types fundamentally different and are therefore measured on fundamentally different scales. The types of analysis we can conduct with qualitative data are more limited than quantitative data, but that does not necessarily mean quantitative data are “better” than qualitative.
 
-![Summary of the types of data.](images/03-data-types.png){.center}
-
+```{r 3-data-types, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("Summary of the types of data. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-data-types.png")
+```
 ### Qualitative Data
 
 Qualitative data are categorical; they are strictly descriptive and lack any meaningful numeric value.  They describe the qualities of a phenomenon, without giving us any numeric information.  Most qualitative data you will work with in GIS are textual or coded numerals, but there are circumstances where you may encounter non-textual data (e.g. images, sound clips, videos) in a dataset.  Qualitative data can be "spatial" in nature (e.g. relative directional descriptors: left/right, near/far, north/south), but because they lack numeric values, they cannot be used for spatial analysis.  Qualitative data can be measured on either a **Nominal** or **Ordinal** scale.
@@ -71,26 +87,40 @@ Qualitative data are categorical; they are strictly descriptive and lack any mea
 
 These are data that just consist of names or categories with no ranking or direction are nominal.  One category is not more or less, better or worse than another, they are just different.  A good example would be flower types.  Other examples would be zoning categories, colors, flavors of ice cream, place names, etc.  With nominal data, you can check for equality between entities and you can count occurrence.  These are the only operations we can do.  You can't calculate 
 
-![Each flower is different, but no flower is "more" or "less" a flower than any of the others.](images/03-flowers-nominal.png){.center}
-
-![Checking equality with flower species.](images/03-nominal-opperations.png){.center}
+```{r 3-flowers-nominal, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("Each flower is different, but no flower is 'more' or 'less' a flower than any of the others, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-flowers-nominal.png")
+```
+```{r 3-nominal-opperations, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("Checking equality with flower species, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-nominal-opperations.png")
+```
 
 
 #### Ordinal Scale
 
 These data are categories that also have a some ranking or directionality.  A good example would be relative sizes (see fig).  Some other good examples of ordinal data include spice levels (mild, medium, hot), residential zoning density (low, medium, high), and survey responses.  
 
-![We can see Yarrow is taller than her sister Shamsa, so we can rank these dogs by height.  However, we haven't measured their heights, so we don't know how much taller Yarrow is than Shamsa.  ](images/03-dogs-ordinal.png){.center}
+```{r 3-dogs-ordinal, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("We can see Yarrow is taller than her sister Shamsa, so we can rank these dogs by height. However, we haven't measured their heights, so we don't know how much taller Yarrow is than Shamsa, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-dogs-ordinal.png")
+```
 
 The only arithmetic operations we can do with nominal data are checking for equality (True/False), counting occurrences (frequencies), and calculating the mode (most frequent occurrence).  With ordinal data, we can do these operations as well, plus a few more.  We can check the order/rank (greater than, less than) and in some circumstances we can calculate the median (see figure).
 
-![In some circumstances, we can directly calculate the median (middle value) of an ordinal set.  With odd numbered sets (e.g. Group 1), the median, is simply the middle value of the set, when sorted lowest to highest.  We can always take the median when we have an odd number.  With even numbered sets, its a bit more complicated.  The median, is the average of the middle two values.  For Group 2, the middle values (5th and 6th) are both "Neutral", so we don't have an issue.  But for Group 3, the 5th value is "Neutral" and the 6th value is "Agree".  We can't directly average these two ordinal values.  One solution is to arbitrarily assign a numeric score to the ordinal categories (e.g. 1-5).  This would then allow you to show the median is between "Neutral" and "Agree".](images/03-ordinal-operatons.png){.center}
+```{r 3-ordinal-operatons, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("In some circumstances, we can directly calculate the median (middle value) of an ordinal set.  With odd numbered sets (e.g. Group 1), the median, is simply the middle value of the set, when sorted lowest to highest.  We can always take the median when we have an odd number.  With even numbered sets, its a bit more complicated.  The median, is the average of the middle two values.  For Group 2, the middle values (5th and 6th) are both 'Neutral', so we don't have an issue.  But for Group 3, the 5th value is 'Neutral' and the 6th value is 'Agree'.  We can't directly average these two ordinal values.  One solution is to arbitrarily assign a numeric score to the ordinal categories (e.g. 1-5).  This would then allow you to show the median is between 'Neutral' and 'Agree'. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-ordinal-operatons.png")
+```
 
 #### Graded Membership
 
 When trying to group real world phenomena into categories, there are often "exceptions" that blur the lines a bit.  Take this example: you are trying to develop a land cover classification scheme for Garibaldi Provincial park in British Columbia.  Some of the land surface is unquestionably alpine tundra and some is certainly forest area.  However, the transition between forest and alpine meadow is not an abrupt line.  How/where do you draw the line?  Examples like this are known as fuzzy variables, and we often use a *Graded Membership* scale to assign them to categories.  With the landscape classification, a simple approach would be a "winner take all" approach.  If a plot is 5% bare rock, 40% forest, and 45% alpine meadow, the area will be classified as alpine meadow.  From that point forward, in the GIS, that area will be treated as alpine meadow, any information about the variability within the area will be lost.  In practice, many of the qualitative data we work with in GIS, especially those describing natural phenomena, are actually graded membership variables. 
 
-![In this example, we see an alpine landscape in Garibalid Provinical Park, BC.  We can see patches of forest and patches of meadow.  But where, exactly, would we draw the boundary between these two landscape classes?](images/03-fuzzy.jpg){.center}
+```{r 3-fuzzy, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("In this example, we see an alpine landscape in Garibalid Provinical Park, BC.  We can see patches of forest and patches of meadow.  But where, exactly, would we draw the boundary between these two landscape classes?, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-fuzzy.jpg")
+```
 
 ### Quantitative Data
 
@@ -102,21 +132,32 @@ Numeric data can be either **discrete** or **continuous**.  Discrete variables (
 
 These data have fixed, meaningful, absolute zero points.  The absolute zero point means ratio data cannot take negative values.  It also means that we can multiply/divide two values to calculate a meaningful ratio between them (hence the name).  A good example of ratio data are population total (see figure).  Population counts start at zero and go up from there.  A population of zero means there are no residents, and its impossible to have a negative population.  Other examples of ratio data include: temperature (*in degrees Kelvin*), precipitation, tree height, income, rental cost, and units of time (years, seconds, etc.)  
 
-![Because of the fixed, meaningful zero point, we can calculate ratios between populations: e.g. Manitoba's population is 1/10th that of Ontario, British Columbia has 129 times as many people as Nunavut.](images/03-ratio-population.png){.center}
+```{r 3-ratio-population, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("Because of the fixed, meaningful zero point, we can calculate ratios between populations: e.g. Manitoba's population is 1/10th that of Ontario, British Columbia has 129 times as many people as Nunavut. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-ratio-population.png")
+```
 
 #### Interval Data
 
 These data on the other hand, have an arbitrarily set zero point.  This means they can can take negative values.  Because the zero point is arbitrary, we cannot multiply/divide two values or calculate meaningful ratios between two values.  A good example of interval data is temperature measured in Celsius, and comparing it to Kelvin highlights the difference between the two data types (see fig).  The conversion between Kelvin (ratio) and Celsius (interval) is very simple: &deg;C = &deg;K-273.15.  Zero Kelvin is "Absolute Zero" - ie. the lack of temperature, while zero Celsius is the freezing point of water (273.15 degrees above absolute zero).  Other examples of interval data include: the pH scale, IQ test scores, elevation (relative to a datum) dates (April 12th, 2011), and times (11:00 A.M.).
 
-![The ratio between two temperatures in Celsius is not meaningful, 20&deg;C is not "twice" as warm as 10&deg;C.  Kelvin's zero point is fixed to absolute zero, the "absence" of temperature.  So we can calculate the ratio, 293.15&deg;K is 1.035 times warmer than 283.15&deg;K.](images/03-interval-ratio-temperature.png){.center}
+{r 3-interval-ratio-temperature, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("The ratio between two temperatures in Celsius is not meaningful, 20&deg;C is not "twice" as warm as 10&deg;C.  Kelvin's zero point is fixed to absolute zero, the "absence" of temperature.  So we can calculate the ratio, 293.15&deg;K is 1.035 times warmer than 283.15&deg;K. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-interval-ratio-temperature.png")
 
 #### Derived Ratio: Normalizing Data
 
 Sometimes we want to account for the influence of one variable when analyzing another.  To do this, we can divide one value by by another to get the ratio of the two, also known as a **derived ratio**.  This process is sometimes referred to as **Normalizing** or **Standardizing** our data.  The basic formula is: $C=\frac{A}{B}$, where A is our variable of interest, B is our confounding variable, and C is our new derived ratio.  There are many circumstances where we might need to do this.  One common example is population density: Canada and Poland both have populations of ~ 38 million people but Canada had 32x the land area of Poland.  Any comparison of the these two nations that fails to account for the size disparity would be seriously flawed.  Another key example are affordability indexes.  The example below shows how normalization can be applied to a households expenditures on food.  Income and household expenditures on food are strongly related (wealthy regions tend to purchase more expensive food).  An analysis of the cost of food that doesn't account for this relationship would not adequately account for the *affordability* of food in a given region.  Dividing household food expenditures by household income, we get the proportion of income spent on food.  This is a much more accurate representation of the affordability of food and highlights that the poorest communities are most severely impacted by increasing food costs.
 
-![Income vs. household expenditures on Food by Census Subdivisions in BC.](images/03-income-v-food.png){.center}
+```{r 3-income-v-food, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("Income vs. household expenditures on Food by Census Subdivisions in BC. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-income-v-food.png")
+```
 
-![Income vs. Fraction of Income Spent on Food by Census Subdivisions in BC.](images/03-income-v-income-on-food.png){.center}
+```{r 3-income-v-income-on-food, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("Income vs. Fraction of Income Spent on Food by Census Subdivisions in BC. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-income-v-income-on-food.png")
+```
 
 
 ### Summary of Data Types
@@ -137,14 +178,19 @@ Sometimes we want to account for the influence of one variable when analyzing an
 You might encounter the phrase "Spatial is special" in your time studying GIS.  Spatial data is the foundation of Geographic Information Science, it is what distinguishes GIS from the broader field of data science.  This was succinctly summarized by Waldo Tobler in The First Law of Geography:
   - *"Everything is related to everything else, but near things are more related than distant things."* 
 
-![Visualization of Tobler's First Law. [8]](images/03-spatial-is-special.jpg){.center}
+```{r 3-spatial-is-special, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("Visualization of Tobler's First Law. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-spatial-is-special.jpg")
+```
 
 This might seem obvious: people interact more if they live in the same city, orca pods in different areas develop different dialects, hemlocks on Vancouver Island are more related to their neighbors than to to hemlock in the New Brunswick.  Generally, near things are more related to one another, but it *does not guarantee similarity*.  Downtown Vancouver averages 40 cm of snow/year, but the ski resort on Grouse Mountain 15 km north gets over 9 m.  These locations are impacted by the same storm systems, but the 1200 m elevation difference causes vastly different quantities and different types of precipitation.
 
 The measure of similarity between objects across space called **spatial autocorrelation**.  Spatial autocorrelation allows us to make some a key assumptions when representing spatial data.  We don't have to measure a phenomena everywhere in order to represent it adequately.  We only need to measure it at specific locations or over regular intervals.  If point A is in dense forest, it is likely point B 10 m away is also in a dense forest.  We don't have to get the location of every tree in the forest.  Instead, we can look at the average presence of trees over a larger area.  
 
-
-![Screengrab from Hectares BC, can easily make into better map.](images/03-bc-snow.png){.center}
+```{r 3-bc-snow, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("Screengrab from Hectares BC, can easily make into better map. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-bc-snow.png")
+```
 
 
 ## Spatial Data Models
@@ -157,22 +203,38 @@ There are two main types of spatial data models: the **Raster** and **Vector** m
 2) The scale at which we plan to analyze our data.
 3) How we plan to use the data.
 
-![Representing space in the raster model vs. the vector model [8]](images/03-vector-v-raster.jpg){.center}
+```{r 3-vector-v-raster, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("Representing space in the raster model vs. the vector model. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-vector-v-raster.jpg")
+```
 
 
 ### Raster Data Model
 
 The raster data model represents a phenomena across space as a gridded set of cell (or pixels).  The cell size determines the **Resolution** of the raster image, that is the smallest feature we can resolve with the raster.  A 10 m resolution raster has cells that are 10 x 10 m (100 m2), a 2 m resolution has cells that are 2 x 2 m (4 m2).  Along with the cell size, the number of rows and columns dictates the extent (or bounds) of a raster image.  A raster with a 1 m cell size, 5 rows, and 5 columns, will cover an area of 5 m x 5 m (25 m2).  Because of the full coverage within their bounds, raster data models are very well suited for representing *continuous phenomena* where cell values correspond to measured (or estimated) value at specific location.  In GIS, rasters are commonly encountered as: satellite and drone imagery, elevation models, climate data, model outputs, and scanned maps.  
 
-![I think this one is pretty good, I use it in my lecture notes. [8]](images/03-raster-example.png){.center}
+```{r 3-raster-example, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("I think this one is pretty good, I use it in my lecture notes. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-raster-example.png")
+```
 
 The value of a pixel can be quantitative (e.g. elevation) or qualitative (e.g. land use).  Each pixel/cell can only have a single value associated with it.  Multiple bands can be combined to store or more information, as is done with a RGB color photograph.  Algebraic expressions can also be performed quickly and efficiently with raster layers a inputs.  This is known as raster overlay, and is one of the key advantages to raster data.  If layer A = Average July Temperature and layer B = Average January Temperature, then A – B will give us the Average Temperature Range across the rasters domain.
 
-![Raster math illustration](images/03-raster-overlay.png){.center}
+```{r 3-raster-overlay, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("Raster math illustration. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-bc-snow.png")
+```
+```{r 3-raster-overlay, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("Raster math illustration. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-raster-overlay.png")
+```
 
 Rasters data relies on Spatial Autocorrelation and The First Law of Geography, the model assumes that *all areas* within a given cell are equally represented by the cell value.  Depending on the resolution of the raster and the scale of the task at hand, this may or may not be an effective assumption.  If you are trying to represent the coastline of Nova Scotia, 100 m or even 1 km resolution cells will likely suffice (see figure).  However, 10 km cells severely degrade the quality of the representation and at a 100 km cell size, the province is indistinguishable.  
 
-![Raster Resolution](images/03-raster-resolution.png){.center}
+```{r 3-raster-resolution, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("Raster Resolution. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-raster-resolution.png")
+```
 
 The above example is related to something known as them *mixed pixel* problem.  Each cell in a raster can only have **one** value.  So how do you handle when the area a cell covers contains **multiple** examples.  Possible approaches are: 
 
@@ -204,11 +266,17 @@ Other file types you will likely encounter when working with raster data include
 
 The vector data model is much more well suited to represent discrete phenomena than the raster data model.  A vector feature is a representation of a discrete object as a set of x,y coordinate pairs (points) linked to set of descriptive attribute about that object.  A vector feature's coordinates can consist of just one x,y pair to form a single point feature, or multiple points which can be connected to form lines or polygons (see figure).  The non-spatial attribute data is typically stored in a **Tabular** format separate from the spatial data, and it is linked using an index.  One of the key advantages of the vector model is the ability to store and retrieve many attributes them quickly.  In GIS, vector data are commonly encountered as: political boundaries, cenus data, pathways (road, trails, etc.), point location (stop sign, fire hydrant), etc.
 
-![Vector objects (points, lines, or polygons) are stored along with any number of attribute.  Point, line, and polygon data are typically stored in separate files.](images/03-vector-types.png){.center}
+```{r 3-vector-types, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("Vector objects (points, lines, or polygons) are stored along with any number of attribute. Point, line, and polygon data are typically stored in separate files. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-vector-types.png")
+```
 
 **Points** are “zero-dimensional”, they have no length, or width.  A point feature is just an individual 𝒙,𝒚 coordinate pair representing a precise location, that has some linked attribute information.  Points are great for representing a variety of objects, depending on the scale.  Fire hydrants, light poles, and trees are suitable to be represented as points in almost any application.  If you are making a map of mines in British Columbia, or cities across Canada, it's probably acceptable to just display them as points.
 
-![An example of point data showing locations of trees.  The points are labeled with their index (unique ID number) which correspoonds to the attribute table below which stores more information about eacht tree.](images/03-vector-points.png){.center}
+```{r 3-vector-points, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("An example of point data showing locations of trees.  The points are labeled with their index (unique ID number) which correspoonds to the attribute table below which stores more information about eacht tree. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-vector-points.png")
+```
 
 
 |index|Longitude (X)|Latitude (Y)|Name |Age|Height|
@@ -225,13 +293,24 @@ The vector data model is much more well suited to represent discrete phenomena t
 
 **Lines** are one-dimensional, they have length, but no width and thus no area.  A line consists of two or more points.  Every line must have a start point and end point, they may also have any number of middle points, called vertices.  A vertex is just any point where two or more lines meet.  Lines are also great for representing a variety of objects, depending on the scale.  Hiking trails, flight paths, coastlines, and power lines are suitable to be represented as lines in almost most applications.  When making smaller scale maps, its often sufficient to represent rivers as lines, though at large scales we might elect to use a polygon.
 
-![Roads are typically reprented as line data.  Though they obviously have an area, unless we are making a very large scale map, we don't need (or have the room) to show that on a map.  This BC road altlas makes use of line data, representing roads a lines and using different colors to denote the type of raod.](images/03-bc-road-map.jpg){.center}
+```{r 3-bc-road-map, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("Roads are typically reprented as line data.  Though they obviously have an area, unless we are making a very large scale map, we don't need (or have the room) to show that on a map.  This BC road altlas makes use of line data, representing roads a lines and using different colors to denote the type of raod. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-bc-road-map.jpg")
+```
 
 **Polygons** are two-dimensional, they have both a length and width and therefore we can also calculate their area.  All polygons consist of a set of at three or more points (vertices) connected by line segments called “edges” that connect to form an enclosed shape.  All polygons form an enclosed shape, but some can also have"holes" (think doughnuts!), these holes are sometimes called interior rings.  Each interior ring is a separate set vertices and edges that is wholly contained within the polygon and no two interior rings can overlap.  Polygons are useful for representing many different objects depending: political boundaries boundaries, Köppen climate zones, lakes, continents, etc.  At large scales they can represent things like buildings which we might choose to represent as points at smaller scales.
 
 Sometimes, a discrete object has multiple parts, that are spatially separated.  In these circumstances, the vector model allows for multi-polygon, multi-line, or multi-point objects.  A good example of when a multi-polygon would be useful is the StatsCanada provincial boundary file (see figure).  Roads sometimes need to be stored as multi-lines as well, for example Highway 1 crosses the Georgia Straight from Vancouver to Nanaimo.  If we want the to represent the entire Highway as one object, we need to use a multi-line.
 
-![This is the official Stats Canada provincial boundary layer.  All the other coastal provinces and territories have islands.  We don't need to represent every island as a separate object, so we can "bundle" together the polygons as multipolygons.  The landlocked provinces do not have any coastlines and are represented as simple polygons reather than multipolygons.  The attribute table bellow corresponds to the map and lists the geometry type (polygon/multipolygon) ](images/03-vector.png){.center}
+```{r 3-bc-road-map, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("Roads are typically reprented as line data.  Though they obviously have an area, unless we are making a very large scale map, we don't need (or have the room) to show that on a map.  This BC road altlas makes use of line data, representing roads a lines and using different colors to denote the type of raod. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-bc-road-map.jpg")
+```
+```{r 3-vector, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("This is the official Stats Canada provincial boundary layer.  All the other coastal provinces and territories have islands.  We don't need to represent every island as a separate object, so we can 'bundle' together the polygons as multipolygons.  The landlocked provinces do not have any coastlines and are represented as simple polygons reather than multipolygons.  The attribute table bellow corresponds to the map and lists the geometry type (polygon/multipolygon). Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-vector.png")
+```
+
 
 |         PRNAME          |Province ID|Population| Area  |Geometry Type|
 |-------------------------|----------:|---------:|------:|-------------|
@@ -253,7 +332,10 @@ Sometimes, a discrete object has multiple parts, that are spatially separated.  
 
 Vector data also has a **Resolution** although it has a somewhat different definition in the context of the vector model.  Vector resolution is determined by the smallest resolvable feature.  Another way to describe vector resolution, would be the distance between verticies.  The greater the distance between vertices, the fewer vertices there are per polygon and, the lower the resolution.  If a vector object (line or polygon) has many verticies, we will have a higher resolution representation of the feature.
  
-![Vector image of Nova Scotia at different resolutions.  Here the original polygon (top left) has been downsampled to lower resolutions, by setting the minimum allowable distance between verticies.  As the distance beween vercicies increases, the resolution decreases and the coastline becomes less distinguishable.](images/03-vector-resolution.png){.center}
+```{r 3-vector-resolution, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("Vector image of Nova Scotia at different resolutions.  Here the original polygon (top left) has been downsampled to lower resolutions, by setting the minimum allowable distance between verticies.  As the distance beween vercicies increases, the resolution decreases and the coastline becomes less distinguishable. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/03-vector-resolution.png")
+```
 
 
 #### File Types

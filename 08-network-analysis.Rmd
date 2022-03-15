@@ -10,7 +10,7 @@ library(rgeos)
 
 # Network Analysis {#network-analysis}
 
-Networks are **abstract structures** commonly used to represent patterns of relationships among sets of various *things* [@ajorlouIntroductionNetworkModels2018]. Such structures can be used to represent social connections, spatial patterns, ecological relationships, etc. In GIS, the elements that compose geospatial networks are **geolocated** -- in other words: they have latitude and longitude values attached to them. Network analysis encompasses a series of techniques used to interpret information from those networks. This chapter introduces basic concepts for building, analyzing and applying spatial networks to real-world problems.
+Networks are **abstract structures** commonly used to represent patterns of relationships among sets of various *things* [@ajorlou_introduction_2018]. Such structures can be used to represent social connections, spatial patterns, ecological relationships, etc. In GIS, the elements that compose geospatial networks are **geolocated** -- in other words: they have latitude and longitude values attached to them. Network analysis encompasses a series of techniques used to interpret information from those networks. This chapter introduces basic concepts for building, analyzing and applying spatial networks to real-world problems.
 
 
 :::: {.box-content .learning-objectives-content}
@@ -34,7 +34,7 @@ Network analysis, Spatial networks, Graph theory
 
 ## Introduction to Graph Theory
 
-Graphs are the abstract language of networks [@systemsinnovationGraphTheoryOverview2015]. Graph theory is the area of mathematics that study graphs. By abstracting networks into graphs, one is able to measure different kinds of indicators that represents information about relationships that exist within a certain system. Why abstracting real-world elements into networks can be useful? Network analysis facilitates the study of data sets that demand information about their behaviour in terms of connectivity, flows, direction or paths. This is especially useful to understand the behaviour of complex adaptive systems such as societies, cities, ecosystems, etc. All graphs are composed of two parts: **nodes** and **edges** (or links).
+Graphs are the abstract language of networks [@systems_innovation_graph_2015]. Graph theory is the area of mathematics that study graphs. By abstracting networks into graphs, one is able to measure different kinds of indicators that represents information about relationships that exist within a certain system. Why abstracting real-world elements into networks can be useful? Network analysis facilitates the study of data sets that demand information about their behaviour in terms of connectivity, flows, direction or paths. This is especially useful to understand the behaviour of complex adaptive systems such as societies, cities, ecosystems, etc. All graphs are composed of two parts: **nodes** and **edges** (or links).
 
 
 ## Nodes
@@ -56,7 +56,7 @@ simpleNetwork(data, charge=-500, linkDistance=50, fontSize=10, zoom=TRUE)
 ```
 
 ``` {r 8-vancouver-transit-network, echo=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Rapid and frequent transit network in Metro Vancouver. Source: City of Pitt Meadows.")
+fig_cap <- paste0("Rapid and frequent transit network in Metro Vancouver [@translink_2020_2020].")
 knitr::include_graphics("images/08-metro_vancouver_transit_network.png")
 ```
 
@@ -92,10 +92,10 @@ On the other hand, in an undirected graph, connections are represented as simple
 
 ## Network Topologies
 
-Topology is the study of how network elements are arranged. The same elements arranged in different ways can change the network **structure** and **dynamics**. A very common example is the arrangement of computer networks [@wikibooksCommunicationNetworksNetwork2018].
+Topology is the study of how network elements are arranged. The same elements arranged in different ways can change the network **structure** and **dynamics**. A very common example is the arrangement of computer networks.
 
 ``` {r 8-network-topologies, echo=FALSE, fig.cap=fig_cap, out.width="80%"}
-fig_cap <- paste0("Abstract examples of network topologies.")
+fig_cap <- paste0("Abstract examples of network topologies [@wikibooks_communication_2018].")
 knitr::include_graphics("images/08-network_topologies.png")
 ```
 </br>
@@ -111,7 +111,7 @@ In GIS we use networks to represent spatial structures of various kinds. While a
 Lines are when nodes are arranged in series where every node has *no more than two connections*, except for the two end nodes. A rail transit line, for example, can be represented as a line network. The map below portrays the SkyTrain Millenium Line in Vancouver. Each node represents a stop and the lines  the connections between those stops.
 
 ```{r 8-vancouver-rail-transit, echo=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Rail transit line in Vancouver. Data from City of Vancouver and licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
+fig_cap <- paste0("Rail transit line in Vancouver [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 lineData <- readLines("data/08-transit_millenium_line.geojson") %>% paste(collapse = "\n")
 nodeData <- readOGR("data/08-transit_millenium_stops.geojson", layer="transit_millenium_stops", verbose=FALSE)
 
@@ -127,7 +127,7 @@ leaflet(height=200, width="80%") %>% setView(lng=-122.9220614617343, lat=49.2658
 Rings are similar to lines except that there are no end nodes. So each and every node has *two connections and the "first" and "last" nodes are connected to each other* forming a circle. The spatial structure of the Stanley park seawall trail in Vancouver resembles a ring. In this example, nodes stand for intersections and view spots and edges are the connections between these spots along the seawall.
 
 ```{r 8-stanley-park-seawall, echo=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Ring of the Stanley Park seawall. Data from City of Vancouver and licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
+fig_cap <- paste0("Ring of the Stanley Park seawall [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 lineData <- readLines("data/08-stanley_park_seawall.geojson") %>% paste(collapse = "\n")
 nodeData <- readOGR("data/08-stanley_park_seawall_nodes.geojson", layer="stanley_park_seawall_nodes", verbose=FALSE)
 
@@ -139,10 +139,10 @@ leaflet(height=400, width="80%") %>% setView(lng=-123.14051382816635, lat=49.303
 
 ### Meshes
 
-In a mesh, *every node is also connected to more than one node*. However, in this case nodes can be connected to more than two nodes. Connections in a mesh are non-hierarchical. Contrary to rings and lines where there is only one possible route from one node to another, in a mesh there are multiple routes to access other nodes in the network. A common way to generate a mesh network is using **Delaunay triangulation** [@wikimediaDelaunayTriangulation2021], where nodes are connected in order to form triangles and maximize the minimum angle of all triangles. Mesh configurations are commonly used in decentralized structures such as the internet.
+In a mesh, *every node is also connected to more than one node*. However, in this case nodes can be connected to more than two nodes. Connections in a mesh are non-hierarchical. Contrary to rings and lines where there is only one possible route from one node to another, in a mesh there are multiple routes to access other nodes in the network. A common way to generate a mesh network is using **Delaunay triangulation**, where nodes are connected in order to form triangles and maximize the minimum angle of all triangles [@wikimedia_delaunay_2021]. Mesh configurations are commonly used in decentralized structures such as the internet.
 
 ```{r 8-tree-canopy-mesh, echo=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Tree canopy mesh. Data from City of Vancouver and licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
+fig_cap <- paste0("Tree canopy mesh [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 lineData <- readLines("data/08-tree_canopy_mesh.geojson") %>% paste(collapse = "\n")
 polyData <- readOGR("data/08-tree_canopy_shapes.geojson", layer="tree_canopy_shapes", verbose=FALSE, GDAL1_integer64_policy=TRUE)
 nodeData <- readOGR("data/08-tree_canopy_centroids.geojson", layer="tree_canopy_centroids", verbose=FALSE)
@@ -160,7 +160,7 @@ leaflet(height=300, width="80%") %>% setView(lng=-123.13264678513188, lat=49.239
 As the name suggests, in fully connected networks *every node is connected to every other node*. The graph representing all possible origin-destination commutes among Metro Vancouver municipalities is a type of fully connected network.
 
 ```{r 8-origin-destination, echo=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Possible origin-destination commutes between municipalities within Metro Vancouver. Data from City of Vancouver and licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
+fig_cap <- paste0("Possible origin-destination commutes between municipalities within Metro Vancouver [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 polygonData <- readOGR("data/08-regional_boundaries.geojson", layer="regional_boundaries", verbose=FALSE)
 lineData <- readLines("data/08-regional_commutes.geojson") %>% paste(collapse = "\n")
 nodeData <- readOGR("data/08-regional_commutes_nodes.geojson", layer="regional_commutes_nodes", verbose=FALSE)
@@ -180,7 +180,7 @@ By looking into hierarchical topologies it becomes easier to understand the noti
 Stars are hierarchical structures where *two or more nodes are directly connected to a central node*. This concentric garden at the University of British Columbia can be represented according to a star topology.
 
 ```{r 8-spatial-structure-garden, echo=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Spatial structure of a concentric garden at UBC. Data from City of Vancouver and licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
+fig_cap <- paste0("Spatial structure of a concentric garden at UBC [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 lineData <- readLines("data/08-concentric_garden.geojson") %>% paste(collapse = "\n")
 nodeData <- readOGR("data/08-concentric_garden_nodes.geojson", layer="concentric_garden_nodes", verbose=FALSE)
 
@@ -195,7 +195,7 @@ leaflet(height=200, width="80%") %>% setView(lng=-123.24650254301488, lat=49.253
 Buses are structures where *every path from one node to another passes through a central path or corridor*. If we isolate a street segment from an urban street network, the connections between buildings and streets depict a bus topology.
 
 ```{r 8-connections-houses-streets, echo=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Connections between houses and streets. Data from City of Vancouver and licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
+fig_cap <- paste0("Connections between houses and streets [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 lineData <- readLines("data/08-row_houses.geojson") %>% paste(collapse = "\n")
 nodeData <- readOGR("data/08-row_houses_nodes.geojson", layer="row_housses_nodes", verbose=FALSE)
 
@@ -210,7 +210,7 @@ leaflet(height=200, width="80%") %>% setView(lng=-123.17161003346679, lat=49.254
 In tree topologies, nodes are *structured from a root node and arranged into edges* that are similar to branches of a tree. This highly hierarchical structure create a sort of **parent - child** relationship amongst nodes. The spatial configuration of boat marinas are usually structures in tree-like topologies. By definition, all tree network structures will always have more than one terminal nodes (a node that only has one connection to the network).
 
 ```{r 8-boat-marina, echo=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Tree spatial structure of a boat marina. Data from City of Vancouver and licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
+fig_cap <- paste0("Tree spatial structure of a boat marina [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 lineData <- readLines("data/08-boat_marina.geojson") %>% paste(collapse = "\n")
 nodeData <- readOGR("data/08-boat_marina_nodes.geojson", layer="boat_marina_nodes", verbose=FALSE)
 
@@ -228,7 +228,7 @@ Networks can then be arranged according to various different configurations. Asi
 The act of modelling spatial networks is called **network tracing**. When tracing a network it is important to bear in mind the **direction** with which information is added to the network, especially when this orientation information is important to further analyze **flows** and relationships within such structure. For example, when mapping hydrological networks to study its flows it might be useful to model the direction of streams coherently as this might be an important information to represent the dynamics of the network.
 
 ```{r 8-fraser-river-flows, echo=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Graph representing Fraser River Flows. Data from City of Vancouver and licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
+fig_cap <- paste0("Graph representing Fraser River Flows [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 
 nodes <- readOGR("data/08-fraser_river_nodes.geojson", verbose=FALSE)
 links <- readOGR("data/08-fraser_river.geojson", verbose=FALSE)
@@ -241,7 +241,7 @@ leaflet(links, height=500, width="80%") %>% addTiles() %>%
 </br>
 
 ## Linear Referencing
-Linear referencing is a method of using geographic locations for measuring relative positions along a linear feature. In network analysis, linear referencing techniques can be used for finding the length of paths along the network [@ramsey23LinearReferencing2012]. In this method, the graph elements are defined in terms of their physical location and edges are used to calculate distances among parts of the network.
+Linear referencing is a method of using geographic locations for measuring relative positions along a linear feature. In network analysis, linear referencing techniques can be used for finding the length of paths along the network [@ramsey_23_2012]. In this method, the graph elements are defined in terms of their physical location and edges are used to calculate distances among parts of the network.
 
 ``` {r 8-lienar-referencing, echo=FALSE, fig.cap=fig_cap, out.width="80%"}
 fig_cap <- paste0("Example of using linear referencing to measure distance between points.")
@@ -252,7 +252,7 @@ knitr::include_graphics("images/08-linear_referencing.png")
 In the above figure we can see how linear referencing systems work. Considering one would like to measure distances from node *a* along a network link *L*, distance measures can be used to locate, for example, points *b*, *c* and *d* along line *L*.
 
 ## Routing
-One application of linear referencing is to find routes between nodes is an useful application of spatial networks. This is how mapping tools help us navigate the world by finding the most efficient route to move around the city, for example. [@systemsinnovationNetworkDiffusionContagion2015].
+One application of linear referencing is to find routes between nodes is an useful application of spatial networks. This is how mapping tools help us navigate the world by finding the most efficient route to move around the city, for example. [@systems_innovation_network_2015].
 
 ## Least Cost Paths
 Usually multiple paths can be traced along a network to go from one point to another. The notion of **cost** allow us compare the degree of *difficulty* needed to cross such paths. With this information, it is possible to rank different routes. In spatial networks, cost usually relate to the necessary distance (either physically or logically) to go from a certain node to another, but they might also represent other aspects such as time, traffic, elevation, current flows, etc. For example, way finding tools that are commonly used to help us to locate and move around in the city usually takes into account multiple costs such as distance, traffic and/or elevation. The **least cost path** is the *easiest* way to go from one point of the network to another.
@@ -260,7 +260,7 @@ Usually multiple paths can be traced along a network to go from one point to ano
 It can be found by associating the costs with elements of the network (either nodes or edges) and summarizing the total cost of certain routes. Usually **linear referencing** techniques are used to calculate costs by storing locations along measured linear features. The map below displays the least cost path in terms of physical distance (shortest path) between two points.
 
 ```{r 8-least-cost-path, echo=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Least cost path (in terms of distance) between two points. Data from City of Vancouver and licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
+fig_cap <- paste0("Least cost path (in terms of distance) between two points [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 
 nodes <- readOGR("data/08-shortest_path_nodes.geojson", verbose=FALSE)
 path <- readOGR("data/08-shortest_path.geojson", verbose=FALSE)
@@ -277,10 +277,10 @@ map %>%
 Although most network analysis techniques are suitable for vector data, raster layers can also be analyzed. One application of using network analysis with **raster data** is the finding of least cost corridors. While least cost paths helps to find linear paths along the network between two points, least cost corridors are based on the overlay of two *cost accumulative* rasters.
 
 ## Reach Analysis
-Reach techniques are commonly used to find the incidence of defined elements *within a certain radius from a chosen node*. All possible routes are modeled. The number of **terminal nodes** varies according to the network structure. Urban walkability indices usually uses reach techniques to assess the intensity of certain indicators (such as intersection density or non-residential land uses) given a walkable radius [@martinoSpatialNetworkAnalysis2020]. In the map below we portray the network reach from a given origin point into the Pacific Spirit Regional Park within 400m (red), 800m (yellow), 1200m (green) and 1600m (blue) radii.
+Reach techniques are commonly used to find the incidence of defined elements *within a certain radius from a chosen node*. All possible routes are modeled. The number of **terminal nodes** varies according to the network structure. Urban walkability indices usually uses reach techniques to assess the intensity of certain indicators (such as intersection density or non-residential land uses) given a walkable radius [@martino_spatial_2020]. In the map below we portray the network reach from a given origin point into the Pacific Spirit Regional Park within 400m (red), 800m (yellow), 1200m (green) and 1600m (blue) radii.
 
 ```{r 8-reach-analysis, echo=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Reachable segments within multiple distance radii. Data from City of Vancouver and licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
+fig_cap <- paste0("Reachable segments within multiple distance radii [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 
 origin <- readOGR("data/08-pacific_spirit_origin.geojson", verbose=FALSE)
 base_net <- readOGR("data/08-pacific_spirit_network.geojson", verbose=FALSE)
@@ -301,13 +301,13 @@ leaflet(net_1600, height=500, width="80%") %>% setView(lng=-123.22165125449455, 
 </br>
 
 ## Network Centrality
-Nodes and edges of a graph can also be ranked in terms of how **important** they are to the overall network. Network centrality measures represent whether elements of a graph are more central or peripheral to the overall system. Such measures can then be interpreted as indicators of importance. Applications are endless. Centrality measures are used for ranking search engine pages [@wikimediaPageRank2021], for finding persons of interest in social networks [@ajorlouIntroductionNetworkModels2018] and for modelling movement in street network [@hillierNaturalMovementConfiguration1993]. There are several **centrality measures** that serve to the most various purposes. Some of the most commonly used ones are Closeness and Betweenness centrality.
+Nodes and edges of a graph can also be ranked in terms of how **important** they are to the overall network. Network centrality measures represent whether elements of a graph are more central or peripheral to the overall system. Such measures can then be interpreted as indicators of importance. Applications are endless. Centrality measures are used for ranking search engine pages [@wikimedia_pagerank_2021], for finding persons of interest in social networks [@ajorlou_introduction_2018] and for modelling movement in street network [@hillier_natural_1993]. There are several **centrality measures** that serve to the most various purposes. Some of the most commonly used ones are Closeness and Betweenness centrality.
 
 ## Closeness Centrality
 Closeness centrality measures *how close each node is to every other node of the graph* in terms of topological distances. It highlights nodes located in easily accessible spaces. For example when analyzing the closeness of street intersections at the University of British Columbia (UBC), intersections in core streets such as the Main Mall, Agronomy Road and Northwest Marine Drive are ranked as highly central whereas more residential and segregated areas such as Acadia Road are ranked with lower closeness centrality.
 
 ```{r 8-closeness-centrality-UBC, echo=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Closeness centrality of the street intersections at UBC. Data from City of Vancouver and licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
+fig_cap <- paste0("Closeness centrality of the street intersections at UBC [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 
 intersections <- readOGR("data/08-ubc_intersections.geojson", verbose=FALSE)
 map <- leaflet(intersections, height=500, width="80%") %>% addTiles()
@@ -330,7 +330,7 @@ where $d_{ij}$ means the logical distance from $i$ to $j$.
 Betweenness centrality measures *how likely a node or an edge is to be passed through* when going from every node to every other node of the graph. If we imagine agents travelling from each node to every other node and back, betweenness centrality would be the trail left by those agents. While closeness highlights central spaces, betweenness highlights pathways that lead to those central spaces. Using the same street network at UBC we can calculate the betweenness of segments.
 
 ```{r 8-betweenness-centrality, echo=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Betweenness centrality of street segments at UBC. Data from City of Vancouver and licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
+fig_cap <- paste0("Betweenness centrality of street segments at UBC [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 segments <- readOGR("data/08-ubc_segments.geojson", verbose=FALSE)
 map <- leaflet(segments, height=500, width="80%") %>% addTiles()
 pal <- colorQuantile(palette="viridis", domain=segments$betweenness, n=6, reverse=TRUE)
@@ -346,7 +346,7 @@ Betweenness is calculated based on the number of **shortest paths** (in logical 
 
 $C_{B}(\upsilon) = \sum\limits_{s \neq v \neq t \in V} \frac {\sigma_{st}(v)}{\sigma_{st}}$
 
-where $(v)$ ${\sigma_{st}}$ represents the number of shortest paths from node $s$ to node $t$ and ${\sigma_{st}(v)}$ represents the number of those paths that pass through $v$. We can use centrality measures to evaluate how accessible certain spaces are from the point of view of their spatial structure with a broader system.
+where $(v)$ ${\sigma_{st}}$ represents the number of shortest paths from node $s$ to node $t$ and ${\sigma_{st}(v)}$ represents the number of those paths that pass through $v$ [@graph-tool_centrality_nodate]. We can use centrality measures to evaluate how accessible certain spaces are from the point of view of their spatial structure with a broader system.
 
 ## Case Study: Central and Peripheral Green Spaces in Vancouver
 
@@ -355,7 +355,7 @@ Are green spaces evenly accessible throughout the whole city? Which parks are to
 First we need to find the Closeness measure for the street network of the City of Vancouver. The network information was downloaded from [OpenStreetMap](https://www.openstreetmap.org/). The [graph-tool](https://graph-tool.skewed.de/) software was used to calculate the centrality measure. With the results of centrality for all street intersections in the city, we can overlay Parks & Green spaces data from the [City of Vancouver Open Data portal](https://opendata.vancouver.ca/explore/dataset/parks-polygon-representation/information/) and get the average closeness of nodes within each green space.
 
 ``` {r 8-closeness-centrality-vancouver, echo=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Closeness centrality of parks and green spaces at the City of Vancouver. Data from City of Vancouver and licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
+fig_cap <- paste0("Closeness centrality of parks and green spaces at the City of Vancouver [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 parks <- readOGR("data/08-vancouver_parks.geojson", verbose=FALSE)
 
 map <- leaflet(parks, height=500, width="100%") %>% addTiles()

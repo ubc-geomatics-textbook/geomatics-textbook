@@ -293,7 +293,7 @@ Common applications:
 If the plane of the lens is _not_ perpendicular to the vertical datum, then the imagery is considered to be **oblique**. Oblique imagery is ideally suited for comparing object sizes or viewing areas that would be otherwise occluded in aerial imagery. Nearly all terrestrial platforms take oblique imagery and it is readily used for airborne and spaceborne platforms. A scanning platform will have an oblique perspective when it is not at the nadir or zenith of its scan arc. Figure \@ref(fig:12-oblique-louise) is an example of an oblique image of a natural area.
 
 ```{r 12-oblique-image, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Oblique image of a forest harvest near Cold Lake in Saskatchewan. Pickell, CC-BY-SA-4.0.")
+fig_cap <- paste0("Oblique image of a forest harvest near Cold Lake in Saskatchewan. Ignacio San-Miguel, CC-BY-SA-4.0.")
 knitr::include_graphics(here::here("images", "12-oblique-image.png"))
 ```
 <br/>
@@ -388,7 +388,7 @@ Significant advancements have been made in recent years to reduce costs of aeria
 Aircraft are subject to rotation along three axes (Figure \@ref(fig:12-pitch-roll-yaw)). **Pitch** refers to rotation around the wings and controls whether the aircraft is ascending or descending. **Roll** refers to rotation around the fuselage (body) of the aircraft and controls which wing of the aircraft is higher than the opposite wing. **Yaw** refers to rotation around the vertical axis that is perpendicular to the fuselage and controls whether the aircraft is moving left or right. Each of these axes are important for understanding the conditions under which aerial photographs are acquired. The pitch and roll of the aircraft have perhaps the most pronounced effect on aerial imagery because any non-zero angle of pitch or roll (positive or negative) will produce an oblique image and cause scale to be inconsistent across the image. Because yaw is an axis that is perpendicular to the aircraft and also to Earth's surface, there is no impact from positive or negative yaw on image scale. However, large angles of yaw or roll can impact the ability to produce overlapping and adjacent stereo image pairs. Aerial photography is covered in more detail in [Chapter 14](https://ubc-geomatics-textbook.github.io/geomatics-textbook/image-analysis.html).
 
 ```{r 12-pitch-roll-yaw, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Pitch is the rotation of the aircraft over the axis of the wings, roll is the rotation of the aircraft over the axis of the fuselage, and yaw is the rotation of the aircraft over the axis of vertical axis that is perpendicular to the fuselage. [Jrvz](https://en.wikipedia.org/wiki/Aircraft_principal_axes#/media/File:Yaw_Axis_Corrected.svg), CC-BY-SA 3.0.")
+fig_cap <- paste0("Pitch is the rotation of the aircraft over the axis of the wings, roll is the rotation of the aircraft over the axis of the fuselage, and yaw is the rotation of the aircraft over the axis of vertical axis that is perpendicular to the fuselage. [Jrvz](https://en.wikipedia.org/wiki/Aircraft_principal_axes#/media/File:Yaw_Axis_Corrected.svg), CC-BY-SA-3.0.")
 knitr::include_graphics(here::here("images", "12-pitch-roll-yaw.png"))
 ```
 <br/>
@@ -412,7 +412,12 @@ The First Law says that anything moving through space will continue to move thro
 
 In the simplest terms, orbits form when two objects are in motion near each other in the vacuum of space. For satellites to reach orbit around Earth, they must accelerate at very high speeds to escape Earth's gravity and maintain their inertial motion (Second Law). At specific speeds, satellites can maintain their motion and continue to interact with Earth, exerting a small force on Earth that is reciprocated (Third Law). The exact path of an orbit is a function of the mass and gravitational acceleration between the two objects. In other words, objects orbit each other and are in constant free fall towards the other due to the Third Law. For example, the Earth is falling towards the Moon and the Moon is falling towards the Earth. Both objects are orbiting around the same imaginary point representing the center of mass of both objects. The same physics apply to the orbits of satellites around Earth. Since Earth has much more mass than any artificial satellite, the center of mass between Earth and any satellite is generally near the center of Earth itself, thus we see the illusion that the satellite "orbits" Earth.
 
-Consider Newton's cannonball thought experiment: you fire a cannonball perpendicular to Earth's surface at the top of a tall mountain. If the cannonball is traveling at 0 $km·s^{-2}$, then the cannonball falls to the ground due to the force of gravity. If the cannonball is traveling at 1 $km·s^{-2}$, then the cannonball travels some distance over an arc before it eventually falls back to Earth due to gravity. If the cannonball is traveling at least 7.8 $km·s^{-2}$, then the speed of the cannonball is roughly equivalent to the force of gravity that is trying to pull the cannonball back to Earth and therefore the cannonball maintains an elliptical orbit around Earth. In other words, the velocity of the  cannonball is faster over Earth than it is falling towards Earth, which results in a curved path or orbit. 
+Consider Newton's cannonball thought experiment: you fire a cannonball perpendicular to Earth's surface at the top of a tall mountain. If the cannonball is traveling at 0 $km·s^{-2}$, then the cannonball falls to the ground due to the force of gravity. If the cannonball is traveling at 1 $km·s^{-2}$, then the cannonball travels some distance over an arc before it eventually falls back to Earth due to gravity (Figure \@ref(fig:12-newtons-cannonball) A). If you fire the cannonball at a slightly faster speed of 3 $km·s^{-2}$, then the cannonball travels a distance farther than before but still eventually falls back to Earth due to gravity (Figure \@ref(fig:12-newtons-cannonball) B). If the cannonball is traveling at least 7.8 $km·s^{-2}$, then the speed of the cannonball is roughly equivalent to the force of gravity that is trying to pull the cannonball back to Earth and therefore the cannonball maintains an approximately circular orbit around Earth (Figure \@ref(fig:12-newtons-cannonball) C). In other words, the velocity of the  cannonball is faster over Earth than it is falling towards Earth, which results in a curved path or orbit. Fire the cannonball at any faster speed and you can achieve elliptical orbits (Figure \@ref(fig:12-newtons-cannonball) D) or even orbits that escape Earth's gravity altogether (Figure \@ref(fig:12-newtons-cannonball) E).
+
+```{r 12-newtons-cannonball, fig.cap = fig_cap, out.width="75%", echo = FALSE}
+fig_cap <- paste0("Netwon's Cannonball thought experiment. [Brian Brondel](https://upload.wikimedia.org/wikipedia/commons/archive/7/73/20070210061321%21Newton_Cannon.svg), CC-BY-SA-3.0.")
+knitr::include_graphics(here::here("images", "12-newtons-cannonball.png"))
+```
 
 Another important force is drag, which is the equal force applied in the opposite direction to acceleration (Third Law). Drag is important for satellites to reach orbit and stay there. Earth's atmosphere exerts an equal and opposite force to the direction the space vehicle is leaving the launchpad and also creates friction that can slow down satellites that are near the transition between the atmosphere and space. Thus, in order for satellites to maintain orbit, they must travel at high speeds and also high altitudes above the ground to avoid the force of drag. Generally, the speed of a satellite is inversely related to the altitude. So satellites that are closer to Earth must travel at much faster speeds than satellites that are farther from Earth. In the following sections, we will look at some examples of different types of orbits and their role in specific remote sensing systems.
 
@@ -446,35 +451,10 @@ Earth is an oblate ellipsoid with a slightly shorter axis of rotation than the e
 
 Were you wondering why MEO extends to such an exact number at the extreme altitude of 35,786 km? That is because 35,786 km is the distance from Earth at which the orbital period of a satellite at the Equator is equivalent to Earth's rotational period of 24 hours. This is known as **Geosynchronous Equatorial Orbit (GEO)** because this orbit only occurs directly above the Earth's Equator. Satellites in GEO are __geosynchronous__, meaning they are always visible in the same location of the sky no matter the time of day or the season. For this reason, these orbits are sometimes referred to as __geostationary__. The advantage of geostationary orbit is that the satellite can continuously image the same visible portion of Earth 24 hours a day. Thus, nearly all weather and communication satellites are in geostationary orbit, allowing transmissions to be relayed across a network of geostationary satellites and ground antenna like a ping-pong ball.
 
-## Important Satellite Systems for Environmental Management
-
-### Coarse Resolution Sensors and Satellites
-MODIS
-
-VIIRS (MODIS replacement)
-
-Sentinel 2
-
-### Medium Resolution Sensors and Satellites
-Landsat
-
-Sentinel 2
-
-### Fine Resolution Sensors and Satellites
-Cube Sats
-
-SkySat (Planet)
-
-WildfireSat
-
-### Active Sensors and Satellites
-GEDI on ISS
-
-ICESat 1/2
-
-RADARSAT 1/2 and Constellation RADARSAT Mission
-
-Sentinel 1
+```{r 12-sunsynchronous-geosynchronous-orbits, fig.cap = fig_cap, out.width="75%", echo = FALSE}
+fig_cap <- paste0("Comparing Sun-synchronous and geosynchronous orbits. The yellow area shows the portion of Earth's surface that is visible during a single orbit. Notice that Sun-synchronous orbit observes at a consistent local time while the geosynchronous orbit observes a constant location. href='",baseurl,"#12-sunsynchronous-geosynchronous-orbits'>Animated figure can be viewed in the web browser version of the textbook.</a> Credit: [NOAA/JPL-Caltech](https://scijinks.gov/about/).")
+knitr::include_graphics(here::here("images", "12-sunsynchronous-geosynchronous-orbits.gif"))
+```
 
 ## Summary
 

@@ -16,6 +16,7 @@ library(sp)
 library(topoDistance)
 library(xtable)
 ```
+# Raster Analysis and Terrain Modelling {#raster-analysis-and-terrain-modelling}
 
 Many data are frequently collected and represented in a raster format. In this chapter, we will look at how rasters can be analyzed with a specific focus on deriving terrain information from elevation rasters. We will explore some useful properties of the raster structure that can be exploited for insightful analysis of land and water alike. Image-based raster analysis will be a later topic of [Chapter 14](https://ubc-geomatics-textbook.github.io/geomatics-textbook/image-analysis.html).
 
@@ -541,7 +542,7 @@ A **viewshed** is an analysis that simulates a physical line-of-sight using a DE
 **Extrusion** is the process of taking 2-dimensional features such as points, lines, or polygons and assigning an elevation to each feature so that it can be visualized in 3-dimensions. An extrusion is often performed using the values of an attribute in a feature class. In this way, extrusion can be used to create 3D buildings from 2D polygons of building footprints that contain an attribute of height (Figure \@ref(fig:9-vancouver-building-height-extruded)). 
 
 ```{r 9-vancouver-building-height-extruded, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste0("Animation showing building polygons in Vancouver, British Columbia extruded by a height attribute. <a href='",baseurl,"#fig:9-vancouver-building-height-extruded'>Animated figure can be viewed in the web browser version of the textbook</a>. Building data (2009) from City of Vancouver, licensed under <a href='",covlicence,"' Open Government License - Vancouver</a>. Base map © OpenStreetMap contributors, licensed under Open Data Commons Open Database License. Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Animation showing building polygons in Vancouver, British Columbia extruded by a height attribute. <a href='",baseurl,"#fig:9-vancouver-building-height-extruded'>Animated figure can be viewed in the web browser version of the textbook</a>. Building data (2009) from City of Vancouver, licensed under <a href='",covlicence,"'> Open Government License - Vancouver</a>. Base map © OpenStreetMap contributors, licensed under Open Data Commons Open Database License. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics("images/09-vancouver-building-height-extruded.gif")
 ```
 

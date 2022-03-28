@@ -64,13 +64,17 @@ Landsat 8-7 has regularly acsquired images of Beaufort Sea and Mackenzie River D
     knitr::include_graphics("images/14-Beaufort-Sea-Ice.gif")
 ```
 
-Similarly, in the high arctic polar desert of Ellesmere Island in Nunavut, Canada, what were once the twin St.Patrick Bay ice caps have now chipped away due to decades of rising temperatures and unusually warm summers. Once the remnants of the Little Ice Age that covered about 7.5 square km and 3 square km across respectively, the formation has reduced to only 5% of their former area and are predicted to extinct within a decade. St.Patrick Bay Ice caps are emblematic of the Arctic change - a reality of how climate change is affecting the whole of Canadian Arctic.  
+Similarly, in the high arctic polar desert of Ellesmere Island in Nunavut, Canada, what were once the twin St.Patrick Bay ice caps have now chipped away due to decades of rising temperatures and unusually warm summers. Once the remnants of the Little Ice Age that covered about 7.5 square km and 3 square km across respectively, the formation has reduced to only 5% of their former area and are predicted to extinct within a decade. St.Patrick Bay Ice caps are emblematic of the Arctic change - a reality of how climate change is affecting the whole of Canadian Arctic. 
 
+<!--Slider code -->
 <div id="container"> <img id="after-img" src="./images/14-st-patrick-2015.png"> <img id ="before-img" src="./images/14-st-patrick-1999.png"> <input type="range" min="0" max="100" value="50" id="slider" oninput="slide()"> </div>
+
+ <p class="caption"> Figure 14.2: Death of the St. Patrick Ice Caps. Sharma, CC-BY-SA-4.0 </p>
 
 <style> #container{position:relative;top: 0; left: 0;} #before-img{width:100%;top: 0; left:0; position:absolute;clip-path: polygon(0 0 , 50% 0, 50% 100%, 0 100%);} #after-img{ position:relative; top:0; left:0;width:100%;}#slider{ position: absolute; top:0; left:0;  -webkit-appearance: none; width: calc(100% + 40px); height: 100%; margin-left: -20px; background-color: transparent; outline: none; } #slider::-webkit-slider-thumb{ -webkit-appearance: none; height: 40px; width: 40px; background: url("./images/scroll-icon.png"); background-size: contain; cursor: pointer; }</style>
 
 <script> slider.oninput = () => {document.getElementById("before-img").style.clipPath = "polygon(0 0," + document.getElementById("slider").value + "% 0," + document.getElementById("slider").value + "% 100%, 0 100%)";}</script>
+<!--End of Slider code -->
 
 ##	Pattern Analysis
 ###	Landscape pattern indices

@@ -5,7 +5,7 @@ output:
 ---
 
 ```{r, include=FALSE}
-type <- "pdf"
+type <- "pdf" ## "pdf" or ""
 baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"
 covlicence <- "https://opendata.vancouver.ca/pages/licence/"
 nrcanlicense <- "https://open.canada.ca/en/open-government-licence-canada"
@@ -139,7 +139,7 @@ $$
 To illustrate the concept of a gravimetric datum, suppose we constructed a large, straight tunnel through the physical Earth that was tangential to the ellipsoid. If we allowed the oceans to flow freely through this tunnel, your experiences might convince you that water would flow from one end to the other. But in fact, this tunnel is so large, that the gravity field is changing. So the water would actually come to rest at the surface of the geoid or gravimetric model, as shown in Figure \@ref(fig:2-geoid-tunnel) below.
 
 ```{r 2-geoid-tunnel, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste0("Thought experiment showing where water would be at rest within a tunnel through the geoid due to the equipotential force of gravity (g).Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Thought experiment showing where water would be at rest within a tunnel through the geoid due to the equipotential force of gravity (g). Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics("images/02-geoid-tunnel.png")
 ```
 <br/>
@@ -168,7 +168,7 @@ m = leaflet(countries) %>%
 
 ``` {r 2-CGVD-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
   fig_cap <- paste0("The difference (in meters) between the Canadian Geodetic Vertical Datum of 2013 (CGVD2013) and the Canadian Geodetic Vertical Datum of 1928 (CGVD28).<a
-  href='",baseurl,"#fig:2-CGVD-leaflet'>Animated figure can be viewed in the web browser version of the textbook</a>. Data from Natural Resources Canada and licensed under the <a href='",nrcanlicense,">Open Government Licence - Canada </a>.Pickell, CC-BY-SA-4.0.")
+  href='",baseurl,"#fig:2-CGVD-leaflet'>Animated figure can be viewed in the web browser version of the textbook</a>. Data from Natural Resources Canada and licensed under the <a href='",nrcanlicense,">Open Government Licence - Canada </a>. Pickell, CC-BY-SA-4.0.")
 if (type == "pdf") { knitr::include_graphics(here::here("images", "02-CGVD-leaflet.PNG")) }
 ```
 
@@ -201,6 +201,16 @@ $CS$ represents the line connecting the centre of a spherical geographic coordin
 A coordinate system that is referenced to an ellipsoid is known as a **horizontal datum**. For example, the World Geodetic System of 1984 (WGS 1984) is a *geodetic* datum that has a geographic coordinate system referenced to it. So the origin of WGS 1984 is also the origin of the GCS from which latitude and longitude measurements are derived. So if you measured your latitude and longitude using the WGS 1984 horizontal datum, you would be placed somewhere on the ellipsoid also defined by WGS 1984. It is important to note, however, that the same exact *geocentric latitude* and longitude measures would place you somewhere else on a sphere. Other factors such as plate tectonics, glaciation, and ocean tides cause the Earth's surface to be in constant motion underneath any fixed horizontal datum. For example, Europe has drifted about 60 meters from North America since Eratosthenes first calculated the circumference of Earth. Therefore, any "type" of latitude or longitude is only useful during a particular epoch of time.
 
 If you mapped the Earth as an ellipsoid in a three dimensional Cartesian coordinate system, you could describe location using three coordinates $[x,y,z]$, with $[0,0,0]$ being the center of Earth. However, we do not often express mapped coordinates of Earth using Cartesian coordinates. Instead of referring to the North Pole at $[0,0,6356752.3]$ meters (the polar radius of Earth) we usually refer to it with a single coordinate, 90° N. Why? The North and South Poles are the only points on Earth that can be defined with a single coordinate because they coincide with the orientation of a geographic coordinate system. Imagine placing a protractor at a 90° angle relative to a table. If you rotate it along that perpendicular axis, one arm of the protector would spin in a 360° circle, but the other arm of the protractor would always point up or down at 90° in the same direction. For all other locations on Earth, a pair of $[λ,φ]$ coordinates are needed to define location. With space-based global navigation systems it is more common to combine coordinates in both horizontal and vertical datums together. For example, $[λ,φ]$ expresses your location relative to the horizontal datum while $[λ,φ,h]$ expresses your ellipsoidal height (h) at a location and $[λ,φ,H]$ expresses your orthometric height (H) at a location.
+
+### Your Turn! {-}
+
+Use our geodesy tool to visualize the differences between the sphere, ellipsoid, and geoid. You can modify the transparency of the sphere and ellipsoid to see how these geometries vary. Change the flattening of the ellipsoid to achieve different models of Earth. Search for locations with latitude and longitude values and calculate the geoid height. Compare geocentric and geodetic latitudes. The sphere and the ellipsoid models in the visualization represent Earth's equatorial diameter (semi-major axis) as 6,356,752.3 m (i.e., equivalent to WGS 1984) and the geoid elevations are exaggerated by a factor of 0.549 to enhance their appearance.
+
+```{r 2-geodesy-visualization-static, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+    fig_cap <- paste0("Online geodesy tool for visualizing the differences between the sphere, ellipsoid, and geoid. <a href='http://oergeomatics-geodesy-viz.s3-website.ca-central-1.amazonaws.com/'>Click here to access the interactive tool.</a> Floria Gu, CC-BY-SA-4.0.")
+    knitr::include_graphics(here::here("images", "02-geodesy-visualization-static.png"))
+```
+<br/>
 
 ### Projected Coordinate Systems
 
@@ -268,7 +278,7 @@ The Mercator map projection is perhaps the most pervasive and reproduced project
 Universal Transverse Mercator (UTM) is very similar to a Mercator projection except that the cylinder is rotated or transverse by 90° so that the opening of the cylinder is perpendicular to the rotational axis of Earth. This has the effect of moving the tangent from the Equator to any Meridian. In fact, you can rotate the cylinder at any angle you want where 0° is a true Mercator, 90° is a transverse Mercator, and any other angle is considered an oblique Mercator. UTM is actually a system of 60 different transverse Mercator projections that are defined to represent 6° Longitudinal intervals of Earth's surface (60 zones x 6° = 360°). Each projection is defined as a zone, which is also divided into North and South zones depending whether you are in the Northern or Southern Hemisphere. Canada spans 15 UTM zones from Zone 7 North in the Yukon to Zone 22 North covering Newfoundland. Figure \@ref(fig:2-UTM-13N-map) below shows a map of UTM Zone 13 over Saskatchewan.
 
 ```{r 2-UTM-13N-map, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste0("Universal Transverse Mercator Zone 13 map projection with Tissot's Indicatrices in red.Pickell, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Universal Transverse Mercator Zone 13 map projection with Tissot's Indicatrices in red. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics("images/02-UTM-13N-map.png")
 ```
 <br/>
@@ -316,13 +326,5 @@ In this chapter, you learned about the science and technology of geodesy that go
 1. Describe the process of measuring the height of something on Earth.
 2. Explain the difference between a geographic coordinate system and a projected coordinate system.
 3. Name as many projected coordinate systems as you can.
-4. 
 
 ## Practice Questions {-}
-
-1. Choose a continent to roughly draw and then draw a grid of latitude and longitude lines in 3 different projected coordinate systems on a piece of paper. Describe the distortions that you expect and point to where they appear on your continent.
-2. x`x`
-
-## Recommended Readings {-}
-
-Ensure all inline citations are properly referenced here.

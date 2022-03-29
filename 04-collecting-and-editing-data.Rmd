@@ -1,7 +1,7 @@
 
 # Collecting and Editing Data {#collecting-and-editing-data}
 
-The ability of a geomatician to answer research questions or produce a map or other visuals, rests, in part, on first finding the right data to do so. Geomaticians often spend much of their time finding, collecting, and editing data, yet the critical activity of finding data is often left as something that geomaticians are assumed to pick up along the way. This chapter addresses that gap by first introducing a range of possible data sources along with some theory, tips, and strategies to access them. We also address some common instances when data do not yet exist, and so we must create them. This chapter may be particualrly useful for students and researchers starting out on their spatial research projects, and for anyone interested in the rapidly changing data universe. 
+The ability of a geomatician to answer research questions or produce a map or other visuals, rests, in part, on first finding the right data to do so. Geomaticians often spend much of their time finding, collecting, and editing data, yet the critical activity of finding data are often left as something that geomaticians are assumed to pick up along the way. This chapter addresses that gap by first introducing a range of possible data sources along with some theory, tips, and strategies to access them. We also address some common instances when data do not yet exist, and so we must create them. This chapter may be particualrly useful for students and researchers starting out on their spatial research projects, and for anyone interested in the rapidly changing data universe. 
 
 
 :::: {.box-content .learning-objectives-content}
@@ -12,82 +12,75 @@ The ability of a geomatician to answer research questions or produce a map or ot
 
 1. Become familiar with a wide range of spatial datasets and strategies to access them
 2. Identify several sources of historical spatial information, including historical maps and aerial photos, and the steps required to analyze them as spatial information
-2. ...Editing data (Paul to change as desired write, or delete)
-4. ...GNSS (Paul to write)
-
+2. Recognize good practices and strategies for writing and reading metadata
+4. Understand the components of Global Navigation Satellite Systems (GNSS) and how location on Earth is triangulated from these systems
 
 ::::
 
 ## Key Terms {-}
-aerial photography, area of interest, census, data repository, data request, georeferencing, GNSS, natural resource administrative data, historical collections, open data, orthophotos, spatial panel data. 
+Aerial Photography, Area of Interest, Census, Data Repository, Data Request, Georeferencing, Global Navigation Satellite Systems (GNSS), Natural Resource Administrative Data, Historical Collections, Open Data, Orthophoto, Spatial Panel Data 
 
-## Open data
+## Open Data
 
-Data is becoming increasingly easy to access thanks to the **open data** movement. The concept of **open data** suggests that governmental data should be available to anyone to use and, if desired, redistribute in any form without any copyright restriction or with minimal restrictions such as providing recognition [@kassen_promising_2013].
+Data are becoming increasingly easy to access thanks to the open data movement. The concept of **open data** suggests that governmental data should be available to anyone to use and, if desired, redistribute in any form without any copyright restriction (Kassen 2013) or with minimal restrictions such as providing recognition [@kassen_promising_2013].
 
-Until recently, most government data were simply unavailable or could only be accessed by data request or by paying the government data provider. Countries around the world are moving to an open data model. For example, Britain is opening up its national geographic database (housed as the &#39;Ordnance Survey&#39;). United States (US) has moved its data housed within the US Geological Survey into the public domain [@usgs_copyrights_nodate]. Canada has signed a [Directive on Open Government](https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=28108), which promotes the proactive and ongoing release of government information. The province of British Columbia (BC) has just released all [government LiDAR data](https://governmentofbc.maps.arcgis.com/apps/MapSeries/index.html?appid=d06b37979b0c4709b7fcf2a1ed458e03) under an open government license and many provinces and municipalities release data under similar licenses. Canada is also signatory of the [Treaty of Open Skies](https://en.wikipedia.org/wiki/Treaty_on_Open_Skies), which is an international effort that encourages the sharing of aerial imagery to promote openness and transparency of each signatory nation's military forces and activities. Despite the tremendous momentum towards **open data**, many datasets are not yet fully open. The tips and strategies below will help locate both open and not so open datasets. 
+Until recently, most government data were simply unavailable or could only be accessed by data request or by paying the government data provider. Countries around the world are moving to an open data model. For example, Britain is opening up its national geographic database (housed as the 'Ordnance Survey'). United States (US) has moved its data housed within the US Geological Survey into the public domain [@usgs_copyrights_nodate]. Canada has signed a [Directive on Open Government](https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=28108), which promotes the proactive and ongoing release of government information. The province of British Columbia (BC) has just released all [government LiDAR data](https://governmentofbc.maps.arcgis.com/apps/MapSeries/index.html?appid=d06b37979b0c4709b7fcf2a1ed458e03) under an open government license and many provinces and municipalities release data under similar licenses. Canada is also signatory of the [Treaty of Open Skies](https://en.wikipedia.org/wiki/Treaty_on_Open_Skies), which is an international effort that encourages the sharing of aerial imagery to promote openness and transparency of each signatory nation's military forces and activities. Despite the tremendous momentum towards open data, many datasets are not yet fully open. The tips and strategies below will help locate both open and not-so-open datasets. 
 
 ## Finding Data
 
-Here we introduce a network model to set a framework for finding data. Imagine that nearly all the data and information in the world is connected in some way through networks of information, composed of individuals, libraries, and institutions. The internet is an important component in this network, one we all use every day to answer questions. For example, me might ask Google: &quot;what is the best lake in Canada to plan a summer holiday?&quot; A common answer returned is &#39;Lake Louise, Alberta,&#39; which is a stunning lake surrounded by tall Rocky Mountains, as well as hordes of tourists! If we asked this question to our friends – and maybe one happens to be an expert fisherman or fisherwoman - we may receive different answers including secret lakes that have not yet been discovered by tourists, or the best lake for fishing. Our friends can also consider our specific interests, suggest helpful resources (such as a lesser known forum on local fishing), and offer additional information about our query such as the best places on that lake to camp, where to fish on the lake, and what type of fishing gear to use. The point in this example is that there are different networks of information available to us, including formal networks of information organized on the internet and accessed by search engines as well as informal networks of individuals and experts who offer an additional strategy to connect us with the right information. 
+Here we introduce a network model to set a framework for finding data. Imagine that nearly all the data and information in the world is connected in some way through networks of information, composed of individuals, libraries, and institutions. The internet is an important component in this network, one we all use every day to answer questions. For example, me might ask Google: &quot;what is the best lake in Canada to plan a summer holiday?&quot; A common answer returned is 'Lake Louise, Alberta,' which is a stunning lake surrounded by tall Rocky Mountains, as well as hordes of tourists! If we asked this question to our friends – and maybe one happens to be an expert fisherman or fisherwoman - we may receive different answers including secret lakes that have not yet been discovered by tourists, or the best lake for fishing. Our friends can also consider our specific interests, suggest helpful resources (such as a lesser known forum on local fishing), and offer additional information about our query such as the best places on that lake to camp, where to fish on the lake, and what type of fishing gear to use. The point in this example is that there are different networks of information available to us, including formal networks of information organized on the internet and accessed by search engines as well as informal networks of individuals and experts who offer an additional strategy to connect us with the right information. 
+Data are becoming increasingly easy to discover through the use of **data repositories** (Figure \@ref(fig:04-data-network-model)). Below we discuss the growing number (and centralization) of spatial data repositories, which can give access to academic, government non-governmental, international, and crowdsourced datasets. Here we introduce each type of repository and offer some hints at what environmental data can be discovered in each.
 
-Data are becoming increasingly easy to discover through the use of **data repositories**  (Figure \@ref(fig:04-data-network-model)). Below we discuss the growing number (and centralization) of spatial data repositories, which can give access to academic, government non-governmental, international, and crowdsourced datasets. Here we introduce each type of repository and offer some hints at what environmental data can be discovered in each. 
-
-```{r 04-data-network-model, fig.cap = fig_cap, out.width="90%", echo = FALSE}
+```{r 04-data-network-model, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
 fig_cap <- paste0("Envisioning university and government data networks. Data within each network is concentrated within data repositories, yet considerable data remains 'hidden' among individual researchers and silos of the Ministry, but can potentially be accessed by finding the right connections. Sutherland, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).")
 knitr::include_graphics(here::here("images", "04-data-network-model.png"))
 ```
 
 ## Data in Academia
 
-Data librarians are particularly well connected and trained to help you navigate these repositories and contacting them can be a good starting point in your search. Nonetheless, considerable data is not yet published. Some of this unpublished data has been analyzed in previous research and its existence could be discovered through a review of the academic literature. Other unpublished data remains essentially 'hidden,' only known about by individuals or small clusters of individual researchers who created those data. In such a case, your only possibility to find such data is through a combination of 'asking around' and reaching out to experts in the field. Once you know it exists, unpublished data could potentially be accessed through connecting with those researchers themselves, and requesting the data or inquiring about the possibility for a collaboration. 
+Data librarians are particularly well connected and trained to help you navigate these repositories and contacting them can be a good starting point in your search. Nonetheless, considerable data are not yet published. Some of this unpublished data has been analyzed in previous research and its existence could be discovered through a review of the academic literature. Other unpublished data remains essentially 'hidden,' only known about by individuals or small clusters of individual researchers who created those data. In such a case, your only possibility to find such data are through a combination of 'asking around' and reaching out to experts in the field. Once you know it exists, unpublished data could potentially be accessed through connecting with those researchers themselves, and requesting the data or inquiring about the possibility for a collaboration. 
 
 ## Government Data
 
-Government data is also increasingly published in **data repositories**, specific to the level of government (Figure \@ref(fig:04-data-network-model)). There are multiple levels to government, including municipalities (the smallest), provinces (or states), and nations (the largest), each of which often has its own **data repository**. Centralized repositories are becoming increasingly common and connect **open data** from all levels of Government. The [Federated Research **data repository**](https://www.frdr-dfdr.ca/repo/) is an aggregation of Canadian **open data** repositories, including municipal, provincial, and academic repositories. It includes a map-based search for datasets with location information tied to their metadata. In the US, geospatial data from federal, municipal, and state government repositories  are being consolidated under [Data.gov](https://www.data.gov/). 
+Government data are also increasingly published in data repositories, specific to the level of government (Figure \@ref(fig:04-data-network-model)). There are multiple levels to government, including municipalities (the smallest), provinces (or states), and nations (the largest), each of which often has its own data repository. Centralized repositories are becoming increasingly common and connect open data from all levels of Government. The [Federated Research data repository](https://www.frdr-dfdr.ca/repo/) is an aggregation of Canadian open data repositories, including municipal, provincial, and academic repositories. It includes a map-based search for datasets with location information tied to their metadata. In the US, geospatial data from federal, municipal, and state government repositories are being consolidated under [Data.gov](https://www.data.gov/](https://www.data.gov/). 
 
-Because not all repositories are yet connected by a centralized repository, one must search in teh correct repository. To do this, consider which government has jurisdiction over the specific subject area and geography of interest. For example, if you are interested in land use zoning and engineering features within a given city, this data is likely best provided by that individual city, either by finding it within a **data repository** or emailing the municipality with a data request (discussed below). In Canada, the provinces have jurisdiction over most natural resources and thus provincial government data repositories tend to provide data on natural resources, such as, water features, forests, wildlife, minerals, and topography. In British Columbia, for example, [DataBC](https://www.data.gov.bc.ca/) houses over a thousand datasets on natural resources, including forest cover mapping, natural disturbances, hunting statistics, administrative boundaries, and much more. [Canada&#39;s **open data** portal](https://open.canada.ca/en/open-data) provides data on fish as well as environmental conditions (e.g., water quality, air quality, historical weather, etc.), which is under federal jurisdiction. Hydrological flow and water quality monitoring is readily accessible across Canada through the Hydat database, which can be easily accessed through the R package called [TidyHydat](https://cran.r-project.org/web/packages/tidyhydat/vignettes/tidyhydat_an_introduction.html) [@albers_tidyhydat_2017].
-
+Because not all repositories are yet connected by a centralized repository, one must search in the correct repository. To do this, consider which government has jurisdiction over the specific subject area and geography of interest. For example, if you are interested in land use zoning and engineering features within a given city, this data are likely best provided by that individual city, either by finding it within a data repository or emailing the municipality with a data request (discussed below). In Canada, the provinces have jurisdiction over most natural resources and thus provincial government data repositories tend to provide data on natural resources, such as, water features, forests, wildlife, minerals, and topography. In British Columbia, for example, [DataBC](https://www.data.gov.bc.ca/) houses over a thousand datasets on natural resources, including forest cover mapping, natural disturbances, hunting statistics, administrative boundaries, and much more. [Canada's open data portal](https://open.canada.ca/en/open-data) provides data on fish as well as environmental conditions (e.g., water quality, air quality, historical weather, etc.), which is under federal jurisdiction. Hydrological flow and water quality monitoring is readily accessible across Canada through the Hydat database, which can be easily accessed through the R package called [TidyHydat](https://cran.r-project.org/web/packages/tidyhydat/vignettes/tidyhydat_an_introduction.html) (Albers 2017).
 
 :::: {.box-content .your-turn-content}
 
 ::: {.box-title .your-turn-top}
 ## Your Turn! {-}
 :::
-Try using a web search to find the government **open data** pages for your city, province/state, and nation. What kinds of data do you see (probably a lot!). Try searching for data within each of them that is related to your own research interest.
+
+Try using a web search to find the government open data pages for your city, province/state, and nation. What kinds of data can you find?
 
 ::::
 
-
-
 ## Census Data
 
-This section introduces the **census** at a cursory level before launching into the applied question of how to find **census** data for your spatial analysis, using the Census of Canada as an example.
+This section introduces the census at a cursory level before launching into the applied question of how to find census data for your spatial analysis, using the Census of Canada as an example.
 
-**Census** generally refers to a complete count by government of a specific region&#39;s population by age, gender, language, income, housing and other demographic characteristics. **Census data** inform public policy, such as allocation of public funds, transportation network planning, and electoral area delineation. **Census data** also provide researchers with an opportunity to gain insight into the social and, to a lesser extent, environmental fabric of a country and are increasingly used in environmental and social-ecological research that aims to address social elements of environmental challenges [@tomscha_guide_2016] [@biggs_routledge_2021].
+A **census** generally refers to a complete count by government of a specific region's population by age, gender, language, income, housing and other demographic characteristics. Census data inform public policy, such as allocation of public funds, transportation network planning, and electoral area delineation. Census data also provide researchers with an opportunity to gain insight into the social and, to a lesser extent, environmental fabric of a country and are increasingly used in environmental and social-ecological research that aims to address social elements of environmental challenges [@tomscha_guide_2016] [@biggs_routledge_2021]. Censuses are typically conducted once every five years (e.g., Canada) or every 10 years (e.g., Unites States).
 
-**Census** are typically conducted once every five years (e.g., Canada) or every 10 years (e.g., United States).
+In addition to demographics, many nations survey information related to economics or specific industries, such as agriculture. For example, Canada's Census of Agriculture captures information on fertilizers, irrigation, livestock, farm types, and crop production across Canada. The Longform Census in Canada surveys additional questions but is only sent to a subset of the population, and the data from it are then estimated for the entire population.
 
-In addition to demographics, many nations survey information related to economics or specific industries, such as agriculture. For example, Canada&#39;s Census of Agriculture captures information on fertilizers, irrigation, livestock, farm types, and crop production across Canada. The Longform Census in Canada surveys additional questions but is only sent to a subset of the population, and the data from it are then estimated for the entire population.
-
-A starting point to using **census data** in spatial analysis is to understand the geographic levels of census data, and then we address where the geography files and data can be downloaded.
+A starting point to using census data in spatial analysis is to understand the geographic levels of census data, and then we address where the geography files and data can be downloaded.
 
 ## Census of Canada Geographic Levels
 
-To protect respondents&#39; confidentiality, the individual data collected during **census** enumeration is obscured from the public. Thus, **census data** can only be accessed by researchers in the form of statistics aggregated to varying geographic levels. Knowing these geographic levels is key to accessing **census data**.
+To protect respondents' confidentiality, the individual data collected during census enumeration is obscured from the public. Thus, census data can only be accessed by researchers in the form of statistics aggregated to varying geographic levels. Knowing these geographic levels is key to accessing census data.
 
-```{r 04-census-geographies, fig.cap = fig_cap, out.width="90%", echo = FALSE}
+```{r 04-census-geographies, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
 fig_cap <- paste0("The geographic levels of the Census of Canada include general units (applicable everywhere throughout Canada) and also an additional layer for urban areas only. Sutherland, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).")
 knitr::include_graphics(here::here("images", "04-census-geographies.png"))
 ```
 
-At the top of Figure \@ref(fig:04-census-geographies) are Canada&#39;s provinces and territories, which are then divided into census divisions, which in turn are divided into census subdivisions. Census subdivisions correspond to municipalities, but also include Indian reserves, and &#39;unorganized areas.&#39; These three areas (municipalities, Indian reserves, and unorganized areas) are also aggregated into census consolidated subdivisions, which offer a more consistent geographic unit for mapping large areas as compared to subdivisions themselves. Census subdivisions are divided into dissemination areas, composed of one or more &#39;dissemination area blocks&#39; (generally, a city block bounded by roads on all sides).
+At the top of Figure \@ref(fig:04-census-geographies) are Canada's provinces and territories, which are then divided into census divisions, which in turn are divided into census subdivisions. Census subdivisions correspond to municipalities, but also include Indian reserves, and 'unorganized areas.' These three areas (municipalities, Indian reserves, and unorganized areas) are also aggregated into census consolidated subdivisions, which offer a more consistent geographic unit for mapping large areas as compared to subdivisions themselves. Census subdivisions are divided into dissemination areas, composed of one or more 'dissemination area blocks' (generally, a city block bounded by roads on all sides).
 
-In addition to these general geographies, which apply throughout Canada, special geographic units are implemented as an additional layer of aggregation for urban centers. A census metropolitan area&quot; (CMA) is a grouping of census subdivisions comprising a large urban area and its surroundings. To become a CMA, an area must register an urban core population of at least 100,000 at the previous census. A census agglomeration (CA) is a smaller version of a CMA in which the urban core population at the previous census was greater than 10,000 but less than 100,000. CMA and CA are useful for making comparisons across cities. CMAs and CAs with a population greater than 50,000 are subdivided into census tracts which have populations ranging from 2,500 to 8,000 and are intended to be relatively homogeneous in their demographic identity (i.e., a local neighbourhood).
+In addition to these general geographies, which apply throughout Canada, special geographic units are implemented as an additional layer of aggregation for urban centers. A Census Metropolitan Area (CMA) is a grouping of census subdivisions comprising a large urban area and its surroundings. To become a CMA, an area must register an urban core population of at least 100,000 at the previous census. A Census Agglomeration (CA) is a smaller version of a CMA in which the urban core population at the previous census was greater than 10,000 but less than 100,000. CMA and CA are useful for making comparisons across cities. CMAs and CAs with a population greater than 50,000 are subdivided into census tracts which have populations ranging from 2,500 to 8,000 and are intended to be relatively homogeneous in their demographic identity (i.e., a local neighbourhood).
+Using census data for geographic analysis typically involves first identifying the smallest spatial unit at which the data are available. Recall that to protect the privacy of respondents, some data are only available at higher geographic levels. Another consideration is that if you plan to compile multiple census years, the geographic boundaries have typically changed over time in response to how the landscapes and information needs have changed. This creates substantial (though, not insurmountable) additional work that limits how the data can be used, especially for finer spatial scale analysis. An example of changes in the geography of census divisions is seen for British Columbia in Figure \@ref(fig:04-shifting-census-boundaries).
 
-Using census data for geographic analysis typically involves first identifying the smallest spatial unit at which the data is available. Recall that to protect the privacy of respondents, some data is only available at higher geographic levels. Another consideration is that if you plan to compile multiple census years, the geographic boundaries have typically changed over time in response to how the landscapes and information needs have changed. This creates substantial (though, not insurmountable) additional work that limits how the data can be used, especially for finer spatial scale analysis. An example of changes in the geography of census divisions is seen for BC in Figure \@ref(fig:04-shifting-census-boundaries).
-
-```{r 04-shifting-census-boundaries, fig.cap = fig_cap, out.width="90%", echo = FALSE}
+```{r 04-shifting-census-boundaries, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
 fig_cap <- paste0("An example of how census boundaries have changed, showing changes in Census divisions for British Columbia from 1911 to 1986. Data from @clark_historical_2016. Sutherland, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).")
 knitr::include_graphics(here::here("images", "04-shifting-census-boundaries.png"))
 ```
@@ -99,16 +92,14 @@ knitr::include_graphics(here::here("images", "04-shifting-census-boundaries.png"
 :::
 
 <p id="box-text">
-Spatial analysis will often want to work with the smallest geographic level available. The smallest geographic unit of the Canada **census** is the dissemination block. Census tracts are also used frequently in spatial analysis but this geographic unit is only applicable to metropolitan areas. 
+Spatial analysis will often want to work with the smallest geographic level available. The smallest geographic unit of the Canada census is the dissemination block. Census tracts are also used frequently in spatial analysis but this geographic unit is only applicable to metropolitan areas. 
 </p>
 
 ::::
 
 ## Accessing Census Data
 
-The geographic boundaries for the Census for each level can be downloaded as shapefiles for the 2016 **census** [here](https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm).
-
-The [Canadian Socio-economic Information Management System Statistics Canada data portal](https://www150.statcan.gc.ca/n1/en/type/data) provides access to the Census of Canada as well as the Census of Agriculture, Aboriginal Peoples Survey, and other government statistical datasets. You have the option to search by a vector or an area of interest. Students with access to [CHASS Canadian Census Analyzer](http://dc1.chass.utoronto.ca/census/index.html) (students of University of Toronto as well as many other subscribing universities) can use CHASS to access additional statistical data, which they can aggregate to **census** geographic units of their choosing.
+Statistics Canada maintains the geographic boundaries for the Census for each level in Canada. The [Canadian Socio-economic Information Management System Statistics Canada data portal](https://www150.statcan.gc.ca/n1/en/type/data) provides access to the Census of Canada as well as the Census of Agriculture, Aboriginal Peoples Survey, and other government statistical datasets. You have the option to search by a vector or an area of interest. Students with access to [CHASS Canadian Census Analyzer](http://dc1.chass.utoronto.ca/census/index.html) (students of University of Toronto as well as many other subscribing universities) can use CHASS to access additional statistical data, which they can aggregate to census geographic units of their choosing.
 
 :::: {.box-content .your-turn-content}
 
@@ -118,7 +109,6 @@ The [Canadian Socio-economic Information Management System Statistics Canada dat
 :::
 Try this: Navigate to [Canadian Socio-economic Information Management System Statistics Canada data portal](https://www150.statcan.gc.ca/n1/en/type/data) and search a key word such as: "age." A list of available geographic levels should be present on the left side, allowing you to check which geographic levels you would like to retrieve the data for. What geographic levels are present for age and which is the smallest geographic level (refer to Figure \@ref(fig:04-shifting-census-boundaries))? Now try searching the keyword: crop production. What is the smallest geographic level for crop production now?
 ::::
-
 
 ## Non-Governmental Organization Data 
 
@@ -130,7 +120,6 @@ Citizen science describes activities where members of the general public contrib
 
 A useful starting point to check for citizen science datasets is [Scistarter](https://scistarter.org/), which can be searched by keyword or location to identify citizen science projects around the globe. These datasets may be readily downloaded or downloaded through contacting the project leaders.
 
-
 :::: {.box-content .your-turn-content}
 
 ::: {.box-title .your-turn-top}
@@ -139,20 +128,19 @@ A useful starting point to check for citizen science datasets is [Scistarter](ht
 If you were to start a citizen science project to capture environmental data to inform public policy, what kind of information would you try to capture? 
 ::::
 
-
-
 ## International Data
 
 Some research questions extend beyond borders. For example, oceans are primarily international and data on oceans can be searched through the [Ocean Biodiversity Information System](https://obis.org/). A database on food production and timber is published by the [United Nations Food and Agricultural Organization](http://www.fao.org/faostat/en/). Academic research that attempts to answer environmental problems at the global scale now often publishes their datasets for open use, such as the [global tree canopy height map](https://glad.umd.edu/dataset/gedi) [@potapov_mapping_2021].
 
+## Metadata
+
+To be written by Evan: at cursory level on how to collect and find metadata, why its important, how it can lead to other findings.
 
 ## Unpublished Data and the Data Request
 
-Governments manage a wide variety of data, which is sometimes located in relatively siloed ministries and departments. Datasets that are not readily accessible online, may still exist and can potentially be retrieved through a data request to the appropriate government agency. In the spirit of **open data**, many governments are becoming increasingly responsive to data requests, but success of this approach often hinges on connecting with the right person that may be able to help you. This requires networking.
+Governments manage a wide variety of data, which is sometimes located in relatively siloed ministries and departments. Datasets that are not readily accessible online, may still exist and can potentially be retrieved through a data request to the appropriate government agency. In the spirit of open data, many governments are becoming increasingly responsive to data requests, but success of this approach often hinges on connecting with the right person that may be able to help you.
 
-While this textbook is primarily centered on technical skills, it is worth considering the old adage that &quot;it is not what you know, but who know.&quot; Accessing data that is not readily available adds extra challenge but can reward you with new research and networking opportunities that can be highly beneficial for both parties. The data provider may benefit from the knowledge gained from your proposed research. They may be able to assist you with understanding the data, disseminating the final report, and even connecting you with job opportunities and other ways to continue your skill development. 
-
-When sending a data request or data query, always be respectful of their time, and be tactful. A data request template is provided below: 
+Accessing data that are not readily available adds extra challenge but can reward you with new research and networking opportunities that can be highly beneficial for both parties. The data provider may benefit from the knowledge gained from your proposed research. They may be able to assist you with understanding the data, disseminating the final report, and even connecting you with job opportunities and other ways to continue your skill development. When sending a data request or data query, always be respectful of their time, and be tactful. A data request template is provided below: 
 
 1. Dear ... (person, or institution)
 2. State your name and affiliation (e.g., University department and program/supervisor)
@@ -161,54 +149,43 @@ When sending a data request or data query, always be respectful of their time, a
 5. Thank them for considering your request. 
 6. If you do not hear back from them within 1-2 weeks reply back with another, much shorter email (e.g., *I'd like to follow up and ask if someone in your office may be able to respond to the above data request?*)
 
-Always be patient and remember that the individual you contacted is busy and may appreciate a reminder in case your first email slipped through. 
-
-
-## Metadata
-
-\&lt;to be written by Evan: at cursory level on how to collect and find metadata, why its important, how it can lead to other findings. \&gt;
-
 ## Historical Data Collections
 
-**Historical data** collections generally include any spatial datasource excluding satellite-based remote sensing that was produced prior to the widespread implementation of GIS in the mid 1990's. **Historical data** are typically not available as ready-to-use digital layers, and thus work is required up front to digitize them in preparation for spatial analysis. 
+**Historical data** collections generally include any spatial datas ource excluding satellite-based remote sensing that was produced prior to the widespread implementation of GIS in the mid 1990's. Historical data are typically not available as ready-to-use digital layers, and thus work is required up front to digitize them in preparation for spatial analysis. 
 
-**Historical Datasets** can be extremely valuable in environmental research because they extend our ability to observe how the environment has changed over the longterm, potentially revealing vastly different landscapes and environmental conditions from those seen today. This insight can help remind us of levels of degradation or abundance that have become 'forgotten' by today's environmental managers, and can lead to surprising discoveries [@mcclenachan_importance_2015]. 
+Historical datasets can be extremely valuable in environmental research because they extend our ability to observe how the environment has changed over longer time horizons, potentially revealing vastly different landscapes and environmental conditions from those seen today. This insight can help remind us of levels of degradation or abundance that have become 'forgotten' by today's environmental managers, and can lead to surprising discoveries [@mcclenachan_importance_2015].
 
-Although **historical datasets** can be very useful, they were often not collected for the intended purpose of being analyzed by future researchers. Data were often collected to serve the needs of the day, and were collected in a cost effective manner using tools and science that were available at that time. While this is less an issue for Census data, which has in some cases used relatively consistent survey questions through time, it complicates use of other datasets such as historical forest inventories, which have evolved their methods in step with technology and changing perceptions of how the forest ought to be monitored and valued. Thus, knowledge of how **historical data** were collected is sometimes required to accurately understand and interpret it. Overall, the process of locating, digitizing, and interpreting historical data can be a substantial portion of the work in a historical spatial analysis. In this section we cover historical **aerial photograph** collections, historical **natural resource administrative data** as well as **historical maps**. 
-
+Although **historical datasets** can be very useful, they were often not collected for the intended purpose of being analyzed by future researchers. Data were often collected to serve the needs of the day, and were collected in a cost effective manner using tools and science that were available at that time. While this is less an issue for Census data, which has in some cases used relatively consistent survey questions through time, it complicates use of other datasets such as historical forest inventories, which have evolved their methods in step with technology and changing perceptions of how the forest ought to be monitored and valued. Thus, knowledge of how **historical data** were collected is sometimes required to accurately understand and interpret it. Overall, the process of locating, digitizing, and interpreting historical data can be a substantial portion of the work in a historical spatial analysis. In this section we cover historical **aerial photograph** collections, historical **natural resource administrative data** as well as **historical maps**.
 
 ## Historical Aerial Photographs
 
-The advent of **aerial photographs**, which are photographs of the Earth&#39;s surface taken from above (generally from an airplane), greatly improved mapping beginning in the 1930&#39;s and became the primary source of data for mapping land cover, timber volumes, topography, and national defense planning. Today, they offer a valuable tool for the unique spatial and temporal resolutions they offer. Temporally, **aerial photos** offer snapshots of landscapes that predate satellite-based remotely-sensed data by many decades [@morgan_historical_2017], which can help inform restoration targets and cumulative effects assessments [@harker_perspectives_2021]. Aerial photos vary in their spatial resolution, but sometimes offer a surprisingly high spatial resolution that can be used to study fine-scale landscape attributes and their changes, such as stream courses [@little_channel_2013], fish habitat [@tomlinson_long-term_2011], and soil hydrodynamics [@harker_perspectives_2021].
+The advent of **aerial photographs**, which are photographs of the Earth's surface taken from above (generally from an airplane), greatly improved mapping beginning in the 1930's and became the primary source of data for mapping land cover, timber volumes, topography, and national defense planning. Today, they offer a valuable tool for the unique spatial and temporal resolutions they offer. Temporally, **aerial photos** offer snapshots of landscapes that predate satellite-based remotely-sensed data by many decades [@morgan_historical_2017], which can help inform restoration targets and cumulative effects assessments [@harker_perspectives_2021]. Aerial photos vary in their spatial resolution, but sometimes offer a surprisingly high spatial resolution that can be used to study fine-scale landscape attributes and their changes, such as stream courses [@little_channel_2013], fish habitat [@tomlinson_long-term_2011], and soil hydrodynamics [@harker_perspectives_2021].
 
-Using **aerial photographs** to track landscape change often requires first &#39;tying&#39; them to the Earth to produce and orthophoto, a process discussed as it applies generally to image processing in [Chapter 13](https://ubc-geomatics-textbook.github.io/geomatics-textbook/image-processing.html) and discussed briefly here. An orthoimage is an aerial photograph or satellite imagery geometrically corrected so that the scale is uniform, such as in Figure \@ref(fig:04-crooked-aerialphoto). Unlike orthoimages, the scale of ordinary aerial images varies across the image, due to the changing elevation of the terrain surface (among other things). The process of creating an orthoimage from an ordinary aerial image is called orthorectification. Photogrammetrists are the professionals who specialize in creating orthorectified aerial imagery, and in compiling geometrically-accurate vector data from aerial images.
+Using **aerial photographs** to track landscape change often requires first 'tying' them to the Earth to produce and orthophoto, a process discussed as it applies generally to image processing in [Chapter 13](https://ubc-geomatics-textbook.github.io/geomatics-textbook/image-processing.html) and discussed briefly here. An orthoimage is an aerial photograph or satellite imagery geometrically corrected so that the scale is uniform, such as in Figure \@ref(fig:04-crooked-aerialphoto). Unlike orthoimages, the scale of ordinary aerial images varies across the image, due to the changing elevation of the terrain surface (among other things). The process of creating an orthoimage from an ordinary aerial image is called orthorectification. Photogrammetrists are the professionals who specialize in creating orthorectified aerial imagery, and in compiling geometrically-accurate vector data from aerial images.
 
 Compare the map and photograph below. Both show the same gas pipeline, which passes through hilly terrain. Note the deformation of the pipeline route in the photo relative to the shape of the route on the topographic map. Only the topographic map is accurate here. The deformation in the photo is caused by relief displacement. The photo would not serve well on its own as a source for topographic mapping.
 
-```{r 04-crooked-aerialphoto, fig.cap = fig_cap, out.width="90%", echo = FALSE}
+```{r 04-crooked-aerialphoto, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
 fig_cap <- paste0("Example of how a linear feature can appear crooked in an aerial photograph that has not yet been orthorectified due to relief displacement. @dibiase_census_2014, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).")
 knitr::include_graphics(here::here("images", "04-crooked-aerialphoto.png"))
 ```
 
 Even in their un-orthorectified state, historical aerial photos can offer a powerful communication tool. They offer a window into historical landscapes that can be easily discerned and appreciated by viewers. Thus, even without orthorectification and performing spatial analysis, historical aerial photos can enrich a research report and other communications. 
 
-
 ## Accessing Historical Aerial Photograph Collections
 
-**Aerial photography** missions involved capturing sequences of overlapping images along parallel flight paths. A flight path produces a &#39;roll&#39; of numerous adjacent images that overlap. Flight paths tend to be here and there, but not necessarily exactly where you need them! Therefore, the first step is to determine the availability of historical photographs rolls for your timeframe and **area of interest**. Some collections can be searched relatively easily using a web-based GIS. For example, the Canada National Air Photo Library has a collection of roughly 6 million aerial photos some dating back to the 1920&#39;s, which can be searched using the Earth Observation Data Management System. A search generally follows these steps: 
+**Aerial photography** missions involved capturing sequences of overlapping images along parallel flight paths. A flight path produces a 'roll' of numerous adjacent images that overlap. Flight paths tend to be here and there, but not necessarily exactly where you need them! Therefore, the first step is to determine the availability of historical photographs rolls for your time frame and **area of interest**. Some collections can be searched relatively easily using a web-based GIS. For example, the Canada National Air Photo Library has a collection of roughly 6 million aerial photos some dating back to the 1920's, which can be searched using the Earth Observation Data Management System. A search generally follows these steps: 
 
-1. Determine your **area of interest**. 
+1. Determine your area of interest.
 2. Decide on the timeframe of interest. 
-3. Search via a GIS web map or paper flight line maps and examine which flight rolls cross over your timeframe and **area of interest**. 
+3. Search via a GIS web map or paper flight line maps and examine which flight rolls cross over your time frame and area of interest.
 
-Figure \@ref(fig:04-accessing-aerial-photos) shows the results from an example search. In this example, the **area of interest** (large pink rectangle) was set by navigating to the study site within the web map then setting the current extent as the **area of interest**. Here the extent is centered on the coastline between St. John's, Newfoundland and Cape Spear, the most easterly point in North America. We then searched for **aerial photographs** at three different timeframes: 1940-1945 (panel A), 1950-1955 (panel B), and 1960-1965 (panel C). Indeed, aerial photos were found to be available at each period. The photos with smaller boxes (or foot prints) tend to have higher spatial resolution but cover less area. Assuming that fine spatial resolution is desired, the smallest photos have been selected in this example and could then be requested from the Library. Previews are often not available so we will not fully know the quality of the photos until we inspect them.  
+Figure \@ref(fig:04-accessing-aerial-photos) shows the results from an example search. In this example, the area of interest (large pink rectangle, figure \@ref(fig:04-accessing-aerial-photos) was set by navigating to the study site within the web map then setting the current extent as the area of interest. Here the extent is centered on the coastline between St. John's, Newfoundland and Cape Spear, the most easterly point in North America. We then searched for **aerial photographs at three different time frames: 1940-1945 (figure \@ref(fig:04-accessing-aerial-photos)) A), 1950-1955 (Figure \@ref(fig:04-accessing-aerial-photos)) B), and 1960-1965 (figure \@ref(fig:04-accessing-aerial-photos)) C). Indeed, aerial photos were found to be available at each period. The photos with smaller boxes (or foot prints) tend to have higher spatial resolution but cover less area. Assuming that fine spatial resolution is desired, the smallest photos have been selected in this example and could then be requested from the Library. Previews are often not available so we will not fully know the quality of the photos until we inspect them.  
 
-```{r 04-accessing-aerial-photos, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Example showing the availabiltiy of historical aerial photos in eastern Nefoundland at three time steps. Data from @natural_resources_canada_earth_nodate, <a href='https://open.canada.ca/en/open-government-licence-canada/'>Open Government License - Canada</a>.")
+```{r 04-accessing-aerial-photos, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+fig_cap <- paste0("Example showing the availabiltiy of historical aerial photos in eastern Newfoundland at three time steps. Data from @natural_resources_canada_earth_nodate, <a href='https://open.canada.ca/en/open-government-licence-canada/'>Open Government License - Canada</a>.")
 knitr::include_graphics(here::here("images", "04-accessing-aerial-photos.png"))
 ```
-
-Search for available rolls In either the paper or digital version  display the extent of available photographs captured side by side.
 
 :::: {.box-content .your-turn-content}
 
@@ -216,16 +193,15 @@ Search for available rolls In either the paper or digital version  display the e
 
 ## Your Turn! {-}
 :::
-Go to the [Canada Eartch Observation Data Management System](https://www.eodms-sgdot.nrcan-rncan.gc.ca/index-en.html) and search for historical aerial photos in your chosen area of interest using the timeframes 1935-1950 and then 1950-1980. What is the oldest photo available? 
+Go to the [Canada Eartch Observation Data Management System](https://www.eodms-sgdot.nrcan-rncan.gc.ca/index-en.html) and search for historical aerial photos in your chosen area of interest using the time frames 1935-1950 and then 1950-1980. What is the oldest photo available? 
 
 ::::
 
-
-If you searched but did not find anything helpful, don't be discouraged. The **area of interest** in the example of Cape Spear, Newfoundland, happens to be a strategic location for national defense so it not surprising that it has excellent coverage in the National Air Photo Library. In contrast, if you are interested in seeing an environmental feature such as historical forest cover in northern BC, recall that natural resources fall under the jurisdiction of provinces in Canada. Consequently, provinces may house aerial photo collections for your area. Some of these collections have been preserved by government or other institutions, such as the Geographic Information Center (GIC) at the University of British Columbia, which rescued a collection of 2.5 million aerial photos. These photos are available for researchers and commercial use. The GIC also maintains a [list of other aerial photograph libraries](https://gic.geog.ubc.ca/resources/air-photo-collection-and-services/other-sources-of-air-photo-information/), including for Alberta, Yukon, and the United States. 
+If you searched but did not find anything helpful, don't be discouraged. The area of interest in the example of Cape Spear, Newfoundland, happens to be a strategic location for national defense so it not surprising that it has excellent coverage in the National Air Photo Library. In contrast, if you are interested in seeing an environmental feature such as historical forest cover in northern BC, recall that natural resources fall under the jurisdiction of provinces in Canada. Consequently, provinces may house aerial photo collections for your area. Some of these collections have been preserved by government or other institutions, such as the Geographic Information Center (GIC) at the University of British Columbia, which rescued a collection of 2.5 million aerial photos. These photos are available for researchers and commercial use. The GIC also maintains a [list of other aerial photograph libraries](https://gic.geog.ubc.ca/resources/air-photo-collection-and-services/other-sources-of-air-photo-information/), including for Alberta, Yukon, and the United States. 
 
 ## Natural Resource Administrative Data 
 
-Governments often conduct ecological and economic monitoring in their efforts to inform public policy and environmental management. Herein, this data is referred collectively to as natural resource administrative data. This data includes information collected during the process of administering natural resources use, such as to calculate fees, royalties, and licensing payments that the resource users must pay to the government for the use of public natural resources. Administering natural resources also requires monitoring data to spatially allocate harvest quotas on resources such as fish, big game, and timber. As opposed to remotely sensed data, this type of data often describes the actual amounts of natural resources available or used, and sometimes the number of users, who those users are, and what types of dependency they may have on the resources (e.g., their levels of income). 
+Governments often conduct ecological and economic monitoring in their efforts to inform public policy and environmental management. Herein, this data are referred collectively to as natural resource administrative data. This data includes information collected during the process of administering natural resources use, such as to calculate fees, royalties, and licensing payments that the resource users must pay to the government for the use of public natural resources. Administering natural resources also requires monitoring data to spatially allocate harvest quotas on resources such as fish, big game, and timber. As opposed to remotely sensed data, this type of data often describes the actual amounts of natural resources available or used, and sometimes the number of users, who those users are, and what types of dependency they may have on the resources (e.g., their levels of income). 
 
 These data often come in a form called spatial panel data. Spatial panel data describe time series associated with particular spatial units (e.g., cities, wildlife management units, timber harvesting areas). Using spatial panel data typically requires:
 
@@ -245,60 +221,52 @@ Geographers recognize that all maps are subjective and **historical maps** are t
 
 ## Georeferencing Historical Maps
 
-Although many types of data seem to come automatically **georeferenced**, such as photos taken from a modern mobile phone, other information must be first processed into a form that can be analyzed by the geomatician. This is especially true for any data captured prior to when gps became common in the 2000&#39;s. For example, decades and sometimes centuries of data exist in the form of herbaria, ship logs, and tree ring records that offer salient information on the spatial distribution of biodiversity and natural processes. This information cannot readily be brought into a GIS. The solution is **georeferencing**, which is a process to assign non-spatial information a spatial location (x and y coordinates) based on a coordinate system. Here we discuss **georeferencing** as it applies to historical maps. To supplement this section, general theory is provided about **georeferencing** aerial images in [Chapter 13](https://ubc-geomatics-textbook.github.io/geomatics-textbook/image-processing.html). 
+Although many types of data seem to be georeferenced, other information must be first processed into a form that can be analyzed. This is especially true for any data captured prior to when Global Navigation Satellite Systems (GNSS) became commercially available in the 2000's. For example, decades and sometimes centuries of data exist in the form of herbaria, ship logs, and tree ring records that offer salient information on the spatial distribution of biodiversity and natural processes. This information cannot readily be brought into a GIS. The solution is **georeferencing**, which is a process to assign non-spatial information a spatial location (x and y coordinates) based on a coordinate system. Here we discuss georeferencing as it applies to historical maps. To supplement this section, general theory is provided about georeferencing aerial images in [Chapter 13](https://ubc-geomatics-textbook.github.io/geomatics-textbook/image-processing.html). 
 
 A common use case for georeferencing in landscape studies is when a historical map must be brought into GIS and overlaid with other data. Imagine you have a paper map and you use a desktop scanning device to scan it and save it as a digital image - this map depicts a particular area on Earth but there is no way for your computer to where and how on Earth to place this map (figure \@ref(fig:04-georeferencing-concept)). In order to solve this problem, it is necessary to assign it geographic coordinate information so that GIS software can correctly align it with other georeferenced data.
 
-```{r 04-georeferencing-concept, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("The need for **georeferencing** illustrated conceptually. Adapted from @university_of_texas_libraries_intro_2021. [CC by 2.0](https://creativecommons.org/licenses/by-nc/2.0/).")
+```{r 04-georeferencing-concept, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+fig_cap <- paste0("The need for georeferencing illustrated conceptually. Adapted from @university_of_texas_libraries_intro_2021. [CC by 2.0](https://creativecommons.org/licenses/by-nc/2.0/).")
 knitr::include_graphics(here::here("images", "04-georeferencing-concept.png"))
 ```
 
-**Georeferencing** is typically carried out using GIS software like QGIS, ArcMap, or ArcGIS Pro. The process of **georeferencing** varies slightly based on the GIS software you are using and the characteristics of the raster data you are working with, but the case study below provides a generalized workflow to help learn the overall process. Two important aspects are placing control points and rubbersheeting. 
+Georeferencing is typically carried out using GIS software. The process of georeferencing varies slightly based on the GIS software you are using and the characteristics of the raster data you are working with, but the case study below provides a generalized workflow to help learn the overall process. Two important aspects are placing control points and rubbersheeting. 
 
 Control points are the locations on the map that we will use to tie our historical map into a coordinate system. Control points should be spaced evenly across the the map. There must be at least 3 control points, but preferably more (e.g., >10). Control points should be spaced relatively evenly to obtain a good rendering. Two options are discussed for control points
 
-
-## Control Points on Maps with Grids or Graticule.
+### Control Points on Maps with Grids or Graticule
 
 Large area maps (e.g., an entire country or province) typically have graticule, which depict lines of latitude and longitude, and smaller scale maps often have UTM grids. These grids or graticule may span across the map, or just be located along the corner or edges of a map. Such maps can often be georeferenced in a GIS by first setting the desired coordinate system and then toggling on the grid or graticule within the GIS. Control points can be placed on the scanned raster at the line intersections than tied to the grid toggled on in the GIS. Here is a [guide to **georeferencing** by map corners using QGIS](https://guides.lib.utexas.edu/georeference-raster-data/qgis-georeference-by-map-corners)
 
-```{r 04-control-points, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("A comparison of A) a historical census map from 1931 with no graticule versus B) a 1961 census map with graticule representing latitude and longitude. Panel C) shows a close-up of the coordinate detail. Sutherland, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).")
+```{r 04-control-points, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+    fig_cap <- paste0("A comparison of A) a historical census map from 1931 with no graticule versus B) a 1961 census map with graticule representing latitude and longitude. Panel C) shows a close-up of the coordinate detail. Sutherland, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).")
 knitr::include_graphics(here::here("images", "04-control-points.png"))
 ```
 
-## Grid and Graticule as Control Points
+### Grid and Graticule as Control Points
 
-Not all maps have geographic coordinates on the map or along its corners (Panel A, figure \@ref(fig:04-control-points)). For such maps, control points must be placed on geographic features that can be linked to a base map that is already georeferenced and shows the locations of these features. Geographic features should be stable over time. For example, an ideal geographic feature is an island or cape in the ocean, or a mountain top. Be aware that many features do change over time: rivers meander, lakes are sometimes flooded by dam construction, and houses or other landmarks can be moved. In urban areas, try to identify features that have not changed over time. If using roads, use the center of road intersections. Here is a [guide to **georeferencing** by map features using QGIS](https://guides.lib.utexas.edu/georeference-raster-data/qgis-georeference-by-map-features) 
+Not all maps have geographic coordinates on the map or along its corners (Figure \@ref(fig:04-control-points) A). For such maps, control points must be placed on geographic features that can be linked to a base map that is already georeferenced and shows the locations of these features. Geographic features should be stable over time. For example, an ideal geographic feature is an island or cape in the ocean, or a mountain top. Be aware that many features do change over time: rivers meander, lakes are sometimes flooded by dam construction, and houses or other landmarks can be moved. In urban areas, try to identify features that have not changed over time. If using roads, use the center of road intersections.
 
-## Rubbersheeting
+### Rubbersheeting
 
-Once the control points are set, a transformation is applied to mold the historical map as best as possible into GIS space. The practice of using georeferencing historical maps using control points and transformations is an example of rubber sheeting. In cartography, rubbersheeting refers to the process by which a layer is distorted to allow it to be seamlessly joined to an adjacent geographic layer of matching imagery. This is sometimes referred to as image-to-vector conflation. Often this has to be done when layers created from adjacent map sheets are joined together. Rubber-sheeting is necessary because the imagery and the vector data will rarely match up correctly due to various reasons, such as the angle at which the image was taken, the curvature of the surface of the earth, minor movements in the imaging platform (such as a satellite or aircraft), and other errors in the imagery. A variety of transformations can be used during rubber sheeting. You should test a few to see how they work then choose one, which appears to produce the most satisfactory results in terms of the visual fit and lowest amount of error, measured as the root mean square error (RMSE, discussed in [Chapter 13](https://ubc-geomatics-textbook.github.io/geomatics-textbook/collecting-and-editing-data.html)). 
+Once the control points are set, a transformation is applied to mold the historical map as best as possible into GIS space. The practice of using georeferencing historical maps using control points and transformations is an example of rubber sheeting. In cartography, rubbersheeting refers to the process by which a layer is distorted to allow it to be seamlessly joined to an adjacent geographic layer of matching imagery. This is sometimes referred to as image-to-vector conflation. Often this has to be done when layers created from adjacent map sheets are joined together. Rubber-sheeting is necessary because the imagery and the vector data will rarely match up correctly due to various reasons, such as the angle at which the image was taken, the curvature of the surface of the earth, minor movements in the imaging platform (such as a satellite or aircraft), and other errors in the imagery. A variety of transformations can be used during rubber sheeting. You should test a few to see how they work then choose one, which appears to produce the most satisfactory results in terms of the visual fit and lowest amount of error. If you are rubber sheeting multiple maps, it may be beneficial to use a consistent transformation to facilitate writing up your methods and communicating your research. 
 
-If you are rubber sheeting multiple maps, it may be beneficial to use a consistent transformation to facilitate writing up your methods and communicating your research. 
-
-## Documenting Georeferencing 
+### Documenting Georeferencing 
 
 During the process of georeferencing you must document the number of control points and the root mean square error (RMSE). Although there are multiple sources of uncertainty in the spatial precision of a historical map, uncertainty should be characterized where possible to demonstrate rigour in your methods and for communicating uncertainty. 
 
-## Data Transformations
+## Summary 
 
-To be written by Paul 
-
-## Affine
-
-## Similarity
-
-## Projective
-
+Data are becoming increasingly accessible thanks to the open data movement, but one must still need to know where to find it. The search for data, whether social, environmental, or economic in nature, is facilitated by data repositories as well as informal approaches such as networking with colleagues, consulting data librarians, and reaching out to experts in your subject area. When data does not exist, we can sometimes create it. Historical data such as aerial photos, natural resource administrative data, and historical maps must often by digitized into a form useable for spatial analysis. However, this effort can be worth while for researchers interested in history and for the unique information gained on social and ecological change.
 
 ## Reflection Questions 
+
 1. What are the key levels of Government where you live, and what kind of spatial data might each one manage?
 2. What are two ways to find unpublished spatial data that is owned by a researcher? 
 3. What are the different types of data repositories where you can access spatial information?
 
 ## Practice Questions 
+
 1. Try the case study on **georeferencing** a historical map. Record the number of control points placed, the RMSE, and the transformation use.
 2. Draft a data request for a shapefile of bus routes as well as bus ridership statistics for the previous year in your hometown. 
 

@@ -13,7 +13,7 @@ library("plyr")
 You probably know that you are using your very own organic remote sensing system to read this sentence. Our eyes take in information from the world around us by detecting changes in light and relaying that information through the optic nerve into our brains, where we make sense of what we are seeing. As you learned in [Chapter 11](https://ubc-geomatics-textbook.github.io/geomatics-textbook/fundamentals-of-remote-sensing.html), this is what constitutes remote sensing - gathering information (“sensing”) without directly measuring or interacting with that information (“remote”). Whereas our eyes are limited to the visible light portion of the electromagnetic spectrum and by the location of our bodies, remote sensing systems use powerful sensors and flight-equipped platforms to paint a broader and deeper picture of the world around us. The picture in figure \@ref(fig:12-GOES-1-earth) is an example of the beautiful imagery we can capture from space, taken from the GOES-1 satellite.
 
 ```{r 12-GOES-1-earth, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("North and South America as seen from the NASA GOES-1 satellite. Captured from KeepTrack.space via NASA. [Copyright (C) 2007 Free Software Foundation, Inc.](https://fsf.org/)")
+fig_cap <- paste0("North and South America as seen from the NASA GOES-1 satellite [@nasa_goes-1_nodate]. Captured from KeepTrack.space. [Copyright (C) 2007 Free Software Foundation, Inc.](https://fsf.org/)")
 knitr::include_graphics("images/12-GOES_1_earth.png")
 ```
 <br/>
@@ -62,14 +62,14 @@ The property of transparent mediums to change the direction of light beams is ca
 The lens at the front of your eyeball changes refracts light beams from varying distances precisely onto your retina. The optical systems on remote sensing platforms are the same: they use a specially designed lens to focus light beams at the desired distance to onto their own recording medium. Below in figure \@ref(fig:12-focus-example-humaneye) is a simple visualization of how optical systems focus light onto a desired point to produce an in-focus image.
 
 ```{r 12-focus-example-humaneye, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Selected material from [How Focus Works](https://www.bhphotovideo.com/explora/photography/tips-and-solutions/how-focus-works). <a href='",baseurl,"#fig:12-focus-example-humaneye'>Animated figure can be viewed in the web browser version of the textbook</a>. Copyright Todd Vorenkamp. Used with permission.)")
+fig_cap <- paste0("Focusing lens [@vorenkamp_how_2015]. <a href='",baseurl,"#fig:12-focus-example-humaneye'>Animated figure can be viewed in the web browser version of the textbook</a>. Copyright Todd Vorenkamp. Used with permission.)")
 knitr::include_graphics("images/12-focus_example_humaneye.gif")
 ```
 <br/>
 
 Now, picture another scene: you are scrolling through social media and you see a beautiful photo of Mt Assiniboine taken by your friend, a professional photographer based in the Canadian Rockies. You think to yourself, “Wow, that peak looks ENORMOUS! I want to visit there and see it for myself.” So, you ask your friend exactly where they went, drive to Banff National Park, hike to the very same spot, and squint skywards. Hmm…though the mountain is still imposing, it is certainly not towering over you at close range as it was in the photo. You also notice that there are several surrounding peaks that you couldn’t see before. Your friend’s picture was crystal-clear, and you have 20/20 vision, so you know its not an issue with focusing properly. Are you being deceived?
 
-Actually, yes, you are – by both your eyes *and* the camera your friend used. We like to think that our eyes show us the world as it truly is and that everything else is a facsimile, but in truth, all optical systems alter the scenes around us to show us what we need to see. From an evolution standpoint, you can see why clear resolution of close-range objects would be of vital importance for humans – think distinguishing edible plants from poisonous ones, hunting prey, reading facial expressions, etc. We can make out human-sized objects up to a distance of three kilometres in good lighting (https://www.livescience.com/33895-human-eye.html), but if you are interested in seeing something far away, such as a mountainside or a celestial body, you’ll have to trade in your natural close-range viewing abilities for a system specialized for distant details – e.g., binoculars or a telescope. The distance at which objects can be resolved and how they appear in an image lies with the lens. Read on below to learn about how different lens designs influence the appearance of a scene or object, and keep in mind how these designs may be used in various earth observation applications.
+Actually, yes, you are – by both your eyes *and* the camera your friend used. We like to think that our eyes show us the world as it truly is and that everything else is a facsimile, but in truth, all optical systems alter the scenes around us to show us what we need to see. From an evolution standpoint, you can see why clear resolution of close-range objects would be of vital importance for humans – think distinguishing edible plants from poisonous ones, hunting prey, reading facial expressions, etc. We can make out human-sized objects up to a distance of three kilometres in good lighting [@wolchover_how_2012], but if you are interested in seeing something far away, such as a mountainside or a celestial body, you’ll have to trade in your natural close-range viewing abilities for a system specialized for distant details – e.g., binoculars or a telescope. The distance at which objects can be resolved and how they appear in an image lies with the lens. Read on below to learn about how different lens designs influence the appearance of a scene or object, and keep in mind how these designs may be used in various earth observation applications.
 
 Most, if not all, lenses on optical systems for remote sensing are **spherical lenses**, called that because each side of the lens is spherical in shape, similar to a bowl. A **convex** optical surface curves outward from the lens centre, whereas a **concave** optical surface curves inward toward the lens centre. Though not spherical, a planar or flat optical surface may be used as well. A spherical lens is formed by joining two optical surfaces – concave, convex, and/or planar – back-to-back. A **biconvex** or positive lens is two convex surfaces, and a **biconcave** or negative lens is - you guessed it - two concave surfaces. The **radius of curvature** is the measure of how much an optical surface “bulges” or “caves”. If you imagine tracing the edge of the surface in an arc and continuing the curve all the way around in a circle, the radius of this imagined circle would be the radius of curvature. Biconvex and biconcave lenses can be “equiconvex”, meaning they have the same spherical curvature on each side, but may also have uneven curvatures. The lens in the human eye is an example of a lens with uneven curvatures – our radius of curvature is higher at the front. Figures \@ref(fig:12-RoC-convex) and \@ref(fig:12-RoC-concave) demonstrate how the radius of curvature is measured for both concave and convex optical surfaces.
 
@@ -105,16 +105,16 @@ Now that we know a little bit about what lenses look like, let us turn to consid
 
 **Concave lenses cause light beams to *diverge*, or spread out, resulting in the light appearing to converge (focus) to a point in front of the lens.** 
 
-The point where the light converges or appears to converge is called the *focal point*, and the distance between the focal point and the centre of the lens is called the *focal length*. For a converging lens, the focal length is positive; for a diverging lens, it is negative. Figures \@ref(fig:12-convex-focal-diagram.png) and \@ref(fig:12-concave-focal-diagram.png) illustrate the behaviour of light when travelling through a biconvex and biconcave lens. See the paragraph below the diagrams for variable labels.
+The point where the light converges or appears to converge is called the *focal point*, and the distance between the focal point and the centre of the lens is called the *focal length*. For a converging lens, the focal length is positive; for a diverging lens, it is negative. Figures \@ref(fig:12-convex-focal-diagram) and \@ref(fig:12-concave-focal-diagram) illustrate the behaviour of light when travelling through a biconvex and biconcave lens. See the paragraph below the diagrams for variable labels.
 
 ```{r 12-convex-focal-diagram, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Measurements in a biconvex lens. [User:DrBob](https://en.wikipedia.org/wiki/User:DrBob). [CC BY 3.0 Unported](https://creativecommons.org/licenses/by/3.0/)")
+fig_cap <- paste0("Measurements in a biconvex lens. [@drbob_positive_2006]. [CC BY 3.0 Unported](https://creativecommons.org/licenses/by/3.0/)")
 knitr::include_graphics("images/12-convex_focal_diagram.png")
 ```
 <br/>
 
 ```{r 12-concave-focal-diagram, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Measurements in a biconcave lens. [User:DrBob](https://en.wikipedia.org/wiki/User:DrBob). [CC BY 3.0 Unported](https://creativecommons.org/licenses/by/3.0/)")
+fig_cap <- paste0("Measurements in a biconcave lens. [@drbob_negative_2006]. [CC BY 3.0 Unported](https://creativecommons.org/licenses/by/3.0/)")
 knitr::include_graphics("images/12-concave_focal_diagram.png")
 ```
 <br/>
@@ -136,13 +136,13 @@ When you return from your trip, your friend decides to test you on your new skil
 </p>
 
 ```{r 12-assiniboine-day, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Mt Assiniboine, image one. Kyle Maguire. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
+fig_cap <- paste0("Mt Assiniboine, image one [@maguire_mt_nodate]. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
 knitr::include_graphics("images/12-assiniboine_day.png")
 ```
 <br/>
 
 ```{r 12-assiniboine-sunset, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Mt Assiniboine, image two. Kyle Maguire. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
+fig_cap <- paste0("Mt Assiniboine, image two [@maguire_mt_nodate-1]. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
 knitr::include_graphics("images/12-assiniboine_sunset.png")
 ```
 <br/>
@@ -247,7 +247,7 @@ There are four camera perspectives used for Earth observation discussed here: ae
 The plane of the lens is perpendicular to the ground plane and the lens vector is pointed straight downwards at the ground. Figure \@ref(fig:12-aerial-plane) is an example.
 
 ```{r 12-aerial-plane, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("[Aerial photo of forest, road, and river near Kitimat, BC](https://unsplash.com/photos/UFwW97AP0LI). [Ben den Engelsen](https://unsplash.com/@benjeeeman) on Unsplash.[Unsplash License](https://unsplash.com/license)")
+fig_cap <- paste0("Aerial photo of forest, road, and river near Kitimat, BC [@den_engelsen_photo_2020]. [Unsplash License.](https://unsplash.com/license)")
 knitr::include_graphics("images/12-aerial-plane.png")
 ```
 
@@ -290,7 +290,7 @@ Common applications:
 
 ## Oblique Perspective
 
-If the plane of the lens is _not_ perpendicular to the vertical datum, then the imagery is considered to be **oblique**. Oblique imagery is ideally suited for comparing object sizes or viewing areas that would be otherwise occluded in aerial imagery. Nearly all terrestrial platforms take oblique imagery and it is readily used for airborne and spaceborne platforms. A scanning platform will have an oblique perspective when it is not at the nadir or zenith of its scan arc. Figure \@ref(fig:12-oblique-louise) is an example of an oblique image of a natural area.
+If the plane of the lens is _not_ perpendicular to the vertical datum, then the imagery is considered to be **oblique**. Oblique imagery is ideally suited for comparing object sizes or viewing areas that would be otherwise occluded in aerial imagery. Nearly all terrestrial platforms take oblique imagery and it is readily used for airborne and spaceborne platforms. A scanning platform will have an oblique perspective when it is not at the nadir or zenith of its scan arc. Figure \@ref(fig:12-oblique-image) is an example of an oblique image of a natural area.
 
 ```{r 12-oblique-image, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 fig_cap <- paste0("Oblique image of a forest harvest near Cold Lake in Saskatchewan. Ignacio San-Miguel, CC-BY-SA-4.0.")
@@ -318,13 +318,13 @@ knitr::include_graphics("images/12-hemisphere-view.png")
 Due to the unusual shape of the lens, it captures a much larger proportion of a scene than we could normally take in without swiveling our heads or stitching photos into a mosaic, such as a panorama. A hemispherical lens will produce a circular rather than rectilinear output. The lens curvature will cause objects in the image to be highly distorted and, unlike rectilinear photos, cannot be easily divided into pixels for analysis. However, hemispherical perspectives are uniquely suited to viewing large expanses of a scene all at once. For this reason, it is highly favourable for sports cameras, security cameras, and natural monitoring. Figures \@ref(fig:12-hemispherical-lens) and \@ref(fig:12-newfoundland-from-space) shows hemispherical perspectives from two very different angles.
 
 ```{r 12-hemispherical-lens, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("[Hemispherical photo taken in the Bavarian forest](https://en.wikipedia.org/wiki/File:Hemispherical_photo1.png). [Martin Wegmann](https://commons.wikimedia.org/wiki/User:Wegmann). [CC BY 3.0 Unported](https://creativecommons.org/licenses/by/3.0/)")
+fig_cap <- paste0("Hemispherical photo taken in the Bavarian forest [@wegmann_hemispherical_2011]. [CC BY 3.0 Unported](https://creativecommons.org/licenses/by/3.0/)")
 knitr::include_graphics("images/12-hemispherical-lens.png")
 ```
 <br/>
 
 ```{r 12-newfoundland-from-space, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("[Picture of Newfoundland, Canada, taken by David Saint-Jacques during his space mission.] (https://asc-csa.gc.ca/eng/multimedia/search/image/watch/13330). [Canadian Space Agency/NASA](https://asc-csa.gc.ca/eng/terms.asp#copyright). [CC BY 3.0 Unported](https://creativecommons.org/licenses/by/3.0/)")
+fig_cap <- paste0("Picture of Newfoundland, Canada, taken by David Saint-Jacques during his space mission [@canadian_space_agency_newfoundland_2019]. [CC BY 3.0 Unported.](https://creativecommons.org/licenses/by/3.0/)")
 knitr::include_graphics("images/12-newfoundland_from_space.png")
 ```
 <br/>
@@ -336,35 +336,35 @@ Common applications
 
 ## Platforms
 
-Remote sensing **platforms** are simply whatever a camera system or sensor is attached or affixed to. The platform can be stationary like a camera on a tripod or it can be mobile in the atmosphere or orbiting in space (Figure \@ref(fig:12-platforms). The choice of platform can impact everything from the type of imagery that can be collected to the scale and frequency of the imagery. As a general rule of thumb, the farther you are above Earth, the more expensive the platform becomes, but the cost per area imaged is reduced drastically. For example, a handheld camera is relatively cheap compared with a multi-million dollar satellite, but it would cost a lot of time and resources to image large areas with a handheld camera compared with a satellite. Scale or resolution of your imagery will also tend to decrease the farther that you get from Earth. This means that each pixel in an image is representing a larger area on the Earth's surface. In the following sections, we will look at some examples and applications of various platforms for remote sensing systems.
+Remote sensing **platforms** are simply whatever a camera system or sensor is attached or affixed to. The platform can be stationary like a camera on a tripod or it can be mobile in the atmosphere or orbiting in space (Figure \@ref(fig:12-platforms)). The choice of platform can impact everything from the type of imagery that can be collected to the scale and frequency of the imagery. As a general rule of thumb, the farther you are above Earth, the more expensive the platform becomes, but the cost per area imaged is reduced drastically. For example, a handheld camera is relatively cheap compared with a multi-million dollar satellite, but it would cost a lot of time and resources to image large areas with a handheld camera compared with a satellite. Scale or resolution of your imagery will also tend to decrease the farther that you get from Earth. This means that each pixel in an image is representing a larger area on the Earth's surface. In the following sections, we will look at some examples and applications of various platforms for remote sensing systems.
 
 ```{r 12-platforms, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Different types of platforms for remote sensing systems. Image scale is represented on the y-axis in log scale. Pickell, CC-BY-SA-4.0")
+fig_cap <- paste0("Different types of platforms for remote sensing systems. Image scale is represented on the y-axis in log scale. Pickell, CC-BY-SA-4.0.")
 knitr::include_graphics(here::here("images", "12-platforms.png"))
 ```
 <br/>
 
 ### Terrestrial Systems
 
-Terrestrial platforms describe any platform that is near the ground surface. Usually terrestrial remote sensing systems are fixed and immobile where the sensors or camera systems are attached to a tower or a tree, but they may also be attached to vehicles such as the Google™ Street View vehicles that collect imagery  from a 360 degree camera (Figure \@ref(fig:12-google-street-view-car). One of the obvious limitations for mounting sensors to vehicles is that they are limited to traveling on roads, which limits what can be seen from the camera. But the clear advantage is that this is a cheap platform that only requires a driving licence to operate.
+Terrestrial platforms describe any platform that is near the ground surface. Usually terrestrial remote sensing systems are fixed and immobile where the sensors or camera systems are attached to a tower or a tree, but they may also be attached to vehicles such as the Google™ Street View vehicles that collect imagery  from a 360 degree camera (Figure \@ref(fig:12-google-street-view-car)). One of the obvious limitations for mounting sensors to vehicles is that they are limited to traveling on roads, which limits what can be seen from the camera. But the clear advantage is that this is a cheap platform that only requires a driving licence to operate.
 
 ```{r 12-google-street-view-car, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("A 360 degree camera mounted on a vehicle is used for collecting street view imagery for Google™ Maps. [Gordon Leggett](https://commons.wikimedia.org/wiki/User:GRDN711), CC-BY-SA-4.0")
+fig_cap <- paste0("A 360 degree camera mounted on a vehicle is used for collecting street view imagery for Google™ Maps [@leggett_google_2014]. CC-BY-SA-4.0.")
 knitr::include_graphics(here::here("images", "12-google-street-view-car.png"))
 ```
 <br/>
 
-Many other terrestrial platforms are fixed or stationary, which means that they are either always observing the same feature or they might have a limited motorized range to pan from a fixed point. Phenological studies that aim to monitor the timing of different plant growth stages throughout the growing season such as budding, leaf-out and flowering will often use a stationary camera pointed towards the plant of interest. Figure \@ref(fig:12-phenological-camera-sequence) shows a time-lapse of images taken once per day at noon during the spring time near Grand Cache, Alberta. The changing leaf colour is clearly visible in the time lapse, which can be important for monitoring springtime wildfire risk (Pickell et al, 2017) or forage quality for wildlife such as Grizzly Bear (Bater et al, 2010).
+Many other terrestrial platforms are fixed or stationary, which means that they are either always observing the same feature or they might have a limited motorized range to pan from a fixed point. Phenological studies that aim to monitor the timing of different plant growth stages throughout the growing season such as budding, leaf-out and flowering will often use a stationary camera pointed towards the plant of interest. Figure \@ref(fig:12-phenological-camera-sequence) shows a time-lapse of images taken once per day at noon during the spring time near Grand Cache, Alberta. The changing leaf colour is clearly visible in the time lapse, which can be important for monitoring springtime wildfire risk [@pickell_early_2017] or forage quality for wildlife such as grizzly bear [@bater_using_2010].
 
 ```{r 12-phenological-camera-sequence, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Time lapse from a camera mounted on a tree. Each image is taken on a different day at noon. <a href='",baseurl,"#12-phenological-camera-sequence'>Animated figure can be viewed in the web browser version of the textbook.</a> Christopher Bater, CC-BY-SA-4.0")
+fig_cap <- paste0("Time lapse from a camera mounted on a tree. Each image is taken on a different day at noon [@bater_timelapse_nodate]. <a href='",baseurl,"#12-phenological-camera-sequence'>Animated figure can be viewed in the web browser version of the textbook.</a> CC-BY-SA-4.0.")
 knitr::include_graphics(here::here("images", "12-phenological-camera-sequence.gif"))
 ```
 
 Spectral responses from forest canopies can be monitored by radiometers such as the Automated Multiangular SPectro-radiometer for Estimation of Canopy reflectance (AMSPEC) instrument that can be mounted to a tower and sits high above the forest canopy (Figure \@ref(fig:12-flux-tower-radiometer)). These "eyes above the forests" can provide important information about forest health and physiology. Since forest canopies are usually imaged from airborne and spaceborne platforms, these terrestrial observations provide a critical link for calibration with other imagery.
 
 ```{r 12-flux-tower-radiometer, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("AMSPEC radiometer affixed to a carbon flux tower located in Buckley Bay, Vancouver Island, Canada.  Photo by Nicholas Coops, used with permission.")
+fig_cap <- paste0("AMSPEC radiometer affixed to a carbon flux tower located in Buckley Bay, Vancouver Island, Canada [@coops_amspec_nodate]. Used with permission.")
 knitr::include_graphics(here::here("images", "12-flux-tower-radiometer.png"))
 ```
 <br/>
@@ -372,7 +372,7 @@ knitr::include_graphics(here::here("images", "12-flux-tower-radiometer.png"))
 In Canada, there are significant stores of historical terrestrial imagery that were collected by the government for surveying the west. From the 1880's to as late as the 1950's, various government agencies of Canada collected over 5,000 terrestrial images of Canada's western territories and provinces primarily within the Rocky Mountains. Some of these locations have been re-imaged at the same terrestrial perspective during the modern era and show dramatic changes to the landscape such as glacial retreat and afforestation. Figure \@ref(fig:12-mountain-legacy-project) shows the retreat of the Athabasca Glacier over nearly 100 years near the Wilcox Pass in Jasper National Park. 
 
 ```{r 12-mountain-legacy-project, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Image pair of Athabasca Glacier from Wilcox Pass in Jasper National Park, Alberta, Canada. The historical image take in 1918 by A.O. Wheeler and the modern image take nearly a hundred years later in 2011 by the Mountain Legacy Project. <a href='",baseurl,"#12-mountain-legacy-project'>Animated figure can be viewed in the web browser version of the textbook.</a> Historical imagery courtesy of Library and Archives Canada. Modern image courtesy of the [Mountain Legacy Project](https://explore.mountainlegacy.ca/), CC-BY-SA-4.0.")
+fig_cap <- paste0("Image pair of Athabasca Glacier from Wilcox Pass in Jasper National Park, Alberta, Canada. The historical image was taken in 1917 by A.O. Wheeler [@library_and_archives_canada_athabasca_1917], and the modern image was taken nearly a hundred years later in 2011 by the Mountain Legacy Project [@mountain_legacy_project_modern_2011]. <a href='",baseurl,"#12-mountain-legacy-project'>Animated figure can be viewed in the web browser version of the textbook.</a> CC-BY-SA-4.0.")
 knitr::include_graphics(here::here("images", "12-mountain-legacy-project.gif"))
 ```
 <br/>
@@ -388,7 +388,7 @@ Significant advancements have been made in recent years to reduce costs of aeria
 Aircraft are subject to rotation along three axes (Figure \@ref(fig:12-pitch-roll-yaw)). **Pitch** refers to rotation around the wings and controls whether the aircraft is ascending or descending. **Roll** refers to rotation around the fuselage (body) of the aircraft and controls which wing of the aircraft is higher than the opposite wing. **Yaw** refers to rotation around the vertical axis that is perpendicular to the fuselage and controls whether the aircraft is moving left or right. Each of these axes are important for understanding the conditions under which aerial photographs are acquired. The pitch and roll of the aircraft have perhaps the most pronounced effect on aerial imagery because any non-zero angle of pitch or roll (positive or negative) will produce an oblique image and cause scale to be inconsistent across the image. Because yaw is an axis that is perpendicular to the aircraft and also to Earth's surface, there is no impact from positive or negative yaw on image scale. However, large angles of yaw or roll can impact the ability to produce overlapping and adjacent stereo image pairs. Aerial photography is covered in more detail in [Chapter 14](https://ubc-geomatics-textbook.github.io/geomatics-textbook/image-analysis.html).
 
 ```{r 12-pitch-roll-yaw, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Pitch is the rotation of the aircraft over the axis of the wings, roll is the rotation of the aircraft over the axis of the fuselage, and yaw is the rotation of the aircraft over the axis of vertical axis that is perpendicular to the fuselage. [Jrvz](https://en.wikipedia.org/wiki/Aircraft_principal_axes#/media/File:Yaw_Axis_Corrected.svg), CC-BY-SA-3.0.")
+fig_cap <- paste0("Pitch is the rotation of the aircraft over the axis of the wings, roll is the rotation of the aircraft over the axis of the fuselage, and yaw is the rotation of the aircraft over the axis of vertical axis that is perpendicular to the fuselage [@jrvz_image_2010]. CC-BY-SA 3.0.")
 knitr::include_graphics(here::here("images", "12-pitch-roll-yaw.png"))
 ```
 <br/>

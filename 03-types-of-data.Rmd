@@ -301,7 +301,7 @@ knitr::include_graphics("images/03-bc-road-map.jpg")
 
 Sometimes, a discrete object has multiple parts, that are spatially separated.  In these circumstances, the vector model allows for multi-polygon, multi-line, or multi-point objects.  A good example of when a multi-polygon would be useful is the StatsCanada provincial boundary file (see figure).  Roads sometimes need to be stored as multi-lines as well, for example Highway 1 crosses the Georgia Straight from Vancouver to Nanaimo.  If we want the to represent the entire Highway as one object, we need to use a multi-line.
 
-```{r 3-vector, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+```{r 3-vector2, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
 fig_cap <- paste0("This is the official Stats Canada provincial boundary layer.  All the other coastal provinces and territories have islands.  We don't need to represent every island as a separate object, so we can 'bundle' together the polygons as multipolygons.  The landlocked provinces do not have any coastlines and are represented as simple polygons reather than multipolygons.  The attribute table bellow corresponds to the map and lists the geometry type (polygon/multipolygon). Skeeter, CC-BY-SA-4.0")
 knitr::include_graphics("images/03-vector.png")
 ```
@@ -449,21 +449,14 @@ No single data model is suitable for all types of data or analysis.
 * It is possible to convert back and forth between models
 * However, this results in a loss of information and may introduce additional error each time a conversion is made
 
+## Case Study
 
 
-:::: {.box-content .case-study-content}
-
-::: {.box-title .case-study-top}
-### Case Study {-}
-:::
-
-#### Resolution: Vector vs. Raster {#box-text -}
+### Resolution: Vector vs. Raster
 
 This video gives an applied example of how resolution differes between raster and vector data.  *Note* The video is just a placeholder.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/bG5E8YzqI0A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-::::  
 
 
 :::: {.box-content .your-turn-content}
@@ -482,7 +475,7 @@ This video gives an applied example of how resolution differes between raster an
 #### Call out {-}
 :::
 
-<p id="box-text">
+<p id="box-text2">
 This is a call out. Put some important concept or fact in here.
 </p>
 

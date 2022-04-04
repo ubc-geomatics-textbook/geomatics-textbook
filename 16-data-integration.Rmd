@@ -2,8 +2,7 @@
 
 **Data Integration**, This chapter is about some of the more practical aspects implementing GIS in a workflow.  What type of problems and pitfalls might you encounter and how do you account for them?
 
-This chapter will walk you through a number of things you will encounter when working in GIS, using an an applied example as a guide.  Then you will be presented with two other case studies showing you example workflow.  One will show how the police involved deaths data presented in [Chapter 3](https://ubc-geomatics-textbook.github.io/geomatics-textbook/types-of-data.html) was compiled.  The second will show (forest stuff - second case study - need guidance on how to include).
- (Skeeter et al. 2021 - Arctic Science).    
+This chapter will walk you through a number of things you will encounter when working in GIS, using an an applied example as a guide.  Then you will be presented with two other case studies showing you example workflow.  One will show how the police involved deaths data presented in [Chapter 3](https://ubc-geomatics-textbook.github.io/geomatics-textbook/types-of-data.html) was compiled.  The second will show (forest stuff - second case study - need guidance on how to include) [@skeeter_controls_2022].    
 
 :::: {.box-content .learning-objectives-content}
 
@@ -42,11 +41,17 @@ Monitoring Carbon balances of Arctic ecosystems is especially difficult and expe
 
 ## About The Data
 
-The MacKenzie Delta (xx km2) is the second largest Arctic Delta in the world.  It is a patchwork of river channels, lakes, boreal forests, and Carbon rich wetlands.  It is very much understudied from the perspective of climate sciences.  To date, only one ground based observation of landscape level Carbon exchange has been made anywhere in the Mackenzie Delta.  In 2017, an intensive study was conducted using a method known as Eddy Covariance to measure the uptake/emission of Carbon Dioxide and Methane across a wetland (xx m2) in real-time (30-minute intervals) at a site in the Delta known as Fish Island (Skeeter et al. 2021). 
+The MacKenzie Delta (xx km2) is the second largest Arctic Delta in the world.  It is a patchwork of river channels, lakes, boreal forests, and Carbon rich wetlands.  It is very much understudied from the perspective of climate sciences.  To date, only one ground based observation of landscape level Carbon exchange has been made anywhere in the Mackenzie Delta.  In 2017, an intensive study was conducted using a method known as Eddy Covariance to measure the uptake/emission of Carbon Dioxide and Methane across a wetland (xx m2) in real-time (30-minute intervals) at a site in the Delta known as Fish Island [@skeeter_controls_2022]. 
 
-![The Eddy Covariance system at Fish Island J. Skeeter (2017)](images/16-ec-site.png){.center}
+```{r 16-ec-site, fig.cap = fig_cap, out.width= "90%", echo = FALSE}
+    fig_cap <- paste0("The Eddy Covariance system at Fish Island [@skeeter_controls_2022].")
+    knitr::include_graphics("images/16-ec-site.png")
+```
 
-![Maybe insert Web-map showing site instead](images/16-fig1.png){.center}
+```{r 16-fig1, fig.cap = fig_cap, out.width= "90%", echo = FALSE}
+    fig_cap <- paste0("Maybe insert Web-map showing site instead. [@skeeter_controls_2022]")
+    knitr::include_graphics("images/16-fig1.png")
+```
 
 In the site was a strong sink for Carbon during the growing season in 2017.  But, Arctic climates are characterized by extreme inter-annual variation so one year alone cannot be used determine the average carbon balance.  Unfortunately, due to funding issues, what was supposed to be a multi-year research campaign, was shutdown after just one season.
 
@@ -104,16 +109,22 @@ Precision:
 The degree of agreement between multiple measurements of the same real world phenomena. How repeatable is a measurement? 
 If you take five measurements of the same feature, how likely are they to be similar?  Lack of precision can be attributed to random errors.
 
-![Source](images/16-accuracy-vs-precision.png){.center}
+```{r 16-accuracy-vs-precision, fig.cap = fig_cap, out.width= "90%", echo = FALSE}
+    fig_cap <- paste0("Precision versus accuracy [@davies_precision_2020].")
+    knitr::include_graphics("images/16-accuracy-vs-precision.png")
+```
 
-![Source](images/16-accuracy-vs-precision2.png){.center}
+```{r 16-accuracy-vs-precision2, fig.cap = fig_cap, out.width= "100%", echo = FALSE}
+    fig_cap <- paste0("Accuracy and precision in chronostratigraphy [@davies_accuracy_2020].")
+    knitr::include_graphics("images/16-accuracy-vs-precision2.png")
+```
 
 ## Vagueness and Ambiguity
 Vagueness - Victoria ... does it mean Victoria BC vs. Victoria AU
 
 Ambiguity - coastline - is it the high water line? Low water line? mean water level?
 
-##  Quantifying Spatial Errors    RMSE, Euclid's distance
+##  Quantifying Spatial Errors RMSE, Euclid's Distance
 
 
 
@@ -121,7 +132,7 @@ Ambiguity - coastline - is it the high water line? Low water line? mean water le
 
 Data incongruousness
 
-## Ecological Fallacy, Atomistic Fallacy, MAUP etc.  Its important to include these, whether here or elsewhere?
+## Ecological Fallacy, Atomistic Fallacy, MAUP etc. Its important to include these, whether here or elsewhere?
 
 ## Other Errors?
 - source data errors, out of date data, data entry & digitization?
@@ -133,20 +144,40 @@ You see textual case study content here
 
 Footprint mapping, temporal upscaling.  I'll fill in more text here later, these figs are just grabbed from my thesis chapters.  The gist of it - Measured NEE in one year.  Have 10 years of climate data + Reanalysis data + satellite data.  Combine these data sources & train a model to do a temporal upscale/sensitivity analysis to see how inter-annual climate variability impacts NEE.  Then do a landscape classification with a greenest pixel NDVI image, intersecting with the flux footprint.  Use that to find the representative areas to do a "back of the envelope" spatial upscaling.
 
-![Rough flowchart draft](images/16-flux-upscaling-estiamte.png){.center}
+```{r 16-16-flux-upscaling-estimate, fig.cap = fig_cap, out.width= "100%", echo = FALSE}
+    fig_cap <- paste0("Rough flowchart draft.")
+    knitr::include_graphics("images/16-flux-upscaling-estimate.png")
+```
 
+```{r 16-fig1-2, fig.cap = fig_cap, out.width= "100%", echo = FALSE}
+    fig_cap <- paste0("Reference map showing the Mackenzie Delta (Currently from chapter 2, I'll change it to a full delta NDVI map).")
+    knitr::include_graphics("images/16-fig1.png")
+```
 
-![Reference map showing the Mackenzie Delta (Currently from chapter 2, I'll change it to a full delta NDVI map) ](images/16-fig1.png){.center}
+```{r 16-fig2, fig.cap = fig_cap, out.width= "100%", echo = FALSE}
+    fig_cap <- paste0("Landscape classification and drone imagery.")
+    knitr::include_graphics("images/16-fig2.png")
+```
 
-![Landscape classification and drone imagery](images/16-fig2.png){.center}
+```{r 16-fig3, fig.cap = fig_cap, out.width= "100%", echo = FALSE}
+    fig_cap <- paste0("Footprint NDVI profile.")
+    knitr::include_graphics("images/16-fig3.png")
+```
 
-![Footprint NDVI profile](images/16-fig3.png){.center}
+```{r 16-fig4, fig.cap = fig_cap, out.width= "100%", echo = FALSE}
+    fig_cap <- paste0("Climate Data.")
+    knitr::include_graphics("images/16-fig4.png")
+```
 
-![Climate Data](images/16-fig4.png){.center}
+```{r 16-fig5, fig.cap = fig_cap, out.width= "100%", echo = FALSE}
+    fig_cap <- paste0("Temporally upscaled flux estimate.")
+    knitr::include_graphics("images/16-fig5.png")
+```
 
-![Temporally upscaled flux estimate](images/16-fig5.png){.center}
-
-![Landscape classification based on fig 3](images/16-fig6.png){.center}
+```{r 16-fig6, fig.cap = fig_cap, out.width= "100%", echo = FALSE}
+    fig_cap <- paste0("Landscape classification.")
+    knitr::include_graphics("images/16-fig6.png")
+```
 
 ```{r include=FALSE}
 knitr::write_bib(c(

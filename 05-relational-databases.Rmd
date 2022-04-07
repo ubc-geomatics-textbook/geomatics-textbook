@@ -38,8 +38,8 @@ Suppose you have collected some data about some trees. You might have organized 
 
 Within a RDBMS, we find **relational databases**, which are highly structured tables comprised of rows and columns. In fact, a table in a relational database is called a **relation**, a row is a **tuple**, and a column is an **attribute**. Relational databases are a great way to store simple data structures that can be organized into a relation with tuples and attributes. When we say that a table or relation is "structured", we are referring to the fact that the data are organized according to a database **schema**, which is a set of constraints that ensure data integrity and consistency. For example, our set of trees likely all contain the same types of information and this can be easily organized into a relation. Suppose we measured the height, diameter at breast height (DBH), and species of each tree, then our relation would look like Figure \@ref(fig:5-tabular-data-spatial-data).
 ```{r 5-tabular-data-spatial-data, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste0("Tabular and spatial data are related by a Relational Database Management System (RDBMS) in a Geographic Information System (GIS). Images of Douglas-Fir and Western Hemlock trees by Natural Resources Canada, Canadian Forest Service, modified with permission.")
-    knitr::include_graphics(here::here("images", "05-tabular-data-spatial-data.png"))
+    fig_cap <- paste0("Tabular and spatial data are related by a Relational Database Management System (RDBMS) in a Geographic Information System (GIS). Images of Douglas-Fir and Western Hemlock trees by @canadian_forest_service_douglas-fir_2013, Canadian Forest Service, modified with permission.")
+    knitr::include_graphics("images/05-tabular-data-spatial-data.png")
 ```
 
 As you can see from the example above, there are two components to geospatial data: the tabular data containing tuples and attributes and the spatial data that contain the coordinate pairs for a projected or geographic coordinate system. This structure is known generically as the **georelational data model**. Many formats of geospatial data conform to the georelational data model, which stores a relation of tuples and attributes separately from another relation containing the geometry and coordinates. These two tables are then dynamically related to one another in a RDBMS using GIS software. You will almost never interact or see the relation that stores the geometry and coordinates of features contained in a relational database. Instead, the GIS software manages those files in the background for the purpose of displaying a set of features on a map, and you primarily interact with the tabular data stored in the relation of tuples and attributes.
@@ -49,8 +49,8 @@ The schema for the very simple example above would include the constraint and ex
 More formally, a relation $R$ is a _subset_ of two sets, $A$ (tuples) and $B$ (attributes). The product of these sets $A×B$ is called the **Cartesian product**. In the same way that Cartesian coordinates are ordered pairs of values from two axes, the Cartesian product of two sets gives us an ordered pair of elements $(a,b)$ from sets $A$ and $B$, where $a$ is an element in the set $A$, written as $a∈A$, and $b$ is an element of set $B$, written as $b∈B$. Therefore, $R$ is both the Cartesian product as well as any subset of $A×B$.
 
 ```{r 5-cartesian-product, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste0("Cartesian product A×B of A (tuples) and B (attributes). Image by [Quartl](https://en.wikipedia.org/wiki/Cartesian_product#/media/File:Cartesian_Product_qtl1.svg), CC BY-SA 3.0.")
-    knitr::include_graphics(here::here("images", "05-cartesian-product.png"))
+    fig_cap <- paste0("Cartesian product A×B of A (tuples) and B (attributes). Image by @quartl_english_2012, CC BY-SA 3.0.")
+    knitr::include_graphics("images/05-cartesian-product.png")
 ```
 <br/>
 
@@ -225,7 +225,7 @@ knitr::kable(
 
 Finally, **set division** is an operation of division between two relations, and you can think of it semantically as, "all the values of an attribute in $R$ that are found with the tuples of $S$." Set division is expressed as $S÷T=U$ and like the Cartesian product and set difference, set division is non-commutative, so the order of $S$ and $T$ changes the value of $U$. 
 
-For the next example of set division, we will introduce a new relation $S$, which is not a subset of $R$. Suppose, in addition to $R$, we have cataloged information about different tree species, some of which are in $R$ (these data are a small sample of a [full list of tree species codes](https://www.for.gov.bc.ca/hfp/publications/00026/fs708-14-appendix_d.htm#ad_02) commonly used in British Columbia, Canada):
+For the next example of set division, we will introduce a new relation $S$, which is not a subset of $R$. Suppose, in addition to $R$, we have cataloged information about different tree species, some of which are in $R$ (these data are a small sample of a full list of tree species codes commonly used in British Columbia, Canada [@forest_practices_branch_silviculture_2005]):
 
 ```{r 5-set-division-1, echo=FALSE}
 co <- c("AT","BB","CW","E","FD","HW","YC")
@@ -415,7 +415,7 @@ Figure \@ref(fig:5-boolean-and) illustrates what is going on here, we are only r
 
 ```{r 5-boolean-and, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Boolean A AND B returns the area shaded blue. Pickell, CC-BY-SA-4.0.")
-    knitr::include_graphics(here::here("images", "05-boolean-and.png"))
+    knitr::include_graphics("images/05-boolean-and.png")
 ```
 
 If we do not want to be so restrictive, we could use Boolean $OR$ such as $(height>15)OR(species=WesternHemlock)$, which evaluates to:
@@ -431,7 +431,7 @@ Figure \@ref(fig:5-boolean-or) illustrates the case of the Boolean $OR$. As you 
 
 ```{r 5-boolean-or, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Boolean A OR B returns the area shaded blue. Pickell, CC-BY-SA-4.0.")
-    knitr::include_graphics(here::here("images", "05-boolean-or.png"))
+    knitr::include_graphics("images/05-boolean-or.png")
 ```
 
 Suppose we want to identify all the trees that are greater than 15 m, but not Western Hemlock. In this case, we would use the expression $(height>15)NOT(species=WesternHemlock)$, which evaluates to:
@@ -447,7 +447,7 @@ Figure \@ref(fig:5-boolean-not) illustrates how Boolean $NOT$ essentially negate
 
 ```{r 5-boolean-not, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Boolean A NOT B returns the area shaded blue. Pickell, CC-BY-SA-4.0.")
-    knitr::include_graphics(here::here("images", "05-boolean-not.png"))
+    knitr::include_graphics("images/05-boolean-not.png")
 ```
 <br/>
 
@@ -464,7 +464,7 @@ Figure \@ref(fig:5-boolean-xor) illustrates how Boolean $XOR$ excludes all the t
 
 ```{r 5-boolean-xor, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Boolean A XOR B returns the area shaded blue. Pickell, CC-BY-SA-4.0.")
-    knitr::include_graphics(here::here("images", "05-boolean-xor.png"))
+    knitr::include_graphics("images/05-boolean-xor.png")
 ```
 <br/>
 
@@ -559,7 +559,7 @@ Depending on the schema of the two relations being joined, the number of tuples 
 
 ```{r 5-join-cardinality, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Cardinality of joins between relations R and S. Pickell, CC-BY-SA-4.0.")
-    knitr::include_graphics(here::here("images", "05-join-cardinality.png"))
+    knitr::include_graphics("images/05-join-cardinality.png")
 ```
 
 ## Structured Query Language
@@ -630,7 +630,7 @@ Your natural reaction to this problem might be to write a long SQL statement lik
 
 *Case Study Author: Taelynn Lam (CC BY 4.0. unless otherwise indicated), University of British Columbia, Master of Geomatics for Environmental Management graduate, 2021*
 
-Vegetation diversity in urban landscapes is important to support urban forest biodiversity and residents’ mental health. The aim of this case study is to link together socioeconomic data and vegetation information to identify areas to prioritize intervention in the City of Vancouver. [The Canadian Index of Multiple Deprivation (CIMD)](https://www150.statcan.gc.ca/n1/pub/45-20-0001/452000012019001-eng.htm) data has four dimensions of population vulnerability scores and we will aggregate these scores to obtain an overall vulnerability score for each dissemination area (DA) in Vancouver. We will compute the vegetation diversity score using [street trees data](https://opendata.vancouver.ca/explore/dataset/street-trees/) and vegetation type cover richness data^[Obtained from reclassifying [Land Cover Classification 2014 - 2m Raster](http://www.metrovancouver.org/data) to one vegetation class and five vegetation classes and counted the number of vegetation type cover classes using the `Zonal Histogram` Tool.] and then use query to identify priority areas.
+Vegetation diversity in urban landscapes is important to support urban forest biodiversity and residents’ mental health. The aim of this case study is to link together socioeconomic data and vegetation information to identify areas to prioritize intervention in the City of Vancouver. The Canadian Index of Multiple Deprivation (CIMD) [@statistics_canada_canadian_2019] data has four dimensions of population vulnerability scores and we will aggregate these scores to obtain an overall vulnerability score for each dissemination area (DA) in Vancouver. We will compute the vegetation diversity score using street trees data [@city_of_vancouver_street_2012] and vegetation type cover richness data^[Obtained from reclassifying [Land Cover Classification 2014 - 2m Raster](http://www.metrovancouver.org/data) to one vegetation class and five vegetation classes and counted the number of vegetation type cover classes using the `Zonal Histogram` Tool.] and then use query to identify priority areas.
 
 ## Join
 

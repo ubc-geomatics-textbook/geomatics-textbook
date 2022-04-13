@@ -8,7 +8,17 @@ library("xtable")
 library("plyr")
 ```
 
+```{r echo=FALSE}
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["relationalDatabases"]][["author"]]
+```
+
 # Relational Databases {#relational-databases}
+
+Written by
+```{r results='asis', echo=FALSE}
+cat(author)
+```
 
 You have almost certainly used a relational database in some form during your life, probably without even realizing it. Relational databases are foundational for information management in a GIS. In this chapter, we will look at the formal construction of relational databases, how they are used across a wide range of fields, and how we can use them to analyze spatial and aspatial information for environmental management.
 

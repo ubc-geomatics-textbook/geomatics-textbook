@@ -1,4 +1,13 @@
+```{r echo=FALSE}
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["whatIsGeomatics"]][["author"]]
+```
 # What is Geomatics? {#what-is-geomatics}
+
+Written by
+```{r results='asis', echo=FALSE}
+cat(author)
+```
 
 We encounter and use geographic information on a regular basis in our everyday lives. Whether it is finding directions to a retailer that has an item in stock you want to buy or recording the path of your last morning jog, you have probably used a Geographic Information System (GIS) and not even realized it. 
 

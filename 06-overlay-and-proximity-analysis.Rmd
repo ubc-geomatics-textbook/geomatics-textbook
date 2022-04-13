@@ -1,4 +1,15 @@
+```{r echo=FALSE}
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["overlayAndProximityAnalysis"]][["author"]]
+coauthor <- yml_content[["overlayAndProximityAnalysis"]][["coauthor"]]
+```
+
 # Overlay and Proximity Analysis {#overlay-and-proximity-analysis}
+
+Written by
+```{r results='asis', echo=FALSE}
+cat(author, "and", coauthor)
+```
 
 Introduction here.
 

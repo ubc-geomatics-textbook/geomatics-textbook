@@ -1,4 +1,15 @@
+```{r echo=FALSE}
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["topologyAndGeocoding"]][["author"]]
+coauthor <- yml_content[["topologyAndGeocoding"]][["coauthor"]]
+```
+
 # Topology and Geocoding {#topology-and-geocoding}
+
+Written by
+```{r results='asis', echo=FALSE}
+cat(author, "and", coauthor)
+```
 
 ``` {r 7-load-packages-and-setup, echo = FALSE, include = FALSE}
 baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"

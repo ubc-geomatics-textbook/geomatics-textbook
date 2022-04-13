@@ -1,4 +1,14 @@
+```{r echo=FALSE}
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["makingBeautifulMaps"]][["author"]]
+coauthor <- yml_content[["makingBeautifulMaps"]][["coauthor"]]
+```
 # Making Beautiful Maps {#making-beautiful-maps}
+
+Written by
+```{r results='asis', echo=FALSE}
+cat(author, "and", coauthor)
+```
 
 A map _is not_ the territory it represents, but, if correct, it has a _similar structure_ to the territory, which accounts for its usefulness.
 —Alfred Korzybski, _Science and Sanity_, 1933
@@ -6,11 +16,6 @@ A map _is not_ the territory it represents, but, if correct, it has a _similar s
 **Making beautiful maps**, _or making effective maps_, is comparable to being able to tell a good story. Just like a good story, a beautiful map comprises certain elements that, put together, frame the narrative in a way that makes it easy for others to understand and interpret. In this way, a map is a communication device. It conveys information through a visual representation of the spatial relationships of the features for a specific area. To better understand maps as particular form of visual communication, it may be helpful to think about what it is that maps actually do.
 
 Maps represent areas larger than we can see, usually from above, and some depict phenomena that cannot be seen (Manson and Matson 2017), such as growing seasons. They also illustrate spatial relationships, such as this map showing the percentage of the population aged 65 and over by census tract in Moncton, New Brunswick. We can deduce that those aged 65 years and over are concentrated in certain areas of the city, using census tracts as a proxy.
-
-``` {r}
-fig_cap <- ""
-knitr::
-```
 
 ![Maps illustrate how variables are related in space. [Percentage of the population aged 65 and over in 2016 by census tract](https://www12.statcan.gc.ca/census-recensement/2016/geo/map-carte/ref/thematic-thematiques/as/files-fichiers/map-carte-5/2016-92173-002-305-013-02-00-eng.pdf
 ) (c) [Statistics Canada](https://www-statcan-gc-ca.eu1.proxy.openathens.net/eng/about/about?MM=as), [Open Government Licence - Canada](https://open.canada.ca/en/open-government-licence-canada).](images/17-moncton.png){.center}

@@ -8,7 +8,17 @@ library("xtable")
 library("plyr")
 ```
 
+```{r echo=FALSE}
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["fundamentalsOfRemoteSensing"]][["author"]]
+coauthor <- yml_content[["fundamentalsOfRemoteSensing"]][["coauthor"]]
+```
 # Fundamentals of Remote Sensing {#fundamentals-of-remote-sensing}
+
+Written by
+```{r results='asis', echo=FALSE}
+cat(author, "and", coauthor)
+```
 
 At some point in your life you may have wondered why the sky is blue.
 You may have noticed that two leaves on the same tree are slightly

@@ -1,4 +1,4 @@
-```{r setup, include=FALSE}
+```{r 8-load-packages-and-setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 library(igraph)
@@ -63,7 +63,7 @@ data <- data.frame(
   to=c("99-B Line", "Canada Line", "Canada Line", "Expo Line", "Expo Line", "Expo Line", "99-B Line", "Canada Line", "Expo Line", "R2", "R1", "99-B Line", "Expo Line", "Millenium Line", "Expo Line", "Canada Line", "R3", "R3", "Seabus", "Canada Line")
 )
 
-simpleNetwork(data, charge=-500, linkDistance=50, fontSize=10, zoom=TRUE)
+simpleNetwork(data, charge=-500, linkDistance=50, fontSize=10, zoom=FALSE)
 ```
 
 ``` {r 8-vancouver-transit-network, echo=FALSE, fig.cap=fig_cap}
@@ -93,7 +93,7 @@ links <- data.frame(source=origins, target=destinations, id=seq.int(length(origi
 
 forceNetwork(Links = MisLinks, Nodes = MisNodes, Source = "source", Value="value",
              Target = "target", NodeID = "name", Nodesize="size", linkColour="gray",
-             Group = "group", opacity=0.8, zoom=TRUE, arrow=TRUE)
+             Group = "group", opacity=0.8, arrow=TRUE, zoom=FALSE)
 ```
 </br>
 

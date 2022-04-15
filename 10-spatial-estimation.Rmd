@@ -673,7 +673,7 @@ moran(filename$Basal, ww, n=length(ww$neighbours), S0=Szero(ww))
 moran.test(filename$Basal, ww)
 ```
 
-#### Using the Knearest Neighborhood Imputation {-}
+**Using the Knearest Neighborhood Imputation**
 
 **Step 1: We will select 3 Nearest Neighbor Using Distance-based Approach**
 
@@ -1106,7 +1106,7 @@ tm_shape(th.clp) +
 ```
 Predicted basal area over the entire Fort Saint Johns TSA using thiessian polygon.
 
-#### Inverse Distance Weighting
+**Inverse Distance Weighting**
 
 ***Inverse distance weighting (IWD)** [@shepard_two-_1968] estimates the variable of interest by assigning more weight to closer points using the weighting function (w) based on the weighting exponent know as power (p) [@babak_statistical_2009]. The influence of one data point on the other decreases as the distance increases. Hence, higher power of the exponent will result in point of interest having less effect on the points far from it [@babak_statistical_2009]. It is a simple technique that does not require prior information to be applied to spatial prediction [@shepard_two-_1968]. Lower value of exponents mean more averaging, and the weights are more evenly distributed among the surrounding data points [@shepard_two-_1968].
 
@@ -1177,7 +1177,7 @@ leaflet() %>% addTiles() %>%
     title = "Predicted basal area")
 ```
 
-Predicted basal area over the entire Fort Saint Johns TSA using inverse distance weighting projected over the province of Brithish Columbia.
+**Figure 10.23.** \ref{fig:figs} Predicted basal area over the entire Fort Saint Johns TSA using inverse distance weighting projected over the province of British Columbia.
 
 ## Methods Using Semi-variogram 
 

@@ -16,7 +16,17 @@ library(sp)
 library(topoDistance)
 library(xtable)
 ```
+
+```{r echo=FALSE}
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["rasterAnalysisTerrainModelling"]][["author"]]
+```
 # Raster Analysis and Terrain Modelling {#raster-analysis-and-terrain-modelling}
+
+Written by
+```{r results='asis', echo=FALSE}
+cat(author)
+```
 
 Many data are frequently collected and represented in a raster format. In this chapter, we will look at how rasters can be analyzed with a specific focus on deriving terrain information from elevation rasters. We will explore some useful properties of the raster structure that can be exploited for insightful analysis of land and water alike. Image-based raster analysis will be a later topic of [Chapter 14](https://ubc-geomatics-textbook.github.io/geomatics-textbook/image-analysis.html).
 

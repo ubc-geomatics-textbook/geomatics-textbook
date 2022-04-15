@@ -18,6 +18,17 @@ library(leaflet)
 library(htmlwidgets)
 ```
 
+```{r echo=FALSE}
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["imageAnalysis"]][["author"]]
+```
+# Image Analysis {#image-analysis}
+
+Written by
+```{r results='asis', echo=FALSE}
+cat(author)
+```
+
 Introduction here.
 
 :::: {.box-content .learning-objectives-content}

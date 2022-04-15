@@ -1,4 +1,14 @@
+```{r echo=FALSE}
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["makingBeautifulMaps"]][["author"]]
+coauthor <- yml_content[["makingBeautifulMaps"]][["coauthor"]]
+```
 # Making Beautiful Maps {#making-beautiful-maps}
+
+Written by
+```{r results='asis', echo=FALSE}
+cat(author, "and", coauthor)
+```
 
 A map _is not_ the territory it represents, but, if correct, it has a _similar structure_ to the territory, which accounts for its usefulness.
 — Alfred @korzybski_science_1933

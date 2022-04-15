@@ -8,7 +8,17 @@ library("xtable")
 library("plyr")
 ```
 
+```{r echo=FALSE}
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["remoteSensingSystems"]][["author"]]
+coauthor <- yml_content[["remoteSensingSystems"]][["coauthor"]]
+```
 # Remote Sensing Systems {#remote-sensing-systems}
+
+Written by
+```{r results='asis', echo=FALSE}
+cat(author, "and", coauthor)
+```
 
 You probably know that you are using your very own organic remote sensing system to read this sentence. Our eyes take in information from the world around us by detecting changes in light and relaying that information through the optic nerve into our brains, where we make sense of what we are seeing. As you learned in [Chapter 11](https://ubc-geomatics-textbook.github.io/geomatics-textbook/fundamentals-of-remote-sensing.html), this is what constitutes remote sensing - gathering information (“sensing”) without directly measuring or interacting with that information (“remote”). Whereas our eyes are limited to the visible light portion of the electromagnetic spectrum and by the location of our bodies, remote sensing systems use powerful sensors and flight-equipped platforms to paint a broader and deeper picture of the world around us. The picture in figure \@ref(fig:12-GOES-1-earth) is an example of the beautiful imagery we can capture from space, taken from the GOES-1 satellite.
 

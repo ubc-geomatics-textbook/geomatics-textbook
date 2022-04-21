@@ -180,28 +180,28 @@ For this assessment, we want to divide our study area into urban and suburban ar
  
 We will select the polygons that are classified as urban and suburban, and then intersect these with Ottawa's wards. This will give us a dataset with the urban and suburban extent of Ottawa's wards. You can see that some wards are both urban and suburban.[highlight this with an image]
 
+###Buffer
+The _buffer_ tool creates a zone (a buffer) around a feature. To create the zone, a distance must be specified from a feature (point, line, polygon). Buffering is a type of proximity analysis. [image of buffers in general?]
+
+Green spaces provide valuable cultural ecosystem services. Green spaces affect the area around them through cooling, viewing, and the ability to recreate. While we could solely assess the amount of green space compared to the amount of area in a ward, we would not be taking the total area around green spaces into account. Instead, we will look at the proportion of the ward that is within 100 meters of a green space. To do this, we will create buffers of 100 meters around the green spaces. [image]
+
 ###Clip
 Street trees also provide cultural ecosystem services, such as **list legit services** (CITE). Therefore, we want to assess the amount (in relative area) of street trees in each ward. Ottawa has an extensive city-wide tree inventory, containing xxx,xxxx trees maintained by the city. 
 This results in a dataset much larger than what we need. Therefore, we will use _clip_ to reduce the number of features in our Tree Inventory shapefile, by clipping the tree inventory file (input) with the urban and suburban boundaries (clip feature). Now the clipped file only has the city-maintained trees within the urban and suburban areas of Ottawa.
-
 
 ###Near
 _Near_ calculates the distance one feature is from another. These features can be within the same shapefile or different files. 
 
 We are specifically interested in Ottawa's street trees, not the park trees or other city-maintained trees. To better assess the relative area of street trees, we want to be sure that we are only using trees along streets in our analysis. The tree inventory dataset contains city-maintained trees, not solely street trees. We will use the _near_ tool to determine the distance threshold to consider a tree a street tree and then filter out trees that do not qualify as such.
 
-###Buffer
-The _buffer_ tool creates a zone (a buffer) around a feature. To create the zone, a distance must be specified from a feature (point, line, polygon). Buffering is a type of proximity analysis. [image of buffers in general?]
-
-Green spaces provide valuable cultural ecosystem services. Green spaces affect the area around them through cooling, viewing, and the ability to recreate. While we could solely assess the amount of green space compared to the amount of area in a ward, we would not be taking the total area around green spaces into account. Instead, we will look at the proportion of the ward that is within 100 meters of a green space. To do this, we will create buffers of 100 meters around the green spaces. [image]
-
-###Eliminate
-Post-dissolve, we would have expected the number of rows in the attribute table to reduce significantly. However, this was not the case. This is because there are many tiny slivers left. [image with zoomed in slivers] We can use eliminate to remove these slivers and clean up the dataset. (this probably happens more after the clip)
-
 ###Attribute-dependent buffer
 Buffers can vary dependent on an attribute. Attribute-dependent buffers are used when features are better represented with differently-sized zones. Approximating the space represented by objects is an example of an _attribute-dependent buffer_ use case.
 
 Many of the trees in the Ottawa street trees have diameter values, and every tree in the dataset that has a blank or zero diameter value will be assumed to be 10 centimeters. We will select for diameter values of zero or below and will set those values to 10. Then, we will use these values to create attribute-dependent buffers to represent tree sizes. NOTE: The values do not actually represent true crown area. Because we are completing a comparative analysis between wards, "true" values are not necessary. We will dissolve the buffers so that overlapping tree canopies do not get counted twice. [image]
+
+###Eliminate
+Post-dissolve, we would have expected the number of rows in the attribute table to reduce significantly. However, this was not the case. This is because there are many tiny slivers left. [image with zoomed in slivers] We can use eliminate to remove these slivers and clean up the dataset. (this probably happens more after the clip)
+
 
 ###Identity
 _Identity_ computes a geometric intersection of the input features and identity features. The input features or portion thereof that overlap identity features will get the attributes of those identity features. 

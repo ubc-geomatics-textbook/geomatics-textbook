@@ -1168,7 +1168,7 @@ X_{normalized,reversed} = (X_{max}-X)/(X_{max}-X_{min})
 <h2><span class="header-section-number">6.2</span> Overlay Methods</h2>
 <p>In the above example, the data was provided already compiled. However, we often have to gather the data ourselves. Overlay methods allow us to get more information about a spatial area, based on other spatial attributes. One example of a suitability analysis would be an equity analysis. These analyses exist for many areas all across the globe. Ottawa, Ontario, for example, has a Neighborhood Equity Index (NEI). We will looking at Ottawa’s NEI and will use data from Ottawa’s Open Data Portal for the rest of this chapter.</p>
 <p>(a highlighted box about the NEI)
-Ottawa’s NEI looks at several variables to assess the equitability of Ottawa’s census tracts. The Index was developed in 2020 (?? verify) with the goal of improving Ottawa’s decision-making. The 17 variables used to develop the index fit into five broad domains: economic opportunity, social and human development, physical environment, health, and community and belonging. (cite this!)</p>
+Ottawa’s NEI looks at several variables to assess the equitability of Ottawa’s census tracts. The Index was published in 2021 using data from 2019 with the goal of improving Ottawa’s decision-making. The 17 variables used to develop the index fit into five broad domains: economic opportunity, social and human development, physical environment, health, and community and belonging. (Contains information licensed under the Open Government Licence – City of Ottawa.)</p>
 <p>While the NEI is valuable and answers questions about the general well-being of citizens, it could be improved by the addition of cultural components. As it stands, the only cultural well-being component is citizens’ closeness to community centres (which is in the physical environment domain).</p>
 <p>Say, for example, you aimed to include citizens’ exposure to cultural services. Such services could be public art, green spaces, street trees, and other points of interest. The developers of the NEI did consider the amount of usable green space within walking distance. However, that value did not make it into the final index.</p>
 <p>For the rest of this chapter, we will develop a cultural equity index for Ottawa. The index can be developed at several scales: are you concerned with the city as a whole? Wards? Census tracts? Or are you assessing the service-providing assets individually? The answer to this is dependent on the question. For the following example, the study scale will be based on Ottawa’s Wards in urban and suburban areas.</p>
@@ -1179,32 +1179,43 @@ Ottawa’s NEI looks at several variables to assess the equitability of Ottawa�
 <p>A <em>clip</em> is effectively a cookie-cutter, where the boundaries of the clipping feature become the boundaries of the input feature. However, a clip does not transfer attributes of the clipping file to the clipped product. Additionally, fields such as “area” must be recalculated after a clip.</p>
 <p>Ottawa’s open data catalogue contains a dataset with the “urban boundaries” of the City. This shapefile consists of one polygon and no additional information within the attribute table. If we wished to solely work within Ottawa’s urban boundaries without suburban distinctions, we would <em>clip</em> the data we have so far to the urban boundary. However, we want to differentiate between different community types within Ottawa; therefore, we must use a different tool.</p>
 <div class="figure"><span id="fig:6-ottawa-urb"></span>
-<img src="images/06-urbanOttawa.png" alt="An aerial image of Ottawa, Ontario. The City of Ottawa is bordered in while and the urban areas are bordered in red. Blood, CC-BY-SA-4.0." width="75%" />
+<img src="images/06-urbanOttawa.png" alt="An aerial image of Ottawa, Ontario. The City of Ottawa is bordered in while and the urban areas are bordered in red. Image created by Blood, CC-BY-SA-4.0. Contains information licensed under the Open Government Licence – City of Ottawa." width="75%" />
 <p class="caption">
-Figure 6.1: An aerial image of Ottawa, Ontario. The City of Ottawa is bordered in while and the urban areas are bordered in red. Blood, CC-BY-SA-4.0.
+Figure 6.1: An aerial image of Ottawa, Ontario. The City of Ottawa is bordered in while and the urban areas are bordered in red. Image created by Blood, CC-BY-SA-4.0. Contains information licensed under the Open Government Licence – City of Ottawa.
 </p>
 </div>
 </div>
 <div id="dissolve" class="section level3" number="6.2.2">
 <h3><span class="header-section-number">6.2.2</span> Dissolve</h3>
-<p><em>Dissolve</em> reduces the number of polygons in a shapefile by grouping everything with the same chosen attribute together.</p>
+<p><em>Dissolve</em> reduces the number of polygons in a shapefile by grouping everything with the same chosen attribute together. A <em>dissolve</em> can be used to summarize data by a common attribute.</p>
 <p><em>If you look at Figure 6.1, what do you notice about the landscape within and then outside of the urban border?</em> There is a lot of agricultural land within the City of Ottawa! The large amount of rural area within Ottawa makes it a demographically unique city. However, analysis of cultural services is substantially different in rural areas than it is in urban areas. The NEI included all areas within Ottawa regardless of community type, but our analysis will not. Our analysis will focus solely on the urban and suburban areas within Ottawa. Therefore, we must classify our wards (study areas) by their level of urbanization. Then, we will remove the areas that are not urban or suburban (such as rural areas and those classified as greenbelt). The NEI dataset comprehensively classifies the areas within Ottawa as urban, suburban, rural, greenbelt, etc. However, we do not need to have our data divided into as many polygons as the NEI dataset. Therefore, we will reduce the amount of polygons (and therefore the amount of data and processing power) by using the <em>dissolve</em> tool.</p>
 <div class="figure"><span id="fig:6-dissolve"></span>
-<img src="images/06-dissolve.gif" alt="Census areas classified by urbanness according to the Neighborhood Equity Index of Ottawa. Image 1 is before the dataset was dissolved, and Image 2 is after. Blood, CC-BY-SA-4.0." width="75%" />
+<img src="images/06-dissolve.gif" alt="Census areas classified by urbanness according to the Neighborhood Equity Index of Ottawa. Image 1 is before the shapefile was dissolved, and Image 2 is after. The dissolve feature was 'Urban.' Image created by Blood, CC-BY-SA-4.0. Contains information licensed under the Open Government Licence – City of Ottawa." width="75%" />
 <p class="caption">
-Figure 6.2: Census areas classified by urbanness according to the Neighborhood Equity Index of Ottawa. Image 1 is before the dataset was dissolved, and Image 2 is after. Blood, CC-BY-SA-4.0.
+Figure 6.2: Census areas classified by urbanness according to the Neighborhood Equity Index of Ottawa. Image 1 is before the shapefile was dissolved, and Image 2 is after. The dissolve feature was ‘Urban.’ Image created by Blood, CC-BY-SA-4.0. Contains information licensed under the Open Government Licence – City of Ottawa.
 </p>
 </div>
+<p>The dissolve field we will use is URB_RURAL (the classification of urbanness). We will create multipart features for this dissolve. Multipart features are features that are considered as one, whether or not they are connected. They are further discussed in Chapter 7.7.1. After the <em>dissolve</em>, there are now six features rather than 196. As can be seen in the attribute table, the number of rows changes from 196 to 6 and the number of columns decreases from 26 to 3.
+Additionally, the file size is halved. Removing extraneous data allows for easier analyses later on. NOTE: In this example, multipart features were created. If they had not been, there would have been 96 features. <em>When a shapefile with multipart features was created, why do you think the number of features decreases to exactly six?</em> It’s because there are six classes of urbanness!</p>
 <pre><code>In this example, the attribute was &quot;URBAN_RURAL&quot;. 
 [example attribute table?] **VV UNSURE ABOUT THIS**
 
-make multipart</code></pre>
+make multipart
+
+Paul, how do I link to other chapters? Or to the images I reference? is that a thing?</code></pre>
 </div>
 <div id="intersect" class="section level3" number="6.2.3">
 <h3><span class="header-section-number">6.2.3</span> Intersect</h3>
 <p>An <em>intersect</em> keeps only the polygons that overlap in the specified shapefiles and results in a shapefile with the attributes of both input shapefiles.</p>
-<p>For this assessment, we want to divide our study area into urban and suburban areas and exclude the rural ones. Therefore, it makes more sense for us to do an <em>intersect</em> than a clip.</p>
+<p>For this assessment, we want to divide our study area into urban and suburban areas and exclude the rural ones. Therefore, it makes more sense for us to do an <em>intersect</em> than a <em>clip</em> as mentioned above.</p>
 <p>We will select the polygons that are classified as urban and suburban, and then intersect these with Ottawa’s wards. This will give us a dataset with the urban and suburban extent of Ottawa’s wards. You can see that some wards are both urban and suburban.[highlight this with an image]</p>
+<p>NOTE: The urban and suburban boundaries according to the NEI differ from those on Ottawa’s website. The boundaries of “urban” are not always easily defined and are often specified as a result of geopolitical reasons. For example, the “urban” area as specified by the City of Ottawa is where urban development is legally allowed to happen (<a href="https://open.ottawa.ca/datasets/ottawa" class="uri">https://open.ottawa.ca/datasets/ottawa</a>::urban-boundary/about).</p>
+<div class="figure"><span id="fig:6-urban-discrepancy"></span>
+<img src="images/06-urban-discrepancy.png" alt="The Ottawa-defined urban areas are bordered in red. The southernmost large polygon is rural, according to NEI. Image created by Blood, CC-BY-SA-4.0. Contains information licensed under the Open Government Licence – City of Ottawa." width="75%" />
+<p class="caption">
+Figure 6.3: The Ottawa-defined urban areas are bordered in red. The southernmost large polygon is rural, according to NEI. Image created by Blood, CC-BY-SA-4.0. Contains information licensed under the Open Government Licence – City of Ottawa.
+</p>
+</div>
 </div>
 <div id="buffer" class="section level3" number="6.2.4">
 <h3><span class="header-section-number">6.2.4</span> Buffer</h3>
@@ -1213,8 +1224,9 @@ make multipart</code></pre>
 </div>
 <div id="clip-1" class="section level3" number="6.2.5">
 <h3><span class="header-section-number">6.2.5</span> Clip</h3>
-<p>Street trees also provide cultural ecosystem services, such as <strong>list legit services</strong> (CITE). Therefore, we want to assess the amount (in relative area) of street trees in each ward. Ottawa has an extensive city-wide tree inventory, containing xxx,xxxx trees maintained by the city.
-This results in a dataset much larger than what we need. Therefore, we will use <em>clip</em> to reduce the number of features in our Tree Inventory shapefile, by clipping the tree inventory file (input) with the urban and suburban boundaries (clip feature). Now the clipped file only has the city-maintained trees within the urban and suburban areas of Ottawa.</p>
+<p>Many data download sites allow you to <em>clip</em> data before downloading it.</p>
+<p>Street trees also provide cultural ecosystem services, such as <strong>list legit services</strong> (CITE). Therefore, we want to assess the amount (in relative area) of street trees in each ward. Ottawa has an extensive city-wide tree inventory, containing over 275,000 trees maintained by the city.
+This results in a dataset much larger than what we need. Therefore, we will use <em>clip</em> to reduce the number of features in our Tree Inventory shapefile. We will <em>clip</em> the tree inventory file (input) with the urban and suburban boundaries (clip feature). Now the clipped file only has the city-maintained trees within the urban and suburban areas of Ottawa.</p>
 </div>
 <div id="near" class="section level3" number="6.2.6">
 <h3><span class="header-section-number">6.2.6</span> Near</h3>

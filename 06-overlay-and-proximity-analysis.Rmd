@@ -139,7 +139,7 @@ We can now see that prioritizing the top three suitable areas $ID = {8,7,1}$ for
 In the above example, the data was provided already compiled. However, we often have to gather the data ourselves. Overlay methods allow us to get more information about a spatial area, based on other spatial attributes. One example of a suitability analysis would be an equity analysis. These analyses exist for many areas all across the globe. Ottawa, Ontario, for example, has a Neighborhood Equity Index (NEI). We will looking at Ottawa's NEI and will use data from Ottawa's Open Data Portal for the rest of this chapter.
 
 (a highlighted box about the NEI)
-Ottawa's NEI looks at several variables to assess the equitability of Ottawa's census tracts. The Index was developed in 2020 (?? verify) with the goal of improving Ottawa's decision-making. The 17 variables used to develop the index fit into five broad domains: economic opportunity, social and human development,  physical environment, health, and community and belonging. (cite this!)
+Ottawa's NEI looks at several variables to assess the equitability of Ottawa's census tracts. The Index was published in 2021 using data from 2019 with the goal of improving Ottawa's decision-making. The 17 variables used to develop the index fit into five broad domains: economic opportunity, social and human development,  physical environment, health, and community and belonging. (Contains information licensed under the Open Government Licence – City of Ottawa.)
 
 While the NEI is valuable and answers questions about the general well-being of citizens, it could be improved by the addition of cultural components. As it stands, the only cultural well-being component is citizens' closeness to community centres (which is in the physical environment domain).
 
@@ -157,50 +157,59 @@ A _clip_ is effectively a cookie-cutter, where the boundaries of the clipping fe
 
 Ottawa's open data catalogue contains a dataset with the "urban boundaries" of the City. This shapefile consists of one polygon and no additional information within the attribute table. If we wished to solely work within Ottawa's urban boundaries without suburban distinctions, we would _clip_ the data we have so far to the urban boundary. However, we want to differentiate between different community types within Ottawa; therefore, we must use a different tool.
 
-[06-OttawaWUrban.png] Caption: Ottawa, ON is bordered in black. The urban areas of Ottawa are bordered in red.
+
+```{r 6-ottawa-urb, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("An aerial image of Ottawa, Ontario. The City of Ottawa is bordered in while and the urban areas are bordered in red. Image created by Blood, CC-BY-SA-4.0. Contains information licensed under the Open Government Licence – City of Ottawa.")
+knitr::include_graphics("images/06-urbanOttawa.png")
+```
 
 
 ### Dissolve
-_Dissolve_ reduces the number of polygons in a shapefile by grouping everything with the same chosen attribute together.
+_Dissolve_ reduces the number of polygons in a shapefile by grouping everything with the same chosen attribute together. A _dissolve_ can be used to summarize data by a common attribute.
 
-_If you look at image *XXabove*, what do you notice about the landscape within and then outside of the urban border?_ There is a lot of agricultural land within the City of Ottawa! The large amount of rural area within Ottawa makes it a demographically unique city.  However, analysis of cultural services is substantially different in rural areas than it is in urban areas. The NEI included all areas within Ottawa regardless of community type, but our analysis will not. Our analysis will focus solely on the urban and suburban areas within Ottawa. Therefore, we must classify our wards (study areas) by their level of urbanization. Then, we will remove the areas that are not urban or suburban (such as rural areas and those classified as greenbelt). The NEI dataset comprehensively classifies the areas within Ottawa as urban, suburban, rural, greenbelt, etc. However, we do not need to have our data divided into as many polygons as the NEI dataset. Therefore, we will reduce the amount of polygons (and therefore the amount of data and processing power) by using the _dissolve_ tool. 
+_If you look at Figure 6.1, what do you notice about the landscape within and then outside of the urban border?_ There is a lot of agricultural land within the City of Ottawa! The large amount of rural area within Ottawa makes it a demographically unique city.  However, analysis of cultural services is substantially different in rural areas than it is in urban areas. The NEI included all areas within Ottawa regardless of community type, but our analysis will not. Our analysis will focus solely on the urban and suburban areas within Ottawa. Therefore, we must classify our wards (study areas) by their level of urbanization. Then, we will remove the areas that are not urban or suburban (such as rural areas and those classified as greenbelt). The NEI dataset comprehensively classifies the areas within Ottawa as urban, suburban, rural, greenbelt, etc. However, we do not need to have our data divided into as many polygons as the NEI dataset. Therefore, we will reduce the amount of polygons (and therefore the amount of data and processing power) by using the _dissolve_ tool. 
 
-[06-dissolveSM.GIF; make images smaller]
+```{r 6-dissolve, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("Census areas classified by urbanness according to the Neighborhood Equity Index of Ottawa. Image 1 is before the shapefile was dissolved, and Image 2 is after. The dissolve feature was 'Urban.' Image created by Blood, CC-BY-SA-4.0. Contains information licensed under the Open Government Licence – City of Ottawa.")
+knitr::include_graphics("images/06-dissolve.gif")
+```
 
+The dissolve field we will use is URB_RURAL (the classification of urbanness). We will create multipart features for this dissolve. Multipart features are features that are considered as one, whether or not they are connected. They are further discussed in Chapter 7.7.1. After the _dissolve_, there are now six features rather than 196. As can be seen in the attribute table, the number of rows changes from 196 to 6 and the number of columns decreases from 26 to 3.
+Additionally, the file size is halved. Removing extraneous data allows for easier analyses later on. NOTE: In this example, multipart features were created. If they had not been, there would have been 96 features. _When a shapefile with multipart features was created, why do you think the number of features decreases to exactly six?_ It's because there are six classes of urbanness!
 
 ```
 In this example, the attribute was "URBAN_RURAL". 
 [example attribute table?] **VV UNSURE ABOUT THIS**
 
 make multipart
+
+Paul, how do I link to other chapters? Or to the images I reference? is that a thing?
 ```
 
 ### Intersect
 An _intersect_ keeps only the polygons that overlap in the specified shapefiles and results in a shapefile with the attributes of both input shapefiles.
 
-For this assessment, we want to divide our study area into urban and suburban areas and exclude the rural ones. Therefore, it makes more sense for us to do an _intersect_ than a clip.
+For this assessment, we want to divide our study area into urban and suburban areas and exclude the rural ones. Therefore, it makes more sense for us to do an _intersect_ than a _clip_ as mentioned above.
  
 We will select the polygons that are classified as urban and suburban, and then intersect these with Ottawa's wards. This will give us a dataset with the urban and suburban extent of Ottawa's wards. You can see that some wards are both urban and suburban.[highlight this with an image]
 
-<<<<<<< HEAD
+NOTE: The urban and suburban boundaries according to the NEI differ from those on Ottawa's website. The boundaries of "urban" are not always easily defined and are often specified as a result of geopolitical reasons. For example, the "urban" area as specified by the City of Ottawa is where urban development is legally allowed to happen (https://open.ottawa.ca/datasets/ottawa::urban-boundary/about).
+
+```{r 6-urban-discrepancy, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("The Ottawa-defined urban areas are bordered in red. The southernmost large polygon is rural, according to NEI. Image created by Blood, CC-BY-SA-4.0. Contains information licensed under the Open Government Licence – City of Ottawa.")
+knitr::include_graphics("images/06-urban-discrepancy.png")
+```
+
 ### Buffer
-=======
-###Buffer
->>>>>>> 6459bb34d1213d7398ccfdc6ed0f97446a3a7f52
 The _buffer_ tool creates a zone (a buffer) around a feature. To create the zone, a distance must be specified from a feature (point, line, polygon). Buffering is a type of proximity analysis. [image of buffers in general?]
 
 Green spaces provide valuable cultural ecosystem services. Green spaces affect the area around them through cooling, viewing, and the ability to recreate. While we could solely assess the amount of green space compared to the amount of area in a ward, we would not be taking the total area around green spaces into account. Instead, we will look at the proportion of the ward that is within 100 meters of a green space. To do this, we will create buffers of 100 meters around the green spaces. [image]
 
-<<<<<<< HEAD
 ### Clip
-Street trees also provide cultural ecosystem services, such as **list legit services** (CITE). Therefore, we want to assess the amount (in relative area) of street trees in each ward. Ottawa has an extensive city-wide tree inventory, containing xxx,xxxx trees maintained by the city. 
-This results in a dataset much larger than what we need. Therefore, we will use _clip_ to reduce the number of features in our Tree Inventory shapefile, by clipping the tree inventory file (input) with the urban and suburban boundaries (clip feature). Now the clipped file only has the city-maintained trees within the urban and suburban areas of Ottawa.
+Many data download sites allow you to _clip_ data before downloading it.
 
-### Near
-=======
-###Clip
-Street trees also provide cultural ecosystem services, such as **list legit services** (CITE). Therefore, we want to assess the amount (in relative area) of street trees in each ward. Ottawa has an extensive city-wide tree inventory, containing xxx,xxxx trees maintained by the city. 
-This results in a dataset much larger than what we need. Therefore, we will use _clip_ to reduce the number of features in our Tree Inventory shapefile, by clipping the tree inventory file (input) with the urban and suburban boundaries (clip feature). Now the clipped file only has the city-maintained trees within the urban and suburban areas of Ottawa.
+Street trees also provide cultural ecosystem services, such as **list legit services** (CITE). Therefore, we want to assess the amount (in relative area) of street trees in each ward. Ottawa has an extensive city-wide tree inventory, containing over 275,000 trees maintained by the city. 
+This results in a dataset much larger than what we need. Therefore, we will use _clip_ to reduce the number of features in our Tree Inventory shapefile. We will _clip_ the tree inventory file (input) with the urban and suburban boundaries (clip feature). Now the clipped file only has the city-maintained trees within the urban and suburban areas of Ottawa. 
 
 ### Near
 _Near_ calculates the distance one feature is from another. These features can be within the same shapefile or different files. 

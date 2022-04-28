@@ -125,7 +125,7 @@ R<-R[order(-R$Suitability),]
 R$cum_cost=cumsum(R$Cost)
 
 
-names(R) <- c('ID','Area (normalized)','Area (ha)','Suitability', 'Individual Cost (\\$)', 'Cummulative Cost (\\$)')
+names(R) <- c('ID','Area (normalized)','Area (ha)','Suitability', 'Individual Cost (\\$)', 'Cumulative Cost (\\$)')
 
 knitr::kable(
   R, booktabs = TRUE, row.names = FALSE

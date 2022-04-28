@@ -182,23 +182,12 @@ For this assessment, we want to divide our study area into urban and suburban ar
  
 We will select the polygons that are classified as urban and suburban, and then intersect these with Ottawa's wards. This will give us a dataset with the urban and suburban extent of Ottawa's wards. You can see that some wards are both urban and suburban.[highlight this with an image]
 
-<<<<<<< HEAD
 ### Buffer
-=======
-###Buffer
->>>>>>> 6459bb34d1213d7398ccfdc6ed0f97446a3a7f52
 The _buffer_ tool creates a zone (a buffer) around a feature. To create the zone, a distance must be specified from a feature (point, line, polygon). Buffering is a type of proximity analysis. [image of buffers in general?]
 
 Green spaces provide valuable cultural ecosystem services. Green spaces affect the area around them through cooling, viewing, and the ability to recreate. While we could solely assess the amount of green space compared to the amount of area in a ward, we would not be taking the total area around green spaces into account. Instead, we will look at the proportion of the ward that is within 100 meters of a green space. To do this, we will create buffers of 100 meters around the green spaces. [image]
 
-<<<<<<< HEAD
 ### Clip
-Street trees also provide cultural ecosystem services, such as **list legit services** (CITE). Therefore, we want to assess the amount (in relative area) of street trees in each ward. Ottawa has an extensive city-wide tree inventory, containing xxx,xxxx trees maintained by the city. 
-This results in a dataset much larger than what we need. Therefore, we will use _clip_ to reduce the number of features in our Tree Inventory shapefile, by clipping the tree inventory file (input) with the urban and suburban boundaries (clip feature). Now the clipped file only has the city-maintained trees within the urban and suburban areas of Ottawa.
-
-### Near
-=======
-###Clip
 Street trees also provide cultural ecosystem services, such as **list legit services** (CITE). Therefore, we want to assess the amount (in relative area) of street trees in each ward. Ottawa has an extensive city-wide tree inventory, containing xxx,xxxx trees maintained by the city. 
 This results in a dataset much larger than what we need. Therefore, we will use _clip_ to reduce the number of features in our Tree Inventory shapefile, by clipping the tree inventory file (input) with the urban and suburban boundaries (clip feature). Now the clipped file only has the city-maintained trees within the urban and suburban areas of Ottawa.
 

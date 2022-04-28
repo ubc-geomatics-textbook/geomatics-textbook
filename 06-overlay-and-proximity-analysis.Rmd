@@ -202,30 +202,21 @@ This results in a dataset much larger than what we need. Therefore, we will use 
 Street trees also provide cultural ecosystem services, such as **list legit services** (CITE). Therefore, we want to assess the amount (in relative area) of street trees in each ward. Ottawa has an extensive city-wide tree inventory, containing xxx,xxxx trees maintained by the city. 
 This results in a dataset much larger than what we need. Therefore, we will use _clip_ to reduce the number of features in our Tree Inventory shapefile, by clipping the tree inventory file (input) with the urban and suburban boundaries (clip feature). Now the clipped file only has the city-maintained trees within the urban and suburban areas of Ottawa.
 
-###Near
->>>>>>> 6459bb34d1213d7398ccfdc6ed0f97446a3a7f52
+### Near
 _Near_ calculates the distance one feature is from another. These features can be within the same shapefile or different files. 
 
 We are specifically interested in Ottawa's street trees, not the park trees or other city-maintained trees. To better assess the relative area of street trees, we want to be sure that we are only using trees along streets in our analysis. The tree inventory dataset contains city-maintained trees, not solely street trees. We will use the _near_ tool to determine the distance threshold to consider a tree a street tree and then filter out trees that do not qualify as such.
 
-###Attribute-dependent buffer
+### Attribute-dependent buffer
 Buffers can vary dependent on an attribute. Attribute-dependent buffers are used when features are better represented with differently-sized zones. Approximating the space represented by objects is an example of an _attribute-dependent buffer_ use case.
 
 Many of the trees in the Ottawa street trees have diameter values, and every tree in the dataset that has a blank or zero diameter value will be assumed to be 10 centimeters. We will select for diameter values of zero or below and will set those values to 10. Then, we will use these values to create attribute-dependent buffers to represent tree sizes. NOTE: The values do not actually represent true crown area. Because we are completing a comparative analysis between wards, "true" values are not necessary. We will dissolve the buffers so that overlapping tree canopies do not get counted twice. [image]
 
-<<<<<<< HEAD
 ### Eliminate
 Post-dissolve, we would have expected the number of rows in the attribute table to reduce significantly. However, this was not the case. This is because there are many tiny slivers left. [image with zoomed in slivers] We can use eliminate to remove these slivers and clean up the dataset. (this probably happens more after the clip)
 
 
 ### Identity
-=======
-###Eliminate
-Post-dissolve, we would have expected the number of rows in the attribute table to reduce significantly. However, this was not the case. This is because there are many tiny slivers left. [image with zoomed in slivers] We can use eliminate to remove these slivers and clean up the dataset. (this probably happens more after the clip)
-
-
-###Identity
->>>>>>> 6459bb34d1213d7398ccfdc6ed0f97446a3a7f52
 _Identity_ computes a geometric intersection of the input features and identity features. The input features or portion thereof that overlap identity features will get the attributes of those identity features. 
 
 The area of street trees is more powerful when compared to the length of streets in each ward. Rather than working with the absolute area, we will be calculating the relative area. To do this, we will use the _identity_ tool to assign a ward to each section of street in the Ottawa streets file. Then, we will use summary statistics to calculate the length of street in each ward. With that value, we will divide the area of street tree by the length of street to get the relative area of street trees per street. 

@@ -1,7 +1,200 @@
 ---
+html_document:
+  df_print: paged
+title: 'null'
 editor_options:
   markdown:
     wrap: 72
 ---
 
 # Image Analysis {#image-analysis}
+
+```{r 14-load-packages-and-setup, include=FALSE}
+type <- "pdf" ## "pdf" or ""
+baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"
+knitr::opts_chunk$set(echo = TRUE)
+library(raster)
+library(leaflet)
+library(htmlwidgets)
+```
+
+```{r echo=FALSE}
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["imageAnalysis"]][["author"]]
+```
+# Image Analysis {#image-analysis}
+
+Written by
+```{r results='asis', echo=FALSE}
+cat(author)
+```
+
+Introduction here.
+
+:::: {.box-content .learning-objectives-content}
+
+::: {.box-title .learning-objectives-top}
+## Learning Objectives {-}
+::: 
+1. 
+::::
+
+## Key Terms {-}
+
+Term
+
+## Aerial Photography and Photogrammetry
+###	Pitch, Roll, and Yaw
+###	Stereo Vision
+###	Shape
+###	Pattern
+###	Size
+###	Tone and Colour
+###	Shadow
+###	Texture
+###	Association and Context
+
+## Image Classification
+###	Land Cover Versus Land Use
+###	Supervised Classification
+###	Unsupervised Classification
+###	Classification Algorithms
+
+##	Time Series Analysis
+###	Change detection
+###	Detecting spectral trends
+###	Inferring surface activity
+## Case Study: Sea Ice Change Analysis in the Beaufort Sea
+
+*Case Study Author: Natasha Sharma (CC BY 4.0. unless otherwise indicated), University of British Columbia, Bachelors of Environment and Sustainability, 2022*
+
+Landsat 8-7 has regularly acquired images of Beaufort Sea and Mackenzie River Delta through true-color image to show abundance surface melt, fast ice break up, leaf fraction, ice motion, and changes in coastal features during early springtime. The Beaufort Sea has seen dramatic summer ice losses, particularly in 2009, with regions that were dominated by thick multi-year ice now completely melting out. For comparison, the timeline GIF from 1992 to 2021 depicts different stages of ice breakup in the month of June. Notice the extensive fracturing of Beaufort Sea ice occurring in 1996, but the 2009 and 2014 fracturing appears more widespread until nearly disappearing in 2017.        
+```{r 14-Beaufort-Sea-Ice, echo=FALSE, fig.cap=fig_cap, message=FALSE, warning=FALSE}
+    fig_cap <- paste0("True-color image of Beaufort Sea Ice Deterioration. Sharma, CC-BY-SA-4.0.")
+    knitr::include_graphics("images/14-Beaufort-Sea-Ice.gif")
+```
+
+Similarly, in the high arctic polar desert of Ellesmere Island in Nunavut, Canada, what were once the twin St. Patrick Bay ice caps have now chipped away due to decades of rising temperatures and unusually warm summers. Once the remnants of the Little Ice Age that covered about 7.5 square km and 3 square km across respectively, the formation has reduced to only 5% of their former area and are predicted to extinct within a decade. St.Patrick Bay Ice caps are emblematic of the Arctic change - a reality of how climate change is affecting the whole of Canadian Arctic. 
+
+<!--Slider code -->
+<div id="container"> <img id="after-img" src="./images/14-st-patrick-2015.png"> <img id ="before-img" src="./images/14-st-patrick-1999.png"> <input type="range" min="0" max="100" value="50" id="slider" oninput="slide()"> </div>
+
+ <p class="caption"> Figure 14.2: Death of the St. Patrick Ice Caps. Sharma, CC-BY-SA-4.0 </p>
+
+<style> #container{position:relative;top: 0; left: 0;} #before-img{width:100%;top: 0; left:0; position:absolute;clip-path: polygon(0 0 , 50% 0, 50% 100%, 0 100%);} #after-img{ position:relative; top:0; left:0;width:100%;}#slider{ position: absolute; top:0; left:0;  -webkit-appearance: none; width: calc(100% + 40px); height: 100%; margin-left: -20px; background-color: transparent; outline: none; } #slider::-webkit-slider-thumb{ -webkit-appearance: none; height: 40px; width: 40px; background: url("./images/scroll-icon.png"); background-size: contain; cursor: pointer; }</style>
+
+<script> slider.oninput = () => {document.getElementById("before-img").style.clipPath = "polygon(0 0," + document.getElementById("slider").value + "% 0," + document.getElementById("slider").value + "% 100%, 0 100%)";}</script>
+<!--End of Slider code -->
+
+##	Pattern Analysis
+###	Landscape Pattern Indices
+###	Class Pattern Indices
+###	Patch Pattern Indices
+### Case Study: Case Study Title Here
+
+Understanding the changes that occur overtime is extremely important for environmental studies. These changes can be monitored using remote sensing data and has been used in a variety of studies. This case study looks at how changes in vegetation health derived from Landsat-8 data were impacted by the burn severity of the 25 569 hectare Little Bobtail Lake wildfire in North-Central British Columbia.
+
+Four vegetation indices were calculated for each of the images in the study. The Normalized Difference Vegetation Index (NDVI) [@rouse_monitoring_1974], and Tasseled Cap Transformation (TCT) [@crist_physically-based_1984] were calculated to measure vegetation health. NDVI is calculated as (Equation 1):
+
+\begin{equation}
+\tag{1}
+  NDVI = \frac{NIR - RED}{NIR + RED}
+\end{equation}
+
+$$\\[0.1in]$$
+Additionally, the Normalized Burn Ratio (NBR) [@lopez_garcia_mapping_1991], and the Difference Normalized Burn Ratio (dNBR) [@key_landscape_2006] were calculated. NBR (Equation 2) and the dNBR (Equation 3) are used to measure burn severity.
+
+\begin{equation}
+\tag{2}
+  NBR = \frac{NIR - SWIR}{NIR + SWIR}
+\end{equation}
+
+$$\\[0.1in]$$
+
+\begin{equation}
+\tag{3}
+  dNBR = NBR_{pre fire} - NBR_{post fire}
+\end{equation}
+
+$$\\[0.1in]$$
+The dNBR values were then scaled for each image to a range of 0-255 by using the following equation (Equation 4):
+
+\begin{equation}
+\tag{4}
+  dNBR_{Scaled} = \frac{(dNBR * 1000) + 275}{5}
+\end{equation}
+
+Each of the scaled dNBR images were then classified into four burn severity classes (Table 1). The classified dNBR image for right after the wildfire was polygonised and the burn severity polygons were then used to extract the NDVI and each of the TCT values for each year of the study.
+
+```{r, echo = FALSE, results='asis'}
+dnbr_table <- data.frame(dNBR = c("< 75", "75-118", "118-187", "> 187"),
+                        Classified = c("0", "1", "2", "3"), 
+                        Description = c("Unburned", 
+                                        "Low Severity", 
+                                        "Moderate Severity",
+                                        "High Severity"))
+knitr::kable(dnbr_table, caption = "Table 1: Classified Burn Severity Values based on the scaled dNBR values.")
+```
+
+The change in value of the NDVI and the TCT Greenness and Wetness based on burn severity can be seen in the box plots below (Figure 1). This shows the changes in the vegetation index values from before the wildfire and every year after. The burn severity had an impact on these values as there was a greater decrease in value immediately after the wildfire with the higher burn severity as well as a slower return to the pre-fire state. Additionally, based on the vegetation index used, it can be seen that there different rates of return to a pre-fire state. These differences are important to understand when choosing a vegetation index for a study.  
+
+
+```{r, echo=FALSE, results='asis', fig.cap = "Figure 1: Changes in the values of NDVI (a), TCT Greenness (b), and TCT Wetness(c) based on the burn severity of the Little Bobtail Lake wildfire from 2014 (before the wildfire) to 2020 (five years after the wildfire)."}
+knitr::include_graphics(here::here("images", "14-VIPlots.png"))
+```
+
+Wildfires create spatial patterns on the landscape which is a key factor in forest regrowth. Pattern metrics can be calculated and used to understand the changes in the spatial patterns overtime. Using the `calculate_lsm()` function found in the Landscape Metrics (v1.5.0) R package [@hesselbarth_landscapemetrics_2019], the Core Area (`lsm_p_core()`) patch metric was calculated for each of the classified dNBR images. Additionally, the NDVI images were classified into four classes (Table 2) and then the Core Area Metric was calculated.
+
+```{r, echo = FALSE, results='asis'}
+ndvi_table <- data.frame(NDVI = c("< 0.1", "0.1-0.14", "0.14-0.5", "> 0.5"),
+                        Classified = c("0", "1", "2", "3"), 
+                        Description = c("No Vegetation", 
+                                        "Sparse Vegetation", 
+                                        "Moderately Healthy Vegetation",
+                                        "Healthy Vegetation"))
+knitr::kable(ndvi_table, caption = "Table 2: Classified Vegetation Health Values based on the NDVI values.")
+```
+
+The changes in the Core Area of the burn severity classes showed that the High Severity class had a decrease of 2.6 hectares every year. The Low Severity class had a increase of 1.5 hectares every year and the Moderate and Unburned classes showed little change in Core Area. This was to be expected because as the vegetation regrows in the High Severity areas it changes to a lesser severity (See Map Below). For the vegetation health classes, the Sparse Vegetation class showed a 3.7 hectare increase in Core Area every year, while the other vegetation classes showed little change. These is due to the initial increase in the new vegetation in the first years after the wildfire.
+
+```{r, echo = FALSE, results='asis', message=FALSE, warning=FALSE}
+r1 <- as.factor(raster("data/14/dNBR_Class_2015.tif"))
+r2 <- as.factor(raster("data/14/dNBR_Class_2016.tif"))
+r3 <- as.factor(raster("data/14/dNBR_Class_2017.tif"))
+r4 <- as.factor(raster("data/14/dNBR_Class_2018.tif"))
+r5 <- as.factor(raster("data/14/dNBR_Class_2019.tif"))
+r6 <- as.factor(raster("data/14/dNBR_Class_2020.tif"))
+
+pal <- colorFactor(c("#1a9641", "#ffffbf", "#fdae61", "#d7191c"), values(r1),
+                   na.color = "transparent")
+labels = c("Unburned", "Low Severity", "Moderate Severity", "High Severity")
+
+dnbrMap = leaflet() %>%
+  addProviderTiles("Esri.WorldTopoMap") %>%
+  addRasterImage(r6, colors = pal, group = "dNBR 2020") %>%
+  addRasterImage(r5, colors = pal, group = "dNBR 2019") %>%
+  addRasterImage(r4, colors = pal, group = "dNBR 2018") %>%
+  addRasterImage(r3, colors = pal, group = "dNBR 2017") %>%
+  addRasterImage(r2, colors = pal, group = "dNBR 2016") %>%
+  addRasterImage(r1, colors = pal, group = "dNBR 2015") %>%
+  addLegend(pal = pal, values = values(r1),
+  title = "Burn Severity",
+  labFormat = function(type, cuts, p){paste0(labels)})%>%
+  addLayersControl(overlayGroups = c("dNBR 2015", "dNBR 2016", "dNBR 2017",
+                                     "dNBR 2018", "dNBR 2019", "dNBR 2020"),
+                   options = layersControlOptions(collapsed = FALSE))%>%
+  hideGroup(c("dNBR 2016", "dNBR 2017", "dNBR 2018", "dNBR 2019", "dNBR 2020"))
+#htmlwidgets:::knit_print.htmlwidget(dnbrMap)
+dnbrMap
+```
+
+``` {r 14-dnbr-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
+  fig_cap <- paste0("Classified Burn Severity images for the Little Bobtail Lake wildfire from 2015 to 2020.<a
+  href='",baseurl,"#fig:14-dnbr-leaflet'> Animated figure can be viewed in the web browser version of the textbook</a>. Data from @natural_resources_canada_natural_nodate and licensed under the <a href='https://www.nrcan.gc.ca/terms-and-conditions/10847'>Open Government Licence - Canada </a>. Pickell, CC-BY-SA-4.0.")
+if (type == "pdf") { knitr::include_graphics(here::here("images", "02-CGVD-leaflet.PNG")) }
+```
+
+
+Figure 2: 
+
+$$\\[0.1in]$$

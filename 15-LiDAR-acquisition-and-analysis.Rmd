@@ -8,7 +8,17 @@ library("xtable")
 library("plyr")
 ```
 
+```{r echo=FALSE}
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["lidarAcquisitionAndAnalysis"]][["author"]]
+coauthor <- yml_content[["lidarAcquisitionAndAnalysis"]][["coauthor"]]
+```
 # LiDAR Acquisition and Analysis {#LiDAR-acquisition-and-analysis}
+
+Written by
+```{r results='asis', echo=FALSE}
+cat(author, "and", coauthor)
+```
 
 Remotely sensed data has traditionally relied on sensors to passively collect reflected energy from the Earth's surface. As you have read in the preceding chapters, the information that we can derive from these sensors is immense; from landscape level satellite analyses to individual tree vigor assessments. One aspect that is more difficult to characterize however, is what a landscape looks like in three dimensions. LiDAR is changing how we can interpret landscapes and forests by producing it's own source of energy; this allows us to ask questions not only about the top of the Earth's surface, but also about the structure of the forest, and what the ground looks like beneath it. In this chapter, we discuss what LiDAR is, as well as how we can use it in multiple different contexts.
 

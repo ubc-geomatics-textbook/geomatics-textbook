@@ -3,12 +3,21 @@ editor_options:
   markdown:
     wrap: 72
 output:
-  word_document: default
   html_document:
     df_print: paged
+  word_document: default
 ---
-
+```{r echo=FALSE}
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["imageProcessing"]][["author"]]
+coauthor <- yml_content[["imageProcessing"]][["coauthor"]]
+```
 # Image Processing {#image-processing}
+
+Written by
+```{r results='asis', echo=FALSE}
+cat(author, "and", coauthor)
+```
 
 The collection of imagery is challenging and time consuming, with sensor
 design and deployment often requiring the development of new

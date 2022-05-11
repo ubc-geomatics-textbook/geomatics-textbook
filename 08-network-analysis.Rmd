@@ -1,4 +1,4 @@
-```{r setup, include=FALSE}
+```{r 8-load-packages-and-setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 library(igraph)
@@ -8,7 +8,18 @@ library(rgdal)
 library(rgeos)
 ```
 
+```{r echo=FALSE}
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["networkAnalysis"]][["author"]]
+coauthor <- yml_content[["networkAnalysis"]][["coauthor"]]
+```
+
 # Network Analysis {#network-analysis}
+
+Written by
+```{r results='asis', echo=FALSE}
+cat(author, "and", coauthor)
+```
 
 Networks are **abstract structures** commonly used to represent patterns of relationships among sets of various *things* [@ajorlou_introduction_2018]. Such structures can be used to represent social connections, spatial patterns, ecological relationships, etc. In GIS, the elements that compose geospatial networks are **geolocated** -- in other words: they have latitude and longitude values attached to them. Network analysis encompasses a series of techniques used to interpret information from those networks. This chapter introduces basic concepts for building, analyzing and applying spatial networks to real-world problems.
 

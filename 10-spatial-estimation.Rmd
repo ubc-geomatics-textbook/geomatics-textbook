@@ -1,5 +1,3 @@
-# Spatial Estimation {#spatial-estimation}
-
 ``` {r 10-load-packages-and-setup, echo = FALSE, include = FALSE}
 baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"
 library(broom)
@@ -30,6 +28,18 @@ library(spatstat)
 library(spdep)
 library(tmap)
 knitr::knit_hooks$set(webgl = hook_webgl)
+```
+
+```{r echo=FALSE}
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["spatialEstimation"]][["author"]]
+coauthor <- yml_content[["spatialEstimation"]][["coauthor"]]
+```
+# Spatial Estimation {#spatial-estimation}
+
+Written by
+```{r results='asis', echo=FALSE}
+cat(author, "and", coauthor)
 ```
 
 **Geostatistics** uses the metrics based on statistical tools that are used to characterize the distribution of an event across the geographical region of interest [@getis_spatial_2004]. In context of spatial data, it is important to understand what is occurring where. Sometimes there is a detailed and precise information of an **event** (spatial phenomenon defined by its location and the characteristics that can be measured in both quantitative or qualitative scale) across the geographical area such that a continuous map can be built out of that information. While, most of the time, only discrete and unrepresentative information on the spatial event is collected, which doesnot allow to create a precise continuous surface of the event over entire geographic area of interest. In such scenario, we should focus on two things; 
@@ -1167,7 +1177,7 @@ leaflet() %>% addTiles() %>%
     title = "Predicted basal area")
 ```
 
-Predicted basal area over the entire Fort Saint Johns TSA using inverse distance weighting projected over the province of Brithish Columbia.
+**Figure 10.23.** \ref{fig:figs} Predicted basal area over the entire Fort Saint Johns TSA using inverse distance weighting projected over the province of British Columbia.
 
 ## Methods Using Semi-variogram 
 

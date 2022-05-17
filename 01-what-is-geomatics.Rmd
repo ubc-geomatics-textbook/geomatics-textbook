@@ -9,7 +9,7 @@ Written by
 cat(author)
 ```
 
-We encounter and use geographic information on a regular basis in our everyday lives. Whether it is finding directions to a retailer that has an item in stock you want to buy or recording the path of your last morning jog, you have probably used a Geographic Information System (GIS) and not even realized it. 
+We encounter and use geographic information on a regular basis in our everyday lives. Whether it is finding directions to a retailer that has an item in stock you want to buy or recording the path of your last morning jog, you have probably used a Geographic Information System (GIS) and not even realized it. In this chapter, we explore what geomatics is all about and where it originated from.
 
 :::: {.box-content .learning-objectives-content}
   
@@ -47,7 +47,7 @@ A GIS is a collection of five inter-connected, inter-acting, and inter-dependent
 ```
 <br/>
 
-**Data** – at the very least, the type of data stored in a GIS is usually spatial in nature, meaning we have some set of coordinates or representation of location. But a GIS can also store aspatial data, data that does not necessarily have coordinates, but may still be relevant to other geographic data For example, you might also record the dates that you jogged or the weather during your jogs. These are examples of aspatial information that we might want to relate to our jogs.
+**Data** – Data are a collection of qualitative and quantitative variables about real world entities. At the very least, the type of data stored in a GIS is usually spatial in nature, meaning we have some set of coordinates or representation of location. But a GIS can also store aspatial data, data that does not necessarily have coordinates, but may still be relevant to other geographic data For example, you might also record the dates that you jogged or the weather during your jogs. These are examples of aspatial information that we might want to relate to your jogs.
 
 ```{r 01-jogging-path, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Abstracted spatial and aspatial information from a jogging path represented by three ordered points. Pickell, CC-BY-SA-4.0.")
@@ -57,13 +57,13 @@ A GIS is a collection of five inter-connected, inter-acting, and inter-dependent
 
 Spatial data can take many forms in a GIS, which we will explore more in [Chapter 2](https://ubc-geomatics-textbook.github.io/geomatics-textbook/mapping-data.html). For the sake of our jogging example, you can imagine your jogging path could be represented as a line or a set of ordered points. In turn, your jogging path can be described by different qualities (day of the week, weather) and quantities (distance, speed, heart rate), which are called **attributes** (Figure \@ref(fig:01-jogging-path)). An important role of a GIS is to govern how data can interact and behave with other types of data For example, we can calculate distance from a line, but not area, which is a special property of a polygon. We will explore data behaviors in more detail in [Chapter 2](https://ubc-geomatics-textbook.github.io/geomatics-textbook/mapping-data.html).
 
+**Software** – There are a lot of different GIS software packages available and the choice of which software to use is usually driven by preference, availability, and/or cost. For example, some GIS software are freely available while others require a paid license. Nearly all GIS software packages can perform the same operations and analyses, but there are some differences like integrated cloud computing or availability of certain plugins. The most widely-used paid software is ESRI's ArcGIS, while the most widely-used Free and Open Source Software (FOSS) is QGIS (Q for Quantum). There are many other historically-significant FOSS software packages like GRASS, SAGA, and MOSS that are discussed in more detail later in this chapter.
+
+**Hardware** – GIS software operate on hardware comprised of computer components and human interface devices (HID). High resolution and high refresh rate monitors are often required when dealing with high resolution imaging and other digitizing, which require high-end graphics cards. Solid State Disks (SSD) with high capacity are important for fast read-write speeds to access and process data while Random Access Memory (RAM) and Central Processing Unit (CPU) clock speed can also be limiting factors for processing. Some specialized HID are designed specifically for working with GIS such as active shutter and polarized glasses for stereo vision, and joysticks for navigating in 3D space.
+
+**Methods** – All organizations must design business processes in order to effectively operationalize GIS for solving real-world problems. Methods will vary from organization to organization based on industry, client needs, and the types of data needed. For example, the business process of a forestry company will involve digitizing forest stands and other natural resources, enumerating attributes for stand inventories, road and forest harvest planning, forest regeneration monitoring, and creating operational maps. It is important for an organization to define exactly the activities, standards, and quality assurance (i.e., methods) that will be needed to achieve operational goals. Well-defined and well-documented methods also ensure that organizational knowledge is retained during staff turnover.
+
 **People** – We are responsible for identifying the information needs, defining the procedures, coding the software, and building the hardware for a Geographic Information System. We are also responsible for interpreting, analyzing, and reporting our results and communicating our findings through maps and reports. Geographic Information Systems do not occur naturally and because a they are a product of our imagination and skill, they inherit our best and worst traits. For example, we often make mistakes when we define our procedures or identify our information needs, which lead to incorrect conclusions. Moreover, our biases intentionally and unintentionally creep into our map-making, distorting shape, size, and importance of features that we want to represent.
-
-**Procedures** – ispum lorem...
-
-**Software** – There are a lot of different GIS software packages available and the choice of which software to use is usually driven by preference or availability. For example, some GIS software are freely available while others require a paid license. Nearly all GIS software packages can perform the same operations and analyses, but there are some differences like integrated cloud computing or open source plugins.
-
-**Hardware** – ipsum lorem... 
 
 ## What a GIS can do
 
@@ -76,23 +76,32 @@ Like other information systems, a GIS should be able to do the following things 
 - Display geospatial data
 - Output geospatial data
 
-https://ubc-geomatics-textbook.github.io/geomatics-textbook/fundamentals-of-remote-sensing.html
-
 Geospatial data may be **captured** from remote sensing ([Chapter 11](https://ubc-geomatics-textbook.github.io/geomatics-textbook/collecting-and-editing-data.html)) or digitized/scanned from other sources ([Chapter 4](https://ubc-geomatics-textbook.github.io/geomatics-textbook/collecting-and-editing-data.html)). Data can be **stored** in many different formats with different behaviours and rules and are kept in databases ([Chapter 3](https://ubc-geomatics-textbook.github.io/geomatics-textbook/types-of-data.html)). Data can be queried (or selected) from a database using a standard query language ([Chapter 5](https://ubc-geomatics-textbook.github.io/geomatics-textbook/relational-databases.html)). Once data are queried, they can then be **analyzed** using operations like proximity, overlay, intersection and zonal statistics ([Chapter 6](https://ubc-geomatics-textbook.github.io/geomatics-textbook/overlay-and-proximity-analysis.html)). A primary justification for investing resources into a GIS is to display and **output** data in the form of graphs, tables, charts, and maps ([Chapter 17](https://ubc-geomatics-textbook.github.io/geomatics-textbook/making-beautiful-maps.html)).
 
 A GIS ultimately answers spatial questions like:
 
 - Where should I buy a home?
 - Where is population density highest in Vancouver, Canada?
-- Where can forest be harvested?
+- Where is the most economical location for a new mill?
 - Where should land be protected or conserved?
 
 ## Modelling the world with GIS
 
 Together, the five components of a GIS allow us to model our spatial environment. A **model** is an abstraction or simplification of reality. Models are necessary for us to understand how complex things work and communicate that understanding to others. For example, the hydrologic cycle describes the states and processes of water in the atmosphere, over land, in the ocean as well as forms of precipitation and evaporation. The concept of the hydrologic cycle is a simplification, of course, because movement and the phase of water is caused by all kinds of interacting forces such as gravity, temperature, pressure, and climate. For this reason, the hydrologic cycle is an example of a **conceptual model**, which is used to hypothesize and theorize about how our world works. This brings us to the second important quality of models: they are reproducible. A model must be reproducible so that we can validate it or check that the result or output is in line with what we expect or observe. For example, the principles of the hydrologic cycle are universal, that is they apply anywhere on Earth and even on other planets because they are based on physical properties that are shared across our universe (e.g., temperature, pressure, gravity).
 
-Data itself is a model. A **data model** abstracts and simplifies the world using numbers. We can also create models that allow us to play out different scenarios and assess the possible range of outcomes in geographic space. For example, you might be interested in purchasing a home, but you have some spatial and aspatial criteria such as price range, preference of neighborhood, distance to your work, or the quality of the nearby schools. This is the type of spatial optimization problem that we often seek to solve with a GIS. If you go onto a property listing website, you will notice that the results will change based on the criteria that you enter. And this brings us to the final type of model that is important to a GIS: the map.
+Data themselves are also models. A **data model** is a numerical abstraction of the real world that . We can also create models that allow us to play out different scenarios and assess the possible range of outcomes in geographic space. For example, you might be interested in purchasing a home, but you have some spatial and aspatial criteria such as price range, preference of neighborhood, distance to your work, or the quality of the nearby schools. This is the type of spatial optimization problem that we often seek to solve with a GIS. If you go onto a property listing website, you will notice that the results will change based on the criteria that you enter. And this brings us to the final type of model that is important to a GIS: the map.
 
 **Maps** are spatial models. They abstract geographic information like coordinates or location of things, places, or people. It is important to underscore the difference between spatial models such as maps and conceptual models such as the hydrologic cycle. With a map, you could abstract or represent the location, distance and area of a lake, but you would need the conceptual model of the hydrologic cycle to describe the interaction of the lake with the atmosphere (i.e., evaporation). There are many aspects of the hydrologic cycle that can be specifically modelled in a GIS, which is something we will explore further in [Chapter 9](https://ubc-geomatics-textbook.github.io/geomatics-textbook/raster-analysis-and-terrain-modelling.html).
 
-## Major Canadian Contributions to Geomatics
+## History of GIS
+
+
+
+## Summary
+
+## Reflection Questions {-}
+1. What are some examples of other models
+
+## Practice Questions {-}
+1. Name the five components of GIS.
+2.

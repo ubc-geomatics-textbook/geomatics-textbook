@@ -9,7 +9,19 @@ Written by
 cat(author)
 ```
 
-We encounter and use geographic information on a regular basis in our everyday lives. Whether it is finding directions to a retailer that has an item in stock you want to buy or recording the path of your last morning jog, you have probably used a Geographic Information System (GIS) and not even realized it. In this chapter, we explore what geomatics is all about and where it originated from.
+```{r, include=FALSE}
+baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"
+nrcanlicense <- "https://open.canada.ca/en/open-government-licence-canada"
+library(leaflet)
+```
+
+<style>
+.html-widget {
+    margin: auto;
+}
+</style>
+
+We encounter and use geographic information on a regular basis in our everyday lives. Whether it is finding directions to a retailer that has an item in stock you want to buy or recording the path of your last morning jog, you have probably used a Geographic Information System (GIS) and not even realized it. In this chapter, we explore what geomatics is all about.
 
 :::: {.box-content .learning-objectives-content}
   
@@ -55,7 +67,7 @@ A GIS is a collection of five inter-connected, inter-acting, and inter-dependent
 ```
 <br/>
 
-Spatial data can take many forms in a GIS, which we will explore more in [Chapter 2](https://ubc-geomatics-textbook.github.io/geomatics-textbook/mapping-data.html). For the sake of our jogging example, you can imagine your jogging path could be represented as a line or a set of ordered points. In turn, your jogging path can be described by different qualities (day of the week, weather) and quantities (distance, speed, heart rate), which are called **attributes** (Figure \@ref(fig:01-jogging-path)). An important role of a GIS is to govern how data can interact and behave with other types of data For example, we can calculate distance from a line, but not area, which is a special property of a polygon. We will explore data behaviors in more detail in [Chapter 2](https://ubc-geomatics-textbook.github.io/geomatics-textbook/mapping-data.html).
+Spatial data can take many forms in a GIS, which we will explore more in [Chapter 2](https://ubc-geomatics-textbook.github.io/geomatics-textbook/mapping-data.html). For the sake of our jogging example, you can imagine your jogging path could be represented as a line or a set of ordered points. In turn, your jogging path can be described by different qualities (day of the week, weather) and quantities (distance, speed, heart rate), which are called **attributes** (Figure \@ref(fig:01-jogging-path)). An important role of a GIS is to govern how data can interact and behave with other types of data. For example, we can calculate distance from a line, but not area, which is a special property of a polygon. We will explore data behaviors in more detail in [Chapter 2](https://ubc-geomatics-textbook.github.io/geomatics-textbook/mapping-data.html).
 
 **Software** – There are a lot of different GIS software packages available and the choice of which software to use is usually driven by preference, availability, and/or cost. For example, some GIS software are freely available while others require a paid license. Nearly all GIS software packages can perform the same operations and analyses, but there are some differences like integrated cloud computing or availability of certain plugins. The most widely-used paid software is ESRI's ArcGIS, while the most widely-used Free and Open Source Software (FOSS) is QGIS (Q for Quantum). There are many other historically-significant FOSS software packages like GRASS, SAGA, and MOSS that are discussed in more detail later in this chapter.
 
@@ -89,19 +101,87 @@ A GIS ultimately answers spatial questions like:
 
 Together, the five components of a GIS allow us to model our spatial environment. A **model** is an abstraction or simplification of reality. Models are necessary for us to understand how complex things work and communicate that understanding to others. For example, the hydrologic cycle describes the states and processes of water in the atmosphere, over land, in the ocean as well as forms of precipitation and evaporation. The concept of the hydrologic cycle is a simplification, of course, because movement and the phase of water is caused by all kinds of interacting forces such as gravity, temperature, pressure, and climate. For this reason, the hydrologic cycle is an example of a **conceptual model**, which is used to hypothesize and theorize about how our world works. This brings us to the second important quality of models: they are reproducible. A model must be reproducible so that we can validate it or check that the result or output is in line with what we expect or observe. For example, the principles of the hydrologic cycle are universal, that is they apply anywhere on Earth and even on other planets because they are based on physical properties that are shared across our universe (e.g., temperature, pressure, gravity).
 
-Data themselves are also models. A **data model** is a numerical abstraction of the real world that . We can also create models that allow us to play out different scenarios and assess the possible range of outcomes in geographic space. For example, you might be interested in purchasing a home, but you have some spatial and aspatial criteria such as price range, preference of neighborhood, distance to your work, or the quality of the nearby schools. This is the type of spatial optimization problem that we often seek to solve with a GIS. If you go onto a property listing website, you will notice that the results will change based on the criteria that you enter. And this brings us to the final type of model that is important to a GIS: the map.
+We can also create models that allow us to play out different scenarios and assess the possible range of outcomes in geographic space. For example, you might be interested in purchasing a home, but you have some spatial and aspatial criteria such as price range, preference of neighborhood, distance to your work, or the quality of the nearby schools. This is the type of spatial optimization problem that we often seek to solve with a GIS. If you go onto a property listing website, you will notice that the results will change based on the criteria that you enter. And this brings us to the final type of model that is important to a GIS: the map.
 
-**Maps** are spatial models. They abstract geographic information like coordinates or location of things, places, or people. It is important to underscore the difference between spatial models such as maps and conceptual models such as the hydrologic cycle. With a map, you could abstract or represent the location, distance and area of a lake, but you would need the conceptual model of the hydrologic cycle to describe the interaction of the lake with the atmosphere (i.e., evaporation). There are many aspects of the hydrologic cycle that can be specifically modelled in a GIS, which is something we will explore further in [Chapter 9](https://ubc-geomatics-textbook.github.io/geomatics-textbook/raster-analysis-and-terrain-modelling.html).
+**Maps** are spatial models. They abstract geographic information like location and attributes of things. It is important to underscore the difference between spatial models such as maps and conceptual models such as the hydrologic cycle. With a map, you could abstract or represent the location, distance and area of a lake, but you would need the conceptual model of the hydrologic cycle to describe the interaction of the lake with the atmosphere (i.e., evaporation). There are many aspects of the hydrologic cycle that can be specifically modelled in a GIS, which is something we will explore further in [Chapter 9](https://ubc-geomatics-textbook.github.io/geomatics-textbook/raster-analysis-and-terrain-modelling.html).
 
-## History of GIS
+## A Canadian History of GIS
 
+Post-war economies of the Allied Powers saw significant growth in the 1940s and 1950s and huge demographic shifts were underway. Agrarian societies, such as the one found in Canada, was transformed by the new economy and rapid urbanization. Prior to the Second World War, about half of all Canadians lived in rural areas. By the 1950s, nearly 62% of the total population lived in urban centres and 37% lived in just the fifteen largest cities (Figure \@ref(fig:01-ninth-census-1951-map)). Faced with the prospect of failed crops and uncertain economic outcomes, many chose to head for better opportunities promised in the metropolitan areas. In the decade from 1941 to 1951, Canadian families left their farms at a rate of 105 per week, despite an overall increase in farmland across the country.
 
+```{r 1-ninth-census-1951-map, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+    fig_cap <- paste("Ninth Census of Canada 1951, Population Distribution. Dominion of Bureau Statistics, Public Domain.")
+    knitr::include_graphics("images/01-ninth-census-1951-map.PNG")
+```
+</br>
+
+As cities sprawled, land use and land planning conflicts emerged. City waistlines grew as adjacent farmland was consumed to welcome new urban dwellers. In 1958, the Senate established the Special Committee on Land Use in Canada whose purpose was "to consider and report on land use in Canada and what should be done to ensure that our land resources are most effectively utilized for the benefit of the Canadian economy and the Canadian people and, in particular, to increase both agricultural production and the incomes of those engaged in it" (@CanadaSenate_1958).
+
+Following years of hearings by the Senate Special Committee on Land Use in Canada, the Agricultural and Rural Development Act was passed by Parliament in June 1961 (@McCrorie_1969). The new legislation empowered the Minister of Agriculture to work with the Provinces and Territories to address rural poverty and promote the development and conservation of Canada's prized farmland. By October, the federal government had organized a national conference in Montreal, "The Resources for Tomorrow". Over 700 delegates from government, non-governmental organizations, university, and industry contributed to a unique national conversation on the future of Canada's renewable natural resources with workshops on agriculture, forestry, fisheries, recreation, wildlife, water and urban growth (@Walter_1961). In the following year, Rachel Carson published her landmark __Silent Spring__. The publication catalyzed public sentiment for protecting people and the environment from harmful pesticide and herbicide use. It was clear that a national approach to mapping renewable resources was needed in order to protect and conserve them, so in 1963 the federal government established an ambitious project called the Canada Land Inventory whose chief purpose was to provide a "comprehensive survey of land capability and use designed to provide a basis for resource and land use planning" (@CLIReport1_1965). 
+
+But how could the Canada Land Inventory ever be achieved for such a vast country using traditional paper maps? To be sure, Canada was not lacking the mapped data, in fact there were thousands of maps produced, cataloged, and housed by the federal government on everything from soils to forests. Still, the scale of agricultural land loss was not known at the time because paper maps of soil fertility could not easily be combined with other information like census data. Decision-makers relied on human interpretation and analysis of paper maps, a time-consuming task that could only accommodate a handful of mapped attributes at a time over a small area. Paper maps had to be reproduced at the same scale, aligned, and analysed polygon-by-polygon. A new approach was needed to cope with the overwhelming amount of information being produced.
+
+```{r 1-data-for-decisions, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+    fig_cap <- paste('Roger Tomlinson talking about the use of computers for the Canada Land Inventory in 1967. Frame from "Data for Decisions", a National Film Board of Canada documentary, directed by Michael Millar.')
+    knitr::include_graphics("images/01-data-for-decisions.png")
+```
+</br>
+
+It was 29-year old Roger Tomlinson who recognized the need for computers to handle the massive influx of mapped data (Figure \@ref(fig:01-data-for-decisions)). Tomlinson was living in Ottawa working for an aerial survey company when the head of the Canada Land Inventory, Lee Pratt, asked him to lead the development of the world's first computerized GIS. Tomlinson first described it as a "geo-information system" (@Tomlinson_1967), but it was later renamed the Canadian Geographic Information System before it was shortened to the **Canada Geographic Information System (CGIS)**. In the years that followed, the Canada Land Inventory produced over 12,000 map sheets showing the capability of Canada's lands for agriculture, forestry, recreation, and wildlife (@FisherandMacDonald_1979). Other advances in computer hardware were achieved as a result of the pioneering work by Tomlinson, including the development and integration of map scanners and x-y digitizers for inputting and updating geographic data into the computer. Tomlinson is widely acknowledged as the creator of modern computerized GIS.
+
+```{r 1-Canada-land-inventory, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+    fig_cap <- paste("Excerpt from a brochure describing initial mapping efforts of the Canada Land Inventory in British Columbia. Published by the Minister of Supply and Services Canada, n.d.")
+    knitr::include_graphics("images/01-Canada-land-inventory.png")
+```
+</br>
+
+While the Canada Land Inventory was underway with the aid of the CGIS, provinces moved to create the agricultural land reserves to ensure that the most fertile areas remained available as farmland. In 1973, British Columbia established the Agriculture Land Reserves, setting aside 5% of its land base for farming priority. Newfoundland and Labrador established an Agriculture Development Area around the city of St. John's in the same year. By 1977, it was learned from CGIS analysis that only 0.5% the second largest country in the world supports prime farmland and half of that occurs in the vicinity of the most populous metropolitan area: Toronto (Figure \@ref(fig:01-Cuyahoga-River-fire-1952)) (@CLIReport11_1977). Ontario published Food Land Guidelines the next year that effectively laid out a land use planning framework for municipalities and the province to protect and maximize the efficiency of farming on the best land (@LandFoodGuidelines_1978).
+
+``` {r echo=FALSE, warning=FALSE, message=FALSE}
+m <- leaflet() %>%
+  setView(lng = -79.46, lat = 43.695, zoom = 11) %>% 
+  addTiles() %>%
+  addWMSTiles(
+    "https://206-12-122-94.cloud.computecanada.ca/geoserver/CLI_Agriculture_Capability/wms",
+    layers = "cli_250k_agr_30m_toronto",
+    options = WMSTileOptions(format = "image/png", transparent = TRUE),
+  )
+```
+
+``` {r 1-cli-agriculture-capability-toronto, fig.cap = fig_cap, out.width= "75%", echo = FALSE, fig.align="center"}
+if (knitr::is_latex_output()) {
+  fig_cap <- paste0("Soil capability for agriculture from the Canada Land Inventory for the area surrounding Toronto, Canada. The majority of the best soils for farming in Canada (Class 1 - No significant limitations in use for crops) are found in southeastern Ontario. <a
+  \\href='",baseurl,"\\#fig:1-cli-agriculture-capability-toronto'>Interactive web map can be viewed in the web browser version of the textbook</a>. Queen's Printer, Public Domain.")
+  knitr::include_graphics(here::here("images", "01-cli-agriculture-capability-toronto.PNG"))
+} else {
+  fig_cap <- paste0("Soil capability for agriculture from the Canada Land Inventory for the area surrounding Toronto, Canada. The majority of the best soils for farming in Canada (Class 1 - No significant limitations in use for crops) are found in southeastern Ontario. Queen's Printer, Public Domain.")
+  m
+}
+```
+</br>
+
+On the opposite shore of Lake Erie from where the best Canadian soils for farming were deposited millennia ago by the glacial processes that formed the Great Lakes, the Cuyahoga River empties a small drainage basin of approximately 2,100 km^2^ and bisects the city of Cleveland, Ohio in the United States. This relatively small, crooked river is one of many that fills Lake Erie and flows slowly by former sleepy industrial towns along the lake shore. The first European settler built his cabin on the shore of the Cuyahoga River in 1797 at the site of present-day Cleveland and over the next 155 years of industrialization, the river was reported to have caught fire nine times (@LaBella_2009). Ignited once every 17 years or so from volatile oil slicks and other pollutants suspended in the water column (Figure \@ref(fig:01-Cuyahoga-River-fire-1952)). 
+
+```{r 01-Cuyahoga-River-fire-1952, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+    fig_cap <- paste("The Cuyahoga River burns in 1952 near Cleveland, Ohio in the United States as an oil slick is ignited. Special Collections, Cleveland State University Library.")
+    knitr::include_graphics("images/01-Cuyahoga-River-fire-1952.png")
+```
+
+In 1968, 16 years after the last burning, just 60 km upstream, a symposium at Kent State University described the state of a 4 km reach of the river (@KentStateUniversity_1968):
+
+> [...] Large quantities of black heavy oil floating in slicks, sometimes several inches thick, are observed frequently. Debris and trash are commonly caught up in these slicks forming an unsightly floating mess. Anaerobic action is common as the dissolved oxygen is seldom above a fraction of a part per million. The discharge of cooling water increases the temperature by 10 to 15 °F [5.6 to 8.3 °C]. The velocity is negligible, and sludge accumulates on the bottom. Animal life does not exist.
+
+The following year in the summer of 1969, the Cuyahoga River burned again. This time, the fire ignited a national conversation in the United States about pollution and was a catalyst for the passage of landmark legislation for protecting the environment. A month after the fire was extinguished, the United States Senate unanimously passed the National Environmental Policy Act (NEPA), legislation that required the federal government to consider the environmental impact of its land use. The following year, the Environmental Protection Agency (EPA) was established by an executive order of President Nixon and the Clean Air Act was passed. By 1972, the United States Congress passed the Clean Water Act. These events in the late 1960s and early 1970s provided new environmental and regulatory imperatives for the continued development of computerized GIS.
+
+By 1976, 
 
 ## Summary
 
 ## Reflection Questions {-}
-1. What are some examples of other models
+1. What is the difference between a conceptual model and a spatial model?
+2. What was the initial purpose for developing the first GIS?
 
 ## Practice Questions {-}
 1. Name the five components of GIS.
-2.
+2. What is a model? Give an example of a model.
+3. What was the name of the first computerized GIS? Who developed it?

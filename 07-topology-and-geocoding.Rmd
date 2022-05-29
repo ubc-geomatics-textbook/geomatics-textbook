@@ -477,9 +477,13 @@ Convex hulls can be generalized to the concave case, called **convex alpha hulls
 ## }
 ```
 
+
 ``` {r 7-2d-alpha-hull, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste0("Concave alpha hull generates an alpha shape around a set of points. Online version of the figure is animated by alpha values from 0 to 1 by increments of 0.05. <a href='",baseurl,"#7-2d-alpha-hull'>Animated figure can be viewed in the web browser version of the textbook.</a> Pickell, CC-BY-SA-4.0.")
-knitr::include_graphics("images/07-2d-alpha-hull.gif")
+if (knitr:::is_latex_output()) { fig_cap <- paste0("Concave alpha hull generates an alpha shape around a set of points. Online version of the figure is animated by alpha values from 0 to 1 by increments of 0.05. <a href='",baseurl,"topology-and-geocoding.html#convex-alpha-hulls-and-alpha-shapes'>Animated figure can be viewed in the web browser version of the textbook.</a> Pickell, CC-BY-SA-4.0.")
+  knitr::include_graphics("images/07-2d-alpha-hull.png")
+} else { fig_cap <- paste0("Concave alpha hull generates an alpha shape around a set of points. Online version of the figure is animated by alpha values from 0 to 1 by increments of 0.05. Pickell, CC-BY-SA-4.0.")
+  knitr::include_graphics("images/07-2d-alpha-hull.gif")
+}
 ```
 
 ## 3D topologies
@@ -491,8 +495,12 @@ In this next section, a number of topologies are described that are important fo
 Similar to multipart geometries, **multipatch geometries** associate several *faces* or *facets* to a single 3D feature such as a building or tree. In order for multipatch geometries to be topologically valid, they must form a closed set of faces, known as a **polyhedron**. Polyhedrons are comprised of *flat* faces that connect 3 or more vertices. Figure \@ref(fig:7-platonic-polyhedrons) illustrates the 5 Platonic polyhedrons, so-named after Plaot who initially wrote about them. The Platonic polyhedrons are a special type of *regular* polyhedron because they are the only polyhedrons that are highly symmetrical and have special transitive properties on the edges, faces, and vertices. As well, the Platonic polyhedrons are all examples of the 3-dimensional case of a convex hull (more on that in the next section). Most polyhedrons that we come across in environmental management like trees, lakes, glaciers, and buildings are very irregular and not Platonic.
 
 ``` {r 7-platonic-polyhedrons, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste0("The five Platonic solids are examples of regular, convex polyhedrons and multipatch geometries. From left to right: tetrahedron (4 faces); hexahedron (6 faces); octahedron (8 faces); dodecahedron (12 faces); and icosahedron (20 faces). <a href='",baseurl,"#7-platonic-polyhedrons'>Animated figure can be viewed in the web browser version of the textbook.</a> @cyp_polyhedra_2005, CC-BY-SA-3.0.")
-knitr::include_graphics("images/07-platonic-polyhedrons.gif")
+
+if (knitr:::is_latex_output()) { fig_cap <- paste0("The five Platonic solids are examples of regular, convex polyhedrons and multipatch geometries. From left to right: tetrahedron (4 faces); hexahedron (6 faces); octahedron (8 faces); dodecahedron (12 faces); and icosahedron (20 faces). <a href='",baseurl,"topology-and-geocoding.html#multipatch-geometries-1'>Animated figure can be viewed in the web browser version of the textbook</a>. @cyp_polyhedra_2005, CC-BY-SA-3.0.")
+  knitr::include_graphics("images/07-platonic-polyhedrons.png")
+} else { fig_cap <- paste0("The five Platonic solids are examples of regular, convex polyhedrons and multipatch geometries. From left to right: tetrahedron (4 faces); hexahedron (6 faces); octahedron (8 faces); dodecahedron (12 faces); and icosahedron (20 faces). @cyp_polyhedra_2005, CC-BY-SA-3.0.")
+  knitr::include_graphics("images/07-platonic-polyhedrons.gif")
+}
 ```
 
 ### 3D Convex hull

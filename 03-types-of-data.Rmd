@@ -77,7 +77,7 @@ knitr::include_graphics("images/03-beach-small-scale.png")
 A lightning strike is an electric discharge between the atmosphere and the ground.  A lightning strike is a discrete object.  The precise location of the strike can be pin pointed, the number of strikes during a storm can be counted.  But what about the actual lighting bolt?  That's more a continuous field, its not really possible to measure the exact boundaries of the path the electric discharge takes.  Then we can look at other things, like the probability of lighting strikes. Figure \@ref(fig:3-lightning-density) is a continuous field, calculated from counting discrete objects.
 
 ```{r 3-lightning-density, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-if (knitr:::is_latex_output()) { fig_cap <- paste0("Global lighting strike density per month. Animated figure... Skeeter, CC-BY-SA-4.0.")
+if (knitr:::is_latex_output()) { fig_cap <- paste0("Global lighting strike density per month. <a href='",baseurl,"types-of-data.html#imperfect-distinctions'>Animated figure can be viewed in the web browser version of the textbook.</a> Skeeter, CC-BY-SA-4.0.")
   knitr::include_graphics("images/03-lightning-density.png")
 } else { fig_cap <- paste0("Global lighting strike density per month. Skeeter, CC-BY-SA-4.0.")
   knitr::include_graphics("images/03-lightning-density.gif")
@@ -146,7 +146,7 @@ knitr::include_graphics("images/03-ratio-population.png")
 
 Interval data on the other hand, have an arbitrarily set zero point.  This means they can can take negative values.  Because the zero point is arbitrary, we cannot multiply/divide two values or calculate meaningful ratios between two values.  A good example of interval data is temperature measured in Celsius, and comparing it to Kelvin highlights the difference between the two data types (see Figure \@ref(fig:3-interval-ratio-temperature)).  The conversion between Kelvin (ratio) and Celsius (interval) is very simple: &deg;C = &deg;K-273.15.  Zero Kelvin is "Absolute Zero" - ie. the lack of temperature, while zero Celsius is the freezing point of water (273.15 degrees above absolute zero).  Other examples of interval data include: the pH scale, IQ test scores, elevation (relative to a datum) dates (April 12th, 2011), and times (11:00 A.M.).
 
-```{r 3-interval-ratio-temperature, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+```{r 3-interval-ratio-temperature, echo=FALSE, fig.cap=fig_cap, out.width='75%'}
 fig_cap <- paste0("The ratio between two temperatures in Celsius is not meaningful, 20&#176;C is not 'twice' as warm as 10&#176;C. Kelvin's zero point is fixed to absolute zero, the 'absence' of temperature. So we can calculate the ratio, 293.15&#176;K is 1.035 times warmer than 283.15&#176;K. Skeeter, CC-BY-SA-4.0.")
 knitr::include_graphics("images/03-interval-ratio-temperature.png")
 ```

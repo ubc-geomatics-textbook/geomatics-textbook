@@ -72,8 +72,11 @@ The property of transparent mediums to change the direction of light beams is ca
 The lens at the front of your eyeball changes refracts light beams from varying distances precisely onto your retina. The optical systems on remote sensing platforms are the same: they use a specially designed lens to focus light beams at the desired distance to onto their own recording medium. Below in figure \@ref(fig:12-focus-example-humaneye) is a simple visualization of how optical systems focus light onto a desired point to produce an in-focus image.
 
 ```{r 12-focus-example-humaneye, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Focusing lens [@vorenkamp_how_2015]. <a href='",baseurl,"#fig:12-focus-example-humaneye'>Animated figure can be viewed in the web browser version of the textbook</a>. Copyright Todd Vorenkamp. Used with permission.)")
-knitr::include_graphics("images/12-focus_example_humaneye.gif")
+if (knitr:::is_latex_output()) { fig_cap <- paste0("Focusing lens [@vorenkamp_how_2015]. Copyright Todd Vorenkamp. Used with permission. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/remote-sensing-systems.html")
+  knitr::include_graphics("images/12-focus_example_humaneye.png")
+} else { fig_cap <- paste0("Focusing lens [@vorenkamp_how_2015]. Copyright Todd Vorenkamp. Used with permission.")
+  knitr::include_graphics("images/12-focus_example_humaneye.gif")
+}
 ```
 <br/>
 
@@ -177,16 +180,22 @@ Building remote sensing systems can be costly, so it is in our best interest to 
 Remote sensing systems typically have zero, one, or two degrees of motion. Rarely do remote sensing systems have all three. It is usually not necessary to have so much range of motion and more moving parts means a higher possibility of malfunction, which can be a real headache when the defunct system is orbiting 700 km above the Earth's surface. These combinations of degrees of motion give rise to the three primary types of scanners. **Push broom** scanners are a type of scanner that have detectors arranged in a single-file line and take advantage of the forward movement of the remote sensing platform, known as **along-track** scanning, to build images line-by-line (Figure \@ref(fig:12-push-broom)). In other words, push broom scanners have two degrees of motion: the platform and the lenses. 
 
 ```{r 12-push-broom, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Visualization of how a push broom scanner captures imagery. The dark purple squares represent the subset of the area seen by the scanner at any given time and the lighter purple squares show previously scanned areas. <a href='",baseurl,"#fig:12-push-broom'>Animated figure can be viewed in the web browser version of the textbook</a>. Armour, CC-BY-SA-4.0.")
-knitr::include_graphics(here::here("images", "12-push-broom.gif"))
+if (knitr:::is_latex_output()) { fig_cap <- paste0("Visualization of how a push broom scanner captures imagery. The dark purple squares represent the subset of the area seen by the scanner at any given time and the lighter purple squares show previously scanned areas. Armour, CC-BY-SA-4.0. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/remote-sensing-systems.html")
+  knitr::include_graphics("images/12-push-broom.png")
+} else { fig_cap <- paste0("Visualization of how a push broom scanner captures imagery. The dark purple squares represent the subset of the area seen by the scanner at any given time and the lighter purple squares show previously scanned areas. Armour, CC-BY-SA-4.0.")
+  knitr::include_graphics("images/12-push-broom.gif")
+}
 ```
 </br>
 
 By contrast, **whisk broom** scanners have an array of detectors that are mechanically moved from side-to-side, known as **cross-track** scanning because the image is produced by scanning across the track of the remote sensing platform direction of motion ((Figure \@ref(fig:12-whisk-broom)). Thus, whisk broom scanners have three degrees of motion: the platform, the lenses, and the camera. The last type of scanner is known as a **staring array**, so-called because the sensors are arranged in a rectangular array that are pointed at the surface or object to be imaged. In this way, the image is built all at once as the light is focused onto the focal plane. Most consumer cameras use staring arrays, which usually have two or fewer degrees of motion, depending on the application.
 
 ```{r 12-whisk-broom, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Visualization of how a whisk broom scanner captures imagery. The dark blue squares represent the subset of the area seen by the scanner at any given time and the lighter blue squares show previously scanned areas. The size of the subset may change between a single pixel (one square) or a spotlight (multiple squares) but the motion remains the same. <a href='",baseurl,"#fig:12-whisk-broom'>Animated figure can be viewed in the web browser version of the textbook</a>. Armour, CC-BY-SA-4.0.")
-knitr::include_graphics(here::here("images", "12-whisk-broom.gif"))
+if (knitr:::is_latex_output()) { fig_cap <- paste0("Visualization of how a whisk broom scanner captures imagery. The dark blue squares represent the subset of the area seen by the scanner at any given time and the lighter blue squares show previously scanned areas. The size of the subset may change between a single pixel (one square) or a spotlight (multiple squares) but the motion remains the same. Armour, CC-BY-SA-4.0. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/remote-sensing-systems.html")
+  knitr::include_graphics("images/12-whisk-broom.png")
+} else { fig_cap <- paste0("Visualization of how a whisk broom scanner captures imagery. The dark blue squares represent the subset of the area seen by the scanner at any given time and the lighter blue squares show previously scanned areas. The size of the subset may change between a single pixel (one square) or a spotlight (multiple squares) but the motion remains the same. Armour, CC-BY-SA-4.0.")
+  knitr::include_graphics("images/12-whisk-broom.gif")
+}
 ```
 </br>
 
@@ -272,13 +281,19 @@ Common applications:
 _It's important to note that the "ground plane" refers to a plane tangent to the geoid and not the physical ground surface. In variable terrain such as mountains, much of the ground will be seen "at an angle", but the overall camera perspective is unchanged. See figures \@ref(fig:12-aerial-good) and \@ref(fig:12-aerial-bad) for a visualization of what this looks like with regards to aerial imagery._
 
 ```{r 12-aerial-good, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("How aerial imagery should be taken. Claire Armour.<a href='",baseurl,"#fig:12-aerial-good'> Animated figure can be viewed in the web browser version of the textbook</a>. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
-knitr::include_graphics("images/12-aerial-good.gif")
+if (knitr:::is_latex_output()) { fig_cap <- paste0("How aerial imagery should be taken. Claire Armour. CC-BY-SA-4.0. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/remote-sensing-systems.html")
+  knitr::include_graphics("images/12-aerial-good.png")
+} else { fig_cap <- paste0("How aerial imagery should be taken. Claire Armour. CC-BY-SA-4.0.")
+  knitr::include_graphics("images/12-aerial-good.gif")
+}
 ```
 
 ```{r 12-aerial-bad, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("How aerial imagery should NOT be taken. Claire Armour.  <a href='",baseurl,"#fig:12-aerial-bad'>Animated figure can be viewed in the web browser version of the textbook</a> --> [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
-knitr::include_graphics("images/12-aerial-bad.gif")
+if (knitr:::is_latex_output()) { fig_cap <- paste0("How aerial imagery should NOT be taken. Claire Armour. CC-BY-SA-4.0. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/remote-sensing-systems.html")
+  knitr::include_graphics("images/12-aerial-bad.png")
+} else { fig_cap <- paste0("How aerial imagery should be taken. Claire Armour. CC-BY-SA-4.0.")
+  knitr::include_graphics("images/12-aerial-bad.gif")
+}
 ```
 <br/>
 
@@ -367,8 +382,11 @@ knitr::include_graphics(here::here("images", "12-google-street-view-car.png"))
 Many other terrestrial platforms are fixed or stationary, which means that they are either always observing the same feature or they might have a limited motorized range to pan from a fixed point. Phenological studies that aim to monitor the timing of different plant growth stages throughout the growing season such as budding, leaf-out and flowering will often use a stationary camera pointed towards the plant of interest. Figure \@ref(fig:12-phenological-camera-sequence) shows a time-lapse of images taken once per day at noon during the spring time near Grand Cache, Alberta. The changing leaf colour is clearly visible in the time lapse, which can be important for monitoring springtime wildfire risk [@pickell_early_2017] or forage quality for wildlife such as grizzly bear [@bater_using_2010].
 
 ```{r 12-phenological-camera-sequence, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Time lapse from a camera mounted on a tree. Each image is taken on a different day at noon [@bater_timelapse_nodate]. <a href='",baseurl,"#12-phenological-camera-sequence'>Animated figure can be viewed in the web browser version of the textbook.</a> CC-BY-SA-4.0.")
-knitr::include_graphics(here::here("images", "12-phenological-camera-sequence.gif"))
+if (knitr:::is_latex_output()) { fig_cap <- paste0("Time lapse from a camera mounted on a tree. Each image is taken on a different day at noon [@bater_timelapse_nodate]. CC-BY-SA-4.0. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/remote-sensing-systems.html")
+  knitr::include_graphics("images/12-phenological-camera-sequence.png")
+} else { fig_cap <- paste0("Time lapse from a camera mounted on a tree. Each image is taken on a different day at noon [@bater_timelapse_nodate]. CC-BY-SA-4.0.")
+  knitr::include_graphics("images/12-phenological-camera-sequence.gif")
+}
 ```
 
 Spectral responses from forest canopies can be monitored by radiometers such as the Automated Multiangular SPectro-radiometer for Estimation of Canopy reflectance (AMSPEC) instrument that can be mounted to a tower and sits high above the forest canopy (Figure \@ref(fig:12-flux-tower-radiometer)). These "eyes above the forests" can provide important information about forest health and physiology. Since forest canopies are usually imaged from airborne and spaceborne platforms, these terrestrial observations provide a critical link for calibration with other imagery.
@@ -382,8 +400,11 @@ knitr::include_graphics(here::here("images", "12-flux-tower-radiometer.png"))
 In Canada, there are significant stores of historical terrestrial imagery that were collected by the government for surveying the west. From the 1880's to as late as the 1950's, various government agencies of Canada collected over 5,000 terrestrial images of Canada's western territories and provinces primarily within the Rocky Mountains. Some of these locations have been re-imaged at the same terrestrial perspective during the modern era and show dramatic changes to the landscape such as glacial retreat and afforestation. Figure \@ref(fig:12-mountain-legacy-project) shows the retreat of the Athabasca Glacier over nearly 100 years near the Wilcox Pass in Jasper National Park. 
 
 ```{r 12-mountain-legacy-project, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Image pair of Athabasca Glacier from Wilcox Pass in Jasper National Park, Alberta, Canada. The historical image was taken in 1917 by A.O. Wheeler [@library_and_archives_canada_athabasca_1917], and the modern image was taken nearly a hundred years later in 2011 by the Mountain Legacy Project [@mountain_legacy_project_modern_2011]. <a href='",baseurl,"#12-mountain-legacy-project'>Animated figure can be viewed in the web browser version of the textbook.</a> CC-BY-SA-4.0.")
-knitr::include_graphics(here::here("images", "12-mountain-legacy-project.gif"))
+if (knitr:::is_latex_output()) { fig_cap <- paste0("Image pair of Athabasca Glacier from Wilcox Pass in Jasper National Park, Alberta, Canada. The historical image was taken in 1917 by A.O. Wheeler [@library_and_archives_canada_athabasca_1917], and the modern image was taken nearly a hundred years later in 2011 by the Mountain Legacy Project [@mountain_legacy_project_modern_2011]. CC-BY-SA-4.0. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/remote-sensing-systems.html")
+  knitr::include_graphics("images/12-mountain-legacy-project.png")
+} else { fig_cap <- paste0("Image pair of Athabasca Glacier from Wilcox Pass in Jasper National Park, Alberta, Canada. The historical image was taken in 1917 by A.O. Wheeler [@library_and_archives_canada_athabasca_1917], and the modern image was taken nearly a hundred years later in 2011 by the Mountain Legacy Project [@mountain_legacy_project_modern_2011]. CC-BY-SA-4.0.")
+  knitr::include_graphics("images/12-mountain-legacy-project.gif")
+}
 ```
 <br/>
 
@@ -462,8 +483,11 @@ Earth is an oblate ellipsoid with a slightly shorter axis of rotation than the e
 Were you wondering why MEO extends to such an exact number at the extreme altitude of 35,786 km? That is because 35,786 km is the distance from Earth at which the orbital period of a satellite at the Equator is equivalent to Earth's rotational period of 24 hours. This is known as **Geosynchronous Equatorial Orbit (GEO)** because this orbit only occurs directly above the Earth's Equator. Satellites in GEO are __geosynchronous__, meaning they are always visible in the same location of the sky no matter the time of day or the season. For this reason, these orbits are sometimes referred to as __geostationary__. The advantage of geostationary orbit is that the satellite can continuously image the same visible portion of Earth 24 hours a day. Thus, nearly all weather and communication satellites are in geostationary orbit, allowing transmissions to be relayed across a network of geostationary satellites and ground antenna like a ping-pong ball.
 
 ```{r 12-sunsynchronous-geosynchronous-orbits, fig.cap = fig_cap, out.width="75%", echo = FALSE}
-fig_cap <- paste0("Comparing Sun-synchronous and geosynchronous orbits. The yellow area shows the portion of Earth's surface that is visible during a single orbit. Notice that Sun-synchronous orbit observes at a consistent local time while the geosynchronous orbit observes a constant location. href='",baseurl,"#12-sunsynchronous-geosynchronous-orbits'>Animated figure can be viewed in the web browser version of the textbook.</a> Credit: [NOAA/JPL-Caltech](https://scijinks.gov/about/).")
-knitr::include_graphics(here::here("images", "12-sunsynchronous-geosynchronous-orbits.gif"))
+if (knitr:::is_latex_output()) { fig_cap <- paste0("Comparing Sun-synchronous and geosynchronous orbits. The yellow area shows the portion of Earth's surface that is visible during a single orbit. Notice that Sun-synchronous orbit observes at a consistent local time while the geosynchronous orbit observes a constant location. Credit: [NOAA/JPL-Caltech](https://scijinks.gov/about/). Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/remote-sensing-systems.html")
+  knitr::include_graphics("images/12-sunsynchronous-geosynchronous-orbits.png")
+} else { fig_cap <- paste0("Comparing Sun-synchronous and geosynchronous orbits. The yellow area shows the portion of Earth's surface that is visible during a single orbit. Notice that Sun-synchronous orbit observes at a consistent local time while the geosynchronous orbit observes a constant location. Credit: [NOAA/JPL-Caltech](https://scijinks.gov/about/).")
+  knitr::include_graphics("images/12-sunsynchronous-geosynchronous-orbits.gif")
+}
 ```
 
 ## Summary

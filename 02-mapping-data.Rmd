@@ -1,11 +1,13 @@
 ---
 output:
+  html_document:
+    df_print: paged
   pdf_document:
     latex_engine: xelatexgit pull origin develop
 ---
 
 ```{r, include=FALSE}
-type <- "" ## "pdf" or ""
+type <- "pdf" ## "pdf" or ""
 baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"
 covlicence <- "https://opendata.vancouver.ca/pages/licence/"
 nrcanlicense <- "https://open.canada.ca/en/open-government-licence-canada"
@@ -64,7 +66,7 @@ All of these questions stem from need to represent **location**. For our purpose
 
 Eratosthenes accurately calculated the circumference of Earth by noticing how the Sun shone directly down the bottom of a well in Syene (modern Egypt) at noon on the summer solstice. He later made a second observation at Alexandria at noon on the summer solstice with a pole and noticed a shadow. He measured the angle of the shadow and inferred the circumference of Earth, which was already known to be spherical (Figure \@ref(fig:2-Eratosthenes)).
 
-```{r 2-Eratosthenes, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+```{r 2-Eratosthenes, echo=FALSE, fig.cap=fig_cap, out.width="75%"}
     fig_cap <- paste0("Diagram showing how Eratosthenes estimated the circumference of Earth by observing the angle of a shadow that was cast about 800 km north of Syene in present-day Egypt. [@monniaux_illustration_2005], CC-BY-SA-4.0.")
     knitr::include_graphics("images/02-Eratosthenes.png")
 ```
@@ -177,12 +179,10 @@ m = leaflet(countries) %>%
 ```
 
 ``` {r 2-CGVD-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
-  fig_cap <- paste0("The difference (in meters) between the Canadian Geodetic Vertical Datum of 2013 (CGVD2013) and the Canadian Geodetic Vertical Datum of 1928 (CGVD28).<a
-  href='",baseurl,"\\#fig:2-CGVD-leaflet'> Animated figure can be viewed in the web browser version of the textbook</a>. Data from Natural Resources Canada and licensed under the <a href='",nrcanlicense,"'>Open Government Licence - Canada </a>. Pickell, CC-BY-SA-4.0.")
-if (type == "pdf") { 
-  knitr::include_graphics(here::here("images", "02-CGVD-leaflet.PNG")) 
-} else {
-  m
+if (knitr:::is_latex_output()) { fig_cap <- paste0("The difference (in meters) between the Canadian Geodetic Vertical Datum of 2013 (CGVD2013) and the Canadian Geodetic Vertical Datum of 1928 (CGVD28). Pickell, CC-BY-SA-4.0. Data from Natural Resources Canada and licensed under the Open Government Licence - Canada. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/mapping-data.html")
+  knitr::include_graphics("images/02-CGVD-leaflet.PNG")
+} else { fig_cap <- paste0("The difference (in meters) between the Canadian Geodetic Vertical Datum of 2013 (CGVD2013) and the Canadian Geodetic Vertical Datum of 1928 (CGVD28). Pickell, CC-BY-SA-4.0. Data from Natural Resources Canada and licensed under the Open Government Licence - Canada.")
+m
 }
 ```
 
@@ -221,7 +221,7 @@ If you mapped the Earth as an ellipsoid in a three dimensional Cartesian coordin
 Use our geodesy tool to visualize the differences between the sphere, ellipsoid, and geoid. You can modify the transparency of the sphere and ellipsoid to see how these geometries vary. Change the flattening of the ellipsoid to achieve different models of Earth. Search for locations with latitude and longitude values and calculate the geoid height. Compare geocentric and geodetic latitudes. The sphere and the ellipsoid models in the visualization represent Earth's equatorial diameter (semi-major axis) as 6,356,752.3 m (i.e., equivalent to WGS 1984) and the geoid elevations are exaggerated by a factor of 0.549 to enhance their appearance.
 
 ```{r 2-geodesy-visualization-static, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste0("Online geodesy tool for visualizing the differences between the sphere, ellipsoid, and geoid. <a href='https://ubc-geomatics-textbook.github.io/geomatics-textbook/viz/geodesy-viz/'>Click here to access the interactive tool.</a> Floria Gu, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Online geodesy tool for visualizing the differences between the sphere, ellipsoid, and geoid. <a href='http://oergeomatics-geodesy-viz.s3-website.ca-central-1.amazonaws.com/'>Click here to access the interactive tool.</a> Floria Gu, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "02-geodesy-visualization-static.png"))
 ```
 <br/>

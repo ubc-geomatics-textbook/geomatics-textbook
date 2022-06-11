@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 ```{r, include=FALSE}
 baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"
 covlicence <- "https://opendata.vancouver.ca/pages/licence/"
@@ -685,7 +690,7 @@ labels <- sprintf(
 
 m <- leaflet(DA_CIMD_proj) %>%
   addProviderTiles("CartoDB.Positron")%>%
-  setView(lat = 49.255, lng = -123.153, zoom = 12) %>%
+  setView(lat = 49.255, lng = -123.153, zoom = 11) %>%
   addPolygons(fillColor = pal(DA_CIMD@data$Situatio_1), 
               weight = 0.6, 
               opacity = 1,
@@ -707,8 +712,12 @@ m <- leaflet(DA_CIMD_proj) %>%
             position = "bottomleft")
 ```
 
-```{r 5-situational-vulnerability-leaflet, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-fig_cap <- paste0("An example of choropleth map displaying the situational vulnerability scores in the City of Vancouver at DA level.<a href='",baseurl,"#fig:5-situational-vulnerability-leaflet'>Animated figure can be viewed in the web browser version of the textbook</a>.Higher score represents the DA has higher situational vulnerable population e.g., population lacking a high school diploma, low-income population.")
+```{r 5-situational-vulnerability-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
+if (knitr:::is_latex_output()) { fig_cap <- paste0("An example of choropleth map displaying the situational vulnerability scores in the City of Vancouver at DA level. Higher score represents the DA has higher situational vulnerable population e.g., population lacking a high school diploma, low-income population. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/relational-databases.html")
+knitr::include_graphics("images/05-situational-vulnerability-leaflet.png")
+} else { fig_cap <- paste0("An example of choropleth map displaying the situational vulnerability scores in the City of Vancouver at DA level. Higher score represents the DA has higher situational vulnerable population e.g., population lacking a high school diploma, low-income population.")
+m
+}
 ```
 <br/>
 

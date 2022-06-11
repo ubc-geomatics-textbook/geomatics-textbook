@@ -712,7 +712,7 @@ m <- leaflet(DA_CIMD_proj) %>%
             position = "bottomleft")
 ```
 
-```{r 5-situational-vulnerability-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
+```{r 5-situational-vulnerability-leaflet, echo=FALSE, out.width="100%", fig.cap=fig_cap}
 if (knitr:::is_latex_output()) { fig_cap <- paste0("An example of choropleth map displaying the situational vulnerability scores in the City of Vancouver at DA level. Higher score represents the DA has higher situational vulnerable population e.g., population lacking a high school diploma, low-income population. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/relational-databases.html")
 knitr::include_graphics("images/05-situational-vulnerability-leaflet.png")
 } else { fig_cap <- paste0("An example of choropleth map displaying the situational vulnerability scores in the City of Vancouver at DA level. Higher score represents the DA has higher situational vulnerable population e.g., population lacking a high school diploma, low-income population.")
@@ -756,7 +756,7 @@ labels <- sprintf(
 
 m1 <- leaflet(full.results_proj) %>%
   addProviderTiles("CartoDB.Positron")%>%
-  setView(lat = 49.255, lng = -123.1533, zoom = 12) %>%
+  setView(lat = 49.255, lng = -123.1533, zoom = 11) %>%
   addPolygons(fillColor = ~pal1(full.results_proj$veg_div_sc),
               weight = 0.6,
               opacity = 1,
@@ -780,8 +780,12 @@ m1 <- leaflet(full.results_proj) %>%
 
 Figure \@ref(fig:5-vegetation-diversity-leaflet) shows a map of the vegetation diversity score at the DA level in Vancouver. The vegetation diversity score and the normalized aggregated vulnerability score are linked to each DA and can be viewed as you hover o-ver the DA.
 
-```{r 5-vegetation-diversity-leaflet, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-fig_cap <- paste0("An example of choropleth map displaying vegetation diversity for each dissemination area in Vancouver. <a href='",baseurl,"#fig:5-vegetation-diversity-leaflet'>Animated figure can be viewed in the web browser version of the textbook</a>. Data from City of Vancouver and licensed under the <a href='",covlicence,"'>Open Government License - Vancouver</a>. Lam, CC-BY-SA-4.0.")
+```{r 5-vegetation-diversity-leaflet, echo=FALSE, out.width="100%", fig.cap=fig_cap}
+if (knitr:::is_latex_output()) { fig_cap <- paste0("An example of choropleth map displaying vegetation diversity for each dissemination area in Vancouver. Data from City of Vancouver and licensed under the Open Government License - Vancouver. Lam, CC-BY-SA-4.0. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/relational-databases.html")
+knitr::include_graphics("images/05-vegetation-diversity-leaflet.png")
+} else { fig_cap <- paste0("An example of choropleth map displaying vegetation diversity for each dissemination area in Vancouver. Data from City of Vancouver and licensed under the Open Government License - Vancouver. Lam, CC-BY-SA-4.0.")
+m1
+}
 ```
 <br/>
 

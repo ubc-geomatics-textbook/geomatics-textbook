@@ -315,11 +315,16 @@ m2 = leaflet(haida) %>%
                 textsize = "12px", direction = "auto"))
 ```
 
-(ref:7-haida-gwaii-leaflet-caption) Singlepart geometry of the Haida Gwaii archipelago off the west coast of British Columbia, Canada. Hover over the islands to see the names. Polygon data from @statistics_canada_statistics_nodate and island placenames from @natural_resources_canada_natural_nodate. Open Government License - Canada. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/topology-and-geocoding.html
+(ref:7-haida-gwaii-leaflet-caption1) Singlepart geometry of the Haida Gwaii archipelago off the west coast of British Columbia, Canada. Hover over the islands to see the names. Polygon data from @statistics_canada_statistics_nodate and island placenames from @natural_resources_canada_natural_nodate. Open Government License - Canada. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/topology-and-geocoding.html
+
+(ref:7-haida-gwaii-leaflet-caption2) Singlepart geometry of the Haida Gwaii archipelago off the west coast of British Columbia, Canada. Hover over the islands to see the names. Polygon data from @statistics_canada_statistics_nodate and island placenames from @natural_resources_canada_natural_nodate. Open Government License - Canada.
 
 ```{r 7-haida-gwaii-leaflet, fig.cap = fig_cap, out.width= "50%", echo = FALSE}
-  fig_cap = "(ref:7-haida-gwaii-leaflet-caption)"
+if (knitr:::is_latex_output()) { fig_cap = "(ref:7-haida-gwaii-leaflet-caption1)"
+  knitr::include_graphics("images/02-CGVD-leaflet.PNG")
+} else { fig_cap ="(ref:7-haida-gwaii-leaflet-caption2)"
 m2
+}
 ```
 
 Although it is possible to convert from a multipart geometry into singlepart geometry, you need to carefully consider how your features should be represented in the attribute table. For example, if you will be undertaking calculations using area or perimeter of the constituent polygons that comprise a multipart geometry of Canada, then you will return a single value for all of Canada while singlepart geometry would return values for each individual polygon. As well, area calculations can vary between multipart and singlepart geometry. For example, approximately 27% of Canada's land area (including freshwater), is comprised of more than 52,000 islands, which is a statistic you could only calculate with singlepart geometry. Thus, the choice of representing a feature using singlepart or multipart geometry should be based on how the features will be used in your analysis (i.e., aggregated versus disaggregated).

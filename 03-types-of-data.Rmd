@@ -55,8 +55,10 @@ knitr::include_graphics("images/03-vector.png")
 
 Continuous fields are infinite and lack defined boundaries.  Fields can be measured at an infinite number of locations.  However, similar values tend to cluster in space so we can often make assumptions based on finite observations of continuous fields.  One of the most common examples of a continuous field is elevation.  This is a physical property associated with every location on earth.  We can't count the "number of elevations" because space is infinitely divisible and everywhere in space can have an elevation.
 
+(ref:3-elevation-caption) Elevation of the Sunshine Coast in BC, from the NRCAN DEM (google earth engine) [@nrcan_canadian_2021].
+
 ```{r 3-elevation, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste0("Elevation of the Sunshine Coast in BC, from the NRCAN DEM (google earth engine) [@nrcan_canadian_2021]")
+fig_cap = "(ref:3-elevation-caption)"
 knitr::include_graphics("images/03-elevation.png")
 ```
 
@@ -289,7 +291,7 @@ knitr::include_graphics("images/03-vector-points.png")
 **Lines** are one-dimensional, they have length, but no width and thus no area.  A line consists of two or more points.  Every line must have a start point and end point, they may also have any number of middle points, called vertices.  A vertex is just any point where two or more lines meet.  Lines are also great for representing a variety of objects, depending on the scale.  Hiking trails, flight paths, coastlines, and power lines are suitable to be represented as lines in almost most applications.  When making smaller scale maps, its often sufficient to represent rivers as lines, though at large scales we might elect to use a polygon.
 
 ```{r 3-bc-road-map, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste0("Roads are typically reprented as line data.  Though they obviously have an area, unless we are making a very large scale map, we don't need (or have the room) to show that on a map.  This BC road altlas makes use of line data, representing roads a lines and using different colors to denote the type of raod. Skeeter, CC-BY-SA-4.0.")
+fig_cap <- paste0("Roads are typically reprented as line data. Though they obviously have an area, unless we are making a very large scale map, we don't need (or have the room) to show that on a map. This BC road altlas makes use of line data, representing roads a lines and using different colors to denote the type of raod. Skeeter, CC-BY-SA-4.0.")
 knitr::include_graphics("images/03-bc-road-map.jpg")
 ```
 
@@ -298,7 +300,7 @@ knitr::include_graphics("images/03-bc-road-map.jpg")
 Sometimes, a discrete object has multiple parts, that are spatially separated.  In these circumstances, the vector model allows for multi-polygon, multi-line, or multi-point objects.  A good example of when a multi-polygon would be useful is the StatsCanada provincial boundary file (see Figure \@ref(fig:3-vector-2)).  Roads sometimes need to be stored as multi-lines as well, for example Highway 1 crosses the Georgia Straight from Vancouver to Nanaimo.  If we want the to represent the entire Highway as one object, we need to use a multi-line.
 
 ```{r 3-vector2, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste0("This is the official Stats Canada provincial boundary layer.  All the other coastal provinces and territories have islands.  We don't need to represent every island as a separate object, so we can 'bundle' together the polygons as multipolygons.  The landlocked provinces do not have any coastlines and are represented as simple polygons reather than multipolygons.  The attribute table bellow corresponds to the map and lists the geometry type (polygon/multipolygon). Skeeter, CC-BY-SA-4.0")
+fig_cap <- paste0("This is the official Stats Canada provincial boundary layer. All the other coastal provinces and territories have islands. We don't need to represent every island as a separate object, so we can 'bundle' together the polygons as multipolygons. The landlocked provinces do not have any coastlines and are represented as simple polygons reather than multipolygons. The attribute table bellow corresponds to the map and lists the geometry type (polygon/multipolygon). Skeeter, CC-BY-SA-4.0")
 knitr::include_graphics("images/03-vector.png")
 ```
 
@@ -323,7 +325,7 @@ knitr::include_graphics("images/03-vector.png")
 Vector data also has a **Resolution** although it has a somewhat different definition in the context of the vector model.  Vector resolution is determined by the smallest resolvable feature.  Another way to describe vector resolution, would be the distance between verticies.  The greater the distance between vertices, the fewer vertices there are per polygon and, the lower the resolution.  If a vector object (line or polygon) has many verticies, we will have a higher resolution representation of the feature.
  
 ```{r 3-vector-resolution, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste0("Vector image of Nova Scotia at different resolutions.  Here the original polygon (top left) has been downsampled to lower resolutions, by setting the minimum allowable distance between verticies.  As the distance beween vercicies increases, the resolution decreases and the coastline becomes less distinguishable. Skeeter, CC-BY-SA-4.0.")
+fig_cap <- paste0("Vector image of Nova Scotia at different resolutions. Here the original polygon (top left) has been downsampled to lower resolutions, by setting the minimum allowable distance between verticies. As the distance beween vercicies increases, the resolution decreases and the coastline becomes less distinguishable. Skeeter, CC-BY-SA-4.0.")
 knitr::include_graphics("images/03-vector-resolution.png")
 ```
 

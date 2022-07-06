@@ -1,3 +1,4 @@
+
 ```{r echo=FALSE}
 yml_content <- yaml::read_yaml("chapterauthors.yml")
 author <- yml_content[["topologyAndGeocoding"]][["author"]]
@@ -66,14 +67,14 @@ It is important to recognize that there may be cases where we "expect" that a gi
 
 In the context of topology, **planar** refers to the concept that all vertices of feature vector geometry are mapped onto the same plane. So in a planar world-view, all lines and polygons share coincident vertices. For example, if two polygons overlap, then the overlapping area forms a new polygon with a boundary of vertices defined by the union of the two other polygons. Also, if two lines overlap, then the two lines are divided into four new segments and a new vertex is formed at the intersection. In other words, planar topology does not allow polygons or lines to lay "underneath" or "on top" of another line or polygon and feature geometries must always be distinct.
 
-On the other hand, **non-planar** topology is the concept that vertices of feature vector geometry can be mapped to different planes. It is important to emphasize here that when we are talking about planes that we are not referring to projected coordinate systems. It is generally assumed that any two spatial data layers containing feature geometries are interacting within the same projected coordinate system. Non-planar topology allows for other knowledge systems to be represented in spatial data. The case where a pipeline runs underneath a river or a territory that was traditionally used by several Indigenous peoples (Figure \@ref(fig:7-native-land-leaflet)) are examples of valid non-planar topology.
+On the other hand, **non-planar** topology is the concept that vertices of feature vector geometry can be mapped to different planes. It is important to emphasize here that when we are talking about planes that we are not referring to projected coordinate systems. It is generally assumed that any two spatial data layers containing feature geometries are interacting within the same projected coordinate system. Non-planar topology allows for other knowledge systems to be represented in spatial data. The case where a pipeline runs underneath a river or a territory that was traditionally used by several Indigenous peoples (Figure \@ref(fig:07-native-land-leaflet)) are examples of valid non-planar topology.
 
-``` {r, 7-native-land-data-load, echo=F, cache=T}
+``` {r, 07-native-land-data-load, echo=F, cache=T}
 native_land <- rgdal::readOGR("Data/07/07-native_land_vancouver_island.geojson", verbose=F)
 labels <- native_land@data$Name
 ```
 
-``` {r 7-native-land-leaflet-setup, cached=T, echo = FALSE, include = FALSE}
+``` {r 07-native-land-leaflet-setup, cached=T, echo = FALSE, include = FALSE}
 getTilesURL <- "https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=06d706f23fc4461db5db742f930174fc"
 m <- leaflet(native_land) %>%
   addTiles(getTilesURL) %>%
@@ -98,14 +99,14 @@ m <- leaflet(native_land) %>%
                 textsize = "12px", direction = "auto"))
 ```
 
-(ref:7-native-land-leaflet-caption1) Non-planar topology of 36 indigenous territories overlapping Vancouver Island, British Columbia. Data from @native_land_native_nodate, CC0. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/topology-and-geocoding.html.
+(ref:07-native-land-leaflet-caption1) Non-planar topology of 36 indigenous territories overlapping Vancouver Island, British Columbia. Data from @native_land_native_nodate, CC0. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/topology-and-geocoding.html.
 
-(ref:7-native-land-leaflet-caption2) Non-planar topology of 36 indigenous territories overlapping Vancouver Island, British Columbia. Data from @native_land_native_nodate, CC0.
+(ref:07-native-land-leaflet-caption2) Non-planar topology of 36 indigenous territories overlapping Vancouver Island, British Columbia. Data from @native_land_native_nodate, CC0.
 
-```{r 7-native-land-leaflet, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-if (knitr:::is_latex_output()) { fig_cap ="(ref:7-native-land-leaflet-caption1)"
+```{r 07-native-land-leaflet, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+if (knitr:::is_latex_output()) { fig_cap ="(ref:07-native-land-leaflet-caption1)"
 knitr::include_graphics("images/07-native-land-leaflet.png")
-} else { fig_cap = "(ref:7-native-land-leaflet-caption2)"
+} else { fig_cap = "(ref:07-native-land-leaflet-caption2)"
 m
 }
 ```
@@ -522,7 +523,7 @@ if (knitr:::is_latex_output()) { fig_cap = "(ref:7-platonic-polyhedrons-caption1
 
 ### 3D Convex hull
 
-The 3D convex hull is the smallest convex polyhedron that contains a set of 3D points (Figure \@ref(fig:7-3d-convex-hull)). The 3D problem is not unlike the 2D problem for finding the 2D convex hull, except instead of using 2D circumcircles we use 3D circumscribed spheres. Otherwise, the overall objective is the same, minimize the 3D polyherdron that encloses the 3D set of points. The 3D convex hull is frequently produced in order to generate a 3D object from a laser scan. Since points are 1-dimensional they have limited use beyond their enumeration within a volume or on a plane or on a line. By contrast, a 3D convex hull produces a polyhedron, which can be used to visualize the object that was initially scanned into a 3D point cloud. The 2D polygon faces that comprise a polyhedron can provide _shape_ and interact with a simulated light source to improve perception of _depth_, which are qualities that are not provided by 3D points alone.  
+The 3D convex hull is the smallest convex polyhedron that contains a set of 3D points (Figure ref(fig:7-3d-convex-hull)). The 3D problem is not unlike the 2D problem for finding the 2D convex hull, except instead of using 2D circumcircles we use 3D circumscribed spheres. Otherwise, the overall objective is the same, minimize the 3D polyherdron that encloses the 3D set of points. The 3D convex hull is frequently produced in order to generate a 3D object from a laser scan. Since points are 1-dimensional they have limited use beyond their enumeration within a volume or on a plane or on a line. By contrast, a 3D convex hull produces a polyhedron, which can be used to visualize the object that was initially scanned into a 3D point cloud. The 2D polygon faces that comprise a polyhedron can provide _shape_ and interact with a simulated light source to improve perception of _depth_, which are qualities that are not provided by 3D points alone.  
 
 ### 3D Convex alpha hull
 

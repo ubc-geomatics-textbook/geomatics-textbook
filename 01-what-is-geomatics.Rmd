@@ -6,13 +6,11 @@ author <- yml_content[["whatIsGeomatics"]][["author"]]
 # What is Geomatics? {#what-is-geomatics}
 
 Written by
-
 ```{r results='asis', echo=FALSE}
 cat(author)
 ```
 
 ```{r, include=FALSE}
-baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"
 nrcanlicense <- "https://open.canada.ca/en/open-government-licence-canada"
 library(leaflet)
 ```
@@ -24,6 +22,7 @@ library(leaflet)
 }
 </style>
 ```
+
 We encounter and use geographic information on a regular basis in our everyday lives. Whether it is finding directions to a retailer that has an item in stock you want to buy or recording the path of your last morning jog, you have probably used a Geographic Information System (GIS) and not even realized it. In this chapter, we explore what geomatics is all about.
 
 ::: {.box-content .learning-objectives-content}
@@ -33,7 +32,8 @@ We encounter and use geographic information on a regular basis in our everyday l
 
 1.  Understand what a Geographic Information System (GIS) is and what it can do
 2.  Understand how the five components of GIS are integrated to solve spatial questions
-3.  Recognize the significant Canadian contributions in the advancement of geomatics as a field
+3.  Recognize the role of models and maps in our understanding and representation of location
+4.  Recognize the significant Canadian contributions in the advancement of geomatics as a field
 :::
 
 ## Key Terms {.unnumbered}
@@ -68,7 +68,7 @@ A GIS is a collection of five inter-connected, inter-acting, and inter-dependent
 ```
 <br/>
 
-Spatial data can take many forms in a GIS, which we will explore more in [Chapter 2](https://ubc-geomatics-textbook.github.io/geomatics-textbook/mapping-data.html). For the sake of our jogging example, you can imagine your jogging path could be represented as a line or a set of ordered points. In turn, your jogging path can be described by different qualities (day of the week, weather) and quantities (distance, speed, heart rate), which are called **attributes** (Figure \@ref(fig:01-jogging-path)). An important role of a GIS is to govern how data can interact and behave with other types of data. For example, we can calculate distance from a line, but not area, which is a special property of a polygon. We will explore data behaviors in more detail in [Chapter 2](https://ubc-geomatics-textbook.github.io/geomatics-textbook/mapping-data.html).
+Spatial data can take many forms in a GIS, which we will explore more in [Chapter 2](https://opengeomatics.ca/mapping-data.html). For the sake of our jogging example, you can imagine your jogging path could be represented as a line or a set of ordered points. In turn, your jogging path can be described by different qualities (day of the week, weather) and quantities (distance, speed, heart rate), which are called **attributes** (Figure \@ref(fig:01-jogging-path)). An important role of a GIS is to govern how data can interact and behave with other types of data. For example, we can calculate distance from a line, but not area, which is a special property of a polygon. We will explore data behaviors in more detail in [Chapter 2](https://opengeomatics.ca/mapping-data.html).
 
 **Software** -- There are a lot of different GIS software packages available and the choice of which software to use is usually driven by preference, availability, and/or cost. For example, some GIS software are freely available while others require a paid license. Nearly all GIS software packages can perform the same operations and analyses, but there are some differences like integrated cloud computing or availability of certain plugins. The most widely-used paid software is ESRI's ArcGIS, while the most widely-used Free and Open Source Software (FOSS) is QGIS (Q for Quantum). There are many other historically-significant FOSS software packages like GRASS, SAGA, and MOSS that are discussed in more detail later in this chapter.
 
@@ -89,7 +89,7 @@ Like other information systems, a GIS should be able to do the following things 
 -   Display geospatial data
 -   Output geospatial data
 
-Geospatial data may be **captured** from remote sensing ([Chapter 11](https://ubc-geomatics-textbook.github.io/geomatics-textbook/collecting-and-editing-data.html)) or digitized/scanned from other sources ([Chapter 4](https://ubc-geomatics-textbook.github.io/geomatics-textbook/collecting-and-editing-data.html)). Data can be **stored** in many different formats with different behaviours and rules and are kept in databases ([Chapter 3](https://ubc-geomatics-textbook.github.io/geomatics-textbook/types-of-data.html)). Data can be queried (or selected) from a database using a standard query language ([Chapter 5](https://ubc-geomatics-textbook.github.io/geomatics-textbook/relational-databases.html)). Once data are queried, they can then be **analyzed** using operations like proximity, overlay, intersection and zonal statistics ([Chapter 6](https://ubc-geomatics-textbook.github.io/geomatics-textbook/overlay-and-proximity-analysis.html)). A primary justification for investing resources into a GIS is to display and **output** data in the form of graphs, tables, charts, and maps ([Chapter 17](https://ubc-geomatics-textbook.github.io/geomatics-textbook/making-beautiful-maps.html)).
+Geospatial data may be **captured** from remote sensing ([Chapter 11](https://opengeomatics.ca/collecting-and-editing-data.html)) or digitized/scanned from other sources ([Chapter 4](https://opengeomatics.ca/collecting-and-editing-data.html)). Data can be **stored** in many different formats with different behaviours and rules and are kept in databases ([Chapter 3](https://opengeomatics.ca/types-of-data.html)). Data can be queried (or selected) from a database using a standard query language ([Chapter 5](https://opengeomatics.ca/relational-databases.html)). Once data are queried, they can then be **analyzed** using operations like proximity, overlay, intersection and zonal statistics ([Chapter 6](https://opengeomatics.ca/overlay-and-proximity-analysis.html)). A primary justification for investing resources into a GIS is to display and **output** data in the form of graphs, tables, charts, and maps ([Chapter 17](https://opengeomatics.ca/making-beautiful-maps.html)).
 
 A GIS ultimately answers spatial questions like:
 
@@ -104,7 +104,7 @@ Together, the five components of a GIS allow us to model our spatial environment
 
 We can also create models that allow us to play out different scenarios and assess the possible range of outcomes in geographic space. For example, you might be interested in purchasing a home, but you have some spatial and aspatial criteria such as price range, preference of neighborhood, distance to your work, or the quality of the nearby schools. This is the type of spatial optimization problem that we often seek to solve with a GIS. If you go onto a property listing website, you will notice that the results will change based on the criteria that you enter. And this brings us to the final type of model that is important to a GIS: the map.
 
-**Maps** are spatial models. They abstract geographic information like location and attributes of things. It is important to underscore the difference between spatial models such as maps and conceptual models such as the hydrologic cycle. With a map, you could abstract or represent the location, distance and area of a lake, but you would need the conceptual model of the hydrologic cycle to describe the interaction of the lake with the atmosphere (i.e., evaporation). There are many aspects of the hydrologic cycle that can be specifically modelled in a GIS, which is something we will explore further in [Chapter 9](https://ubc-geomatics-textbook.github.io/geomatics-textbook/raster-analysis-and-terrain-modelling.html).
+**Maps** are spatial models. They abstract geographic information like location and attributes of things. It is important to underscore the difference between spatial models such as maps and conceptual models such as the hydrologic cycle. With a map, you could abstract or represent the location, distance and area of a lake, but you would need the conceptual model of the hydrologic cycle to describe the interaction of the lake with the atmosphere (i.e., evaporation). There are many aspects of the hydrologic cycle that can be specifically modelled in a GIS, which is something we will explore further in [Chapter 9](https://opengeomatics.ca/raster-analysis-and-terrain-modelling.html).
 
 ## A Canadian History of GIS
 
@@ -168,15 +168,15 @@ Airplanes played a more significant role in World War II both as weapons and for
 ```
 </br>
 
-After World War II, many RCAF pilots went on to start their own aerial surveying companies and benefited from the immense mapping efforts that were underway across the nation. One particular company, Spartan Air Services, emerged in 1946. Founded by two retired RCAF pilots, the mission of Spartan Air Services was to provide mapping and surveying
+After the Second World War, many RCAF pilots went on to start their own aerial surveying companies and benefited from the immense mapping efforts that were underway across the nation. One particular company, Spartan Air Services, emerged in 1946. Founded by two retired RCAF pilots, Spartan Air Services primarily flew aerial surveys for 
 
 ### The Computer
 
 ### The Land Use Problem in Canada
 
-1961 - Resources for Tomorrow Conference 1963 -
+1935 - Prarie and Farm Rehabilitation Act to address drought, farmer insolvency, and unemployment. Dust bowl.
 
-The post-war economy of Canada saw significant growth in the 1940s and 1950s and huge demographic shifts were underway. Agrarian societies were transformed by the new economy and rapid urbanization. Prior to the Second World War, about half of all Canadians lived in rural areas. By the 1950s, nearly 62% of the total population lived in urban centres and 37% lived in just the fifteen largest cities (Figure \@ref(fig:01-ninth-census-1951-map)). Faced with the prospect of failed crops and uncertain economic outcomes, many chose to head for better opportunities promised in the metropolitan areas. In the decade from 1941 to 1951, 105 Canadian families left their farms every week, despite an overall increase in farmland across the country.
+The post-war economy of Canada saw significant growth in the 1940s and 1950s and huge demographic shifts were underway. Agrarian societies were transformed by the new economy and rapid urbanization. Prior to the Second World War, about half of all Canadians lived in rural areas (@DominionBureauStatistics_1944). By the 1950s, nearly 62% of the total population lived in urban centres and 37% lived in just the fifteen largest cities (Figure \@ref(fig:01-ninth-census-1951-map), @DominionBureauStatistics_1952). Faced with the prospect of failed crops and uncertain economic outcomes, many chose to head for better opportunities promised in the metropolitan areas. In the decade from 1941 to 1951, 105 Canadian families left their farms every week, despite an overall increase in farmland across the country (@DominionBureauStatistics_1952, @DominionBureauStatistics_1953).
 
 ```{r 01-ninth-census-1951-map, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste("Ninth Census of Canada 1951, Population Distribution. Dominion of Bureau Statistics, Public Domain.")
@@ -184,13 +184,13 @@ The post-war economy of Canada saw significant growth in the 1940s and 1950s and
 ```
 </br>
 
-As cities sprawled, land use and land planning conflicts emerged. City waistlines grew as adjacent farmland was consumed to welcome new urban dwellers. In 1957, the Senate established the Special Committee on Land Use in Canada whose purpose was "to consider and report on land use in Canada and what should be done to ensure that our land resources are most effectively utilized for the benefit of the Canadian economy and the Canadian people and, in particular, to increase both agricultural production and the incomes of those engaged in it" (@CanadaSenate_1958). Over the next four years, the special committee heard testimony from 109 witnesses and recorded 1,606 pages of evidence on the issue of land use in Canada (@CanadaSenateSpecialCommitteeLandUseCanada_1963).
+As cities sprawled, land use and land planning conflicts emerged. City waistlines grew as adjacent farmland was consumed to welcome new urban dwellers. In 1957, the Senate established the Special Committee on Land Use in Canada whose purpose was "to consider and report on land use in Canada and what should be done to ensure that our land resources are most effectively utilized for the benefit of the Canadian economy and the Canadian people and, in particular, to increase both agricultural production and the incomes of those engaged in it" (@CanadaSenate_1957). Over the next four years, the special committee heard testimony from 109 witnesses and recorded 1,606 pages of evidence on the issue of land use in Canada (@CanadaSenateSpecialCommitteeLandUseCanada_1963).
 
-Following years of hearings by the Senate Special Committee on Land Use in Canada, the Agricultural and Rural Development Act was passed by Parliament in June 1961 (@McCrorie_1969). The new legislation empowered the Minister of Agriculture to work with the Provinces and Territories to address rural poverty and promote the development and conservation of Canada's prized farmland. By October, the federal government had organized a national conference in Montreal, "The Resources for Tomorrow". Over 700 delegates from government, non-governmental organizations, university, and industry contributed to a unique national conversation on the future of Canada's renewable natural resources with workshops on agriculture, forestry, fisheries, recreation, wildlife, water and urban growth (@Gray_1961). The conference was attended by then Govenor General , Prime Minister Diefenbaker, and future Prime Minister Pierre Elliot Trudeau.
+Following years of hearings by the Senate Special Committee on Land Use in Canada, the Agricultural and Rural Development Act was passed by Parliament in June 1961 (@McCrorie_1969). The new legislation empowered the Minister of Agriculture to work with the Provinces and Territories to address rural poverty and promote the development and conservation of Canada's prized farmland. By October, the federal government had organized a national conference in Montreal, "The Resources for Tomorrow". Over 700 delegates from government, non-governmental organizations, university, and industry contributed to a unique national conversation on the future of Canada's renewable natural resources with workshops on agriculture, forestry, fisheries, recreation, wildlife, water and urban growth (@Gray_1962). The conference was attended by then Governor General Georges Philias Vanier, Prime Minister Diefenbaker, and future Prime Minister Pierre Elliot Trudeau among many other bureaucrats from all levels of government. The proceedings were highly spatial in nature with a a total of 66 maps found among the 87 published background papers, all hand-drawn of course.
 
-In the following year, Rachel Carson published her landmark **Silent Spring**. The publication catalyzed public sentiment for protecting people and the environment from harmful pesticide and herbicide use. It was clear that a national approach to mapping renewable resources was needed in order to protect and conserve them, so in 1963 the federal government established an ambitious project called the Canada Land Inventory whose chief purpose was to provide a "comprehensive survey of land capability and use designed to provide a basis for resource and land use planning" (@CLIReport1_1965).
+[CONCLUSIONS AND RECOMMENDATIONS FROM CONFERENCE HERE] It was clear that a national approach to mapping renewable resources was needed in order to protect and conserve them, so in 1963 the federal government established an ambitious project called the Canada Land Inventory whose chief purpose was to provide a "comprehensive survey of land capability and use designed to provide a basis for resource and land use planning" (@CLIReport1_1965). Initially, the Canada Land Inventory prioritized soil maps, a nod to the strategic importance of vanishing farmland 
 
-But how could the Canada Land Inventory ever be achieved for such a vast country using traditional paper maps? To be sure, Canada was not lacking the mapped data. In fact there were tens of thousands of maps produced, cataloged, and housed by the federal government on everything from soils to agriculture to recreation to forests. Still, the scale of agricultural land loss was not known at the time because paper maps of soil fertility could not easily be combined with other information like census data. Decision-makers relied on human interpretation and analysis of paper maps, a time-consuming task that could only accommodate a handful of mapped attributes at a time over a small area. Paper maps had to be reproduced at the same scale, aligned, and analysed polygon-by-polygon. The process to create maps at the time was entirely manual, requiring approximately 10 hours by a skilled technician to produce a single map sheet and about as much time by another to check and make any corrections (@Tomlinson_1974). At that rate, it would have taken a A new approach was needed to cope with the overwhelming amount of information being produced.
+But how could the Canada Land Inventory ever be achieved for such a vast country using traditional paper maps? To be sure, Canada was not lacking the mapped data. In fact there were tens of thousands of maps produced, cataloged, and housed by the federal government on everything from soils to agriculture to recreation to forests. Still, the scale of agricultural land loss was not known at the time because paper maps of soil fertility could not easily be combined with other information like census data. Decision-makers relied on human interpretation and analysis of paper maps, a time-consuming task that could only accommodate a handful of mapped attributes at a time over a small area. Paper maps had to be reproduced at the same scale, aligned, and analysed polygon-by-polygon. The process to create maps at the time was entirely manual, requiring approximately 10 hours by a skilled technician to produce a single map sheet and about as much time by another to check and make any corrections (@Tomlinson_1974). At that rate, it was estimated to take 666 "man-years" and 133 staff to complete the project (@Gamble_1961). A new approach was needed to cope with the overwhelming amount of information being produced.
 
 ```{r 01-data-for-decisions, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste('Roger Tomlinson talks about the use of computers for the Canada Land Inventory in 1967. Frame from "Data for Decisions", a National Film Board of Canada documentary, directed by Michael Millar.')
@@ -198,7 +198,7 @@ But how could the Canada Land Inventory ever be achieved for such a vast country
 ```
 </br>
 
-It was 29-year old Roger Tomlinson who recognized the need for computers to handle the massive influx of mapped data (Figure \@ref(fig:01-data-for-decisions)). Tomlinson was working in Ottawa for an aerial survey company called Spartan Air Services Ltd., when he serendipitously met the head of the Canada Land Inventory, Lee Pratt, aboard a flight. Pratt and Tomlinson exchanged ideas about creating a computer system for handling mapped data.
+It was 29-year old Roger Tomlinson who recognized the need for computers to handle the massive influx of mapped data (Figure \@ref(fig:01-data-for-decisions)). Tomlinson was working in Ottawa as an air photo interpreter for the aerial survey company Spartan Air Services, a company he joined in 1959. The phenomenon that occurred next can only be explained by American geographer Waldo Tobler's **First Law of Geography**, "everything is related to everything else, but near things are more related than distant things" (@Tobler_1970). In spring 1962, aboard a flight bound for the capital city where Spartan Air Services was headquartered, Tomlinson serendipitously met the lead bureaucrat of the Canada Land Inventory, Lee Pratt. Pratt and Tomlinson exchanged ideas about creating a computer system for handling mapped data. Tomlinson outlined a possible approach to help automate the mapping approach using computers and with some napkin 
 
 Cartographic puberty, the awkward but necessary transition from paper to magnetic tape.
 

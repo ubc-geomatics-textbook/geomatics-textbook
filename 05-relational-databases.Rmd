@@ -47,8 +47,11 @@ Suppose you have collected some data about some trees. You might have organized 
 ## Relational Databases
 
 Within a RDBMS, we find **relational databases**, which are highly structured tables comprised of rows and columns. In fact, a table in a relational database is called a **relation**, a row is a **tuple**, and a column is an **attribute**. Relational databases are a great way to store simple data structures that can be organized into a relation with tuples and attributes. When we say that a table or relation is "structured", we are referring to the fact that the data are organized according to a database **schema**, which is a set of constraints that ensure data integrity and consistency. For example, our set of trees likely all contain the same types of information and this can be easily organized into a relation. Suppose we measured the height, diameter at breast height (DBH), and species of each tree, then our relation would look like Figure \@ref(fig:5-tabular-data-spatial-data).
+
+(ref:5-tabular-data-spatial-data-caption) Tabular and spatial data are related by a Relational Database Management System (RDBMS) in a Geographic Information System (GIS). Images of Douglas-Fir and Western Hemlock trees by @canadian_forest_service_douglas-fir_2013, Canadian Forest Service, modified with permission.
+
 ```{r 5-tabular-data-spatial-data, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste0("Tabular and spatial data are related by a Relational Database Management System (RDBMS) in a Geographic Information System (GIS). Images of Douglas-Fir and Western Hemlock trees by @canadian_forest_service_douglas-fir_2013, Canadian Forest Service, modified with permission.")
+    fig_cap = "(ref:5-tabular-data-spatial-data-caption)"
     knitr::include_graphics("images/05-tabular-data-spatial-data.png")
 ```
 
@@ -58,8 +61,10 @@ The schema for the very simple example above would include the constraint and ex
 
 More formally, a relation $R$ is a _subset_ of two sets, $A$ (tuples) and $B$ (attributes). The product of these sets $A×B$ is called the **Cartesian product**. In the same way that Cartesian coordinates are ordered pairs of values from two axes, the Cartesian product of two sets gives us an ordered pair of elements $(a,b)$ from sets $A$ and $B$, where $a$ is an element in the set $A$, written as $a∈A$, and $b$ is an element of set $B$, written as $b∈B$. Therefore, $R$ is both the Cartesian product as well as any subset of $A×B$.
 
+(ref:5-cartesian-product-caption) Cartesian product A×B of A (tuples) and B (attributes). Image by @quartl_english_2012, CC BY-SA 3.0.
+
 ```{r 5-cartesian-product, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste0("Cartesian product A×B of A (tuples) and B (attributes). Image by @quartl_english_2012, CC BY-SA 3.0.")
+    fig_cap = "(ref:5-cartesian-product-caption)"
     knitr::include_graphics("images/05-cartesian-product.png")
 ```
 <br/>
@@ -685,7 +690,7 @@ labels <- sprintf(
 
 m <- leaflet(DA_CIMD_proj) %>%
   addProviderTiles("CartoDB.Positron")%>%
-  setView(lat = 49.255, lng = -123.153, zoom = 12) %>%
+  setView(lat = 49.255, lng = -123.153, zoom = 11) %>%
   addPolygons(fillColor = pal(DA_CIMD@data$Situatio_1), 
               weight = 0.6, 
               opacity = 1,
@@ -707,8 +712,12 @@ m <- leaflet(DA_CIMD_proj) %>%
             position = "bottomleft")
 ```
 
-```{r 5-situational-vulnerability-leaflet, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-fig_cap <- paste0("An example of choropleth map displaying the situational vulnerability scores in the City of Vancouver at DA level.<a href='",baseurl,"#fig:5-situational-vulnerability-leaflet'>Animated figure can be viewed in the web browser version of the textbook</a>.Higher score represents the DA has higher situational vulnerable population e.g., population lacking a high school diploma, low-income population.")
+```{r 5-situational-vulnerability-leaflet, echo=FALSE, out.width="100%", fig.cap=fig_cap}
+if (knitr:::is_latex_output()) { fig_cap <- paste0("An example of choropleth map displaying the situational vulnerability scores in the City of Vancouver at DA level. Higher score represents the DA has higher situational vulnerable population e.g., population lacking a high school diploma, low-income population. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/relational-databases.html")
+knitr::include_graphics("images/05-situational-vulnerability-leaflet.png")
+} else { fig_cap <- paste0("An example of choropleth map displaying the situational vulnerability scores in the City of Vancouver at DA level. Higher score represents the DA has higher situational vulnerable population e.g., population lacking a high school diploma, low-income population.")
+m
+}
 ```
 <br/>
 
@@ -747,7 +756,7 @@ labels <- sprintf(
 
 m1 <- leaflet(full.results_proj) %>%
   addProviderTiles("CartoDB.Positron")%>%
-  setView(lat = 49.255, lng = -123.1533, zoom = 12) %>%
+  setView(lat = 49.255, lng = -123.1533, zoom = 11) %>%
   addPolygons(fillColor = ~pal1(full.results_proj$veg_div_sc),
               weight = 0.6,
               opacity = 1,
@@ -771,8 +780,12 @@ m1 <- leaflet(full.results_proj) %>%
 
 Figure \@ref(fig:5-vegetation-diversity-leaflet) shows a map of the vegetation diversity score at the DA level in Vancouver. The vegetation diversity score and the normalized aggregated vulnerability score are linked to each DA and can be viewed as you hover o-ver the DA.
 
-```{r 5-vegetation-diversity-leaflet, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-fig_cap <- paste0("An example of choropleth map displaying vegetation diversity for each dissemination area in Vancouver. <a href='",baseurl,"#fig:5-vegetation-diversity-leaflet'>Animated figure can be viewed in the web browser version of the textbook</a>. Data from City of Vancouver and licensed under the <a href='",covlicence,"'>Open Government License - Vancouver</a>. Lam, CC-BY-SA-4.0.")
+```{r 5-vegetation-diversity-leaflet, echo=FALSE, out.width="100%", fig.cap=fig_cap}
+if (knitr:::is_latex_output()) { fig_cap <- paste0("An example of choropleth map displaying vegetation diversity for each dissemination area in Vancouver. Data from City of Vancouver and licensed under the Open Government License - Vancouver. Lam, CC-BY-SA-4.0. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/relational-databases.html")
+knitr::include_graphics("images/05-vegetation-diversity-leaflet.png")
+} else { fig_cap <- paste0("An example of choropleth map displaying vegetation diversity for each dissemination area in Vancouver. Data from City of Vancouver and licensed under the Open Government License - Vancouver. Lam, CC-BY-SA-4.0.")
+m1
+}
 ```
 <br/>
 

@@ -153,9 +153,9 @@ We would start by downloading all of the necessary data we wish to work with. We
 ```Amy, verify all of the dataset names```
 
 ### Clip
-A _clip_ is effectively a cookie-cutter, where the boundaries of the clipping feature become the boundaries of the input feature. However, a clip does not transfer attributes of the clipping file to the clipped product. Additionally, fields such as "area" must be recalculated after a clip.
+A *clip* is effectively a cookie-cutter, where the boundaries of the clipping feature become the boundaries of the input feature. However, a clip does not transfer attributes of the clipping file to the clipped product. Additionally, fields such as "area" must be recalculated after a clip.
 
-Ottawa's open data catalogue contains a dataset with the "urban boundaries" of the City. This shapefile consists of one polygon and no additional information within the attribute table. If we wished to solely work within Ottawa's urban boundaries without suburban distinctions, we would _clip_ the data we have so far to the urban boundary. However, we want to differentiate between different community types within Ottawa; therefore, we must use a different tool.
+Ottawa's open data catalogue contains a dataset with the "urban boundaries" of the City. This shapefile consists of one polygon and no additional information within the attribute table. If we wished to solely work within Ottawa's urban boundaries without suburban distinctions, we would clip the data we have so far to the urban boundary. However, we want to differentiate between different community types within Ottawa; therefore, we must use a different tool.
 
 
 ```{r 6-ottawa-urb, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
@@ -163,27 +163,51 @@ fig_cap <- paste0("An aerial image of Ottawa, Ontario. The City of Ottawa is bor
 knitr::include_graphics("images/06-urbanOttawa.png")
 ```
 
+``` {r 6-leafletsetup, echo=F, warning=F, message=F}
+##this used to work and is now producing errors.. am I missing something? 
+library(raster)
+library(leaflet)
+library(rgdal)
+library(rgl)
+library(RColorBrewer)
+boundary <- rgdal::readOGR("Data/06/Urban_Boundary.geojson", verbose=F)
+r <- raster("Data/02/CGG2013_minus_HT21997_meters.tif")
+p <- brewer.pal(11,"RdYlBu")
+pal <- colorNumeric(p, values(r), na.color = "transparent")
+```
+
+``` {r 6-urbanboundary-leaflet, echo=FALSE, warning=FALSE, message=FALSE}
+m = leaflet(boundary) %>%
+    addTiles("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}") %>%
+    addScaleBar(position = c("topleft")) %>%
+    addPolygons(stroke = T, color="red", weight=1, smoothFactor = 0.3, fillOpacity = 0) #%>%
+    addLegend(pal = pal, values = values(r), group = "Difference", opacity = 1, title = "CGVD2013 minus CGVD28 (meters)")
+```
+
+``` {r 6-display-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
+fig_cap <- paste0("jgdfghf")
+m
+```
+
 
 ### Dissolve
-_Dissolve_ reduces the number of polygons in a shapefile by grouping everything with the same chosen attribute together. A _dissolve_ can be used to summarize data by a common attribute.
+**Dissolve** reduces the number of polygons in a shapefile by grouping everything with the same chosen attribute together. A dissolve can be used to summarize data by a common attribute.
 
 _If you look at Figure 6.1, what do you notice about the landscape within and then outside of the urban border?_ There is a lot of agricultural land within the City of Ottawa! The large amount of rural area within Ottawa makes it a demographically unique city.  However, analysis of cultural services is substantially different in rural areas than it is in urban areas. The NEI included all areas within Ottawa regardless of community type, but our analysis will not. Our analysis will focus solely on the urban and suburban areas within Ottawa. Therefore, we must classify our wards (study areas) by their level of urbanization. Then, we will remove the areas that are not urban or suburban (such as rural areas and those classified as greenbelt). The NEI dataset comprehensively classifies the areas within Ottawa as urban, suburban, rural, greenbelt, etc. However, we do not need to have our data divided into as many polygons as the NEI dataset. Therefore, we will reduce the amount of polygons (and therefore the amount of data and processing power) by using the _dissolve_ tool. 
 
 ```{r 6-dissolve, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste0("Census areas classified by urbanness according to the Neighborhood Equity Index of Ottawa. Image 1 is before the shapefile was dissolved, and Image 2 is after. The dissolve feature was 'Urban.' Image created by Blood, CC-BY-SA-4.0. Contains information licensed under the Open Government Licence – City of Ottawa.")
+fig_cap <- paste0("Census areas classified by urbanness according to the Neighborhood Equity Index of Ottawa. Image 1 is before the shapefile was dissolved, and Image 2 is after. The dissolve feature was 'Community Type ' Image created by Blood, CC-BY-SA-4.0. Contains information licensed under the Open Government Licence – City of Ottawa.")
 knitr::include_graphics("images/06-dissolve.gif")
 ```
 
-The dissolve field we will use is URB_RURAL (the classification of urbanness). We will create multipart features for this dissolve. Multipart features are features that are considered as one, whether or not they are connected. They are further discussed in Chapter 7.7.1. After the _dissolve_, there are now six features rather than 196. As can be seen in the attribute table, the number of rows changes from 196 to 6 and the number of columns decreases from 26 to 3.
-Additionally, the file size is halved. Removing extraneous data allows for easier analyses later on. NOTE: In this example, multipart features were created. If they had not been, there would have been 96 features. _When a shapefile with multipart features was created, why do you think the number of features decreases to exactly six?_ It's because there are six classes of urbanness!
+The dissolve field we will use is URB_RURAL (the classification of Community Type). We will create multipart features for this dissolve. Multipart features are features that are considered as one, whether or not they are connected. They are further discussed in Chapter @ref/(Multipart-Geometry). After the _dissolve_, there are now six features rather than 196. As can be seen in the attribute table, the number of rows changes from 196 to 6 and the number of columns decreases from 26 to 3.
+Additionally, the file size is halved. Removing extraneous data allows for easier analyses later on. NOTE: In this example, multipart features were created. If they had not been, there would have been 96 features. _When a shapefile with multipart features was created, why do you think the number of features decreases to exactly six?_ It's because there are six classes of community types!
 
 ```
 In this example, the attribute was "URBAN_RURAL". 
 [example attribute table?] **VV UNSURE ABOUT THIS**
 
 make multipart
-
-Paul, how do I link to other chapters? Or to the images I reference? is that a thing?
 ```
 
 ### Intersect
@@ -196,38 +220,41 @@ We will select the polygons that are classified as urban and suburban, and then 
 NOTE: The urban and suburban boundaries according to the NEI differ from those on Ottawa's website. The boundaries of "urban" are not always easily defined and are often specified as a result of geopolitical reasons. For example, the "urban" area as specified by the City of Ottawa is where urban development is legally allowed to happen (https://open.ottawa.ca/datasets/ottawa).
 
 ```{r 6-urban-discrepancy, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste0("The Ottawa-defined urban areas are bordered in red. The southernmost large polygon is rural, according to NEI. Image created by Blood, CC-BY-SA-4.0. Contains information licensed under the Open Government Licence – City of Ottawa.")
+fig_cap <- paste0("The Ottawa-defined urban areas are bordered in red. The black polygons are to be excluded from the analysis, as they are rural or a greenbelt. Image created by Blood, CC-BY-SA-4.0. Contains information licensed under the Open Government Licence – City of Ottawa.")
 knitr::include_graphics("images/06-urban-discrepancy.png")
 ```
 
-### Buffer
-The _buffer_ tool creates a zone (a buffer) around a feature. To create the zone, a distance must be specified from a feature (point, line, polygon). Buffering is a type of proximity analysis. [image of buffers in general?]
-
-Green spaces provide valuable cultural ecosystem services. Green spaces affect the area around them through cooling, viewing, and the ability to recreate. While we could solely assess the amount of green space compared to the amount of area in a ward, we would not be taking the total area around green spaces into account. Instead, we will look at the proportion of the ward that is within 100 meters of a green space. To do this, we will create buffers of 100 meters around the green spaces. [image]
-
-### Clip
-Many data download sites allow you to _clip_ data before downloading it.
+### Clip (Part 2)
+Many data download sites allow you to **clip** data before downloading it.
 
 Street trees also provide cultural ecosystem services, such as **list legit services** (CITE). Therefore, we want to assess the amount (in relative area) of street trees in each ward. Ottawa has an extensive city-wide tree inventory, containing over 275,000 trees maintained by the city. 
 This results in a dataset much larger than what we need. Therefore, we will use _clip_ to reduce the number of features in our Tree Inventory shapefile. We will _clip_ the tree inventory file (input) with the urban and suburban boundaries (clip feature). Now the clipped file only has the city-maintained trees within the urban and suburban areas of Ottawa. 
 
+### Buffer
+The _buffer_ tool creates a zone (a buffer) around a feature. To create the zone, a distance must be specified from a feature (point, line, polygon). Buffering is a type of proximity analysis. [image of buffers in general?]
+
+Green spaces provide valuable cultural ecosystem services. Green spaces affect the area around them through cooling, viewing, and the ability to recreate. While we could solely assess the amount of green space compared to the amount of area in a ward, we would not be taking the total area influenced by local green spaces into account. Instead, we will look at the proportion of the ward that is within 100 meters of a green space. To do this, we will create buffers of 100 meters around the green spaces. [image]
+
+### Attribute-dependent buffer
+Buffers can be made to vary dependent on an attribute. Attribute-dependent buffers are used when features are better represented with differently-sized zones. Approximating the space represented by objects is an example of an _attribute-dependent buffer_ use case.
+
+We already have a way to estimate the amount of area in each ward that is affected by greenspace. Now we want to understand how much treed space is within each ward. 
+
+Many of the trees in the Ottawa street trees have diameter values. For this example, we will assume that every tree without a diameter value above zero has a diameter of ten centimeters. To do so, we will select for diameter values of zero or below and will set those values to ten. Then, we will use these values to create attribute-dependent buffers to represent tree sizes. NOTE: The values do not actually represent true crown area. Because we are completing a comparative analysis between wards, "true" values are not necessary. We will dissolve the buffers so that overlapping tree canopies do not get counted twice. [image]
+
 ### Near
 _Near_ calculates the distance one feature is from another. These features can be within the same shapefile or different files. 
 
-We are specifically interested in Ottawa's street trees, not the park trees or other city-maintained trees. To better assess the relative area of street trees, we want to be sure that we are only using trees along streets in our analysis. The tree inventory dataset contains city-maintained trees, not solely street trees. We will use the _near_ tool to determine the distance threshold to consider a tree a street tree and then filter out trees that do not qualify as such.
+We are specifically interested in Ottawa's street trees, not the park trees or other city-maintained trees. To better assess the relative area of street trees, we want to be sure that we are only using trees along streets in our analysis. The tree inventory dataset contains city-maintained trees, not solely street trees. We will use the _near_ tool on the most recently created shapefile to determine the distance threshold to consider a tree a street tree and then filter out trees that do not qualify as such.
 
-### Attribute-dependent buffer
-Buffers can vary dependent on an attribute. Attribute-dependent buffers are used when features are better represented with differently-sized zones. Approximating the space represented by objects is an example of an _attribute-dependent buffer_ use case.
-
-Many of the trees in the Ottawa street trees have diameter values, and every tree in the dataset that has a blank or zero diameter value will be assumed to be 10 centimeters. We will select for diameter values of zero or below and will set those values to 10. Then, we will use these values to create attribute-dependent buffers to represent tree sizes. NOTE: The values do not actually represent true crown area. Because we are completing a comparative analysis between wards, "true" values are not necessary. We will dissolve the buffers so that overlapping tree canopies do not get counted twice. [image]
 
 ### Eliminate
 Post-dissolve, we would have expected the number of rows in the attribute table to reduce significantly. However, this was not the case. This is because there are many tiny slivers left. [image with zoomed in slivers] We can use eliminate to remove these slivers and clean up the dataset. (this probably happens more after the clip)
 
 ### Identity
-_Identity_ computes a geometric intersection of the input features and identity features. The input features or portion thereof that overlap identity features will get the attributes of those identity features. 
+_Identity_ computes a geometric intersection of the input features and identity features. The input features or portion thereof that overlap identity features will get the attributes of those identity features. <--- turns out this is from esri. MUST REWORD.
 
-The area of street trees is more powerful when compared to the length of streets in each ward. Rather than working with the absolute area, we will be calculating the relative area. To do this, we will use the _identity_ tool to assign a ward to each section of street in the Ottawa streets file. Then, we will use summary statistics to calculate the length of street in each ward. With that value, we will divide the area of street tree by the length of street to get the relative area of street trees per street. 
+The area of street trees is more powerful when compared to the length of streets in each ward. Rather than working with the absolute area, we will be calculating the relative area. To do this, we will use the _identity_ tool to assign a ward to each section of street in the Ottawa streets file. Then, we will use summary statistics to calculate the length of street in each ward. With that value, we will divide the area of street tree by the length of street to get the relative area of street trees per street.
 
 ### whats the best tool to get the cultural info here too
 Add Ottawa cultural. However, this data can be gotten through crowd sourcing, such as wayfinding/AR apps like those developed by Niantic. 
@@ -241,10 +268,10 @@ coul dremove from greenspaces
 
 
 
-```
-Although each neighborhood has a value from 1-100, we will use the ranking system developed by the people who created the NEI [cite who that is]. They categorized the neighbourhoods into four colour groups (from most to least equitable) -- Green, Light Green, Yellow, and Red. 
-[Insert image with all neighborhoods and their colours]. The creators of the NEI did not use the same neighborhood or ward boundaries as those used by the City of Ottawa census. For the analysis we will complete, the neighborhood boundaries developed by the creators of the NEI are not ideal. Therefore, we can reduce the amount of polygons (and therefore the amount of data and processing power) by using the _dissolve_ tool. [Insert dissolved GIF] Dissolve reduces the number of polygons in a shapefile by grouping everything with the same chosen attribute together. In this example, the attribute was "colour".
-Ottawa has created a Neighbourhood Equity Index (NEI). Each neighbourhood is given a value from 1-100 based on several factors. Greater numbers mean the neighbourhood is more equitable, lower numbers mean the neighborhood is less equitable. Some of the considerations were: walkability, income, commute time, accessibility of childcare, etc etc.  
+```{r nei_notes, include=FALSE}
+# Although each neighborhood has a value from 1-100, we will use the ranking system developed by the people who created the NEI [cite who that is]. They categorized the neighbourhoods into four colour groups (from most to least equitable) -- Green, Light Green, Yellow, and Red. 
+# [Insert image with all neighborhoods and their colours]. The creators of the NEI did not use the same neighborhood or ward boundaries as those used by the City of Ottawa census. For the analysis we will complete, the neighborhood boundaries developed by the creators of the NEI are not ideal. Therefore, we can reduce the amount of polygons (and therefore the amount of data and processing power) by using the _dissolve_ tool. [Insert dissolved GIF] Dissolve reduces the number of polygons in a shapefile by grouping everything with the same chosen attribute together. In this example, the attribute was "colour".
+# Ottawa has created a Neighbourhood Equity Index (NEI). Each neighbourhood is given a value from 1-100 based on several factors. Greater numbers mean the neighbourhood is more equitable, lower numbers mean the neighborhood is less equitable. Some of the considerations were: walkability, income, commute time, accessibility of childcare, etc etc.  
 ```
 
 
@@ -286,22 +313,22 @@ Raster and vector
 
 ## Summary
 
-```
-the story:
-we want to make a green equity index
-tph in wards
-park per hectare in wards
 
-would be great if wards were classed by whether theyre urban or not (union)
+<!-- the story: -->
+<!-- we want to make a green equity index -->
+<!-- tph in wards -->
+<!-- park per hectare in wards -->
 
-consider breaking up wards by the NEI colour within them
+<!-- would be great if wards were classed by whether theyre urban or not (union) -->
 
-urban, suburban, rural. 
+<!-- consider breaking up wards by the NEI colour within them -->
 
-adjacency (do through buffer)
+<!-- urban, suburban, rural.  -->
 
-keep wards with labels throughout images
-```
+<!-- adjacency (do through buffer) -->
+
+<!-- keep wards with labels throughout images -->
+
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
 

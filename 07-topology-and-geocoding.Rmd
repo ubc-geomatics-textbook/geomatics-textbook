@@ -133,7 +133,7 @@ Some examples of adjacency and overlap topological rules:
 
 ## Intersect and Connect
 
-As we have seen from [Chapter 3](https://ubc-geomatics-textbook.github.io/geomatics-textbook/types-of-data.html), lines are often used to represent phenomena that flow, so intersection and connection are important concepts for these representations. Important to understanding how connection and intersection work in planar topology, we need to understand that lines are comprised of a set of vertices and nodes. A **node** is simply the terminating vertex in a set of vertices for a line. For example, suppose the line segment $A$ has a set of vertices, $[[1,0],[1,3],[1,5]]$. Then the nodes for $A$ are $[1,0]$ and $[1,5]$ (Figure \@ref(fig:7-node)). Since nodes define the end points of a line segment, they are key to enforcing connection rules. We will look at network analysis in more detail in the next chapter. For now, let us consider two different networks that can help us conceptualize some fundamental line topology using nodes.
+As we have seen from [Chapter 3](./types-of-data.html), lines are often used to represent phenomena that flow, so intersection and connection are important concepts for these representations. Important to understanding how connection and intersection work in planar topology, we need to understand that lines are comprised of a set of vertices and nodes. A **node** is simply the terminating vertex in a set of vertices for a line. For example, suppose the line segment $A$ has a set of vertices, $[[1,0],[1,3],[1,5]]$. Then the nodes for $A$ are $[1,0]$ and $[1,5]$ (Figure \@ref(fig:7-node)). Since nodes define the end points of a line segment, they are key to enforcing connection rules. We will look at network analysis in more detail in the next chapter. For now, let us consider two different networks that can help us conceptualize some fundamental line topology using nodes.
 
 ```{r, 7-node, fig.align = 'center', out.width = '75%', fig.cap=fig_cap, cached=T, echo = FALSE}
 fig_cap <- paste0("Lines are always comprised of two nodes. Line A shown here has nodes at [1,0] and [1,5]. Pickell, CC-BY-SA-4.0.")
@@ -338,7 +338,7 @@ fig_cap <- paste("Conceptual forest land cover polygon that contains a lake caus
 knitr::include_graphics("images/07-hole.png")
 ```
 
-Topologically, holes in polygons imply that another polygon shares an adjacent boundary where the hole exists, for example, from the union of two layers (see [Chapter 6](https://ubc-geomatics-textbook.github.io/geomatics-textbook/overlay-and-proximity-analysis.html)). In our example, the lake would comprise its own polygon that would completely fill the hole.
+Topologically, holes in polygons imply that another polygon shares an adjacent boundary where the hole exists, for example, from the union of two layers (see [Chapter 6](./overlay-and-proximity-analysis.html)). In our example, the lake would comprise its own polygon that would completely fill the hole.
 
 ### Delaunay triangulation
 
@@ -493,7 +493,7 @@ Convex hulls can be generalized to the concave case, called **convex alpha hulls
 
 
 ``` {r 7-2d-alpha-hull, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-if (knitr:::is_latex_output()) { fig_cap <- paste0("Concave alpha hull generates an alpha shape around a set of points. Online version of the figure is animated by alpha values from 0 to 1 by increments of 0.05. Pickell, CC-BY-SA-4.0.  Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/types-of-data.html")
+if (knitr:::is_latex_output()) { fig_cap <- paste0("Concave alpha hull generates an alpha shape around a set of points. Online version of the figure is animated by alpha values from 0 to 1 by increments of 0.05. Pickell, CC-BY-SA-4.0.  Animated figure can be viewed in the web browser version of the textbook: https://www.opengeomatics.ca/topology-and-geocoding.html#fig:7-2d-alpha-hull")
   knitr::include_graphics("images/07-2d-alpha-hull.png")
 } else { fig_cap <- paste0("Concave alpha hull generates an alpha shape around a set of points. Online version of the figure is animated by alpha values from 0 to 1 by increments of 0.05. Pickell, CC-BY-SA-4.0.")
   knitr::include_graphics("images/07-2d-alpha-hull.gif")
@@ -502,13 +502,13 @@ if (knitr:::is_latex_output()) { fig_cap <- paste0("Concave alpha hull generates
 
 ## 3D topologies
 
-In this next section, a number of topologies are described that are important for 3D modeling and several examples are given using LiDAR (Light Detection and Ranging), which is the topic of [Chapter 15](https://ubc-geomatics-textbook.github.io/geomatics-textbook/LiDAR-acquisition-and-analysis.html). It is beyond the scope of this chapter to discuss the technology of LiDAR, so the reader is referred to [Chapter 15](https://ubc-geomatics-textbook.github.io/geomatics-textbook/LiDAR-acquisition-and-analysis.html) for a more in-depth discussion of LiDAR.
+In this next section, a number of topologies are described that are important for 3D modeling and several examples are given using LiDAR (Light Detection and Ranging), which is the topic of [Chapter 15](./LiDAR-acquisition-and-analysis.html). It is beyond the scope of this chapter to discuss the technology of LiDAR, so the reader is referred to [Chapter 15](./LiDAR-acquisition-and-analysis.html) for a more in-depth discussion of LiDAR.
 
 ### Multipatch geometries
 
 Similar to multipart geometries, **multipatch geometries** associate several *faces* or *facets* to a single 3D feature such as a building or tree. In order for multipatch geometries to be topologically valid, they must form a closed set of faces, known as a **polyhedron**. Polyhedrons are comprised of *flat* faces that connect 3 or more vertices. Figure \@ref(fig:7-platonic-polyhedrons) illustrates the 5 Platonic polyhedrons, so-named after Plaot who initially wrote about them. The Platonic polyhedrons are a special type of *regular* polyhedron because they are the only polyhedrons that are highly symmetrical and have special transitive properties on the edges, faces, and vertices. As well, the Platonic polyhedrons are all examples of the 3-dimensional case of a convex hull (more on that in the next section). Most polyhedrons that we come across in environmental management like trees, lakes, glaciers, and buildings are very irregular and not Platonic.
 
-(ref:7-platonic-polyhedrons-caption1) The five Platonic solids are examples of regular, convex polyhedrons and multipatch geometries. From left to right: tetrahedron (4 faces); hexahedron (6 faces); octahedron (8 faces); dodecahedron (12 faces); and icosahedron (20 faces). @cyp_polyhedra_2005, CC-BY-SA-3.0. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/topology-and-geocoding.html
+(ref:7-platonic-polyhedrons-caption1) The five Platonic solids are examples of regular, convex polyhedrons and multipatch geometries. From left to right: tetrahedron (4 faces); hexahedron (6 faces); octahedron (8 faces); dodecahedron (12 faces); and icosahedron (20 faces). @cyp_polyhedra_2005, CC-BY-SA-3.0. Animated figure can be viewed in the web browser version of the textbook: https://www.opengeomatics.ca/topology-and-geocoding.html#fig:7-platonic-polyhedrons
 
 (ref:7-platonic-polyhedrons-caption2) The five Platonic solids are examples of regular, convex polyhedrons and multipatch geometries. From left to right: tetrahedron (4 faces); hexahedron (6 faces); octahedron (8 faces); dodecahedron (12 faces); and icosahedron (20 faces). @cyp_polyhedra_2005, CC-BY-SA-3.0.
 
@@ -541,7 +541,7 @@ ahull.d <- ashape3d(xyz,alpha=0.05)
 ```
 
 ```{r 7-3d-alpha-hull-deciduous, echo=FALSE, out.width = '75%', fig.cap=fig_cap, webgl = TRUE}
-if (knitr:::is_latex_output()) { fig_cap <- paste0("3D concave alpha hull for a deciduous tree (species here). The alpha hull was generated using alpha = 0.05. Data collected by Spencer Dakin Kuiper with a GeoSlam terrestrial laser scanner in Vancouver, Canada. Pickell, CC-BY-SA-4.0. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/topology-and-geocoding.html.")
+if (knitr:::is_latex_output()) { fig_cap <- paste0("3D concave alpha hull for a deciduous tree (species here). The alpha hull was generated using alpha = 0.05. Data collected by Spencer Dakin Kuiper with a GeoSlam terrestrial laser scanner in Vancouver, Canada. Pickell, CC-BY-SA-4.0. Animated figure can be viewed in the web browser version of the textbook: https://www.opengeomatics.ca/topology-and-geocoding.html#fig:7-3d-alpha-hull-deciduous.")
 knitr::include_graphics("images/07-3d-alpha-hull-deciduous.png")
 } else { fig_cap <- paste0("3D concave alpha hull for a deciduous tree (species here). The alpha hull was generated using alpha = 0.05. Data collected by Spencer Dakin Kuiper with a GeoSlam terrestrial laser scanner in Vancouver, Canada. Pickell, CC-BY-SA-4.0.")
 plot3d(ahull.d,col="#2D5A27")
@@ -559,7 +559,7 @@ ahull.c <- ashape3d(xyz,alpha=0.1)
 ```
 
 ``` {r 7-3d-alpha-hull-conifer, echo=FALSE, out.width = '75%', fig.cap=fig_cap, webgl = TRUE}
-if (knitr:::is_latex_output()) { fig_cap <- paste0("3D convex alpha hull for a coniferous tree (Abies lasiocarpa). The alpha hull was generated using alpha = 0.1. Data collected by Yangqian (Frederick) Qi with a terrestrial laser scanner in British Columbia, Canada. Pickell, CC-BY-SA-4.0. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/topology-and-geocoding.html.")
+if (knitr:::is_latex_output()) { fig_cap <- paste0("3D convex alpha hull for a coniferous tree (Abies lasiocarpa). The alpha hull was generated using alpha = 0.1. Data collected by Yangqian (Frederick) Qi with a terrestrial laser scanner in British Columbia, Canada. Pickell, CC-BY-SA-4.0. Animated figure can be viewed in the web browser version of the textbook: https://www.opengeomatics.ca/topology-and-geocoding.html#fig:7-3d-alpha-hull-conifer.")
 knitr::include_graphics("images/07-3d-alpha-hull-conifer.png")
 } else { fig_cap <- paste0("3D convex alpha hull for a coniferous tree (Abies lasiocarpa). The alpha hull was generated using alpha = 0.1. Data collected by Yangqian (Frederick) Qi with a terrestrial laser scanner in British Columbia, Canada. Pickell, CC-BY-SA-4.0.")
 plot3d(ahull.c,xlim=c(40,64),ylim=c(21,45),col="#2D5A27")
@@ -622,9 +622,9 @@ If you are aiming to geocode addresses in a single city, then it is feasible to 
 
 ## Case Study: Working with Canadian Census Data
 
-[Download 2016 Census Profile data](https://www12.statcan.gc.ca/census-recensement/2016/dp-pd/prof/details/download-telecharger/comp/page_dl-tc.cfm?Lang=E)
+[2016 Census Profile data](https://www12.statcan.gc.ca/census-recensement/2016/dp-pd/prof/details/download-telecharger/comp/page_dl-tc.cfm?Lang=E)
 
-[Download 2016 Census Boundaries](https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm) i make an edit
+[2016 Census Boundaries](https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm)
 
 ## Summary
 

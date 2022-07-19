@@ -1,11 +1,3 @@
-document.addEventListener('DOMContentLoaded', function () {
-  // If section divs is used, we need to put the anchor in the child header
-  const headers = document.querySelectorAll("div.hasAnchor.section[class*='level'] > :first-child")
-
-  headers.forEach(function (x) {
-    // Add to the header node
-    if (!x.classList.contains('hasAnchor')) x.classList.add('hasAnchor')
-    // Remove from the section or div created by Pandoc
-    x.parentElement.classList.remove('hasAnchor')
-  })
-})
+version https://git-lfs.github.com/spec/v1
+oid sha256:b62f980f11f9563004cd8fc04d4a11fc41e7f1190cba8e80d504fe50539b2ee8
+size 487

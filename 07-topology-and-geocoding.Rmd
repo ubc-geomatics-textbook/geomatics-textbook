@@ -491,11 +491,15 @@ Convex hulls can be generalized to the concave case, called **convex alpha hulls
 ## }
 ```
 
+(ref:7-2d-alpha-hull-caption1) Concave alpha hull generates an alpha shape around a set of points. Online version of the figure is animated by alpha values from 0 to 1 by increments of 0.05. Pickell, CC-BY-SA-4.0.  Animated figure can be viewed in the web browser version of the textbook: https://www.opengeomatics.ca/topology-and-geocoding.html#fig:7-2d-alpha-hull.
+
+(ref:7-2d-alpha-hull-caption2) Concave alpha hull generates an alpha shape around a set of points. Online version of the figure is animated by alpha values from 0 to 1 by increments of 0.05. Pickell, CC-BY-SA-4.0..
+
 
 ``` {r 7-2d-alpha-hull, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-if (knitr:::is_latex_output()) { fig_cap <- paste0("Concave alpha hull generates an alpha shape around a set of points. Online version of the figure is animated by alpha values from 0 to 1 by increments of 0.05. Pickell, CC-BY-SA-4.0.  Animated figure can be viewed in the web browser version of the textbook: https://www.opengeomatics.ca/topology-and-geocoding.html#fig:7-2d-alpha-hull")
-  knitr::include_graphics("images/07-2d-alpha-hull.png")
-} else { fig_cap <- paste0("Concave alpha hull generates an alpha shape around a set of points. Online version of the figure is animated by alpha values from 0 to 1 by increments of 0.05. Pickell, CC-BY-SA-4.0.")
+if (knitr:::is_latex_output()) { fig_cap = "(ref:7-2d-alpha-hull-caption1)"
+  knitr::include_graphics("images/07-2d-alpha-hull.png"
+} else { fig_cap = "(ref:7-2d-alpha-hull-caption2)"
   knitr::include_graphics("images/07-2d-alpha-hull.gif")
 }
 ```
@@ -540,10 +544,14 @@ xyz <- cbind(x,y,z)
 ahull.d <- ashape3d(xyz,alpha=0.05)
 ```
 
+(ref:7-3d-alpha-hull-deciduous-caption1) 3D concave alpha hull for a deciduous tree (species here). The alpha hull was generated using alpha = 0.05. Data collected by Spencer Dakin Kuiper with a GeoSlam terrestrial laser scanner in Vancouver, Canada. Pickell, CC-BY-SA-4.0. Animated figure can be viewed in the web browser version of the textbook: https://www.opengeomatics.ca/topology-and-geocoding.html#fig:7-3d-alpha-hull-deciduous.
+
+(ref:7-3d-alpha-hull-deciduous-caption2) 3D concave alpha hull for a deciduous tree (species here). The alpha hull was generated using alpha = 0.05. Data collected by Spencer Dakin Kuiper with a GeoSlam terrestrial laser scanner in Vancouver, Canada. Pickell, CC-BY-SA-4.0.
+
 ```{r 7-3d-alpha-hull-deciduous, echo=FALSE, out.width = '75%', fig.cap=fig_cap, webgl = TRUE}
-if (knitr:::is_latex_output()) { fig_cap <- paste0("3D concave alpha hull for a deciduous tree (species here). The alpha hull was generated using alpha = 0.05. Data collected by Spencer Dakin Kuiper with a GeoSlam terrestrial laser scanner in Vancouver, Canada. Pickell, CC-BY-SA-4.0. Animated figure can be viewed in the web browser version of the textbook: https://www.opengeomatics.ca/topology-and-geocoding.html#fig:7-3d-alpha-hull-deciduous.")
+if (knitr:::is_latex_output()) { fig_cap = "(ref:7-3d-alpha-hull-deciduous-caption1)"
 knitr::include_graphics("images/07-3d-alpha-hull-deciduous.png")
-} else { fig_cap <- paste0("3D concave alpha hull for a deciduous tree (species here). The alpha hull was generated using alpha = 0.05. Data collected by Spencer Dakin Kuiper with a GeoSlam terrestrial laser scanner in Vancouver, Canada. Pickell, CC-BY-SA-4.0.")
+} else { fig_cap = "(ref:7-3d-alpha-hull-deciduous-caption2)"
 plot3d(ahull.d,col="#2D5A27")
 rglwidget(width = 600, height = 600, reuse=FALSE, elementId="7-3d-alpha-hull-deciduous")
 }

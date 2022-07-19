@@ -214,6 +214,8 @@ Other advances in computer hardware were achieved as a result of the pioneering 
 
 While the Canada Land Inventory was underway with the aid of the CGIS, provinces moved to create the agricultural land reserves to ensure that the most fertile areas remained available as farmland. In 1973, British Columbia established the Agriculture Land Reserves, setting aside 5% of its land base for farming priority. Newfoundland and Labrador established an Agriculture Development Area around the city of St. John's in the same year. By 1977, it was learned from CGIS analysis that only 0.5% the second largest country in the world supports prime farmland and half of that occurs in the vicinity of the most populous metropolitan area: Toronto (Figure \@ref(fig:01-cli-agriculture-capability-toronto)) (@CLIReport11_1977). Ontario published Food Land Guidelines the next year that effectively laid out a land use planning framework for municipalities and the province to protect and maximize the efficiency of farming on the best available land (@LandFoodGuidelines_1978).
 
+
+
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 m <- leaflet() %>%
   setView(lng = -79.46, lat = 43.695, zoom = 11) %>% 
@@ -225,14 +227,15 @@ m <- leaflet() %>%
   )
 ```
 
+(ref:01-cli-agriculture-capability-toronto-caption1) Soil capability for agriculture from the Canada Land Inventory for the area surrounding Toronto, Canada. The majority of the best soils for farming in Canada (Class 1 - No significant limitations in use for crops) are found in southeastern Ontario. Queen's Printer, Public Domain. Animated figure can be viewed in the web browser version of the textbook: https://www.opengeomatics.ca/network-analysis.html#fig:1-cli-agriculture-capability-toronto.
+
+(ref:01-cli-agriculture-capability-toronto-caption2) oil capability for agriculture from the Canada Land Inventory for the area surrounding Toronto, Canada. The majority of the best soils for farming in Canada (Class 1 - No significant limitations in use for crops) are found in southeastern Ontario. Queen's Printer, Public Domain.
+
 ```{r 01-cli-agriculture-capability-toronto, fig.cap = fig_cap, out.width= "75%", echo = FALSE, fig.align="center"}
-if (knitr::is_latex_output()) {
-  fig_cap <- paste0("Soil capability for agriculture from the Canada Land Inventory for the area surrounding Toronto, Canada. The majority of the best soils for farming in Canada (Class 1 - No significant limitations in use for crops) are found in southeastern Ontario. <a
-  \\href='",baseurl,"\\#fig:1-cli-agriculture-capability-toronto'>Interactive web map can be viewed in the web browser version of the textbook</a>. Queen's Printer, Public Domain.")
-  knitr::include_graphics(here::here("images", "01-cli-agriculture-capability-toronto.PNG"))
-} else {
-  fig_cap <- paste0("Soil capability for agriculture from the Canada Land Inventory for the area surrounding Toronto, Canada. The majority of the best soils for farming in Canada (Class 1 - No significant limitations in use for crops) are found in southeastern Ontario. Queen's Printer, Public Domain.")
-  m
+if (knitr::is_latex_output()) { fig_cap = "(ref:01-cli-agriculture-capability-toronto-caption1)"
+knitr::include_graphics("images/01-cli-agriculture-capability-toronto.PNG")
+} else { fig_cap = "(ref:01-cli-agriculture-capability-toronto-caption2)"
+m
 }
 ```
 </br>

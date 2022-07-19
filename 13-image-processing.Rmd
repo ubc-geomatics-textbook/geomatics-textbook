@@ -1,3 +1,12 @@
+---
+editor_options:
+  markdown:
+    wrap: 72
+output:
+  html_document:
+    df_print: paged
+  word_document: default
+---
 ```{r echo=FALSE}
 yml_content <- yaml::read_yaml("chapterauthors.yml")
 author <- yml_content[["imageProcessing"]][["author"]]
@@ -135,7 +144,7 @@ perspective views into plan views before they can be used to trace the
 features that appear on topographic maps, or to digitize vector features
 in digital data sets.
 
-Compare photographs in Figure ref(fig:13-ortho). Both show the same
+Compare photographs in Figure \@ref(fig:13-ortho). Both show the same
 gas pipeline, which passes through hilly terrain. Note the deformation
 of the pipeline route in the photo on the left relative to the shape of
 the route on the orthoimage to the right. The deformation in the photo
@@ -312,7 +321,7 @@ the atmosphere has on the observation of electromagnetic radition
 relates to changes in the atmosphere during collection and the specific
 wavelengths being collected. The majority of impacts are caused by the
 three main types of scattering, which were presented in Chapter
-ref(fundamentals-of-remote-sensing).
+\@ref(fundamentals-of-remote-sensing).
 
 ## Atmospheric Windows
 
@@ -344,7 +353,7 @@ not remove them entirely.
 
 When approaching the removal of clouds, it is important to recall the
 physics that drive Mie scattering (Chapter
-ref(fundamentals-of-remote-sensing)). Essentially, water vapors in the
+\@ref(fundamentals-of-remote-sensing)). Essentially, water vapors in the
 atmosphere scatter visible and near infrared light and generate what
 appears to be white objects in the sky. Since the visible and near
 infrared regions of the EMS fall within an atmospheric window in which
@@ -442,8 +451,10 @@ noise is inherent in all sensors. Readout noise is therefore equal to
 any difference in pixel value when all sensors are exposed to identical
 levels of illumination. There are a variety of technical methods used to
 correct for this error, but the concepts and mathematics supporting them
-are perhaps beyond the scope of this book. Check out [Readout Noise by Michael Richmond](http://spiff.rit.edu/classes/phys445/lectures/readout/readout.html)
-if you are interested in learning more about readout noise.
+are perhaps beyond the scope of this book. If you are interested in
+learning more about readout noise, check out this
+[webpage](http://spiff.rit.edu/classes/phys445/lectures/readout/readout.html "Readout Noise by Michael Richmond")
+created by Michael Richmond.
 
 ## Thermal Noise
 
@@ -500,8 +511,9 @@ inconsistencies present in an image. The USGS utilizes a combination of
 ground control points (GCP), digital elevation models (DEM) and internal
 sensor calibrations to correct an image. Within Level 1 there are a
 variety of sub-levels that users can select from, each varying based on
-the amount of correction that has been completed. USGS's informational page [Landsat Level-1 Processing Details](https://www.usgs.gov/core-science-systems/nli/landsat/landsat-level-1-processing-details) is a good resource for learning more about
-the specifics of Landsat Level-1 processing.
+the amount of correction that has been completed. More information about
+the specific of Landsat Level-1 processing can be found
+[here](https://www.usgs.gov/core-science-systems/nli/landsat/landsat-level-1-processing-details "Landsat Level-1 Processing").
 
 </p>
 
@@ -518,16 +530,17 @@ environmental metrics, such as land cover, while surface temperature
 lends insight to vegetation health and the global energy balance. It is
 important to note that there are two Collection levels at which Landsat
 processing takes place, with Collection 2 representing the highest
-quality processing stream. You can explore the differences between [collections of Landsat Collection 1 vs 2 imagery [PDF]](https://prd-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/atoms/files/Landsat-C1vsC2-2021-0430-LMWS.pdf),
+quality processing stream. You can explore the differences between
+Collections
+[here](https://prd-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/atoms/files/Landsat-C1vsC2-2021-0430-LMWS.pdf "Landsat Collection 1 vs 2"),
 while information about Collection 2 images processed at a Level-2
-standard can be observed on USGS's [Landsat Collection 2 Level-2 Science Products information page](https://www.usgs.gov/core-science-systems/nli/landsat/landsat-collection-2-level-2-science-products).
+standard can be observed
+[here](https://www.usgs.gov/core-science-systems/nli/landsat/landsat-collection-2-level-2-science-products "Landsat Colleciton 2 Level-2").
 
 </p>
 
-(ref:13-landsat-c2-l2-caption) Three unique Landsat 8 Collection 2 images. In order from left to right: Level-1 Top of Atmosphere reflectance image (no atmospheric correction), Level-2 atmospherically corrected surface reflectance and Level-2 surface temperature. Images were collected on May 3, 2013 over the Sapta Kosh River in Bairawa, Nepal [@bouchard_example_2013]. Public domain.
-
 ```{r 13-landsat-c2-l2, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-    fig_cap = "(ref:13-landsat-c2-l2-caption)"
+    fig_cap <- paste0("Three unique Landsat 8 Collection 2 images. In order from left to right: Level-1 Top of Atmosphere reflectance image (no atmospheric correction), Level-2 atmospherically corrected surface reflectance and Level-2 surface temperature. Images were collected on May 3, 2013 over the Sapta Kosh River in Bairawa, Nepal [@bouchard_example_2013]. Public domain.")
     knitr::include_graphics("images/13-landsat-c2-l2.png")
 ```
 

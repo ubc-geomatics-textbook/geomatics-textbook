@@ -1,3 +1,32 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:32a9c1fd1c01aa4ed7abe67d9d4b0dda3e6c2b9c95441993cb375094cd7bd58b
-size 804
+.leaflet-tooltip.leaflet-tooltip-text-only,
+.leaflet-tooltip.leaflet-tooltip-text-only:before,
+.leaflet-tooltip.leaflet-tooltip-text-only:after {
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+.leaflet-tooltip.leaflet-tooltip-text-only.leaflet-tooltip-left {
+  margin-left: 5px;
+}
+
+.leaflet-tooltip.leaflet-tooltip-text-only.leaflet-tooltip-right {
+  margin-left: -5px;
+}
+
+.leaflet-tooltip:after {
+  border-right: 6px solid transparent;
+  /* right: -16px; */
+}
+
+.leaflet-popup-pane .leaflet-popup-tip-container {
+  /* when the tooltip container is clicked, it is closed */
+  pointer-events: all;
+  /* tooltips should display the "hand" icon, just like .leaflet-interactive*/
+  cursor: pointer;
+}
+
+/* have the widget be displayed in the right 'layer' */
+.leaflet-map-pane {
+  z-index: auto;
+}

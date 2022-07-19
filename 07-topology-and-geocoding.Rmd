@@ -66,14 +66,14 @@ It is important to recognize that there may be cases where we "expect" that a gi
 
 In the context of topology, **planar** refers to the concept that all vertices of feature vector geometry are mapped onto the same plane. So in a planar world-view, all lines and polygons share coincident vertices. For example, if two polygons overlap, then the overlapping area forms a new polygon with a boundary of vertices defined by the union of the two other polygons. Also, if two lines overlap, then the two lines are divided into four new segments and a new vertex is formed at the intersection. In other words, planar topology does not allow polygons or lines to lay "underneath" or "on top" of another line or polygon and feature geometries must always be distinct.
 
-On the other hand, **non-planar** topology is the concept that vertices of feature vector geometry can be mapped to different planes. It is important to emphasize here that when we are talking about planes that we are not referring to projected coordinate systems. It is generally assumed that any two spatial data layers containing feature geometries are interacting within the same projected coordinate system. Non-planar topology allows for other knowledge systems to be represented in spatial data. The case where a pipeline runs underneath a river or a territory that was traditionally used by several Indigenous peoples (Figure \@ref(fig:7-native-land-leaflet)) are examples of valid non-planar topology.
+On the other hand, **non-planar** topology is the concept that vertices of feature vector geometry can be mapped to different planes. It is important to emphasize here that when we are talking about planes that we are not referring to projected coordinate systems. It is generally assumed that any two spatial data layers containing feature geometries are interacting within the same projected coordinate system. Non-planar topology allows for other knowledge systems to be represented in spatial data. The case where a pipeline runs underneath a river or a territory that was traditionally used by several Indigenous peoples (Figure \@ref(fig:07-native-land-leaflet)) are examples of valid non-planar topology.
 
-``` {r, 7-native-land-data-load, echo=F, cache=T}
+``` {r, 07-native-land-data-load, echo=F, cache=T}
 native_land <- rgdal::readOGR("Data/07/07-native_land_vancouver_island.geojson", verbose=F)
 labels <- native_land@data$Name
 ```
 
-``` {r 7-native-land-leaflet-setup, cached=T, echo = FALSE, include = FALSE}
+``` {r 07-native-land-leaflet-setup, cached=T, echo = FALSE, include = FALSE}
 getTilesURL <- "https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=06d706f23fc4461db5db742f930174fc"
 m <- leaflet(native_land) %>%
   addTiles(getTilesURL) %>%
@@ -98,9 +98,16 @@ m <- leaflet(native_land) %>%
                 textsize = "12px", direction = "auto"))
 ```
 
-``` {r, 7-native-land-leaflet, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-fig_cap <- paste("Non-planar topology of 36 indigenous territories overlapping Vancouver Island, British Columbia. Data from @native_land_native_nodate, CC0.")
+(ref:07-native-land-leaflet-caption1) Non-planar topology of 36 indigenous territories overlapping Vancouver Island, British Columbia. Data from @native_land_native_nodate, CC0. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/topology-and-geocoding.html.
+
+(ref:07-native-land-leaflet-caption2) Non-planar topology of 36 indigenous territories overlapping Vancouver Island, British Columbia. Data from @native_land_native_nodate, CC0.
+
+```{r 07-native-land-leaflet, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+if (knitr:::is_latex_output()) { fig_cap ="(ref:07-native-land-leaflet-caption1)"
+knitr::include_graphics("images/07-native-land-leaflet.png")
+} else { fig_cap = "(ref:07-native-land-leaflet-caption2)"
 m
+}
 ```
 
 ## Implementing Planar Topology
@@ -126,7 +133,7 @@ Some examples of adjacency and overlap topological rules:
 
 ## Intersect and Connect
 
-As we have seen from [Chapter 3](https://ubc-geomatics-textbook.github.io/geomatics-textbook/types-of-data.html), lines are often used to represent phenomena that flow, so intersection and connection are important concepts for these representations. Important to understanding how connection and intersection work in planar topology, we need to understand that lines are comprised of a set of vertices and nodes. A **node** is simply the terminating vertex in a set of vertices for a line. For example, suppose the line segment $A$ has a set of vertices, $[[1,0],[1,3],[1,5]]$. Then the nodes for $A$ are $[1,0]$ and $[1,5]$ (Figure \@ref(fig:7-node)). Since nodes define the end points of a line segment, they are key to enforcing connection rules. We will look at network analysis in more detail in the next chapter. For now, let us consider two different networks that can help us conceptualize some fundamental line topology using nodes.
+As we have seen from [Chapter 3](./types-of-data.html), lines are often used to represent phenomena that flow, so intersection and connection are important concepts for these representations. Important to understanding how connection and intersection work in planar topology, we need to understand that lines are comprised of a set of vertices and nodes. A **node** is simply the terminating vertex in a set of vertices for a line. For example, suppose the line segment $A$ has a set of vertices, $[[1,0],[1,3],[1,5]]$. Then the nodes for $A$ are $[1,0]$ and $[1,5]$ (Figure \@ref(fig:7-node)). Since nodes define the end points of a line segment, they are key to enforcing connection rules. We will look at network analysis in more detail in the next chapter. For now, let us consider two different networks that can help us conceptualize some fundamental line topology using nodes.
 
 ```{r, 7-node, fig.align = 'center', out.width = '75%', fig.cap=fig_cap, cached=T, echo = FALSE}
 fig_cap <- paste0("Lines are always comprised of two nodes. Line A shown here has nodes at [1,0] and [1,5]. Pickell, CC-BY-SA-4.0.")
@@ -308,9 +315,16 @@ m2 = leaflet(haida) %>%
                 textsize = "12px", direction = "auto"))
 ```
 
+(ref:7-haida-gwaii-leaflet-caption1) Singlepart geometry of the Haida Gwaii archipelago off the west coast of British Columbia, Canada. Hover over the islands to see the names. Polygon data from @statistics_canada_statistics_nodate and island placenames from @natural_resources_canada_natural_nodate. Open Government License - Canada. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/topology-and-geocoding.html
+
+(ref:7-haida-gwaii-leaflet-caption2) Singlepart geometry of the Haida Gwaii archipelago off the west coast of British Columbia, Canada. Hover over the islands to see the names. Polygon data from @statistics_canada_statistics_nodate and island placenames from @natural_resources_canada_natural_nodate. Open Government License - Canada.
+
 ```{r 7-haida-gwaii-leaflet, fig.cap = fig_cap, out.width= "50%", echo = FALSE}
-  fig_cap <- paste0("Singlepart geometry of the Haida Gwaii archipelago off the west coast of British Columbia, Canada. Hover over the islands to see the names. <a href='",baseurl,"#7-haida-gwaii-leaflet'>Animated figure can be viewed in the web browser version of the textbook.</a> Polygon data from @statistics_canada_statistics_nodate and island placenames from @natural_resources_canada_natural_nodate. <a href='",canadalicense,"'>Open Government License - Canada</a>.")
+if (knitr:::is_latex_output()) { fig_cap = "(ref:7-haida-gwaii-leaflet-caption1)"
+  knitr::include_graphics("images/07-haida-gwaii-leaflet.png")
+} else { fig_cap ="(ref:7-haida-gwaii-leaflet-caption2)"
 m2
+}
 ```
 
 Although it is possible to convert from a multipart geometry into singlepart geometry, you need to carefully consider how your features should be represented in the attribute table. For example, if you will be undertaking calculations using area or perimeter of the constituent polygons that comprise a multipart geometry of Canada, then you will return a single value for all of Canada while singlepart geometry would return values for each individual polygon. As well, area calculations can vary between multipart and singlepart geometry. For example, approximately 27% of Canada's land area (including freshwater), is comprised of more than 52,000 islands, which is a statistic you could only calculate with singlepart geometry. Thus, the choice of representing a feature using singlepart or multipart geometry should be based on how the features will be used in your analysis (i.e., aggregated versus disaggregated).
@@ -324,7 +338,7 @@ fig_cap <- paste("Conceptual forest land cover polygon that contains a lake caus
 knitr::include_graphics("images/07-hole.png")
 ```
 
-Topologically, holes in polygons imply that another polygon shares an adjacent boundary where the hole exists, for example, from the union of two layers (see [Chapter 6](https://ubc-geomatics-textbook.github.io/geomatics-textbook/overlay-and-proximity-analysis.html)). In our example, the lake would comprise its own polygon that would completely fill the hole.
+Topologically, holes in polygons imply that another polygon shares an adjacent boundary where the hole exists, for example, from the union of two layers (see [Chapter 6](./overlay-and-proximity-analysis.html)). In our example, the lake would comprise its own polygon that would completely fill the hole.
 
 ### Delaunay triangulation
 
@@ -477,27 +491,42 @@ Convex hulls can be generalized to the concave case, called **convex alpha hulls
 ## }
 ```
 
+(ref:7-2d-alpha-hull-caption1) Concave alpha hull generates an alpha shape around a set of points. Online version of the figure is animated by alpha values from 0 to 1 by increments of 0.05. Pickell, CC-BY-SA-4.0.  Animated figure can be viewed in the web browser version of the textbook: https://www.opengeomatics.ca/topology-and-geocoding.html#fig:7-2d-alpha-hull.
+
+(ref:7-2d-alpha-hull-caption2) Concave alpha hull generates an alpha shape around a set of points. Online version of the figure is animated by alpha values from 0 to 1 by increments of 0.05. Pickell, CC-BY-SA-4.0.
+
+
 ``` {r 7-2d-alpha-hull, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste0("Concave alpha hull generates an alpha shape around a set of points. Online version of the figure is animated by alpha values from 0 to 1 by increments of 0.05. <a href='",baseurl,"#7-2d-alpha-hull'>Animated figure can be viewed in the web browser version of the textbook.</a> Pickell, CC-BY-SA-4.0.")
-knitr::include_graphics("images/07-2d-alpha-hull.gif")
+if (knitr:::is_latex_output()) { fig_cap = "(ref:7-2d-alpha-hull-caption1)"
+  knitr::include_graphics("images/07-2d-alpha-hull.png")
+} else { fig_cap = "(ref:7-2d-alpha-hull-caption2)"
+  knitr::include_graphics("images/07-2d-alpha-hull.gif")
+}
 ```
 
 ## 3D topologies
 
-In this next section, a number of topologies are described that are important for 3D modeling and several examples are given using LiDAR (Light Detection and Ranging), which is the topic of [Chapter 15](https://ubc-geomatics-textbook.github.io/geomatics-textbook/LiDAR-acquisition-and-analysis.html). It is beyond the scope of this chapter to discuss the technology of LiDAR, so the reader is referred to [Chapter 15](https://ubc-geomatics-textbook.github.io/geomatics-textbook/LiDAR-acquisition-and-analysis.html) for a more in-depth discussion of LiDAR.
+In this next section, a number of topologies are described that are important for 3D modeling and several examples are given using LiDAR (Light Detection and Ranging), which is the topic of [Chapter 15](./LiDAR-acquisition-and-analysis.html). It is beyond the scope of this chapter to discuss the technology of LiDAR, so the reader is referred to [Chapter 15](./LiDAR-acquisition-and-analysis.html) for a more in-depth discussion of LiDAR.
 
 ### Multipatch geometries
 
 Similar to multipart geometries, **multipatch geometries** associate several *faces* or *facets* to a single 3D feature such as a building or tree. In order for multipatch geometries to be topologically valid, they must form a closed set of faces, known as a **polyhedron**. Polyhedrons are comprised of *flat* faces that connect 3 or more vertices. Figure \@ref(fig:7-platonic-polyhedrons) illustrates the 5 Platonic polyhedrons, so-named after Plaot who initially wrote about them. The Platonic polyhedrons are a special type of *regular* polyhedron because they are the only polyhedrons that are highly symmetrical and have special transitive properties on the edges, faces, and vertices. As well, the Platonic polyhedrons are all examples of the 3-dimensional case of a convex hull (more on that in the next section). Most polyhedrons that we come across in environmental management like trees, lakes, glaciers, and buildings are very irregular and not Platonic.
 
+(ref:7-platonic-polyhedrons-caption1) The five Platonic solids are examples of regular, convex polyhedrons and multipatch geometries. From left to right: tetrahedron (4 faces); hexahedron (6 faces); octahedron (8 faces); dodecahedron (12 faces); and icosahedron (20 faces). @cyp_polyhedra_2005, CC-BY-SA-3.0. Animated figure can be viewed in the web browser version of the textbook: https://www.opengeomatics.ca/topology-and-geocoding.html#fig:7-platonic-polyhedrons
+
+(ref:7-platonic-polyhedrons-caption2) The five Platonic solids are examples of regular, convex polyhedrons and multipatch geometries. From left to right: tetrahedron (4 faces); hexahedron (6 faces); octahedron (8 faces); dodecahedron (12 faces); and icosahedron (20 faces). @cyp_polyhedra_2005, CC-BY-SA-3.0.
+
 ``` {r 7-platonic-polyhedrons, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste0("The five Platonic solids are examples of regular, convex polyhedrons and multipatch geometries. From left to right: tetrahedron (4 faces); hexahedron (6 faces); octahedron (8 faces); dodecahedron (12 faces); and icosahedron (20 faces). <a href='",baseurl,"#7-platonic-polyhedrons'>Animated figure can be viewed in the web browser version of the textbook.</a> @cyp_polyhedra_2005, CC-BY-SA-3.0.")
-knitr::include_graphics("images/07-platonic-polyhedrons.gif")
+if (knitr:::is_latex_output()) { fig_cap = "(ref:7-platonic-polyhedrons-caption1)"
+  knitr::include_graphics("images/07-platonic-polyhedrons.png")
+} else { fig_cap = "(ref:7-platonic-polyhedrons-caption2)"
+  knitr::include_graphics("images/07-platonic-polyhedrons.gif")
+}
 ```
 
 ### 3D Convex hull
 
-The 3D convex hull is the smallest convex polyhedron that contains a set of 3D points (Figure \@ref(fig:7-3d-convex-hull)). The 3D problem is not unlike the 2D problem for finding the 2D convex hull, except instead of using 2D circumcircles we use 3D circumscribed spheres. Otherwise, the overall objective is the same, minimize the 3D polyherdron that encloses the 3D set of points. The 3D convex hull is frequently produced in order to generate a 3D object from a laser scan. Since points are 1-dimensional they have limited use beyond their enumeration within a volume or on a plane or on a line. By contrast, a 3D convex hull produces a polyhedron, which can be used to visualize the object that was initially scanned into a 3D point cloud. The 2D polygon faces that comprise a polyhedron can provide _shape_ and interact with a simulated light source to improve perception of _depth_, which are qualities that are not provided by 3D points alone.  
+The 3D convex hull is the smallest convex polyhedron that contains a set of 3D points (Figure ref(fig:7-3d-convex-hull)). The 3D problem is not unlike the 2D problem for finding the 2D convex hull, except instead of using 2D circumcircles we use 3D circumscribed spheres. Otherwise, the overall objective is the same, minimize the 3D polyherdron that encloses the 3D set of points. The 3D convex hull is frequently produced in order to generate a 3D object from a laser scan. Since points are 1-dimensional they have limited use beyond their enumeration within a volume or on a plane or on a line. By contrast, a 3D convex hull produces a polyhedron, which can be used to visualize the object that was initially scanned into a 3D point cloud. The 2D polygon faces that comprise a polyhedron can provide _shape_ and interact with a simulated light source to improve perception of _depth_, which are qualities that are not provided by 3D points alone.  
 
 ### 3D Convex alpha hull
 
@@ -515,10 +544,17 @@ xyz <- cbind(x,y,z)
 ahull.d <- ashape3d(xyz,alpha=0.05)
 ```
 
-``` {r 7-3d-alpha-hull-deciduous, echo=FALSE, out.width = '75%', fig.cap=fig_cap, webgl = TRUE}
-fig_cap <- paste0("3D concave alpha hull for a deciduous tree (species here). The alpha hull was generated using alpha = 0.05. Data collected by Spencer Dakin Kuiper with a GeoSlam terrestrial laser scanner in Vancouver, Canada. <a href='",baseurl,"#7-3d-alpha-hull-deciduous'>Animated figure can be viewed in the web browser version of the textbook.</a> Pickell, CC-BY-SA-4.0.")
+(ref:7-3d-alpha-hull-deciduous-caption1) 3D concave alpha hull for a deciduous tree (species here). The alpha hull was generated using alpha = 0.05. Data collected by Spencer Dakin Kuiper with a GeoSlam terrestrial laser scanner in Vancouver, Canada. Pickell, CC-BY-SA-4.0. Animated figure can be viewed in the web browser version of the textbook: https://www.opengeomatics.ca/topology-and-geocoding.html#fig:7-3d-alpha-hull-deciduous.
+
+(ref:7-3d-alpha-hull-deciduous-caption2) 3D concave alpha hull for a deciduous tree (species here). The alpha hull was generated using alpha = 0.05. Data collected by Spencer Dakin Kuiper with a GeoSlam terrestrial laser scanner in Vancouver, Canada. Pickell, CC-BY-SA-4.0.
+
+```{r 7-3d-alpha-hull-deciduous, echo=FALSE, out.width = '75%', fig.cap=fig_cap, webgl = TRUE}
+if (knitr:::is_latex_output()) { fig_cap = "(ref:7-3d-alpha-hull-deciduous-caption1)"
+knitr::include_graphics("images/07-3d-alpha-hull-deciduous.png")
+} else { fig_cap = "(ref:7-3d-alpha-hull-deciduous-caption2)"
 plot3d(ahull.d,col="#2D5A27")
 rglwidget(width = 600, height = 600, reuse=FALSE, elementId="7-3d-alpha-hull-deciduous")
+}
 ```
 
 ``` {r setup-3d-alpha-hull-conifer, echo=F, cached=T, warning=F, include=F}
@@ -530,10 +566,18 @@ xyz <- cbind(x,y,z)
 ahull.c <- ashape3d(xyz,alpha=0.1)
 ```
 
+(ref:7-3d-alpha-hull-conifer-caption1) 3D convex alpha hull for a coniferous tree (Abies lasiocarpa). The alpha hull was generated using alpha = 0.1. Data collected by Yangqian (Frederick) Qi with a terrestrial laser scanner in British Columbia, Canada. Pickell, CC-BY-SA-4.0. Animated figure can be viewed in the web browser version of the textbook: https://www.opengeomatics.ca/topology-and-geocoding.html#fig:7-3d-alpha-hull-conifer.
+
+(ref:7-3d-alpha-hull-conifer-caption2) 3D convex alpha hull for a coniferous tree (Abies lasiocarpa). The alpha hull was generated using alpha = 0.1. Data collected by Yangqian (Frederick) Qi with a terrestrial laser scanner in British Columbia, Canada. Pickell, CC-BY-SA-4.0.
+
+
 ``` {r 7-3d-alpha-hull-conifer, echo=FALSE, out.width = '75%', fig.cap=fig_cap, webgl = TRUE}
-fig_cap <- paste("3D convex alpha hull for a coniferous tree (<i>Abies lasiocarpa</i>). The alpha hull was generated using alpha = 0.1. Data collected by Yangqian (Frederick) Qi with a terrestrial laser scanner in British Columbia, Canada. <a href='",baseurl,"#7-3d-alpha-hull-conifer'>Animated figure can be viewed in the web browser version of the textbook.</a> Pickell, CC-BY-SA-4.0.")
+if (knitr:::is_latex_output()) { fig_cap = "(ref:7-3d-alpha-hull-conifer-caption1)"
+knitr::include_graphics("images/07-3d-alpha-hull-conifer.png")
+} else { fig_cap = "(ref:7-3d-alpha-hull-conifer-caption2)"
 plot3d(ahull.c,xlim=c(40,64),ylim=c(21,45),col="#2D5A27")
 rglwidget(width = 600, height = 600, reuse=FALSE, elementId="7-3d-alpha-hull-conifer")
+}
 ```
 
 We can derive some useful information from these 3D convex alpha hulls. One obvious use of a polyhedron such as this is to calculate the volume, which for a tree might inform the amount of merchantable wood in the stem or the size of the canopy. Also, the polyhedron has replaced the points with polygon faces, which can be used to model shadowing and shading by simulating the position of the Sun in the sky. 
@@ -542,8 +586,10 @@ We can derive some useful information from these 3D convex alpha hulls. One obvi
 
 Similar to Thiessen polygons, Voronoi tessellations can be undertaken for 3D point clouds. 3D Voronoi tessellations produce nearest neighbour polyhedrons around the space of each 3D point. Just as in the 2D case, these 3D Voronoi tessellations can be used to partition the 3D space. Figure \@ref(fig:7-neper) shows the use of a 3D Voronoi tessellation for use in mapping and visualizing polycrystals.
 
+(ref:7-neper-caption) 3D Voronoi tesselation of simulated polycrystals. @quey_neper_nodate, GPL 3.0.
+
 ```{r 7-neper, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste("3D Voronoi tesselation of simulated polycrystals. @quey_neper_nodate, GPL 3.0.")
+fig_cap = "(ref:7-neper-caption)"
 knitr::include_graphics("images/07-neper.png")
 ```
 
@@ -589,9 +635,9 @@ If you are aiming to geocode addresses in a single city, then it is feasible to 
 
 ## Case Study: Working with Canadian Census Data
 
-[Download 2016 Census Profile data](https://www12.statcan.gc.ca/census-recensement/2016/dp-pd/prof/details/download-telecharger/comp/page_dl-tc.cfm?Lang=E)
+[2016 Census Profile data](https://www12.statcan.gc.ca/census-recensement/2016/dp-pd/prof/details/download-telecharger/comp/page_dl-tc.cfm?Lang=E)
 
-[Download 2016 Census Boundaries](https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm) i make an edit
+[2016 Census Boundaries](https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm)
 
 ## Summary
 

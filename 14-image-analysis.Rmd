@@ -1,11 +1,3 @@
----
-html_document:
-  df_print: paged
-title: 'null'
-editor_options:
-  markdown:
-    wrap: 72
----
 
 # Image Analysis {#image-analysis}
 
@@ -22,7 +14,6 @@ library(htmlwidgets)
 yml_content <- yaml::read_yaml("chapterauthors.yml")
 author <- yml_content[["imageAnalysis"]][["author"]]
 ```
-# Image Analysis {#image-analysis}
 
 Written by
 ```{r results='asis', echo=FALSE}
@@ -68,10 +59,18 @@ Term
 
 *Case Study Author: Natasha Sharma (CC BY 4.0. unless otherwise indicated), University of British Columbia, Bachelors of Environment and Sustainability, 2022*
 
-Landsat 8-7 has regularly acquired images of Beaufort Sea and Mackenzie River Delta through true-color image to show abundance surface melt, fast ice break up, leaf fraction, ice motion, and changes in coastal features during early springtime. The Beaufort Sea has seen dramatic summer ice losses, particularly in 2009, with regions that were dominated by thick multi-year ice now completely melting out. For comparison, the timeline GIF from 1992 to 2021 depicts different stages of ice breakup in the month of June. Notice the extensive fracturing of Beaufort Sea ice occurring in 1996, but the 2009 and 2014 fracturing appears more widespread until nearly disappearing in 2017.        
+Landsat 8-7 has regularly acquired images of Beaufort Sea and Mackenzie River Delta through true-color image to show abundance surface melt, fast ice break up, leaf fraction, ice motion, and changes in coastal features during early springtime. The Beaufort Sea has seen dramatic summer ice losses, particularly in 2009, with regions that were dominated by thick multi-year ice now completely melting out. For comparison, the timeline GIF from 1992 to 2021 depicts different stages of ice breakup in the month of June. Notice the extensive fracturing of Beaufort Sea ice occurring in 1996, but the 2009 and 2014 fracturing appears more widespread until nearly disappearing in 2017.     
+
+(ref:14-Beaufort-Sea-Ice-caption1) True-color image of Beaufort Sea Ice Deterioration. Sharma, CC-BY-SA-4.0. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/image-analysis.html#fig:14-Beaufort-Sea-Ice.
+
+(ref:14-Beaufort-Sea-Ice-caption2) True-color image of Beaufort Sea Ice Deterioration. Sharma, CC-BY-SA-4.0.
+
 ```{r 14-Beaufort-Sea-Ice, echo=FALSE, fig.cap=fig_cap, message=FALSE, warning=FALSE}
-    fig_cap <- paste0("True-color image of Beaufort Sea Ice Deterioration. Sharma, CC-BY-SA-4.0.")
-    knitr::include_graphics("images/14-Beaufort-Sea-Ice.gif")
+if (knitr:::is_latex_output()) { fig_cap = "(ref:14-Beaufort-Sea-Ice-caption1)"
+  knitr::include_graphics("images/14-Beaufort-Sea-Ice.png")
+} else { fig_cap = "(ref:14-Beaufort-Sea-Ice-caption2)"
+  knitr::include_graphics("images/14-Beaufort-Sea-Ice.gif")
+}
 ```
 
 Similarly, in the high arctic polar desert of Ellesmere Island in Nunavut, Canada, what were once the twin St. Patrick Bay ice caps have now chipped away due to decades of rising temperatures and unusually warm summers. Once the remnants of the Little Ice Age that covered about 7.5 square km and 3 square km across respectively, the formation has reduced to only 5% of their former area and are predicted to extinct within a decade. St.Patrick Bay Ice caps are emblematic of the Arctic change - a reality of how climate change is affecting the whole of Canadian Arctic. 
@@ -185,13 +184,18 @@ dnbrMap = leaflet() %>%
                    options = layersControlOptions(collapsed = FALSE))%>%
   hideGroup(c("dNBR 2016", "dNBR 2017", "dNBR 2018", "dNBR 2019", "dNBR 2020"))
 #htmlwidgets:::knit_print.htmlwidget(dnbrMap)
-dnbrMap
 ```
 
+(ref:14-dnbr-leaflet-caption1) Classified Burn Severity images for the Little Bobtail Lake wildfire from 2015 to 2020. Data from @natural_resources_canada_natural_nodate and licensed under the Open Government Licence - Canada. Pickell, CC-BY-SA-4.0. Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/image-analysis.html#fig:14-dnbr-leaflet.
+
+(ref:14-dnbr-leaflet-caption2) Classified Burn Severity images for the Little Bobtail Lake wildfire from 2015 to 2020. Data from @natural_resources_canada_natural_nodate and licensed under the Open Government Licence - Canada. Pickell, CC-BY-SA-4.0.
+
 ``` {r 14-dnbr-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
-  fig_cap <- paste0("Classified Burn Severity images for the Little Bobtail Lake wildfire from 2015 to 2020.<a
-  href='",baseurl,"#fig:14-dnbr-leaflet'> Animated figure can be viewed in the web browser version of the textbook</a>. Data from @natural_resources_canada_natural_nodate and licensed under the <a href='https://www.nrcan.gc.ca/terms-and-conditions/10847'>Open Government Licence - Canada </a>. Pickell, CC-BY-SA-4.0.")
-if (type == "pdf") { knitr::include_graphics(here::here("images", "02-CGVD-leaflet.PNG")) }
+if (knitr:::is_latex_output()) { fig_cap = "(ref:14-dnbr-leaflet-caption1)"
+  knitr::include_graphics("images/14-dnbr-leaflet.png")
+} else { fig_cap = "(ref:14-dnbr-leaflet-caption2)"
+  dnbrMap
+}
 ```
 
 

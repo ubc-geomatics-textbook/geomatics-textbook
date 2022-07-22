@@ -190,7 +190,7 @@ Following years of hearings by the Senate Special Committee on Land Use in Canad
 
 [CONCLUSIONS AND RECOMMENDATIONS FROM CONFERENCE HERE] It was clear that a national approach to mapping renewable resources was needed in order to protect and conserve them, so in 1963 the federal government established an ambitious project called the Canada Land Inventory whose chief purpose was to provide a "comprehensive survey of land capability and use designed to provide a basis for resource and land use planning" (@CLIReport1_1965). Initially, the Canada Land Inventory prioritized soil maps, a nod to the strategic importance of vanishing farmland 
 
-But how could the Canada Land Inventory ever be achieved for such a vast country using traditional paper maps? To be sure, Canada was not lacking the mapped data. In fact there were tens of thousands of maps produced, cataloged, and housed by the federal government on everything from soils to agriculture to recreation to forests. Still, the scale of agricultural land loss was not known at the time because paper maps of soil fertility could not easily be combined with other information like census data. Decision-makers relied on human interpretation and analysis of paper maps, a time-consuming task that could only accommodate a handful of mapped attributes at a time over a small area. Paper maps had to be reproduced at the same scale, aligned, and analysed polygon-by-polygon. The process to create maps at the time was entirely manual, requiring approximately 10 hours by a skilled technician to produce a single map sheet and about as much time by another to check and make any corrections (@Tomlinson_1974). At that rate, it was estimated to take 666 "man-years" and 133 staff to complete the project (@Gamble_1961). A new approach was needed to cope with the overwhelming amount of information being produced.
+But how could the Canada Land Inventory ever be achieved for such a vast country using traditional paper maps? To be sure, Canada was not lacking the mapped data. In fact there were tens of thousands of paper maps produced, cataloged, and housed by the federal government on everything from soils to agriculture to recreation to forests. Still, the scale of agricultural land loss was not known at the time because paper maps of soil fertility could not easily be combined with other information like census data. Decision-makers relied on human interpretation and analysis of paper maps, a time-consuming task that could only accommodate a handful of mapped attributes at a time over a small area. Paper maps had to be reproduced at the same scale, aligned, and analysed polygon-by-polygon. The process to create maps at the time was entirely manual, requiring approximately 10 hours by a skilled technician to produce a single map sheet and about as much time by another to check and make any corrections (@Tomlinson_1974). At that rate, it was estimated to take 666 "man-years" and 133 staff to complete the project (@Gamble_1961). A new approach was needed to cope with the overwhelming amount of information being produced.
 
 ```{r 01-data-for-decisions, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste('Roger Tomlinson talks about the use of computers for the Canada Land Inventory in 1967. Frame from "Data for Decisions", a National Film Board of Canada documentary, directed by Michael Millar.')
@@ -198,19 +198,17 @@ But how could the Canada Land Inventory ever be achieved for such a vast country
 ```
 </br>
 
-It was 29-year old Roger Tomlinson who recognized the need for computers to handle the massive influx of mapped data (Figure \@ref(fig:01-data-for-decisions)). Tomlinson was working in Ottawa as an air photo interpreter for the aerial survey company Spartan Air Services, a company he joined in 1959. The phenomenon that occurred next can only be explained by American geographer Waldo Tobler's **First Law of Geography**, "everything is related to everything else, but near things are more related than distant things" (@Tobler_1970). In spring 1962, aboard a flight bound for the capital city where Spartan Air Services was headquartered, Tomlinson serendipitously met the lead bureaucrat of the Canada Land Inventory, Lee Pratt. Pratt and Tomlinson exchanged ideas about creating a computer system for handling mapped data. Tomlinson outlined a possible approach to help automate the mapping approach using computers and with some napkin 
+It was 29-year old Roger Tomlinson who recognized the need for computers to handle the massive influx of mapped data (Figure \@ref(fig:01-data-for-decisions)). Tomlinson was working in Ottawa as an air photo interpreter for the aerial survey company Spartan Air Services, a company he joined in 1959. The phenomenon that occurred next can only be explained by American geographer Waldo Tobler's **First Law of Geography**, "everything is related to everything else, but near things are more related than distant things" (@Tobler_1970). In spring 1962, aboard a flight bound for the capital city where Spartan Air Services was headquartered, Tomlinson serendipitously met the lead bureaucrat of the Canada Land Inventory, Lee Pratt. Pratt and Tomlinson exchanged ideas about creating a computer system for handling mapped data and Tomlinson quickly got to working on the development on the world's first computerized GIS. That was 1962. Tomlinson first described it as a "geo-information system" (@Tomlinson_1967), but it was later renamed the Canadian Geographic Information System before it was finally shortened to the **Canada Geographic Information System (CGIS)**.
 
-Cartographic puberty, the awkward but necessary transition from paper to magnetic tape.
-
-to lead the development of the world's first computerized GIS. That was 1962. Tomlinson first described it as a "geo-information system" (@Tomlinson_1967), but it was later renamed the Canadian Geographic Information System before it was shortened to the **Canada Geographic Information System (CGIS)**. In the years that followed, the Canada Land Inventory produced over 12,000 map sheets showing the capability of Canada's lands for agriculture, forestry, recreation, and wildlife (@FisherandMacDonald_1979). At the time, a major function of the CGIS was to scan and digitize maps, all of which were on paper sheets.
-
-Other advances in computer hardware were achieved as a result of the pioneering work by Tomlinson, including the development and integration of map scanners and digitizer tables for inputting and updating geographic data into the computer. Tomlinson is widely acknowledged as the creator of modern computerized GIS.
+The months that followed are best described as cartographic puberty, the awkward but necessary transition from paper to magnetic tape. Thousands of existing paper maps had to be scanned, one line at a time, by a drum scanner. To scan a paper map with these machines required feeding the large paper map into the belly of a cylindrical drum so that as the drum spun a little optical head focused a light onto a small area and a photomultiplier together with a detector recorded the light intensity of the cartographic lines as a digital number. As the drum spins and completes a revolution, the optical head shifts by a fraction of a centimeter to record the next line of the map. In this way, a drum scanner capable of 20,000 samples per second would take about 20 minutes to fully scan a 80 x 60 cm paper map at a resolution of 0.02 cm. Other advances in computer hardware were achieved as a result of the pioneering work by Tomlinson, including the development and integration of digitizer and plotter tables for inputting and updating geographic data into the computer. Tomlinson is widely acknowledged as the creator of modern computerized GIS.
 
 ```{r 01-Canada-land-inventory, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste("Excerpt from a brochure describing initial mapping efforts of the Canada Land Inventory in British Columbia. Published by the Minister of Supply and Services Canada, n.d.")
     knitr::include_graphics("images/01-Canada-land-inventory.png")
 ```
 </br>
+
+By 1979, the Canada Land Inventory produced over 12,000 map sheets showing the capability of Canada's lands for agriculture, forestry, recreation, and wildlife (@FisherandMacDonald_1979). These maps represented the first digital overlays and analyses of land capability in the world and they covered much of Canada from the Atlantic Ocean to the Pacific Ocean.
 
 While the Canada Land Inventory was underway with the aid of the CGIS, provinces moved to create the agricultural land reserves to ensure that the most fertile areas remained available as farmland. In 1973, British Columbia established the Agriculture Land Reserves, setting aside 5% of its land base for farming priority. Newfoundland and Labrador established an Agriculture Development Area around the city of St. John's in the same year. By 1977, it was learned from CGIS analysis that only 0.5% the second largest country in the world supports prime farmland and half of that occurs in the vicinity of the most populous metropolitan area: Toronto (Figure \@ref(fig:01-cli-agriculture-capability-toronto)) (@CLIReport11_1977). Ontario published Food Land Guidelines the next year that effectively laid out a land use planning framework for municipalities and the province to protect and maximize the efficiency of farming on the best available land (@LandFoodGuidelines_1978).
 
@@ -249,25 +247,34 @@ In 1968, 16 years after the last burning, just 60 km upstream, a symposium at Ke
 
 > [...] Large quantities of black heavy oil floating in slicks, sometimes several inches thick, are observed frequently. Debris and trash are commonly caught up in these slicks forming an unsightly floating mess. Anaerobic action is common as the dissolved oxygen is seldom above a fraction of a part per million. The discharge of cooling water increases the temperature by 10 to 15 °F [5.6 to 8.3 °C]. The velocity is negligible, and sludge accumulates on the bottom. Animal life does not exist.
 
-The following year in the summer of 1969, the Cuyahoga River burned again. This time, the fire ignited a national conversation in the United States about pollution and was a catalyst for the passage of landmark legislation for protecting the environment. A month after the fire was extinguished, the United States Senate unanimously passed the National Environmental Policy Act (NEPA), legislation that required the federal government to consider the environmental impact of its land use. The following year, the Environmental Protection Agency (EPA) was established by an executive order of President Nixon and the Clean Air Act was passed. By 1972, the United States Congress passed the Clean Water Act. These events in the late 1960s and early 1970s provided new environmental and regulatory imperatives for the continued development of GIS.
+The following year in the summer of 1969, the Cuyahoga River burned again. This time, the fire ignited a national conversation in the United States about pollution and was symbolic for the passage of landmark legislation for protecting the environment. A month after the fire was extinguished, the United States Senate unanimously passed the National Environmental Policy Act (NEPA), legislation that required the federal government to consider the environmental impact of its land use. The following year, the Environmental Protection Agency (EPA) was established by an executive order of President Nixon and the Clean Air Act was passed. By 1972, the United States Congress passed the Clean Water Act. These events in the 1970s provided new environmental management and regulatory imperatives for the continued development of GIS.
 
-By 1976,
+The next wave of GIS development came from United States federal government agencies in response to the environmental management reforms that had taken place in the early 1970s. By the late 1970s, the benefits of GIS were recognised for improving environmental management, but software development was still only in its infancy. In 1976, the US Fish and Wildlife Service 
+
+In 1978, the US Army Corps of Engineers was among the first to look NFHUJGYDH7
+
+These new GIS software also had to confront a quickly emerging type of data: the raster image. 
+
+Map Overlay and Statistical Software (MOSS) - released in 1978
+System for Automated Geoscientific Analyses (SAGA) - released in 2004
+
+Landsat 1 launched July 23, 1972
+Landsat Island discovered in 1976
 
 Landsat Island, a truly Canadian story of discovery:
 
 > I have spoken to Frank Hall Sr. and he told me a fascinating story about the moment of discovery. He was strapped into a harness and lowered from a helicopter down to the island. This was quite a frozen island and it was completely covered with ice. As he was lowered out of the helicopter a polar bear took a swat at him. The bear was on the highest point on the island and it was hard for him to see because it was white. Hall yanked at the cable and got himself hauled up. He said he very nearly became the first person to end his life on Landsat Island.
 
-## Summary
-
 ## Reflection Questions {.unnumbered}
 
-1.  What is the difference between a conceptual model and a spatial model?
-2.  What was the initial purpose for developing the first GIS?
+1. What is the difference between a conceptual model and a spatial model?
+2. What was the initial purpose for developing the first GIS?
 
 ## Practice Questions {.unnumbered}
 
-1.  Name the five components of GIS.
-2.  Give an example of a spatial question that could be answered by a GIS.
-3.  What is a model? Give an example of a model.
-4.  What is a map?
-5.  What was the name of the first computerized GIS? Who was involved in its development it?
+1. Name the five components of GIS.
+2. Give an example of a spatial question that could be answered by a GIS.
+3. What is a model? Give an example of a model.
+4. What is a map?
+5. What was the name of the first computerized GIS? Who was involved in its development it?
+6. Name two other open source GIS software.

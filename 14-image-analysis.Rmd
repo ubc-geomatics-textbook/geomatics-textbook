@@ -19,7 +19,7 @@ Written by
 ```{r results='asis', echo=FALSE}
 cat(author)
 ```
-
+<!--
 Introduction here.
 
 :::: {.box-content .learning-objectives-content}
@@ -54,7 +54,8 @@ Term
 ##	Time Series Analysis
 ###	Change detection
 ###	Detecting spectral trends
-###	Inferring surface activity
+###	Inferring surface activity 
+-->
 ## Case Study: Sea Ice Change Analysis in the Beaufort Sea
 
 *Case Study Author: Natasha Sharma (CC BY 4.0. unless otherwise indicated), University of British Columbia, Bachelors of Environment and Sustainability, 2022*
@@ -84,12 +85,13 @@ Similarly, in the high arctic polar desert of Ellesmere Island in Nunavut, Canad
 
 <script> slider.oninput = () => {document.getElementById("before-img").style.clipPath = "polygon(0 0," + document.getElementById("slider").value + "% 0," + document.getElementById("slider").value + "% 100%, 0 100%)";}</script>
 <!--End of Slider code -->
-
+<!--
 ##	Pattern Analysis
 ###	Landscape Pattern Indices
 ###	Class Pattern Indices
-###	Patch Pattern Indices
-### Case Study: Case Study Title Here
+###	Patch Pattern Indices 
+-->
+### Case Study 2
 
 Understanding the changes that occur overtime is extremely important for environmental studies. These changes can be monitored using remote sensing data and has been used in a variety of studies. This case study looks at how changes in vegetation health derived from Landsat-8 data were impacted by the burn severity of the 25 569 hectare Little Bobtail Lake wildfire in North-Central British Columbia.
 
@@ -138,7 +140,7 @@ knitr::kable(dnbr_table, caption = "Table 1: Classified Burn Severity Values bas
 The change in value of the NDVI and the TCT Greenness and Wetness based on burn severity can be seen in the box plots below (Figure 1). This shows the changes in the vegetation index values from before the wildfire and every year after. The burn severity had an impact on these values as there was a greater decrease in value immediately after the wildfire with the higher burn severity as well as a slower return to the pre-fire state. Additionally, based on the vegetation index used, it can be seen that there different rates of return to a pre-fire state. These differences are important to understand when choosing a vegetation index for a study.  
 
 
-```{r, echo=FALSE, results='asis', fig.cap = "Figure 1: Changes in the values of NDVI (a), TCT Greenness (b), and TCT Wetness(c) based on the burn severity of the Little Bobtail Lake wildfire from 2014 (before the wildfire) to 2020 (five years after the wildfire)."}
+```{r, echo=FALSE, results='asis', fig.cap = "Changes in the values of NDVI (a), TCT Greenness (b), and TCT Wetness(c) based on the burn severity of the Little Bobtail Lake wildfire from 2014 (before the wildfire) to 2020 (five years after the wildfire)."}
 knitr::include_graphics(here::here("images", "14-VIPlots.png"))
 ```
 
@@ -198,7 +200,8 @@ if (knitr:::is_latex_output()) { fig_cap = "(ref:14-dnbr-leaflet-caption1)"
 }
 ```
 
-
+<!--
 Figure 2: 
 
 $$\\[0.1in]$$
+-->

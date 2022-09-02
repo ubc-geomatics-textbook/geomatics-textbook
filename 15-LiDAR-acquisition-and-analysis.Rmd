@@ -77,7 +77,7 @@ Unlike passive remote sensing technologies, LiDAR has the advantage of being abl
 
 ## Components of a LiDAR System
 
-## Lasers
+### Lasers
 
 **Lasers** are a very important component of LiDAR systems. Here we will discuss some basic concepts, as well as the technical parameters that are important when interpreting LiDAR data. LiDAR lasers are typically beams of **near-infrared** light (800 -- 1,550 nm, typically 1,064 nm), and are used because these wavelengths are considered eye safe [@white_best_2013]. Green wavelengths are used for bathymetric LiDAR (i.e. water penetrating LiDAR), but are less common, and not typically used on land [@uf_geomatics_-_fort_lauderdale_lidar_2016-2]. Laser scanners use rotating or oscillating mirrors in order to 'scan' a scene in multiple dimensions [@uf_geomatics_-_fort_lauderdale_lidar_2016-1]. When these scanners are placed on a moving platform (e.g. a plane), we can cover large areas [@uf_geomatics_-_fort_lauderdale_lidar_2016-1]. LiDAR sensors scan in a variety of ways; zig-zag, rotation mirror line, and push broom scanners are the most common, and use the same principles as those described for sensors in **Chapter 12 (double check, dynamically link)** [@uf_geomatics_-_fort_lauderdale_lidar_2016-1].
 
@@ -109,9 +109,7 @@ fig_cap <- paste0("An example of a LiDAR Unit. ('LiDAR machine', @the_center_for
 knitr::include_graphics("images/15-LiDAR-Unit.png")
 ```
 
-## Position and Orientation
-
-## Global Navigation Satellite Systems
+### Global Navigation Satellite Systems
 
 In order for us to use the calculation from Figure \@ref(fig:15-Concept-of-LiDAR), we need to know the exact position of the scanner in space. For airborne and mobile platforms, we can can do this by using the **global navigation satellite system (GNSS)**, as well as post processing using a local GNSS reference station. This helps us to improve accuracy by not comparing our position to a known local position in order to ensure our location is known as accurately as possible. GNSS concepts are covered further in [Chapter 4](https://ubc-geomatics-textbook.github.io/geomatics-textbook/collecting-and-editing-data.html).
 
@@ -120,11 +118,11 @@ fig_cap <- paste0("An on board GNSS is required toprovide an accurate location o
 knitr::include_graphics("images/15-XYZ-coordinates.png")
 ```
 
-## Inertial Measurement Unit (IMU)
+### Inertial Measurement Unit (IMU)
 
 An **inertial measurement unit (IMU)** consists of gyroscopes and accelerometers and measures the attitude and acceleration of the aircraft along the X, Y, Z axis. This data is combined with the GNSS data to provide a precise location of the scanner in space. This information becomes very important for airborne platforms where wind conditions can cause the orientation of the scanner to change subtly. We refer to the orientation of the platform in space by using the terms pitch, roll, and yaw, to describe which was the scanner is facing (see \@ref(fig:15-LiDAR-System)).
 
-## Clocks
+### Clocks
 
 LiDAR point data needs to be synced with positioning data in order to know exactly where the point is in space. To do this, a very accurate GNSS clock is used to time stamp the laser scanning data [@uf_geomatics_-_fort_lauderdale_lidar_2016-1]. Accurate clocks are imperative for producing accurate point clouds; one nanosecond (i.e., one billionth of a second) corresponds to a 30 cm travel distance, as seen in Figure \@ref(fig:15-LiDAR-Discrete-Full-Waveform) [@uf_geomatics_-_fort_lauderdale_lidar_2016-2]!
 
@@ -132,11 +130,11 @@ LiDAR point data needs to be synced with positioning data in order to know exact
 
 LiDAR units can be attached to a variety of platforms. Traditionally, LiDAR units for forestry research were mounted on airplanes and helicopters, as units were large and cumbersome, however ground based units such as terrestrial laser scanning (TLS), and mobile laser scanning (MLS) have also been developed. These units tend to have a very high point density, and TLS is often used in modeling tree architecture.
 
-## Airplanes and Helicopters
+### Airplanes and Helicopters
 
 Airplanes and helicopters are still the most common platforms for LiDAR data collection. This is due to their ability to collect large amounts of data in one acquisition. LiDAR units that are designed for airplanes are more powerful than those designed for drones, leading to increased penetration in forests, even though the flight height is significantly increased. Data storage issues can also be mitigated as the platform is not as sensitive to weight restrictions when compared to drones. With increased pulse rates, data acquisitions can also be dense enough to do individual tree crown work. Since helicopters are capable of flying at lower altitudes, slower speeds, and following terrain, they are capable of collecting more dense data, but higher operating costs [@white_best_2013]. Typical point densities range from 5 - 200 points·m^-2^.
 
-## Drones
+### Drones
 
 As laser units have decreased in size, we have been able to mount LiDAR units to smaller platforms. Drones (also known as unmanned aerial vehicles (UAV) or remotely piloted aerial systems (RPAS)) are extremely convenient to collect high density point clouds over small areas. They typically fly relatively close to the forest (e.g. 50 m above the trees) and fly a pre-defined flight route so ensure evenly spaced data collection. Typical point densities range from hundreds to thousands of points per meter squared. A major limitation of drones is currently battery life, as acquisition campaigns are limited by how long the drone can fly for (approximately 20 - 30 minutes). This means that collecting large amounts of data is difficult in remote locations.
 
@@ -145,15 +143,15 @@ fig_cap <- paste("Drone mounted LiDAR. This technology is rapidly developing, wi
 knitr::include_graphics("images/15-LiDAR-on-Drone.png")
 ```
 
-## Mobile Laser Scanning
+### Mobile Laser Scanning
 
 Mobile Laser Scanning (MLS) includes people (sometimes called 'backpack LiDAR') and moving vehicles. This version of LiDAR has been used by transportation and engineering companies to precisely map things like road or building conditions, and as the units have reduced in size there has been and increase in interest for use in forestry. Current MLS units such as panel 2 in Figure \@ref(fig:15-LiDAR-Platforms) can be carried around by the user in a forest easily. The point density for that specific unit is approximately 6,000 points·m^-2^ while the battery can last for over an hour. Typical point densities are highly dependent on what the MLS is mounted to; and can range from hundreds to thousands of points per square meter.
 
-**Terrestrial Laser Scanning**
+### Terrestrial Laser Scanning
 
 Terrestrial Laser Scanning (TLS) is a static system, meaning that is is placed in one location, takes measurements of a scene, and can then be moved (see panel 1 of Figure \@ref(fig:15-LiDAR-Platforms). These units are used by engineers for surveying, and are used by foresters to precisely measure trees. This information can be used to build quantitative structure models (QSM), to precisely estimate tree parameters. Unlike the other platforms mentioned here, TLS is not necessarily a fast data collection technique. Due to occlusion, the TLS instrument needs to be placed in multiple positions around a plot to be able to fully visualize the trees/plot, which means that a one hectare plot can take three to six days to survey [@wilkes_understanding_2015]! Typical point densities are in the thousands of points per meter squared.
 
-## Satellite
+### Satellites
 
 Satellites are a relatively new platform for LiDAR sensors. Two current satellite sensors are highlighted here; ICESat-2 (Ice, Cloud and land Elevation Satellite) and GEDI (Global Ecosystem Dynamics Investigation). Both are examples of large-footprint, profiling LiDAR systems. ICESat-2 was launched in 2018, with the objectives to determine sea-ice thickness and measure vegetation canopy height for large scale biomass estimation [@nasa_icesat-2_2021]. The ICESat-2 LiDAR sensor is composed of 6 beams in 3 pairs, each with a footprint size of 13 m [@nasa_icesat-2_2021]. GEDI is a LiDAR sensor that was installed on the International Space Station in 2018, with 3 lasers producing 10 parallel tracks of observations, and a footprint size of 25 m [@nasa_gedi_2021]. The GEDI sensor can be seen in panel 4 of Figure \@ref(fig:15-LiDAR-Platforms).
 
@@ -164,11 +162,11 @@ knitr::include_graphics("images/15-LiDAR-Platforms.png")
 
 ## Types of LiDAR
 
-## Discrete Return
+### Discrete Return
 
 **Discrete return** LiDAR is the most common type of LiDAR. Here, the reflected energy from a pulse is converted into return targets referenced in time and space [@white_best_2013]. Discrete return systems can often record multiple returns (often 5 or more), as long as the energy from each return meets the energy threshold to be classified as a return. Returns are classified per pulse, by the arrival sequence in which the return signals are detected by the sensor [@uf_geomatics_-_fort_lauderdale_lidar_2016]. In the case where a laser pulse intercepts a solid object (such as a building), only a single return would occur; in contrast if the laser pulse can penetrate through the object (e.g. the forest), some of the energy will be returned to the instrument where the pulse intercepts stems/branches/leaves [@white_best_2013]. Figure \@ref(fig:15-LiDAR-Discrete-Full-Waveform) shows an example of this; a discrete return system would interpret the returned echo as two returns, as there are two peaks in the returned echo corresponding to a canopy and a ground hit. In a forested landscape, first returns often represent the upper canopy, while last returns correspond to the ground or objects near the ground [@white_best_2013].
 
-## Full Waveform
+### Full Waveform
 
 **Full waveform** LiDAR systems record reflected energy from each laser pulse as a continuous signal [@white_best_2013].Traditionally, discrete return systems would only digitally store the discrete returns, without recording the complete analog return [@uf_geomatics_-_fort_lauderdale_lidar_2016]. In contrast, full waveform systems digitize the entire analog signal at high sampling rates [@uf_geomatics_-_fort_lauderdale_lidar_2016]. This can be seen on the right hand side of Figure \@ref(fig:15-LiDAR-Discrete-Full-Waveform). This type of LiDAR creates much larger file sizes which were an issue in the past, but with modern storage capabilities it is becoming a viable alternative to discrete return LiDAR.
 
@@ -176,6 +174,16 @@ knitr::include_graphics("images/15-LiDAR-Platforms.png")
 fig_cap <- paste0("Differents in the response between discrete echo and full waveform LiDAR. 'Airborne Laser Scanning Discrete Echo and Full Waveform signal comparison', @beck_airborne_2012, CC-BY-SA-3.0).")
 knitr::include_graphics("images/15-LiDAR-Discrete-Full-Waveform.png")
 ```
+
+### Your Turn!
+
+Use our online tool to visualize and explore a discrete return LiDAR point cloud. You can visualize different attributes of the point cloud including elevation, classification, number of returns, return number, and intensity. Why do you think the intensity of returns varies across the vegetation? What do you notice about the pattern of return number relative to the point elevation? What information do you think could be used to classify the returns?
+
+```{r 15-lidar-visualization-static, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+    fig_cap <- paste0("Online tool for visualizing and exploring the properties of a small LiDAR point cloud. Data from City of Vancouver and licensed under the <a href='",covlicence,"'>Open Government License - Vancouver</a>. <a href='https://www.opengeomatics.ca/viz/lidar-viz/'>Click here to access the interactive tool.</a> Juno Yoon, CC-BY-SA-4.0.")
+    knitr::include_graphics(here::here("images", "15-lidar-visualization-static.PNG"))
+```
+<br/>
 
 ## Emerging Technology
 

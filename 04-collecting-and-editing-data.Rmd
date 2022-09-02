@@ -22,7 +22,7 @@ The ability of a geomatician to answer research questions or produce a map or ot
 1. Become familiar with a wide range of spatial datasets and strategies to access them
 2. Identify several sources of historical spatial information, including historical maps and aerial photos, and the steps required to analyze them as spatial information
 2. Recognize good practices and strategies for writing and reading metadata
-4. Understand the components of Global Navigation Satellite Systems (GNSS) and how location on Earth is triangulated from these systems
+4. Understand how to collect data using Global Navigation Satellite Systems (GNSS)
 
 ::::
 
@@ -69,7 +69,7 @@ Try using a web search to find the government open data pages for your city, pro
 
 This section introduces the census at a cursory level before launching into the applied question of how to find census data for your spatial analysis, using the Census of Canada as an example.
 
-A **census** generally refers to a complete count by government of a specific region's population by age, gender, language, income, housing and other demographic characteristics. Census data inform public policy, such as allocation of public funds, transportation network planning, and electoral area delineation. Census data also provide researchers with an opportunity to gain insight into the social and, to a lesser extent, environmental fabric of a country and are increasingly used in environmental and social-ecological research that aims to address social elements of environmental challenges [@tomscha_guide_2016] [@biggs_routledge_2021]. Censuses are typically conducted once every five years (e.g., Canada) or every 10 years (e.g., Unites States).
+A **census** generally refers to a complete count by government of a specific region's population by age, gender, language, income, housing and other demographic characteristics. Census data inform public policy, such as allocation of public funds, transportation network planning, and electoral area delineation. Census data also provide researchers with an opportunity to gain insight into the social and, to a lesser extent, environmental fabric of a country and are increasingly used in environmental and social-ecological research that aims to address social elements of environmental challenges [@tomscha_guide_2016] [@biggs_routledge_2021]. Censuses are typically conducted once every five years (e.g., Canada) or every 10 years (e.g., United States).
 
 In addition to demographics, many nations survey information related to economics or specific industries, such as agriculture. For example, Canada's Census of Agriculture captures information on fertilizers, irrigation, livestock, farm types, and crop production across Canada. The Longform Census in Canada surveys additional questions but is only sent to a subset of the population, and the data from it are then estimated for the entire population.
 
@@ -270,7 +270,58 @@ Once the control points are set, a transformation is applied to mold the histori
 
 ### Documenting Georeferencing 
 
-During the process of georeferencing you must document the number of control points and the root mean square error (RMSE). Although there are multiple sources of uncertainty in the spatial precision of a historical map, uncertainty should be characterized where possible to demonstrate rigour in your methods and for communicating uncertainty. 
+During the process of georeferencing you must document the number of control points and the root mean square error (RMSE). Although there are multiple sources of uncertainty in the spatial precision of a historical map, uncertainty should be characterized where possible to demonstrate rigour in your methods and for communicating uncertainty.
+
+## Collecting Data from Global Navigation Satellite Systems
+
+Most likely, the type of data that you will need to collect in the field will be location. You might need to locate some plots in the forest or walk the perimeter of a rare ecosystem in order to map these features. To do this, we rely on Global Navigation Satellite Systems (GNSS). In this section, we will explore how GNSS works, what are the sources of error, identify the main segments, and discuss how you can collect your own positional data from a GNSS.
+
+### How GNSS Work
+
+A GNSS is, fundamentally, a ranging system. Range is simply the distance between two points that are connected by a line-of-sight. One of those points is you, holding your GNSS receiver, and the other point is a satellite that is orbiting somewhere between 20,000 and 23,000 km above the surface of the Earth. The satellite is broadcasting a radio wave signal that is traveling at the speed of light $c = 299,792,458 m·s^{-1}$, which at a distance of 20,000 km would take about 67 _milliseconds_ to reach you on the ground if the satellite was directly above you. But the range to a single satellite cannot tell you much. For example, how would you know where you are if you knew that you were 20,000 km away from Vancouver, Canada? You could literally be 20,000 km in any direction, and you might visualise that as a sphere with a radius $r = 20,000 km$. The radius of the Earth's semi-major axis measures only $a=6,378.137km$ for the World Geodetic System 1984 (WGS 1984), which means a range of 20,000 km could place you anywhere on Earth, but also many other locations off in space. So how do we narrow our possible location and solve our position on Earth? We need more satellites!
+
+With a range to a single satellite, you know you are somewhere on the surface of a sphere with a radius equal to that range. With known ranges to two satellites, you can reduce your possible positions to the intersection of the two spheres that are formed from the two ranges (Figure \@ref(fig:04-two-gnss-satellites). It is important to recognize here that when you intersect two spheres, the arc (line) that forms the intersection represents the possible locations where both ranges are true. In other words, we have now reduced our possible positions from a 3D surface of a sphere to a 2D arc.
+
+```{r 04-two-gnss-satellites, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+    fig_cap <- paste0("Range to two satellites gives an intersection, which spatially is represented as a 2D arc of possible positions. Pickell, CC-BY-SA-4.0.")
+    knitr::include_graphics("images/04-two-gnss-satellites.PNG")
+```
+<br/>
+
+Adding the range to a third satellite gives us two more intersecting arcs, one with the first satellite and another with the second satellite. The intersection of these three arcs reduces our possible positions to just two locations (Figure \@ref(fig:04-three-gnss-satellites) and usually only one of these is actually logical relative to Earth (i.e., one position is in space and one is on Earth).
+
+```{r 04-three-gnss-satellites, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+    fig_cap <- paste0("Range to three satellites gives us three intersections. These three arcs intersect only at two positions. Pickell, CC-BY-SA-4.0.")
+    knitr::include_graphics("images/04-three-gnss-satellites.PNG")
+```
+<br/>
+
+
+
+But the satellite itself is of course in motion, orbiting the Earth at a speed of about 14,000 km·s^{-1}, which complicates things in two ways. First, the range to the satellite is always changing because the satellite is moving. Second, the satellite will eventually disappear over the horizon and then you do not have a line-of-sight anymore. 
+
+Ranging
+Clocks
+Trilateration
+Carrier phases
+Pseudorandom code
+
+### Sources of Error
+
+Dilution of precision: geometric, horizontal, vertical, time
+Ionosphere delay
+total electron count
+multipath errors
+line of sight
+obstructions
+
+### Segments of GNSS
+
+Users
+Space
+Ground control
+
+### Planning Your GNSS Data Collection
 
 ## Summary 
 

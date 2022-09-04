@@ -1,157 +1,72 @@
 --- 
-title: "An Open Geomatics Textbook"
-author: "UBC"
-date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
+title: "Geomatics for Environmental Management: An Open Textbook for Students and Practitioners"
 documentclass: book
-bibliography: [bibliographies/ch2.bib, bibliographies/ch3.bib, bibliographies/ch4.bib, bibliographies/ch5.bib, bibliographies/ch7.bib, bibliographies/ch8.bib, bibliographies/ch9.bib, bibliographies/ch10.bib, bibliographies/ch11.bib, bibliographies/ch12.bib, bibliographies/ch13.bib, bibliographies/ch14.bib, bibliographies/ch15.bib, bibliographies/ch16.bib, bibliographies/ch17.bib]
-biblio-style: apalike
-link-citations: yes
-github-repo:  ubc-geomatics-textbook/book
-url: 'https\://github.com/ubc-geomatics-textbook/book/'
-description: "Advancing teaching and learning in geomatics at UBC"
+bibliography:
+- bibliographies/ch1.bib
+- bibliographies/ch2.bib
+- bibliographies/ch3.bib
+- bibliographies/ch4.bib
+- bibliographies/ch5.bib
+- bibliographies/ch7.bib
+- bibliographies/ch8.bib
+- bibliographies/ch9.bib
+- bibliographies/ch10.bib
+- bibliographies/ch11.bib
+- bibliographies/ch12.bib
+- bibliographies/ch13.bib
+- bibliographies/ch14.bib
+- bibliographies/ch15.bib
+- bibliographies/ch16.bib
+- bibliographies/ch17.bib
+- packages.bib
+link-citations: true
+github-repo: ubc-geomatics-textbook
+url: https\://github.com/ubc-geomatics-textbook
+description: Advancing teaching and learning in geomatics
 always_allow_html: true
+site: bookdown::bookdown_site
 ---
 
-# Preface {-}
+# About this textbook {.unnumbered}
 
-This is the very first part of the book, which will eventually include the textbook's introduction. For now, here's some useful info for you:
+```{r 00-book-cover, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+    fig_cap <- paste("Cover design by Lily Crandall-Oral, CC-BY-SA-4.0.")
+    knitr::include_graphics("images/15-las-denoise.png")
+```
+</br>
 
-## Contacts 
+Geomatics is a large and growing field that encompasses the art, science and technology of measuring attributes about Earth's systems. From the earliest observations of Earth's shape in ancient Greece to the space and information age, humans have wondered about their place on this planet. Nearly every aspect of our modern geographic lives can be attributed to advances in the field of geomatics. Today, location is real-time and precise, made easy by millennia of observations and incremental advances in technology that have culminated in a wondrous field of study.
 
-Paul Pickell, paul.pickell@ubc.ca    
-Evan Thornberry, evan.thornberry@ubc.ca    
-Francois du Toit, fdutoit@mail.ubc.ca
+The purpose of this textbook is to give students and practitioners a solid survey (pun intended) of what modern geomatics is capable of when confronting environmental management problems. We take a Canadian perspective to this approach, by telling the historical contributions of Canadians to the field and sharing real-world case studies of environmental management problems in Canada. Inside, you will find interactive web-based content and tools, case studies with real geographic data, and tons of reflection and practice questions. Best of all, unless otherwise stated, the content is free to use, adapt, and remix for any purpose with attribution to us and under the same [Creative Commons 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/).
 
-## Project Wiki
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />
 
-[github.com/ubc-geomatics-textbook/docs/wiki](https://github.com/ubc-geomatics-textbook/docs/wiki)
+## Who Should use this textbook {.unnumbered}
 
-## Style Guide
-### Audience
-1.	Audience is undergraduate of graduate student studying GIS, geomatics, and remote sensing with no prior knowledge in these subject areas (i.e., introductory).
-2.	Assume only first year-level knowledge (or equivalent concurrent learning) of mathematics, science (biology, chemistry, physics), and geography.
-3.	Assume a multicultural reader who is not necessarily familiar with Canadian geography and history.
+This textbook is designed to be used by students, instructors, and practitioners of geomatics. All the basics are covered for introducing Geographic Information Systems (GIS) and remote sensing at any level or as a refresher. We throw in a little extra for understanding common GIS workflows and some more advanced topics that are suitable for advanced students. Unlike many other geomatics textbooks, we do not adopt any specific GIS software and therefore any student or practitioner should be able pick up this textbook and apply the methods and knowledge to the software of your choice. That said, the textbook is created with many geospatial packages in R and because it is open, anyone is free to poke their head under the hood in the GitHub repository for specific workflows and geospatial data handling with R.
 
-### General Style
-1.	Word spellings should follow *The Oxford Canadian Dictionary (2 ed.)*.
-2.	Every chapter begins with 1-3 paragraphs of introductory text. The introductory text should be for general interest and not introduce any important terms that will be defined later in the chapter. The last sentence of this introductory text should summarize what students will learn.
-3.	Posing questions to readers is encouraged in all sections. For example, “Have you ever wondered…?” “How do you think X relates to Y?”
-4.	At every opportunity, authors should highlight Canadian examples of technology and science in geomatics. Examples of geomatics applications are highly encouraged in the Canadian context. For example, the following list of environmental management problems that are important to Canada should be discussed whenever possible:
-    -	Northern communities
-    -	First Nations
-    -	Climate change
-    -	Boreal forest
-    -	Endangered wildlife
-    -	Freshwater management and ecosystems
-    -	Fisheries
-    -	Glaciers/ice monitoring
-    -	Environmental justice
-    -	Resource extraction
-    
-### Learning Objectives
-1.	Every chapter will have a numbered list of learning objectives that follow the introductory text.
-2.	There should be no period at the end of each listed learning objective.
+## How to adopt this textbook in your geomatics classroom {.unnumbered}
 
-### Summary
-1.	All learning objectives should be addressed in the summary section.
-2.	The summary section should never introduce any new concepts, terms, or definitions and should never reference figures, tables, or equations.
+Depending on what you are teaching and how you organize your course, you can easily assign readings that are thematic or sequential. A great way to get started with adopting this textbook is to read the clear and concise **Learning Objectives** that are displayed at the very beginning of each chapter and then compare with your own curriculum.
 
-### Key Terms
-1.	Every chapter will have an alphabetical, but unnumbered list of key terms.
-2.	At first mention in the chapter text, key terms should be boldened and defined.
+```{r 00-learning-objectives, out.width= "75%", echo = FALSE}
+    knitr::include_graphics("images/00-learning-objectives.png")
+```
+</br>
 
-### Headings and Labels
-1.	Chapter titles should use title-case and are numbered.
-2.	Chapter sub-titles are also numbered and in title-case. Sub-titles should go no lower than level 3 heading (i.e., 1.2.3).
-3.	Level 4 headings are not numbered, all letters are capitalized, and should only be used in special call-out boxes:
-    - LEARNING OBJECTIVES
-    - REMEMBER THIS?
-    - YOUR TURN!
-    - CASE STUDY
+Chapter 1 provides an overview of the field with some key definitions and a detailed history of much of the technology that is presented in later chapters. The remainder of the textbook can be divided into four parts:
 
-### Formulae
-1.	Do not format formulae using Microsoft Word or LaTeX. Instead, formulae should be formatted with [RMarkdown](https://bookdown.org/yihui/rmarkdown/markdown-syntax.html).
-2.	Coordinates and Greek letters should always be formatted as formulae with RMarkdown.
+- **Part 1** Chapters 2-5 cover **Geospatial Data Fundamentals** such as types of data, collecting and editing data, Global Navigation Satellite Systems, and relational database management systems.
+- **Part 2** Chapters 6-10 focus on **Spatial Analysis** and cover a wide variety of common workflows, some of which might be found in more advanced geomatics coursework like network analysis and spatial estimation.
+- **Part 3** Chapters 10-15 focus on everything **Remote Sensing** including theory, systems, image processing and analysis, and LiDAR (light detection and ranging).
+- **Part 4** Chapters 16 and 17 illustrate how to create **Information from Data** with a focus on integrating data and creating maps.
 
-### Units
-1.	Standard International (SI) units should be used for the following:
-    -	Length = meter (m)
-    -	Time = second (s)
-    -	Amount of substance = mole (mole)
-    -	Electric current = ampere (A)
-    -	Temperature = Kelvin (K)
-    -	Luminous intensity = candela (cd)
-    -	Mass = Kilogram (kg)
-2.	Angle degrees are preferred over radians (rad) when referencing geographic position.
-3.	Rates should be expressed with a dot operator and negative exponent rather than a divisor (e.g., m·s-1 or W·m-2).
+Chapters are written to stand alone as authoritative contributions on specific topics, but an accumulative approach is taken to content organization. In this way, the textbook can be adopted in sequence as-is for an entire semester or you can adopt the chapters that suit the needs for your course and compliment them with other materials. Each chapter is also subdivided into subsections that can be easily linked to for an assigned reading.
 
-### Numbers
-1.	Scientific notation is the preferred way to represent large and small numbers and should use the × operator (not dot or asterisk) and be formatted as a formula (see Formulae): 1 × 102.
-2.	Scientific notation should be limited to four significant figures (e.g., 1.234 × 100) except for specific numbers where the precision is important or meaningful like the speed of light (2.99792458 × 108 m·s-1) or Planck’s constant (6.62607004 × 10-34 J·s-1).
-3.	Constants (like above) and other physical variables should use [common notations](https://en.wikipedia.org/wiki/List_of_common_physics_notations) (e.g., c for speed of light and h for Planck’s constant) and be formatted as formulae (see Formulae).
+## How to get involved {.unnumbered}
 
-### Dates and Times
-1.	The Gregorian calendar should be adopted for recent dates. In these cases, use Common Era (C.E.) to indicate dates after 0 A.D. and Before Common Era (B.C.E.) for dates before 0 A.D.
-    -	For specific recent dates, use the format “20 February 2021” and omit C.E.
-    -	If many dates need to be summarized in a table, use the format “DD-MM-YYYY”
-2.	Times should be specified in either Local Standard Time (LST) or Coordinated Universal Time (UTC) using a 24-hour clock:
-    -	00:00 = 12 A.M. midnight LST
-    -	12:00 = 12 P.M. noon LST
-    -	23:00 = 11 P.M. LST
-3.	For non-recent dates or when referring to geologic time scales, use the following:
-    -	Thousands of years before present = kilo annum (ka)
-    -	Millions of years before present = mega annum (Ma)
-    -	Billions of years = giga annum (Ga)
+Because this is an open project, we highly encourage contributions from the community through our **Open Geomatics Community of Practice** on GitHub. The textbook is hosted on our GitHub repository and from there you can open an issue or start a discussion. Feel free to open an issue for any typos, factual discrepancies, bugs, or topics you want to see in a future edition. We are always looking for great Canadian case studies to share! Beyond the built versions of the textbook (e.g., [www.opengeomatics.ca(http://www.opengeomatics.ca), pdf, epub, etc.), you can fork our GitHub repository to explore the source code.
 
-### Tables
-1.	Tables are numbered in the order that they appear in text and begin with the number of the chapter:
-    -	Table 1 in Chapter 1  = 1.1
-2.	A short, descriptive caption should be written for a table.
-3.	Tables should only include information that is discussed or referenced in the chapter text.
-4.	Every table must be referenced in the chapter text.
+## Acknowledgements {.unnumbered}
 
-### Code Blocks
-1.	Avoid code blocks in chapter text. Instead, try to place code blocks in TRY THIS! or CASE STUDY sections.
-2.	Only R code blocks should be embedded using [RMarkdown](https://bookdown.org/yihui/rmarkdown/r-code.html).
-
-### Abbreviations
-1.	Abbreviations are shortened form of a word or phrase and should be punctuated with periods:
-    -	e.g.
-    -	Dr.
-    -	Ph.D.
-
-### Initialisms
-1.	Initialisms are the first letters of several words and should always be defined at first use in the chapter text regardless if the initialism is introduced and defined in an earlier chapter.
-2.	Do not introduce initialisms in figure or table captions or table text.
-3.	Except for the specific cases in this style guide, do not punctuate initialisms with periods:
-    -	AVHRR
-    -	NDVI
-
-### Acronyms
-1.	Acronyms are combinations of the first letters of several words and are pronounced as words. Acronyms should never be punctuated with periods.
-2.	Many satellites and remote sensing systems have acronyms that vary capitalization.
-3.	Following are some preferred acronyms:
-    -	Light Detection and Ranging = LiDAR
-    -	Radio Detection and Ranging = RADAR
-    -	Moderate Resolution Imaging Spectroradiometer = MODIS
-
-### Punctuation
-1.	Use serial comma (Oxford comma) in lists: Yukon, Northwest Territories, and Nunavut.
-2.	Use italics for internal dialogue or when you infer what the reader might be thinking:
-    - “At this point, you might be wondering, *why am I reading this sentence?*”
-3.	Avoid the use of semi-colons.
-4.	Use and punctuate common Latin abbreviations with periods:
-    -	“For example” = exempli gratia (e.g.)
-    -	“That is” = is est (i.e.)
-    -	“And other similar things” = et cetera (etc.)
-5.	Avoid phrases in parentheses () or brackets []. Instead, place the phrase in a proper sentence.
-6.	Use single spaces between sentences.
-7.	Use double quotation marks for direct quotes, but avoid reproducing verbatim large texts. Paraphrasing with proper citation is preferred to direct quotation.
-8.	Bullet points are preferred over long lists in sentences.
-
-### Citations
-1.	Style should follow American Psychological Association (APA) format.
-2.	In-text references are encouraged where necessary, especially in case studies.
-3.	References and Recommended Readings section is placed at end of each chapter. Where possible, Recommended Readings should be populated with Open Educational Resources.
-
+So many folks helped with the development of this textbook and many of them are named as authors in various chapters. For those not explicitly named with contributions, we greatly thank the efforts by Nick Murphy for collating our bibliographic sources, Natasha Sharma for editing and fixing things, students enrolled in the Master of Geomatics for Environmental Management program at the University of British Columbia for contributing case studies and early reviews. This textbook would not have been possible without the support of an Open Educational Resources (OER) Implementation Grant from the University of British Columbia.

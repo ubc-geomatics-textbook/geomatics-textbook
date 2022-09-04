@@ -1,12 +1,3 @@
----
-editor_options:
-  markdown:
-    wrap: 72
-output:
-  html_document:
-    df_print: paged
-  word_document: default
----
 ```{r echo=FALSE}
 yml_content <- yaml::read_yaml("chapterauthors.yml")
 author <- yml_content[["imageProcessing"]][["author"]]
@@ -144,7 +135,7 @@ perspective views into plan views before they can be used to trace the
 features that appear on topographic maps, or to digitize vector features
 in digital data sets.
 
-Compare photographs in Figure \@ref(fig:13-ortho). Both show the same
+Compare photographs in Figure ref(fig:13-ortho). Both show the same
 gas pipeline, which passes through hilly terrain. Note the deformation
 of the pipeline route in the photo on the left relative to the shape of
 the route on the orthoimage to the right. The deformation in the photo
@@ -321,7 +312,7 @@ the atmosphere has on the observation of electromagnetic radition
 relates to changes in the atmosphere during collection and the specific
 wavelengths being collected. The majority of impacts are caused by the
 three main types of scattering, which were presented in Chapter
-\@ref(fundamentals-of-remote-sensing).
+ref(fundamentals-of-remote-sensing).
 
 ## Atmospheric Windows
 
@@ -353,7 +344,7 @@ not remove them entirely.
 
 When approaching the removal of clouds, it is important to recall the
 physics that drive Mie scattering (Chapter
-\@ref(fundamentals-of-remote-sensing)). Essentially, water vapors in the
+ref(fundamentals-of-remote-sensing)). Essentially, water vapors in the
 atmosphere scatter visible and near infrared light and generate what
 appears to be white objects in the sky. Since the visible and near
 infrared regions of the EMS fall within an atmospheric window in which
@@ -539,8 +530,10 @@ standard can be observed
 
 </p>
 
+(ref:13-landsat-c2-l2-caption) Three unique Landsat 8 Collection 2 images. In order from left to right: Level-1 Top of Atmosphere reflectance image (no atmospheric correction), Level-2 atmospherically corrected surface reflectance and Level-2 surface temperature. Images were collected on May 3, 2013 over the Sapta Kosh River in Bairawa, Nepal [@bouchard_example_2013]. Public domain.
+
 ```{r 13-landsat-c2-l2, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-    fig_cap <- paste0("Three unique Landsat 8 Collection 2 images. In order from left to right: Level-1 Top of Atmosphere reflectance image (no atmospheric correction), Level-2 atmospherically corrected surface reflectance and Level-2 surface temperature. Images were collected on May 3, 2013 over the Sapta Kosh River in Bairawa, Nepal [@bouchard_example_2013]. Public domain.")
+    fig_cap = "(ref:13-landsat-c2-l2-caption)"
     knitr::include_graphics("images/13-landsat-c2-l2.png")
 ```
 

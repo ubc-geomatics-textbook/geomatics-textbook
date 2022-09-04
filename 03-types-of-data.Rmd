@@ -66,7 +66,7 @@ knitr::include_graphics("images/03-elevation.png")
 Few phenomena will fit perfectly and exclusively into one category or the other.  That said, its helpful for us to think about the discrete v. continuous dichotomy.  As long as we recognize that it's not a perfect classification.  Whether a phenomenon is considered discrete or continuous depends on scale (both spatial and temporal) and perspective.  Some phenomenon are a bit of both.  Take the coastlines, they can be treated as discrete or continuous.  At the scale of an individual beach over hours, tides can cause wide variations in water levels/position.  How/where does one draw the discrete line representing the "coast".  At this scale, the coast isn't really a discreet object, rather a continuous field known as the inter-tidal zone.  Zoom out a bit and those fluctuations aren't particularly relevant if you want to make a map of Pacific Rim National Park.  The coast could be considered a discrete object.  But if you change the timescale and look at sea level rise projections, then you're dealing with a continuous field.
 
 ```{r 3-beach-small-scale, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste0("The west coast of Vancouver Island (just a screen grab from Arc, might want something better. Skeeter, CC-BY-SA-4.0.")
+fig_cap <- paste0("The west coast of Vancouver Island. Skeeter, CC-BY-SA-4.0.")
 knitr::include_graphics("images/03-beach-small-scale.png")
 ```
 
@@ -216,7 +216,7 @@ knitr::include_graphics("images/03-vector-v-raster.jpg")
 The raster data model represents a phenomena across space as a gridded set of cell (or pixels).  The cell size determines the **Resolution** of the raster image, that is the smallest feature we can resolve with the raster.  A 10 m resolution raster has cells that are 10 x 10 m (100 m2), a 2 m resolution has cells that are 2 x 2 m (4 m2).  Along with the cell size, the number of rows and columns dictates the extent (or bounds) of a raster image.  A raster with a 1 m cell size, 5 rows, and 5 columns, will cover an area of 5 m x 5 m (25 m2).  Because of the full coverage within their bounds, raster data models are very well suited for representing *continuous phenomena* where cell values correspond to measured (or estimated) value at specific location.  In GIS, rasters are commonly encountered as: satellite and drone imagery, elevation models, climate data, model outputs, and scanned maps.  
 
 ```{r 3-raster-example, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste0("I think this one is pretty good, I use it in my lecture notes. Skeeter, CC-BY-SA-4.0")
+fig_cap <- paste0("Raster data. Skeeter, CC-BY-SA-4.0")
 knitr::include_graphics("images/03-raster-example.png")
 ```
 
@@ -337,7 +337,7 @@ Like raster data, vector data can also come in many different formats. The **sha
 
 Because the structure of points, lines, and polygons are different, each individual shapefile can only contain one vector type (all points, all lines or all polygons). You will not find a mixture of point, line and polygon objects in a single shapefile.
 
-**GeoJSON** is a simple, lightweight format for storing a variety of geographic data structures.  It is most commonly encountered in web mapping and other open source applications.  GeoJSON supports the following geometries: Point, Line, Polygon, MultiPoint, MultiLine, and MultiPolygon objects.  Unlike with shapefiles, one GeoJSON file can contain any mix of geometries. An objects with and its attributes are a Feature object. A set of Features is a FeatureCollection.  GeoJSON has the added benefit of allowing you to encode stylistic choices within the file.  If you'd like to explore this format a bit more, take the code below and paste it [here](https://geojson.io/#map=2/20.0/0.0).  You can make changes and see them reflected on your the map.
+**GeoJSON** is a simple, lightweight format for storing a variety of geographic data structures.  It is most commonly encountered in web mapping and other open source applications.  GeoJSON supports the following geometries: Point, Line, Polygon, MultiPoint, MultiLine, and MultiPolygon objects.  Unlike with shapefiles, one GeoJSON file can contain any mix of geometries. An objects with and its attributes are a Feature object. A set of Features is a FeatureCollection.  GeoJSON has the added benefit of allowing you to encode stylistic choices within the file. If you'd like to explore this format a bit more, copy the code below and paste it in the [online GeoJSON editor geojson.io](https://geojson.io/#map=2/20.0/0.0).  You can make changes and see them reflected on your the map.
 
 ```json
 {
@@ -445,11 +445,11 @@ No single data model is suitable for all types of data or analysis.
 
 ### Resolution: Vector vs. Raster
 
-This video gives an applied example of how resolution differes between raster and vector data.  *Note* The video is just a placeholder.
+This video gives an applied example of how resolution differes between raster and vector data.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/bG5E8YzqI0A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-
+<!-- 
 :::: {.box-content .your-turn-content}
 
 ::: {.box-title .your-turn-top}
@@ -472,6 +472,8 @@ This is a call out. Put some important concept or fact in here.
 
 ::::
 
+-->
+
 ## Summary
 
 This chapter has introduced you to how we represent data in a GIS.
@@ -490,6 +492,7 @@ This chapter has introduced you to how we represent data in a GIS.
 3. What is the role of resolution in raster data?
 4. How does the vector data model differ from the raster data model?
 
+<!-- 
 ### Practice Questions {-}
 
 1. Given ipsum, solve for lorem.
@@ -498,7 +501,7 @@ This chapter has introduced you to how we represent data in a GIS.
 `r if (knitr::is_html_output()) '
 ## Recommended Readings {-}
 '`
-Ensure all inline citations are properly referenced here.
+Ensure all inline citations are properly referenced here. -->
 ```{r include=FALSE}
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown', 'htmlwidgets', 'webshot', 'DT',

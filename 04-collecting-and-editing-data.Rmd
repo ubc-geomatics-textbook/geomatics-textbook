@@ -145,7 +145,31 @@ Some research questions extend beyond borders. For example, oceans are primarily
 
 ## Metadata
 
-To be written by Evan: at cursory level on how to collect and find metadata, why its important, how it can lead to other findings.
+Information has a lifecycle. After information is created, it might also be stored, published, distributed, reused, and retired. In each step of the way, some aspects of the information might become more important than others. For example, when publishing a journal article, the author may need to supply the contact information associated with their [ORCID iD](https://orcid.org/). In another case, someone using a GIS file downloaded from the internet would want to know what projection was used to create the file. As informationpasses through its lifecycle, whether it is a file, journal article, software, digital photograph, or any other system or data object, decisions are made about things like where to store it, who to share it with, and how to describe it. In order to reliably answer these questions, the object must also be accompanied by its own set of information. Metadata is the term we use to define “information about information”, and it describes your data so it can be used, shared, discovered, and understood by a wide audience.
+
+When creating information, how do you know what to include in your metadata? Surely, you can’t be expected to predict what metadata will be needed in the future or what questions someone will ask about it. To help with this concern, many metadata *schemas* have been developed by different communities of practice which provide generally agreed upon guidelines for creating and maintaining metadata. Metadata *standards* are more universally endorsed than metadata schemas, and therefore come with a larger base of support. One of the most widely endorsed metadata standards for geospatial metadata–the Federal Geographic Data Committee’s (FGDC) Content Standard for Digital Geospatial Metadata–has an abundance of resources online for learning more about the standard, including a tool from the U.S. Geological Survey called [Metadata in Plain Language](https://geology.usgs.gov/tools/metadata/tools/doc/ctc/). 
+
+In addition to resources for humans to learn more, standards provide a means for machines to transform or convert metadata from one format to another so that new systems can accurately and efficiently interpret metadata, like converting into HTML so that it can be more human-readable in a web browser.
+
+It is said that “metadata is a love note to the future”. You may not see the importance at first, or know exactly what to include in your metadata, but inevitably you will find out once you hand in your project files, publish a research paper, or share your data with your supervisor. Creating metadata might at first seem tedious, but it will make your own data more reproducible, shareable, and impactful. 
+
+## Creating Metadata
+
+Luckily, many common software and applications have built-in features for users to easily (sometimes automatically) create, edit, and transform metadata–freeing practitioners from some of these tedious and time-consuming tasks. It is always advisable to investigate this at the start of a project so that any extensions or project files are configured to ensure they’re working correctly. You might also find yourself bouncing from software to software and file to file when working with digital objects or files which can complicate the processes involved with keeping good metadata. In these cases, you might need to rely on your own documentation to help assemble metadata in the future by maintaining a notes file, using code annotations, or other techniques for logging all of the important steps involved so that others can and recreate your work.     
+
+When thinking about the types of information that you might want to include in your metadata, consider these four general categories of metadata:
+
+Descriptive metadata – This type of metadata provides all the necessary information describing your data or study, including how it was derived and uncertainty errors. For example the data’s abstract, methodology, file attribute descriptions, purpose, uncertainty errors, and access information.
+
+Technical metadata – This type of metadata provides technical and configuration information about your study or data, and is very discipline-specific. Geospatial metadata might include things like CRS / projection / datum used, attribute data types, software used, and character encoding.
+
+Discovery metadata – Discovery metadata is used to index and link your data with other information. When you search and filter information by subject, date, or filename, you're using discovery metadata. This could include things like, title, date, keywords, or geographic extent.
+
+Administrative metadata – This type of metadata reflects the ownership and terms of use information about a study or data, including copyright, contact info, version, and update status.
+
+As you begin a project’s metadata creation starts with investigating industry or discipline standards for your topic to find out what metadata standard or schema is most widely recognized. Consider the software you’ll use to work with and process your data, and find out what kinds of built-in tools or features it might have available to help with generating metadata. You may find that others before you have figured out good approaches to metadata creation that can be adopted for use in your own project. 
+
+At the very least, one great way to start documenting your project or data is by creating a README file. A README file is a text-based file (.txt or .md) that explains your project clearly and concisely so that others know what it is and how to use it. README files are stored alongside all of your other files being used for your project or study, usually in the top-level file directory so that it is easily found. These descriptive files are also a great way to link to other material that is contained within your file directory or elsewhere on the web. If you’re just starting out, you'll find many resources on the web for guidelines and best practices for creating READMEs, including [UBC's Creating a README for your dataset Quick Guide](https://osf.io/aqxw3) which includes a README template in the .txt format.
 
 ## Unpublished Data and the Data Request
 

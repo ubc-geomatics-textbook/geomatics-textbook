@@ -22,7 +22,7 @@ The ability of a geomatician to answer research questions or produce a map or ot
 1. Become familiar with a wide range of spatial datasets and strategies to access them
 2. Identify several sources of historical spatial information, including historical maps and aerial photos, and the steps required to analyze them as spatial information
 2. Recognize good practices and strategies for writing and reading metadata
-4. Understand the components of Global Navigation Satellite Systems (GNSS) and how location on Earth is triangulated from these systems
+4. Understand how to collect data using Global Navigation Satellite Systems (GNSS)
 
 ::::
 
@@ -69,7 +69,7 @@ Try using a web search to find the government open data pages for your city, pro
 
 This section introduces the census at a cursory level before launching into the applied question of how to find census data for your spatial analysis, using the Census of Canada as an example.
 
-A **census** generally refers to a complete count by government of a specific region's population by age, gender, language, income, housing and other demographic characteristics. Census data inform public policy, such as allocation of public funds, transportation network planning, and electoral area delineation. Census data also provide researchers with an opportunity to gain insight into the social and, to a lesser extent, environmental fabric of a country and are increasingly used in environmental and social-ecological research that aims to address social elements of environmental challenges [@tomscha_guide_2016] [@biggs_routledge_2021]. Censuses are typically conducted once every five years (e.g., Canada) or every 10 years (e.g., Unites States).
+A **census** generally refers to a complete count by government of a specific region's population by age, gender, language, income, housing and other demographic characteristics. Census data inform public policy, such as allocation of public funds, transportation network planning, and electoral area delineation. Census data also provide researchers with an opportunity to gain insight into the social and, to a lesser extent, environmental fabric of a country and are increasingly used in environmental and social-ecological research that aims to address social elements of environmental challenges [@tomscha_guide_2016] [@biggs_routledge_2021]. Censuses are typically conducted once every five years (e.g., Canada) or every 10 years (e.g., United States).
 
 In addition to demographics, many nations survey information related to economics or specific industries, such as agriculture. For example, Canada's Census of Agriculture captures information on fertilizers, irrigation, livestock, farm types, and crop production across Canada. The Longform Census in Canada surveys additional questions but is only sent to a subset of the population, and the data from it are then estimated for the entire population.
 
@@ -145,7 +145,31 @@ Some research questions extend beyond borders. For example, oceans are primarily
 
 ## Metadata
 
-To be written by Evan: at cursory level on how to collect and find metadata, why its important, how it can lead to other findings.
+Information has a lifecycle. After information is created, it might also be stored, published, distributed, reused, and retired. In each step of the way, some aspects of the information might become more important than others. For example, when publishing a journal article, the author may need to supply the contact information associated with their [ORCID iD](https://orcid.org/). In another case, someone using a GIS file downloaded from the internet would want to know what projection was used to create the file. As informationpasses through its lifecycle, whether it is a file, journal article, software, digital photograph, or any other system or data object, decisions are made about things like where to store it, who to share it with, and how to describe it. In order to reliably answer these questions, the object must also be accompanied by its own set of information. Metadata is the term we use to define “information about information”, and it describes your data so it can be used, shared, discovered, and understood by a wide audience.
+
+When creating information, how do you know what to include in your metadata? Surely, you can’t be expected to predict what metadata will be needed in the future or what questions someone will ask about it. To help with this concern, many metadata *schemas* have been developed by different communities of practice which provide generally agreed upon guidelines for creating and maintaining metadata. Metadata *standards* are more universally endorsed than metadata schemas, and therefore come with a larger base of support. One of the most widely endorsed metadata standards for geospatial metadata–the Federal Geographic Data Committee’s (FGDC) Content Standard for Digital Geospatial Metadata–has an abundance of resources online for learning more about the standard, including a tool from the U.S. Geological Survey called [Metadata in Plain Language](https://geology.usgs.gov/tools/metadata/tools/doc/ctc/). 
+
+In addition to resources for humans to learn more, standards provide a means for machines to transform or convert metadata from one format to another so that new systems can accurately and efficiently interpret metadata, like converting into HTML so that it can be more human-readable in a web browser.
+
+It is said that “metadata is a love note to the future”. You may not see the importance at first, or know exactly what to include in your metadata, but inevitably you will find out once you hand in your project files, publish a research paper, or share your data with your supervisor. Creating metadata might at first seem tedious, but it will make your own data more reproducible, shareable, and impactful. 
+
+## Creating Metadata
+
+Luckily, many common software and applications have built-in features for users to easily (sometimes automatically) create, edit, and transform metadata–freeing practitioners from some of these tedious and time-consuming tasks. It is always advisable to investigate this at the start of a project so that any extensions or project files are configured to ensure they’re working correctly. You might also find yourself bouncing from software to software and file to file when working with digital objects or files which can complicate the processes involved with keeping good metadata. In these cases, you might need to rely on your own documentation to help assemble metadata in the future by maintaining a notes file, using code annotations, or other techniques for logging all of the important steps involved so that others can and recreate your work.     
+
+When thinking about the types of information that you might want to include in your metadata, consider these four general categories of metadata:
+
+Descriptive metadata – This type of metadata provides all the necessary information describing your data or study, including how it was derived and uncertainty errors. For example the data’s abstract, methodology, file attribute descriptions, purpose, uncertainty errors, and access information.
+
+Technical metadata – This type of metadata provides technical and configuration information about your study or data, and is very discipline-specific. Geospatial metadata might include things like CRS / projection / datum used, attribute data types, software used, and character encoding.
+
+Discovery metadata – Discovery metadata is used to index and link your data with other information. When you search and filter information by subject, date, or filename, you're using discovery metadata. This could include things like, title, date, keywords, or geographic extent.
+
+Administrative metadata – This type of metadata reflects the ownership and terms of use information about a study or data, including copyright, contact info, version, and update status.
+
+As you begin a project’s metadata creation starts with investigating industry or discipline standards for your topic to find out what metadata standard or schema is most widely recognized. Consider the software you’ll use to work with and process your data, and find out what kinds of built-in tools or features it might have available to help with generating metadata. You may find that others before you have figured out good approaches to metadata creation that can be adopted for use in your own project. 
+
+At the very least, one great way to start documenting your project or data is by creating a README file. A README file is a text-based file (.txt or .md) that explains your project clearly and concisely so that others know what it is and how to use it. README files are stored alongside all of your other files being used for your project or study, usually in the top-level file directory so that it is easily found. These descriptive files are also a great way to link to other material that is contained within your file directory or elsewhere on the web. If you’re just starting out, you'll find many resources on the web for guidelines and best practices for creating READMEs, including [UBC's Creating a README for your dataset Quick Guide](https://osf.io/aqxw3) which includes a README template in the .txt format.
 
 ## Unpublished Data and the Data Request
 
@@ -270,7 +294,58 @@ Once the control points are set, a transformation is applied to mold the histori
 
 ### Documenting Georeferencing 
 
-During the process of georeferencing you must document the number of control points and the root mean square error (RMSE). Although there are multiple sources of uncertainty in the spatial precision of a historical map, uncertainty should be characterized where possible to demonstrate rigour in your methods and for communicating uncertainty. 
+During the process of georeferencing you must document the number of control points and the root mean square error (RMSE). Although there are multiple sources of uncertainty in the spatial precision of a historical map, uncertainty should be characterized where possible to demonstrate rigour in your methods and for communicating uncertainty.
+
+## Collecting Data from Global Navigation Satellite Systems
+
+Most likely, the type of data that you will need to collect in the field will be location. You might need to locate some plots in the forest or walk the perimeter of a rare ecosystem in order to map these features. To do this, we rely on Global Navigation Satellite Systems (GNSS). In this section, we will explore how GNSS works, what are the sources of error, identify the main segments, and discuss how you can collect your own positional data from a GNSS.
+
+### How GNSS Work
+
+A GNSS is, fundamentally, a ranging system. Range is simply the distance between two points that are connected by a line-of-sight. One of those points is you, holding your GNSS receiver, and the other point is a satellite that is orbiting somewhere between 20,000 and 23,000 km above the surface of the Earth. The satellite is broadcasting a radio wave signal that is traveling at the speed of light $c = 299,792,458 m·s^{-1}$, which at a distance of 20,000 km would take about 67 _milliseconds_ to reach you on the ground if the satellite was directly above you. But the range to a single satellite cannot tell you much. For example, how would you know where you are if you knew that you were 20,000 km away from Vancouver, Canada? You could literally be 20,000 km in any direction, and you might visualise that as a sphere with a radius $r = 20,000 km$. The radius of the Earth's semi-major axis measures only $a=6,378.137km$ for the World Geodetic System 1984 (WGS 1984), which means a range of 20,000 km could place you anywhere on Earth, but also many other locations off in space. So how do we narrow our possible location and solve our position on Earth? We need more satellites!
+
+With a range to a single satellite, you know you are somewhere on the surface of a sphere with a radius equal to that range. With known ranges to two satellites, you can reduce your possible positions to the intersection of the two spheres that are formed from the two ranges (Figure \@ref(fig:04-two-gnss-satellites). It is important to recognize here that when you intersect two spheres, the arc (line) that forms the intersection represents the possible locations where both ranges are true. In other words, we have now reduced our possible positions from a 3D surface of a sphere to a 2D arc.
+
+```{r 04-two-gnss-satellites, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+    fig_cap <- paste0("Range to two satellites gives an intersection, which spatially is represented as a 2D arc of possible positions. Pickell, CC-BY-SA-4.0.")
+    knitr::include_graphics("images/04-two-gnss-satellites.PNG")
+```
+<br/>
+
+Adding the range to a third satellite gives us two more intersecting arcs, one with the first satellite and another with the second satellite. The intersection of these three arcs reduces our possible positions to just two locations (Figure \@ref(fig:04-three-gnss-satellites) and usually only one of these is actually logical relative to Earth (i.e., one position is in space and one is on Earth).
+
+```{r 04-three-gnss-satellites, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+    fig_cap <- paste0("Range to three satellites gives us three intersections. These three arcs intersect only at two positions. Pickell, CC-BY-SA-4.0.")
+    knitr::include_graphics("images/04-three-gnss-satellites.PNG")
+```
+<br/>
+
+
+
+But the satellite itself is of course in motion, orbiting the Earth at a speed of about 14,000 km·s^{-1}, which complicates things in two ways. First, the range to the satellite is always changing because the satellite is moving. Second, the satellite will eventually disappear over the horizon and then you do not have a line-of-sight anymore. 
+
+Ranging
+Clocks
+Trilateration
+Carrier phases
+Pseudorandom code
+
+### Sources of Error
+
+Dilution of precision: geometric, horizontal, vertical, time
+Ionosphere delay
+total electron count
+multipath errors
+line of sight
+obstructions
+
+### Segments of GNSS
+
+Users
+Space
+Ground control
+
+### Planning Your GNSS Data Collection
 
 ## Summary 
 
@@ -292,4 +367,4 @@ Data are becoming increasingly accessible thanks to the open data movement, but 
 
 Data is becoming increasingly accessible thanks to the open data movement, but one must still need to know where to find it. The search for data, whether social, environmental, or economic in nature, is facilitated by data repositories as well as informal approaches such as networking with colleagues, consulting data librarians, and reaching out to experts in your subject area. When data does not exist, we can sometimes create it. Historical data such as aerial photos, natural resource administrative data, and historical maps must often by digitized into a form useable for spatial analysis. However, this effort can be worth while for researchers interested in history and for the unique information gained on social and ecological change. 
 
-GNSS and data transformations... 
+<!-- GNSS and data transformations... -->

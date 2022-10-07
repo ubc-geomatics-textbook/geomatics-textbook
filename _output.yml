@@ -1,4 +1,6 @@
 bookdown::gitbook:
+  includes:
+    in_header: header.html
   css: style.css
   split_by: chapter
   config:
@@ -8,9 +10,9 @@ bookdown::gitbook:
       engine: lunr
     view: https://github.com/ubc-geomatics-textbook/geomatics-textbook/blob/develop/%s
     download:
-      - ["Geomatics-for-Environmental-Management-2022.pdf", "PDF"]
+      - ["https://osf.io/whqe2", "PDF"]
     toc:
-      collapse: subsection
+      collapse: section
       before: |
         <li><a href="./">Geomatics for Environmental Management</a></li>
       after: |

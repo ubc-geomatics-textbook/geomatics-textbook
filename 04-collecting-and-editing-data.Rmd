@@ -6,6 +6,47 @@ library(lubridate)
 ```
 # Collecting and Editing Data {#collecting-and-editing-data}
 
+```{js, echo=FALSE}
+var images = new Array()
+var tec1date = new Date();
+tec1date.setDate(tec1date.getDate() - 1);
+var tec2date = new Date();
+tec2date.setDate(tec2date.getDate() - 2);
+var tec3date = new Date();
+tec3date.setDate(tec3date.getDate() - 3);
+var tec4date = new Date();
+tec4date.setDate(tec4date.getDate() - 4);
+var tec5date = new Date();
+tec5date.setDate(tec5date.getDate() - 5);
+var tec6date = new Date();
+tec6date.setDate(tec6date.getDate() - 6);
+var tec7date = new Date();
+tec7date.setDate(tec7date.getDate() - 7);
+
+var part1 = "https://www.spaceweather.gc.ca/service/tools/tec/?date="
+var part2 = "T00:00&format=png&maxlevel=40&type=1&lang=en"
+
+var loaded = [];
+function preload() {
+    for (var i = 0; i < arguments.length; i++) {
+        loaded[i] = new Image();
+        loaded[i].src = preload.arguments[i];
+    }
+}
+
+preload(
+  "https://www.spaceweather.gc.ca/auto_generated_products/tec/latest/tec-en.png",
+  part1 + tec1date.toISOString().split('T')[0] + part2,
+  part1 + tec2date.toISOString().split('T')[0] + part2,
+  part1 + tec3date.toISOString().split('T')[0] + part2,
+  part1 + tec4date.toISOString().split('T')[0] + part2,
+  part1 + tec5date.toISOString().split('T')[0] + part2,
+  part1 + tec6date.toISOString().split('T')[0] + part2,
+  part1 + tec7date.toISOString().split('T')[0] + part2
+)
+```
+
+
 Written by
 ```{r results='asis', echo=FALSE}
 cat(author, "and", coauthor)
@@ -316,15 +357,14 @@ Adding the range to a third satellite gives us two more intersecting arcs, one w
 ```
 <br/>
 
-In theory, you could estimate your position with just three satellites if you were lucky and these three spheres perfectly intersected at a single location. But the satellites are of course in motion, orbiting the Earth at a speed of about 14,000 km·s^{-1}, which complicates things in two ways. First, the range to the satellite is always changing because the satellite is moving, so any chance of having three intersect perfectly at a single location would not only be extremely rare but also instantaneous. Second, the satellite will eventually disappear over the horizon and then we do not have a line-of-sight anymore, so we end up losing and gaining satellites as they move across the sky.
+In theory, you could estimate your position with just three satellites if you were lucky and these three spheres perfectly intersected at a single location. But the satellites are of course in motion, orbiting the Earth at a speed of about $14,000 km·s^{-1}$, which complicates things in two ways. First, the range to the satellite is always changing because the satellite is moving, so any chance of having three intersect perfectly at a single location would not only be extremely rare but also instantaneous. Second, the satellite will eventually disappear over the horizon and then we do not have a line-of-sight anymore, so we end up losing and gaining satellites as they move across the sky.
 
 Practically speaking, all of the above assumes that there are absolutely no errors in this system, but there are in fact many factors that impact the timing of the signal, which are discussed in the next section. One important factor is clock error. The clocks on the satellites are highly precise atomic clocks that are synchronized and periodically corrected. This clock synchronization among the satellites is important because it allows us, on the ground with our receivers, to rely on a consistent and comparable time stamp in the GNSS signal. So when we get a signal from one satellite and calculate the time difference, that time difference should be comparable to the time difference we get with any other satellite.
 
-However, the clocks in our receiver have no where near the same precision and are not synchronized with the clocks on the satellites. This means that the current time in our receiver on the ground is not the same current time as the satellite orbiting overhead. No matter how small this time difference is between the satellite and receiver, it is multiplied by the speed of light and ultimately impacts our estimation of position. For example, if the current time on the satellite differed by 0.001 s or 1 ms from our receiver, then our range to a single satellite will be off by about 300 km! For this reason, we need a fourth satellite   
+However, the clocks in our receiver have no where near the same precision and are not synchronized with the clocks on the satellites. This means that the current time in our receiver on the ground is not the same current time as the satellite orbiting overhead. No matter how small this time difference is between the satellite and receiver, it is multiplied by the speed of light and ultimately impacts our estimation of position. For example, if the current time on the satellite differed by 0.001 s or 1 ms from our receiver, then our range to a single satellite will be off by about 300 km! For this reason, we need a fourth satellite to solve for the final position. This process of intersecting spheres from three or more satellites is known as **trilateration**.
 
-Ranging
-Clocks
-Trilateration
+With the advent 
+
 Carrier phases
 Pseudorandom code
 
@@ -336,16 +376,6 @@ total electron count
 multipath errors
 line of sight
 obstructions
-
-```{js, echo=FALSE}
-const frames = document.getElementById("animation").children;
-const frameCount = frames.length;
-let i = 0;
-setInterval(function () { 
-    frames[i % frameCount].style.display = "none";
-    frames[++i % frameCount].style.display = "block";
-}, 100);
-```
 
 ```{r, echo=FALSE}
 doy <- yday(Sys.Date())
@@ -367,16 +397,40 @@ tec6 <- paste0("https://www.spaceweather.gc.ca/service/tools/tec/?date=",tec6dat
 tec7 <- paste0("https://www.spaceweather.gc.ca/service/tools/tec/?date=",tec7date,"T00:00&format=png&maxlevel=40&type=1&lang=en")
 ```
 
+```{css, echo=FALSE}
+#animation img {
+    display: none;
+}
+#animation img:first-child {
+    display: block;
+}
+```
+
 ::: {#animation}
-  <img src="`r tec0`" />
-  <img src="`r tec1`" />
-  <img src="`r tec2`" />
-  <img src="`r tec3`" />
-  <img src="`r tec4`" />
-  <img src="`r tec5`" />
-  <img src="`r tec6`" />
   <img src="`r tec7`" />
+  <img src="`r tec6`" />
+  <img src="`r tec5`" />
+  <img src="`r tec4`" />
+  <img src="`r tec3`" />
+  <img src="`r tec2`" />
+  <img src="`r tec1`" />
+  <img src="`r tec0`" />
 :::
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$('img').unwrap("p");
+</script>
+
+```{js echo=FALSE}
+  const frames = document.getElementById("animation").children;
+  const frameCount = frames.length;
+  let i = 0;
+  setInterval(function () { 
+      frames[i % frameCount].style.display = "none";
+      frames[++i % frameCount].style.display = "block";
+  }, 1250);
+```
 
 ### Segments of GNSS
 

@@ -2,9 +2,20 @@
 yml_content <- yaml::read_yaml("chapterauthors.yml")
 author <- yml_content[["collectingAndEditingData"]][["author"]]
 coauthor <- yml_content[["collectingAndEditingData"]][["coauthor"]]
-library(lubridate)
+canadalicense <- "https://open.canada.ca/en/open-government-licence-canada"
+baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"
 ```
 # Collecting and Editing Data {#collecting-and-editing-data}
+
+```{r setup, include=FALSE}
+## This allows us to add an id attribute to a chunk
+knitr::opts_chunk$set(echo = FALSE)
+
+knitr::opts_hooks$set(out.extra = function(options) {
+  options$out.extra <- paste0(ifelse(!is.logical(options$out.extra), options$out.extra, "")," id='", options$label, "'")
+  options
+})
+```
 
 ```{js, echo=FALSE}
 var images = new Array()
@@ -24,7 +35,7 @@ var tec7date = new Date();
 tec7date.setDate(tec7date.getDate() - 7);
 
 var part1 = "https://www.spaceweather.gc.ca/service/tools/tec/?date="
-var part2 = "T00:00&format=png&maxlevel=40&type=1&lang=en"
+var part2 = ":00&format=png&maxlevel=40&type=1&lang=en"
 
 var loaded = [];
 function preload() {
@@ -35,17 +46,16 @@ function preload() {
 }
 
 preload(
-  "https://www.spaceweather.gc.ca/auto_generated_products/tec/latest/tec-en.png",
-  part1 + tec1date.toISOString().split('T')[0] + part2,
-  part1 + tec2date.toISOString().split('T')[0] + part2,
-  part1 + tec3date.toISOString().split('T')[0] + part2,
-  part1 + tec4date.toISOString().split('T')[0] + part2,
-  part1 + tec5date.toISOString().split('T')[0] + part2,
-  part1 + tec6date.toISOString().split('T')[0] + part2,
-  part1 + tec7date.toISOString().split('T')[0] + part2
+  part1 + tec7date.toISOString().substring(0,13) + part2,
+  part1 + tec6date.toISOString().substring(0,13) + part2,
+  part1 + tec5date.toISOString().substring(0,13) + part2,
+  part1 + tec4date.toISOString().substring(0,13) + part2,
+  part1 + tec3date.toISOString().substring(0,13) + part2,
+  part1 + tec2date.toISOString().substring(0,13) + part2,
+  part1 + tec1date.toISOString().substring(0,13) + part2,
+  "https://www.spaceweather.gc.ca/auto_generated_products/tec/latest/tec-en.png"
 )
 ```
-
 
 Written by
 ```{r results='asis', echo=FALSE}
@@ -377,59 +387,33 @@ multipath errors
 line of sight
 obstructions
 
-```{r, echo=FALSE}
-doy <- yday(Sys.Date())
-tec1date <- as.Date(doy-2, origin = paste0(format(Sys.Date(), "%Y"),"-01-01"))
-tec2date <- as.Date(doy-3, origin = paste0(format(Sys.Date(), "%Y"),"-01-01"))
-tec3date <- as.Date(doy-4, origin = paste0(format(Sys.Date(), "%Y"),"-01-01"))
-tec4date <- as.Date(doy-5, origin = paste0(format(Sys.Date(), "%Y"),"-01-01"))
-tec5date <- as.Date(doy-6, origin = paste0(format(Sys.Date(), "%Y"),"-01-01"))
-tec6date <- as.Date(doy-7, origin = paste0(format(Sys.Date(), "%Y"),"-01-01"))
-tec7date <- as.Date(doy-8, origin = paste0(format(Sys.Date(), "%Y"),"-01-01"))
-
-tec0 <- "https://www.spaceweather.gc.ca/auto_generated_products/tec/latest/tec-en.png"
-tec1 <- paste0("https://www.spaceweather.gc.ca/service/tools/tec/?date=",tec1date,"T00:00&format=png&maxlevel=40&type=1&lang=en")
-tec2 <- paste0("https://www.spaceweather.gc.ca/service/tools/tec/?date=",tec2date,"T00:00&format=png&maxlevel=40&type=1&lang=en")
-tec3 <- paste0("https://www.spaceweather.gc.ca/service/tools/tec/?date=",tec3date,"T00:00&format=png&maxlevel=40&type=1&lang=en")
-tec4 <- paste0("https://www.spaceweather.gc.ca/service/tools/tec/?date=",tec4date,"T00:00&format=png&maxlevel=40&type=1&lang=en")
-tec5 <- paste0("https://www.spaceweather.gc.ca/service/tools/tec/?date=",tec5date,"T00:00&format=png&maxlevel=40&type=1&lang=en")
-tec6 <- paste0("https://www.spaceweather.gc.ca/service/tools/tec/?date=",tec6date,"T00:00&format=png&maxlevel=40&type=1&lang=en")
-tec7 <- paste0("https://www.spaceweather.gc.ca/service/tools/tec/?date=",tec7date,"T00:00&format=png&maxlevel=40&type=1&lang=en")
+```{r 04-total-electron-count-canada, out.extra='id="tec"', fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+    fig_cap <- paste0("Total Electron Count (TEC) over Canada from the last 7 days. <a href='",baseurl,"#04-total-electron-count-canada'>Animated figure can be viewed in the web browser version of the textbook.</a> Data from Natural Resources Canada, Environment Canada, and the Canadian Space Agency. <a href='",canadalicense,"'>Open Government License - Canada</a>.")
+    knitr::include_graphics("https://www.spaceweather.gc.ca/auto_generated_products/tec/latest/tec-en.png")
 ```
 
-```{css, echo=FALSE}
-#animation img {
-    display: none;
+```{js, echo=FALSE}
+images = [
+  part1 + tec7date.toISOString().substring(0,13) + part2,
+  part1 + tec6date.toISOString().substring(0,13) + part2,
+  part1 + tec5date.toISOString().substring(0,13) + part2,
+  part1 + tec4date.toISOString().substring(0,13) + part2,
+  part1 + tec3date.toISOString().substring(0,13) + part2,
+  part1 + tec2date.toISOString().substring(0,13) + part2,
+  part1 + tec1date.toISOString().substring(0,13) + part2,
+  "https://www.spaceweather.gc.ca/auto_generated_products/tec/latest/tec-en.png"
+];
+
+setInterval("Animate()", 1250);
+var x = 0;
+
+function Animate() {
+  document.getElementById("tec").src = images[x]
+  x++;
+  if (images.length == x) {
+    x = 0;
+  }
 }
-#animation img:first-child {
-    display: block;
-}
-```
-
-::: {#animation}
-  <img src="`r tec7`" />
-  <img src="`r tec6`" />
-  <img src="`r tec5`" />
-  <img src="`r tec4`" />
-  <img src="`r tec3`" />
-  <img src="`r tec2`" />
-  <img src="`r tec1`" />
-  <img src="`r tec0`" />
-:::
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>
-$('img').unwrap("p");
-</script>
-
-```{js echo=FALSE}
-  const frames = document.getElementById("animation").children;
-  const frameCount = frames.length;
-  let i = 0;
-  setInterval(function () { 
-      frames[i % frameCount].style.display = "none";
-      frames[++i % frameCount].style.display = "block";
-  }, 1250);
 ```
 
 ### Segments of GNSS

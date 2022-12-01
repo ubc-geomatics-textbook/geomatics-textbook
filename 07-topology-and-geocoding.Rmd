@@ -593,7 +593,6 @@ fig_cap = "(ref:7-neper-caption)"
 knitr::include_graphics("images/07-neper.png")
 ```
 
-
 ## Geocoding
 
 **Geocoding** is the process of converting addresses to geographic coordinates, while **reverse geocoding** is the process of converting geographic coordinates to addresses (Figure \@ref(fig:7-geocoding)). In order to achieve this conversion, an **address locator** uses reference spatial data that are mapped to a geographic or projected coordinate system in order to locate new addresses or coordinates. 
@@ -633,27 +632,27 @@ In addition to a set of geographic coordinates, one key result from geocoding an
 
 If you are aiming to geocode addresses in a single city, then it is feasible to manually specify your own address locator using available spatial data such as roads, parcels, neighborhoods, and postal codes. However, for geocoding across large areas, this may not be feasible and you may instead rely on geocoding services that use large databases of reference spatial data. Commercially-available geocoding services are frequently used to provide routing, like Google Maps and Waze. However, these geocoding services do not provide match scores or any other indication of how confident or reliable the matches are.
 
-## Case Study: Working with Canadian Census Data
-
-[2016 Census Profile data](https://www12.statcan.gc.ca/census-recensement/2016/dp-pd/prof/details/download-telecharger/comp/page_dl-tc.cfm?Lang=E)
-
-[2016 Census Boundaries](https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm)
-
-## Summary
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
-
 ## Reflection Questions {-}
 
 1. Give some examples of situations where you might use planar and non-planar topology.
 2. What are some examples of applications of geocoding and reverse geocoding?
 3. Define topology.
+4. How are Thiessen Polygons related to the Delaunay Triangulation?
+5. How do you interpret a Voronoi diagram? Give an example for how you could use this layer to solve a spatial problem.
+6. What are some uses of a multipart geometry?
 
 ## Practice Questions {-}
 
-1. Draw a convex hull for the points below.
-2. Given ipsum, solve for lorem.
-3. Draw ipsum lorem.
+1. Draw a convex hull for the points below. Estimate where the centroid is for the polygon you drew.
+2. Draw the Delaunay Triangulation for the points below.
+3. Draw two lines from the points below that share a pseudonode.
+4. Draw a polygon with a hole from the points below.
+
+```{r 7-scatterplot, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste("Ten random points. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/07-scatterplot.png")
+```
+
 
 ## Recommended Readings {-}
 

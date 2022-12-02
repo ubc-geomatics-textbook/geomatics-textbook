@@ -280,7 +280,6 @@ Four vegetation indices were calculated for each of the images in the study. The
   NDVI = \frac{NIR - RED}{NIR + RED}
 \end{equation}
 
-$$\\[0.1in]$$
 Additionally, the Normalized Burn Ratio (NBR) [@lopez_garcia_mapping_1991], and the Difference Normalized Burn Ratio (dNBR) [@key_landscape_2006] were calculated. NBR (Equation 2) and the dNBR (Equation 3) are used to measure burn severity.
 
 \begin{equation}
@@ -288,14 +287,12 @@ Additionally, the Normalized Burn Ratio (NBR) [@lopez_garcia_mapping_1991], and 
   NBR = \frac{NIR - SWIR}{NIR + SWIR}
 \end{equation}
 
-$$\\[0.1in]$$
 
 \begin{equation}
 \tag{3}
   dNBR = NBR_{pre fire} - NBR_{post fire}
 \end{equation}
 
-$$\\[0.1in]$$
 The dNBR values were then scaled for each image to a range of 0-255 by using the following equation (Equation 4):
 
 \begin{equation}
@@ -333,9 +330,9 @@ ndvi_table <- data.frame(NDVI = c("< 0.1", "0.1-0.14", "0.14-0.5", "> 0.5"),
 knitr::kable(ndvi_table, caption = "Classified Vegetation Health Values based on the NDVI values.")
 ```
 
-The changes in the Core Area of the burn severity classes showed that the High Severity class had a decrease of 2.6 hectares every year. The Low Severity class had a increase of 1.5 hectares every year and the Moderate and Unburned classes showed little change in Core Area. This was to be expected because as the vegetation regrows in the High Severity areas it changes to a lesser severity (See Map Below). For the vegetation health classes, the Sparse Vegetation class showed a 3.7 hectare increase in Core Area every year, while the other vegetation classes showed little change. These is due to the initial increase in the new vegetation in the first years after the wildfire.
+The changes in the Core Area of the burn severity classes showed that the High Severity class had a decrease of 2.6 hectares every year. The Low Severity class had a increase of 1.5 hectares every year and the Moderate and Unburned classes showed little change in Core Area. This was to be expected because as the vegetation regrows in the High Severity areas it changes to a lesser severity (Figure \@ref(fig:13-dnbr-leaflet)). For the vegetation health classes, the Sparse Vegetation class showed a 3.7 hectare increase in Core Area every year, while the other vegetation classes showed little change. These is due to the initial increase in the new vegetation in the first years after the wildfire.
 
-```{r 13-dnbr-leaflet, echo = FALSE, results='asis', message=FALSE, warning=FALSE}
+```{r, echo = FALSE, results='asis', message=FALSE, warning=FALSE}
 r1 <- as.factor(raster("data/13/dNBR_Class_2015.tif"))
 r2 <- as.factor(raster("data/13/dNBR_Class_2016.tif"))
 r3 <- as.factor(raster("data/13/dNBR_Class_2017.tif"))
@@ -363,15 +360,16 @@ dnbrMap = leaflet() %>%
                    options = layersControlOptions(collapsed = FALSE))%>%
   hideGroup(c("dNBR 2016", "dNBR 2017", "dNBR 2018", "dNBR 2019", "dNBR 2020"))
 #htmlwidgets:::knit_print.htmlwidget(dnbrMap)
-dnbrMap
 ```
 
-``` {r 14-dnbr-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
-  fig_cap <- paste0("Classified Burn Severity images for the Little Bobtail Lake wildfire from 2015 to 2020. <a
+``` {r 13-dnbr-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
+if (knitr:::is_latex_output()) { fig_cap <- paste0("Classified Burn Severity images for the Little Bobtail Lake wildfire from 2015 to 2020. <a
   href='",baseurl,"#fig:13-dnbr-leaflet'>Interactive figure can be viewed in the web browser version of the textbook</a>. Data from @natural_resources_canada_natural_nodate and licensed under the <a href='https://www.nrcan.gc.ca/terms-and-conditions/10847'>Open Government Licence - Canada </a>. Murray, CC-BY-SA-4.0.")
+  knitr::include_graphics("images/13-dnbr-leaflet.png")
+} else { fig_cap <- paste0("Classified Burn Severity images for the Little Bobtail Lake wildfire from 2015 to 2020. Data from @natural_resources_canada_natural_nodate and licensed under the <a href='https://www.nrcan.gc.ca/terms-and-conditions/10847'>Open Government Licence - Canada </a>. Murray, CC-BY-SA-4.0.")
+dnbrMap
+}
 ```
-
-$$\\[0.1in]$$
 
 ## Summary
 

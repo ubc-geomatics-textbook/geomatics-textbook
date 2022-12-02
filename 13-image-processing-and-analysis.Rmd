@@ -10,8 +10,8 @@ output:
 
 ```{r echo=FALSE}
 yml_content <- yaml::read_yaml("chapterauthors.yml")
-author <- yml_content[["imageProcessing"]][["author"]]
-coauthor <- yml_content[["imageProcessing"]][["coauthor"]]
+author <- yml_content[["imageProcessingAndAnalysis"]][["author"]]
+coauthor <- yml_content[["imageProcessingAndAnalysis"]][["coauthor"]]
 baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"
 knitr::opts_chunk$set(echo = TRUE)
 library(raster)
@@ -19,7 +19,7 @@ library(leaflet)
 library(htmlwidgets)
 ```
 
-# Image Processing and Analysis {#image-processing}
+# Image Processing and Analysis {#image-processing-and-analysis}
 
 Written by
 ```{r results='asis', echo=FALSE}

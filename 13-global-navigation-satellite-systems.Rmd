@@ -1,0 +1,47 @@
+---
+editor_options:
+  markdown:
+    wrap: 72
+output:
+  html_document:
+    df_print: paged
+  word_document: default
+---
+
+```{r echo=FALSE}
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["globalNavigationSatelliteSystems"]][["author"]]
+coauthor <- yml_content[["globalNavigationSatelliteSystems"]][["coauthor"]]
+baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Global Navigation Satellite Systems {#global-navigation-satellite-systems}
+
+Written by
+```{r results='asis', echo=FALSE}
+cat(author, "and", coauthor)
+```
+
+Introduction
+
+::: {.box-content .learning-objectives-content}
+::: {.box-title .learning-objectives-top}
+## Learning Objectives {.unnumbered}
+:::
+
+1. Objective
+
+:::
+
+## Key Terms {.unnumbered}
+
+Term 
+
+## Summary
+
+Summary
+
+## Reflection Questions {.unnumbered}
+
+1. Question

@@ -19,6 +19,56 @@ yml_content <- yaml::read_yaml("chapterauthors.yml")
 author <- yml_content[["globalNavigationSatelliteSystems"]][["author"]]
 ```
 
+```{r setup, include=FALSE}
+## This allows us to add an id attribute to a chunk
+knitr::opts_chunk$set(echo = FALSE)
+
+knitr::opts_hooks$set(out.extra = function(options) {
+  options$out.extra <- paste0(ifelse(!is.logical(options$out.extra), options$out.extra, "")," id='", options$label, "'")
+  options
+})
+```
+
+```{js, echo=FALSE}
+var images = new Array()
+var tec1date = new Date();
+tec1date.setDate(tec1date.getDate() - 1);
+var tec2date = new Date();
+tec2date.setDate(tec2date.getDate() - 2);
+var tec3date = new Date();
+tec3date.setDate(tec3date.getDate() - 3);
+var tec4date = new Date();
+tec4date.setDate(tec4date.getDate() - 4);
+var tec5date = new Date();
+tec5date.setDate(tec5date.getDate() - 5);
+var tec6date = new Date();
+tec6date.setDate(tec6date.getDate() - 6);
+var tec7date = new Date();
+tec7date.setDate(tec7date.getDate() - 7);
+
+var part1 = "https://www.spaceweather.gc.ca/service/tools/tec/?date="
+var part2 = ":00&format=png&maxlevel=40&type=1&lang=en"
+
+var loaded = [];
+function preload() {
+    for (var i = 0; i < arguments.length; i++) {
+        loaded[i] = new Image();
+        loaded[i].src = preload.arguments[i];
+    }
+}
+
+preload(
+  part1 + tec7date.toISOString().substring(0,13) + part2,
+  part1 + tec6date.toISOString().substring(0,13) + part2,
+  part1 + tec5date.toISOString().substring(0,13) + part2,
+  part1 + tec4date.toISOString().substring(0,13) + part2,
+  part1 + tec3date.toISOString().substring(0,13) + part2,
+  part1 + tec2date.toISOString().substring(0,13) + part2,
+  part1 + tec1date.toISOString().substring(0,13) + part2,
+  "https://www.spaceweather.gc.ca/auto_generated_products/tec/latest/tec-en.png"
+)
+```
+
 Written by
 ```{r results='asis', echo=FALSE}
 cat(author)
@@ -31,12 +81,12 @@ Introduction here.
 ::: {.box-title .learning-objectives-top}
 ## Learning Objectives {-}
 ::: 
-1. Objective
+1. Understand how data are collected by Global Navigation Satellite Systems (GNSS)
 ::::
 
 ## Key Terms {-}
 
-Term
+Almanac, Control Segment, Dilution of Precision (DOP), Ephemeris, Global Navigation Satellite Systems (GNSS), Ionospheric Delay, Multipath Error, Pseudorange, Space Segment, Total Electron Count (TEC), Tropospheric Delay, User Segment
 
 ## Collecting Data from Global Navigation Satellite Systems
 

@@ -54,6 +54,16 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.0/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.0/leaflet-providers-plugin.js"></script>
 
 
 
@@ -519,41 +529,57 @@
 <li><a href="remote-sensing-systems.html#practice-questions-8">Practice Questions<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html"><i class="fa fa-check"></i><b>13</b> Image Processing and Analysis<span></span></a><ul>
-<li><a href="image-processing-and-analysis.html#learning-objectives-13">Learning Objectives<span></span></a></li>
 <li><a href="image-processing-and-analysis.html#key-terms-13">Key Terms<span></span></a></li>
 <li class="chapter" data-level="13.1" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#overview"><i class="fa fa-check"></i><b>13.1</b> Overview<span></span></a></li>
-<li class="chapter" data-level="13.2" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#geometric-correction"><i class="fa fa-check"></i><b>13.2</b> Geometric Correction<span></span></a></li>
-<li class="chapter" data-level="13.3" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#orthoimagery"><i class="fa fa-check"></i><b>13.3</b> Orthoimagery<span></span></a></li>
-<li class="chapter" data-level="13.4" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#relief-displacement"><i class="fa fa-check"></i><b>13.4</b> Relief Displacement<span></span></a></li>
-<li><a href="image-processing-and-analysis.html#your-turn-7">Your turn!<span></span></a></li>
-<li class="chapter" data-level="13.5" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#georeferencing"><i class="fa fa-check"></i><b>13.5</b> Georeferencing<span></span></a></li>
-<li class="chapter" data-level="13.6" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#georegistration-georectification"><i class="fa fa-check"></i><b>13.6</b> Georegistration (georectification)<span></span></a></li>
-<li class="chapter" data-level="13.7" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#resampling"><i class="fa fa-check"></i><b>13.7</b> Resampling<span></span></a></li>
-<li class="chapter" data-level="13.8" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#nearest-neighbor-1"><i class="fa fa-check"></i><b>13.8</b> Nearest Neighbor<span></span></a></li>
-<li class="chapter" data-level="13.9" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#bilinear-interpolation"><i class="fa fa-check"></i><b>13.9</b> Bilinear Interpolation<span></span></a></li>
-<li class="chapter" data-level="13.10" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#cubic-convolution"><i class="fa fa-check"></i><b>13.10</b> Cubic Convolution<span></span></a></li>
-<li class="chapter" data-level="13.11" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#atmospheric-correction"><i class="fa fa-check"></i><b>13.11</b> Atmospheric Correction<span></span></a></li>
-<li class="chapter" data-level="13.12" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#atmospheric-windows"><i class="fa fa-check"></i><b>13.12</b> Atmospheric Windows<span></span></a></li>
-<li class="chapter" data-level="13.13" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#clouds-and-shadows"><i class="fa fa-check"></i><b>13.13</b> Clouds and Shadows<span></span></a></li>
-<li class="chapter" data-level="13.14" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#smoke-and-haze"><i class="fa fa-check"></i><b>13.14</b> Smoke and Haze<span></span></a></li>
-<li class="chapter" data-level="13.15" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#radiometric-correction"><i class="fa fa-check"></i><b>13.15</b> Radiometric Correction<span></span></a></li>
-<li class="chapter" data-level="13.16" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#signal-to-noise"><i class="fa fa-check"></i><b>13.16</b> Signal-to-noise<span></span></a></li>
-<li class="chapter" data-level="13.17" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#readout-noise"><i class="fa fa-check"></i><b>13.17</b> Readout Noise<span></span></a></li>
-<li class="chapter" data-level="13.18" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#thermal-noise"><i class="fa fa-check"></i><b>13.18</b> Thermal Noise<span></span></a></li>
-<li><a href="image-processing-and-analysis.html#your-turn-8">Your turn!<span></span></a></li>
-<li class="chapter" data-level="13.19" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#an-overview-of-landsat-processing"><i class="fa fa-check"></i><b>13.19</b> An overview of Landsat Processing<span></span></a></li>
-<li class="chapter" data-level="13.20" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#image-enhancement"><i class="fa fa-check"></i><b>13.20</b> Image Enhancement<span></span></a></li>
-<li class="chapter" data-level="13.21" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#stretching"><i class="fa fa-check"></i><b>13.21</b> Stretching<span></span></a></li>
-<li class="chapter" data-level="13.22" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#smoothing"><i class="fa fa-check"></i><b>13.22</b> Smoothing<span></span></a></li>
-<li><a href="image-processing-and-analysis.html#call-out-3">Call out<span></span></a></li>
-<li class="chapter" data-level="13.23" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#image-classification"><i class="fa fa-check"></i><b>13.23</b> Image Classification<span></span></a></li>
-<li class="chapter" data-level="13.24" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#case-study-sea-ice-change-analysis-in-the-beaufort-sea"><i class="fa fa-check"></i><b>13.24</b> Case Study: Sea Ice Change Analysis in the Beaufort Sea<span></span></a><ul>
-<li class="chapter" data-level="13.24.1" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#case-study-spatial-patterns-of-wildfire-in-british-columbia"><i class="fa fa-check"></i><b>13.24.1</b> Case Study: Spatial Patterns of Wildfire in British Columbia<span></span></a></li>
+<li class="chapter" data-level="13.2" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#geometric-correction"><i class="fa fa-check"></i><b>13.2</b> Geometric Correction<span></span></a><ul>
+<li class="chapter" data-level="13.2.1" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#orthoimagery"><i class="fa fa-check"></i><b>13.2.1</b> Orthoimagery<span></span></a></li>
+<li class="chapter" data-level="13.2.2" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#relief-displacement"><i class="fa fa-check"></i><b>13.2.2</b> Relief Displacement<span></span></a></li>
+<li class="chapter" data-level="13.2.3" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#georeferencing"><i class="fa fa-check"></i><b>13.2.3</b> Georeferencing<span></span></a></li>
+<li class="chapter" data-level="13.2.4" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#georegistration-georectification"><i class="fa fa-check"></i><b>13.2.4</b> Georegistration (georectification)<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="13.25" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#summary-11"><i class="fa fa-check"></i><b>13.25</b> Summary<span></span></a></li>
+<li class="chapter" data-level="13.3" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#resampling"><i class="fa fa-check"></i><b>13.3</b> Resampling<span></span></a><ul>
+<li class="chapter" data-level="13.3.1" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#nearest-neighbor-1"><i class="fa fa-check"></i><b>13.3.1</b> Nearest Neighbor<span></span></a></li>
+<li class="chapter" data-level="13.3.2" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#bilinear-interpolation"><i class="fa fa-check"></i><b>13.3.2</b> Bilinear Interpolation<span></span></a></li>
+<li class="chapter" data-level="13.3.3" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#cubic-convolution"><i class="fa fa-check"></i><b>13.3.3</b> Cubic Convolution<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#atmospheric-correction"><i class="fa fa-check"></i><b>13.4</b> Atmospheric Correction<span></span></a><ul>
+<li class="chapter" data-level="13.4.1" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#atmospheric-windows"><i class="fa fa-check"></i><b>13.4.1</b> Atmospheric Windows<span></span></a></li>
+<li class="chapter" data-level="13.4.2" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#clouds-and-shadows"><i class="fa fa-check"></i><b>13.4.2</b> Clouds and Shadows<span></span></a></li>
+<li class="chapter" data-level="13.4.3" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#smoke-and-haze"><i class="fa fa-check"></i><b>13.4.3</b> Smoke and Haze<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#radiometric-correction"><i class="fa fa-check"></i><b>13.5</b> Radiometric Correction<span></span></a><ul>
+<li class="chapter" data-level="13.5.1" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#signal-to-noise"><i class="fa fa-check"></i><b>13.5.1</b> Signal-to-noise<span></span></a></li>
+<li class="chapter" data-level="13.5.2" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#readout-noise"><i class="fa fa-check"></i><b>13.5.2</b> Readout Noise<span></span></a></li>
+<li class="chapter" data-level="13.5.3" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#thermal-noise"><i class="fa fa-check"></i><b>13.5.3</b> Thermal Noise<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#an-overview-of-landsat-processing"><i class="fa fa-check"></i><b>13.6</b> An overview of Landsat Processing<span></span></a></li>
+<li class="chapter" data-level="13.7" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#image-enhancement"><i class="fa fa-check"></i><b>13.7</b> Image Enhancement<span></span></a><ul>
+<li class="chapter" data-level="13.7.1" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#stretching"><i class="fa fa-check"></i><b>13.7.1</b> Stretching<span></span></a></li>
+<li class="chapter" data-level="13.7.2" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#smoothing"><i class="fa fa-check"></i><b>13.7.2</b> Smoothing<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="13.8" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#image-classification"><i class="fa fa-check"></i><b>13.8</b> Image Classification<span></span></a><ul>
+<li class="chapter" data-level="13.8.1" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#land-cover-versus-land-use"><i class="fa fa-check"></i><b>13.8.1</b> Land Cover Versus Land Use<span></span></a></li>
+<li class="chapter" data-level="13.8.2" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#supervised-classification"><i class="fa fa-check"></i><b>13.8.2</b> Supervised Classification<span></span></a></li>
+<li class="chapter" data-level="13.8.3" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#unsupervised-classification"><i class="fa fa-check"></i><b>13.8.3</b> Unsupervised Classification<span></span></a></li>
+<li class="chapter" data-level="13.8.4" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#classification-algorithms"><i class="fa fa-check"></i><b>13.8.4</b> Classification Algorithms<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="13.9" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#time-series-analysis"><i class="fa fa-check"></i><b>13.9</b> Time Series Analysis<span></span></a><ul>
+<li class="chapter" data-level="13.9.1" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#change-detection"><i class="fa fa-check"></i><b>13.9.1</b> Change detection<span></span></a></li>
+<li class="chapter" data-level="13.9.2" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#detecting-spectral-trends"><i class="fa fa-check"></i><b>13.9.2</b> Detecting spectral trends<span></span></a></li>
+<li class="chapter" data-level="13.9.3" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#inferring-surface-activity"><i class="fa fa-check"></i><b>13.9.3</b> Inferring surface activity<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="13.10" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#case-study-sea-ice-change-analysis-in-the-beaufort-sea"><i class="fa fa-check"></i><b>13.10</b> Case Study: Sea Ice Change Analysis in the Beaufort Sea<span></span></a></li>
+<li class="chapter" data-level="13.11" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#pattern-analysis"><i class="fa fa-check"></i><b>13.11</b> Pattern Analysis<span></span></a><ul>
+<li class="chapter" data-level="13.11.1" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#landscape-pattern-indices"><i class="fa fa-check"></i><b>13.11.1</b> Landscape Pattern Indices<span></span></a></li>
+<li class="chapter" data-level="13.11.2" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#class-pattern-indices"><i class="fa fa-check"></i><b>13.11.2</b> Class Pattern Indices<span></span></a></li>
+<li class="chapter" data-level="13.11.3" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#patch-pattern-indices"><i class="fa fa-check"></i><b>13.11.3</b> Patch Pattern Indices<span></span></a></li>
+<li class="chapter" data-level="13.11.4" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#case-study-spatial-patterns-of-wildfire-in-british-columbia"><i class="fa fa-check"></i><b>13.11.4</b> Case Study: Spatial Patterns of Wildfire in British Columbia<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="13.12" data-path="image-processing-and-analysis.html"><a href="image-processing-and-analysis.html#summary-11"><i class="fa fa-check"></i><b>13.12</b> Summary<span></span></a></li>
 <li><a href="image-processing-and-analysis.html#reflection-questions-11">Reflection Questions<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="global-navigation-satellite-systems.html"><a href="global-navigation-satellite-systems.html"><i class="fa fa-check"></i><b>14</b> Global Navigation Satellite Systems<span></span></a><ul>
+<li><a href="global-navigation-satellite-systems.html#learning-objectives-14">Learning Objectives<span></span></a></li>
 <li><a href="global-navigation-satellite-systems.html#key-terms-14">Key Terms<span></span></a></li>
 <li class="chapter" data-level="14.1" data-path="global-navigation-satellite-systems.html"><a href="global-navigation-satellite-systems.html#how-gnss-work"><i class="fa fa-check"></i><b>14.1</b> How GNSS Work<span></span></a></li>
 <li class="chapter" data-level="14.2" data-path="global-navigation-satellite-systems.html"><a href="global-navigation-satellite-systems.html#segments-of-gnss"><i class="fa fa-check"></i><b>14.2</b> Segments of GNSS<span></span></a></li>

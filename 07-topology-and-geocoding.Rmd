@@ -99,7 +99,7 @@ m <- leaflet(native_land) %>%
                 textsize = "12px", direction = "auto"))
 ```
 
-(ref:07-native-land-leaflet-caption1) Non-planar topology of 36 indigenous territories overlapping Vancouver Island, British Columbia. Data from @native_land_native_nodate, CC0. Animated figure can be viewed in the web browser version of the textbook: https://opengeomatics.ca/topology-and-geocoding.html.
+(ref:07-native-land-leaflet-caption1) Non-planar topology of 36 indigenous territories overlapping Vancouver Island, British Columbia. Data from @native_land_native_nodate, CC0. Animated figure can be viewed in the web browser version of the textbook: https://www.opengeomatics.ca/topology-and-geocoding.html.
 
 (ref:07-native-land-leaflet-caption2) Non-planar topology of 36 indigenous territories overlapping Vancouver Island, British Columbia. Data from @native_land_native_nodate, CC0.
 
@@ -139,7 +139,7 @@ m = leaflet(uscanada_simp) %>%
 ```
 
 ``` {r 2-CGVD-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
-if (knitr:::is_latex_output()) { fig_cap <- paste0("Simplified boundary of Canada (red) and the United States (blue), centred at the Rainy River boundary between Minnesota and Ontario. Without preserving topology, the output results in illogical overlaps in some places and slivers in other places. Pickell, CC-BY-SA-4.0. Data from Natural Resources Canada and licensed under the Open Government Licence - Canada. Animated figure can be viewed in the web browser version of the textbook: https://opengeomatics.ca/topology-and-geocoding.html")
+if (knitr:::is_latex_output()) { fig_cap <- paste0("Simplified boundary of Canada (red) and the United States (blue), centred at the Rainy River boundary between Minnesota and Ontario. Without preserving topology, the output results in illogical overlaps in some places and slivers in other places. Pickell, CC-BY-SA-4.0. Data from Natural Resources Canada and licensed under the Open Government Licence - Canada. Animated figure can be viewed in the web browser version of the textbook: https://www.opengeomatics.ca/topology-and-geocoding.html")
   knitr::include_graphics("images/07-Canada-US-border-simplified-leaflet.PNG")
 } else { fig_cap <- paste0("Simplified boundary of Canada (red) and the United States (blue), centred at the Rainy River boundary between Minnesota and Ontario. Without preserving topology, the output results in illogical overlaps in some places and slivers in other places. Pickell, CC-BY-SA-4.0. Data from Natural Resources Canada and licensed under the Open Government Licence - Canada.")
 m
@@ -488,8 +488,6 @@ fig_cap <- paste("Convex hull formed by topological closure of the smallest clos
 knitr::include_graphics("images/07-2d-convex-hull.png")
 ```
 
-Convex hulls are easily drawn by hand and are used for identifying a natural boundary for a sample set of points. Formally, the calculation is 
-
 ### Convex alpha hulls and alpha shapes
 
 Convex hulls can be generalized to the concave case, called **convex alpha hulls** or **α-shapes (alpha shapes)**, by adjusting the maximum radius of the circumcircles through a parameter, alpha $α$. The objective of a convex alpha hull is to minimize the α-shape formed by circumcircles of radius less than or equal to $α$. Similar to the Delaunay triangulation, the circumcircles must be _open_, meaning they contain no other points in the set. Defined in this way, the final α-shape may not result in closure of the full set of points and can result in holes where the distance between points exceeds $2α$. Surprisingly, α-shapes are prone to not existing at all. For the case of $α=0$, applying circumcircles of radius 0 results in an empty α-shape and only the input set of points are returned without any boundaries. For $α=∞$, the α-shape is equivalent to the convex hull because if we use circumcircles with an infinitely large radius, then all points in the set are bound to be enclosed by the resulting α-shape, which like the convex hull must also minimize the bounding area. Figure \@ref(fig:7-2d-alpha-hull) shows an animation of the α-shapes for $α=1$ to $α=0$ for our set of 50 points.
@@ -546,11 +544,11 @@ if (knitr:::is_latex_output()) { fig_cap = "(ref:7-platonic-polyhedrons-caption1
 
 ### 3D Convex hull
 
-The 3D convex hull is the smallest convex polyhedron that contains a set of 3D points (Figure ref(fig:7-3d-convex-hull)). The 3D problem is not unlike the 2D problem for finding the 2D convex hull, except instead of using 2D circumcircles we use 3D circumscribed spheres. Otherwise, the overall objective is the same, minimize the 3D polyherdron that encloses the 3D set of points. The 3D convex hull is frequently produced in order to generate a 3D object from a laser scan. Since points are 1-dimensional they have limited use beyond their enumeration within a volume or on a plane or on a line. By contrast, a 3D convex hull produces a polyhedron, which can be used to visualize the object that was initially scanned into a 3D point cloud. The 2D polygon faces that comprise a polyhedron can provide _shape_ and interact with a simulated light source to improve perception of _depth_, which are qualities that are not provided by 3D points alone.  
+The 3D convex hull is the smallest convex polyhedron that contains a set of 3D points. The 3D problem is not unlike the 2D problem for finding the 2D convex hull, except instead of using 2D circumcircles we use 3D circumscribed spheres. Otherwise, the overall objective is the same, minimize the 3D polyherdron that encloses the 3D set of points. The 3D convex hull is frequently produced in order to generate a 3D object from a laser scan. Since points are 1-dimensional they have limited use beyond their enumeration within a volume or on a plane or on a line. By contrast, a 3D convex hull produces a polyhedron, which can be used to visualize the object that was initially scanned into a 3D point cloud. The 2D polygon faces that comprise a polyhedron can provide _shape_ and interact with a simulated light source to improve perception of _depth_, which are qualities that are not provided by 3D points alone.  
 
 ### 3D Convex alpha hull
 
-The 3D convex alpha hull is Figure \@ref(fig:7-3d-alpha-hull-deciduous) below shows a 3D convex alpha hull for a deciduous tree near the 
+The 3D convex alpha hull is Figure \@ref(fig:7-3d-alpha-hull-deciduous) below shows a 3D convex alpha hull for a deciduous tree near the Forest Sciences Centre at the University of British Columbia.
 
 ```{r setup-3d-alpha-hull-deciduous, echo=FALSE, cached=T, warning=F, include=F}
 las <- readLAS("Data/07/07-deciduous-tree.las")

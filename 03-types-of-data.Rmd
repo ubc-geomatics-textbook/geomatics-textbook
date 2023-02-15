@@ -1,9 +1,3 @@
----
-output:
-  pdf_document: default
-  html_document: default
-  word_document: default
----
 ```{r echo=FALSE}
 yml_content <- yaml::read_yaml("chapterauthors.yml")
 author <- yml_content[["typesOfData"]][["author"]]
@@ -60,8 +54,10 @@ knitr::include_graphics("images/03-vector.png")
 
 Continuous fields are infinite and lack defined boundaries.  Fields can be measured at an infinite number of locations.  However, similar values tend to cluster in space so we can often make assumptions based on finite observations of continuous fields.  One of the most common examples of a continuous field is elevation.  This is a physical property associated with every location on earth.  We can't count the "number of elevations" because space is infinitely divisible and everywhere in space can have an elevation.
 
+(ref:3-elevation-caption) Elevation of the Sunshine Coast in BC, from the NRCAN DEM (google earth engine) [@nrcan_canadian_2021].
+
 ```{r 3-elevation, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste0("Elevation of the Sunshine Coast in BC, from the NRCAN DEM (google earth engine) [@nrcan_canadian_2021]")
+fig_cap = "(ref:3-elevation-caption)"
 knitr::include_graphics("images/03-elevation.png")
 ```
 
@@ -70,15 +66,18 @@ knitr::include_graphics("images/03-elevation.png")
 Few phenomena will fit perfectly and exclusively into one category or the other.  That said, its helpful for us to think about the discrete v. continuous dichotomy.  As long as we recognize that it's not a perfect classification.  Whether a phenomenon is considered discrete or continuous depends on scale (both spatial and temporal) and perspective.  Some phenomenon are a bit of both.  Take the coastlines, they can be treated as discrete or continuous.  At the scale of an individual beach over hours, tides can cause wide variations in water levels/position.  How/where does one draw the discrete line representing the "coast".  At this scale, the coast isn't really a discreet object, rather a continuous field known as the inter-tidal zone.  Zoom out a bit and those fluctuations aren't particularly relevant if you want to make a map of Pacific Rim National Park.  The coast could be considered a discrete object.  But if you change the timescale and look at sea level rise projections, then you're dealing with a continuous field.
 
 ```{r 3-beach-small-scale, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste0("The west coast of Vancouver Island (just a screen grab from Arc, might want something better. Skeeter, CC-BY-SA-4.0.")
+fig_cap <- paste0("The west coast of Vancouver Island. Skeeter, CC-BY-SA-4.0.")
 knitr::include_graphics("images/03-beach-small-scale.png")
 ```
 
 A lightning strike is an electric discharge between the atmosphere and the ground.  A lightning strike is a discrete object.  The precise location of the strike can be pin pointed, the number of strikes during a storm can be counted.  But what about the actual lighting bolt?  That's more a continuous field, its not really possible to measure the exact boundaries of the path the electric discharge takes.  Then we can look at other things, like the probability of lighting strikes. Figure \@ref(fig:3-lightning-density) is a continuous field, calculated from counting discrete objects.
 
 ```{r 3-lightning-density, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste0("Global lighting strike density per month. Skeeter, CC-BY-SA-4.0.")
-knitr::include_graphics("images/03-lightning-density.gif")
+if (knitr:::is_latex_output()) { fig_cap <- paste0("Global lighting strike density per month. Skeeter, CC-BY-SA-4.0.  Animated figure can be viewed in the web browser version of the textbook: https://ubc-geomatics-textbook.github.io/geomatics-textbook/types-of-data.html")
+  knitr::include_graphics("images/03-lightning-density.png")
+} else { fig_cap <- paste0("Global lighting strike density per month. Skeeter, CC-BY-SA-4.0.")
+  knitr::include_graphics("images/03-lightning-density.gif")
+}
 ```
 
 
@@ -143,8 +142,8 @@ knitr::include_graphics("images/03-ratio-population.png")
 
 Interval data on the other hand, have an arbitrarily set zero point.  This means they can can take negative values.  Because the zero point is arbitrary, we cannot multiply/divide two values or calculate meaningful ratios between two values.  A good example of interval data is temperature measured in Celsius, and comparing it to Kelvin highlights the difference between the two data types (see Figure \@ref(fig:3-interval-ratio-temperature)).  The conversion between Kelvin (ratio) and Celsius (interval) is very simple: &deg;C = &deg;K-273.15.  Zero Kelvin is "Absolute Zero" - ie. the lack of temperature, while zero Celsius is the freezing point of water (273.15 degrees above absolute zero).  Other examples of interval data include: the pH scale, IQ test scores, elevation (relative to a datum) dates (April 12th, 2011), and times (11:00 A.M.).
 
-```{r 3-interval-ratio-temperature, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste0("The ratio between two temperatures in Celsius is not meaningful, 20&deg;C is not 'twice' as warm as 10&deg;C. Kelvin's zero point is fixed to absolute zero, the 'absence' of temperature.  So we can calculate the ratio, 293.15&deg;K is 1.035 times warmer than 283.15&deg;K. Skeeter, CC-BY-SA-4.0.")
+```{r 3-interval-ratio-temperature, echo=FALSE, fig.cap=fig_cap, out.width='75%'}
+fig_cap <- paste0("The ratio between two temperatures in Celsius is not meaningful, 20&#176;C is not 'twice' as warm as 10&#176;C. Kelvin's zero point is fixed to absolute zero, the 'absence' of temperature. So we can calculate the ratio, 293.15&#176;K is 1.035 times warmer than 283.15&#176;K. Skeeter, CC-BY-SA-4.0.")
 knitr::include_graphics("images/03-interval-ratio-temperature.png")
 ```
 
@@ -217,7 +216,7 @@ knitr::include_graphics("images/03-vector-v-raster.jpg")
 The raster data model represents a phenomena across space as a gridded set of cell (or pixels).  The cell size determines the **Resolution** of the raster image, that is the smallest feature we can resolve with the raster.  A 10 m resolution raster has cells that are 10 x 10 m (100 m2), a 2 m resolution has cells that are 2 x 2 m (4 m2).  Along with the cell size, the number of rows and columns dictates the extent (or bounds) of a raster image.  A raster with a 1 m cell size, 5 rows, and 5 columns, will cover an area of 5 m x 5 m (25 m2).  Because of the full coverage within their bounds, raster data models are very well suited for representing *continuous phenomena* where cell values correspond to measured (or estimated) value at specific location.  In GIS, rasters are commonly encountered as: satellite and drone imagery, elevation models, climate data, model outputs, and scanned maps.  
 
 ```{r 3-raster-example, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste0("I think this one is pretty good, I use it in my lecture notes. Skeeter, CC-BY-SA-4.0")
+fig_cap <- paste0("Raster data. Skeeter, CC-BY-SA-4.0")
 knitr::include_graphics("images/03-raster-example.png")
 ```
 
@@ -291,7 +290,7 @@ knitr::include_graphics("images/03-vector-points.png")
 **Lines** are one-dimensional, they have length, but no width and thus no area.  A line consists of two or more points.  Every line must have a start point and end point, they may also have any number of middle points, called vertices.  A vertex is just any point where two or more lines meet.  Lines are also great for representing a variety of objects, depending on the scale.  Hiking trails, flight paths, coastlines, and power lines are suitable to be represented as lines in almost most applications.  When making smaller scale maps, its often sufficient to represent rivers as lines, though at large scales we might elect to use a polygon.
 
 ```{r 3-bc-road-map, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste0("Roads are typically reprented as line data.  Though they obviously have an area, unless we are making a very large scale map, we don't need (or have the room) to show that on a map.  This BC road altlas makes use of line data, representing roads a lines and using different colors to denote the type of raod. Skeeter, CC-BY-SA-4.0.")
+fig_cap <- paste0("Roads are typically reprented as line data. Though they obviously have an area, unless we are making a very large scale map, we don't need (or have the room) to show that on a map. This BC road altlas makes use of line data, representing roads a lines and using different colors to denote the type of raod. Skeeter, CC-BY-SA-4.0.")
 knitr::include_graphics("images/03-bc-road-map.jpg")
 ```
 
@@ -299,8 +298,8 @@ knitr::include_graphics("images/03-bc-road-map.jpg")
 
 Sometimes, a discrete object has multiple parts, that are spatially separated.  In these circumstances, the vector model allows for multi-polygon, multi-line, or multi-point objects.  A good example of when a multi-polygon would be useful is the StatsCanada provincial boundary file (see Figure \@ref(fig:3-vector-2)).  Roads sometimes need to be stored as multi-lines as well, for example Highway 1 crosses the Georgia Straight from Vancouver to Nanaimo.  If we want the to represent the entire Highway as one object, we need to use a multi-line.
 
-```{r 3-vector2, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste0("This is the official Stats Canada provincial boundary layer.  All the other coastal provinces and territories have islands.  We don't need to represent every island as a separate object, so we can 'bundle' together the polygons as multipolygons.  The landlocked provinces do not have any coastlines and are represented as simple polygons reather than multipolygons.  The attribute table bellow corresponds to the map and lists the geometry type (polygon/multipolygon). Skeeter, CC-BY-SA-4.0")
+```{r 3-vector-2, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("This is the official Stats Canada provincial boundary layer. All the other coastal provinces and territories have islands. We don't need to represent every island as a separate object, so we can 'bundle' together the polygons as multipolygons. The landlocked provinces do not have any coastlines and are represented as simple polygons reather than multipolygons. The attribute table bellow corresponds to the map and lists the geometry type (polygon/multipolygon). Skeeter, CC-BY-SA-4.0")
 knitr::include_graphics("images/03-vector.png")
 ```
 
@@ -325,7 +324,7 @@ knitr::include_graphics("images/03-vector.png")
 Vector data also has a **Resolution** although it has a somewhat different definition in the context of the vector model.  Vector resolution is determined by the smallest resolvable feature.  Another way to describe vector resolution, would be the distance between verticies.  The greater the distance between vertices, the fewer vertices there are per polygon and, the lower the resolution.  If a vector object (line or polygon) has many verticies, we will have a higher resolution representation of the feature.
  
 ```{r 3-vector-resolution, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste0("Vector image of Nova Scotia at different resolutions.  Here the original polygon (top left) has been downsampled to lower resolutions, by setting the minimum allowable distance between verticies.  As the distance beween vercicies increases, the resolution decreases and the coastline becomes less distinguishable. Skeeter, CC-BY-SA-4.0.")
+fig_cap <- paste0("Vector image of Nova Scotia at different resolutions. Here the original polygon (top left) has been downsampled to lower resolutions, by setting the minimum allowable distance between verticies. As the distance beween vercicies increases, the resolution decreases and the coastline becomes less distinguishable. Skeeter, CC-BY-SA-4.0.")
 knitr::include_graphics("images/03-vector-resolution.png")
 ```
 
@@ -338,7 +337,7 @@ Like raster data, vector data can also come in many different formats. The **sha
 
 Because the structure of points, lines, and polygons are different, each individual shapefile can only contain one vector type (all points, all lines or all polygons). You will not find a mixture of point, line and polygon objects in a single shapefile.
 
-**GeoJSON** is a simple, lightweight format for storing a variety of geographic data structures.  It is most commonly encountered in web mapping and other open source applications.  GeoJSON supports the following geometries: Point, Line, Polygon, MultiPoint, MultiLine, and MultiPolygon objects.  Unlike with shapefiles, one GeoJSON file can contain any mix of geometries. An objects with and its attributes are a Feature object. A set of Features is a FeatureCollection.  GeoJSON has the added benefit of allowing you to encode stylistic choices within the file.  If you'd like to explore this format a bit more, take the code below and paste it [here](https://geojson.io/#map=2/20.0/0.0).  You can make changes and see them reflected on your the map.
+**GeoJSON** is a simple, lightweight format for storing a variety of geographic data structures.  It is most commonly encountered in web mapping and other open source applications.  GeoJSON supports the following geometries: Point, Line, Polygon, MultiPoint, MultiLine, and MultiPolygon objects.  Unlike with shapefiles, one GeoJSON file can contain any mix of geometries. An objects with and its attributes are a Feature object. A set of Features is a FeatureCollection.  GeoJSON has the added benefit of allowing you to encode stylistic choices within the file. If you'd like to explore this format a bit more, copy the code below and paste it in the [online GeoJSON editor geojson.io](https://geojson.io/#map=2/20.0/0.0).  You can make changes and see them reflected on your the map.
 
 ```json
 {
@@ -446,11 +445,11 @@ No single data model is suitable for all types of data or analysis.
 
 ### Resolution: Vector vs. Raster
 
-This video gives an applied example of how resolution differes between raster and vector data.  *Note* The video is just a placeholder.
+This video gives an applied example of how resolution differes between raster and vector data.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/bG5E8YzqI0A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-
+<!-- 
 :::: {.box-content .your-turn-content}
 
 ::: {.box-title .your-turn-top}
@@ -473,6 +472,8 @@ This is a call out. Put some important concept or fact in here.
 
 ::::
 
+-->
+
 ## Summary
 
 This chapter has introduced you to how we represent data in a GIS.
@@ -491,6 +492,7 @@ This chapter has introduced you to how we represent data in a GIS.
 3. What is the role of resolution in raster data?
 4. How does the vector data model differ from the raster data model?
 
+<!-- 
 ### Practice Questions {-}
 
 1. Given ipsum, solve for lorem.
@@ -499,7 +501,7 @@ This chapter has introduced you to how we represent data in a GIS.
 `r if (knitr::is_html_output()) '
 ## Recommended Readings {-}
 '`
-Ensure all inline citations are properly referenced here.
+Ensure all inline citations are properly referenced here. -->
 ```{r include=FALSE}
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown', 'htmlwidgets', 'webshot', 'DT',

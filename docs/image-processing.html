@@ -10,18 +10,16 @@
 
   <meta property="og:title" content="Chapter 13 Image Processing and Analysis | An Open Geomatics Textbook" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://github.com/ubc-geomatics-textbook/book/" />
   
-  <meta property="og:description" content="Advancing teaching and learning in geomatics at UBC" />
-  <meta name="github-repo" content="ubc-geomatics-textbook/book" />
+  <meta property="og:description" content="Advancing teaching and learning in geomatics" />
+  <meta name="github-repo" content="ubc-geomatics-textbook" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 13 Image Processing and Analysis | An Open Geomatics Textbook" />
   
-  <meta name="twitter:description" content="Advancing teaching and learning in geomatics at UBC" />
+  <meta name="twitter:description" content="Advancing teaching and learning in geomatics" />
   
 
-<meta name="author" content="UBC" />
 
 
 <meta name="date" content="2022-12-02" />
@@ -66,6 +64,70 @@
 <script src="libs/leaflet-providers-plugin-2.1.0/leaflet-providers-plugin.js"></script>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -81,7 +143,7 @@
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">An Open Geomatics Textbook</a></li>
+<li><a href="./">Geomatics for Environmental Management</a></li>
 
 <li class="divider"></li>
 <li><a href="index.html#preface">Preface<span></span></a><ul>
@@ -188,7 +250,6 @@
 <li><a href="types-of-data.html#reflection-questions-2">Reflection Questions<span></span></a></li>
 <li><a href="types-of-data.html#practice-questions-2">Practice Questions<span></span></a></li>
 </ul></li>
-<li><a href="types-of-data.html#recommended-readings">Recommended Readings<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="collecting-and-editing-data.html"><a href="collecting-and-editing-data.html"><i class="fa fa-check"></i><b>4</b> Collecting and Editing Data<span></span></a><ul>
 <li><a href="collecting-and-editing-data.html#learning-objectives-4">Learning Objectives<span></span></a></li>
@@ -357,18 +418,18 @@
 <li class="chapter" data-level="8.10.2" data-path="network-analysis.html"><a href="network-analysis.html#buses"><i class="fa fa-check"></i><b>8.10.2</b> Buses<span></span></a></li>
 <li class="chapter" data-level="8.10.3" data-path="network-analysis.html"><a href="network-analysis.html#trees"><i class="fa fa-check"></i><b>8.10.3</b> Trees<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="8.11" data-path="network-analysis.html"><a href="network-analysis.html#spatial-network-analysis"><i class="fa fa-check"></i><b>8.11</b> Spatial Network Analysis<span></span></a></li>
-<li class="chapter" data-level="8.12" data-path="network-analysis.html"><a href="network-analysis.html#network-tracing"><i class="fa fa-check"></i><b>8.12</b> Network Tracing<span></span></a></li>
-<li class="chapter" data-level="8.13" data-path="network-analysis.html"><a href="network-analysis.html#linear-referencing"><i class="fa fa-check"></i><b>8.13</b> Linear Referencing<span></span></a></li>
-<li class="chapter" data-level="8.14" data-path="network-analysis.html"><a href="network-analysis.html#routing"><i class="fa fa-check"></i><b>8.14</b> Routing<span></span></a></li>
-<li class="chapter" data-level="8.15" data-path="network-analysis.html"><a href="network-analysis.html#least-cost-paths"><i class="fa fa-check"></i><b>8.15</b> Least Cost Paths<span></span></a></li>
-<li class="chapter" data-level="8.16" data-path="network-analysis.html"><a href="network-analysis.html#least-cost-corridors"><i class="fa fa-check"></i><b>8.16</b> Least Cost Corridors<span></span></a></li>
-<li class="chapter" data-level="8.17" data-path="network-analysis.html"><a href="network-analysis.html#reach-analysis"><i class="fa fa-check"></i><b>8.17</b> Reach Analysis<span></span></a></li>
-<li class="chapter" data-level="8.18" data-path="network-analysis.html"><a href="network-analysis.html#network-centrality"><i class="fa fa-check"></i><b>8.18</b> Network Centrality<span></span></a></li>
-<li class="chapter" data-level="8.19" data-path="network-analysis.html"><a href="network-analysis.html#closeness-centrality"><i class="fa fa-check"></i><b>8.19</b> Closeness Centrality<span></span></a></li>
-<li class="chapter" data-level="8.20" data-path="network-analysis.html"><a href="network-analysis.html#betweenness-centrality"><i class="fa fa-check"></i><b>8.20</b> Betweenness Centrality<span></span></a></li>
-<li class="chapter" data-level="8.21" data-path="network-analysis.html"><a href="network-analysis.html#case-study-central-and-peripheral-green-spaces-in-vancouver"><i class="fa fa-check"></i><b>8.21</b> Case Study: Central and Peripheral Green Spaces in Vancouver<span></span></a></li>
-<li><a href="network-analysis.html#practice-reflection">Practice &amp; Reflection<span></span></a></li>
+<li class="chapter" data-level="8.11" data-path="network-analysis.html"><a href="network-analysis.html#spatial-network-analysis"><i class="fa fa-check"></i><b>8.11</b> Spatial Network Analysis</a></li>
+<li class="chapter" data-level="8.12" data-path="network-analysis.html"><a href="network-analysis.html#network-tracing"><i class="fa fa-check"></i><b>8.12</b> Network Tracing</a></li>
+<li class="chapter" data-level="8.13" data-path="network-analysis.html"><a href="network-analysis.html#linear-referencing"><i class="fa fa-check"></i><b>8.13</b> Linear Referencing</a></li>
+<li class="chapter" data-level="8.14" data-path="network-analysis.html"><a href="network-analysis.html#routing"><i class="fa fa-check"></i><b>8.14</b> Routing</a></li>
+<li class="chapter" data-level="8.15" data-path="network-analysis.html"><a href="network-analysis.html#least-cost-paths"><i class="fa fa-check"></i><b>8.15</b> Least Cost Paths</a></li>
+<li class="chapter" data-level="8.16" data-path="network-analysis.html"><a href="network-analysis.html#least-cost-corridors"><i class="fa fa-check"></i><b>8.16</b> Least Cost Corridors</a></li>
+<li class="chapter" data-level="8.17" data-path="network-analysis.html"><a href="network-analysis.html#reach-analysis"><i class="fa fa-check"></i><b>8.17</b> Reach Analysis</a></li>
+<li class="chapter" data-level="8.18" data-path="network-analysis.html"><a href="network-analysis.html#network-centrality"><i class="fa fa-check"></i><b>8.18</b> Network Centrality</a></li>
+<li class="chapter" data-level="8.19" data-path="network-analysis.html"><a href="network-analysis.html#closeness-centrality"><i class="fa fa-check"></i><b>8.19</b> Closeness Centrality</a></li>
+<li class="chapter" data-level="8.20" data-path="network-analysis.html"><a href="network-analysis.html#betweenness-centrality"><i class="fa fa-check"></i><b>8.20</b> Betweenness Centrality</a></li>
+<li class="chapter" data-level="8.21" data-path="network-analysis.html"><a href="network-analysis.html#case-study-central-and-peripheral-green-spaces-in-vancouver"><i class="fa fa-check"></i><b>8.21</b> Case Study: Central and Peripheral Green Spaces in Vancouver</a></li>
+<li class="chapter" data-level="" data-path="network-analysis.html"><a href="network-analysis.html#practice-reflection"><i class="fa fa-check"></i>Practice &amp; Reflection</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="raster-analysis-and-terrain-modelling.html"><a href="raster-analysis-and-terrain-modelling.html"><i class="fa fa-check"></i><b>9</b> Raster Analysis and Terrain Modelling<span></span></a><ul>
 <li><a href="raster-analysis-and-terrain-modelling.html#learning-objectives-9">Learning Objectives<span></span></a></li>
@@ -717,7 +778,8 @@
 <li><a href="making-beautiful-maps.html#recommended-readings-6">Recommended Readings<span></span></a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with Bookdown</a></li>
+<li><a href="https://github.com/ubc-geomatics-textbook/geomatics-textbook/issues/new/choose" target="blank">Suggest an edit or report a bug</a></li>
 
 </ul>
 
@@ -728,7 +790,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">An Open Geomatics Textbook</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Geomatics for Environmental Management: An Open Textbook for Students and Practitioners</a>
           </h1>
         </div>
 
@@ -885,7 +947,7 @@ Calculate SNR or the associated values for various Landsat sensors:
 <p>Level-1 processing is designed to address the geometric and radiometric inconsistencies present in an image. The USGS utilizes a combination ofground control points (GCP), digital elevation models (DEM) and internal sensor calibrations to correct an image. Within Level 1 there are a variety of sub-levels that users can select from, each varying based on the amount of correction that has been completed. More information about the specific of Landsat Level-1 processing can be found <a href="https://www.usgs.gov/core-science-systems/nli/landsat/landsat-level-1-processing-details" title="Landsat Level-1Processing">here</a>.</p>
 <p>With the geometric and radiometric correction complete in Level-1, Level-2 processing is designed to reduce atmospheric inconsistencies. The output images created from Level-2 processing are considered to be Science Products (images with corrections completed at a quality suitable for scientific inquiry without further processing) and accurately represent surface reflectance and surface temperature. Data regarding surface reflectance is useful for evaluating a variety of environmental metrics, such as land cover, while surface temperature lends insight to vegetation health and the global energy balance. It is important to note that there are two Collection levels at which Landsat processing takes place, with Collection 2 representing the highest quality processing stream. You can explore the differences between Collections <a href="https://prd-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/atoms/files/Landsat-C1vsC2-2%2021-0430-LMWS.pdf" title="Landsat Collection 1 vs 2">here</a>, while information about Collection 2 images processed at a Level-2 standard can be observed<a href="https://www.usgs.gov/core-science-systems/nli/landsat/landsat-collection-2-level-2-scien%20e-products" title="Landsat Colleciton 2 Level-2">here</a>.</p>
 <div class="figure"><span style="display:block;" id="fig:13-landsat-c2-l2"></span>
-<img src="images/13-landsat-c2-l2.png" alt="Three unique Landsat 8 Collection 2 images. In order from left to right: Level-1 Top of Atmosphere reflectance image (no atmospheric correction), Level-2 atmospherically corrected surface reflectance and Level-2 surface temperature. Images were collected on May 3, 2013 over the Sapta Kosh River in Bairawa, Nepal [@bouchard_example_2013]. Public domain." width="90%" />
+<img src="images/13-landsat-c2-l2.png" alt="Three unique Landsat 8 Collection 2 images. In order from left to right: Level-1 Top of Atmosphere reflectance image (no atmospheric correction), Level-2 atmospherically corrected surface reflectance and Level-2 surface temperature. Images were collected on May 3, 2013 over the Sapta Kosh River in Bairawa, Nepal (Bouchard and US Geological Survey 2013). Public domain." width="90%" />
 <p class="caption">
 Figure 13.2: Three unique Landsat 8 Collection 2 images. In order from left to right: Level-1 Top of Atmosphere reflectance image (no atmospheric correction), Level-2 atmospherically corrected surface reflectance and Level-2 surface temperature. Images were collected on May 3, 2013 over the Sapta Kosh River in Bairawa, Nepal <span class="citation">(Bouchard and US Geological Survey <a href="#ref-bouchard_example_2013" role="doc-biblioref">2013</a>)</span>. Public domain.
 </p>
@@ -1146,6 +1208,7 @@ Figure 13.6: Classified Burn Severity images for the Little Bobtail Lake wildfir
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -1181,16 +1244,19 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": null,
+"link": "https://github.com/ubc-geomatics-textbook/geomatics-textbook/blob/develop/13-image-processing.Rmd",
 "text": null
 },
-"download": null,
+"download": [["https://osf.io/whqe2", "PDF"]],
 "search": {
-"engine": "fuse",
+"engine": "lunr",
 "options": null
 },
 "toc": {
-"collapse": "subsection"
+"collapse": "section"
+},
+"toolbar": {
+"position": "fixed"
 }
 });
 });

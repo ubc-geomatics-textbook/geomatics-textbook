@@ -1,14 +1,14 @@
----
-editor_options:
-  markdown:
-    wrap: 72
-output:
-  word_document: default
-  html_document:
-    df_print: paged
----
-
+```{r echo=FALSE}
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["imageProcessing"]][["author"]]
+coauthor <- yml_content[["imageProcessing"]][["coauthor"]]
+```
 # Image Processing {#image-processing}
+
+Written by
+```{r results='asis', echo=FALSE}
+cat(author, "and", coauthor)
+```
 
 The collection of imagery is challenging and time consuming, with sensor
 design and deployment often requiring the development of new
@@ -135,7 +135,7 @@ perspective views into plan views before they can be used to trace the
 features that appear on topographic maps, or to digitize vector features
 in digital data sets.
 
-Compare photographs in Figure \@ref(fig:13-ortho). Both show the same
+Compare photographs in Figure ref(fig:13-ortho). Both show the same
 gas pipeline, which passes through hilly terrain. Note the deformation
 of the pipeline route in the photo on the left relative to the shape of
 the route on the orthoimage to the right. The deformation in the photo
@@ -247,8 +247,7 @@ This lack of uniformity in pixel size and shape could compromise future
 image analysis and need to be corrected for. To do so, users can
 implement a variety of methods to reassign the spatially accurate values
 to spatially uniform pixels. This process of transforming an image from
-one set of coordinates to another is called resampling (Parker 1983
-Zotero not working).
+one set of coordinates to another is called resampling [@parker_comparison_1983].
 
 The most important concept to understand about resampling is also the
 first step in the process, which is the creation of a new, empty raster
@@ -299,7 +298,7 @@ smoothing effect, however, as the output value of a cell may be outside
 the range of the 16 input cell values.
 
 ```{r 13-cubic, fig.cap = fig_cap, out.width = "75%", out.height="75%", echo = FALSE}
-    fig_cap <- paste0("Demonstration of neighbour selection (red) using cubic convolution resampling to determine the value of a single cell (yellow) in an empty raster.(Hacker, CC-BY-4.0")
+    fig_cap <- paste0("Demonstration of neighbour selection (red) using cubic convolution resampling to determine the value of a single cell (yellow) in an empty raster. Hacker, CC-BY-4.0.")
     knitr::include_graphics("images/13-cubic_convolution.png")
 ```
 
@@ -313,7 +312,7 @@ the atmosphere has on the observation of electromagnetic radition
 relates to changes in the atmosphere during collection and the specific
 wavelengths being collected. The majority of impacts are caused by the
 three main types of scattering, which were presented in Chapter
-\@ref(fundamentals-of-remote-sensing).
+ref(fundamentals-of-remote-sensing).
 
 ## Atmospheric Windows
 
@@ -345,7 +344,7 @@ not remove them entirely.
 
 When approaching the removal of clouds, it is important to recall the
 physics that drive Mie scattering (Chapter
-\@ref(fundamentals-of-remote-sensing). Essentially, water vapors in the
+ref(fundamentals-of-remote-sensing)). Essentially, water vapors in the
 atmosphere scatter visible and near infrared light and generate what
 appears to be white objects in the sky. Since the visible and near
 infrared regions of the EMS fall within an atmospheric window in which
@@ -379,11 +378,11 @@ change throughout the day in accordance with the sun.
 An important feature of any shadow is that the area shaded is still
 considered to be illuminated, but only by skylight . The exclusion of
 sunlight from the area creates a unique opportunity for shadow
-identification and removal [@finlayson2001]. Finlayson et al.'s method
+identification and removal [@finlayson_color_2001]. Finlayson and Hordley's method
 of shadow removal is complex, using derivative calculus to capitalize on
 the fact that a illumination invariant function can be recognized based
 solely on surface reflectance. Although more complicated that Martinuzzi
-et al.'s approach, it may be worth reviewing Finlayson's (2001) work if
+et al.'s approach, it may be worth reviewing Finlayson's work if
 you are interested in learning more about shadow removal.
 
 ## Smoke and Haze
@@ -391,10 +390,10 @@ you are interested in learning more about shadow removal.
 Smoke and haze present unique issues to image processing as they tend to
 vary in presence, consistency and density. They also represent different
 types of scattering, with smoke causing Mie scattering and haze causing
-non-selective scattering. Makarau et al., 2014 demonstrated that haze
+non-selective scattering. Makarau et al. demonstrated that haze
 can be somewhat removed through the creation of a haze thickness map
-[@makarau2014]. This methodology is equally as complex as that of
-Finlayson (2001) and is perhaps beyond the scope of this book. It is
+[@makarau_haze_2014]. This methodology is equally as complex as that of
+Finlayson's and is perhaps beyond the scope of this book. It is
 important to note, though, that removal of shadows, clouds, smoke and
 haze relies on an understanding of how their respective scattering types
 affect incoming solar radiation. Successful removal, then, depends on
@@ -443,10 +442,8 @@ noise is inherent in all sensors. Readout noise is therefore equal to
 any difference in pixel value when all sensors are exposed to identical
 levels of illumination. There are a variety of technical methods used to
 correct for this error, but the concepts and mathematics supporting them
-are perhaps beyond the scope of this book. If you are interested in
-learning more about readout noise, check out this
-[webpage](http://spiff.rit.edu/classes/phys445/lectures/readout/readout.html "Readout Noise by Michael Richmond")
-created by Michael Richmond.
+are perhaps beyond the scope of this book. Check out [Readout Noise by Michael Richmond](http://spiff.rit.edu/classes/phys445/lectures/readout/readout.html)
+if you are interested in learning more about readout noise.
 
 ## Thermal Noise
 
@@ -470,12 +467,7 @@ Calculate SNR or it's associated values for various Landsat sensors:
 3.  ETM+ = SNR: 22.3, µ: 13.4
 :::
 
-::: {.box-content .case-study-content}
-::: {.box-title .case-study-top}
-## Case Study: Title of Case Study Here 
-You see textual case study content here 
-
-## An overview of Landsat Processing {.unnumbered}
+## Case Study: An overview of Landsat Processing
 
 <p>
 
@@ -504,9 +496,8 @@ inconsistencies present in an image. The USGS utilizes a combination of
 ground control points (GCP), digital elevation models (DEM) and internal
 sensor calibrations to correct an image. Within Level 1 there are a
 variety of sub-levels that users can select from, each varying based on
-the amount of correction that has been completed. More information about
-the specific of Landsat Level-1 processing can be found
-[here](https://www.usgs.gov/core-science-systems/nli/landsat/landsat-level-1-processing-details "Landsat Level-1 Processing").
+the amount of correction that has been completed. USGS's informational page [Landsat Level-1 Processing Details](https://www.usgs.gov/core-science-systems/nli/landsat/landsat-level-1-processing-details) is a good resource for learning more about
+the specifics of Landsat Level-1 processing.
 
 </p>
 
@@ -523,17 +514,16 @@ environmental metrics, such as land cover, while surface temperature
 lends insight to vegetation health and the global energy balance. It is
 important to note that there are two Collection levels at which Landsat
 processing takes place, with Collection 2 representing the highest
-quality processing stream. You can explore the differences between
-Collections
-[here](https://prd-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/atoms/files/Landsat-C1vsC2-2021-0430-LMWS.pdf "Landsat Collection 1 vs 2"),
+quality processing stream. You can explore the differences between [collections of Landsat Collection 1 vs 2 imagery [PDF]](https://prd-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/atoms/files/Landsat-C1vsC2-2021-0430-LMWS.pdf),
 while information about Collection 2 images processed at a Level-2
-standard can be observed
-[here](https://www.usgs.gov/core-science-systems/nli/landsat/landsat-collection-2-level-2-science-products "Landsat Colleciton 2 Level-2").
+standard can be observed on USGS's [Landsat Collection 2 Level-2 Science Products information page](https://www.usgs.gov/core-science-systems/nli/landsat/landsat-collection-2-level-2-science-products).
 
 </p>
 
+(ref:13-landsat-c2-l2-caption) Three unique Landsat 8 Collection 2 images. In order from left to right: Level-1 Top of Atmosphere reflectance image (no atmospheric correction), Level-2 atmospherically corrected surface reflectance and Level-2 surface temperature. Images were collected on May 3, 2013 over the Sapta Kosh River in Bairawa, Nepal [@bouchard_example_2013]. Public domain.
+
 ```{r 13-landsat-c2-l2, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-    fig_cap <- paste0("Three unique Landsat 8 Collection 2 images. In order from left to right: Level-1 Top of Atmosphere reflectance image (no atmospheric correction), Level-2 atmospherically corrected surface reflectance and Level-2 surface temperature. Images were collected on May 3, 2013 over the Sapta Kosh River in Bairawa, Nepal. Created by Michelle A. Bouchard, USGS. Public domain.")
+    fig_cap = "(ref:13-landsat-c2-l2-caption)"
     knitr::include_graphics("images/13-landsat-c2-l2.png")
 ```
 
@@ -552,7 +542,6 @@ learned in this chapter to evaluate the usefulness of any processed data
 you consider in your work.
 
 </p>
-:::
 
 ## Image Enhancement
 
@@ -582,7 +571,7 @@ this change can be determined and then applied to all other observed
 values.
 
 ```{r 13-stretch, fig.cap = fig_cap, out.width = "100%", echo = FALSE}
-    fig_cap <- paste0("Example of how (a) the original distribution of radiometric values in a image is (b) stretched")
+    fig_cap <- paste0("Example of how (a) the original distribution of radiometric values in a image is (b) stretched. Hacker, CC-BY-4.0.")
     knitr::include_graphics("images/13-stretch.png")
 ```
 
@@ -605,7 +594,7 @@ quality through the loss of detail.
 <p>
 
 If you are interested in learning more about how sharpening can impact
-hyperspectral imagery you can check out [@inamdar2020]. Their research
+hyperspectral imagery you can check out [@inamdar_characterizing_2020]. Their research
 demonstrates that recorded pixel values contain information from areas
 beyond the traditional spatial boundary of a cell. These findings have
 interesting implications for a variety of applications.

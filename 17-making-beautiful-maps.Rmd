@@ -17,7 +17,7 @@ A map _is not_ the territory it represents, but, if correct, it has a _similar s
 
 Maps represent areas larger than we can see, usually from above, and some depict phenomena that cannot be seen [@manson_maps_2017], such as growing seasons. They also illustrate spatial relationships, such as this map showing the percentage of the population aged 65 and over by census tract in Moncton, New Brunswick. We can deduce that those aged 65 years and over are concentrated in certain areas of the city, using census tracts as a proxy.
 
-![Maps illustrate how variables are related in space. [@statistics_canada_thematic_2016] (c) [Statistics Canada](https://www-statcan-gc-ca.eu1.proxy.openathens.net/eng/about/about?MM=as), [Open Government Licence - Canada](https://open.canada.ca/en/open-government-licence-canada).](images/17-moncton.png)
+![Maps illustrate how variables are related in space. [@statistics_canada_thematic_2016] (c) [Statistics Canada](https://www-statcan-gc-ca.eu1.proxy.openathens.net/eng/about/about?MM=as), [Open Government Licence - Canada](https://open.canada.ca/en/open-government-licence-canada).](images/17-moncton.png){.center}
 
 **Cartography** is the art and science of designing maps and consists of certain principles and rules that help ensure accuracy and clarity. All maps are simplified representations of a place and reflect the particular choices and motivations of the cartographer. Cartography is as much about deciding what to omit from a map as it choosing what to include. Making beautiful maps involves the art, and science, of selecting and modifying data and portraying concepts with clarity and precision. Decisions around colour, font size, graphical hierarchies, classification themes, and legends are all elements of maps that determine how effective, and accurate, they are in conveying information. In this chapter, you will learn about what elements go into making an effective map, the different categories of maps, and the principles of map design. 
 
@@ -39,9 +39,9 @@ Map elements, symbology, classification, cartography, north arrow, scale, themat
 
 ## Types of Maps
 
-There are many different types of maps. Just try doing a Google search, and you will come across descriptions of thematic, cadastral, topographic, and physiographic maps, to name but a few. There is no standard agreement on how many different categories of maps exist. Although some differentiate among as many as five  types of maps based on the functions they serve [@icsm_types_2021], all maps can also be categorized into just two types, **reference** and **thematic**. Reference maps represent the human-made or natural features of the landscape and are sometimes thought of as basemaps. They provide information about a particular location, such as in the example below, depicting the longest rivers in the location of Canada and where they overlap with the United States. Topographic maps based on the [National Topographic System (NTS)](https://www.nrcan.gc.ca/earth-sciences/geography/topographic-information/maps/national-topographic-system-maps/9767) are another example of reference maps.
+There are many different types of maps. Just try doing a Google search, and you will come across descriptions of thematic, cadastral, topographic, and physiographic maps, to name but a few. There is no standard agreement on how many different categories of maps exist. Although some differentiate among as many as five  types of maps based on the functions they serve [@icsm_types_2021], all maps can also be categorized into just two types, **reference** and **thematic**. Reference maps represent the human-made or natural features of the landscape and are sometimes thought of as basemaps. They provide information about a particular location, such as in the example below, depicting the longest rivers in the location of Canada and where they overlap with the United States. Topographic maps based on the [National Topographic System (NTS)](https://www.nrcan.gc.ca/earth-sciences/geography/topographic-information/maps/national-topographic-system-maps/9767){target="_blank"} are another example of reference maps.
 
-![One example of a reference map. [@shannon1_longest_2017] (c) [Shannon1](https://en.wikipedia.org/wiki/User:Shannon1), [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/).](images/17-longRivers.png)
+![One example of a reference map. [@shannon1_longest_2017] (c) [Shannon1](https://en.wikipedia.org/wiki/User:Shannon1), [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/).](images/17-longRivers.png){.center}
 
 ## Thematic Maps
 
@@ -49,11 +49,11 @@ Thematic maps depict the spatial distribution of particular features, which are 
 
 Qualitative thematic maps illustrate the spatial extent of categorical data [@anderson_types_2020], such as the 1956 map bedrock geology map below.
 
-![A thematic map using qualitative categorical data. [@nicholson_bedrock_1956] (c) Comtois and Nicholson, [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/).](images/17-geology.png)
+![A thematic map using qualitative categorical data. [@nicholson_bedrock_1956] (c) Comtois and Nicholson, [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/).](images/17-geology.png){.center}
 
 Quantitative thematic maps depict the spatial patterns of numerical data, often expressed as rates or percentages, as in the map below showing the difference in population change between two periods, where the difference is expressed as a percentage.
 
-![A thematic map depicting population data as a percentage. [@statistics_canada_illustrated_2017] (c) [Statistics Canada](https://www-statcan-gc-ca.eu1.proxy.openathens.net/eng/about/about?MM=as), [Open Government License - Canada](https://open.canada.ca/en/open-government-licence-canada).](images/17-population.png)
+![A thematic map depicting population data as a percentage. [@statistics_canada_illustrated_2017] (c) [Statistics Canada](https://www-statcan-gc-ca.eu1.proxy.openathens.net/eng/about/about?MM=as), [Open Government License - Canada](https://open.canada.ca/en/open-government-licence-canada).](images/17-population.png){.center}
 
 ## Choropleth Maps
 
@@ -63,15 +63,13 @@ One of the reasons choropleth maps are so widely used is because much of the dat
 
 The map below represents, using percentages instead of absolute numbers, the spatial distribution of the percentage of Cantonese speakers per total population in each census tract in the city of Vancouver, British Columbia. Household population of mother tongue language speakers by census tract is an example of demographic data collected by Statistics Canada and can serve as a proxy for linguistic diversity. This map shows greater concentration of Cantonese speakers in census tracts in the East Vancouver area.
 
-(ref:17-choropleth-caption) A choropleth map representing the 
-percentage of Cantonese speakers per total population of census tracts in the City of Vancouver [Household Population by Mother Tongue](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm) retrieved from [the web application SimplyAnalytics](https://simplyanalytics.com/).
-
 ```{r 17-choropleth, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap = "(ref:17-choropleth-caption)"
+fig_cap <- paste0("A choropleth map representing the 
+percentage of Cantonese speakers per total population of census tracts in the City of Vancouver [Household Population by Mother Tongue](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm) retrieved from [SimplyAnalytics](https://simplyanalytics.com/).")
 knitr::include_graphics("images/17-choropleth.png")
 ```
 
-This map is also a good example of the potential problems with choropleth maps, which has to do with something called the [Modifiable areal unit problem](https://en.wikipedia.org/wiki/Modifiable_areal_unit_problem), or MAUP. This results when data such as population, which is the measurement of population per unit area, is aggregated into an areal unit, where the shape and scale of the unit affects the resulting rates, or values, of the data. In this map example, the areal unit is a census tract, which vary by size and population density across the city and are delineated according to factors other than number of mother tongue language speakers. Without knowing anything about census tracts, we may assume based on this map that an entire census tract contains a disproportionate percentage of Cantoneses speakers, when in reality it may be just a few households more than the census tract next to it. This map fails to convey that kind of nuance and illustrates one of the weaknesses of choropleth maps, in spite of their wide use and applicability, particularly when displaying census data.
+This map is also a good example of the potential problems with choropleth maps, which has to do with something called the [Modifiable areal unit problem](https://en.wikipedia.org/wiki/Modifiable_areal_unit_problem){target="_blank"}, or MAUP. This results when data such as population, which is the measurement of population per unit area, is aggregated into an areal unit, where the shape and scale of the unit affects the resulting rates, or values, of the data. In this map example, the areal unit is a census tract, which vary by size and population density across the city and are delineated according to factors other than number of mother tongue language speakers. Without knowing anything about census tracts, we may assume based on this map that an entire census tract contains a disproportionate percentage of Cantoneses speakers, when in reality it may be just a few households more than the census tract next to it. This map fails to convey that kind of nuance and illustrates one of the weaknesses of choropleth maps, in spite of their wide use and applicability, particularly when displaying census data.
 
 ## Dot Density Maps
 
@@ -79,19 +77,14 @@ In contrast to choropleth maps, raw data/counts (e.g. number of mother tongue la
 
 Also unlike choropleth maps, dot density maps do not need to be tied to enumeration units, although they can be, such as in this map example, which uses another method of mapping the same data that was used in the choropleth map above. For their part, dots are distributed randomly, and a potential misleading aspect of dot density maps is the false interpretation that the dots are placed in precise locations in space.
 
-(ref:17-dotDensity-caption) Dot density map showing the distribution of Cantonese and Mandarin mother tongue language speakers by census tract [Household Population by Mother Tongue](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm) retrieved from [SimplyAnalytics](https://simplyanalytics.com/).
-
 ```{r 17-dotDensity, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap = "(ref:17-dotDensity-caption)"
+fig_cap <- paste0("Dot density map showing the distribution of Cantonese and Mandarin mother tongue language speakers by census tract [Household Population by Mother Tongue](https://www12.statcan.gc.ca/census-recensement/2016/ref/dict/pop095-eng.cfm) retrieved from [SimplyAnalytics](https://simplyanalytics.com/).")
 knitr::include_graphics("images/17-dotDensity.png")
 ```
 
 ## Isoline Maps
-
-(ref:17-isoline-caption) An isoline map representing growing seasons from the _Atlas of Canada_. Isolines are lines which connect points with identical values.  ('Growing Seasons', [@nicholson_growing_1950], CC BY-NC-SA 3.1) retrieved from [David Rumsey Map Collection](https://www.davidrumsey.com/luna/servlet/s/c68r55).
-
 ```{r 17-isoline, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap = "(ref:17-isoline-caption)"
+fig_cap <- paste0("An isoline map representing growing seasons from the _Atlas of Canada_. Isolines are lines which connect points with identical values.  ('Growing Seasons', [@nicholson_growing_1950], CC BY-NC-SA 3.1) retrieved from [David Rumsey Map Collection](https://www.davidrumsey.com/luna/servlet/s/c68r55).")
 knitr::include_graphics("images/17-isoline.png")
 ```
 
@@ -103,10 +96,8 @@ _Note: I think I would combine diagrammatic and cartogram subsections._
 -->
 ## Cartograms
 
-(ref:17-cartogram-caption) A effective illustration of a cartogram representing the population (%) with no access to clean drinking water. ([@worldmapper_no_2015], CC BY-NC-SA 4.0).
-
 ```{r 17-cartogram, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap = "(ref:17-cartogram-caption)"
+fig_cap <- paste0("A effective illustration of a cartogram representing the population (%) with no access to clean drinking water. ([@worldmapper_no_2015], CC BY-NC-SA 4.0).")
 knitr::include_graphics("images/17-cartogram.png")
 ```
 <!-- 
@@ -116,11 +107,11 @@ _Note: Paul, see example interactive quiz at bottom of this [Introduction to Geo
 -->
 ## Additional Resources on Types of Maps
 
-- [Thematic Maps](https://openpress.usask.ca/introgeomatics/chapter/thematic-maps/)
-- [Choropleth Maps](https://www.axismaps.com/guide/choropleth)
-- [Dot Density Maps](https://www.axismaps.com/guide/dot-density)
-- [Dot density map](http://wiki.gis.com/wiki/index.php/Dot_density_map)
-- [Types of Maps](https://www.e-education.psu.edu/geog486/node/641)
+- [Thematic Maps](https://openpress.usask.ca/introgeomatics/chapter/thematic-maps/){target="_blank"}
+- [Choropleth Maps](https://www.axismaps.com/guide/choropleth){target="_blank"}
+- [Dot Density Maps](https://www.axismaps.com/guide/dot-density){target="_blank"}
+- [Dot density map](http://wiki.gis.com/wiki/index.php/Dot_density_map){target="_blank"}
+- [Types of Maps](https://www.e-education.psu.edu/geog486/node/641){target="_blank"}
 
 
 ## Map Composition
@@ -128,10 +119,8 @@ Most effective maps comprise standard elements that help orient the map viewer i
 
 ## Figure
 
-(ref:17-figure-caption) The components of effective map composition. ('Map composition.', @manson_composition_2017, CC BY-NC-SA 4.0)
-
 ```{r 17-figure, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap = "(ref:17-figure-caption)"
+fig_cap <- paste0("The components of effective map composition. ('Map composition.', @manson_composition_2017, CC BY-NC-SA 4.0)")
 knitr::include_graphics("images/17-figure.png")
 ```
 <!-- 
@@ -154,10 +143,8 @@ Just as in writing, it is also important to provide information about the data s
 
 ## Text
 
-(ref:17-text-caption) Typography standards for cartography. ('Cartographic style guide.', @gaba_cartographic_2014, CC BY 2.5).
-
 ```{r 17-text, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap = "(ref:17-text-caption)"
+fig_cap <- paste0("Typography standards for cartography. ('Cartographic style guide.', @gaba_cartographic_2014, CC BY 2.5).")
 knitr::include_graphics("images/17-text.png")
 ```
 <!-- 
@@ -169,10 +156,8 @@ knitr::include_graphics("images/17-text.png")
 
 ## Scale and North Arrow
 
-(ref:17-scale-caption) Six maps of Ottowa at different scales from the _Atlas of Canada_. ('Comparison of scales', @nicholson_comparison_1958, CC BY-NC-SA 3.1).
-
 ```{r 17-scale, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap = "(ref:17-scale-caption)"
+fig_cap <- paste0("Six maps of Ottowa at different scales from the _Atlas of Canada_. ('Comparison of scales', @nicholson_comparison_1958, CC BY-NC-SA 3.1).")
 knitr::include_graphics("images/17-scale.png")
 ```
 <!-- 
@@ -193,19 +178,15 @@ knitr::include_graphics("images/17-scale.png")
 
 There are many ways to visually alter symbols - represented by points, lines, or polygons -  to convey information and show both qualitative and quantitative differences between features in the map. These include varying symbols by size, shape, and colour, to name just a few. Using points to map the location of Canada's cities, for example, the cartographer may use different shapes to illustrate differences between cities and towns. To show variations in populations of those cities, the cartographer might vary the size of the symbols.
 
-(ref:17-symbolization-caption) The components of symbolization. ('Symbolization', @manson_symbolization_2013, CC BY-NC-SA 4.0).
-
 ```{r 17-symbolization, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap = "(ref:17-symbolization-caption)"
+fig_cap <- paste0("The components of symbolization. ('Symbolization', @manson_symbolization_2013, CC BY-NC-SA 4.0).")
 knitr::include_graphics("images/17-symbolization.png")
 ```
 
 ## Separable
 
-(ref:17-separable-caption) Separable and integral visual combinations delineated by value/shape and heighth/width, respectively. (@elmer_symbol_2012)
-
 ```{r 17-separable, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap = "(ref:17-separable-caption)"
+fig_cap <- paste0("Separable and integral visual combinations delineated by value/shape and heighth/width, respectively. (@elmer_symbol_2012)")
 knitr::include_graphics("images/17-separable.png")
 ```
 <!-- 
@@ -218,10 +199,8 @@ knitr::include_graphics("images/17-separable.png")
 
 ## Graduated
 
-(ref:17-graduated-caption) Graduated symbols vary symbol size representing a category of values. ('Proportional & Graduated Symbols', @robinson_layout_2020, CC BY-NC-SA 4.1).
-
 ```{r 17-graduated, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap = "(ref:17-graduated-caption)"
+fig_cap <- paste0("Graduated symbols vary symbol size representing a category of values. ('Proportional & Graduated Symbols', @robinson_layout_2020, CC BY-NC-SA 4.1).")
 knitr::include_graphics("images/17-graduated.png")
 ```
 <!-- 
@@ -230,10 +209,8 @@ knitr::include_graphics("images/17-graduated.png")
 
 ## Configurable
 
-(ref:17-configurable-caption) Separable and integral visual combinations delineated by value/shape and heighth/width, respectively. (@elmer_symbol_2012)
-
 ```{r 17-configurable, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap = "(ref:17-configurable-caption)"
+fig_cap <- paste0("Separable and integral visual combinations delineated by value/shape and heighth/width, respectively. (@elmer_symbol_2012)")
 knitr::include_graphics("images/17-configurable.png")
 ```
 <!-- 
@@ -242,10 +219,8 @@ knitr::include_graphics("images/17-configurable.png")
 
 ## Proportional
 
-(ref:17-proportional-caption) Proportional symbols vary size of symbols in relation to their attribute value. ('Proportional & Graduated Symbols', @robinson_layout_2020, CC BY-NC-SA 4.1.)
-
 ```{r 17-proportional, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap = "(ref:17-proportional-caption)"
+fig_cap <- paste0("Proportional symbols vary size of symbols in relation to their attribute value. ('Proportional & Graduated Symbols', @robinson_layout_2020, CC BY-NC-SA 4.1.)")
 knitr::include_graphics("images/17-proportional.png")
 ```
 
@@ -254,10 +229,9 @@ knitr::include_graphics("images/17-proportional.png")
 -->
 
 ## Line Weight
-(ref:17-lineWeight-caption) Varying the thickness of different lines in the map can help focus attention and differentiate between map features. ('Map Elements and Design Principles', @ingram_map_2021, CC-BY-SA-4.0).
 
 ```{r 17-lineWeight, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap = "(ref:17-lineWeight-caption)"
+fig_cap <- paste0("Varying the thickness of different lines in the map can help focus attention and differentiate between map features. ('Map Elements and Design Principles', @ingram_map_2021, CC-BY-SA-4.0).")
 knitr::include_graphics("images/17-lineWeight.png")
 ```
 
@@ -270,43 +244,36 @@ Cartographers use **colour** in maps to communicate information, to differentiat
 
 Colour can also influence the feeling of a map. Some cartographers caution against using red for symbols, for example, because it can convey a sense of alarm. In general, it is a good idea to pay attention to how colours convey intensity.
 
-Choice of colours should also take into account that some people are colourblind, especially when choosing a colour scheme. The [online tool Colorbrewer 2.0](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) helps cartographers evaluate how easy it is to differentiate among colours in a colour scheme.
+Choice of colours should also take into account that some people are colourblind, especially when choosing a colour scheme. [Colorbrewer 2.0](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) is an online tool to help cartographers evaluate how easy it is to differentiate among colours in a colour scheme.
 
 Colour is actually comprised of three elements: hue, chroma, and lightness, or value.
 
 ## Hue
 
-(ref:17-hue-caption) Hues are what we commonly think of as the names of colours and distinguish between qualitative data. ('Hue', @manson_hue_2013, CC BY-NC-SA 3.0).
-
 ```{r 17-hue, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap = "(ref:17-hue-caption)"
+fig_cap <- paste0("Hues are what we commonly think of as the names of colours and distinguish between qualitative data. ('Hue', @manson_hue_2013, CC BY-NC-SA 3.0).")
 knitr::include_graphics("images/17-hue.png")
 ```
 
 ## Chroma
 
-(ref:17-chroma-caption) Higher values represent lighter colorus while lower values refer to dark colours. ('Chroma', @anderson_chroma_2020, CC BY-NC-SA 4.0).
-
 ```{r 17-chroma, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap = "(ref:17-chroma-caption)"
+fig_cap <- paste0("Higher values represent lighter colorus while lower values refer to dark colours. ('Chroma', @anderson_chroma_2020, CC BY-NC-SA 4.0).")
 knitr::include_graphics("images/17-chroma.png")
 ```
 
 ## Lightness
 
-(ref:17-lightness-caption) Higher values represent lighter colours while lower values refer to darker colours. ('Value', @manson_value_2013, CC BY-NC-SA 4.0).
 
 ```{r 17-lightness, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap = "(ref:17-lightness-caption)"
+fig_cap <- paste0("Higher values represent lighter colours while lower values refer to darker colours. ('Value', @manson_value_2013, CC BY-NC-SA 4.0).")
 knitr::include_graphics("images/17-lightness.png")
 ```
 
 ## Bivariate Colour Schemes
 
-(ref:17-bivariate-caption) Different examples of bivariate legends. ('Bivariate', @axis_maps_bivariate_2020, CC BY-NC-SA 4.0).
-
 ```{r 17-bivariate, fig.cap = fig_cap, out.width="80%", echo = FALSE}
-fig_cap = "(ref:17-bivariate-caption)"
+fig_cap <- paste0("Different examples of bivariate legends. ('Bivariate', @axis_maps_bivariate_2020, CC BY-NC-SA 4.0).")
 knitr::include_graphics("images/17-bivariate.png")
 ```
 <!-- 
@@ -390,7 +357,7 @@ Good map design effectively integrates map elements with design principles and s
 
 ## Hierarchy
 
-- hierarchy.png from row 44 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192) for labeling hierarchy
+- hierarchy.png from row 44 of [OER Content Sharing](https://docs.google.com/spreadsheets/d/1LqzXn00wMeIjHWstNT3tMImNDZirLGc3g72jFOQc_8I/edit#gid=817407192){target="_blank"} for labeling hierarchy
 - see [Visual Hierarchy](https://www.axismaps.com/guide/visual-hierarchy) for discussion of and examples of visual hierachy instead
 
 ## Balance

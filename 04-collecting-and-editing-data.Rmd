@@ -132,7 +132,7 @@ Try this: Navigate to [Canadian Socio-economic Information Management System Sta
 
 ## Non-Governmental Organization Data 
 
-Many elements of the environment, such as biodiversity and large old trees, are not monitored by most governments. These knowledge gaps are sometimes filled by other organizations not associated with the government (i.e.,  non-governmental organizations) or by citizen science initiatives.
+Many elements of the environment, such as biodiversity and large old trees, are not monitored by most governments. These knowledge gaps are sometimes filled by other organizations not associated with the government (i.e.,  non-governmental organizations) or by citizen science initiatives. 
 
 [Pacific Salmon Foundation](https://www.salmonexplorer.ca/#!/) has collaborated with the help of First Nations and government to compile salmon information for BC so that the data can be readily viewed and downloaded for further analysis. Organizations such as the International Union for Conservation of Nature often synthesize and [offer datasets](https://www.iucn.org/resources/conservation-tools) that support their mandates such as monitoring species at risk and expanding protected areas. 
 
@@ -214,7 +214,7 @@ Using **aerial photographs** to track landscape change often requires first 'tyi
 
 Compare the map and photograph below. Both show the same gas pipeline, which passes through hilly terrain. Note the deformation of the pipeline route in the photo relative to the shape of the route on the topographic map. Only the topographic map is accurate here. The deformation in the photo is caused by relief displacement. The photo would not serve well on its own as a source for topographic mapping.
 
-(ref:04-crooked-aerialphoto-caption) Example of how a linear feature can appear crooked in an aerial photograph that has not yet been orthorectified due to relief displacement. @dibiase_census_2014, CC BY 4.0.
+(ref:04-crooked-aerialphoto-caption) Example of how a linear feature can appear crooked in an aerial photograph that has not yet been orthorectified due to relief displacement. @dibiase_census_2014, CC-BY-4.0.
 
 ```{r 04-crooked-aerialphoto, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
 fig_cap = "(ref:04-crooked-aerialphoto-caption)"
@@ -231,10 +231,6 @@ Even in their un-orthorectified state, historical aerial photos can offer a powe
 2. Decide on the time-frame of interest. 
 3. Search via a GIS web map or paper flight line maps and examine which flight rolls cross over your time frame and area of interest.
 
-Figure \@ref(fig:04-accessing-aerial-photos) shows the results from an example search. In this example, the area of interest (large pink rectangle, figure \@ref(fig:04-accessing-aerial-photos) was set by navigating to the study site within the web map then setting the current extent as the area of interest. Here the extent is centered on the coastline between St. John's, Newfoundland and Cape Spear, the most easterly point in North America. We then searched for **aerial photographs at three different time frames: 1940-1945 (figure \@ref(fig:04-accessing-aerial-photos)) A), 1950-1955 (Figure \@ref(fig:04-accessing-aerial-photos)) B), and 1960-1965 (figure \@ref(fig:04-accessing-aerial-photos)) C). Indeed, aerial photos were found to be available at each period. The photos with smaller boxes (or foot prints) tend to have higher spatial resolution but cover less area. Assuming that fine spatial resolution is desired, the smallest photos have been selected in this example and could then be requested from the Library. Previews are often not available so we will not fully know the quality of the photos until we inspect them.
-
-(ref:04-accessing-aerial-photos-caption) Example showing the availabiltiy of historical aerial photos in eastern Newfoundland at three time steps. Data from @natural_resources_canada_earth_nodate, Open Government License - Canada.
-
 ```{r 04-accessing-aerial-photos, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
 fig_cap = "(ref:04-accessing-aerial-photos-caption)"
 knitr::include_graphics(here::here("images", "04-accessing-aerial-photos.png"))
@@ -243,17 +239,17 @@ knitr::include_graphics(here::here("images", "04-accessing-aerial-photos.png"))
 
 (ref:04-accessing-aerial-photos-caption) Example showing the availabiltiy of historical aerial photos in eastern Newfoundland at three time steps. Data from @natural_resources_canada_earth_nodate, Open Government License - Canada.
 
+Figure \@ref(fig:04-accessing-aerial-photos) shows the results from an example search. In this example, the area of interest (large pink rectangle, figure \@ref(fig:04-accessing-aerial-photos) was set by navigating to the study site within the web map then setting the current extent as the area of interest. Here the extent is centered on the coastline between St. John's, Newfoundland and Cape Spear, the most easterly point in North America. We then searched for **aerial photographs at three different time frames: 1940-1945 (Figure \@ref(fig:04-accessing-aerial-photos) A, 1950-1955 Figure \@ref(fig:04-accessing-aerial-photos) B, and 1960-1965 Figure \@ref(fig:04-accessing-aerial-photos) C). Indeed, aerial photos were found to be available at each period. The photos with smaller boxes (or foot prints) tend to have higher spatial resolution but cover less area. Assuming that fine spatial resolution is desired, the smallest photos have been selected in this example and could then be requested from the library. Previews are often not available so we will not fully know the quality of the photos until we inspect them.
+
 :::: {.box-content .your-turn-content}
 
 ::: {.box-title .your-turn-top}
-
 ## Your Turn! {-}
 :::
-Go to the [Canada Earth Observation Data Management System](https://www.eodms-sgdot.nrcan-rncan.gc.ca/index-en.html) and search for historical aerial photos in your chosen area of interest using the time frames 1935-1950 and then 1950-1980. What is the oldest photo available? 
-
+<p id="box-text">
+Go to the [Canada Eartch Observation Data Management System](https://www.eodms-sgdot.nrcan-rncan.gc.ca/index-en.html) and search for historical aerial photos in your chosen area of interest using the time frames 1935-1950 and then 1950-1980. What is the oldest photo available?
+</p>
 ::::
-
-</br>
 
 If you searched but did not find anything helpful, do not be discouraged. The area of interest in the example of Cape Spear, Newfoundland, happens to be a strategic location for national defense so it not surprising that it has excellent coverage in the National Air Photo Library. In contrast, if you are interested in seeing an environmental feature such as historical forest cover in northern BC, recall that natural resources fall under the jurisdiction of provinces in Canada. Consequently, provinces may house aerial photo collections for your area. Some of these collections have been preserved by government or other institutions, such as the Geographic Information Center (GIC) at the University of British Columbia, which rescued a collection of 2.5 million aerial photos. These photos are available for researchers and commercial use. The GIC also maintains a [list of other aerial photograph libraries](https://gic.geog.ubc.ca/resources/air-photo-collection-and-services/other-sources-of-air-photo-information/), including for Alberta, Yukon, and the US. 
 
@@ -267,7 +263,7 @@ These data often come in a form called spatial panel data. Spatial panel data de
 2. Downloading the spatial geometry file
 3. Linking the two files using an attribute join
 
-An example of a marvelous and yet relatively easy to use natural resource administrative data record is the [BC big Game Hunting Statistics](https://catalogue.data.gov.bc.ca/dataset/big-game-harvest-statistics-1976-to-current), which documents the number of large game hunted in BC by species, by hunter type (BC resident vs. non-resident hunter), and the effort (# days) that went into the hunts. This data can be made spatial by performing an attribute join with the [BC Wildlife Management Units Layer](https://catalogue.data.gov.bc.ca/dataset/wildlife-management-units). Attribute joins are discussed in [Chapter 5](./relational-databases.html#joining-relations)).
+An example of a marvelous and yet relatively easy to use natural resource administrative data record is the [BC big Game Hunting Statistics](https://catalogue.data.gov.bc.ca/dataset/big-game-harvest-statistics-1976-to-current), which documents the number of large game hunted in BC by species, by hunter type (BC resident vs. non-resident hunter), and the effort (number of days) that went into the hunts. These data can be made spatial by performing an attribute join with the [BC Wildlife Management Units Layer](https://catalogue.data.gov.bc.ca/dataset/wildlife-management-units). Attribute joins are discussed in [Chapter 5](https://www.opengeomatics.ca/relational-databases.html#joining-relations). 
 
 Many natural resource administrative records are in digital form back to about 1980. Before that data often only exists in archival documents and must be digitized. Libraries are actively digitizing important archives, such as government annual reports, which are a rich source for natural resource administrative data. 
 
@@ -283,9 +279,7 @@ Although many types of data seem to be georeferenced, other information must be 
 
 A common use case for georeferencing in landscape studies is when an historical map must be brought into GIS and overlaid with other data. Imagine you have a paper map and you use a desktop scanning device to scan it and save it as a digital image. This map depicts a particular area on Earth but there is no way for your computer to know where and how on Earth to place this map (figure \@ref(fig:04-georeferencing-concept)). In order to solve this problem, it is necessary to assign it geographic coordinate information so that GIS software can correctly align it with other georeferenced data.
 
-(ref:04-georeferencing-concept-caption) The need for georeferencing illustrated conceptually. Adapted from @university_of_texas_libraries_intro_2021. CC by 2.0.
-
-(ref:04-georeferencing-concept-caption) The need for georeferencing illustrated conceptually. Adapted from @university_of_texas_libraries_intro_2021. CC by 2.0.
+(ref:04-georeferencing-concept-caption) The need for georeferencing illustrated conceptually. Adapted from @university_of_texas_libraries_intro_2021. CC-BY-2.0.
 
 ```{r 04-georeferencing-concept, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
 fig_cap = "(ref:04-georeferencing-concept-caption)"
@@ -302,7 +296,7 @@ Georeferencing is typically carried out using GIS software. The process of geore
 Large area maps (e.g., an entire country or province) typically have a **graticule**, which depicts lines of latitude and longitude, and smaller scale maps often have UTM (Universal Transverse Mercator) grids (see [Chapter 2](https://www.opengeomatics.ca/mapping-data.html) for more on map coordinate systems). These grids or graticules may span across the map or just be located along the corner or edges of a map. Such maps can often be georeferenced in a GIS by first setting the desired coordinate system and then toggling on the grid or graticule within the GIS. Control points can be placed on the scanned raster at the line intersections than tied to the grid toggled on in the GIS.
 
 ```{r 04-control-points, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste0("A comparison of (A) an historical census map from 1931 with no graticule versus (B) a 1961 census map with graticule representing latitude and longitude. Panel C shows a close-up of the coordinate detail. Sutherland, CC BY 4.0.")
+    fig_cap <- paste0("A comparison of (A) an historical census map from 1931 with no graticule versus (B) a 1961 census map with graticule representing latitude and longitude. Panel C shows a close-up of the coordinate detail. Sutherland, CC-BY-4.0.")
 knitr::include_graphics(here::here("images", "04-control-points.png"))
 ```
 </br>

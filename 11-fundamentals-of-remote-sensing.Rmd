@@ -275,8 +275,8 @@ that these categories have gradual boundaries, rather than sharp
 dividing lines. In order of increasing wavelength they are: radio,
 microwave, infrared, visible, ultraviolet, X ray and Gamma ray. We will
 detail each of these seven groups in Table 1 [@zwinkels_encyclopedia_2020]. If you
-wish a visual tour of the EMS you can explore [this
-document](https://books.google.ca/books?id=DfLPpxogdM4C&pg=PP1#v=onepage&q&f=false "Tour of the electromagnetic spectrum")
+wish a visual tour of the EMS you can explore ["Tour of the electromagnetic spectrum"
+online](https://books.google.ca/books?id=DfLPpxogdM4C&pg=PP1#v=onepage&q&f=false)
 created by Ginger Butcher for NASA in 2010.
 
 | Name             | Wavelength                       |
@@ -303,7 +303,7 @@ the most common terms have been included below. They are organized into
 three categories: Radiation Basics, Foundations of Measurement and
 Methods of Normalization.
 
-## **Radiation Basics**
+## Radiation Basics
 
 The use of radiation to quantify properties of an object is
 inherently linked with relatively complex theories of physics. To
@@ -458,17 +458,20 @@ underpinning its interactions with other objects, we can begin to
 explore the measurements that our sensors record. One of the most
 important concepts to understand is that of the spectral signature, or
 spectra. A spectral signature refers to the amount of electromagnetic
-energy recorded across a defined section of the EMS. A nice example
-of a spectral signature is Figure \@ref(fig:11-solar-radiation), which
-presents the sun's radiation between 250 - 2500 nm in the units of
-solar irradiance (W/m-2/nm). Similar graphs are common throughout remote
-sensing and can employ different units of measure.
+energy recorded across a defined section of the EMS. Use our EMS visualization tool to examine spectral signatures for different land covers (Figure
+\@ref(fig:11-ems-visualization-static)).
+
+```{r 11-ems-visualization-static, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+    fig_cap <- paste0("Online tool for visualizing the spectral signatures for different land covers using hyperspectral Hyperion satellite imagery. Data from United States Geological Survey - Licensed by U.S. Public Domain. <a href='https://www.opengeomatics.ca/viz/emspectrum-viz/'>Click here to access the interactive tool.</a> , CC-BY-SA-4.0.")
+    knitr::include_graphics(here::here("images", "11-ems-visualization-static.png"))
+```
+<br/>
 
 The base measurements taken to generate spectral signatures is of an
 objects radiance. Acquiring radiance across a defined section of the EMS
 can be conducted by a variety of sensors and at different spatial
 scales, highlighting the practical advantages of evaluating surfaces
-using EMR. To fully capture and compare the objects being measured,
+using electromagnetic radiation. To fully capture and compare the objects being measured,
 however, it is often necessary to normalize radiance. The need for
 normalization stems mainly from the aforementioned issues of atmospheric
 effects, source and sensor location and sensor calibration. As with any
@@ -564,7 +567,7 @@ considered high spatial resolution. When a sensor is in motion,
 collecting multiple pixels across space and time, the term instantaneous
 field of view (IFOV) is used to describe the FOV at the time each pixel
 was collected. We will learn more about the challenges of collecting
-data over space and time in [Chapter 12 and 15](https://ubc-geomatics-textbook.github.io/geomatics-textbook/remote-sensing-systems.html,https://ubc-geomatics-textbook.github.io/geomatics-textbook/LiDAR-acquisition-and-analysis.html ).
+data over space and time in [Chapter 12](./remote-sensing-systems.html) and [Chapter 15](./LiDAR-acquisition-and-analysis.html).
 
 It is a trade off when determining if a certain spatial resolution is
 useful for a given application, the pixel size needs to be fine enough
@@ -642,7 +645,7 @@ information in a small number of strategic locations along the EMS. For
 other applications, spectral information may need to be more detailed
 and capture information using thin, adjacent bands spanning a large
 region of the EMS. These specifications will be discussed in greater
-detail in [Chapter 12](https://ubc-geomatics-textbook.github.io/geomatics-textbook/remote-sensing-systems.html), so for now we'll focus on how spectral information
+detail in [Chapter 12](./remote-sensing-systems.html), so for now we'll focus on how spectral information
 can be useful.
 
 (ref:11-landsat-bands-caption) Locations of bands for various sensors deployed by NASA on one of more Landsat misison. Landsat 1-5 had the Multispectral Scanner System (MSS), while the Thematic Mapper (TM) was aboard Landsat 4-5. The Enrinched TM Plus (ETM+) had 8 bands and was aboard Landsat 7. Grey distributions in the background represent the atmospheric transmission values for a mid-latitude, hazy, summer atmosphere [@nasa_atmospheric_nodate].
@@ -753,14 +756,14 @@ As an active sensor, RADARsat produces and measures EMR with wavelengths
 between 7.5 - 15 cm and is capable of penetrating clouds and smoke. These characteristics make RADARsat ideal for applications
 such as ecosystem monitoring, maritime surveillance and disaster
 management. It's active nature also enables RADARsat to record
-observations at night. [Chapter 12](https://ubc-geomatics-textbook.github.io/geomatics-textbook/remote-sensing-systems.html) will discuss radar in more detail.
+observations at night. [Chapter 12](./remote-sensing-systems.html) will discuss radar in more detail.
 
 Another active remote sensing technique that has become popular is light
 detection and ranging (LiDAR), which can also be called airborne laser
 scanning (ALS). LiDAR is particularly useful in evaluating structural
 components of the environment, such as forest canopies and elevation
 [@coops_estimating_2007]. More details regarding the theories and applications of
-LIDAR will be presented in [Chapter 15](https://ubc-geomatics-textbook.github.io/geomatics-textbook/LiDAR-acquistion-and-anlysis.html).
+LIDAR will be presented in [Chapter 15](./LiDAR-acquistion-and-anlysis.html).
 
 ## Case Study: Optical Remote Sensing to Evaluate Land Cover in Canada
 

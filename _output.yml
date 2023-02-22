@@ -1,9 +1,18 @@
 bookdown::gitbook:
+  includes:
+    in_header: header.html
   css: style.css
   split_by: chapter
   config:
+    toolbar:
+      position: fixed
+    search:
+      engine: lunr
+    view: https://github.com/ubc-geomatics-textbook/geomatics-textbook/blob/develop/%s
+    download:
+      - ["https://osf.io/whqe2", "PDF"]
     toc:
-      collapse: subsection
+      collapse: section
       before: |
         <li><a href="./">An Open Geomatics Textbook</a></li>
       after: |

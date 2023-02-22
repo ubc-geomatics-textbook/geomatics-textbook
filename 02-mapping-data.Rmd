@@ -249,7 +249,7 @@ So how do we use this tool? The quotient between a line projected onto a map $a$
 ```
 <br/>
 
-Let us assume that $a = b = 1$. Then, the reference indicatrix has the following properties: $a=b$, $a×b=1$, and $Area=πab=π^2$. If $\frac{a'}{a'}>1$, then we can conclude that the the projection is *expanding* the distance along the $a$ line. If $\frac{a'}{a'}<1$, then we can conclude that the projection is *compressing* the distance along the line $a$. For example, suppose $a=2$ and $b=0.5$, then we have modified the scale of the indicatrix along both axes, but the areal solution is the same as the reference indicatrix shown as the red dashed circle in Figure \@ref(fig:2-reference-equivalent) below.
+Let us assume that $a = b = 1$. Then, the reference indicatrix has the following properties: $a=b$, $a×b=1$, and $Area=πab=π$. If $\frac{a'}{a'}>1$, then we can conclude that the the projection is *expanding* the distance along the $a$ line. If $\frac{a'}{a'}<1$, then we can conclude that the projection is *compressing* the distance along the line $a$. For example, suppose $a=2$ and $b=0.5$, then we have modified the scale of the indicatrix along both axes, but the areal solution is the same as the reference indicatrix shown as the red dashed circle in Figure \@ref(fig:2-reference-equivalent) below.
 
 ```{r 2-reference-equivalent, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Equivalent Tissot Indicatrix. Pickell, CC-BY-SA-4.0.")
@@ -257,7 +257,7 @@ Let us assume that $a = b = 1$. Then, the reference indicatrix has the following
 ```
 <br/>
 
-The indicatrix above in Figure \@ref(fig:2-equivalent-indicatrix) is an example of an *equivalent* indicatrix, which has the following properties: $a>b$, $a×b=1$, and $Area=πab=π^2$. 
+The indicatrix above in Figure \@ref(fig:2-reference-equivalent) is an example of an *equivalent* indicatrix, which has the following properties: $a>b$, $a×b=1$, and $Area=πab=π$. 
 
 If $\frac{a}{a'}×\frac{b}{b'}>1$, then we can conclude that the projection is *inflating* the area. If $\frac{a}{a'}×\frac{b}{b'}<1$, then we can conclude that the projection is *deflating* the area. Consequently, whenever the quotients of both axes are equivalent (i.e., $\frac{a}{a'}=\frac{b}{b'}$), Tissot's Indicatrix forms a perfect circle and the ellipse is conformal with angles true to the globe. For example, suppose $a=b=2$, then we have modified the scale of the indicatrix along both axes, but with the same factor. This results in a *conformal* indicatrix that is not equivalent, shown in Figure \@ref(fig:2-conformal-indicatrix) below.
 
@@ -267,7 +267,7 @@ If $\frac{a}{a'}×\frac{b}{b'}>1$, then we can conclude that the projection is *
 ```
 <br/>
 
-This conformal indicatrix has the following properties: $a=b$, but $a×b≠1$, and therefore $Area=πab=4π^2$. As you can see, whenever $a×b=1$ the indicatrix is equivalent (equal-area) and whenever $a=b$ the indicatrix is conformal.
+This conformal indicatrix has the following properties: $a=b$, but $a×b≠1$, and therefore $Area=πab=4π$. As you can see, whenever $a×b=1$ the indicatrix is equivalent (equal-area) and whenever $a=b$ the indicatrix is conformal.
 
 ## Map Projections for Environmental Management
 
@@ -285,7 +285,7 @@ The Mercator map projection is perhaps the most pervasive and reproduced project
 
 ### Universal Transverse Mercator (UTM)
 
-Universal Transverse Mercator (UTM) is very similar to a Mercator projection except that the cylinder is rotated or transverse by 90° so that the opening of the cylinder is perpendicular to the rotational axis of Earth. This has the effect of moving the tangent from the Equator to any Meridian. In fact, you can rotate the cylinder at any angle you want where 0° is a true Mercator, 90° is a transverse Mercator, and any other angle is considered an oblique Mercator. UTM is actually a system of 60 different transverse Mercator projections that are defined to represent 6° Longitudinal intervals of Earth's surface (60 zones x 6° = 360°). Each projection is defined as a zone, which is also divided into North and South zones depending whether you are in the Northern or Southern Hemisphere. Canada spans 15 UTM zones from Zone 7 North in the Yukon to Zone 22 North covering Newfoundland. Figure \@ref(fig:2-UTM-13N-map) below shows a map of UTM Zone 13 over Saskatchewan.
+Universal Transverse Mercator (UTM) is very similar to a Mercator projection except that the cylinder is rotated or transverse by 90° so that the opening of the cylinder is perpendicular to the rotational axis of Earth. This has the effect of moving the tangent from the Equator to any Meridian. In fact, you can rotate the cylinder at any angle you want where 0° is a true Mercator, 90° is a transverse Mercator, and any other angle is considered an oblique Mercator. UTM is actually a system of 60 different transverse Mercator projections that are defined to represent 6° Longitudinal intervals of Earth's surface (60 zones x 6° = 360°). Each projection is defined as a zone, which is also divided into North and South zones depending whether you are in the Northern or Southern Hemisphere. Canada spans 16 UTM zones from Zone 7 North in the Yukon to Zone 22 North covering Newfoundland. Figure \@ref(fig:2-UTM-13N-map) below shows a map of UTM Zone 13 over Saskatchewan.
 
 ```{r 2-UTM-13N-map, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Universal Transverse Mercator Zone 13 map projection with Tissot's Indicatrices in red. Pickell, CC-BY-SA-4.0.")

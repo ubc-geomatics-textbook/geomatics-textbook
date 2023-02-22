@@ -297,7 +297,7 @@ the most common terms have been included below. They are organized into
 three categories: Radiation Basics, Foundations of Measurement and
 Methods of Normalization.
 
-## **Radiation Basics**
+## Radiation Basics
 
 The use of radiation to quantify properties of an object is
 inherently linked with relatively complex theories of physics. To
@@ -446,17 +446,20 @@ underpinning its interactions with other objects, we can begin to
 explore the measurements that our sensors record. One of the most
 important concepts to understand is that of the spectral signature, or
 spectra. A spectral signature refers to the amount of electromagnetic
-energy recorded across a defined section of the EMS. A nice example
-of a spectral signature is Figure \@ref(fig:11-solar-radiation), which
-presents the sun's radiation between 250 - 2500 nm in the units of
-solar irradiance (W/m-2/nm). Similar graphs are common throughout remote
-sensing and can employ different units of measure.
+energy recorded across a defined section of the EMS. Use our EMS visualization tool to examine spectral signatures for different land covers (Figure
+\@ref(fig:11-ems-visualization-static)).
+
+```{r 11-ems-visualization-static, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+    fig_cap <- paste0("Online tool for visualizing the spectral signatures for different land covers using hyperspectral Hyperion satellite imagery. Data from United States Geological Survey - Licensed by U.S. Public Domain. <a href='https://www.opengeomatics.ca/viz/emspectrum-viz/'>Click here to access the interactive tool.</a> , CC-BY-SA-4.0.")
+    knitr::include_graphics(here::here("images", "11-ems-visualization-static.png"))
+```
+<br/>
 
 The base measurements taken to generate spectral signatures is of an
 objects radiance. Acquiring radiance across a defined section of the EMS
 can be conducted by a variety of sensors and at different spatial
 scales, highlighting the practical advantages of evaluating surfaces
-using EMR. To fully capture and compare the objects being measured,
+using electromagnetic radiation. To fully capture and compare the objects being measured,
 however, it is often necessary to normalize radiance. The need for
 normalization stems mainly from the aforementioned issues of atmospheric
 effects, source and sensor location and sensor calibration. As with any

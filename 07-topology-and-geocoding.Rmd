@@ -28,6 +28,7 @@ options(rgl.useNULL=TRUE)
 library(rgl)
 library(mgcv)
 library(rLiDAR)
+library(sf)
 knitr::knit_hooks$set(webgl = hook_webgl)
 ```
 
@@ -98,8 +99,14 @@ m <- leaflet(native_land) %>%
                 textsize = "12px", direction = "auto"))
 ```
 
-``` {r, 7-native-land-leaflet, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-fig_cap <- paste("Non-planar topology of 36 indigenous territories overlapping Vancouver Island, British Columbia. Data from @native_land_native_nodate, CC0.")
+(ref:07-native-land-leaflet-caption1) Non-planar topology of 36 indigenous territories overlapping Vancouver Island, British Columbia. Data from @native_land_native_nodate, CC0. Animated figure can be viewed in the web browser version of the textbook: https://www.opengeomatics.ca/topology-and-geocoding.html.
+
+(ref:07-native-land-leaflet-caption2) Non-planar topology of 36 indigenous territories overlapping Vancouver Island, British Columbia. Data from @native_land_native_nodate, CC0.
+
+```{r 07-native-land-leaflet, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+if (knitr:::is_latex_output()) { fig_cap ="(ref:07-native-land-leaflet-caption1)"
+knitr::include_graphics("images/07-native-land-leaflet.png")
+} else { fig_cap = "(ref:07-native-land-leaflet-caption2)"
 m
 ```
 
@@ -113,16 +120,37 @@ So far, we have seen that there are six ways to combine feature geometries (poin
 
 There are times when we need to ensure that two polygons are **adjacent** to one another by sharing a common edge. If two polygons are not adjacent to one another, then a gap, known as a **sliver**, exists between them or they must **overlap**. Consider the case where we are mapping land covers. If we have a formal scheme that describes all possible land covers, then we expect that a map of land covers will have perfect adjacency between all polygons so that there are no areas that are not mapped (i.e., slivers) and that no area has multiple, overlapping land covers. Since lines are also 2-dimensional, lines can overlap other lines. Depending on the context, a topological rule may be needed to promote or prevent this relationship. For example, if you are modeling bus routes, then one road might support several different routes.
 
-[figure of sliver]
-[figure of overlap]
+``` {r echo=FALSE, warning=FALSE, message=FALSE}
+#countries <- st_read("Data/02/world-countries.geojson")
+countries <- rgdal::readOGR("Data/02/world-countries.geojson", verbose = F)
+uscanada <- countries[countries$CNTRY_NAME == "Canada" | countries$CNTRY_NAME == "United States",]
+uscanada_sf <- st_as_sf(uscanada)
+uscanada_simp <- st_simplify(uscanada_sf, preserveTopology = FALSE, dTolerance = 1000)
+```
 
+``` {r echo=FALSE, warning=FALSE, message=FALSE}
+pal <- colorFactor(palette = c("#a50026","#313695"), levels = c("Canada","United States"))
+m = leaflet(uscanada_simp) %>%
+  addTiles() %>%
+  setView(lng = -94.0637905778631, lat = 48.64363272747508, zoom = 9) %>%
+  addScaleBar(position = c("topleft")) %>%
+  addPolygons(stroke = T, color=~pal(CNTRY_NAME), weight=1, smoothFactor = 0.3, fillOpacity = 0.8)
+```
+
+``` {r 2-CGVD-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
+if (knitr:::is_latex_output()) { fig_cap <- paste0("Simplified boundary of Canada (red) and the United States (blue), centred at the Rainy River boundary between Minnesota and Ontario. Without preserving topology, the output results in illogical overlaps in some places and slivers in other places. Pickell, CC-BY-SA-4.0. Data from Natural Resources Canada and licensed under the Open Government Licence - Canada. Animated figure can be viewed in the web browser version of the textbook: https://www.opengeomatics.ca/topology-and-geocoding.html")
+  knitr::include_graphics("images/07-Canada-US-border-simplified-leaflet.PNG")
+} else { fig_cap <- paste0("Simplified boundary of Canada (red) and the United States (blue), centred at the Rainy River boundary between Minnesota and Ontario. Without preserving topology, the output results in illogical overlaps in some places and slivers in other places. Pickell, CC-BY-SA-4.0. Data from Natural Resources Canada and licensed under the Open Government Licence - Canada.")
+m
+}
+```
 
 Some examples of adjacency and overlap topological rules:
-- Polygons within the same layer must not have gaps
-- Polygons within the same layer must not overlap
-- Polygons must not overlap other polygons
-- Lines must not overlap other lines
-- Lines must not self-overlap
+* Polygons within the same layer must not have gaps
+* Polygons within the same layer must not overlap
+* Polygons must not overlap other polygons
+* Lines must not overlap other lines
+* Lines must not self-overlap
 
 ## Intersect and Connect
 
@@ -245,19 +273,19 @@ points(3,5,col="red",pch=19)
 ```
 
 Some examples of intersection and connection topological rules:
-- Lines must not intersect other lines
-- Lines must intersect other lines
-- Lines must not self-intersect
-- Lines within a same layer must not self-intersect
-- Lines must not have dangles
+* Lines must not intersect other lines
+* Lines must intersect other lines
+* Lines must not self-intersect
+* Lines within a same layer must not self-intersect
+* Lines must not have dangles
 
 ## Coincident and Disjoint
 
 Point features can be either **coincident** or **disjoint** with other point features. Point features that need to be disjoint may be representing trees, mountain peaks, or any similar type of feature that would be expected to be discrete in geographic space. There are also instances where we might need one set of point features to be coincident with another such as field plots that are centered using a tree or other spatially-discrete feature on the landscape.
 
 Some examples of coincident and disjoint topological rules:
-- Points must be disjoint with other points
-- Points must by coincident with other points
+* Points must be disjoint with other points
+* Points must by coincident with other points
 
 ## Cover
 
@@ -269,10 +297,10 @@ knitr::include_graphics("images/07-dam-river-watershed.png")
 ```
 
 Some examples of cover topological rules:
-- Point must be covered by a line
-- Point must be covered by a polygon
-- Line must be covered by a polygon
-- Polygon must be covered by a polygon
+* Point must be covered by a line
+* Point must be covered by a polygon
+* Line must be covered by a polygon
+* Polygon must be covered by a polygon
 
 ### Multipart geometry
 
@@ -369,8 +397,6 @@ Figure \@ref(fig:7-delaunay-triangulation) shows a Delaunay triangulation for a 
 ## dev.off()
 ```
 
-### Multipatch geometries
-
 ``` {r 7-delaunay-triangulation, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
 fig_cap <- paste("Delaunay triangulation of 50 random points. Pickell, CC-BY-SA-4.0.")
 knitr::include_graphics("images/07-delaunay-triangulation.png")
@@ -454,8 +480,6 @@ fig_cap <- paste("Convex hull formed by topological closure of the smallest clos
 knitr::include_graphics("images/07-2d-convex-hull.png")
 ```
 
-Convex hulls are easily drawn by hand and are used for identifying a natural boundary for a sample set of points. Formally, the calculation is 
-
 ### Convex alpha hulls and alpha shapes
 
 Convex hulls can be generalized to the concave case, called **convex alpha hulls** or **α-shapes (alpha shapes)**, by adjusting the maximum radius of the circumcircles through a parameter, alpha $α$. The objective of a convex alpha hull is to minimize the α-shape formed by circumcircles of radius less than or equal to $α$. Similar to the Delaunay triangulation, the circumcircles must be _open_, meaning they contain no other points in the set. Defined in this way, the final α-shape may not result in closure of the full set of points and can result in holes where the distance between points exceeds $2α$. Surprisingly, α-shapes are prone to not existing at all. For the case of $α=0$, applying circumcircles of radius 0 results in an empty α-shape and only the input set of points are returned without any boundaries. For $α=∞$, the α-shape is equivalent to the convex hull because if we use circumcircles with an infinitely large radius, then all points in the set are bound to be enclosed by the resulting α-shape, which like the convex hull must also minimize the bounding area. Figure \@ref(fig:7-2d-alpha-hull) shows an animation of the α-shapes for $α=1$ to $α=0$ for our set of 50 points.
@@ -497,11 +521,11 @@ knitr::include_graphics("images/07-platonic-polyhedrons.gif")
 
 ### 3D Convex hull
 
-The 3D convex hull is the smallest convex polyhedron that contains a set of 3D points (Figure \@ref(fig:7-3d-convex-hull)). The 3D problem is not unlike the 2D problem for finding the 2D convex hull, except instead of using 2D circumcircles we use 3D circumscribed spheres. Otherwise, the overall objective is the same, minimize the 3D polyherdron that encloses the 3D set of points. The 3D convex hull is frequently produced in order to generate a 3D object from a laser scan. Since points are 1-dimensional they have limited use beyond their enumeration within a volume or on a plane or on a line. By contrast, a 3D convex hull produces a polyhedron, which can be used to visualize the object that was initially scanned into a 3D point cloud. The 2D polygon faces that comprise a polyhedron can provide _shape_ and interact with a simulated light source to improve perception of _depth_, which are qualities that are not provided by 3D points alone.  
+The 3D convex hull is the smallest convex polyhedron that contains a set of 3D points. The 3D problem is not unlike the 2D problem for finding the 2D convex hull, except instead of using 2D circumcircles we use 3D circumscribed spheres. Otherwise, the overall objective is the same, minimize the 3D polyherdron that encloses the 3D set of points. The 3D convex hull is frequently produced in order to generate a 3D object from a laser scan. Since points are 1-dimensional they have limited use beyond their enumeration within a volume or on a plane or on a line. By contrast, a 3D convex hull produces a polyhedron, which can be used to visualize the object that was initially scanned into a 3D point cloud. The 2D polygon faces that comprise a polyhedron can provide _shape_ and interact with a simulated light source to improve perception of _depth_, which are qualities that are not provided by 3D points alone.  
 
 ### 3D Convex alpha hull
 
-The 3D convex alpha hull is Figure \@ref(fig:7-3d-alpha-hull-deciduous) below shows a 3D convex alpha hull for a deciduous tree near the 
+The 3D convex alpha hull is Figure \@ref(fig:7-3d-alpha-hull-deciduous) below shows a 3D convex alpha hull for a deciduous tree near the Forest Sciences Centre at the University of British Columbia.
 
 ```{r setup-3d-alpha-hull-deciduous, echo=FALSE, cached=T, warning=F, include=F}
 las <- readLAS("Data/07/07-deciduous-tree.las")
@@ -515,8 +539,14 @@ xyz <- cbind(x,y,z)
 ahull.d <- ashape3d(xyz,alpha=0.05)
 ```
 
-``` {r 7-3d-alpha-hull-deciduous, echo=FALSE, out.width = '75%', fig.cap=fig_cap, webgl = TRUE}
-fig_cap <- paste0("3D concave alpha hull for a deciduous tree (species here). The alpha hull was generated using alpha = 0.05. Data collected by Spencer Dakin Kuiper with a GeoSlam terrestrial laser scanner in Vancouver, Canada. <a href='",baseurl,"#7-3d-alpha-hull-deciduous'>Animated figure can be viewed in the web browser version of the textbook.</a> Pickell, CC-BY-SA-4.0.")
+(ref:7-3d-alpha-hull-deciduous-caption1) 3D concave alpha hull for a deciduous tree. The alpha hull was generated using alpha = 0.05. Data collected by Spencer Dakin Kuiper with a GeoSlam terrestrial laser scanner in Vancouver, Canada. Pickell, CC-BY-SA-4.0. Animated figure can be viewed in the web browser version of the textbook: https://www.opengeomatics.ca/topology-and-geocoding.html#fig:7-3d-alpha-hull-deciduous.
+
+(ref:7-3d-alpha-hull-deciduous-caption2) 3D concave alpha hull for a deciduous tree (species here). The alpha hull was generated using alpha = 0.05. Data collected by Spencer Dakin Kuiper with a GeoSlam terrestrial laser scanner in Vancouver, Canada. Pickell, CC-BY-SA-4.0.
+
+```{r 7-3d-alpha-hull-deciduous, echo=FALSE, out.width = '75%', fig.cap=fig_cap, webgl = TRUE}
+if (knitr:::is_latex_output()) { fig_cap = "(ref:7-3d-alpha-hull-deciduous-caption1)"
+knitr::include_graphics("images/07-3d-alpha-hull-deciduous.png")
+} else { fig_cap = "(ref:7-3d-alpha-hull-deciduous-caption2)"
 plot3d(ahull.d,col="#2D5A27")
 rglwidget(width = 600, height = 600, reuse=FALSE, elementId="7-3d-alpha-hull-deciduous")
 ```
@@ -546,7 +576,6 @@ Similar to Thiessen polygons, Voronoi tessellations can be undertaken for 3D poi
 fig_cap <- paste("3D Voronoi tesselation of simulated polycrystals. @quey_neper_nodate, GPL 3.0.")
 knitr::include_graphics("images/07-neper.png")
 ```
-
 
 ## Geocoding
 
@@ -587,27 +616,27 @@ In addition to a set of geographic coordinates, one key result from geocoding an
 
 If you are aiming to geocode addresses in a single city, then it is feasible to manually specify your own address locator using available spatial data such as roads, parcels, neighborhoods, and postal codes. However, for geocoding across large areas, this may not be feasible and you may instead rely on geocoding services that use large databases of reference spatial data. Commercially-available geocoding services are frequently used to provide routing, like Google Maps and Waze. However, these geocoding services do not provide match scores or any other indication of how confident or reliable the matches are.
 
-## Case Study: Working with Canadian Census Data
-
-[Download 2016 Census Profile data](https://www12.statcan.gc.ca/census-recensement/2016/dp-pd/prof/details/download-telecharger/comp/page_dl-tc.cfm?Lang=E)
-
-[Download 2016 Census Boundaries](https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm) i make an edit
-
-## Summary
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
-
 ## Reflection Questions {-}
 
 1. Give some examples of situations where you might use planar and non-planar topology.
 2. What are some examples of applications of geocoding and reverse geocoding?
 3. Define topology.
+4. How are Thiessen Polygons related to the Delaunay Triangulation?
+5. How do you interpret a Voronoi diagram? Give an example for how you could use this layer to solve a spatial problem.
+6. What are some uses of a multipart geometry?
 
 ## Practice Questions {-}
 
-1. Draw a convex hull for the points below.
-2. Given ipsum, solve for lorem.
-3. Draw ipsum lorem.
+1. Draw a convex hull for the points below. Estimate where the centroid is for the polygon you drew.
+2. Draw the Delaunay Triangulation for the points below.
+3. Draw two lines from the points below that share a pseudonode.
+4. Draw a polygon with a hole from the points below.
+
+```{r 7-scatterplot, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste("Ten random points. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/07-scatterplot.png")
+```
+
 
 ## Recommended Readings {-}
 

@@ -465,19 +465,9 @@ $$y_j=\text{variable measure at location j}$$
 $$S^2=\text{the variance}$$
 $$w_{ij}=\text{the spatial weight matrix}$$ 
 
-## Case Study: Title of Case Study Here 
-You see textual case study content here
+## Case Study 1
 
 For this case study, we will use ground plot data from Change Monitoring Inventory (CMI) program [for details: @province_of_bc_provincial_2018] for Williams Lake and 100-miles House timber supply area (TSA) in the province of British Columbia, Canada. William Lake TSA and 100-miles House TSA are divided into 18 and 8 blocks respectively **Figure \@ref(fig:10-spatial-autocorrelation)**. There is a total of 456 CMI plots used in this study **Figure \@ref(fig:10-spatial-autocorrelation)**. The total basal area (m2/ha) is our variable of interest in this study. For each of the polygon in Williams lake and 100-miles house TSA, total basal area was calculated by taking the sum of the basal area of each CMI plots in each polygon. For this part of exercise, we want to understand if there is any spatial relationship (autocorrelation) between the total basal area measured in each polygon of TSA. We will quantitatively measure the presence or absence of **spatial autocorrelation** using **Moran’s I** and **Geary's C**. 
-
-<p id="box-text">
-</p>
-
-<p id="box-text">
-</p>
-
-<p id="box-text">
-</p>
 
 ```{r 10-morans-I-load-data-and-setup, echo=F, warning=F, message=F}
 options(stringsAsFactors = FALSE)
@@ -806,28 +796,16 @@ g<-ggplot(evgm,aes(x=dist,y=gamma))+geom_point()+
   theme_bw()
 g
 ```
-
 An example semivariogram with all the components using the "Fulmar" [see details @pebesma_mapping_2005] data from "gstat" package in R.
 
-## Case Study: Title of Case Study Here
-You see textual case study content here 
+## Case Study 2
 
 For this case study, we will use the ground plot data from Young stand monitoring (YSM) program data [@province_of_bc_provincial_2018] for Fort Saint Johns timber supply area (TSA) in the province of British Columbia, Canada. Fort Saint Johns is divided into 6 blocks respectively **Figure \@ref(fig:10-FSJ-plot)**. There is a total of 108 YSM plots used in this study **Figure \@ref(fig:10-FSJ-plot)**. The total basal area (m2/ha) is our variable of interest in this study. For each of the YSM plots, we will calculate the total basal area by adding the basal area for all trees within the plot. We will explore different type of semivariogram model with the same dataset and check which one will best fit the data. 
+
 ```{r 10-FSJ-plot, echo=FALSE, fig.cap=fig_cap, message=FALSE, warning=FALSE}
     fig_cap <- paste0("Location of Fort Saint Johns TSA and the young stand change monitoring plots. Nepal, CC-BY-SA-4.0.")
 knitr::include_graphics("images/10-FSJ-plot.png")
 ```
-
-
-<p id="box-text">
-</p>
-
-<p id="box-text">
-</p>
-
-<p id="box-text">
-</p>
-::::
 
 ### Gaussian 
 
@@ -836,7 +814,6 @@ In actual application, Gaussian model usually suggest that at shorter lag distan
 ```{r 10-semivariogram-modelling-load-data-and-setup, echo=F, message=F, warning=F}
 data<-read.csv("data/10/FSJ.csv",header=T)
 ```
-
 
 ```{r 10-gaussian, warning=FALSE, message=FALSE, fig.cap=fig_cap}
 fig_cap <- paste0("A semivariogram using the Gaussian model for the basal area (m2/ha) for young stand monitoring plots. Nepal, CC-BY-SA-4.0.")
@@ -970,8 +947,7 @@ We can see that the partial sill to total sill ratio is highest for Gaussian and
 
 We will discuss both method with a case study in detail.
 
-## Case Study: Title of Case Study Here
-You see textual case study content here 
+## Case Study 3 
 
 For this case study, we will use ground plot data from Young stand monitoring (YSM) program data [@province_of_bc_provincial_2018] for Fort Saint Johns timber supply area (TSA) in the province of British Columbia, Canada.Fort Saint Johns is divided into 6 blocks respectively **Figure \@ref(fig:10-FSJ-plot)**. There is a total of 108 YSM plots used in this study **Figure \@ref(fig:10-FSJ-plot)**. The total basal area (m2/ha) is our variable of interest in this study. For each of the YSM plot the total basal area was calculated by adding the basal area for all trees within the plot. We will use this dataset to explore different interpolation technique to find the variable of interest (basal area) within the unsampled locations.
 
@@ -979,8 +955,6 @@ For this case study, we will use ground plot data from Young stand monitoring (Y
     fig_cap <- paste0(" Location of Fort Saint Johns TSA and the young stand change monitoring plots. Nepal, CC-BY-SA-4.0.")
     knitr::include_graphics("images/10-FSJ-plot.png")
 ```
-
-::::
 
 ## Methods Without Using Semi-variogram 
 
@@ -1201,19 +1175,9 @@ $$\epsilon_{s_o} = \text{spatially autocorrelated erros}$$
 
 Linear kriging are distribution free linear interpolation techniques that are in alignment with linear regression methods [@asa_comparison_2012]. There are three principle linear kriging techniques as discussed below:
 
-## Case Study: Title of Case Study here 
-You see textual case study content here 
+## Case Study 4 
 
 For this case study, we will use ground plot data from Young stand monitoring (YSM) program data [@province_of_bc_provincial_2018] for Fort Saint Johns timber supply area (TSA) in the province of British Columbia, Canada.Fort Saint Johns is divided into 6 blocks respectively **Figure \@ref(fig:10-FSJ-plot)**. There is a total of 108 YSM plots used in this study **Figure \@ref(fig:10-FSJ-plot)**. The total basal area (m2/ha) is our variable of interest in this study. For each of the YSM plot the total basal area was calculated by adding the basal area for all trees within the plot. We will use this dataset to explore different interpolation technique to find the variable of interest (basal area) in the unsampled locations.
-<p id="box-text">
-</p>
-
-<p id="box-text">
-</p>
-
-<p id="box-text">
-</p>
-::::
 
 ## Simple Kriging
 
@@ -1553,19 +1517,10 @@ Disjunctive kriging allows to estimate the value of a variable of interest at an
 
 For classical statistics tests,**spatial autocorrelation** is problematic as ordinary least square (regression) or analysis of variance (ANOVA) assumes that observations are independent in space and time [@meng_spatial_2009]. However, geostatistical data violates the assumptions of independence, and using regression and ANOVA might inflate the significance of t and F statistics, when, in fact, they may not be significant at all [@meng_spatial_2009]. In that case one should try to improve the regression model by adding important **auxiliary** (independent variables that are associated or important in predicting the variables of interest) and incorporating the spatial autocorrelation structure [@meng_spatial_2009] using spatial regression models [@anselin_spatial_1998]. **The whole objective of spatial regression is to understand the association of the variable of interest with the independent variables while accounting for the spatial structure present in the data.** We will show two examples of spatial regression model in this section using our familiar YSM data for Fort Saint Johns TSA. 
 
-## Case Study: Title of case study here 
-You see textual case study content here
+## Case Study 5 
+
 
 For this case study, we will use ground plot data from Young stand monitoring (YSM) program data [@province_of_bc_provincial_2018] for Fort Saint Johns timber supply area (TSA) in the province of British Columbia, Canada.Fort Saint Johns is divided into 6 blocks respectively **Figure \@ref(fig:10-FSJ-plot)**. There is a total of 108 YSM plots used in this study **Figure \@ref(fig:10-FSJ-plot)**. The total basal area (m2/ha) is our variable of interest or response variable in this study. For each of the YSM plot the total basal area was calculated by adding the basal area for all trees within the plot. We will use the auxiliary variables such as trees per hectare (TPH), elevation (m), site index, top height(m), and tree volume (m3/ha)
-<p id="box-text">
-</p>
-
-<p id="box-text">
-</p>
-
-<p id="box-text">
-</p>
-::::
 
 ## Spatial Lag Model 
 

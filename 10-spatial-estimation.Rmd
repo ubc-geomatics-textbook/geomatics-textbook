@@ -1055,14 +1055,15 @@ cata <- spTransform(spdf, TA)
 **Step 2: Create polygons throughout the study area where interpolation is to be done and rasterize the polygons**
 
 ```{r 10-nearest-neighbor-2, warning=FALSE, message=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("An intermediate step in creating polygon and rasterizing it over the entire Fort Saint Johns TSA. Nepal, CC-BY-SA-4.0.")
-v <- voronoi(dta)
-plot(v)
-vca <- intersect(v, cata)
-spplot(vca, 'baha_L', col.regions=rev(get_col_regions()))
+#fig_cap <- paste0("An intermediate step in creating polygon and rasterizing it over the entire Fort Saint Johns TSA. Nepal, CC-BY-SA-4.0.")
+#v <- voronoi(dta)
+#plot(v)
+### FUNCTION BELOW CRASHES R, COMMENTING OUT FOR NOW
+#vca <- intersect(v, cata)
+#spplot(vca, 'baha_L', col.regions=rev(get_col_regions()))
 ################### rasterize the data ####################
-r <- raster(cata, res=100)
-vr <- rasterize(vca, r, 'baha_L')
+#r <- raster(cata, res=100)
+#vr <- rasterize(vca, r, 'baha_L')
 ```
 
 An intermediate step in creating polygon and rasterizing it over the entire Fort Saint Johns TSA.
@@ -1070,14 +1071,15 @@ An intermediate step in creating polygon and rasterizing it over the entire Fort
 **Step 3: Nearest neighbor with five unsampled points to be interpolated at a time and plot the results**
 
 ```{r 10-nearest-neighbor-3, warning=FALSE, message=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Predicted basal area over the entire Fort Saint Johns TSA using five nearest neighbor. Nepal, CC-BY-SA-4.0.")
+### COMMENTING BELOW BECAUSE ABOVE CHUNK FAILS
+#fig_cap <- paste0("Predicted basal area over the entire Fort Saint Johns TSA using five nearest neighbor. Nepal, CC-BY-SA-4.0.")
 ## gstat package to create semivariogram model, kriging an dinterpolation
-gs <- gstat(formula=baha_L~1, locations=dta, nmax=5, set=list(idp = 0))
-nn <- interpolate(r, gs)
-nnmsk <- mask(nn,vr)
-tm_shape(nnmsk) +
-  tm_raster(n=8,palette = "RdBu", auto.palette.mapping = FALSE,title="Predicted basal area") +
-  tm_legend(legend.outside=FALSE)
+#gs <- gstat(formula=baha_L~1, locations=dta, nmax=5, set=list(idp = 0))
+#nn <- interpolate(r, gs)
+#nnmsk <- mask(nn,vr)
+#tm_shape(nnmsk) +
+#  tm_raster(n=8,palette = "RdBu", auto.palette.mapping = FALSE,title="Predicted basal area") +
+#  tm_legend(legend.outside=FALSE)
 ```
 
 Predicted basal area over the entire Fort Saint Johns TSA using five nearest neighbor.
@@ -1085,13 +1087,14 @@ Predicted basal area over the entire Fort Saint Johns TSA using five nearest nei
 **Step 4: Leaflet map for some interactions**
 
 ```{r 10-nearest-neighbor-4, echo=FALSE, warning=FALSE, message=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Predicted basal area over the entire Fort Saint Johns TSA using five nearest neighbor projected over the province of British Columbia. Nepal, CC-BY-SA-4.0.")
-pal <- colorNumeric(c("#fef0d9","#fdcc8a","#fc8d59","#e34a33","#b30000"), values(nnmsk),
-  na.color = "transparent")
-leaflet() %>% addTiles() %>%
-  addRasterImage(nnmsk, colors = pal, opacity = 0.5) %>%
-  addLegend(pal = pal, values = values(nnmsk),
-    title = "Predicted basal area")
+### COMMENTING BELOW BECAUSE ABOVE CHUNK FAILS
+#fig_cap <- paste0("Predicted basal area over the entire Fort Saint Johns TSA using five nearest neighbor projected over the province of British Columbia. Nepal, CC-BY-SA-4.0.")
+#pal <- colorNumeric(c("#fef0d9","#fdcc8a","#fc8d59","#e34a33","#b30000"), values(nnmsk),
+#  na.color = "transparent")
+#leaflet() %>% addTiles() %>%
+#  addRasterImage(nnmsk, colors = pal, opacity = 0.5) %>%
+#  addLegend(pal = pal, values = values(nnmsk),
+#    title = "Predicted basal area")
 ```
 
 Predicted basal area over the entire Fort Saint Johns TSA using five nearest neighbor projected over the province of British Columbia. 
@@ -1372,7 +1375,7 @@ Variogram models fitted for basal area using the YSM plot data.
 
 Step 5: Put all the variogram parameters in a table and see which fits best
 
-Table 10.2 Summary of various components of variogram fro four variogram models.
+Table 10.2 Summary of various components of variogram from four variogram models.
 
 ```{r 10-simple-kriging-5, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE, fig.cap=fig_cap}
 fig_cap <- paste0("Variogram models fitted for basal area using the YSM plot data. Nepal, CC-BY-SA-4.0.")

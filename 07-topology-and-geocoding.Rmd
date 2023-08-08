@@ -99,15 +99,16 @@ m <- leaflet(native_land) %>%
                 textsize = "12px", direction = "auto"))
 ```
 
-(ref:07-native-land-leaflet-caption1) Non-planar topology of 36 indigenous territories overlapping Vancouver Island, British Columbia. Data from @native_land_native_nodate, CC0. Animated figure can be viewed in the web browser version of the textbook: https://www.opengeomatics.ca/topology-and-geocoding.html.
+(ref:7-native-land-leaflet-caption1) Non-planar topology of 36 indigenous territories overlapping Vancouver Island, British Columbia. Data from @native_land_native_nodate, CC0. Animated figure can be viewed in the web browser version of the textbook: https://www.opengeomatics.ca/topology-and-geocoding.html.
 
-(ref:07-native-land-leaflet-caption2) Non-planar topology of 36 indigenous territories overlapping Vancouver Island, British Columbia. Data from @native_land_native_nodate, CC0.
+(ref:7-native-land-leaflet-caption2) Non-planar topology of 36 indigenous territories overlapping Vancouver Island, British Columbia. Data from @native_land_native_nodate, CC0.
 
-```{r 07-native-land-leaflet, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-if (knitr:::is_latex_output()) { fig_cap ="(ref:07-native-land-leaflet-caption1)"
+```{r 7-native-land-leaflet, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+if (knitr:::is_latex_output()) { fig_cap ="(ref:7-native-land-leaflet-caption1)"
 knitr::include_graphics("images/07-native-land-leaflet.png")
-} else { fig_cap = "(ref:07-native-land-leaflet-caption2)"
+} else { fig_cap = "(ref:7-native-land-leaflet-caption2)"
 m
+}
 ```
 
 ## Implementing Planar Topology
@@ -137,7 +138,7 @@ m = leaflet(uscanada_simp) %>%
   addPolygons(stroke = T, color=~pal(CNTRY_NAME), weight=1, smoothFactor = 0.3, fillOpacity = 0.8)
 ```
 
-``` {r 2-CGVD-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
+``` {r echo=FALSE, out.width="75%", fig.cap=fig_cap}
 if (knitr:::is_latex_output()) { fig_cap <- paste0("Simplified boundary of Canada (red) and the United States (blue), centred at the Rainy River boundary between Minnesota and Ontario. Without preserving topology, the output results in illogical overlaps in some places and slivers in other places. Pickell, CC-BY-SA-4.0. Data from Natural Resources Canada and licensed under the Open Government Licence - Canada. Animated figure can be viewed in the web browser version of the textbook: https://www.opengeomatics.ca/topology-and-geocoding.html")
   knitr::include_graphics("images/07-Canada-US-border-simplified-leaflet.PNG")
 } else { fig_cap <- paste0("Simplified boundary of Canada (red) and the United States (blue), centred at the Rainy River boundary between Minnesota and Ontario. Without preserving topology, the output results in illogical overlaps in some places and slivers in other places. Pickell, CC-BY-SA-4.0. Data from Natural Resources Canada and licensed under the Open Government Licence - Canada.")
@@ -549,9 +550,10 @@ knitr::include_graphics("images/07-3d-alpha-hull-deciduous.png")
 } else { fig_cap = "(ref:7-3d-alpha-hull-deciduous-caption2)"
 plot3d(ahull.d,col="#2D5A27")
 rglwidget(width = 600, height = 600, reuse=FALSE, elementId="7-3d-alpha-hull-deciduous")
+}
 ```
 
-``` {r setup-3d-alpha-hull-conifer, echo=F, cached=T, warning=F, include=F}
+``` {r 7-setup-3d-alpha-hull-conifer, echo=F, cached=T, warning=F, include=F}
 las <- readLAS("Data/07/07-conifer-tree.las")
 z <- las[,3]-1156
 x <- las[,1]-640600
@@ -636,7 +638,6 @@ If you are aiming to geocode addresses in a single city, then it is feasible to 
 fig_cap <- paste("Ten random points. Pickell, CC-BY-SA-4.0.")
 knitr::include_graphics("images/07-scatterplot.png")
 ```
-
 
 ## Recommended Readings {-}
 

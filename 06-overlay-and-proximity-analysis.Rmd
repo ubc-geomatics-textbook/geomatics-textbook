@@ -13,7 +13,6 @@ Introduction here.
 3. Practice map algebra in raster overlay
 4. Practice attribute transfer in vector overlay
 5. Synthesize the role of relational databases in overlay analysis
-6. 
 
 ::::
 
@@ -23,7 +22,7 @@ Overlay, Union, Intersect, Identity, Difference, Symmetrical Difference, Buffer,
 
 ## Cartographic Modelling
 
-### Geoprocessing
+
 
 ### Capability Modelling
 
@@ -126,58 +125,6 @@ knitr::kable(
 We can now see that prioritizing the top three suitable areas $ID = {8,7,1}$ for our conservation intervention will cost \$149,900, nearly exhausting our budget with \$100 left over for a party to celebrate the geomatics team. This is just one example of how cartographic modelling can provide powerful answers to very real spatial questions. Can you think of other mapped attributes, besides area, that could factor into this conservation cost analysis?
 
 ## Overlay Methods
-In the above example, the data was provided already compiled. However, we often have to gather the data ourselves. Overlay methods allow us to get more information about a spatial area, based on other spatial attributes. One example of a suitability analysis would be an equity analysis. These analyses exist for many areas all across the globe. Ottawa, Ontario, for example, has a Neighborhood Equity Index (NEI). We will looking at Ottawa's NEI and will use data from Ottawa's Open Data Portal for the rest of this chapter.
-
-(a highlighted box about the NEI)
-Ottawa's NEI looks at several variables to assess the equitability of Ottawa's census tracts. The Index was published in 2021 using data from 2019 with the goal of improving Ottawa's decision-making. The 17 variables used to develop the index fit into five broad domains: economic opportunity, social and human development,  physical environment, health, and community and belonging. (Contains information licensed under the Open Government Licence – City of Ottawa.)
-
-While the NEI is valuable and answers questions about the general well-being of citizens, it could be improved by the addition of cultural components. As it stands, the only cultural well-being component is citizens' closeness to community centres (which is in the physical environment domain).
-
-Say, for example, you aimed to include citizens' exposure to cultural services. Such services could be public art, green spaces, street trees, and other points of interest. The developers of the NEI did consider the amount of usable green space within walking distance. However, that value did not make it into the final index.
-
-For the rest of this chapter, we will develop a cultural equity index for Ottawa. The index can be developed at several scales: are you concerned with the city as a whole? Wards? Census tracts? Or are you assessing the service-providing assets individually? The answer to this is dependent on the question. For the following example, the study scale will be based on Ottawa's Wards in urban and suburban areas. 
-
-We would start by downloading all of the necessary data we wish to work with. We will be working with several datasets: Ottawa's Urban Boundary, Ottawa's Wards, Street Trees, Parks and Greenspaces, and the Neighbourhood Equity Index (NEI) in Ottawa. All of this data can be found in Ottawa's Open Data Portal.
-
-
-```Amy, verify all of the dataset names```
-
-### Clip
-A *clip* is effectively a cookie-cutter, where the boundaries of the clipping feature become the boundaries of the input feature. However, a clip does not transfer attributes of the clipping file to the clipped product. Additionally, fields such as "area" must be recalculated after a clip.
-
-Ottawa's open data catalogue contains a dataset with the "urban boundaries" of the City. This shapefile consists of one polygon and no additional information within the attribute table. If we wished to solely work within Ottawa's urban boundaries without suburban distinctions, we would clip the data we have so far to the urban boundary. However, we want to differentiate between different community types within Ottawa; therefore, we must use a different tool.
-
-
-```{r 6-ottawa-urb, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste0("An aerial image of Ottawa, Ontario. The City of Ottawa is bordered in while and the urban areas are bordered in red. Image created by Blood, CC-BY-SA-4.0. Contains information licensed under the Open Government Licence – City of Ottawa.")
-knitr::include_graphics("images/06-urbanOttawa.png")
-```
-
-``` {r 6-leafletsetup, echo=F, warning=F, message=F}
-##this used to work and is now producing errors.. am I missing something? 
-library(raster)
-library(leaflet)
-library(rgdal)
-library(rgl)
-library(RColorBrewer)
-boundary <- rgdal::readOGR("Data/06/Urban_Boundary.geojson", verbose=F)
-r <- raster("Data/02/CGG2013_minus_HT21997_meters.tif")
-p <- brewer.pal(11,"RdYlBu")
-pal <- colorNumeric(p, values(r), na.color = "transparent")
-```
-
-``` {r 6-urbanboundary-leaflet, echo=FALSE, warning=FALSE, message=FALSE}
-m = leaflet(boundary) %>%
-    addTiles("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}") %>%
-    addScaleBar(position = c("topleft")) %>%
-    addPolygons(stroke = T, color="red", weight=1, smoothFactor = 0.3, fillOpacity = 0) #%>%
-    addLegend(pal = pal, values = values(r), group = "Difference", opacity = 1, title = "CGVD2013 minus CGVD28 (meters)")
-```
-
-``` {r 6-display-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
-fig_cap <- paste0("jgdfghf")
-m
-```
 
 In the above example, the data were provided already compiled. However, we often have to gather data ourselves. Overlay methods allow us to get more information about a spatial area, based on other spatial attributes or other mapped features. One example of a suitability analysis would be an equity analysis. These analyses exist for many areas all across the globe. Ottawa, Ontario, for example, has a Neighborhood Equity Index (NEI). Ottawa's NEI looks at several variables to assess the equity of Ottawa's census tracts. The NEI was published in 2021 using data from 2019 with the goal of improving Ottawa's decision-making. The 17 variables used to develop the NEI fit into five broad domains: economic opportunity; social and human development; physical environment; health; and community and belonging (read more about the NEI here: [https://neighbourhoodequity.ca/](https://neighbourhoodequity.ca/))
 
@@ -213,7 +160,7 @@ boundary <- rgdal::readOGR("Data/06/Urban_Boundary.geojson", verbose=F)
 m = leaflet(boundary) %>%
     addTiles("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}") %>%
     addScaleBar(position = c("topleft")) %>%
-    addPolygons(stroke = T, color="red", weight=1, smoothFactor = 0.3, fillOpacity = 0)
+    addPolygons(stroke = T, color="red", weight=2, smoothFactor = 0.3, fillOpacity = 0)
 ```
 
 ``` {r 6-display-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}

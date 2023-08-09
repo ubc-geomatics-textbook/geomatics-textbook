@@ -1,5 +1,4 @@
-``` {r 10-load-packages-and-setup, echo = FALSE, include = FALSE}
-baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"
+``` {r 10-load-packages-and-setup, echo = FALSE, include = FALSE, warning=FALSE}
 library(broom)
 library(cowplot)
 library(dismo)
@@ -42,13 +41,7 @@ Written by
 cat(author, "and", coauthor)
 ```
 
-**Geostatistics** uses the metrics based on statistical tools that are used to characterize the distribution of an event across the geographical region of interest [@getis_spatial_2004]. In context of spatial data, it is important to understand what is occurring where. Sometimes there is a detailed and precise information of an **event** (spatial phenomenon defined by its location and the characteristics that can be measured in both quantitative or qualitative scale) across the geographical area such that a continuous map can be built out of that information. While, most of the time, only discrete and unrepresentative information on the spatial event is collected, which doesnot allow to create a precise continuous surface of the event over entire geographic area of interest. In such scenario, we should focus on two things; 
-
-1) How can we best utilize the available discrete information to represent the event across entire area using the appropriate sampling strategies. 
-
-2) Once a good sampling strategy is employed, we should be able to estimate the occurrence of the event across the unsampled region in the entirety of study area using proper spatial estimation technique.
-
-This chapter introduces some basic ideas on different types of **sampling** strategies in spatial context. In addition, this chapter also introduces various type of spatial statistics that are being used in **predicting** the occurrence of events in the unsampled locations. 
+**Geostatistics** uses the metrics based on statistical tools to characterize the distribution of a random variable across a geographical region of interest [@getis_spatial_2004]. Like any other data, spatial data may be incomplete, which can limit our analytical capacity in the incomplete regions. In context of spatial data, we wish to understand spatial phenomena like events or processes that occur over large areas, but usually we are limited in our capacity to sample everywhere. Most of the time, only discrete and unrepresentative information on the spatial phenomenon is collected, which does not allow us to create a precise and continuous map of the phenomenon over entire geographic area of interest. How can we best utilize the available samples to represent the phenomenon across the entire geographic area? This chapter introduces some basic ideas on different types of sampling strategies in spatial context. In addition, this chapter also introduces various type of spatial statistics that are available to predict the occurrence of spatial phenomena in unsampled locations.
 
 :::: {.box-content .learning-objectives-content}
 
@@ -56,331 +49,22 @@ This chapter introduces some basic ideas on different types of **sampling** stra
 ## Learning Objectives {-}
 ::: 
 
-1. To be familiar with different types of spatial sampling
-2. To understand the relationship between observations at spatial scale using autocorrelation and semivariogram
-3. To be familiar with the methods of spatial interpolation to predict observations at unknown locations
-4. To be familiar with the methods of spatial prediction using regression models
+1. Differentiate the advantages of spatial sampling strategies
+2. Describe the relationship between observations at different spatial scales using autocorrelation and semivariogram
+3. Apply methods of spatial interpolation to predict observations at unknown locations
+4. Apply methods of spatial prediction using regression models
 
 ::::
 
 ## Key Terms {-}
 
-Geostatistics, Sampling, Prediction, Spatial Autocorrelation, Estimation, Geostatistics, P-value, Alpha, Null Hypothesis, Semi-variance, Semi-variogram, Population, Sampling Design, Sampling Unit, Probability Sampling, Simple Random Sampling, Stratified Random Sampling, Homogeneous, Systematic Sampling, Cluster Sampling, Purposive/Adaptive Sampling, Representative Sampling, Unique Case Sampling, Sequential Sampling, Spatial Autocorrelation, Domain, Attributes, Moran's I, Geary's C, Polygon Data, Point Data, Rook's/Queen's Case, Lag, Lag Distance, Gaussian, Spherical, Exponential, Circular, Spatial Interpolation, Thiessian Polygon, Inverse Distance Weighting, Kriging, Auxiliary, Spatial Lag Model, Spatial Weight Matrix, Distance-based Approach, Nearest-neighbor, Response Variable, Predictor Variable, Spatial Error Model, Errorsarlm, Spatialreg, Basal Area, Non-Probability Sampling, Linear Kriging, Simple Kriging, Ordinary Kriging, Universal Kriging, Co-Kriging, Non-Linear Kriging, Indicator Kriging, Probability Kriging, Disjunctive Kriging
-
-## Introduction 
-
-Like any other data, spatial data will only make true sense if it can represent the entire population of interest and provide some flexibility in level of spatial analysis that can be performed from it. A representative sample will allow us to make unbiased and more accurate inferences of certain attribute of the population. While, spatial analysis will allow to understand where and what is occurring in the area of our interest. Two kind of limitation are inherent in a spatial data:
-
-1. There is a high chance that the information regarding an attribute may be similar at nearby locations that are sampled due to **spatial autocorrelation**.
-
-2. On the other hand, a spatial data carry the unsampled locations within a study area. 
-
-To overcome this limitation, one should come up with a proper **sampling** strategies to ensure that the given sample is representative of a population and lacks any redundant information. While the need to account for additional variables about a location may be intimidating, many spatial statistic analyses are out there to help with basic **prediction** and **estimation** of the information in an unobserved location. For example, interpolation and spatial regression can help us predict and estimate the value of a variable in an unsampled location. Similarly, **spatial autocorrelation** measures the degree of similarity between samples at different sampled locations.
-
-
-:::: {.box-content .call-out-content}
-
-::: {.box-title .call-out-top}
-## Recall This {-}
-:::
-
-<p id="box-text"> 
-
-## Geostatistics
-
-Branch of statistics used to analyze and predict the values associated with spatial or spatiotemporal phenomenan often defined by the locations over a study area.
+Spatial autocorrelation, 
 
 ## Spatial Autocorrelation
 
-The measures the degree of similarity between samples at different sampled locations.
+A key characteristic that distinguishes spatial data from other types of data is the fact that spatial phenomena are frequently spatially autocorrelated. **Spatial autocorrelation** is the relationship between a variable of interest with itself when measured at different locations [@cliff_ad_and_ord_spatial_1973]. Any two samples are more likely to be correlated or similar to each other when the samples are closer in space compared with two samples that are taken at farther distances. For example, if we measured air temperature at our current location and then walked 1 m away and measured it again, then walked 10 km and measured it again, we would expect that the temperatures sampled 1 m apart would be more similar than the temperatures measured 10 km apart. The precise degree and sign (positive or negative) of spatial autocorrelation will vary from phenomenon to phenomenon because some phenomena change more quickly over space than others. As far as we can tell, all spatial phenomenon exhibit spatial autocorrelation at some, but not all distances. In other words, we have never observed a natural spatial phenomenon that is truly random. Spatial autocorrelation provides a tremendous advantage for estimating statistics and characteristics of populations in space, but also introduces several important caveats.
 
-
-## Sampling
-
-The process of selecting a part of a population. 
-
-## Prediction
-
-Using the existing sampled data to compute the value of the variable in a unsampled location.
-
-## Estimation
-
-Using the existing data to find the best value of the coefficient while establishing the association between different variables 
-
-</p>
-
-::::
-
-
-## Classical vs. Geostatistical Inferences
-
-In classical statistics, the variance is assumed to be totally random when samples are drawn from a defined sampling space [@jacquez_spatial_1999] and are assumed to come from one distribution [@steel_principles_1980]. The inference about the population is the based on the comparison of a test statistic calculated for a sample to the distribution of the statistic under the null hypothesis for the reference distribution [@jacquez_spatial_1999]. The significance level of a test statistics from the sample is compared with the critical value of test statistics obtained by repeatedly reordering the data at random proportion [@jacquez_spatial_1999]. Interpretation of this significance level on the classical model is done using a **p-value** which, if less than or equal to the a level of cutoff, also know as **alpha** (usually 5% or 0.05) the **null hypothesis** of **‘no difference’** is rejected [@jacquez_spatial_1999].
-
-While in geostatistics, the variance is assumed to be partly random and each point in the field represents a sample from some distribution [@jacquez_spatial_1999]. However,the distribution at any one point may differ completely from that at all other points in its shape, mean, and variance [@jacquez_spatial_1999]. The distribution of differences in sample values separated by a specified distance is assumed to be the same over the entire field [@jacquez_spatial_1999]. In geostatistics, if the sample values are similar (also know as **spatial autocorrelation**) given that they are in proximity to each other, the random variance of the distribution of differences in sample values is relatively small [@jacquez_spatial_1999]. If the sample values doesnot show spatial autocorrelation, the variance is larger. In geostatistics, the **semi-variance**, i.e., half of the variance is used to measure the similarity between points at a given distance apart [@jacquez_spatial_1999]. Using the semivarince, a graph of semivariance versus distance is constructed, know as **semi-variogram** [@jacquez_spatial_1999]. Thus, beside conducting a hypothesis test , in geostatistics, there are two additional stages: 1) semivariogram construction and 2) incorporating semi-variogram to estimate the values at unsampled locations using various spatial methods. We will get into details about semivariogram construction and spatial methods in the later sections of this chapter. 
-
-## Sampling
-
-**Sampling** can be defined as the process of selecting some part of a population (also known as **sample**) in order to make an inference, and estimate some parameters about the whole population[@thompson_sampling_2012]. For example, to estimate the amount of biomass of trees in Malcom Knapp Forest, BC, scientist collects the data on tree size, and height from randomly distributed 100 small plots across the forest. Based on some equations and using the tree data on height and size from 100 plots, biomass of entire Malcom Knapp Forest can be estimated. Similarly, to estimate the amount of recoverable oil in a region, a few (highly expensive) sample holes are drilled (example adapted from @thompson_sampling_2012). The situation is similar in a national opinion survey, in which only a sample of the people in the population is contacted, and the opinions in the sample are used to estimate the proportions with the various opinions in the whole population (example adapted from @thompson_sampling_2012, pp.1). 
-
-**Sampling** should not be confused with **observational** study. In an observational study, one has no control over the sample while in sampling one can deliberately select samples which prevent research bias[@thompson_sampling_2012]. Sampling accounts on how data can be collected out of every possibilities under the control of investigator [@thompson_sampling_2012]. 
-
-Broadly, sampling can be categorized into two groups [@teddlie_mixed_2007]:
-
-1. Probability sampling
-2. Non-probability sampling
-
-Before getting into the details about different types of sampling. We will make ourself familiar with some sampling key terms and their definitions.
-
-
-:::: {.box-content .call-out-content}
-
-::: {.box-title .call-out-top}
-## Recall This {-}
-:::
-
-<p id="box-text">
-
-## Population
-
-Any large spatially defined entity of plots, people, trees, animals etc., from which samples are drawn and measurement of certain characteristics is conducted. 
-
-## Sampling Design
-
-The procedure by which the sample of units is selected from the population is called the sampling design. 
-
-## Sampling Unit
-
-The smallest entity within a population from which the information about population is drawn is known as sampling unit. For example, in a survey of potential internet user over entire BC , sampling unit can be the certain number of household in each city across BC. 
-
-</p>
-
-::::
-
-## Probability Sampling
-
-Probability sampling techniques are mostly used in studies that use extensive amount of quantitative analysis [@tashakkori_sage_2010]. It involves selecting a large number of units from a population where the probability of inclusion for every member of the population is determinable [@tashakkori_sage_2010].
-
-## Simple Random Sampling
-
-In simple random sampling, each sampling unit within a given population has equal probability of being selected in a sample [@thompson_sampling_2012].For example, suppose we would like to measure the tree heights of all the trees from a simple random sample of 60 plots with their spatial locations (given by plots center co-ordinates) from a forest divided into 625 spatially defined plots as given in **Figure \@ref(fig:10-simple-random-sampling)**.  Notice, there is no distinctive pattern on how plots are being selected for the measurement of tree heights, this justify the **random part** of the simple random sampling. 
-
-As an investigator, when we make a sequence of selections from a population, at each step, new and distinct set of sampling units are being selected in the sample, each having equal probability of being selected at each step.
-
-For example, when we take another sample of 60 plots, we can see that different **sampling units (plots)** are being selected from what we obtained, this represent the **equal probability** of each sampling unit being selected.
-
-```{r 10-simple-random-sampling, echo=FALSE, warning=FALSE, message=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Simple random sample of 60 units from a population of 625 units. Nepal, CC-BY-SA-4.0.")
-m <- matrix(c(1:625), nrow=25, ncol=25)
-df <- expand.grid(x=1:ncol(m),y=1:nrow(m))
-df$val <- m[as.matrix(df[c('y','x')])]
-n <- df[sample(nrow(df), 60, replace = FALSE, prob = NULL),]
-p<-ggplot(n,aes(x=x, y=y, label=val)) + 
-  geom_tile(data=df, fill='transparent', colour = 'black') + 
-  geom_tile(data=n,fill='black')+
-  scale_y_reverse() +
-  theme_classic() + 
-  theme(axis.text  = element_blank(),
-        panel.grid = element_blank(),
-        axis.line  = element_blank(),
-        axis.ticks = element_blank(),
-        axis.title = element_blank())
-p
-```
-
-Simple random sample of 60 units from a population of 625 units.
-
-```{r 10-simple-random-sampling-2, echo=FALSE,warning=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Another simple random sample of 60 units. Nepal, CC-BY-SA-4.0.")
-m <- matrix(c(1:625), nrow=25, ncol=25)
-df2 <- expand.grid(x=1:ncol(m),y=1:nrow(m))
-df2$val <- m[as.matrix(df[c('y','x')])]
-n <- df2[sample(nrow(df2), 60, replace = FALSE, prob = NULL),]
-
-p<-ggplot(n,aes(x=x, y=y, label=val)) + 
-  geom_tile(data=df2, fill='transparent', colour = 'black') + 
-  geom_tile(data=n,fill='black')+
-  scale_y_reverse() +
-  theme_classic() + 
-  theme(axis.text  = element_blank(),
-        panel.grid = element_blank(),
-        axis.line  = element_blank(),
-        axis.ticks = element_blank(),
-        axis.title = element_blank())
-p
-```
-
-Another simple random sample of 60 units.
-
-
-## Stratified Random Sampling
-
-When a population under study is not **homogeneous** (similar in biological characteristics) across the entire study area and consists of some sort of gradient, stratified random sampling method is used [@thompson_sampling_2012]. The principle of stratification is to partition the population in such a way that the units within a stratum are as similar as possible [@teddlie_mixed_2007]. Random samples from each strata are drawn to ensure adequate sampling of all groups [@teddlie_mixed_2007]. Even though one stratum may differ markedly from another, a stratified sample with the desired number of units from each stratum in the population will tend to be “representative” of the population as a whole [@howell_area_2020].
-
-For example, a forest under study is divided **(stratified)** into similar regions Figure \@ref(fig:10-simple-random-sampling-2) defined by elevation, soil moisture, and soil nutrient gradient and random samples are taken within each strata. The stratification of a study region despite of its size can help to spread the sample over the entire study area.
-
-
-```{r 10-stratified-random-sampling, echo=FALSE, warning=FALSE, message=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Stratified random sample within unequal strata within a study area. Nepal, CC-BY-SA-4.0.")
-m <- matrix(c(1:400), nrow=20, ncol=20)
-df3 <- expand.grid(x=1:ncol(m),y=1:nrow(m))
-df3$val <- m[as.matrix(df3[c('y','x')])]
-n <- df3[sample(nrow(df3), 40, replace = FALSE, prob = NULL),]
-p<-ggplot(n,aes(x=x, y=y, label=val)) + 
-  geom_tile(data=df3, fill='transparent', colour = 'black') + 
-  geom_tile(data=n,fill='black')+
-  geom_rect(aes(xmin =0.5,xmax = 10.5,ymin = 0.5, ymax = 20.5),
-    fill = 'pink',alpha=0.02,color = "black",size = 2)+
-  geom_rect(aes(xmin =10.5,xmax = 20.5,ymin = 0.5, ymax = 5.5),
-    fill = 'skyblue',alpha=0.02,color = "black",size = 2)+
-  geom_rect(aes(xmin =10.5,xmax = 20.5,ymin = 5.5, ymax = 20.5),
-    fill = 'lightgrey',alpha=0.02,color = "black",size = 2)+
-  scale_y_reverse() +
-  theme_classic() + 
-  theme(axis.text  = element_blank(),
-        panel.grid = element_blank(),
-        axis.line  = element_blank(),
-        axis.ticks = element_blank(),
-        axis.title = element_blank())
-p
-```
-
-Stratified random sample within unequal strata within a study area.
-
-```{r 10-stratified-random-sampling-2, echo=FALSE,warning=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Stratified random sample from equal strata within a study area. Nepal, CC-BY-SA-4.0.")
-m <- matrix(c(1:400), nrow=20, ncol=20)
-df <- expand.grid(x=1:ncol(m),y=1:nrow(m))
-df$val <- m[as.matrix(df[c('y','x')])]
-n <- df[sample(nrow(df), 40, replace = FALSE, prob = NULL),]
-p<-ggplot(n,aes(x=x, y=y, label=val)) + 
-  geom_tile(data=df, fill='transparent', colour = 'black') + 
-  geom_tile(data=n,fill='black')+
-  geom_rect(aes(xmin =0.5,xmax = 10.5,ymin = 0.5, ymax = 10.5),
-    fill = 'pink',alpha=0.02,color = "black",size = 2)+
-  geom_rect(aes(xmin =0.5,xmax = 10.5,ymin = 10.5, ymax = 20.5),
-    fill = 'skyblue',alpha=0.02,color = "black",size = 2)+
-  geom_rect(aes(xmin =10.5,xmax = 20.5,ymin = 10.5, ymax = 20.5),
-    fill = 'lightgrey',alpha=0.02,color = "black",size = 2)+
-  geom_rect(aes(xmin =10.5,xmax = 20.5,ymin = 0.5, ymax = 10.5),
-    fill = 'brown',alpha=0.02,color = "black",size = 2)+
-  
-  scale_y_reverse() +
-  theme_classic() + 
-  theme(axis.text  = element_blank(),
-        panel.grid = element_blank(),
-        axis.line  = element_blank(),
-        axis.ticks = element_blank(),
-        axis.title = element_blank())
-p
-```
-
-Stratified random sample from equal strata within a study area.
-
-## Systematic Sampling
-
-A systematic sample uses a fixed grid or array to assign plots in a regular pattern **Figure \@ref(fig:10-stratified-random-sampling-2)** [@mcroberts_sampling_2014]. The advantage of systematic sampling is that it maximizes the average distance between the plots and therefore minimizes spatial correlation among observations and increases statistical efficiency [@mcroberts_sampling_2014]. In addition, a systematic sample, which is clearly seen to be representative in some sense, can be very convincing to decision-makers who lack experience with sampling [@mcroberts_sampling_2014]. Raster grids such as digital elevation models (DEM) are some examples of systematic sample.
-
-```{r 10-systematic-sampling, echo=FALSE,warning=FALSE,message=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Sample every second observation in the row. Nepal, CC-BY-SA-4.0.")
-m <- matrix(c(1:400), nrow=20, ncol=20)
-
-# Create row indicator
-df <- expand.grid(x=1:ncol(m),y=1:nrow(m))
-df$val <- m[as.matrix(df[c('y','x')])]
-row_odd <- seq_len(nrow(df)) %% 2 
-col_odd<- seq_len(ncol(df)) %% 2
-data_row_odd <- df[row_odd == 0,] 
-data_col_odd <- df[col_odd == 0,]
-# Subset odd rows
-p<-ggplot(data_col_odd,aes(x=x, y=y, label=val)) + 
-  geom_tile(data=df, fill='transparent', colour = 'black') + 
-  geom_rect(data=data_col_odd,aes(xmin = x, ymin = y, xmax = x + 0.3, ymax = y + 0.6),fill='black')+
-  scale_y_reverse() +
-  theme_classic() + 
-  theme(axis.text  = element_blank(),
-        panel.grid = element_blank(),
-        axis.line  = element_blank(),
-        axis.ticks = element_blank(),
-        axis.title = element_blank())
-p
-```
-
-Sample every second observation in the row 
-
-```{r 10-systematic-sampling-2, echo=FALSE,warning=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Sample all the observation in every second column. Nepal, CC-BY-SA-4.0.")
-m <- matrix(c(1:400), nrow=20, ncol=20)
-
-# Create row indicator
-df <- expand.grid(x=1:ncol(m),y=1:nrow(m))
-df$val <- m[as.matrix(df[c('y','x')])]
-row_odd <- seq_len(nrow(df)) %% 2 
-data_row_odd <- df[row_odd == 0,] 
-# Subset odd rows
-p<-ggplot(data_row_odd,aes(x=x, y=y, label=val)) + 
-  geom_tile(data=df, fill='transparent', colour = 'black') + 
-  geom_rect(data=data_row_odd,aes(xmin = x, ymin = y, xmax = x + 0.3, ymax = y + 0.6),fill='black')+
-  scale_y_reverse() +
-  theme_classic() + 
-  theme(axis.text  = element_blank(),
-        panel.grid = element_blank(),
-        axis.line  = element_blank(),
-        axis.ticks = element_blank(),
-        axis.title = element_blank())
-p
-```
-Sample all the observation in every second column 
-
-## Cluster Sampling 
-
-In cluster sampling, rather than sampling individual units, which might be geographically spread over great distances, we can sample groups (clusters) of plots that occur naturally in the study area [@teddlie_mixed_2007]. Cluster sampling is employed when we want to be more efficient in terms of the use of time and money to generate a more efficient probability sample [@teddlie_mixed_2007].
-
-```{r 10-cluster-sampling, echo=FALSE, warning=FALSE, message=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Cluster of plots selected from entire study area. Nepal, CC-BY-SA-4.0.")
-m <- matrix(c(1:400), nrow=20, ncol=20)
-df <- expand.grid(x=1:ncol(m),y=1:nrow(m))
-df$val <- m[as.matrix(df[c('y','x')])]
-p<-ggplot(df,aes(x=x, y=y,label=val)) + 
-  geom_tile(data=df, fill='transparent', colour = 'black') +
-  geom_rect(aes(xmin = 0.5,xmax = 3.5,ymin = 14.5, ymax = 20.5),
-    fill = 'lightgrey',alpha=0.02,color = "black",size = 2)+
-  geom_rect(aes(xmin = 5.5,xmax = 7.5,ymin = 5.5, ymax = 7.5),
-    fill = 'lightgrey',alpha=0.02,color = "black",size = 2)+
-  geom_rect(aes(xmin = 12.5,xmax = 14.5,ymin = 12.5, ymax = 14.5),
-    fill = 'lightgrey',alpha=0.02,color = "black",size = 2)+
-  geom_rect(aes(xmin = 15.5,xmax = 20.5,ymin = 0.5, ymax = 5.5),
-    fill = 'lightgrey',alpha=0.02,color = "black",size = 2)+
-  scale_y_reverse() +
-  theme_classic() + 
-  theme(axis.text  = element_blank(),
-        panel.grid = element_blank(),
-        axis.line  = element_blank(),
-        axis.ticks = element_blank(),
-        axis.title = element_blank())
-p 
-```
-
-Cluster of plots selected from entire study area
-
-## Non-probability Sampling
-
-Non-probability sampling is generally used in qualitative studies. They are also know as **purposive or adaptive sampling**, and defined as selecting units (e.g.,individuals, groups of individuals, institutions) based on specific purposes associated with answering some research questions. **Purposive or Adaptive** sampling can be classified into three broad categories [@teddlie_mixed_2007]:
-
-## Representative Sampling
-
-This type of sampling is used when we want to select samples that will represent broader groups as closely as possible [@teddlie_mixed_2007]. One of the example of representative sampling is selecting 100 Douglas fir and 50 Spruce tree from study area within Malcom Knapp Forest, BC consisting of 500 Douglas fir and 300 Spruce trees for the measurement of tree height.
-
-## Unique Case Sampling
-
-In this sampling, we want to focus on more specific case which is unique and rare in terms of one or more characteristics [@teddlie_mixed_2007]. One of the example of unique case sampling could be understanding the genetic makeup of person who is not affected by Covid-19 virus. 
-
-## Sequential Sampling
-
-In this sampling method, we would pick up a single or group of cases in an interval of time, analyzes the results and then move on to the next group of cases and so on [@teddlie_mixed_2007]. The goal of the research project is to generate some theory (or broadly defined themes) [@teddlie_mixed_2007]. 
-
-## Spatial Autocorrelation
-
-When an attribute or variable is mapped across a study area or domain, geologist ask a question on whether a variable is cluster, randomly distributed or dispersed [@carr_general_1993]. In some cases, the nature of a cluster is distinctive visually, while in others it is not apparent [@carr_general_1993]. Hence, to come up with a quantitative measure on variable is clustered or randomly distributed in the domain, **spatial autocorrelation** is used. The concept of autocorrelation comes from Tobler’s first law of geography which states, “things that are closer in distance are related” [@tobler_computer_1970]. **Spatial autocorrelation** can be defined as the relationship between a variable of interest with itself when measured at different location [@cliff_ad_and_ord_spatial_1973]. In other words, if a variable is measured at different locations which are at proximity, the value of variable is almost same. There could be both positive and negative spatial autocorrelation. Consider the following example; **Figure \@ref(fig:10-cluster-sampling)** shows the clustering pattern in the given square boxes (can be variable of interest) representing the positive spatial autocorrelation (left) and a complete checkerboard (right) distribution of square boxes (variable of interest) indicating a negative spatial autocorrelation.
+Consider the following example; **Figure \@ref(fig:10-cluster-sampling)** shows the clustering pattern in the given square boxes (can be variable of interest) representing the positive spatial autocorrelation (left) and a complete checkerboard (right) distribution of square boxes (variable of interest) indicating a negative spatial autocorrelation.
 
 :::: {.box-content .call-out-content}
 
@@ -468,15 +152,6 @@ $$w_{ij}=\text{the spatial weight matrix}$$
 ## Case Study 1
 
 For this case study, we will use ground plot data from Change Monitoring Inventory (CMI) program [for details: @province_of_bc_provincial_2018] for Williams Lake and 100-miles House timber supply area (TSA) in the province of British Columbia, Canada. William Lake TSA and 100-miles House TSA are divided into 18 and 8 blocks respectively **Figure \@ref(fig:10-spatial-autocorrelation)**. There is a total of 456 CMI plots used in this study **Figure \@ref(fig:10-spatial-autocorrelation)**. The total basal area (m2/ha) is our variable of interest in this study. For each of the polygon in Williams lake and 100-miles house TSA, total basal area was calculated by taking the sum of the basal area of each CMI plots in each polygon. For this part of exercise, we want to understand if there is any spatial relationship (autocorrelation) between the total basal area measured in each polygon of TSA. We will quantitatively measure the presence or absence of **spatial autocorrelation** using **Moran’s I** and **Geary's C**. 
-
-<p id="box-text">
-</p>
-
-<p id="box-text">
-</p>
-
-<p id="box-text">
-</p>
 
 ```{r 10-morans-I-load-data-and-setup, echo=F, warning=F, message=F}
 options(stringsAsFactors = FALSE)
@@ -672,7 +347,7 @@ moran(filename$Basal, ww, n=length(ww$neighbours), S0=Szero(ww))
 moran.test(filename$Basal, ww)
 ```
 
-**Using the Knearest Neighborhood Imputation**
+**Using the K-Nearest Neighborhood Imputation**
 
 **Step 1: We will select 3 Nearest Neighbor Using Distance-based Approach**
 
@@ -736,11 +411,52 @@ geary.test(filename$Basal, ww1)
 ```
 Note that the value of Geary's C indicated a positive spatial autocorrelation using both queens case and k-nearest neighbor. However, the spatial autocorrelation was not significant as given by p-value < 0.05. Both Moran's I and Geary's C are in agreement in terms of results.
 
+## Populations, Samples and Statistics
+
+Suppose you are interested in measuring the heights of trees in a forest. There are a lot of trees in this forest and you cannot measure all of them. So you cleverly decide to sample some locations and infer the mean tree height of the forest from this sample. In this example, the number of trees that you measured are the __sample__ $n$, the forest is the total __population__ of trees $N$, and the __statistic__ that you are interested in estimating is the mean tree height of the forest: 
+
+$$
+x̄ = \frac{1}{n} \sum_{i=1}^{n} x_i
+$$
+Lowercase $x$ represents any sampled tree and $x̄$ represents the mean of the __sample__, which is an __estimate__ of the __population__ mean. It is important to recognize that statistics of samples and populations are discussed and represented differently. The true mean tree height of the forest is denoted by the Greek lowercase mu $μ$, and we can never know this value without measuring every tree. So instead, we __infer__ the population statistic using the sampled data and hope that the sample statistic will be close to the true population statistic, but we must accept that they are rarely equivalent $x̄≠μ$. The same equation above can be re-written for the population mean:
+
+$$
+μ = \frac{1}{N} \sum_{i=1}^{N} X_i
+$$
+
+Notice here we are using $μ$ to signify the population mean tree height, uppercase $N$ signifies all the trees in the population, and uppercase $X_i$ is one tree in the population. At this point, you might take a moment to appreciate that as our sample $n$ approaches $N$, our sample mean $x̄$ should also approach the population mean $μ$. In other words, the more trees we sample, the more likely we are going to have an accurate estimate of $μ$. It might surprise you that this conclusion is likely true for large samples $n$, but not small samples $n$. Why? Because any randomly-selected tree from our forest $n=1$ could be much taller or shorter than the mean just due to random chance alone. In fact, if our forest has two distinct cohorts of trees, one very young emerging below the canopy and one established in the overstory (i.e., bi-modal distribution), then the population mean might never be approximated by any particular tree. This is problematic for us, because we want to accurately estimate the population statistic whilst exhausting as few of our resources as possible to do so (i.e., time, people, equipment, budget).
+
+When we made our measures of tree heights, it would be reasonable for us to expect that the tree heights that we sampled are going to be different (i.e., most trees will not have the same height). The magnitude of those differences in the sample are captured by the **variance**, which is a measure of the dispersion of our tree heights $x$ relative to the sample mean $x̄$:
+
+$$
+s^2 = \frac{1}{n} \sum_{i=1}^{n} (x_i-x̄)^2
+$$
+We square the differences so that the variance is always positively signed and consequently variance always has squared units, hence $s^2$. If we take the square root of the variance, we have the **standard deviation**:
+
+$$
+s = \sqrt{s^2}
+$$
+The population standard deviation is represented by Greek lowercase sigma $σ$ and population variance is $σ^2$.
+
+## Significance Testing
+
+The significance level of a test statistic from the sample is compared with the critical value of the test statistic obtained by repeatedly reordering the data with random proportions [@jacquez_spatial_1999]. Interpretation of this significance level in classical statistics is done using a **p-value** which, if less than or equal to a defined threshold, also know as **alpha α** (usually 5% or 0.05), then the **null hypothesis** of "no difference from random" is rejected [@jacquez_spatial_1999]. In other words, when the p-value is less than or equal to 0.05, we conclude that the statistic we observe for the sample is unlikely to have occurred due to random chance alone. This interpretation is important because recall that if our sample is small, there is a random chance that any statistic we calculate from it could be due to that particular sample rather than represent a true characteristic of the larger population. For example, imagine the case where we randomly sample some trees, but by chance we happen to only sample young trees and so our mean tree height from the sample is not representative of the population. The p-value represents the probability that our statistic from the sample is observed due to random chance, so we want this value to be as low as possible.
+
+While $α=0.05$ is widely used, there are cases where we may set a higher standard. For example, where the risk of incorrectly rejecting the null hypothesis, known as a "false positive" or **Type I error**, could have significant consequences on human health or safety. Consider the case where a new drug is being tested for efficacy and the p-value in the clinical trial is 0.05, so the null hypothesis that placebo is better than the drug is rejected. But there is a 5% probability that there is no difference between the new drug and a placebo. The implication is that 5% of the human population who take the new drug will not experience any benefits. If the population eligible for this drug is large, this can translate to many people being impacted by this decision. You can see how this can be problematic because there might be alternative therapies or drugs that are more effective than this new drug that the population are not utilizing. A similar case might exist where we believe that the null hypothesis is true, but it is in fact false, known as a "false negative" or **Type II error**. In these cases, we want to be sure that our result is not spurious, so the p-value standard may be raised to 0.01 or even 0.001, so that only one person in a hundred or one person in a thousand will experience no difference from the placebo.
+
+## Classical Statistics vs. Geostatistics
+
+In classical statistics, the variance is assumed to be totally random when samples are drawn from a defined population [@jacquez_spatial_1999] and are assumed to come from one distribution [@steel_principles_1980]. Inferences about the population can be made by comparing a statistic calculated for the sample to the distribution of that statistic under the null hypothesis for the assumed distribution [@jacquez_spatial_1999].
+
+In geostatistics, the variance of a spatial phenomenon is assumed to be partly random and each point in the field represents a sample from some distribution [@jacquez_spatial_1999]. However, the distribution at any one point may differ completely from all other points in its shape, mean, and variance. The distribution of differences in sample values separated by a specified distance is assumed to be the same over the entire field. Sample values that exhibit spatial autocorrelation due to their proximity to each other will have relatively small random variance of the distribution of differences. If the sample values do not exhibit spatial autocorrelation, then the variance is larger. The **semivariance** or half of the variance is used to measure the similarity between points at a given distance apart. The distance at which we compare the semivariance of sample values is known as the **lag distance**. If we graph semivariance and lag distance, we have created a **semivariogram**. Since we are usually dealing with samples and not the full population, we will almost never know the exact semi-variogram, instead we must rely on fitting models to __estimate__ this relationship.
+
+Thus, geostatistics is distinguished from classical statistics by the fact that we need to estimate the semivariogram function and then incorporate the semivariogram function to estimate the values at unsampled locations using various predictive spatial methods.
+
 ## Semivariogram Modeling 
 
-**Semivariogram** is a basic geostatistical tool for measuring spatial autocorrelation of a variable measured at different spatial location. A semivariogram is a measure of variance of a variable between two specified location separated by certain distance which is termed as **lag** distance [@isaaks_introduction_1989]. For example, we can measure how a variable y changes in value between site i and j by calculating the difference y(i) - y(i + j), where i+j=h is a lag distance. If the surface represented by the two points is continuous and j is a small distance, one expects the difference to be small [@isaaks_introduction_1989]. With increasing j, the difference increases. Let’s translate this intuitive statement into a formula:
+The semivariogram is a basic geostatistical tool for measuring spatial autocorrelation of a variable measured at different spatial location. A semivariogram is a measure of variance of a variable between two locations separated by certain lag distance [@isaaks_introduction_1989]. For example, we can measure how a variable $y$ changes in value between sites $i$ and $j$ by calculating the variance between the sites $y_i-y_j$. If the surface represented by the two points is continuous and the lag is a small distance, we would expect the variance to be small [@isaaks_introduction_1989]. With increasing lag distance, we would expect the variance to increase. Let us translate this intuitive statement into a equation known as the empirical variogram:
 
-$$\gamma_{h}= \frac{1}{2N} \sum_{i,j= 1}^{N(h)}{({y_i} - y_i)}^2$$ 
+$$\gamma{(h)}=\frac{1}{2N}\sum_{i,j=1}^{N(h)}{({y_i}-y_j)}^2$$ 
 
 Where, $$\gamma{h}=\text{semivariance at a spatial lag h}$$
 $$ i=\text{measure spatial coordinate (latitude/UTM easting)}$$
@@ -749,24 +465,13 @@ $$y_{i}=\text{measured value of variable of interest at the spatial location i} 
 $$y_{j}=\text{measured value of variable of interest at the spatial location j} $$
 $$N=\text{number of sampled differences or lag} $$
 
-Like the familiar variance of basic statistics, it is a sum of squares divided by the number N of sampled differences. Unlike simple variance about a mean, the semivariogram measures difference between two samples. The 'semi' in semivariogram comes from the fact that the variance is divided by 2.
+Like the familiar variance, it is a sum of squared differences divided by the number $N$ of sampled differences. Unlike simple variance about a mean that we discussed earlier, the semivariogram measures difference between two sample values. The __semi__ in semivariogram comes from the fact that the variance is divided in half.
 
-A **semivariogram** is a graph that consists of **semivariance** on the y-axis and a **lag distance** on the x-axis **Figure \@ref(fig:10-semivariogram-modelling)**. There are various components in a semivariogram that can be used to interpret the nature and structure of spatial autocorrelation. Various components of a semivariogram are:
-
-Nugget (C): Nugget refers to an unaccounted autocorrelation due to a small lag distance than sampling distance or due to sampling errors **Figure \@ref(fig:10-semivariogram-modelling)**.
-
-Range (R): The distance at which a variogram model first flattens out. This is the distance upto which y variables are spatially autocorrelated or aggregated **Figure \@ref(fig:10-semivariogram-modelling)**.
-
-Sill (S): The value of semivariance that a variogram model attains at a given range is called sill **Figure \@ref(fig:10-semivariogram-modelling)**.
-
-Partial sill: The sill minus nugget
-
-$$S_{i}= S-R$$
-
-Partial sill to total sill ratio: This is the structural variance explained by the fitted semivariogram model [@rossi_geostatistical_1992]. Amount of variance that is spatially autocorrelated [@rossi_geostatistical_1992].
-$$ Ratio =\frac {S_{i}}{S+R}$$
+A semivariogram is a graph that consists of semivariance on the y-axis and a lag distance on the x-axis Figure \@ref(fig:10-semivariogram-modelling). There are some important features of a semivariogram that can be used to interpret the nature and structure of spatial autocorrelation.
 
 ```{r 10-semivariogram-modelling, echo=FALSE, warning=FALSE, message=FALSE, fig.cap=fig_cap}
+## An example semivariogram with all the components using the "Fulmar" [see details @pebesma_mapping_2005] data from "gstat" package in R.
+
 fig_cap <- paste0("An example semivariogram with all the components using the 'Fulmar'data from 'gstat' package in R. Nepal, CC-BY-SA-4.0.")
 data(fulmar)
 fulmar.spdf <- SpatialPointsDataFrame(cbind(fulmar$x,fulmar$y),
@@ -806,144 +511,233 @@ g<-ggplot(evgm,aes(x=dist,y=gamma))+geom_point()+
 g
 ```
 
-An example semivariogram with all the components using the "Fulmar" [see details @pebesma_mapping_2005] data from "gstat" package in R.
+**Range $a$:** The distance at which a variogram model first flattens out. This is the distance up to which the variable is considered to be spatially autocorrelated (Figure \@ref(fig:10-semivariogram-modelling)). For variogram models that are bounded and have sills, the range is generally accepted to be 95% of the sill.
 
-## Case Study 2
+**Nugget $c_0$:** Nugget refers to unaccounted autocorrelation due to a smaller lag distance than sampling distance or due to errors and imprecision arising from sampling (Figure \@ref(fig:10-semivariogram-modelling)). The nugget is also where the variance function $\gamma{(h)}$ intercepts the y-axis. Without the nugget, we would expect all variogram models to evaluate to zero variance at zero lag $\gamma{(0)}=0$, and conceptually this makes sense because how can you have variance between any observation and itself?
 
-For this case study, we will use the ground plot data from Young stand monitoring (YSM) program data [@province_of_bc_provincial_2018] for Fort Saint Johns timber supply area (TSA) in the province of British Columbia, Canada. Fort Saint Johns is divided into 6 blocks respectively **Figure \@ref(fig:10-FSJ-plot)**. There is a total of 108 YSM plots used in this study **Figure \@ref(fig:10-FSJ-plot)**. The total basal area (m2/ha) is our variable of interest in this study. For each of the YSM plots, we will calculate the total basal area by adding the basal area for all trees within the plot. We will explore different type of semivariogram model with the same dataset and check which one will best fit the data. 
+**Sill $s$:** The value of variance that a variogram model attains at a given range (Figure \@ref(fig:10-semivariogram-modelling)).
+
+$$
+s=c_0+c_1
+$$
+
+**Partial sill $c_1$:** The sill minus the nugget.
+
+$$
+c_1=s-c_0
+$$
+
+**Partial sill to total sill ratio:** The structural variance explained by the fitted variogram model [@rossi_geostatistical_1992]. This is the amount of variance that is spatially autocorrelated [@rossi_geostatistical_1992].
+
+$$ Ratio =\frac {s}{s+a}$$
+
+Usually, we are interested in modeling the semivariance (semivariogram) or variance (variogram) of a process so that we can make predictions from a model rather than an incomplete set of sampled observations. In this way, we can fit a model to our paired observations and use a continuous variogram function to estimate the variance at any lag. These models are known as **theoretical variograms** and in the following sections we will compare several commonly-used models, summarized in Figure \@ref(fig:10-theoretical-variogram-models).
+
+```{r 10-theoretical-variogram-models, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+vv <- rev(seq(0,10,0.01))
+
+## Linear variogram
+vv_linear <- rev(vv/max(vv))
+#plot(vv_linear,type="l")
+
+## Quadratic variogram
+qua <- function(x) {
+  xx <- (max(x)*(x^2))/(1+(x^2))
+  xx <- xx/max(xx)
+  xx
+}
+vv_quadratic <- rev(qua(vv))
+#plot(vv_quadratic),type="l")
+
+## Exponential variogram
+vv_exponential <- (max(exp(vv))-exp(vv))/max(exp(vv))
+#plot(vv_exponential,type="l")
+
+## Gaussian variogram
+gau <- function(x) {
+  xx <- 1-exp(-(x/max(x))^2)
+  xx <- xx/max(xx)
+  xx
+}
+vv_gaussian <- rev(gau(vv))
+#plot(vv_gaussian,type="l")
+
+## Spherical variogram
+sph <- function(x) {
+  xx <- ((3/2)*(x/max(x)))-((1/2)*((x/max(x))^3))
+  xx <- xx/max(xx)
+  xx
+}
+vv_spherical <- rev(sph(vv))
+#plot(vv_spherical,type="l")
+
+## Power variogram
+pow <- function(x,a) {
+  xx <- x^a
+  xx <- xx/max(xx)
+  xx
+}
+vv_power_05 <- rev(pow(vv,0.5))
+vv_power_15 <- rev(pow(vv,1.5))
+#plot(vv_power_15,type="l")
+
+#png("./images/10-theoretical-variogram-models.png",width=1800,height=1800,res=300)
+#par(mar=c(4,4,1,1))
+#colors <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+#plot(vv,type="n",xlim=c(1,1000),ylim=c(0,1),xlab="Lag (h)",ylab="Variance λ(h)",xaxt="n",yaxt="n")
+#axis(1,at=c(0,1000),label=c("0","Range (a)"))
+#axis(2,at=c(0,1),label=c("0","Sill (s)"))
+#vv_nugget <- vv_linear*0+1
+#vv_nugget[1] <- 0
+#lines(vv_nugget,lwd=2,col=colors[1])
+#lines(vv_linear,lwd=2,col=colors[2])
+#lines(vv_quadratic,lwd=2,col=colors[3])
+#lines(vv_exponential,lwd=2,col=colors[4])
+#lines(vv_gaussian,lwd=2,col=colors[5])
+#lines(vv_spherical,lwd=2,col=colors[6])
+#lines(vv_power_05,lwd=2,col=colors[7])
+#lines(vv_power_15,lwd=2,col=colors[8])
+#legend(650, 0.4, legend=c("Nugget" ,"Linear", "Quadratic", "Exponential", "Gaussian", "Spherical", "Power (a=0.5)", "Power (a=1.5)"), col=colors, lty=1, lwd=2, cex=1, title="Variogram Models")
+#dev.off()
+
+fig_cap <- paste0("Comparison of theoretical variogram models. The upper bound of the variance in the plot is the sill for variogram models that have sills and the upper limit of the lag in the plot is the range for variogram models that have ranges. Note that the linear and power models are not bounded and extend infinitely beyond the plot space. The exponential, quadratic, and Gaussian models approach the sill asymptotically as lag distances approach infinity. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/10-theoretical-variogram-models.png")
+```
+
+### Nugget variogram model
+
+A **nugget model** is the simplest model that assumes there is no relationship between variance and lag and consequently there is no range for this model. In other words, the variance is assumed to be constant. This is also the least likely case for most natural spatial phenomena. If you used this model to make spatial predictions, then your predictions would be made as if your data had no spatial component at all, so this is also the least useful model for spatial prediction. The nugget model is expressed as:
+
+$$
+\begin{array}{ccc}
+\gamma{(h)} = 0 & \text{for }h=0, \\
+\gamma{(h)} = 1 & \text{ for }h>0
+\end{array}
+$$
+
+### Linear variogram model
+
+A **linear model** assumes a linear and constant slope $b$ between variance and lag. Like the nugget model, the linear model has no defined range or sill. Unlike the linear model, variance is assumed to be infinite and therefore it is not possible to distinguish between correlated and uncorrelated lags. Note the special case of $b=0$ is equivalent to the nugget model. A linear effect in spatial autocorrelation suggests a trend in your spatial data. The linear model is expressed as:
+
+$$
+\gamma{(h)} = bh+c_0
+$$
+Where $b$ is the slope to be estimated.
+
+### Quadratic variogram model
+
+A **quadratic or logistic model** assumes variance increases near-exponentially, but the shape is more "S"-shaped or sigmoid. The quadratic model is expressed as:
+
+$$
+\gamma{(h)} = \frac{ah^2}{1+bh^2}+c_0
+$$
+Where $b$ is the slope to be estimated.
+
+### Exponential variogram model
+
+An **exponential model** assumes spatial autocorrelation decreases exponentially with increasing lag distance. The variance in the exponential variogram approaches the sill asymptotically as $h → ∞$, so unlike the spherical and nugget models, an exponential model never assumes a repeating variance beyond the range. Since the variance will continue to marginally increase with infinite lag distance, the range is defined as 95% of the sill $a=0.95s$ or $3a$ beyond which lag distances $h$ are considered not spatially autocorrelated for the given variable. The exponential model is expressed as:
+
+$$
+\gamma{(h)} = c_1(1-e^{-\frac{h}{a}})+c_0
+$$
+
+### Gaussian variogram model
+
+A **Gaussian model** assumes that spatial autocorrelation is extremely high at short lag distances (i.e., variance is low) and then falls quickly towards zero (i.e., variance is high) at farther lag distances. This is a good model to use if you expect high local autocorrelation or phenomena that change rapidly with distance. The range is defined as 95% of the sill $a=0.95s$ or $\sqrt{3}a$ beyond which lag distances $h$ are considered not spatially autocorrelated for the given variable. The Gaussian model is expressed as:
+
+$$
+\gamma{(h)} = c_1(1-e^{-(\frac{h}{a})^2})+c_0
+$$
+
+### Spherical variogram model
+
+A **spherical model** assumes a progressive, but not constant, decrease of spatial autocorrelation (i.e., increasing variance) until the range, beyond which autocorrelation is zero and variance remains the same. Note that the slope of a spherical model is generally higher (i.e., faster) than a linear model where $h<a$. The spherical model is one of the most commonly used models because the assumption of zero autocorrelation beyond the range $h>a$. The spherical model is expressed as:
+
+$$
+\begin{array}{ccc}
+\gamma{(h)} = c_1(\frac{3}{2}\frac{h}{a}-\frac{1}{2}(\frac{h}{a})^3)+c_0 & \text{for }0<h≤a, \\
+\gamma{(h)} = s = c_0 + c_1 = 0 & \text{ for }h>a
+\end{array}
+$$
+
+### Power variogram model
+
+A **power model** modulates the variance by raising the lag to a power $λ$:
+
+$$
+\begin{array}{ccc}
+\gamma{(h)} = h^λ & \text{for }0<λ<2, \\
+\gamma{(h)} = bh+c_0 & \text{for }λ=1
+\end{array}
+$$
+
+The power model has no range or sill that can be estimated and the variance process is considered to be infinite, the same as the exponential and Gaussian models. Notably, $λ=1$ is equivalent to the linear model.
+
+### Case Study: Selecting the appropriate variogram model {-}
+
+We will look at some different models for estimating the semivariogram. We will use the ground plot data from the young stand monitoring (YSM) program data [@province_of_bc_provincial_2018] for Fort Saint Johns Timber Supply Area (TSA) in the province of British Columbia, Canada. Fort Saint Johns is divided into six blocks respectively Figure \@ref(fig:10-FSJ-plot). There are a total of 108 YSM plots used in this study (Figure \@ref(fig:10-FSJ-plot)). The total basal area ($m^2/ha$) is the variable that we want to predict spatially. For each of the YSM plots, we will calculate the total basal area by adding the basal area for all trees within each plot. We will explore different variogram models with these data and check which model provides the best fit for the variogram.
+
 ```{r 10-FSJ-plot, echo=FALSE, fig.cap=fig_cap, message=FALSE, warning=FALSE}
-    fig_cap <- paste0("Location of Fort Saint Johns TSA and the young stand change monitoring plots. Nepal, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Location of Fort Saint Johns Timber Supply Area (TSA) in British Columbia (BC), Canada and the young stand monitoring (YSM) plots. Nepal, CC-BY-SA-4.0.")
 knitr::include_graphics("images/10-FSJ-plot.png")
 ```
 
+```{r 10-gaussian, echo=FALSE, warning=FALSE, message=FALSE, fig.cap=fig_cap}
+fig_cap <- paste0("Semivariogram comparing different variogram models for basal area (m2/ha) of the young stand monitoring plots. Nepal, CC-BY-SA-4.0.")
 
-<p id="box-text">
-</p>
-
-<p id="box-text">
-</p>
-
-<p id="box-text">
-</p>
-::::
-
-### Gaussian 
-
-In actual application, Gaussian model usually suggest that at shorter lag distance the correlation is extremely high and it drops faster compared to any other variogram models.
-
-```{r 10-semivariogram-modelling-load-data-and-setup, echo=F, message=F, warning=F}
 data<-read.csv("data/10/FSJ.csv",header=T)
-```
 
-
-```{r 10-gaussian, warning=FALSE, message=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("A semivariogram using the Gaussian model for the basal area (m2/ha) for young stand monitoring plots. Nepal, CC-BY-SA-4.0.")
 ## summarize the basal area at plot level
-data1<- data%>% 
+data1<- data %>% 
   group_by(utm_easting,utm_northing) %>%
   summarise(Basal=sum(baha_L))
 coordinates(data1)= ~ utm_easting+utm_northing
 
 ## Model formula
-TheVariogram=variogram(Basal~1, data=data1)
-## Initiating the parameters for the variogram , starting search window
-TheVariogramModel <- vgm(psill=3000, model="Gau", nugget=100, range=20000)
-## fitting a variogram model (Gaussian)
-FittedModel <- fit.variogram(TheVariogram, model=TheVariogramModel) 
-preds = variogramLine(FittedModel, maxdist = max(TheVariogram$dist))
+TheVariogram <- variogram(Basal~1, data=data1)
 
-## Making some nice plots
-g<-ggplot(TheVariogram,aes(x=dist,y=gamma))+geom_point()+
-  geom_line(data = preds)+ theme_classic()+ 
-  labs(x = "lag distance (h)", y = "Semi-variance")
-g
+## Initiating the parameters for the variogram, starting search window
+nugmodel <- vgm(model="Nug")
+linmodel <- vgm(model="Lin")
+expmodel <- vgm(model="Exp")
+gaumodel <- vgm(model="Gau")
+sphmodel <- vgm(model="Sph")
+pow05model <- vgm(model="Pow", range=0.5)
+pow15model <- vgm(model="Pow", range=1.5)
+
+## Fitting the variogram model
+nugfit <- fit.variogram(TheVariogram, model=nugmodel)
+linfit <- fit.variogram(TheVariogram, model=linmodel)
+expfit <- fit.variogram(TheVariogram, model=expmodel)
+gaufit <- fit.variogram(TheVariogram, model=gaumodel)
+sphfit <- fit.variogram(TheVariogram, model=sphmodel)
+pow05fit <- fit.variogram(TheVariogram, model=pow05model)
+pow15fit <- fit.variogram(TheVariogram, model=pow15model)
+
+## Predicting the variogram
+nugpreds <- variogramLine(nugfit, maxdist=max(TheVariogram$dist))
+linpreds <- variogramLine(linfit, maxdist=max(TheVariogram$dist))
+exppreds <- variogramLine(expfit, maxdist=max(TheVariogram$dist))
+gaupreds <- variogramLine(gaufit, maxdist=max(TheVariogram$dist))
+sphpreds <- variogramLine(sphfit, maxdist=max(TheVariogram$dist))
+pow05preds <- variogramLine(pow05fit, maxdist=max(TheVariogram$dist))
+pow15preds <- variogramLine(pow15fit, maxdist=max(TheVariogram$dist))
+
+## Plot
+colors <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+plot(TheVariogram$dist/1000,TheVariogram$gamma,xlim=c(0,100),ylim=c(-1000,3500),xlab="Lag h (km)",ylab="Semivariance γ(h)",type="n")
+lines(nugpreds$dist/1000,nugpreds$gamma,lwd=2,col=colors[1])
+lines(linpreds$dist/1000,linpreds$gamma,lwd=2,col=colors[2])
+#lines(vv_quadratic,lwd=2,col=colors[3])
+lines(exppreds$dist/1000,exppreds$gamma,lwd=2,col=colors[4])
+lines(gaupreds$dist/1000,gaupreds$gamma,lwd=2,col=colors[5])
+lines(sphpreds$dist/1000,sphpreds$gamma,lwd=2,col=colors[6])
+lines(pow05preds$dist/1000,pow05preds$gamma,lwd=2,col=colors[7])
+lines(pow15preds$dist/1000,pow15preds$gamma,lwd=2,col=colors[8])
+points(TheVariogram$dist/1000,TheVariogram$gamma,pch=20)
 ```
-
-A semivariogram using the Gaussian model for the basal area (m2/ha) for young stand monitoring plots.
-
-## Spherical
-
-This model shows a progressive decrease of spatial autocorrelation (equivalently, an increase of semivariance) until some distance, beyond which autocorrelation is zero. The spherical model is one of the most commonly used models.
-
-```{r 10-spherical, warning=FALSE, message=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("A semivariogram using the Spherical model for the basal area (m2/ha) for for young stand monitoring plots. Nepal, CC-BY-SA-4.0.")
-## summarize the basal area at plot level
-data1<- data%>% 
-  group_by(utm_easting,utm_northing) %>%
-  summarise(Basal=sum(baha_L))
-coordinates(data1)= ~ utm_easting+utm_northing
-
-## Model formula
-TheVariogram=variogram(Basal~1, data=data1)
-## Initiating parameters
-TheVariogramModel <- vgm(psill=3000, model="Sph", nugget=60, range=20000)
-
-## Fitting and predicting 
-FittedModel <- fit.variogram(TheVariogram, model=TheVariogramModel) 
-preds = variogramLine(FittedModel, maxdist = max(TheVariogram$dist))
-
-## Some nice graph
-g<-ggplot(TheVariogram,aes(x=dist,y=gamma))+geom_point()+
-  geom_line(data = preds)+ theme_classic()+ 
-  labs(x = "lag distance (h)", y = "Semi-variance")
-g
-```
-
-A semivariogram using the Spherical model for the basal area (m2/ha) for for young stand monitoring plots.
-
-## Exponential
-
-Exponential model is used when spatial autocorrelation decreases exponentially with increasing distance. Here, the autocorrelation disappears completely only at an infinite distance.
-
-```{r 10-exponential,  warning=FALSE, message=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("A semivariogram using the exponential model for the basal area (m2/ha) for for young stand monitoring plots. Nepal, CC-BY-SA-4.0.")
-## summarize the basal area at plot level
-data1<- data%>% 
-  group_by(utm_easting,utm_northing) %>%
-  summarise(Basal=sum(baha_L))
-coordinates(data1)= ~ utm_easting+utm_northing
-
-## Model formula
-TheVariogram=variogram(Basal~1, data=data1)
-TheVariogramModel <- vgm(psill=3000, model="Exp", nugget=60, range=20000)
-FittedModel <- fit.variogram(TheVariogram, model=TheVariogramModel) 
-preds = variogramLine(FittedModel, maxdist = max(TheVariogram$dist))
-g<-ggplot(TheVariogram,aes(x=dist,y=gamma))+geom_point()+
-  geom_line(data = preds)+ theme_classic()+ 
-  labs(x = "lag distance (h)", y = "Semi-variance")
-g
-```
-
-A semivariogram using the exponential model for the basal area (m2/ha) for for young stand monitoring plots.
-
-## Circular
-
-A circular variogram means that there is no preferred orientation in the data. We are only interested in the values of the variable of interest without considering the spatial orientation of the data. 
-
-```{r 10-circular,  warning=FALSE, message=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("A semivariogram using the circular model for the basal area (m2/ha) for for young stand monitoring plots. Nepal, CC-BY-SA-4.0.")
-## summarize the basal area at plot level
-data1<- data%>% 
-  group_by(utm_easting,utm_northing) %>%
-  summarise(Basal=sum(baha_L))
-coordinates(data1)= ~ utm_easting+utm_northing
-
-## Model formula
-TheVariogram=variogram(Basal~1, data=data1)
-TheVariogramModel <- vgm(psill=3000, model="Cir", nugget=60, range=20000)
-FittedModel <- fit.variogram(TheVariogram, model=TheVariogramModel) 
-preds = variogramLine(FittedModel, maxdist = max(TheVariogram$dist))
-g<-ggplot(TheVariogram,aes(x=dist,y=gamma))+geom_point()+
-  geom_line(data = preds)+ theme_classic()+ 
-  labs(x = "lag distance (h)", y = "Semi-variance")
-g
-```
-
-A semivariogram using the circular model for the basal area (m2/ha) for for young stand monitoring plots.
 
 Just looking at the variograms, it appears that all of the four models fit our data well and indicates there is a strong correlation in basal area per hectare of live trees between the plots. However, we will use all the components of semivariogram models to pick our best fitting variogram.
-
-**Table 10.1** Summary of various component of variogram for four different models.
 
 ```{r 10-circular-2, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE}
 Model<-c("Circular", "Gaussian", "Spherical", "Exponential")
@@ -954,10 +748,264 @@ Partial_sill<-c("1785.56","4446.62","2966.37","2994.05")
 Sill_to_Sill<-c("0.76","1.00","0.99","1.00")
 summary<-data.frame(Model,Range,Nugget,Sill,Partial_sill,Sill_to_Sill)
 View(summary)
-knitr::kable(summary, caption =NULL)
+knitr::kable(summary, caption="Summary of various component of variogram for four different models.")
 ```
 
-We can see that the partial sill to total sill ratio is highest for Gaussian and Exponential variogram. This indicated a highest total amount of semi-variance that is spatially correlated. Similarly, we can see that both models are indicating that we are observing a spatial autocorrelation in basal area at a very shorter range. Since with, exponential variogram autocorrelation only disappear at a infinite distance in reality , it is better to pick Gaussian model in most of the similar cases like we have in this study.
+We can see that the p-to-s ratio is highest for Gaussian and exponential semivariogram. This indicates the most total amount of semivariance that is spatially autocorrelated. Similarly, we can see that both models are indicating that we are observing a spatial autocorrelation in basal area at a very shorter range. Since with, exponential semivariogram autocorrelation only disappear at a infinite distance in reality, it is better to pick a Gaussian model in most of the similar cases like we have in this example.
+
+## Sampling
+
+**Sampling** can be defined as the process of selecting some part of a population in order to make an inference, and estimate some parameters about the whole population[@thompson_sampling_2012]. For example, to estimate the amount of biomass of trees in the University of British Columbia Malcolm Knapp Research Forest, scientists collect data on tree size and height from 100 randomly distributed small plots across the forest. Based on some allometric equations that relate these tree size measures to the mass of different species, biomass of the entire Malcolm Knapp Research Forest can be estimated. Similarly, to estimate the amount of recoverable oil in a region, a few (highly expensive) sample holes can be drilled (example adapted from @thompson_sampling_2012). The situation is similar in a national opinion survey, in which only a sample of the people in the population are contacted, and the opinions in the sample are used to estimate the proportions with the various opinions in the whole population (example adapted from @thompson_sampling_2012). 
+
+Sampling should not be confused with observational study. In an observational study, one has little-to-no control over the inclusion of units in the study whereas sampling usually consists of a well-defined protocol for defining both the population under study and the inclusion criteria of units to sample [@thompson_sampling_2012]. Broadly, sampling can be categorized into two groups [@teddlie_mixed_2007]:
+
+1. Probability sampling
+2. Non-probability sampling
+
+Before getting into the details about different types of sampling. We will make ourself familiar with some sampling key terms and their definitions.
+
+:::: {.box-content .call-out-content}
+
+::: {.box-title .call-out-top}
+## Recall This {-}
+:::
+
+<p id="box-text">
+
+## Population
+
+Any large spatially defined entity of plots, people, trees, animals etc., from which samples are drawn and measurement of certain characteristics is conducted. 
+
+## Sampling Design
+
+The procedure by which the sample of units is selected from the population is called the sampling design. 
+
+## Sampling Unit
+
+The smallest entity within a population from which the information about population is drawn is known as sampling unit. For example, in a survey of potential internet user over entire BC , sampling unit can be the certain number of household in each city across BC. 
+
+</p>
+
+::::
+
+## Probability Sampling
+
+Probability sampling techniques are mostly used in studies that use extensive amount of quantitative analysis [@tashakkori_sage_2010]. It involves selecting a large number of units from a population where the probability of inclusion for every member of the population is determinable [@tashakkori_sage_2010].
+
+## Simple Random Sampling
+
+In simple random sampling, each sampling unit within a given population has equal probability of being selected in a sample [@thompson_sampling_2012].For example, suppose we would like to measure the tree heights of all the trees from a simple random sample of 60 plots with their spatial locations (given by plots center co-ordinates) from a forest divided into 625 spatially defined plots as given in **Figure \@ref(fig:10-simple-random-sampling)**.  Notice, there is no distinctive pattern on how plots are being selected for the measurement of tree heights, this justify the **random part** of the simple random sampling. 
+
+As an investigator, when we make a sequence of selections from a population, at each step, new and distinct set of sampling units are being selected in the sample, each having equal probability of being selected at each step.
+
+For example, when we take another sample of 60 plots, we can see that different **sampling units (plots)** are being selected from what we obtained, this represent the **equal probability** of each sampling unit being selected.
+
+```{r 10-simple-random-sampling, echo=FALSE, warning=FALSE, message=FALSE, fig.cap=fig_cap}
+fig_cap <- paste0("Simple random sample of 60 units from a population of 625 units. Nepal, CC-BY-SA-4.0.")
+m <- matrix(c(1:625), nrow=25, ncol=25)
+df <- expand.grid(x=1:ncol(m),y=1:nrow(m))
+df$val <- m[as.matrix(df[c('y','x')])]
+n <- df[sample(nrow(df), 60, replace = FALSE, prob = NULL),]
+p<-ggplot(n,aes(x=x, y=y, label=val)) + 
+  geom_tile(data=df, fill='transparent', colour = 'black') + 
+  geom_tile(data=n,fill='black')+
+  scale_y_reverse() +
+  theme_classic() + 
+  theme(axis.text  = element_blank(),
+        panel.grid = element_blank(),
+        axis.line  = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+p
+```
+
+Simple random sample of 60 units from a population of 625 units.
+
+```{r 10-simple-random-sampling-2, echo=FALSE,warning=FALSE, fig.cap=fig_cap}
+fig_cap <- paste0("Another simple random sample of 60 units. Nepal, CC-BY-SA-4.0.")
+m <- matrix(c(1:625), nrow=25, ncol=25)
+df2 <- expand.grid(x=1:ncol(m),y=1:nrow(m))
+df2$val <- m[as.matrix(df[c('y','x')])]
+n <- df2[sample(nrow(df2), 60, replace = FALSE, prob = NULL),]
+
+p<-ggplot(n,aes(x=x, y=y, label=val)) + 
+  geom_tile(data=df2, fill='transparent', colour = 'black') + 
+  geom_tile(data=n,fill='black')+
+  scale_y_reverse() +
+  theme_classic() + 
+  theme(axis.text  = element_blank(),
+        panel.grid = element_blank(),
+        axis.line  = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+p
+```
+
+## Stratified Random Sampling
+
+When a population under study is not **homogeneous** (similar in biological characteristics) across the entire study area and consists of some sort of gradient, stratified random sampling method is used [@thompson_sampling_2012]. The principle of stratification is to partition the population in such a way that the units within a stratum are as similar as possible [@teddlie_mixed_2007]. Random samples from each strata are drawn to ensure adequate sampling of all groups [@teddlie_mixed_2007]. Even though one stratum may differ markedly from another, a stratified sample with the desired number of units from each stratum in the population will tend to be “representative” of the population as a whole [@howell_area_2020].
+
+For example, a forest under study is divided **(stratified)** into similar regions Figure \@ref(fig:10-simple-random-sampling-2) defined by elevation, soil moisture, and soil nutrient gradient and random samples are taken within each strata. The stratification of a study region despite of its size can help to spread the sample over the entire study area.
+
+
+```{r 10-stratified-random-sampling, echo=FALSE, warning=FALSE, message=FALSE, fig.cap=fig_cap}
+fig_cap <- paste0("Stratified random sample within unequal strata within a study area. Nepal, CC-BY-SA-4.0.")
+m <- matrix(c(1:400), nrow=20, ncol=20)
+df3 <- expand.grid(x=1:ncol(m),y=1:nrow(m))
+df3$val <- m[as.matrix(df3[c('y','x')])]
+n <- df3[sample(nrow(df3), 40, replace = FALSE, prob = NULL),]
+p<-ggplot(n,aes(x=x, y=y, label=val)) + 
+  geom_tile(data=df3, fill='transparent', colour = 'black') + 
+  geom_tile(data=n,fill='black')+
+  geom_rect(aes(xmin =0.5,xmax = 10.5,ymin = 0.5, ymax = 20.5),
+    fill = 'pink',alpha=0.02,color = "black",size = 2)+
+  geom_rect(aes(xmin =10.5,xmax = 20.5,ymin = 0.5, ymax = 5.5),
+    fill = 'skyblue',alpha=0.02,color = "black",size = 2)+
+  geom_rect(aes(xmin =10.5,xmax = 20.5,ymin = 5.5, ymax = 20.5),
+    fill = 'lightgrey',alpha=0.02,color = "black",size = 2)+
+  scale_y_reverse() +
+  theme_classic() + 
+  theme(axis.text  = element_blank(),
+        panel.grid = element_blank(),
+        axis.line  = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+p
+```
+
+Stratified random sample within unequal strata within a study area.
+
+```{r 10-stratified-random-sampling-2, echo=FALSE,warning=FALSE, fig.cap=fig_cap}
+fig_cap <- paste0("Stratified random sample from equal strata within a study area. Nepal, CC-BY-SA-4.0.")
+m <- matrix(c(1:400), nrow=20, ncol=20)
+df <- expand.grid(x=1:ncol(m),y=1:nrow(m))
+df$val <- m[as.matrix(df[c('y','x')])]
+n <- df[sample(nrow(df), 40, replace = FALSE, prob = NULL),]
+p<-ggplot(n,aes(x=x, y=y, label=val)) + 
+  geom_tile(data=df, fill='transparent', colour = 'black') + 
+  geom_tile(data=n,fill='black')+
+  geom_rect(aes(xmin =0.5,xmax = 10.5,ymin = 0.5, ymax = 10.5),
+    fill = 'pink',alpha=0.02,color = "black",size = 2)+
+  geom_rect(aes(xmin =0.5,xmax = 10.5,ymin = 10.5, ymax = 20.5),
+    fill = 'skyblue',alpha=0.02,color = "black",size = 2)+
+  geom_rect(aes(xmin =10.5,xmax = 20.5,ymin = 10.5, ymax = 20.5),
+    fill = 'lightgrey',alpha=0.02,color = "black",size = 2)+
+  geom_rect(aes(xmin =10.5,xmax = 20.5,ymin = 0.5, ymax = 10.5),
+    fill = 'brown',alpha=0.02,color = "black",size = 2)+
+  
+  scale_y_reverse() +
+  theme_classic() + 
+  theme(axis.text  = element_blank(),
+        panel.grid = element_blank(),
+        axis.line  = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+p
+```
+
+Stratified random sample from equal strata within a study area.
+
+## Systematic Sampling
+
+A systematic sample uses a fixed grid or array to assign plots in a regular pattern **Figure \@ref(fig:10-stratified-random-sampling-2)** [@mcroberts_sampling_2014]. The advantage of systematic sampling is that it maximizes the average distance between the plots and therefore minimizes spatial correlation among observations and increases statistical efficiency [@mcroberts_sampling_2014]. In addition, a systematic sample, which is clearly seen to be representative in some sense, can be very convincing to decision-makers who lack experience with sampling [@mcroberts_sampling_2014]. Raster grids such as digital elevation models (DEM) are some examples of systematic sample.
+
+```{r 10-systematic-sampling, echo=FALSE,warning=FALSE,message=FALSE, fig.cap=fig_cap}
+fig_cap <- paste0("Sample every second observation in the row. Nepal, CC-BY-SA-4.0.")
+m <- matrix(c(1:400), nrow=20, ncol=20)
+
+# Create row indicator
+df <- expand.grid(x=1:ncol(m),y=1:nrow(m))
+df$val <- m[as.matrix(df[c('y','x')])]
+row_odd <- seq_len(nrow(df)) %% 2 
+col_odd<- seq_len(ncol(df)) %% 2
+data_row_odd <- df[row_odd == 0,] 
+data_col_odd <- df[col_odd == 0,]
+# Subset odd rows
+p<-ggplot(data_col_odd,aes(x=x, y=y, label=val)) + 
+  geom_tile(data=df, fill='transparent', colour = 'black') + 
+  geom_rect(data=data_col_odd,aes(xmin = x, ymin = y, xmax = x + 0.3, ymax = y + 0.6),fill='black')+
+  scale_y_reverse() +
+  theme_classic() + 
+  theme(axis.text  = element_blank(),
+        panel.grid = element_blank(),
+        axis.line  = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+p
+```
+
+Sample every second observation in the row 
+
+```{r 10-systematic-sampling-2, echo=FALSE,warning=FALSE, fig.cap=fig_cap}
+fig_cap <- paste0("Sample all the observation in every second column. Nepal, CC-BY-SA-4.0.")
+m <- matrix(c(1:400), nrow=20, ncol=20)
+
+# Create row indicator
+df <- expand.grid(x=1:ncol(m),y=1:nrow(m))
+df$val <- m[as.matrix(df[c('y','x')])]
+row_odd <- seq_len(nrow(df)) %% 2 
+data_row_odd <- df[row_odd == 0,] 
+# Subset odd rows
+p<-ggplot(data_row_odd,aes(x=x, y=y, label=val)) + 
+  geom_tile(data=df, fill='transparent', colour = 'black') + 
+  geom_rect(data=data_row_odd,aes(xmin = x, ymin = y, xmax = x + 0.3, ymax = y + 0.6),fill='black')+
+  scale_y_reverse() +
+  theme_classic() + 
+  theme(axis.text  = element_blank(),
+        panel.grid = element_blank(),
+        axis.line  = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+p
+```
+Sample all the observation in every second column 
+
+## Cluster Sampling 
+
+In cluster sampling, rather than sampling individual units, which might be geographically spread over great distances, we can sample groups (clusters) of plots that occur naturally in the study area [@teddlie_mixed_2007]. Cluster sampling is employed when we want to be more efficient in terms of the use of time and money to generate a more efficient probability sample [@teddlie_mixed_2007].
+
+```{r 10-cluster-sampling, echo=FALSE, warning=FALSE, message=FALSE, fig.cap=fig_cap}
+fig_cap <- paste0("Cluster of plots selected from entire study area. Nepal, CC-BY-SA-4.0.")
+m <- matrix(c(1:400), nrow=20, ncol=20)
+df <- expand.grid(x=1:ncol(m),y=1:nrow(m))
+df$val <- m[as.matrix(df[c('y','x')])]
+p<-ggplot(df,aes(x=x, y=y,label=val)) + 
+  geom_tile(data=df, fill='transparent', colour = 'black') +
+  geom_rect(aes(xmin = 0.5,xmax = 3.5,ymin = 14.5, ymax = 20.5),
+    fill = 'lightgrey',alpha=0.02,color = "black",size = 2)+
+  geom_rect(aes(xmin = 5.5,xmax = 7.5,ymin = 5.5, ymax = 7.5),
+    fill = 'lightgrey',alpha=0.02,color = "black",size = 2)+
+  geom_rect(aes(xmin = 12.5,xmax = 14.5,ymin = 12.5, ymax = 14.5),
+    fill = 'lightgrey',alpha=0.02,color = "black",size = 2)+
+  geom_rect(aes(xmin = 15.5,xmax = 20.5,ymin = 0.5, ymax = 5.5),
+    fill = 'lightgrey',alpha=0.02,color = "black",size = 2)+
+  scale_y_reverse() +
+  theme_classic() + 
+  theme(axis.text  = element_blank(),
+        panel.grid = element_blank(),
+        axis.line  = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+p 
+```
+
+Cluster of plots selected from entire study area
+
+## Non-probability Sampling
+
+Non-probability sampling is generally used in qualitative studies. They are also know as **purposive or adaptive sampling**, and defined as selecting units (e.g.,individuals, groups of individuals, institutions) based on specific purposes associated with answering some research questions. **Purposive or Adaptive** sampling can be classified into three broad categories [@teddlie_mixed_2007]:
+
+## Representative Sampling
+
+This type of sampling is used when we want to select samples that will represent broader groups as closely as possible [@teddlie_mixed_2007]. One of the example of representative sampling is selecting 100 Douglas fir and 50 Spruce tree from study area within Malcom Knapp Forest, BC consisting of 500 Douglas fir and 300 Spruce trees for the measurement of tree height.
+
+## Unique Case Sampling
+
+In this sampling, we want to focus on more specific case which is unique and rare in terms of one or more characteristics [@teddlie_mixed_2007]. One of the example of unique case sampling could be understanding the genetic makeup of person who is not affected by Covid-19 virus. 
+
+## Sequential Sampling
+
+In this sampling method, we would pick up a single or group of cases in an interval of time, analyzes the results and then move on to the next group of cases and so on [@teddlie_mixed_2007]. The goal of the research project is to generate some theory (or broadly defined themes) [@teddlie_mixed_2007]. 
 
 ## Spatial Interpolation  
 
@@ -970,14 +1018,12 @@ We will discuss both method with a case study in detail.
 
 ## Case Study 3 
 
-For this case study, we will use ground plot data from Young stand monitoring (YSM) program data [@province_of_bc_provincial_2018] for Fort Saint Johns timber supply area (TSA) in the province of British Columbia, Canada.Fort Saint Johns is divided into 6 blocks respectively **Figure \@ref(fig:10-FSJ-plot)**. There is a total of 108 YSM plots used in this study **Figure \@ref(fig:10-FSJ-plot)**. The total basal area (m2/ha) is our variable of interest in this study. For each of the YSM plot the total basal area was calculated by adding the basal area for all trees within the plot. We will use this dataset to explore different interpolation technique to find the variable of interest (basal area) within the unsampled locations.
+For this case study, we will use ground plot data from Young stand monitoring (YSM) program data [@province_of_bc_provincial_2018] for Fort Saint Johns timber supply area (TSA) in the province of British Columbia, Canada. Fort Saint Johns is divided into 6 blocks respectively **Figure \@ref(fig:10-FSJ-plot)**. There are a total of 108 YSM plots used in this study **Figure \@ref(fig:10-FSJ-plot)**. The total basal area (m2/ha) is our variable of interest in this study. For each of the YSM plot the total basal area was calculated by adding the basal area for all trees within the plot. We will use this dataset to explore different interpolation technique to find the variable of interest (basal area) within the unsampled locations.
 
 ```{r 10-FSJ-plot1, echo=FALSE, fig.cap=fig_cap, message=FALSE, warning=FALSE}
     fig_cap <- paste0(" Location of Fort Saint Johns TSA and the young stand change monitoring plots. Nepal, CC-BY-SA-4.0.")
     knitr::include_graphics("images/10-FSJ-plot.png")
 ```
-
-::::
 
 ## Methods Without Using Semi-variogram 
 
@@ -1009,14 +1055,15 @@ cata <- spTransform(spdf, TA)
 **Step 2: Create polygons throughout the study area where interpolation is to be done and rasterize the polygons**
 
 ```{r 10-nearest-neighbor-2, warning=FALSE, message=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("An intermediate step in creating polygon and rasterizing it over the entire Fort Saint Johns TSA. Nepal, CC-BY-SA-4.0.")
-v <- voronoi(dta)
-plot(v)
-vca <- intersect(v, cata)
-spplot(vca, 'baha_L', col.regions=rev(get_col_regions()))
+#fig_cap <- paste0("An intermediate step in creating polygon and rasterizing it over the entire Fort Saint Johns TSA. Nepal, CC-BY-SA-4.0.")
+#v <- voronoi(dta)
+#plot(v)
+### FUNCTION BELOW CRASHES R, COMMENTING OUT FOR NOW
+#vca <- intersect(v, cata)
+#spplot(vca, 'baha_L', col.regions=rev(get_col_regions()))
 ################### rasterize the data ####################
-r <- raster(cata, res=100)
-vr <- rasterize(vca, r, 'baha_L')
+#r <- raster(cata, res=100)
+#vr <- rasterize(vca, r, 'baha_L')
 ```
 
 An intermediate step in creating polygon and rasterizing it over the entire Fort Saint Johns TSA.
@@ -1024,14 +1071,15 @@ An intermediate step in creating polygon and rasterizing it over the entire Fort
 **Step 3: Nearest neighbor with five unsampled points to be interpolated at a time and plot the results**
 
 ```{r 10-nearest-neighbor-3, warning=FALSE, message=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Predicted basal area over the entire Fort Saint Johns TSA using five nearest neighbor. Nepal, CC-BY-SA-4.0.")
+### COMMENTING BELOW BECAUSE ABOVE CHUNK FAILS
+#fig_cap <- paste0("Predicted basal area over the entire Fort Saint Johns TSA using five nearest neighbor. Nepal, CC-BY-SA-4.0.")
 ## gstat package to create semivariogram model, kriging an dinterpolation
-gs <- gstat(formula=baha_L~1, locations=dta, nmax=5, set=list(idp = 0))
-nn <- interpolate(r, gs)
-nnmsk <- mask(nn,vr)
-tm_shape(nnmsk) +
-  tm_raster(n=8,palette = "RdBu", auto.palette.mapping = FALSE,title="Predicted basal area") +
-  tm_legend(legend.outside=FALSE)
+#gs <- gstat(formula=baha_L~1, locations=dta, nmax=5, set=list(idp = 0))
+#nn <- interpolate(r, gs)
+#nnmsk <- mask(nn,vr)
+#tm_shape(nnmsk) +
+#  tm_raster(n=8,palette = "RdBu", auto.palette.mapping = FALSE,title="Predicted basal area") +
+#  tm_legend(legend.outside=FALSE)
 ```
 
 Predicted basal area over the entire Fort Saint Johns TSA using five nearest neighbor.
@@ -1039,13 +1087,14 @@ Predicted basal area over the entire Fort Saint Johns TSA using five nearest nei
 **Step 4: Leaflet map for some interactions**
 
 ```{r 10-nearest-neighbor-4, echo=FALSE, warning=FALSE, message=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Predicted basal area over the entire Fort Saint Johns TSA using five nearest neighbor projected over the province of British Columbia. Nepal, CC-BY-SA-4.0.")
-pal <- colorNumeric(c("#fef0d9","#fdcc8a","#fc8d59","#e34a33","#b30000"), values(nnmsk),
-  na.color = "transparent")
-leaflet() %>% addTiles() %>%
-  addRasterImage(nnmsk, colors = pal, opacity = 0.5) %>%
-  addLegend(pal = pal, values = values(nnmsk),
-    title = "Predicted basal area")
+### COMMENTING BELOW BECAUSE ABOVE CHUNK FAILS
+#fig_cap <- paste0("Predicted basal area over the entire Fort Saint Johns TSA using five nearest neighbor projected over the province of British Columbia. Nepal, CC-BY-SA-4.0.")
+#pal <- colorNumeric(c("#fef0d9","#fdcc8a","#fc8d59","#e34a33","#b30000"), values(nnmsk),
+#  na.color = "transparent")
+#leaflet() %>% addTiles() %>%
+#  addRasterImage(nnmsk, colors = pal, opacity = 0.5) %>%
+#  addLegend(pal = pal, values = values(nnmsk),
+#    title = "Predicted basal area")
 ```
 
 Predicted basal area over the entire Fort Saint Johns TSA using five nearest neighbor projected over the province of British Columbia. 
@@ -1068,7 +1117,7 @@ dta <- spTransform(dsp, TA)
 cata <- spTransform(spdf, TA)
 ```
 
-**Step 2: Create the thiessian polygon around the sample points for entire TSA using**
+Step 2: Create the thiessian polygon around the sample points for entire TSA using
 
 ```{r 10-nearest-neighbor-6, warning=FALSE, message=FALSE}
 #"dirichlet" function from "spatstat" package
@@ -1080,7 +1129,7 @@ th  <-  as(dirichlet(as.ppp(dta)), "SpatialPolygons")
 proj4string(th) <- proj4string(dta)
 ```
 
-**Step 3: The tessellated surface does not store attribute information from the point data layer. Hence, the information from the data layer should be carried over to tesselllated surface **
+Step 3: The tessellated surface does not store attribute information from the point data layer. Hence, the information from the data layer should be carried over to tessellated surface 
 
 ```{r 10-nearest-neighbor-7, warning=FALSE, message=FALSE}
 #We'll use the over() function from the "sp" package to join the point attributes to the thiessian polygon via spatial join
@@ -1091,17 +1140,16 @@ th.spdf  <-  SpatialPolygonsDataFrame(th, th.z)
 th.clp   <- raster::intersect(cata,th.spdf)
 ```
 
-**Step 4: Visualize the results**
+Step 4: Visualize the results
 
 ```{r 10-nearest-neighbor-8, warning=FALSE, message=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Predicted basal area over the entire Fort Saint Johns TSA using thiessian polygon. Nepal, CC-BY-SA-4.0.")
+fig_cap <- paste0("Predicted basal area over the entire Fort Saint Johns TSA using thiessan polygons. Nepal, CC-BY-SA-4.0.")
 # Map the data
 #using package "tmap"
 tm_shape(th.clp) +
   tm_polygons(col="baha_L", palette="RdBu", auto.palette.mapping = FALSE,title="Predicted basal area") +
   tm_legend(legend.outside=FALSE)
 ```
-Predicted basal area over the entire Fort Saint Johns TSA using thiessian polygon.
 
 **Inverse Distance Weighting**
 
@@ -1174,6 +1222,8 @@ leaflet() %>% addTiles() %>%
     title = "Predicted basal area")
 ```
 
+**Figure 10.23.** \ref{fig:figs} Predicted basal area over the entire Fort Saint Johns TSA using inverse distance weighting projected over the province of British Columbia.
+
 ## Methods Using Semi-variogram 
 
 ## Kriging 
@@ -1198,16 +1248,7 @@ Linear kriging are distribution free linear interpolation techniques that are in
 
 ## Case Study 4 
 
-For this case study, we will use ground plot data from Young stand monitoring (YSM) program data [@province_of_bc_provincial_2018] for Fort Saint Johns timber supply area (TSA) in the province of British Columbia, Canada.Fort Saint Johns is divided into 6 blocks respectively **Figure \@ref(fig:10-FSJ-plot)**. There is a total of 108 YSM plots used in this study **Figure \@ref(fig:10-FSJ-plot)**. The total basal area (m2/ha) is our variable of interest in this study. For each of the YSM plot the total basal area was calculated by adding the basal area for all trees within the plot. We will use this dataset to explore different interpolation technique to find the variable of interest (basal area) in the unsampled locations.
-<p id="box-text">
-</p>
-
-<p id="box-text">
-</p>
-
-<p id="box-text">
-</p>
-::::
+For this case study, we will use ground plot data from Young stand monitoring (YSM) program data [@province_of_bc_provincial_2018] for Fort Saint Johns timber supply area (TSA) in the province of British Columbia, Canada. Fort Saint Johns is divided into 6 blocks respectively Figure \@ref(fig:10-FSJ-plot). There are a total of 108 YSM plots used in this study Figure \@ref(fig:10-FSJ-plot). The total basal area (m2/ha) is our variable of interest in this study. For each of the YSM plot the total basal area was calculated by adding the basal area for all trees within the plot. We will use this dataset to explore different interpolation technique to find the variable of interest (basal area) in the unsampled locations.
 
 ## Simple Kriging
 
@@ -1217,7 +1258,7 @@ $$\hat{Z}_{s_o}=\mu_{s_o} + \epsilon_{s_o}$$
 Where, $$\hat{Z}_{s_o}=\text{variable of interest predicted at a given saptial location}\ s_{o}$$
 $$\mu_{s_o}=\text{an known constant mean} $$
 
-**Step 1: Make sure the projection of the point data and shape file is same**
+Step 1: Make sure the projection of the point data and shape file is same
 
 ```{r 10-simple-kriging, warning=FALSE, message=FALSE}
 # summarize the data to individual plots
@@ -1233,7 +1274,8 @@ TA <- CRS("+proj=utm +zone=10 +ellps=GRS80 +datum=NAD83")
 dta <- spTransform(dsp, TA)
 cata <- spTransform(spdf, TA)
 ```
-**Step 2: Create an empty grid**
+
+Step 2: Create an empty grid
 
 A grid with the total number of n cells where basal area is to be predicted is overlaid over Forty Saint Johns. The grid will be a raster
 
@@ -1249,7 +1291,7 @@ proj4string(dta) <- proj4string(dta) # Temp fix until new proj env is adopted
 proj4string(grd) <- proj4string(dta)
 ```
 
-**Step 3: Calculate the overall mean of the variable to be interpolated **
+Step 3: Calculate the overall mean of the variable to be interpolated
 
 Simple kriging, which assumes that mean is a known constant over entire domain need a mean value of variable of interest (basal area)
 
@@ -1258,7 +1300,7 @@ basal<-mean(data$total)
 basal
 ```
 
-**Step 4: Semivariogram modeling**
+Step 4: Semivariogram modeling
 
 Start by fitting the semivariogram model for the variable of interest (basal area) and see which model best fit the data
 
@@ -1331,9 +1373,9 @@ grids_bs
 
 Variogram models fitted for basal area using the YSM plot data. 
 
-**Step 5: Put all the variogram parameters in a table and see which fits best**
+Step 5: Put all the variogram parameters in a table and see which fits best
 
-**Table 10.2** Summary of various components of variogram fro four variogram models.
+Table 10.2 Summary of various components of variogram from four variogram models.
 
 ```{r 10-simple-kriging-5, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE, fig.cap=fig_cap}
 fig_cap <- paste0("Variogram models fitted for basal area using the YSM plot data. Nepal, CC-BY-SA-4.0.")
@@ -1349,13 +1391,13 @@ knitr::kable(summary, caption =NULL)
 
 Looking into the variogram and the parameter (Figure \@ref(fig:10-simple-kriging-4), Table: (\#tab:10-simple-kriging-5), we can see that exponential variogram fits the data quite well compared to spherical and Gaussian as it has short range, low nugget and high partial sill to total sill ratio. As pointed earlier, the spatial autocorrelation only disappear at infinite lag using exponential model and best way to go is Gaussian for our data.
 
-**Step 6: We will use beta = 95.73, as we know the assume mean is a known constant over the domain for simple kriging**
+Step 6: We will use beta = 95.73, as we know the assume mean is a known constant over the domain for simple kriging
 
 ```{r 10-simple-kriging-6, warning=FALSE, message=FALSE}
 simple<- krige(total ~ 1, dta, grd, model=FittedModel2,beta=95.73)
 ```
 
-**Step 6: Visualize the predicted surface**
+Step 6: Visualize the predicted surface
 
 ```{r 10-simple-kriging-7, warning=FALSE, message=FALSE, fig.cap=fig_cap}
 fig_cap <- paste0("Predicted basal area using simple kriging. Nepal, CC-BY-SA-4.0.")
@@ -1373,7 +1415,7 @@ tm_shape(raster_clip) +
 ```
 Predicted basal area using simple kriging.
 
-**Step 7: Cross validation**
+Step 7: Cross validation
 
 ```{r 10-simple-kriging-8, warning=FALSE, message=FALSE}
 cv_sK <- krige.cv(total~ 1, dta, model=FittedModel2, nfold=nrow(dta),
@@ -1396,16 +1438,17 @@ Where, $$\hat{Z}_{s_o}=\text{variable of interest predicted at a given saptial l
 
 $$\mu_{s_o}=\text{an unknown constant mean}$$
 
-**Steps 1, 3, 4, are similar to what we did for simple kriging and we don't need step 2 as mean is assumed to be a unknown constant**
+Steps 1, 3, 4, are similar to what we did for simple kriging and we don't need step 2 as mean is assumed to be a unknown constant
 
-**Step 5: Using ordinary kriging**
+Step 5: Using ordinary kriging
 
 Krigging model is specified only using variable of interest.  
 
 ```{r 10-ordinary-kriging, warning=FALSE, message=FALSE}
 ordinary<- krige (total ~ 1, dta, grd, model=FittedModel2)
 ```
-**Step 6: Visualize the predicted surface**
+
+Step 6: Visualize the predicted surface
 
 ```{r 10-ordinary-kriging-2, warning=FALSE, message=FALSE, fig.cap=fig_cap}
 fig_cap <- paste0("Predicted basal area using ordinary kriging. Nepal, CC-BY-SA-4.0.")
@@ -1423,7 +1466,7 @@ tm_shape(Ok_clip) +
 ```
 Predicted basal area using ordinary kriging.
 
-**Step 7: Cross validation**
+Step 7: Cross validation**
 
 ```{r 10-ordinary-kriging-3, warning=FALSE, message=FALSE}
 cv_oK <- krige.cv(total~ 1, dta, model=FittedModel2, nfold=nrow(dta),
@@ -1441,7 +1484,7 @@ mean(res^2/as.data.frame(cv_oK)$var1.var)
 
 The universal kriging is one of the variant of ordinary kriging. This method assume that the mean varies from location to location in a deterministic way (trend or drift) while the variance is constant throughout the domain [@matheron_traite_1962]. One example could be measurements of temperatures, which are commonly related to elevation (at a known rate of oC by m difference).
 
-**Step 1: This is similar to what we did for simple kriging and we will calculate the mean based on the drift or trend in data (more localized mean) using the spatial location of the plots**
+Step 1: This is similar to what we did for simple kriging and we will calculate the mean based on the drift or trend in data (more localized mean) using the spatial location of the plots
 
 ```{r 10-universal-kriging, warning=FALSE, message=FALSE}
 
@@ -1470,7 +1513,7 @@ universal<- krige(total~X+Y,dta, grd, model=FittedModel4)
 
 ```
 
-**Step 2: Visualize the results as we usually**
+Step 2: Visualize the results as we usually
 
 ```{r 10-universal-kriging-2, warning=FALSE, message=FALSE, fig.cap=fig_cap}
 fig_cap <- paste0("Predicted basal area using universal kriging. Nepal, CC-BY-SA-4.0.")
@@ -1488,7 +1531,7 @@ tm_shape(uk_clip) +
 
 Predicted basal area using universal kriging.
 
-**Step 3: Cross validation**
+Step 3: Cross validation
 
 ```{r 10-universal-kriging-3, warning=FALSE, message=FALSE}
 cv_uK <- krige.cv(total~ X+Y, dta, model=FittedModel4, nfold=nrow(dta),
@@ -1517,7 +1560,7 @@ summary<-data.frame(Method,RMSE,ME,MSDR)
 knitr::kable(summary, caption =NULL)
 ```
 
-From the cross validation results **(Table 10.3)**, we want root mean squared error (RMSE) to be low for greater predictive accuracy [@tziachris_spatial_2017]. We also want mean error (ME) to be as close to 0 as possible [@tziachris_spatial_2017]. And we want mean squared deviation Ratio (MSDR) to be closer to 1 for the good kriging model [@tziachris_spatial_2017]. The RMSE is lowest for simple and ordinary kriging, the ME is negative and below zero, and the MSDR of the predictions vs. the sample is low and closer to 1 for both simple and ordinary kriging (Table 10.3). This means the variability in predictions from both kriging are somewhat closer to real values than universal kriging [@tziachris_spatial_2017]. Looks like universal kriging is predicting more negative basal area for some of the location within TSA. The choice between simple and ordinary kriging may vary with researchers discretion here.
+From the cross validation results (Table 10.3), we want root mean squared error (RMSE) to be low for greater predictive accuracy [@tziachris_spatial_2017]. We also want mean error (ME) to be as close to 0 as possible [@tziachris_spatial_2017]. And we want mean squared deviation Ratio (MSDR) to be closer to 1 for the good kriging model [@tziachris_spatial_2017]. The RMSE is lowest for simple and ordinary kriging, the ME is negative and below zero, and the MSDR of the predictions vs. the sample is low and closer to 1 for both simple and ordinary kriging (Table 10.3). This means the variability in predictions from both kriging are somewhat closer to real values than universal kriging [@tziachris_spatial_2017]. Looks like universal kriging is predicting more negative basal area for some of the location within TSA. The choice between simple and ordinary kriging may vary with researchers discretion here.
 
 ## Co-Kriging
 
@@ -1529,7 +1572,8 @@ In principle, nonlinear kriging algorithms are linear kriging algorithms applied
 
 ## Indicator Kriging
 
-Indicator kriging is a non-parametric approach of estimating a binary variable (presence absence or variables that takes 0 or 1 value) of interest at an unsampled or unmeasured location [@journel_nonparametric_1983]. For example, we might have a sample that consists of information on presence or absence of  Douglas-fir tree species within Williams lake timber supply area, where 0 indicates absence and 1 indicates the presence of species. Indicator kriging assumes that mean is a unknown constant over the domain. The only difference between the indicator kriging and ordinary krigging is in the use of binary variable. The basic mathematical formulation of indicator kriging is given below: 
+Indicator kriging is a non-parametric approach of estimating a binary variable (presence absence or variables that takes 0 or 1 value) of interest at an unsampled or unmeasured location [@journel_nonparametric_1983]. For example, we might have a sample that consists of information on presence or absence of  Douglas-fir tree species within Williams lake timber supply area, where 0 indicates absence and 1 indicates the presence of species. Indicator kriging assumes that mean is a unknown constant over the domain. The only difference between the indicator kriging and ordinary krigging is in the use of binary variable. The basic mathematical formulation of indicator kriging is given below:
+
 $$I_{s}= \mu + \epsilon_{s}$$
 where, $$I= \text{binary variable preicated at the location s}$$
 $$\mu= \text{unknown mean}$$
@@ -1545,21 +1589,11 @@ Disjunctive kriging allows to estimate the value of a variable of interest at an
 
 ## Spatial Regression Models
 
-For classical statistics tests,**spatial autocorrelation** is problematic as ordinary least square (regression) or analysis of variance (ANOVA) assumes that observations are independent in space and time [@meng_spatial_2009]. However, geostatistical data violates the assumptions of independence, and using regression and ANOVA might inflate the significance of t and F statistics, when, in fact, they may not be significant at all [@meng_spatial_2009]. In that case one should try to improve the regression model by adding important **auxiliary** (independent variables that are associated or important in predicting the variables of interest) and incorporating the spatial autocorrelation structure [@meng_spatial_2009] using spatial regression models [@anselin_spatial_1998]. **The whole objective of spatial regression is to understand the association of the variable of interest with the independent variables while accounting for the spatial structure present in the data.** We will show two examples of spatial regression model in this section using our familiar YSM data for Fort Saint Johns TSA. 
+For classical statistics tests, spatial autocorrelation is problematic as ordinary least square (regression) or analysis of variance (ANOVA) assumes that observations are independent in space and time [@meng_spatial_2009]. However, geostatistical data violates the assumptions of independence, and using regression and ANOVA might inflate the significance of t and F statistics, when, in fact, they may not be significant at all [@meng_spatial_2009]. In that case one should try to improve the regression model by adding important auxiliary (independent variables that are associated or important in predicting the variables of interest) and incorporating the spatial autocorrelation structure [@meng_spatial_2009] using spatial regression models [@anselin_spatial_1998]. The whole objective of spatial regression is to understand the association of the variable of interest with the independent variables while accounting for the spatial structure present in the data. We will show two examples of spatial regression model in this section using our familiar YSM data for Fort Saint Johns TSA. 
 
 ## Case Study 5 
 
-
-For this case study, we will use ground plot data from Young stand monitoring (YSM) program data [@province_of_bc_provincial_2018] for Fort Saint Johns timber supply area (TSA) in the province of British Columbia, Canada.Fort Saint Johns is divided into 6 blocks respectively **Figure \@ref(fig:10-FSJ-plot)**. There is a total of 108 YSM plots used in this study **Figure \@ref(fig:10-FSJ-plot)**. The total basal area (m2/ha) is our variable of interest or response variable in this study. For each of the YSM plot the total basal area was calculated by adding the basal area for all trees within the plot. We will use the auxiliary variables such as trees per hectare (TPH), elevation (m), site index, top height(m), and tree volume (m3/ha)
-<p id="box-text">
-</p>
-
-<p id="box-text">
-</p>
-
-<p id="box-text">
-</p>
-::::
+For this case study, we will use ground plot data from Young stand monitoring (YSM) program data [@province_of_bc_provincial_2018] for Fort Saint Johns timber supply area (TSA) in the province of British Columbia, Canada. Fort Saint Johns is divided into 6 blocks respectively Figure \@ref(fig:10-FSJ-plot). There are a total of 108 YSM plots used in this study Figure \@ref(fig:10-FSJ-plot). The total basal area ($m^2/ha$) is our variable of interest or response variable in this study. For each of the YSM plot the total basal area was calculated by adding the basal area for all trees within the plot. We will use the auxiliary variables such as trees per hectare (TPH), elevation (m), site index, top height (m), and tree volume ($m^3/ha$)
 
 ## Spatial Lag Model 
 
@@ -1576,9 +1610,9 @@ $$\epsilon=\text{vector of error terms}$$
 
 ## Steps in Fitting Spatial Lag Model:
 
-**Step 1: Build spatial weight matrix**
+Step 1: Build spatial weight matrix
 
-We will create a **spatial weight matrix** using the **distance-based approach** usign the **nearest-neighbor** approach. This spatial weight matrix will be used in our spatial lag model to account for the spatial autocorreltion. 
+We will create a spatial weight matrix using the distance-based approach using the nearest-neighbor approach. This spatial weight matrix will be used in our spatial lag model to account for the spatial autocorrelation. 
 
 ```{r 10-spatial-lag-model, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE}
 YSM_pots <- read_sf(dsn="data/10",layer="YSM_point")
@@ -1587,9 +1621,9 @@ YSM.nb <- dnearneigh(YSM.coords, 0, 60000, longlat = FALSE) ## neighbors between
 YSM.W<-nb2listw(YSM.nb, style = "W", zero.policy = T) # Creates a matrix W object with zero policy=TRUE as some plot might not have any neighbors
 ```
 
-**Step 2: Check for the spatial autocorrelation**
+Step 2: Check for the spatial autocorrelation
 
-We will check the spatial autocorrelation using the Moran's I adn Moran's test using our distance based spatial weight matrix [@getis_constructing_2010] we have just calculated. For the details on Moran's I, please refer to **section 4.3**.
+We will check the spatial autocorrelation using the Moran's I and Moran's test using our distance based spatial weight matrix [@getis_constructing_2010] we have just calculated.
 
 ```{r 10-spatial-lag-model-2, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE}
 moran.test(YSM_pots$Basal, YSM.W)
@@ -1597,9 +1631,9 @@ moran.test(YSM_pots$Basal, YSM.W)
 
 Moran's I value was (I=0.065), which was significant (p-value < 0.05) indicting a positive spatial autocorrelation. It seems like a weak autocorrelation but for the purpose of demonstration in this section we will proceed further assuming there is a spatial autocorrelation.
 
-**Step 3: Fit a spatial lag model**
+Step 3: Fit a spatial lag model
 
-In this step, we will fit a spatial lag model using basal area (m2/ha) as a **response variable.** While, trees per hectare (TPH), elevation (m), site index, top height(m), and tree volume (m3/ha) will be used as **predictor variable.** 
+In this step, we will fit a spatial lag model using basal area (m2/ha) as a response variable. While, trees per hectare (TPH), elevation (m), site index, top height(m), and tree volume (m3/ha) will be used as predictor variable.
 
 ```{r 10-spatial-lag-model-3, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE}
 f1<- Basal~TPH+Elevation+Volume+Height+Site_index ## formula for basal area as response and auxiliary variables as predictor  
@@ -1607,7 +1641,7 @@ basal_lag<- lagsarlm(f1,data=YSM_pots,YSM.W,zero.policy = T)
 summary(basal_lag)
 ```
 
-**Step 4: Select auxiliary variables and refit the model** 
+Step 4: Select auxiliary variables and refit the model
 
 Varieties of ways has been proposed to select the auxiliary variables to get the best spatial model. We will go through them briefly. First, we will Use the alpha=0.005 to check whether our auxiliary variables are significantly associated with the basal area. From the summary, we can see that TPH, Elevation and Volume has p-value < 0.05 indicating that they are significantly associated with basal area. 
 
@@ -1617,11 +1651,11 @@ basal_lag1<- lagsarlm(f2,data=YSM_pots,YSM.W,zero.policy = T)
 summary(basal_lag1)
 ```
 
-**Step 5: Assess both models using Akaike Information Criteria (AIC)**
+Step 5: Assess both models using Akaike's Information Criteria (AIC)
 
-Sometime, only using the p-value to assess significant variables will not be useful while assessing which models best fits the data as multiple models can have potential to describe the association between response and predictor variables. In the context, when we have different competing models, we can use AIC [for details see, @akaike_information_1973] to compare the models. For example, suppose models we have fitted in **step 3** and **step 4** were competing and potential. We can select the best model between two with lowest AIC values. AIC value of model from **step 3** is 867.44 while the AIC value of model from **step 4** is 865.65, indicating later one is the best fit to our data.
+Sometime, only using the p-value to assess significant variables will not be useful while assessing which models best fits the data as multiple models can have potential to describe the association between response and predictor variables. In the context, when we have different competing models, we can use AIC [for details see, @akaike_information_1973] to compare the models. For example, suppose models we have fitted in step 3 and step 4 were competing and potential. We can select the best model between two with lowest AIC values. AIC value of model from step 3 is 867.44 while the AIC value of model from step 4 is 865.65, indicating later one is the best fit to our data.
 
-**Step 6: Interpreting rho coefficient for our selected model**
+Step 6: Interpreting rho coefficient for our selected model
 
 Rho (0.16445), reflects the spatial dependence inherent in our sample data, measuring the average influence on observations by their neighboring observations. It has a positive effect and it is significant (p-value < 0.05). As a result, the general model fit improved over the linear model.
 
@@ -1642,11 +1676,11 @@ $$u=\text{indepndent errors}$$
 
 ## Steps in Fitting Spatial Error Model:
 
-**Step 1 and Step 2** in fitting spatial error model is exactly similar to what we did for spatial lag model. 
+Step 1 and Step 2 in fitting spatial error model is exactly similar to what we did for spatial lag model. 
 
-**Step 3: Fit the spatial error model**
+Step 3: Fit the spatial error model
 
-We will use the function **errorsarlm** from the package **spatialreg** to fit the error model indicating that we are accounting the spatial autocorrelation that exists in the residuals or the error terms instead of the response variable (**basal area**).
+We will use the function errorsarlm from the package spatialreg to fit the error model indicating that we are accounting the spatial autocorrelation that exists in the residuals or the error terms instead of the response variable (basal area).
 
 ```{r 10-spatial-error-model, echo=FALSE, warning=FALSE, message=FALSE, tab.cap = FALSE}
 f3<- Basal~TPH+Elevation+Volume+Height+Site_index ## formula for basal area as response and auxiliary variables as predictor  
@@ -1654,7 +1688,7 @@ basal_lag2<- errorsarlm(f3,data=YSM_pots,YSM.W,zero.policy = T)
 summary(basal_lag2)
 ```
 
-**Step 4: Select auxiliary variables and refit the model** 
+Step 4: Select auxiliary variables and refit the model
 
 We will use the alpha=0.05 to check whether our auxiliary variables are significantly associated with the basal area. From the summary, we can see that TPH, Elevation and Volume has p-value < 0.05 indicating that they are significantly associated with basal area. 
 
@@ -1664,13 +1698,13 @@ basal_lag3<- errorsarlm(f4,data=YSM_pots,YSM.W,zero.policy = T)
 summary(basal_lag3)
 ```
 
-**Step 5: Assess both models using akiekie information criteria (AIC)**
+Step 5: Assess both models using akaike's information criteria (AIC)
 
-AIC value of model from **step 3** is 868.83 while the AIC value of model from **step 4** is 866.04, indicating later one is the best fit to our data.
+AIC value of model from step 3 is 868.83 while the AIC value of model from step 4 is 866.04, indicating later one is the best fit to our data.
 
-**Step 6: Interpret lambda parameter from the summary from our selected model**
+Step 6: Interpret lambda parameter from the summary from our selected model
 
-The lag error parameter Lambda for the model in **step 4** is positive and significant (p-value < 0.05), indicating the need to control for spatial autocorrelation in the error
+The lag error parameter Lambda for the model in step 4 is positive and significant (p-value < 0.05), indicating the need to control for spatial autocorrelation in the error
 
 ## Selection Between Lag and Error Model
 

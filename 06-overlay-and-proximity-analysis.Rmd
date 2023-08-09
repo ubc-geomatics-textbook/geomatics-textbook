@@ -1,6 +1,14 @@
+```{r echo=FALSE, warning=FALSE}
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["topologyAndGeocoding"]][["author"]]
+coauthor <- yml_content[["topologyAndGeocoding"]][["coauthor"]]
+```
 # Overlay and Proximity Analysis {#overlay-and-proximity-analysis}
 
-Introduction here.
+Written by
+```{r results='asis', echo=FALSE}
+cat(author, "and", coauthor)
+```
 
 :::: {.box-content .learning-objectives-content}
 
@@ -13,7 +21,6 @@ Introduction here.
 3. Practice map algebra in raster overlay
 4. Practice attribute transfer in vector overlay
 5. Synthesize the role of relational databases in overlay analysis
-6. 
 
 ::::
 
@@ -22,8 +29,6 @@ Introduction here.
 Overlay, Union, Intersect, Identity, Difference, Symmetrical Difference, Buffer, Near Distance, Thiessan Polygons, Dissolve?
 
 ## Cartographic Modelling
-
-### Geoprocessing
 
 ### Capability Modelling
 
@@ -121,8 +126,8 @@ names(R) <- c('ID','Area (normalized)','Area (ha)','Suitability', 'Individual Co
 knitr::kable(
   R, booktabs = TRUE, row.names = FALSE
 )
-
 ```
+
 We can now see that prioritizing the top three suitable areas $ID = {8,7,1}$ for our conservation intervention will cost \$149,900, nearly exhausting our budget with \$100 left over for a party to celebrate the geomatics team. This is just one example of how cartographic modelling can provide powerful answers to very real spatial questions. Can you think of other mapped attributes, besides area, that could factor into this conservation cost analysis?
 
 ## Overlay Methods
@@ -161,7 +166,12 @@ boundary <- rgdal::readOGR("Data/06/Urban_Boundary.geojson", verbose=F)
 m = leaflet(boundary) %>%
     addTiles("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}") %>%
     addScaleBar(position = c("topleft")) %>%
-    addPolygons(stroke = T, color="red", weight=1, smoothFactor = 0.3, fillOpacity = 0)
+    addPolygons(stroke = T, color="red", weight=2, smoothFactor = 0.3, fillOpacity = 0)
+if (knitr:::is_latex_output()) {
+knitr::include_graphics(here::here("images", "06-urbanboundary-leaflet.png"))
+} else {
+m
+}
 ```
 
 ``` {r 6-display-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
@@ -231,6 +241,8 @@ Post-dissolve, we would have expected the number of rows in the attribute table 
 
 The area of street trees is more powerful when compared to the length of streets in each ward. Rather than working with the absolute area, we will be calculating the relative area. To do this, we will calculate an identity to assign a ward to each section of street in the Ottawa streets feature class Then, we will use summary statistics to calculate the length of street in each ward. With that value, we will divide the area of street trees by the length of street to get the relative area of street trees per street.
 
+<!--
+
 ### Erase
 
 ### Attribute Transfer
@@ -262,3 +274,4 @@ The area of street trees is more powerful when compared to the length of streets
 ## Reflection Questions {-}
 
 ## Practice Questions {-}
+-->

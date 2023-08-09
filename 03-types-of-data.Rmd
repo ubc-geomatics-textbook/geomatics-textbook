@@ -101,6 +101,7 @@ These are data that just consist of names or categories with no ranking or direc
 fig_cap <- paste0("Each flower is different, but no flower is 'more' or 'less' a flower than any of the others. Skeeter, CC-BY-SA-4.0.")
 knitr::include_graphics("images/03-flowers-nominal.png")
 ```
+
 ```{r 3-nominal-operations, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
 fig_cap <- paste0("Checking equality with flower species. Skeeter, CC-BY-SA-4.0.")
 knitr::include_graphics("images/03-nominal-operations.png")
@@ -120,7 +121,7 @@ fig_cap <- paste0("In some circumstances, we can directly calculate the median (
 knitr::include_graphics("images/03-ordinal-operations.png")
 ```
 
-The only arithmetic operations we can do with nominal data are checking for equality (True/False), counting occurrences (frequencies), and calculating the mode (most frequent occurrence). With ordinal data, we can do these operations as well, plus a few more. We can check the order/rank (greater than, less than) and in some circumstances we can calculate the median (see Figure \@ref(fig:3-ordinal-operatons)).
+The only arithmetic operations we can do with nominal data are checking for equality (True/False), counting occurrences (frequencies), and calculating the mode (most frequent occurrence). With ordinal data, we can do these operations as well, plus a few more. We can check the order/rank (greater than, less than) and in some circumstances we can calculate the median (see Figure \@ref(fig:3-ordinal-operations)).
 
 (Graded Membership) When trying to group real world phenomena into categories, there are often "exceptions" that blur the lines a bit.  Take this example: you are trying to develop a land cover classification scheme for Garibaldi Provincial park in British Columbia.  Some of the land surface is unquestionably alpine tundra and some is certainly forest area.  However, the transition between forest and alpine meadow is not an abrupt line.  How/where do you draw the line?  Examples like this are known as fuzzy variables, and we often use a *Graded Membership* scale to assign them to categories.  With the landscape classification, a simple approach would be a "winner take all" approach.  If a plot is 5% bare rock, 40% forest, and 45% alpine meadow, the area will be classified as alpine meadow.  From that point forward, in the GIS, that area will be treated as alpine meadow, any information about the variability within the area will be lost.  In practice, many of the qualitative data we work with in GIS, especially those describing natural phenomena, are actually graded membership variables. 
 

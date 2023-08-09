@@ -8,7 +8,7 @@ output:
   word_document: default
 ---
 
-```{r echo=FALSE}
+```{r echo=FALSE, warning=FALSE}
 yml_content <- yaml::read_yaml("chapterauthors.yml")
 author <- yml_content[["imageProcessingAndAnalysis"]][["author"]]
 coauthor <- yml_content[["imageProcessingAndAnalysis"]][["coauthor"]]
@@ -68,7 +68,12 @@ An orthoimage is an aerial photograph or satellite imagery geometrically correct
 
 Digital aerial photographs can be rectified using specialized photogrammetric software that shifts image pixels toward or away from the principal point of each photo in proportion to two variables: the elevation of the point of the Earth's surface at the location that corresponds to each pixel, and each pixel's distance from the principal point of the photo. Aerial images need to be transformed from perspective views into plan views before they can be used to trace the features that appear on topographic maps, or to digitize vector features in digital data sets.
 
-Compare photographs in Figure \@ref(fig:13-ortho). Both show the same gas pipeline, which passes through hilly terrain. Note the deformation of the pipeline route in the photo on the left relative to the shape of the route on the orthoimage to the right. The deformation in the photo is caused by relief displacement. The original photo would not serve well on its own as a source for topographic mapping.
+```{r 13-orthorectification, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste0("An aerial image pair that has been orthorectified showing a gas pipeline. Hacker, CC-BY-SA-4.0.")
+knitr::include_graphics("images/13-orthorectification.png")
+```
+
+Compare photographs in Figure \@ref(fig:13-orthorectification). Both show the same gas pipeline, which passes through hilly terrain. Note the deformation of the pipeline route in the photo on the left relative to the shape of the route on the orthoimage to the right. The deformation in the photo is caused by relief displacement. The original photo would not serve well on its own as a source for topographic mapping.
 
 Think of it this way: where the terrain elevation is high, the ground is closer to the aerial camera, and the photo scale is a little larger than where the terrain elevation is lower. Although the altitude of the camera is constant, the effect of the undulating terrain is to zoom in and out. The effect of continuously-varying scale is to distort the geometry of the aerial photo. This effect is called relief displacement.
 

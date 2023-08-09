@@ -5,7 +5,6 @@ output:
 ---
 
 ```{r, include=FALSE}
-type <- "pdf" ## "pdf" or ""
 baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"
 covlicence <- "https://opendata.vancouver.ca/pages/licence/"
 nrcanlicense <- "https://open.canada.ca/en/open-government-licence-canada"
@@ -18,7 +17,7 @@ library(RColorBrewer)
 library(raster)
 ```
 
-```{r echo=FALSE}
+```{r echo=FALSE, warning=FALSE}
 yml_content <- yaml::read_yaml("chapterauthors.yml")
 author <- yml_content[["mappingData"]][["author"]]
 ```
@@ -65,7 +64,7 @@ All of these questions stem from need to represent **location**. For our purpose
 Eratosthenes accurately calculated the circumference of Earth by noticing how the Sun shone directly down the bottom of a well in Syene (modern Egypt) at noon on the summer solstice. He later made a second observation at Alexandria at noon on the summer solstice with a pole and noticed a shadow. He measured the angle of the shadow and inferred the circumference of Earth, which was already known to be spherical (Figure \@ref(fig:2-Eratosthenes)).
 
 ```{r 2-Eratosthenes, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste0("Diagram showing how Eratosthenes estimated the circumference of Earth by observing the angle of a shadow that was cast about 800 km north of Syene in present-day Egypt. [@monniaux_illustration_2005], CC-BY-SA-4.0.")
+    fig_cap <- paste0("Diagram showing how Eratosthenes estimated the circumference of Earth by observing the angle of a shadow that was cast about 800 km north of Syene in present-day Egypt. @monniaux_illustration_2005, CC-BY-SA-4.0.")
     knitr::include_graphics("images/02-Eratosthenes.png")
 ```
 <br/>
@@ -179,7 +178,11 @@ m = leaflet(countries) %>%
 ``` {r 2-CGVD-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
   fig_cap <- paste0("The difference (in meters) between the Canadian Geodetic Vertical Datum of 2013 (CGVD2013) and the Canadian Geodetic Vertical Datum of 1928 (CGVD28).<a
   href='",baseurl,"#fig:2-CGVD-leaflet'>Animated figure can be viewed in the web browser version of the textbook</a>. Data from Natural Resources Canada and licensed under the <a href='",nrcanlicense,">Open Government Licence - Canada </a>. Pickell, CC-BY-SA-4.0.")
-if (type == "pdf") { knitr::include_graphics(here::here("images", "02-CGVD-leaflet.PNG")) }
+if (knitr:::is_latex_output()) {
+knitr::include_graphics(here::here("images", "02-CGVD-leaflet.PNG"))
+} else {
+m
+}
 ```
 
 ## Referencing Location

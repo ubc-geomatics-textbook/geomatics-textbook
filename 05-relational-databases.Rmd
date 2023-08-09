@@ -1,4 +1,4 @@
-```{r, include=FALSE}
+```{r, include=FALSE, warning=FALSE}
 baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"
 covlicence <- "https://opendata.vancouver.ca/pages/licence/"
 library("dplyr")
@@ -709,6 +709,11 @@ m <- leaflet(DA_CIMD_proj) %>%
 
 ```{r 5-situational-vulnerability-leaflet, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
 fig_cap <- paste0("An example of choropleth map displaying the situational vulnerability scores in the City of Vancouver at DA level.<a href='",baseurl,"#fig:5-situational-vulnerability-leaflet'>Animated figure can be viewed in the web browser version of the textbook</a>.Higher score represents the DA has higher situational vulnerable population e.g., population lacking a high school diploma, low-income population.")
+if (knitr:::is_latex_output()) {
+knitr::include_graphics(here::here("images", "05-situational-vulnerability-leaflet.PNG"))
+} else {
+m
+}
 ```
 <br/>
 
@@ -773,6 +778,11 @@ Figure \@ref(fig:5-vegetation-diversity-leaflet) shows a map of the vegetation d
 
 ```{r 5-vegetation-diversity-leaflet, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
 fig_cap <- paste0("An example of choropleth map displaying vegetation diversity for each dissemination area in Vancouver. <a href='",baseurl,"#fig:5-vegetation-diversity-leaflet'>Animated figure can be viewed in the web browser version of the textbook</a>. Data from City of Vancouver and licensed under the <a href='",covlicence,"'>Open Government License - Vancouver</a>. Lam, CC-BY-SA-4.0.")
+if (knitr:::is_latex_output()) {
+knitr::include_graphics(here::here("images", "05-vegetation-diversity-leaflet.PNG"))
+} else {
+m1
+}
 ```
 <br/>
 

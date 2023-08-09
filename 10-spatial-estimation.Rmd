@@ -1,4 +1,4 @@
-``` {r 10-load-packages-and-setup, echo = FALSE, include = FALSE}
+``` {r 10-load-packages-and-setup, echo = FALSE, include = FALSE, warning=FALSE}
 library(broom)
 library(cowplot)
 library(dismo)
@@ -531,7 +531,7 @@ $$
 
 $$ Ratio =\frac {s}{s+a}$$
 
-Usually, we are interested in modeling the semivariance (semivariogram) or variance (variogram) of a process so that we can make predictions from a model rather than an incomplete set of sampled observations. In this way, we can fit a model to our paired observations and use a continuous variogram function to estimate the variance at any lag. These models are known as **theoretical variograms** and in the following sections we will compare several commonly-used models, summarized in Figure \@ref(fig:10-theoretical-variograms).
+Usually, we are interested in modeling the semivariance (semivariogram) or variance (variogram) of a process so that we can make predictions from a model rather than an incomplete set of sampled observations. In this way, we can fit a model to our paired observations and use a continuous variogram function to estimate the variance at any lag. These models are known as **theoretical variograms** and in the following sections we will compare several commonly-used models, summarized in Figure \@ref(fig:10-theoretical-variogram-models).
 
 ```{r 10-theoretical-variogram-models, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
 vv <- rev(seq(0,10,0.01))

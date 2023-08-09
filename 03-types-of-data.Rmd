@@ -4,7 +4,7 @@ output:
   html_document: default
   word_document: default
 ---
-```{r echo=FALSE}
+```{r echo=FALSE, warning=FALSE}
 yml_content <- yaml::read_yaml("chapterauthors.yml")
 author <- yml_content[["typesOfData"]][["author"]]
 coauthor <- yml_content[["typesOfData"]][["coauthor"]]
@@ -103,7 +103,7 @@ knitr::include_graphics("images/03-flowers-nominal.png")
 ```
 ```{r 3-nominal-operations, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
 fig_cap <- paste0("Checking equality with flower species. Skeeter, CC-BY-SA-4.0.")
-knitr::include_graphics("images/03-nominal-opperations.png")
+knitr::include_graphics("images/03-nominal-operations.png")
 ```
 
 #### Ordinal Scale
@@ -117,7 +117,7 @@ knitr::include_graphics("images/03-dogs-ordinal.png")
 
 ```{r 3-ordinal-operations, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
 fig_cap <- paste0("In some circumstances, we can directly calculate the median (middle value) of an ordinal set. With odd numbered sets (e.g. Group 1), the median is simply the middle value of the set, when sorted lowest to highest. We can always take the median when we have an odd number.  With even numbered sets, its a bit more complicated.  The median, is the average of the middle two values. For Group 2, the middle values (5th and 6th) are both 'Neutral', so we don't have an issue. But for Group 3, the 5th value is 'Neutral' and the 6th value is 'Agree'. We cannot directly average these two ordinal values. One solution is to arbitrarily assign a numeric score to the ordinal categories (e.g., 1-5). This would then allow you to show the median is between 'Neutral' and 'Agree'. Skeeter, CC-BY-SA-4.0.")
-knitr::include_graphics("images/03-ordinal-operatons.png")
+knitr::include_graphics("images/03-ordinal-operations.png")
 ```
 
 The only arithmetic operations we can do with nominal data are checking for equality (True/False), counting occurrences (frequencies), and calculating the mode (most frequent occurrence). With ordinal data, we can do these operations as well, plus a few more. We can check the order/rank (greater than, less than) and in some circumstances we can calculate the median (see Figure \@ref(fig:3-ordinal-operatons)).

@@ -1,4 +1,9 @@
-```{r echo=FALSE}
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+```{r echo=FALSE, warning=FALSE}
 yml_content <- yaml::read_yaml("chapterauthors.yml")
 author <- yml_content[["topologyAndGeocoding"]][["author"]]
 coauthor <- yml_content[["topologyAndGeocoding"]][["coauthor"]]
@@ -8,7 +13,7 @@ coauthor <- yml_content[["topologyAndGeocoding"]][["coauthor"]]
 
 Written by
 ```{r results='asis', echo=FALSE}
-cat(author, "and", coauthor)
+cat(author)
 ```
 
 ``` {r 7-load-packages-and-setup, echo = FALSE, include = FALSE}
@@ -528,7 +533,7 @@ The 3D convex hull is the smallest convex polyhedron that contains a set of 3D p
 
 The 3D convex alpha hull is Figure \@ref(fig:7-3d-alpha-hull-deciduous) below shows a 3D convex alpha hull for a deciduous tree near the Forest Sciences Centre at the University of British Columbia.
 
-```{r setup-3d-alpha-hull-deciduous, echo=FALSE, cached=T, warning=F, include=F}
+```{r 7-setup-3d-alpha-hull-deciduous, echo=FALSE, cached=T, warning=F, include=F}
 las <- readLAS("Data/07/07-deciduous-tree.las")
 z <- las[,3]
 x <- las[,1]
@@ -542,11 +547,11 @@ ahull.d <- ashape3d(xyz,alpha=0.05)
 
 (ref:7-3d-alpha-hull-deciduous-caption1) 3D concave alpha hull for a deciduous tree. The alpha hull was generated using alpha = 0.05. Data collected by Spencer Dakin Kuiper with a GeoSlam terrestrial laser scanner in Vancouver, Canada. Pickell, CC-BY-SA-4.0. Animated figure can be viewed in the web browser version of the textbook: https://www.opengeomatics.ca/topology-and-geocoding.html#fig:7-3d-alpha-hull-deciduous.
 
-(ref:7-3d-alpha-hull-deciduous-caption2) 3D concave alpha hull for a deciduous tree (species here). The alpha hull was generated using alpha = 0.05. Data collected by Spencer Dakin Kuiper with a GeoSlam terrestrial laser scanner in Vancouver, Canada. Pickell, CC-BY-SA-4.0.
+(ref:7-3d-alpha-hull-deciduous-caption2) 3D concave alpha hull for a deciduous tree. The alpha hull was generated using alpha = 0.05. Data collected by Spencer Dakin Kuiper with a GeoSlam terrestrial laser scanner in Vancouver, Canada. Pickell, CC-BY-SA-4.0.
 
 ```{r 7-3d-alpha-hull-deciduous, echo=FALSE, out.width = '75%', fig.cap=fig_cap, webgl = TRUE}
 if (knitr:::is_latex_output()) { fig_cap = "(ref:7-3d-alpha-hull-deciduous-caption1)"
-knitr::include_graphics("images/07-3d-alpha-hull-deciduous.png")
+knitr::include_graphics("images/07-3d-alpha-hull-deciduous-static.png")
 } else { fig_cap = "(ref:7-3d-alpha-hull-deciduous-caption2)"
 plot3d(ahull.d,col="#2D5A27")
 rglwidget(width = 600, height = 600, reuse=FALSE, elementId="7-3d-alpha-hull-deciduous")
@@ -562,10 +567,17 @@ xyz <- cbind(x,y,z)
 ahull.c <- ashape3d(xyz,alpha=0.1)
 ```
 
+(ref:7-3d-alpha-hull-conifer-caption1) 3D concave alpha hull for a coniferous tree. The alpha hull was generated using alpha = 0.05. Data collected by Spencer Dakin Kuiper with a GeoSlam terrestrial laser scanner in Vancouver, Canada. Pickell, CC-BY-SA-4.0. Animated figure can be viewed in the web browser version of the textbook: https://www.opengeomatics.ca/topology-and-geocoding.html#fig:7-3d-alpha-hull-conifer.
+
+(ref:7-3d-alpha-hull-conifer-caption2) 3D concave alpha hull for a coniferous tree. The alpha hull was generated using alpha = 0.05. Data collected by Spencer Dakin Kuiper with a GeoSlam terrestrial laser scanner in Vancouver, Canada. Pickell, CC-BY-SA-4.0.
+
 ``` {r 7-3d-alpha-hull-conifer, echo=FALSE, out.width = '75%', fig.cap=fig_cap, webgl = TRUE}
-fig_cap <- paste("3D convex alpha hull for a coniferous tree (<i>Abies lasiocarpa</i>). The alpha hull was generated using alpha = 0.1. Data collected by Yangqian (Frederick) Qi with a terrestrial laser scanner in British Columbia, Canada. <a href='",baseurl,"#7-3d-alpha-hull-conifer'>Animated figure can be viewed in the web browser version of the textbook.</a> Pickell, CC-BY-SA-4.0.")
+if (knitr:::is_latex_output()) { fig_cap = "(ref:7-3d-alpha-hull-conifer-caption1)"
+knitr::include_graphics("images/07-3d-alpha-hull-conifer-static.png")
+} else { fig_cap = "(ref:7-3d-alpha-hull-deciduous-caption2)"
 plot3d(ahull.c,xlim=c(40,64),ylim=c(21,45),col="#2D5A27")
 rglwidget(width = 600, height = 600, reuse=FALSE, elementId="7-3d-alpha-hull-conifer")
+}
 ```
 
 We can derive some useful information from these 3D convex alpha hulls. One obvious use of a polyhedron such as this is to calculate the volume, which for a tree might inform the amount of merchantable wood in the stem or the size of the canopy. Also, the polyhedron has replaced the points with polygon faces, which can be used to model shadowing and shading by simulating the position of the Sun in the sky. 

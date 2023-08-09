@@ -1,4 +1,4 @@
-```{r echo=FALSE}
+```{r echo=FALSE, warning=FALSE}
 yml_content <- yaml::read_yaml("chapterauthors.yml")
 author <- yml_content[["whatIsGeomatics"]][["author"]]
 ```
@@ -52,9 +52,9 @@ What makes a **Geographic Information System** different from other information 
 
 ## The Five Components of GIS
 
-A GIS is a collection of five inter-connected, inter-acting, and inter-dependent components (Figure \@ref(fig:01-five-components-gis)).
+A GIS is a collection of five inter-connected, inter-acting, and inter-dependent components (Figure \@ref(fig:1-five-components-gis)).
 
-```{r 01-five-components-gis, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+```{r 1-five-components-gis, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("The five components of a geographic information system. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics("images/01-five-components-gis.png")
 ```
@@ -62,13 +62,13 @@ A GIS is a collection of five inter-connected, inter-acting, and inter-dependent
 
 **Data** -- Data are a collection of qualitative and quantitative variables about real world entities. At the very least, the type of data stored in a GIS is usually spatial in nature, meaning we have some set of coordinates or representation of location. But a GIS can also store aspatial data, data that does not necessarily have coordinates, but may still be relevant to other geographic data For example, you might also record the dates that you jogged or the weather during your jogs. These are examples of aspatial information that we might want to relate to your jogs.
 
-```{r 01-jogging-path, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+```{r 1-jogging-path, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Abstracted spatial and aspatial information from a jogging path represented by three ordered points. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics("images/01-jogging-path.png")
 ```
 <br/>
 
-Spatial data can take many forms in a GIS, which we will explore more in [Chapter 2](./mapping-data.html). For the sake of our jogging example, you can imagine your jogging path could be represented as a line or a set of ordered points. In turn, your jogging path can be described by different qualities (day of the week, weather) and quantities (distance, speed, heart rate), which are called **attributes** (Figure \@ref(fig:01-jogging-path)). An important role of a GIS is to govern how data can interact and behave with other types of data. For example, we can calculate distance from a line, but not area, which is a special property of a polygon. We will explore data behaviors in more detail in [Chapter 2](./mapping-data.html).
+Spatial data can take many forms in a GIS, which we will explore more in [Chapter 2](./mapping-data.html). For the sake of our jogging example, you can imagine your jogging path could be represented as a line or a set of ordered points. In turn, your jogging path can be described by different qualities (day of the week, weather) and quantities (distance, speed, heart rate), which are called **attributes** (Figure \@ref(fig:1-jogging-path)). An important role of a GIS is to govern how data can interact and behave with other types of data. For example, we can calculate distance from a line, but not area, which is a special property of a polygon. We will explore data behaviors in more detail in [Chapter 2](./mapping-data.html).
 
 **Software** -- There are a lot of different GIS software packages available and the choice of which software to use is usually driven by preference, availability, and/or cost. For example, some GIS software are freely available while others require a paid license. Nearly all GIS software packages can perform the same operations and analyses, but there are some differences like integrated cloud computing or availability of certain plugins. The most widely-used paid software is ESRI's ArcGIS, while the most widely-used Free and Open Source Software (FOSS) is QGIS (Q for Quantum). There are many other historically-significant FOSS software packages like GRASS, SAGA, and MOSS that are discussed in more detail later in this chapter.
 
@@ -112,15 +112,15 @@ Modern GIS cannot be understood without the context of three majors technologica
 
 ### The Photograph
 
-The first successful attempt to record light on a durable image can be traced to France. Nicéphore Niépce is widely credited with the invention of photography by producing the oldest surviving photograph from the window of his home in 1826 or 1827 simply titled, *View from the Window at Le Gras* (Figure \@ref(fig:01-View-from-the-Window-at-Le-Gras)). His process involved using a camera obscura (a discovery handed down from antiquity) to project a real-world scene onto a photosensitive metal plate for hours and possibly days on end. Though the results were crude, it was a major advancement over all earlier attempts that failed to produce a durable photograph. Niépce died only a few years later in 1833 before he was able to publish his invention. Before his death, he shared his secrets with Louis Daguerre who would perfect his process and announce the daguerreotype to the world in 1839, a photographic process that was much faster and commercially viable. The announcement of the daguerreotype from France spread rapidly and resulted in the first known photograph captured of Canada the very next year of Niagara Falls, Ontario (Figure \@ref(fig:01-niagara-falls-daguerreotype-1840)).
+The first successful attempt to record light on a durable image can be traced to France. Nicéphore Niépce is widely credited with the invention of photography by producing the oldest surviving photograph from the window of his home in 1826 or 1827 simply titled, *View from the Window at Le Gras* (Figure \@ref(fig:1-View-from-the-Window-at-Le-Gras)). His process involved using a camera obscura (a discovery handed down from antiquity) to project a real-world scene onto a photosensitive metal plate for hours and possibly days on end. Though the results were crude, it was a major advancement over all earlier attempts that failed to produce a durable photograph. Niépce died only a few years later in 1833 before he was able to publish his invention. Before his death, he shared his secrets with Louis Daguerre who would perfect his process and announce the daguerreotype to the world in 1839, a photographic process that was much faster and commercially viable. The announcement of the daguerreotype from France spread rapidly and resulted in the first known photograph captured of Canada the very next year of Niagara Falls, Ontario (Figure \@ref(fig:1-niagara-falls-daguerreotype-1840)).
 
-```{r 01-View-from-the-Window-at-Le-Gras, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+```{r 1-View-from-the-Window-at-Le-Gras, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste("View from the Window at Le Gras showing some buildings and a tree in the distance. This image has been flipped from the original metal plate along both the horizontal and vertical axes. The camera obscura would have originally recorded the upper right corner in the lower left corner. Public Domain.")
     knitr::include_graphics("images/01-View-from-the-Window-at-Le-Gras.jpg")
 ```
 </br>
 
-```{r 01-niagara-falls-daguerreotype-1840, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+```{r 1-niagara-falls-daguerreotype-1840, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste("The earliest known photograph of present-day Canada was this daguerreotype taken in 1840 by Hugh Lee Pattinson of Niagara Falls, Ontario (Horseshoe Falls). Due to the dagguerrotype capture process, the image is flipped on the vertical axis so that image right is the United States on the East side of the falls and image left is Canada on the West side of the falls (image is looking South). Courtesy of Newcastle University Library Special Collections, CC-BY-SA-4.0")
     knitr::include_graphics("images/01-niagara-falls-daguerreotype-1840.png")
 ```
@@ -130,39 +130,39 @@ It was not long before more Canadian landscapes became the subjects of photograp
 
 ### The Airplane
 
-The next technological leap came at the turn of the century and forever transformed photography and photogrammetry. From 1900 to 1902, Orville and Wilbur Wright had been designing and experimenting with light-than-air gliders and kites near Kitty Hawk, North Carolina. By 1903, the brothers had designed the first heavier-than-air airplane capable of powered flight by a gasoline engine called the *Wright Flyer*. Incidentally, because the technology of photography had developed six decades earlier, the moment of this first flight was captured in one of the most iconic photographs ever taken by John T. Daniels, member of the U.S. Lifesaving Service Station at Kill Devil Hills who was standing by (Figure \@ref(fig:01-wright-flyer)).
+The next technological leap came at the turn of the century and forever transformed photography and photogrammetry. From 1900 to 1902, Orville and Wilbur Wright had been designing and experimenting with light-than-air gliders and kites near Kitty Hawk, North Carolina. By 1903, the brothers had designed the first heavier-than-air airplane capable of powered flight by a gasoline engine called the *Wright Flyer*. Incidentally, because the technology of photography had developed six decades earlier, the moment of this first flight was captured in one of the most iconic photographs ever taken by John T. Daniels, member of the U.S. Lifesaving Service Station at Kill Devil Hills who was standing by (Figure \@ref(fig:1-wright-flyer)).
 
-```{r 01-wright-flyer, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+```{r 1-wright-flyer, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste("Restored image taken by John T. Daniels on December 17, 1903 near Kitty Hawk, North Carolina only seconds into the 12 second first powered flight piloted by Orville Wright. Wilbur Wright is seen to the right. Public Domain.")
     knitr::include_graphics("images/01-wright-flyer.jpg")
 ```
 </br>
 
-Aviation developed quickly following the first successful powered flight by the Wright Brothers and so did aerial photography. In 1912, Frederick Charles Victor Laws of the British Royal Flying Corps discovered that aerial photographs taken with at least 60% overlap could be used to produce a 3D stereographic effect when viewed through a **stereoscope** (Figure \@ref(fig:01-woman-stereoscope)). Following Laws' realization, flight paths were more intentionally planned to achieve this effect and in the coming years many more personnel were employed to help with **air photo interpretation**, the process of viewing air photos and discerning types of features based on tone, shade, shape, pattern, texture, and spatial association. At the outset of World War I, aircraft were being equipped with cameras for reconnaissance at the front lines.
+Aviation developed quickly following the first successful powered flight by the Wright Brothers and so did aerial photography. In 1912, Frederick Charles Victor Laws of the British Royal Flying Corps discovered that aerial photographs taken with at least 60% overlap could be used to produce a 3D stereographic effect when viewed through a **stereoscope** (Figure \@ref(fig:1-woman-stereoscope)). Following Laws' realization, flight paths were more intentionally planned to achieve this effect and in the coming years many more personnel were employed to help with **air photo interpretation**, the process of viewing air photos and discerning types of features based on tone, shade, shape, pattern, texture, and spatial association. At the outset of World War I, aircraft were being equipped with cameras for reconnaissance at the front lines.
 
-```{r 01-woman-stereoscope, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+```{r 1-woman-stereoscope, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste("A woman is seen annotating an overlapping air photo pair with a stereoscope in 1945. Canada. Dept. of National Defence / Library and Archives Canada / PA-065599, Public Domain.")
     knitr::include_graphics("images/01-woman-stereoscope.jpg")
 ```
 </br>
 
-The Canadian government quickly realized the potential benefits of air travel and aerial surveying for such a large country. In 1919, Canada became the first nation to regulate the domain of aviation with the establishment of the Air Board. Six air stations were established by the Air Board around the country primarily for civil patrols and surveying (Figure \@ref(fig:01-jericho-air-station)). By 1922, Canada established the National Air Photo Library to store the new and increasing cache of air photos being collected by federal agencies. During the 1930's, many private companies began prospecting from the sky and found profit in undertaking aerial mineral surveys in the Northwest Territories and the Yukon.
+The Canadian government quickly realized the potential benefits of air travel and aerial surveying for such a large country. In 1919, Canada became the first nation to regulate the domain of aviation with the establishment of the Air Board. Six air stations were established by the Air Board around the country primarily for civil patrols and surveying (Figure \@ref(fig:1-jericho-air-station)). By 1922, Canada established the National Air Photo Library to store the new and increasing cache of air photos being collected by federal agencies. During the 1930's, many private companies began prospecting from the sky and found profit in undertaking aerial mineral surveys in the Northwest Territories and the Yukon.
 
-```{r 01-jericho-air-station, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+```{r 1-jericho-air-station, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste("One of the first air stations established after the inception of the Air Board was Jericho Air Station seen here in 1923 near Vancouver, Canada. Canada. Dept. of National Defence / Library and Archives Canada / PA-051943, Public Domain.")
     knitr::include_graphics("images/01-jericho-air-station.jpg")
 ```
 </br>
 
-Airplanes played a more significant role in World War II both as weapons and for reconnaissance. A new process for collecting aerial imagery was developed called **trimetrogon**, which involves capturing three photos at the same time: one directly down and two oblique images to the right and left of the airplane (Figure \@ref(fig:01-trimetrogon-airplane)). Even in the 1940's, much of Canada remained unmapped and unimaged, so the Royal Canadian Air Force contributed multiple photo squadrons with the task of mapping the vast country. One of those squadrons was No. 413 Photographic Squadron (Figure \@ref(fig:01-no-413-squadron)), which was based out of Canadian Forces Base Rockcliffe near Ottawa (formerly Rockliffe Air Station, the first air station established in Canada) and responsible for capturing the first aerial images of northern Canada. In the summer of 1950, No. 413 Photographic Squadron completed imaging the last gaps of land near Ellsemere Island. For the first time ever and more than 30 years after aerial surveys began, Canada finally had a self portrait from the sky. Today, a century after aerial surveying efforts began, the National Air Photo Library archives over six million air photos.
+Airplanes played a more significant role in World War II both as weapons and for reconnaissance. A new process for collecting aerial imagery was developed called **trimetrogon**, which involves capturing three photos at the same time: one directly down and two oblique images to the right and left of the airplane (Figure \@ref(fig:1-trimetrogon-airplane)). Even in the 1940's, much of Canada remained unmapped and unimaged, so the Royal Canadian Air Force contributed multiple photo squadrons with the task of mapping the vast country. One of those squadrons was No. 413 Photographic Squadron (Figure \@ref(fig:1-no-413-squadron)), which was based out of Canadian Forces Base Rockcliffe near Ottawa (formerly Rockliffe Air Station, the first air station established in Canada) and responsible for capturing the first aerial images of northern Canada. In the summer of 1950, No. 413 Photographic Squadron completed imaging the last gaps of land near Ellsemere Island. For the first time ever and more than 30 years after aerial surveys began, Canada finally had a self portrait from the sky. Today, a century after aerial surveying efforts began, the National Air Photo Library archives over six million air photos.
 
-```{r 01-trimetrogon-airplane, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+```{r 1-trimetrogon-airplane, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste('Trimetrogon camera installation in North American "Mitchell" II aircraft of No. 14 Photo Squadron, Royal Canadian Air Force seen in 1945. One of the oblique angle cameras can be seen on the side of the aircraft toward the nose. Library and Archives Canada / PA-065503, Public Domain.')
     knitr::include_graphics("images/01-trimetrogon-airplane.jpg")
 ```
 </br>
 
-```{r 01-no-413-squadron, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+```{r 1-no-413-squadron, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste("Inside the fuselage of an aircraft of RCAF No. 413 Squadron showing an alternative arrangement of trimetrogon cameras with the oblique cameras pointing inward instead of outward. Library and Archives Canada / PA-065920, Public Domain.")
     knitr::include_graphics("images/01-no-413-squadron.jpg")
 ```
@@ -188,9 +188,9 @@ In the modern era, the word "computer" refers to a machine, not unlike the chron
 
 The technologies of the photograph, the airplane, and the computer collided suddenly in the 1960s in Canada and evolved into the GIS that we know today.
 
-The post-war economy of Canada saw significant growth in the 1940s and 1950s and huge demographic shifts were underway. Agrarian societies were transformed by the new economy and rapid urbanization. Prior to the Second World War, about half of all Canadians lived in rural areas. By the 1950s, nearly 62% of the total population lived in urban centres and 37% lived in just the fifteen largest cities (Figure \@ref(fig:01-ninth-census-1951-map)). Faced with the prospect of failed crops and uncertain economic outcomes, many chose to head for better opportunities promised in the metropolitan areas. In the decade from 1941 to 1951, 105 Canadian families left their farms every week, despite an overall increase in farmland across the country [@dominion_bureau_of_statistics_volume_1944] [@dominion_bureau_of_statistics_number_1952].
+The post-war economy of Canada saw significant growth in the 1940s and 1950s and huge demographic shifts were underway. Agrarian societies were transformed by the new economy and rapid urbanization. Prior to the Second World War, about half of all Canadians lived in rural areas. By the 1950s, nearly 62% of the total population lived in urban centres and 37% lived in just the fifteen largest cities (Figure \@ref(fig:1-ninth-census-1951-map)). Faced with the prospect of failed crops and uncertain economic outcomes, many chose to head for better opportunities promised in the metropolitan areas. In the decade from 1941 to 1951, 105 Canadian families left their farms every week, despite an overall increase in farmland across the country [@dominion_bureau_of_statistics_volume_1944] [@dominion_bureau_of_statistics_number_1952].
 
-```{r 01-ninth-census-1951-map, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+```{r 1-ninth-census-1951-map, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste("Ninth Census of Canada 1951, Population Distribution. Dominion of Bureau Statistics, Public Domain.")
     knitr::include_graphics("images/01-ninth-census-1951-map.PNG")
 ```
@@ -204,25 +204,25 @@ In the following year, Rachel Carson published her landmark _Silent Spring_. The
 
 But how could the Canada Land Inventory ever be achieved for such a vast country using traditional paper maps? To be sure, Canada was not lacking the mapped data. In fact there were tens of thousands of maps produced, cataloged, and housed by the federal government on everything from soils to agriculture to recreation to forests. Still, the scale of agricultural land loss was not known at the time because paper maps of soil fertility could not easily be combined with other information like census data. Decision-makers relied on human interpretation and analysis of paper maps, a time-consuming task that could only accommodate a handful of mapped attributes at a time over a small area. Paper maps had to be reproduced at the same scale, aligned, and analysed polygon-by-polygon. The process to create maps at the time was entirely manual, requiring approximately 10 hours by a skilled technician to produce a single map sheet and about as much time by another to check and make any corrections [@tomlinson_application_1974]. At that rate, it would have taken a A new approach was needed to cope with the overwhelming amount of information being produced.
 
-```{r 01-data-for-decisions, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+```{r 1-data-for-decisions, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste('Roger Tomlinson talks about the use of computers for the Canada Land Inventory in 1967. Frame from "Data for Decision", a National Film Board of Canada documentary, directed by Michael Millar.')
     knitr::include_graphics("images/01-data-for-decisions.png")
 ```
 </br>
 
-It was 29-year old Roger Tomlinson who recognized the need for computers to handle the massive influx of mapped data (Figure \@ref(fig:01-data-for-decisions)). Tomlinson was working in Ottawa for an aerial survey company called Spartan Air Services Ltd., when he serendipitously met the head of the Canada Land Inventory, Lee Pratt, aboard a flight. Pratt and Tomlinson exchanged ideas about creating a computer system for handling mapped data and Tomlinson got to work to lead the development of the world's first computerized GIS. That was 1962. Tomlinson first described it as a "geo-information system" [@Tomlinson_1967], but it was later renamed the Canadian Geographic Information System before it was shortened to the **Canada Geographic Information System (CGIS)**. In the years that followed, the Canada Land Inventory produced over 12,000 map sheets showing the capability of Canada's lands for agriculture, forestry, recreation, and wildlife [@fisher_overview_1979]. A major early function of the CGIS was to scan and digitize maps, all of which were on paper sheets. This time is best thought of as "cartographic puberty", the awkward but necessary transition from paper to magnetic tape.
+It was 29-year old Roger Tomlinson who recognized the need for computers to handle the massive influx of mapped data (Figure \@ref(fig:1-data-for-decisions)). Tomlinson was working in Ottawa for an aerial survey company called Spartan Air Services Ltd., when he serendipitously met the head of the Canada Land Inventory, Lee Pratt, aboard a flight. Pratt and Tomlinson exchanged ideas about creating a computer system for handling mapped data and Tomlinson got to work to lead the development of the world's first computerized GIS. That was 1962. Tomlinson first described it as a "geo-information system" [@Tomlinson_1967], but it was later renamed the Canadian Geographic Information System before it was shortened to the **Canada Geographic Information System (CGIS)**. In the years that followed, the Canada Land Inventory produced over 12,000 map sheets showing the capability of Canada's lands for agriculture, forestry, recreation, and wildlife [@fisher_overview_1979]. A major early function of the CGIS was to scan and digitize maps, all of which were on paper sheets. This time is best thought of as "cartographic puberty", the awkward but necessary transition from paper to magnetic tape.
 
 The months that followed are best described as cartographic puberty, the awkward but necessary transition from paper to magnetic tape. Thousands of existing paper maps had to be scanned, one line at a time, by a drum scanner. To scan a paper map with these machines required feeding the large paper map into the belly of a cylindrical drum so that as the drum spun a little optical head focused a light onto a small area and a photomultiplier together with a detector recorded the light intensity of the cartographic lines as a digital number. As the drum spins and completes a revolution, the optical head shifts by a fraction of a centimeter to record the next line of the map. In this way, a drum scanner capable of 20,000 samples per second would take about 20 minutes to fully scan a 80 x 60 cm paper map at a resolution of 0.02 cm. Other advances in computer hardware were achieved as a result of the pioneering work by Tomlinson, including the development and integration of digitizer and plotter tables for inputting and updating geographic data into the computer. Tomlinson is widely acknowledged as the creator of modern computerized GIS.
 
-```{r 01-Canada-land-inventory, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+```{r 1-Canada-land-inventory, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste("Excerpt from a brochure describing initial mapping efforts of the Canada Land Inventory in British Columbia. Published by the Minister of Supply and Services Canada, n.d.")
     knitr::include_graphics("images/01-Canada-land-inventory.png")
 ```
 </br>
 
-While the Canada Land Inventory was underway with the aid of the CGIS, provinces moved to create the agricultural land reserves to ensure that the most fertile areas remained available as farmland. In 1973, British Columbia established the Agriculture Land Reserves, setting aside 5% of its land base for farming priority. Newfoundland and Labrador established an Agriculture Development Area around the city of St. John's in the same year. By 1977, it was learned from CGIS analysis that only 0.5% the second largest country in the world supports prime farmland and half of that occurs in the vicinity of the most populous metropolitan area: Toronto (Figure \@ref(fig:01-cli-agriculture-capability-toronto)) [@manning_overview_1977]. Ontario published Food Land Guidelines the next year that effectively laid out a land use planning framework for municipalities and the province to protect and maximize the efficiency of farming on the best available land [@ministry_of_agriculture_and_food_food_1978].
+While the Canada Land Inventory was underway with the aid of the CGIS, provinces moved to create the agricultural land reserves to ensure that the most fertile areas remained available as farmland. In 1973, British Columbia established the Agriculture Land Reserves, setting aside 5% of its land base for farming priority. Newfoundland and Labrador established an Agriculture Development Area around the city of St. John's in the same year. By 1977, it was learned from CGIS analysis that only 0.5% the second largest country in the world supports prime farmland and half of that occurs in the vicinity of the most populous metropolitan area: Toronto (Figure \@ref(fig:1-cli-agriculture-capability-toronto)) [@manning_overview_1977]. Ontario published Food Land Guidelines the next year that effectively laid out a land use planning framework for municipalities and the province to protect and maximize the efficiency of farming on the best available land [@ministry_of_agriculture_and_food_food_1978].
 
-By 1979, the Canada Land Inventory produced over 12,000 map sheets showing the capability of Canada's lands for agriculture, forestry, recreation, and wildlife (@FisherandMacDonald_1979). These maps represented the first digital overlays and analyses of land capability in the world and they covered much of Canada from the Atlantic Ocean to the Pacific Ocean.
+By 1979, the Canada Land Inventory produced over 12,000 map sheets showing the capability of Canada's lands for agriculture, forestry, recreation, and wildlife [@fisher_overview_1979]. These maps represented the first digital overlays and analyses of land capability in the world and they covered much of Canada from the Atlantic Ocean to the Pacific Ocean.
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 m <- leaflet() %>%
@@ -235,7 +235,7 @@ m <- leaflet() %>%
   )
 ```
 
-```{r 01-cli-agriculture-capability-toronto, fig.cap = fig_cap, out.width= "75%", echo = FALSE, fig.align="center"}
+```{r 1-cli-agriculture-capability-toronto, fig.cap = fig_cap, out.width= "75%", echo = FALSE, fig.align="center"}
 if (knitr::is_latex_output()) {
   fig_cap <- paste0("Soil capability for agriculture from the Canada Land Inventory for the area surrounding Toronto, Canada. The majority of the best soils for farming in Canada (Class 1 - No significant limitations in use for crops) are found in southeastern Ontario. <a
   \\href='",baseurl,"\\#fig:1-cli-agriculture-capability-toronto'>Interactive web map can be viewed in the web browser version of the textbook</a>. Queen's Printer, Public Domain.")
@@ -249,9 +249,9 @@ if (knitr::is_latex_output()) {
 
 ## Environmental Management Imperatives
 
-On the opposite shore of Lake Erie from where some of the best Canadian soils for farming were deposited millennia ago by the glacial processes that formed the Great Lakes, the Cuyahoga River quietly empties a small drainage basin of approximately 2,100 km^2^ and bisects the city of Cleveland, Ohio in the United States. This relatively small, crooked river is one of many that fills Lake Erie and flows slowly by former sleepy industrial towns along the lake shore. The first European settler built his cabin on the shore of the Cuyahoga River in 1797 at the site of present-day Cleveland and over the next 155 years of industrialization, the river was reported to have caught fire nine times [@LaBella_2009]. Ignited once every 17 years or so from volatile oil slicks and other pollutants suspended in the water column (Figure \@ref(fig:01-Cuyahoga-River-fire-1952)). 
+On the opposite shore of Lake Erie from where some of the best Canadian soils for farming were deposited millennia ago by the glacial processes that formed the Great Lakes, the Cuyahoga River quietly empties a small drainage basin of approximately 2,100 km^2^ and bisects the city of Cleveland, Ohio in the United States. This relatively small, crooked river is one of many that fills Lake Erie and flows slowly by former sleepy industrial towns along the lake shore. The first European settler built his cabin on the shore of the Cuyahoga River in 1797 at the site of present-day Cleveland and over the next 155 years of industrialization, the river was reported to have caught fire nine times [@la_bella_not_2009]. Ignited once every 17 years or so from volatile oil slicks and other pollutants suspended in the water column (Figure \@ref(fig:1-Cuyahoga-River-fire-1952)). 
 
-```{r 01-Cuyahoga-River-fire-1952, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+```{r 1-Cuyahoga-River-fire-1952, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste("The Cuyahoga River burns in 1952 near Cleveland, Ohio in the United States as an oil slick is ignited. Special Collections, Cleveland State University Library.")
     knitr::include_graphics("images/01-Cuyahoga-River-fire-1952.png")
 ```

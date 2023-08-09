@@ -1,4 +1,4 @@
-```{r 9-load-packages-and-setup, include=FALSE}
+```{r 9-load-packages-and-setup, include=FALSE, warning=FALSE}
 baseurl <- "https://ubc-geomatics-textbook.github.io/geomatics-textbook/"
 covlicence <- "https://opendata.vancouver.ca/pages/licence/"
 knitr::opts_chunk$set(echo = TRUE)
@@ -415,6 +415,11 @@ m = leaflet() %>%
 
 ```{r 9-fort-st-john-study-area, echo=FALSE, fig.cap=fig_cap, ouwidth="75%"}
 fig_cap <- paste0("The Fort St. John Timber Supply Area, British Columbia, Canada. Data from Government of British Columbia and licensed under the Open Government Licence - British Columbia. Mesler, CC-BY-SA-4.0.")
+if (knitr:::is_latex_output()) {
+knitr::include_graphics(here::here("images", "09-fort-st-john-study-area.png"))
+} else {
+m
+}
 ```
 
 The use of topographic indices was employed alongside spectral indices to perform land cover classification. For the successful prediction of wetland landscape classes, a particularly promising topographic index is Topographic Wetness Index (TWI). In brief, high TWI values indicate areas with high water accumulation and low slope, whilst low TWI values indicate areas that are well drained and on steep slopes. There are several GIS platforms that provide users with TWI tools, yet not all are the same. A particular tool used in this case study was the SAGA Wetness Index tool: relative to 'regular' TWI calculations, System for Automated Geoscientific Analyses (SAGA) Wetness modifies the calculation of the contributing catchment area to a cells 'wetness', and consequently produces a more realistic prediction of soil moisture potential [@mattivi_twi_2019]. The equations for SAGA Wetness ($WI_S$) (Equation 1), and for its unique computation of catchment area ($SCA_M$) (Equation 2) are given below [@bohner_spatial_2006].
@@ -526,6 +531,11 @@ m2 = leaflet() %>%
 
 ```{r 9-leaflet-map-layers, echo=FALSE, out.width="75%", fig.cap=fig_cap}
 fig_cap <- paste0("Input layers and output prediction raster for the Chowade Watershed Management basin.<a href='",baseurl,"#fig:9-leaflet-map'> Animated figure can be viewed in the web browser version of the textbook</a>.Data from @city_of_vancouver_notitle_2009 and licensed under the  under the <a href='",covlicence,"'>Open Government License - Vancouver</a>. Lam, CC-BY-SA-4.0.")
+if (knitr:::is_latex_output()) {
+knitr::include_graphics(here::here("images", "09-leaflet-map-layers.png"))
+} else {
+m2
+}
 ```
 
 ## 3D Geovisualization

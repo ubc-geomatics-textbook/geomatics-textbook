@@ -1,6 +1,14 @@
+```{r echo=FALSE, warning=FALSE}
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["topologyAndGeocoding"]][["author"]]
+coauthor <- yml_content[["topologyAndGeocoding"]][["coauthor"]]
+```
 # Overlay and Proximity Analysis {#overlay-and-proximity-analysis}
 
-Introduction here.
+Written by
+```{r results='asis', echo=FALSE}
+cat(author, "and", coauthor)
+```
 
 :::: {.box-content .learning-objectives-content}
 
@@ -21,8 +29,6 @@ Introduction here.
 Overlay, Union, Intersect, Identity, Difference, Symmetrical Difference, Buffer, Near Distance, Thiessan Polygons, Dissolve?
 
 ## Cartographic Modelling
-
-
 
 ### Capability Modelling
 
@@ -161,6 +167,11 @@ m = leaflet(boundary) %>%
     addTiles("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}") %>%
     addScaleBar(position = c("topleft")) %>%
     addPolygons(stroke = T, color="red", weight=2, smoothFactor = 0.3, fillOpacity = 0)
+if (knitr:::is_latex_output()) {
+knitr::include_graphics(here::here("images", "06-urbanboundary-leaflet.png"))
+} else {
+m
+}
 ```
 
 ``` {r 6-display-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
@@ -230,6 +241,8 @@ Post-dissolve, we would have expected the number of rows in the attribute table 
 
 The area of street trees is more powerful when compared to the length of streets in each ward. Rather than working with the absolute area, we will be calculating the relative area. To do this, we will calculate an identity to assign a ward to each section of street in the Ottawa streets feature class Then, we will use summary statistics to calculate the length of street in each ward. With that value, we will divide the area of street trees by the length of street to get the relative area of street trees per street.
 
+<!--
+
 ### Erase
 
 ### Attribute Transfer
@@ -261,3 +274,4 @@ The area of street trees is more powerful when compared to the length of streets
 ## Reflection Questions {-}
 
 ## Practice Questions {-}
+-->

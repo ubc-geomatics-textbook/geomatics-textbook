@@ -5,11 +5,11 @@ output:
 ---
 ```{r echo=FALSE, warning=FALSE}
 yml_content <- yaml::read_yaml("chapterauthors.yml")
-author <- yml_content[["topologyAndGeocoding"]][["author"]]
-coauthor <- yml_content[["topologyAndGeocoding"]][["coauthor"]]
+author <- yml_content[["topology"]][["author"]]
+coauthor <- yml_content[["topology"]][["coauthor"]]
 ```
 
-# Topology and Geocoding {#topology-and-geocoding}
+# Topology and Geocoding {#topology}
 
 Written by
 ```{r results='asis', echo=FALSE}
@@ -595,53 +595,13 @@ fig_cap <- paste("3D Voronoi tesselation of simulated polycrystals. @quey_neper_
 knitr::include_graphics("images/07-neper.png")
 ```
 
-## Geocoding
-
-**Geocoding** is the process of converting addresses to geographic coordinates, while **reverse geocoding** is the process of converting geographic coordinates to addresses (Figure \@ref(fig:7-geocoding)). In order to achieve this conversion, an **address locator** uses reference spatial data that are mapped to a geographic or projected coordinate system in order to locate new addresses or coordinates. 
-
-```{r 7-geocoding, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste("Conceptual figure showing the process of geocoding (converting addresses to geographic coordinates) and the process of reverse geocoding (converting geographic coordinates to addresses). Pickell, CC-BY-SA-4.0.")
-knitr::include_graphics("images/07-geocoding.png")
-```
-
-For example, consider that we are looking the 100-block of Main Street in Anytown, Canada. Neighbourhood blocks usually demarcate anywhere between 100 and 1000 unique civic numbers along a street segment. So the 100-block of our conceptual Main Street has addresses in the range of 100-199 (Figure \@ref(fig:7-left-right-side)). It is important to recognize that this is only a segment of Main Street, which presumably extends farther with additional segments for the 200-block, 300-block, and so on. (Remember, with proper planar topology, a single street can be comprised of many segments due to intersections with other streets.) 
-
-```{r 7-left-right-side, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
-fig_cap <- paste("The 100-block of Main Street represents all civic addresses in the range of 100-199. Pickell, CC-BY-SA-4.0.")
-knitr::include_graphics("images/07-left-right-side.png")
-```
-
-Suppose we have three addresses that we want to locate geographically along this segment: 101 Main Street; 150 Main Street; and 198 Main Street. If this segment of Main Street is mapped in a GIS, then we know the exact geographic coordinates (i.e., latitude and longitude) of the vertices and nodes (ends) of the street segment. Within the attribute table for this segment, we would find four fields: FROM_LEFT; TO_LEFT; FROM_RIGHT; and TO_RIGHT (shown below).
-
-```{r, echo=FALSE}
-R <- data.frame(STREET_NAME="Main Street",FROM_LEFT=101,TO_LEFT=199,FROM_RIGHT=100,TO_RIGHT=199)
-knitr::kable(
-  R, booktabs = TRUE, row.names = FALSE
-)
-```
-
-These fields indicate the range of civic numbers and the side of the street segment that a particular range falls on. The typical convention for address assignment within municipalities in Canada is odd-numbered civic numbers are on one side and even-numbered civic numbers are on the other side. In the GIS, these are arbitrarily assigned as $RIGHT$ or $LEFT$ sides, but geographically these addresses will occur on the North, East, South, or  West "sides" of the street segment. 
-
-We can see that the values on the $LEFT$ side of the street range from 101-199, which are odd-numbered, and the values on the $RIGHT$ side of the street range from 100-198, which are even-numbered. Since the civic numbers of the street segment are known at the nodes (i.g., 100 and 101 at one end and 198 and 199 at the other end), then we can simply interpolate for any other civic number along the segment and identify the location of our three addresses (Figure \@ref(fig:7-left-right-side)). This interpolation process only places an address on the line segment (i.e., the centre of the street), so the locator must also geographically place the address on the correct side of the street using some offset value (usually in meters) that is usually perpendicular to the street segment.
-
-### Geocoding Assumptions and Limitations
-
-One problem might seem obvious here: many cities have a street named Main Street. Therefore, an address locator relies on several pieces of reference spatial data such as maps of road networks, postal codes, cities, provinces or states, and countries. The address locator then works to _match_ the input address against this database of spatial reference data. Thus, geocoding is both imprecise and inaccurate because the address locator relies on several assumptions. The primary assumption is that the input address exists and contains no typos or errors. Data entry by humans is a frequent source of typos and different styles for abbreviations (e.g., "E", "E." and "East"). An address locator can still geocode an address that does not exist as long as it is specified correctly, which results in an inaccurate location. If the input address is correct, but incomplete (e.g., "Main Street, Vancouver" is missing civic number, city, and province), then the address locator must match the other provided information against the spatial database (e.g., street name and city), which results in an imprecise location. 
-
-In addition to a set of geographic coordinates, one key result from geocoding an address is the **match score**, which is an indication of how well the address locator was able to match the address against the spatial reference database. The match score usually ranges from 0% (no match) to 100% (perfect match) and the calculation varies depending on how you want to penalize incomplete or incorrect input addresses. Although it is frequently presented as a percentage, the match score is _not an indication of accuracy_ and it really only reflects the confidence by the address locator given the reference spatial database. In other words, a completely inaccurate road network with correct names and civic numbers can conceivably "locate" an address with a 100% match score, but very low accuracy. The final limitation is that you cannot geocode addresses outside of the extent of the spatial data provided to the address locator. For geocoding over large areas, we often rely on geocoding services described in the next section.
-
-### Geocoding Services
-
-If you are aiming to geocode addresses in a single city, then it is feasible to manually specify your own address locator using available spatial data such as roads, parcels, neighborhoods, and postal codes. However, for geocoding across large areas, this may not be feasible and you may instead rely on geocoding services that use large databases of reference spatial data. Commercially-available geocoding services are frequently used to provide routing, like Google Maps and Waze. However, these geocoding services do not provide match scores or any other indication of how confident or reliable the matches are.
-
 ## Reflection Questions {-}
 
 1. Give some examples of situations where you might use planar and non-planar topology.
-2. What are some examples of applications of geocoding and reverse geocoding?
-3. Define topology.
-4. How are Thiessen Polygons related to the Delaunay Triangulation?
-5. How do you interpret a Voronoi diagram? Give an example for how you could use this layer to solve a spatial problem.
-6. What are some uses of a multipart geometry?
+2. Define topology.
+3. How are Thiessen Polygons related to the Delaunay Triangulation?
+4. How do you interpret a Voronoi diagram? Give an example for how you could use this layer to solve a spatial problem.
+5. What are some uses of a multipart geometry?
 
 ## Practice Questions {-}
 

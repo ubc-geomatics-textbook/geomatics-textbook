@@ -121,12 +121,12 @@ In GIS we use networks to represent spatial structures of various kinds. While a
 
 Lines are when nodes are arranged in series where every node has *no more than two connections*, except for the two end nodes. A rail transit line, for example, can be represented as a line network. The map below portrays the SkyTrain Millenium Line in Vancouver. Each node represents a stop and the lines  the connections between those stops.
 
-```{r 8-vancouver-rail-transit, echo=FALSE, fig.cap=fig_cap}
+```{r 8-vancouver-rail-transit, echo=FALSE, warning=FALSE, message=FALSE, fig.cap=fig_cap}
 fig_cap <- paste0("Rail transit line in Vancouver [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 lineData <- readLines("data/08-transit_millenium_line.geojson") %>% paste(collapse = "\n")
 nodeData <- readOGR("data/08-transit_millenium_stops.geojson", layer="transit_millenium_stops", verbose=FALSE)
 
-leaflet(height=200, width="80%") %>% setView(lng=-122.9220614617343, lat=49.26585706918778, zoom=11) %>%
+leaflet(height=200, width="100%") %>% setView(lng=-122.9220614617343, lat=49.26585706918778, zoom=11) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addGeoJSON(lineData, weight=3, color="gray", fill=FALSE) %>%
   addCircles(data=nodeData, radius=20)
@@ -137,12 +137,12 @@ leaflet(height=200, width="80%") %>% setView(lng=-122.9220614617343, lat=49.2658
 
 Rings are similar to lines except that there are no end nodes. So each and every node has *two connections and the "first" and "last" nodes are connected to each other* forming a circle. The spatial structure of the Stanley park seawall trail in Vancouver resembles a ring. In this example, nodes stand for intersections and view spots and edges are the connections between these spots along the seawall.
 
-```{r 8-stanley-park-seawall, echo=FALSE, fig.cap=fig_cap}
+```{r 8-stanley-park-seawall, echo=FALSE, warning=FALSE, message=FALSE, fig.cap=fig_cap}
 fig_cap <- paste0("Ring of the Stanley Park seawall [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 lineData <- readLines("data/08-stanley_park_seawall.geojson") %>% paste(collapse = "\n")
 nodeData <- readOGR("data/08-stanley_park_seawall_nodes.geojson", layer="stanley_park_seawall_nodes", verbose=FALSE)
 
-leaflet(height=400, width="80%") %>% setView(lng=-123.14051382816635, lat=49.3035701861337, zoom=14) %>%
+leaflet(height=400, width="100%") %>% setView(lng=-123.14051382816635, lat=49.3035701861337, zoom=14) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addGeoJSON(lineData, weight=3, color="gray", fill=FALSE) %>%
   addCircles(data=nodeData)
@@ -152,31 +152,30 @@ leaflet(height=400, width="80%") %>% setView(lng=-123.14051382816635, lat=49.303
 
 In a mesh, *every node is also connected to more than one node*. However, in this case nodes can be connected to more than two nodes. Connections in a mesh are non-hierarchical. Contrary to rings and lines where there is only one possible route from one node to another, in a mesh there are multiple routes to access other nodes in the network. A common way to generate a mesh network is using **Delaunay triangulation**, where nodes are connected in order to form triangles and maximize the minimum angle of all triangles [@wikimedia_delaunay_2021]. Mesh configurations are commonly used in decentralized structures such as the internet.
 
-```{r 8-tree-canopy-mesh, echo=FALSE, fig.cap=fig_cap}
+```{r 8-tree-canopy-mesh, echo=FALSE, warning=FALSE, message=FALSE, fig.cap=fig_cap}
 fig_cap <- paste0("Tree canopy mesh [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 lineData <- readLines("data/08-tree_canopy_mesh.geojson") %>% paste(collapse = "\n")
 polyData <- readOGR("data/08-tree_canopy_shapes.geojson", layer="tree_canopy_shapes", verbose=FALSE, GDAL1_integer64_policy=TRUE)
 nodeData <- readOGR("data/08-tree_canopy_centroids.geojson", layer="tree_canopy_centroids", verbose=FALSE)
 
-leaflet(height=300, width="80%") %>% setView(lng=-123.13264678513188, lat=49.23942113799484, zoom=17) %>%
+leaflet(height=300, width="100%") %>% setView(lng=-123.13264678513188, lat=49.23942113799484, zoom=17) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addPolygons(data=polyData, color="green", weight=0) %>%
   addGeoJSON(lineData, weight=1, color="gray", fill=FALSE) %>%
   addCircles(data=nodeData, radius=0.5)
 ```
 
-
 ### Fully Connected
 
 As the name suggests, in fully connected networks *every node is connected to every other node*. The graph representing all possible origin-destination commutes among Metro Vancouver municipalities is a type of fully connected network.
 
-```{r 8-origin-destination, echo=FALSE, fig.cap=fig_cap}
+```{r 8-origin-destination, echo=FALSE, warning=FALSE, message=FALSE, fig.cap=fig_cap}
 fig_cap <- paste0("Possible origin-destination commutes between municipalities within Metro Vancouver [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 polygonData <- readOGR("data/08-regional_boundaries.geojson", layer="regional_boundaries", verbose=FALSE)
 lineData <- readLines("data/08-regional_commutes.geojson") %>% paste(collapse = "\n")
 nodeData <- readOGR("data/08-regional_commutes_nodes.geojson", layer="regional_commutes_nodes", verbose=FALSE)
 
-leaflet(height=420, width="80%") %>% setView(lng=-122.89050696548136, lat=49.19456939297959, zoom=10) %>%
+leaflet(height=420, width="100%") %>% setView(lng=-122.89050696548136, lat=49.19456939297959, zoom=10) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addGeoJSON(lineData, weight=2, color="gray", fill=FALSE) %>%
   addCircles(data=nodeData, radius=1)
@@ -184,18 +183,20 @@ leaflet(height=420, width="80%") %>% setView(lng=-122.89050696548136, lat=49.194
 </br>
 
 ## Hierarchical Topologies
+
 Different from non-hierarchical topologies, hierarchical configurations are structured around a central node or link.
 By looking into hierarchical topologies it becomes easier to understand the notion of depth. The more distant a node is from the central node or link, the more depth it has. Hover the mouse over the nodes in the following maps to check out their depth.
 
 ### Stars
+
 Stars are hierarchical structures where *two or more nodes are directly connected to a central node*. This concentric garden at the University of British Columbia can be represented according to a star topology.
 
-```{r 8-spatial-structure-garden, echo=FALSE, fig.cap=fig_cap}
+```{r 8-spatial-structure-garden, echo=FALSE, warning=FALSE, message=FALSE, fig.cap=fig_cap}
 fig_cap <- paste0("Spatial structure of a concentric garden at UBC [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 lineData <- readLines("data/08-concentric_garden.geojson") %>% paste(collapse = "\n")
 nodeData <- readOGR("data/08-concentric_garden_nodes.geojson", layer="concentric_garden_nodes", verbose=FALSE)
 
-leaflet(height=200, width="80%") %>% setView(lng=-123.24650254301488, lat=49.25331570212763, zoom=19) %>%
+leaflet(height=200, width="100%") %>% setView(lng=-123.24650254301488, lat=49.25331570212763, zoom=19) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addGeoJSON(lineData, weight=2, color="gray", fill=FALSE) %>%
   addCircles(data=nodeData, radius=1)
@@ -205,12 +206,12 @@ leaflet(height=200, width="80%") %>% setView(lng=-123.24650254301488, lat=49.253
 ### Buses
 Buses are structures where *every path from one node to another passes through a central path or corridor*. If we isolate a street segment from an urban street network, the connections between buildings and streets depict a bus topology.
 
-```{r 8-connections-houses-streets, echo=FALSE, fig.cap=fig_cap}
+```{r 8-connections-houses-streets, echo=FALSE, warning=FALSE, message=FALSE, fig.cap=fig_cap}
 fig_cap <- paste0("Connections between houses and streets [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 lineData <- readLines("data/08-row_houses.geojson") %>% paste(collapse = "\n")
 nodeData <- readOGR("data/08-row_houses_nodes.geojson", layer="row_housses_nodes", verbose=FALSE)
 
-leaflet(height=200, width="80%") %>% setView(lng=-123.17161003346679, lat=49.2547602831889, zoom=18) %>%
+leaflet(height=200, width="100%") %>% setView(lng=-123.17161003346679, lat=49.2547602831889, zoom=18) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addGeoJSON(lineData, weight=2, color="gray", fill=FALSE) %>%
   addCircles(data=nodeData, radius=1)
@@ -218,9 +219,10 @@ leaflet(height=200, width="80%") %>% setView(lng=-123.17161003346679, lat=49.254
 </br>
 
 ### Trees
+
 In tree topologies, nodes are *structured from a root node and arranged into edges* that are similar to branches of a tree. This highly hierarchical structure create a sort of **parent - child** relationship amongst nodes. The spatial configuration of boat marinas are usually structures in tree-like topologies. By definition, all tree network structures will always have more than one terminal nodes (a node that only has one connection to the network).
 
-```{r 8-boat-marina, echo=FALSE, fig.cap=fig_cap}
+```{r 8-boat-marina, echo=FALSE, warning=FALSE, message=FALSE, fig.cap=fig_cap}
 fig_cap <- paste0("Tree spatial structure of a boat marina [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 lineData <- readLines("data/08-boat_marina.geojson") %>% paste(collapse = "\n")
 nodeData <- readOGR("data/08-boat_marina_nodes.geojson", layer="boat_marina_nodes", verbose=FALSE)
@@ -233,18 +235,20 @@ leaflet(height=500, width="80%") %>% setView(lng=-123.1270252730915, lat=49.2953
 </br>
 
 ## Spatial Network Analysis
+
 Networks can then be arranged according to various different configurations. Aside from classifying networks into different types according to their topologies, some of the most useful features of spatial network analysis refers to how to **extract information** from these structures given certain parameters.
 
 ## Network Tracing
+
 The act of modelling spatial networks is called **network tracing**. When tracing a network it is important to bear in mind the **direction** with which information is added to the network, especially when this orientation information is important to further analyze **flows** and relationships within such structure. For example, when mapping hydrological networks to study its flows it might be useful to model the direction of streams coherently as this might be an important information to represent the dynamics of the network.
 
-```{r 8-fraser-river-flows, echo=FALSE, fig.cap=fig_cap}
+```{r 8-fraser-river-flows, echo=FALSE, warning=FALSE, message=FALSE, fig.cap=fig_cap}
 fig_cap <- paste0("Graph representing Fraser River Flows [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 
 nodes <- readOGR("data/08-fraser_river_nodes.geojson", verbose=FALSE)
 links <- readOGR("data/08-fraser_river.geojson", verbose=FALSE)
 
-leaflet(links, height=500, width="80%") %>% addTiles() %>%
+leaflet(links, height=500, width="100%") %>% addTiles() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addPolylines(data=links, color="gray") %>%
   addCircles(data=nodes, radius=1)
@@ -252,6 +256,7 @@ leaflet(links, height=500, width="80%") %>% addTiles() %>%
 </br>
 
 ## Linear Referencing
+
 Linear referencing is a method of using geographic locations for measuring relative positions along a linear feature. In network analysis, linear referencing techniques can be used for finding the length of paths along the network [@ramsey_23_2012]. In this method, the graph elements are defined in terms of their physical location and edges are used to calculate distances among parts of the network.
 
 ``` {r 8-lienar-referencing, echo=FALSE, fig.cap=fig_cap, out.width="80%"}
@@ -262,35 +267,122 @@ knitr::include_graphics("images/08-linear_referencing.png")
 
 In the above figure we can see how linear referencing systems work. Considering one would like to measure distances from node *a* along a network link *L*, distance measures can be used to locate, for example, points *b*, *c* and *d* along line *L*.
 
+## Geocoding
+
+One example of linear referencing is the process of geocoding. **Geocoding** is the process of converting addresses to geographic coordinates, while **reverse geocoding** is the process of converting geographic coordinates to addresses (Figure \@ref(fig:8-geocoding)). In order to achieve this conversion, an **address locator** uses reference spatial data that are mapped to a geographic or projected coordinate system in order to locate new addresses or coordinates.
+
+```{r 8-geocoding, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste("Conceptual figure showing the process of geocoding (converting addresses to geographic coordinates) and the process of reverse geocoding (converting geographic coordinates to addresses). Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/08-geocoding.png")
+```
+
+For example, consider that we are looking the 100-block of Main Street in Anytown, Canada. Neighbourhood blocks usually demarcate anywhere between 100 and 1000 unique civic numbers along a street segment. So the 100-block of our conceptual Main Street has addresses in the range of 100-199 (Figure \@ref(fig:8-left-right-side)). It is important to recognize that this is only a segment of Main Street, which presumably extends farther with additional segments for the 200-block, 300-block, and so on. (Remember, with proper planar topology, a single street can be comprised of many segments due to intersections with other streets.) 
+
+```{r 8-left-right-side, echo=FALSE, out.width = '75%', fig.cap=fig_cap}
+fig_cap <- paste("The 100-block of Main Street represents all civic addresses in the range of 100-199. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/08-left-right-side.png")
+```
+
+Suppose we have three addresses that we want to locate geographically along this segment: 101 Main Street; 150 Main Street; and 198 Main Street. If this segment of Main Street is mapped in a GIS, then we know the exact geographic coordinates (i.e., latitude and longitude) of the vertices and nodes (ends) of the street segment. Within the attribute table for this segment, we would find four fields: FROM_LEFT; TO_LEFT; FROM_RIGHT; and TO_RIGHT (shown below).
+
+```{r, echo=FALSE}
+R <- data.frame(STREET_NAME="Main Street",FROM_LEFT=101,TO_LEFT=199,FROM_RIGHT=100,TO_RIGHT=199)
+knitr::kable(
+  R, booktabs = TRUE, row.names = FALSE
+)
+```
+
+These fields indicate the range of civic numbers and the side of the street segment that a particular range falls on. The typical convention for address assignment within municipalities in Canada is odd-numbered civic numbers are on one side and even-numbered civic numbers are on the other side. In the GIS, these are arbitrarily assigned as $RIGHT$ or $LEFT$ sides, but geographically these addresses will occur on the North, East, South, or  West "sides" of the street segment. 
+
+We can see that the values on the $LEFT$ side of the street range from 101-199, which are odd-numbered, and the values on the $RIGHT$ side of the street range from 100-198, which are even-numbered. Since the civic numbers of the street segment are known at the nodes (i.g., 100 and 101 at one end and 198 and 199 at the other end), then we can simply interpolate for any other civic number along the segment and identify the location of our three addresses (Figure \@ref(fig:8-left-right-side)). This interpolation process only places an address on the line segment (i.e., the centre of the street), so the locator must also geographically place the address on the correct side of the street using some offset value (usually in meters) that is usually perpendicular to the street segment.
+
+### Geocoding Assumptions and Limitations
+
+One problem might seem obvious here: many cities have a street named Main Street. Therefore, an address locator relies on several pieces of reference spatial data such as maps of road networks, postal codes, cities, provinces or states, and countries. The address locator then works to _match_ the input address against this database of spatial reference data. Thus, geocoding is both imprecise and inaccurate because the address locator relies on several assumptions. The primary assumption is that the input address exists and contains no typos or errors. Data entry by humans is a frequent source of typos and different styles for abbreviations (e.g., "E", "E." and "East"). An address locator can still geocode an address that does not exist as long as it is specified correctly, which results in an inaccurate location. If the input address is correct, but incomplete (e.g., "Main Street, Vancouver" is missing civic number, city, and province), then the address locator must match the other provided information against the spatial database (e.g., street name and city), which results in an imprecise location. 
+
+In addition to a set of geographic coordinates, one key result from geocoding an address is the **match score**, which is an indication of how well the address locator was able to match the address against the spatial reference database. The match score usually ranges from 0% (no match) to 100% (perfect match) and the calculation varies depending on how you want to penalize incomplete or incorrect input addresses. Although it is frequently presented as a percentage, the match score is _not an indication of accuracy_ and it really only reflects the confidence by the address locator given the reference spatial database. In other words, a completely inaccurate road network with correct names and civic numbers can conceivably "locate" an address with a 100% match score, but very low accuracy. The final limitation is that you cannot geocode addresses outside of the extent of the spatial data provided to the address locator. For geocoding over large areas, we often rely on geocoding services described in the next section.
+
+### Geocoding Services
+
+If you are aiming to geocode addresses in a single city, then it is feasible to manually specify your own address locator using available spatial data such as roads, parcels, neighborhoods, and postal codes. However, for geocoding across large areas, this may not be feasible and you may instead rely on geocoding services that use large databases of reference spatial data. Commercially-available geocoding services are frequently used to provide routing, like Google Maps and Waze. However, these geocoding services do not provide match scores or any other indication of how confident or reliable the matches are.
+
 ## Routing
+
 One application of linear referencing is to find routes between nodes is an useful application of spatial networks. This is how mapping tools help us navigate the world by finding the most efficient route to move around the city, for example. [@systems_innovation_network_2015].
 
 ## Least Cost Paths
-Usually multiple paths can be traced along a network to go from one point to another. The notion of **cost** allow us compare the degree of *difficulty* needed to cross such paths. With this information, it is possible to rank different routes. In spatial networks, cost usually relate to the necessary distance (either physically or logically) to go from a certain node to another, but they might also represent other aspects such as time, traffic, elevation, current flows, etc. For example, way finding tools that are commonly used to help us to locate and move around in the city usually takes into account multiple costs such as distance, traffic and/or elevation. The **least cost path** is the *easiest* way to go from one point of the network to another.
 
-It can be found by associating the costs with elements of the network (either nodes or edges) and summarizing the total cost of certain routes. Usually **linear referencing** techniques are used to calculate costs by storing locations along measured linear features. The map below displays the least cost path in terms of physical distance (shortest path) between two points.
+Usually multiple paths can be traced along a network to go from one point to another. The notion of **cost** allow us compare the degree of *difficulty* needed to cross such paths. With this information, it is possible to rank different routes. In spatial networks, cost usually relate to the necessary distance (either physically or logically) to go from a certain node to another, but they might also represent other aspects such as time, traffic, elevation, current flows, etc. For example, way finding tools that are commonly used to help us to locate and move around in the city usually takes into account multiple costs such as distance, traffic and/or elevation. The **least cost path** is the *easiest* way to go from one point of the network to another given some set of factors. The image below shows a simple example of a least cost path between two points considering distance to roads.
 
-```{r 8-least-cost-path, echo=FALSE, fig.cap=fig_cap}
-fig_cap <- paste0("Least cost path (in terms of distance) between two points [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
-
-nodes <- readOGR("data/08-shortest_path_nodes.geojson", verbose=FALSE)
-path <- readOGR("data/08-shortest_path.geojson", verbose=FALSE)
-map <- leaflet(nodes, height=500, width="80%") %>% addTiles()
-
-map %>%
-  addProviderTiles(providers$CartoDB.Positron) %>%
-  addPolylines(data=path) %>%
-  addCircles(data=nodes)
+```{r 8-least-cost-path, fig.cap = fig_cap, out.width="75%", echo = FALSE}
+fig_cap <- paste0("Example of a least cost path traced across a cost raster representing distance to road. In this analysis, distance to road is minimized across the entire length of the least cost path. Still, the least cost path must cross several road segments. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/08-least-cost-path.png")
 ```
-</br>
 
-## Least Cost Corridors
-Although most network analysis techniques are suitable for vector data, raster layers can also be analyzed. One application of using network analysis with **raster data** is the finding of least cost corridors. While least cost paths helps to find linear paths along the network between two points, least cost corridors are based on the overlay of two *cost accumulative* rasters.
+Least cost path analysis involves calculating a cost raster. The cost raster represents the total cost of traversing a cell of the raster. In environmental management, we might consider modelling cost factors such as predation risk, terrain, forage quality, preferred habitat, soils, visability, time, and success rate. Each factor can be calculated separately and then combined into a weighted overlay to a final cost raster.
+
+```{r 8-calculating-cost-raster, fig.cap = fig_cap, out.width="75%", echo = FALSE}
+fig_cap <- paste0("Example of calculating a cost raster using three factors in the Yellowhead Grizzly Bear Management Area of Alerta, Canada: land cover, distance to road, and terrain slope. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/08-calculating-cost-raster.png")
+```
+
+With the cost raster, we can calculate two other rasters: an **accumulative cost raster** and a **backlink direction raster**. The accumulative cost raster represents the total cost to move through a set of cells given a starting point location. In other words, we trace all possible paths leading away from the given point location and add up or accumulate the costs to take that path as illustrated in the image below. The starting point in the least cost path is known as the **source location**.
+
+```{r 8-accumulative-cost-from-source, fig.cap = fig_cap, out.width="75%", echo = FALSE}
+fig_cap <- paste0("Accumulative cost to move from the green source point location. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/08-accumulative-cost-from-source.png")
+```
+
+Given a second point location, we can also calculate an accumulative cost raster for that location as illustrated in the image below. The ending point in the least cost path is known as the **target location**.
+
+```{r 8-accumulative-cost-from-target, fig.cap = fig_cap, out.width="75%", echo = FALSE}
+fig_cap <- paste0("Accumulative cost to move from the red target point location. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/08-accumulative-cost-from-target.png")
+```
+
+These two accumulative cost rasters representing the accumulative costs of travelling from the source location and also from the target location can then be added together to produce an accumulative cost raster that represents the accumulative costs to travel between the two locations.
+
+```{r 8-total-accumulative-cost, fig.cap = fig_cap, out.width="75%", echo = FALSE}
+fig_cap <- paste0("Total accumulative cost to move between the green source point location and the red target point location. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/08-total-accumulative-cost.png")
+```
+
+Now, in order to solve for the single least cost path, we simply need to trace the path that minimizes the total accumulative cost. This is achieved by encoding a backlink direction for every cell that represents the path to take to return to the source point location. The backlink direction is typically encoded with numbers 0 to 8:
+
+- 0 = Source cell
+- 1 = “Move left”
+- 2 = “Move upper left”
+- 3 = “Move up”
+- 4 = “Move upper right”
+- 5 = “Move right”
+- 6 = “Move lower right”
+- 7 = “Move down”
+- 8 = “Move lower left”
+
+```{r 8-backlink-direction-encoding, fig.cap = fig_cap, out.width="25%", echo = FALSE}
+fig_cap <- paste0("The backlink direction is encoded with one of nine numbers that represents the direction for the least cost path to take given any location in the accumulative cost raster. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/08-backlink-direction-encoding.png")
+```
+
+The backlink encoding is what enables us to trace a path from any target location back to the source location. Think of the backlink raster as a set of instructions that allow us to find our way home in the raster.
+
+```{r 8-backlink-direction-raster, fig.cap = fig_cap, out.width="75%", echo = FALSE}
+fig_cap <- paste0("Backlink direction raster for the source point location. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/08-backlink-direction-raster.png")
+```
+
+With the backlink direction raster, we can now trace the least cost path between the source and target locations. Importantly, because we have an accumulative cost raster that represents the movement costs for all of the possible paths between both locations, we can solve both the least cost path and a least cost corridor. A **least cost corridor** is an acceptable level or range of costs. For example, we might tolerate any path that has an accumulative cost lower than some cost value. Thresholding the accumulative cost raster in this way allows us to map movement corridors that share the same level of cost. Least cost corridors can be useful for modelling species movement behaviour where many possible paths are tolerable, whereas a least cost path analysis might be more suitable for engineering a forestry road or highway that has specific requirements.
+
+```{r 8-cost-thresholds, fig.cap = fig_cap, out.width="75%", echo = FALSE}
+fig_cap <- paste0("Applying thresholds to the accumulative cost raster can reveal least cost corridors rather than a single least cost path. Areas coloured the same represent similar cost tolerance between the green source location and the red target location. Pickell, CC-BY-SA-4.0.")
+knitr::include_graphics("images/08-cost-thresholds.png")
+```
 
 ## Reach Analysis
+
 Reach techniques are commonly used to find the incidence of defined elements *within a certain radius from a chosen node*. All possible routes are modeled. The number of **terminal nodes** varies according to the network structure. Urban walkability indices usually uses reach techniques to assess the intensity of certain indicators (such as intersection density or non-residential land uses) given a walkable radius [@martino_spatial_2020]. In the map below we portray the network reach from a given origin point into the Pacific Spirit Regional Park within 400m (red), 800m (yellow), 1200m (green) and 1600m (blue) radii.
 
-```{r 8-reach-analysis, echo=FALSE, fig.cap=fig_cap}
+```{r 8-reach-analysis, echo=FALSE, warning=FALSE, message=FALSE, fig.cap=fig_cap}
 fig_cap <- paste0("Reachable segments within multiple distance radii [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 
 origin <- readOGR("data/08-pacific_spirit_origin.geojson", verbose=FALSE)
@@ -300,7 +392,7 @@ net_800 <- readOGR("data/08-pacific_spirit_800.geojson", verbose=FALSE)
 net_1200 <- readOGR("data/08-pacific_spirit_1200.geojson", verbose=FALSE)
 net_1600 <- readOGR("data/08-pacific_spirit_1600.geojson", verbose=FALSE)
 
-leaflet(net_1600, height=500, width="80%") %>% setView(lng=-123.22165125449455, lat=49.25752614491611, zoom=14) %>% addTiles() %>%
+leaflet(net_1600, height=500, width="100%") %>% setView(lng=-123.22165125449455, lat=49.25752614491611, zoom=14) %>% addTiles() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addPolylines(data=base_net, color="lightgray") %>%
   addPolylines(data=net_1600, color="mediumaquamarine") %>%
@@ -312,16 +404,18 @@ leaflet(net_1600, height=500, width="80%") %>% setView(lng=-123.22165125449455, 
 </br>
 
 ## Network Centrality
+
 Nodes and edges of a graph can also be ranked in terms of how **important** they are to the overall network. Network centrality measures represent whether elements of a graph are more central or peripheral to the overall system. Such measures can then be interpreted as indicators of importance. Applications are endless. Centrality measures are used for ranking search engine pages [@wikimedia_pagerank_2021], for finding persons of interest in social networks [@ajorlou_introduction_2018] and for modelling movement in street network [@hillier_natural_1993]. There are several **centrality measures** that serve to the most various purposes. Some of the most commonly used ones are Closeness and Betweenness centrality.
 
 ## Closeness Centrality
+
 Closeness centrality measures *how close each node is to every other node of the graph* in terms of topological distances. It highlights nodes located in easily accessible spaces. For example when analyzing the closeness of street intersections at the University of British Columbia (UBC), intersections in core streets such as the Main Mall, Agronomy Road and Northwest Marine Drive are ranked as highly central whereas more residential and segregated areas such as Acadia Road are ranked with lower closeness centrality.
 
-```{r 8-closeness-centrality-UBC, echo=FALSE, fig.cap=fig_cap}
+```{r 8-closeness-centrality-UBC, echo=FALSE, warning=FALSE, message=FALSE, fig.cap=fig_cap}
 fig_cap <- paste0("Closeness centrality of the street intersections at UBC [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 
 intersections <- readOGR("data/08-ubc_intersections.geojson", verbose=FALSE)
-map <- leaflet(intersections, height=500, width="80%") %>% addTiles()
+map <- leaflet(intersections, height=500, width="100%") %>% addTiles()
 pal <- colorNumeric(palette="viridis", domain=intersections$closeness, n=6, reverse=TRUE)
 
 map %>%
@@ -338,12 +432,13 @@ $c_i = \sum\limits_{j} \frac{1}{d_{ij}}$
 where $d_{ij}$ means the logical distance from $i$ to $j$.
 
 ## Betweenness Centrality
+
 Betweenness centrality measures *how likely a node or an edge is to be passed through* when going from every node to every other node of the graph. If we imagine agents travelling from each node to every other node and back, betweenness centrality would be the trail left by those agents. While closeness highlights central spaces, betweenness highlights pathways that lead to those central spaces. Using the same street network at UBC we can calculate the betweenness of segments.
 
-```{r 8-betweenness-centrality, echo=FALSE, fig.cap=fig_cap}
+```{r 8-betweenness-centrality, echo=FALSE, warning=FALSE, message=FALSE, fig.cap=fig_cap}
 fig_cap <- paste0("Betweenness centrality of street segments at UBC [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 segments <- readOGR("data/08-ubc_segments.geojson", verbose=FALSE)
-map <- leaflet(segments, height=500, width="80%") %>% addTiles()
+map <- leaflet(segments, height=500, width="100%") %>% addTiles()
 pal <- colorQuantile(palette="viridis", domain=segments$betweenness, n=6, reverse=TRUE)
 
 map %>%
@@ -365,7 +460,7 @@ Are green spaces evenly accessible throughout the whole city? Which parks are to
 
 First we need to find the Closeness measure for the street network of the City of Vancouver. The network information was downloaded from [OpenStreetMap](https://www.openstreetmap.org/). The [graph-tool](https://graph-tool.skewed.de/) software was used to calculate the centrality measure. With the results of centrality for all street intersections in the city, we can overlay Parks & Green spaces data from the [City of Vancouver Open Data portal](https://opendata.vancouver.ca/explore/dataset/parks-polygon-representation/information/) and get the average closeness of nodes within each green space.
 
-``` {r 8-closeness-centrality-vancouver, echo=FALSE, fig.cap=fig_cap}
+``` {r 8-closeness-centrality-vancouver, echo=FALSE, warning=FALSE, message=FALSE, fig.cap=fig_cap}
 fig_cap <- paste0("Closeness centrality of parks and green spaces at the City of Vancouver [@city_of_vancouver_open_nodate]. Licensed under the Open Government License - Vancouver. Interactive figure in the online format of the textbook.")
 parks <- readOGR("data/08-vancouver_parks.geojson", verbose=FALSE)
 
@@ -384,11 +479,10 @@ ggplot(parks_df, aes(x=parks.closeness_mean)) + geom_density(alpha=0.3, fill=rgb
 
 Results show parks located in the middle of the city have **higher closeness** than parks located at the edges. In other words, these parks are located in parts of the city that have easy access to the city's street network as a whole. As the histogram leans towards the right, we can conclude that there are more parks with higher closeness than parks with lower closeness.
 
-## Practice & Reflection {-}
+## Reflection Questions {-}
 
-Some questions to reflect and better understand the basic concepts and applications of network analysis explained in this chapter:
-
-* Which types of behaviour can be modelled and understood using network analysis techniques?
-* What is the difference between *physical* and *logical* distances?
-* How different *costs* can be used for routing along spatial networks?
-* How can network centrality measures be interpreted in spatial networks?
+- Which types of behaviour can be modelled and understood using network analysis techniques?
+- What is the difference between physical and logical distances?
+- How can different costs be used for routing along spatial networks?
+- How can network centrality measures be interpreted in spatial networks?
+- What are some examples of applications of geocoding and reverse geocoding?

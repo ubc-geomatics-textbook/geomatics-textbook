@@ -167,7 +167,7 @@ pal <- colorNumeric(p, values(r), na.color = "transparent")
 ```
 
 ``` {r echo=FALSE, warning=FALSE, message=FALSE}
-m = leaflet(countries) %>%
+m <- leaflet(countries) %>%
   addTiles() %>%
   addScaleBar(position = c("topleft")) %>%
   addRasterImage(r, colors = pal, group = "Difference", opacity = 1, maxBytes = "Inf") %>%
@@ -175,7 +175,7 @@ m = leaflet(countries) %>%
   addLegend(pal = pal, values = values(r), group = "Difference", opacity = 1, title = "CGVD2013 minus CGVD28 (meters)")
 ```
 
-``` {r 2-CGVD-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
+``` {r 2-CGVD-leaflet, echo=FALSE, out.width="100%", fig.cap=fig_cap}
   fig_cap <- paste0("The difference (in meters) between the Canadian Geodetic Vertical Datum of 2013 (CGVD2013) and the Canadian Geodetic Vertical Datum of 1928 (CGVD28). <a
   href='",baseurl,"#fig:2-CGVD-leaflet'>Animated figure can be viewed in the web browser version of the textbook</a>. Data from Natural Resources Canada and licensed under the <a href='",nrcanlicense,"'>Open Government Licence - Canada</a>. Pickell, CC-BY-SA-4.0.")
 if (knitr:::is_latex_output()) {

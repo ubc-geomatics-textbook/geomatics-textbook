@@ -423,7 +423,7 @@ knitr::kable(
 
 Figure \@ref(fig:5-boolean-and) illustrates what is going on here, we are only returning the tuples that evaluate $true$ for both statements. Hence, Boolean $AND$ is equivalent to multiplying two Boolean truth values together. You should also recognize that a Boolean $AND$ is equivalent to what a set intersection $A∩B$ achieves between two relations.
 
-```{r 5-boolean-and, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+```{r 5-boolean-and, fig.cap = fig_cap, out.width= "50%", echo = FALSE}
     fig_cap <- paste0("Boolean A AND B returns the area shaded blue. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics("images/05-boolean-and.png")
 ```
@@ -439,7 +439,7 @@ knitr::kable(
 
 Figure \@ref(fig:5-boolean-or) illustrates the case of the Boolean $OR$. As you can see, it returns everything where either of the statements evaluate to $true$, regardless if the other statement is $false$. You should also recognize that a Boolean $OR$ is equivalent to what a set union $A∪B$ achieves between two relations. 
 
-```{r 5-boolean-or, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+```{r 5-boolean-or, fig.cap = fig_cap, out.width= "50%", echo = FALSE}
     fig_cap <- paste0("Boolean A OR B returns the area shaded blue. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics("images/05-boolean-or.png")
 ```
@@ -455,7 +455,7 @@ knitr::kable(
 
 Figure \@ref(fig:5-boolean-not) illustrates how Boolean $NOT$ essentially negates or inverts the statement that follows. In this case, instead of returning the Western Hemlock tuples, $NOT(species=WesternHemlock)$ returns "everything except" Western Hemlock, which is also equivalent to $species≠WesternHemlock$.
 
-```{r 5-boolean-not, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+```{r 5-boolean-not, fig.cap = fig_cap, out.width= "50%", echo = FALSE}
     fig_cap <- paste0("Boolean A NOT B returns the area shaded blue. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics("images/05-boolean-not.png")
 ```
@@ -472,7 +472,7 @@ knitr::kable(
 
 Figure \@ref(fig:5-boolean-xor) illustrates how Boolean $XOR$ excludes all the tuples that evaluate to $true$ for both statements. In the example above, tuples ID=2 and ID=3 are excluded because both of the statements for height and species are $true$. 
 
-```{r 5-boolean-xor, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+```{r 5-boolean-xor, fig.cap = fig_cap, out.width= "50%", echo = FALSE}
     fig_cap <- paste0("Boolean A XOR B returns the area shaded blue. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics("images/05-boolean-xor.png")
 ```
@@ -519,7 +519,7 @@ knitr::kable(
 
 The natural join $R⋈S$ evaluates to:
 
-```{r 5-natural-join-3, echo=FALSE}
+```{r 5-natural-join-3, echo=FALSE, warning=FALSE, message=FALSE}
 knitr::kable(
   inner_join(R,S), booktabs = TRUE, row.names = FALSE
 )
@@ -529,7 +529,7 @@ knitr::kable(
 
 An **outer join** joins all the tuples of two relations based on a common attribute. The result is similar to a set union, except the input relations do not need to be union compatible. Formally, an outer join or sometimes called a full join is expressed as $R⟗S$, which  evaluates to:
 
-```{r 5-outer-join, echo=FALSE}
+```{r 5-outer-join, echo=FALSE, warning=FALSE, message=FALSE}
 knitr::kable(
   full_join(R,S), booktabs = TRUE, row.names = FALSE
 )
@@ -539,7 +539,7 @@ knitr::kable(
 
 Sometimes, it may be desirable to join attributes or tuples from one relation, but not the other. For these cases, we can use either **right outer join** or **left outer join**. Formally, right outer join is expressed as $R⋉S$ and evaluates to:
 
-```{r 5-right-left-outer-join, echo=FALSE}
+```{r 5-right-left-outer-join, echo=FALSE, warning=FALSE, message=FALSE}
 knitr::kable(
   right_join(R,S), booktabs = TRUE, row.names = FALSE
 )
@@ -547,7 +547,7 @@ knitr::kable(
 
 Formally, left outer join is expressed as $R⋊S$ and evaluates to:
 
-```{r 5-right-left-outer-join-2, echo=FALSE}
+```{r 5-right-left-outer-join-2, echo=FALSE, warning=FALSE, message=FALSE}
 knitr::kable(
   left_join(R,S), booktabs = TRUE, row.names = FALSE
 )
@@ -557,7 +557,7 @@ knitr::kable(
 
 We can also join relations conditionally and without sharing a common attribute, which is known as a **theta join** and expressed as $R⋈_θS$. To understand how a theta join works, it is useful to recognize that $R⋈_θS=σ_{θ}(R×S)$. As you can see, a theta join is simply a selection of a Cartesian product where theta $θ$ is the predicate. For example, $R⋈_{height>19}S$ evaluates to:
 
-```{r 5-theta-join, echo=FALSE}
+```{r 5-theta-join, echo=FALSE, warning=FALSE, message=FALSE}
 knitr::kable(
   inner_join(R[which(R$Height>19),],S), booktabs = TRUE, row.names = FALSE
 )
@@ -804,33 +804,3 @@ knitr::kable(
   caption = 'Query result shows five records matched the priority area requirements.'
 )
 ```
-
-:::: {.box-content .call-out-content}
-
-::: {.box-title .call-out-top}
-## Remember This? {-}
-:::
-
-<p id="box-text">Models are abstractions of reality and help us understand and communicate complex ideas.</p>
-
-::::
-
-<!-- ## Summary
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et augue scelerisque, consectetur lorem eu, auctor lacus. Fusce metus leo, aliquet at velit eu, aliquam vehicula lacus. Donec libero mauris, pharetra sed tristique eu, gravida ac ex. Phasellus quis lectus lacus. Vivamus gravida eu nibh ac malesuada. Integer in libero pellentesque, tincidunt urna sed, feugiat risus. Sed at viverra magna. Sed sed neque sed purus malesuada auctor quis quis massa.
-
-## Reflection Questions {-}
-
-1. Explain ipsum lorem.
-2. Define ipsum lorem.
-3. What is the role of ispum lorem?
-4. How does ipsum lorem work?
-
-## Practice Questions {-}
-
-2. Given ipsum, solve for lorem.
-3. Draw ipsum lorem.
-
-## Recommended Readings {-}
-
-Ensure all inline citations are properly referenced here. -->

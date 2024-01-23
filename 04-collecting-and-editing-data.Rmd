@@ -43,7 +43,7 @@ Here we introduce a network model to set a framework for finding data. Imagine t
 Data are becoming increasingly easy to discover through the use of **data repositories** (Figure \@ref(fig:4-data-network-model)). Below we discuss the growing number (and centralization) of spatial data repositories, which can give access to academic, government non-governmental, international, and crowd-sourced datasets. Here we introduce each type of repository and offer some hints at what environmental data can be discovered in each.
 
 ```{r 4-data-network-model, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-fig_cap <- paste0("Envisioning university and government data networks. Data within each network is concentrated within data repositories, yet considerable data remains 'hidden' among individual researchers and silos of the Ministry, but can potentially be accessed by finding the right connections. Sutherland, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).")
+fig_cap <- paste0("Envisioning university and government data networks. Data within each network is concentrated within data repositories, yet considerable data remains 'hidden' among individual researchers and silos of the Ministry, but can potentially be accessed by finding the right connections. Sutherland, CC-BY-SA-4.0.")
 knitr::include_graphics(here::here("images", "04-data-network-model.png"))
 ```
 </br>
@@ -54,7 +54,7 @@ Data librarians are particularly well-connected and trained to help you navigate
 
 ## Government Data
 
-Government data are also increasingly published in data repositories, specific to the level of government (Figure \@ref(fig:4-data-network-model)). There are multiple levels to government, including municipalities (the smallest), sometimes counties (precincts, townships, or parishes), provinces (or states), and nations (the largest), each of which often has its own data repository. Centralized repositories are becoming increasingly common and connect open data from all levels of Government. The [Federated Research data repository](https://www.frdr-dfdr.ca/repo/) is an aggregation of Canadian open data repositories, including municipal, provincial, and academic repositories. It includes a map-based search for datasets with location information tied to their metadata. In the US, geospatial data from federal, municipal, and state government repositories are being consolidated under [Data.gov](https://www.data.gov/](https://www.data.gov/).
+Government data are also increasingly published in data repositories, specific to the level of government (Figure \@ref(fig:4-data-network-model)). There are multiple levels to government, including municipalities (the smallest), sometimes counties (precincts, townships, or parishes), provinces (or states), and nations (the largest), each of which often has its own data repository. Centralized repositories are becoming increasingly common and connect open data from all levels of Government. The [Federated Research data repository](https://www.frdr-dfdr.ca/repo/) is an aggregation of Canadian open data repositories, including municipal, provincial, and academic repositories. It includes a map-based search for datasets with location information tied to their metadata. In the US, geospatial data from federal, municipal, and state government repositories are being consolidated under [Data.gov](https://www.data.gov/).
 
 Because not all repositories are yet connected by a centralized repository, one must search in the correct repository. To do this, consider which government has jurisdiction over the specific subject area and geography of interest. For example, if you are interested in land use zoning and engineering features within a given city, this data are likely best provided by that individual city, either by finding it within a data repository or e-mailing the municipality with a data request. In Canada, the provinces have jurisdiction over most natural resources and thus provincial government data repositories tend to provide the best data coverage on natural resources such as, water, forests, wildlife, minerals, and topography. In British Columbia, for example, [DataBC](https://www.data.gov.bc.ca/) houses over a thousand datasets on natural resources, including forest inventory maps, natural disturbances, hunting statistics, administrative boundaries, and much more. [Canada's open data portal](https://open.canada.ca/en/open-data) provides data on fish as well as environmental conditions (e.g., water quality, air quality, historical weather, etc.), which is under federal jurisdiction. Hydrological flow and water quality monitoring are readily accessible across Canada through the Hydat database, which can be easily accessed through the R package called [TidyHydat](https://cran.r-project.org/web/packages/tidyhydat/vignettes/tidyhydat_an_introduction.html) (@albers_tidyhydat_2017).
 
@@ -93,24 +93,13 @@ knitr::include_graphics(here::here("images", "04-census-geographies.png"))
 At the top of Figure \@ref(fig:4-census-geographies) are Canada's provinces and territories, which are then divided into census divisions, which in turn are divided into census subdivisions. Census subdivisions correspond to municipalities, but also include Indian reserves, and 'unorganized areas.' These three areas (municipalities, Indian reserves, and unorganized areas) are also aggregated into census consolidated subdivisions, which offer a more consistent geographic unit for mapping large areas as compared to subdivisions themselves. Census subdivisions are divided into dissemination areas, composed of one or more 'dissemination area blocks' (generally, a city block bounded by roads on all sides).
 
 In addition to these general geographies, which apply throughout Canada, special geographic units are implemented as an additional layer of aggregation for urban centers. A Census Metropolitan Area (CMA) is a grouping of census subdivisions comprising a large urban area and its surroundings. To become a CMA, an area must register an urban core population of at least 100,000 at the previous census. A Census Agglomeration (CA) is a smaller version of a CMA in which the urban core population at the previous census was greater than 10,000 but less than 100,000. CMA and CA are useful for making comparisons across cities. CMAs and CAs with a population greater than 50,000 are subdivided into census tracts which have populations ranging from 2,500 to 8,000 and are intended to be relatively homogeneous in their demographic identity (i.e., a local neighbourhood).
+
 Using census data for geographic analysis typically involves first identifying the smallest spatial unit at which the data are available. Recall that to protect the privacy of respondents, some data are only available at higher geographic levels. Another consideration is that if you plan to compile multiple census years, the geographic boundaries have typically changed over time in response to how the landscapes and information needs have changed. This creates substantial (though, not insurmountable) additional work that limits how the data can be used, especially for finer spatial scale analysis. An example of changes in the geography of census divisions is seen for British Columbia in Figure \@ref(fig:4-shifting-census-boundaries).
 
 ```{r 4-shifting-census-boundaries, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
 fig_cap <- paste0("An example of how census boundaries have changed, showing changes in Census divisions for British Columbia from 1911 to 1986. Data from @clark_historical_2016. Sutherland, CC-BY-SA-4.0.")
 knitr::include_graphics(here::here("images", "04-shifting-census-boundaries.png"))
 ```
- 
-:::: {.box-content .call-out-content}
-
-::: {.box-title .call-out-top}
-## Call Out {-}
-:::
-
-<p id="box-text">
-Some spatial analyses will want to work with the smallest geographic level available. The smallest geographic unit of the Canada census is the dissemination block. Census tracts are also used frequently in spatial analysis but this geographic unit is only applicable to metropolitan areas.
-</p>
-
-::::
 
 ## Accessing Census Data
 
@@ -119,8 +108,7 @@ Statistics Canada maintains the geographic boundaries for the Census for each le
 :::: {.box-content .your-turn-content}
 
 ::: {.box-title .your-turn-top}
-
-### Your Turn! {-}
+## Your Turn! {-}
 :::
 
 <p id="box-text">
@@ -209,7 +197,7 @@ Although **historical datasets** can be very useful, they were often not collect
 
 The advent of **aerial photographs**, which are photographs of the Earth's surface taken from above (generally from an airplane), greatly improved mapping beginning in the 1930's and became the primary source of data for mapping land cover, timber volumes, topography, and national defense planning. Today, they offer a valuable tool for the unique spatial and temporal resolutions they offer. Temporally, **aerial photos** offer snapshots of landscapes that predate satellite-based remotely-sensed data by many decades [@morgan_historical_2017], which can help inform restoration targets and cumulative effects assessments [@harker_perspectives_2021]. Aerial photos vary in their spatial resolution, but sometimes offer a surprisingly high spatial resolution that can be used to study fine-scale landscape attributes and their changes, such as stream courses [@little_channel_2013], fish habitat [@tomlinson_long-term_2011], and soil hydrodynamics [@harker_perspectives_2021].
 
-Using **aerial photographs** to track landscape change often requires first 'tying' them to the Earth to produce and orthophoto, a process discussed as it applies generally to image processing in [Chapter 13](https://ubc-geomatics-textbook.github.io/geomatics-textbook/image-processing.html) and discussed briefly here. An orthoimage is an aerial photograph or satellite imagery geometrically corrected so that the scale is uniform, such as in Figure \@ref(fig:4-crooked-aerialphoto). Unlike orthoimages, the scale of ordinary aerial images varies across the image, due to the changing elevation of the terrain surface (among other things). The process of creating an orthoimage from an ordinary aerial image is called orthorectification. Photogrammetrists are the professionals who specialize in creating orthorectified aerial imagery, and in compiling geometrically-accurate vector data from aerial images.
+Using **aerial photographs** to track landscape change often requires first 'tying' them to the Earth to produce and orthophoto. An orthophoto is an aerial photograph or satellite imagery geometrically corrected so that the scale is uniform, such as in Figure \@ref(fig:4-crooked-aerialphoto). Unlike orthophoto, the scale of ordinary aerial images varies across the image, due to the changing elevation of the terrain surface (among other things). The process of creating an orthophoto from an ordinary aerial image is called orthorectification. Photogrammetrists are the professionals who specialize in creating orthorectified aerial imagery, and in compiling geometrically-accurate vector data from aerial images.
 
 Compare the map and photograph below. Both show the same gas pipeline, which passes through hilly terrain. Note the deformation of the pipeline route in the photo relative to the shape of the route on the topographic map. Only the topographic map is accurate here. The deformation in the photo is caused by relief displacement. The photo would not serve well on its own as a source for topographic mapping.
 
@@ -245,9 +233,11 @@ Figure \@ref(fig:4-accessing-aerial-photos) shows the results from an example se
 ::: {.box-title .your-turn-top}
 ## Your Turn! {-}
 :::
+
 <p id="box-text">
 Go to the [Canada Eartch Observation Data Management System](https://www.eodms-sgdot.nrcan-rncan.gc.ca/index-en.html) and search for historical aerial photos in your chosen area of interest using the time frames 1935-1950 and then 1950-1980. What is the oldest photo available?
 </p>
+
 ::::
 
 If you searched but did not find anything helpful, do not be discouraged. The area of interest in the example of Cape Spear, Newfoundland, happens to be a strategic location for national defense so it not surprising that it has excellent coverage in the National Air Photo Library. In contrast, if you are interested in seeing an environmental feature such as historical forest cover in northern BC, recall that natural resources fall under the jurisdiction of provinces in Canada. Consequently, provinces may house aerial photo collections for your area. Some of these collections have been preserved by government or other institutions, such as the Geographic Information Center (GIC) at the University of British Columbia, which rescued a collection of 2.5 million aerial photos. These photos are available for researchers and commercial use. The GIC also maintains a [list of other aerial photograph libraries](https://gic.geog.ubc.ca/resources/air-photo-collection-and-services/other-sources-of-air-photo-information/), including for Alberta, Yukon, and the United States. 

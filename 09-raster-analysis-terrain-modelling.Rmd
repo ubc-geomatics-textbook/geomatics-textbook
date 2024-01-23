@@ -28,7 +28,7 @@ Written by
 cat(author)
 ```
 
-Many data are frequently collected and represented in a raster format. In this chapter, we will look at how rasters can be analyzed with a specific focus on deriving terrain information from elevation rasters. We will explore some useful properties of the raster structure that can be exploited for insightful analysis of land and water alike. Image-based raster analysis will be a later topic of [Chapter 14](https://ubc-geomatics-textbook.github.io/geomatics-textbook/image-analysis.html).
+Many data are frequently collected and represented in a raster format. In this chapter, we will look at how rasters can be analyzed with a specific focus on deriving terrain information from elevation rasters. We will explore some useful properties of the raster structure that can be exploited for insightful analysis of land and water alike.
 
 :::: {.box-content .learning-objectives-content}
 
@@ -60,11 +60,11 @@ Finally, after deriving and classifying our rasters, we often need to **combine*
 
 ## Digital Vertical Models
 
-**Digital Vertical Models (DVM)** represent vertical heights and elevations of terrain and features. As we learned from [Chapter 2](https://ubc-geomatics-textbook.github.io/geomatics-textbook/mapping-data.html), *vertical* refers to the axis of geographic space that is orthogonal (i.e., perpendicular) to a vertical datum, such as a geoid or ellipsoid. Thus, a DVM may represent elevation of terrain or the height of a building. Both of these examples have specific meanings and calculations relative to the vertical datum, which we will explore in more detail in the following sections.
+**Digital Vertical Models (DVM)** represent vertical heights and elevations of terrain and features. *Vertical* refers to the axis of geographic space that is orthogonal (i.e., perpendicular) to a vertical datum, such as a geoid or ellipsoid. Thus, a DVM may represent elevation of terrain or the height of a building. Both of these examples have specific meanings and calculations relative to the vertical datum, which we will explore in more detail in the following sections.
 
 ## Digital Elevation Models (DEM)
 
-As the name suggests, a **Digital Elevation Model (DEM)** is a digital representation of elevation data or heights above a vertical datum. We call it a _model_ because, as you know from reading [Chapter 3](https://ubc-geomatics-textbook.github.io/geomatics-textbook/types-of-data.html), all spatial data formats are inherently spatial data models. As is the case for all rasters, DEMs represent sampled data. That is, the elevations that are represented continuously in the raster DEM are in fact samples of elevation at the raster cell centres. For this reason, a DEM is a model that is simplifying elevation to some degree depending on the cell size. 
+As the name suggests, a **Digital Elevation Model (DEM)** is a digital representation of elevation data or heights above a vertical datum. We call it a _model_ because all spatial data formats are inherently spatial data models. As is the case for all rasters, DEMs represent sampled data. That is, the elevations that are represented continuously in the raster DEM are in fact samples of elevation at the raster cell centres. For this reason, a DEM is a model that is simplifying elevation to some degree depending on the cell size. 
 
 Figure \@ref(fig:9-mount-assiniboine-dem) shows a DEM for Mount Assiniboine near the Alberta and British Columbia border. Mount Assiniboine has a distinctive pyramidal peak that is not immediately apparent from the bird's-eye view of a DEM. It is common to see DEMs displayed in this black and white colour scheme, where black represents lower elevations and white represents higher elevations. Can you tell where the peak is? We will look at more sophisticated colour schemes and geovisualizations of terrain in a later section.
 
@@ -74,22 +74,22 @@ Figure \@ref(fig:9-mount-assiniboine-dem) shows a DEM for Mount Assiniboine near
 ```
 </br>
 
-Figure \@ref(fig:9-nelson-river-dem) shows another DEM, but this time for some the flattest terrain in Canada over 1,600 km away from Mount Assiniboine on the Canadian Shield at the mouth of the Nelson River in Manitoba. The Nelson River drains an area of more than 1 million km^2 of land across much of the Canadian prairie provinces and pours into Hudson Bay. The Canadian Shield is home to the oldest terrain on Earth and millions of years of erosion have reduced it to rolling hills and flattened horizons. 
+Figure \@ref(fig:9-nelson-river-dem) shows another DEM, but this time for some the flattest terrain in Canada over 1,600 km away from Mount Assiniboine on the Canadian Shield at the mouth of the Nelson River in Manitoba. The Nelson River drains an area of more than 1 million km^{2} of land across much of the Canadian prairie provinces and pours into Hudson Bay. The Canadian Shield is home to the oldest terrain on Earth and millions of years of erosion have reduced it to rolling hills and flattened horizons. 
 
 ```{r 9-nelson-river-dem, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
     fig_cap <- paste0("Digital Elevation Model of Nelson River pouring into Hudson Bay, Manitoba, Canada. Data from @earth_resources_observation_and_science_center_usgs_2018. Pickell, CC-BY-4.0.")
     knitr::include_graphics("images/09-nelson-river-dem.png")
 ```
 
-Over an entire extent of 3,300 km^2, the Nelson River DEM in Figure \@ref(fig:9-nelson-river-dem) only varies by 44 m. Compare that with the 1,328 m of difference from the white peak of Mount Assiniboine to the black valleys of the Rocky Mountains over about 5 km^2 in Figure \@ref(fig:9-mount-assiniboine-dem). Throughout the remainder of this chapter, we will look at raster analysis applied to these two extreme examples of terrain.
+Over an entire extent of 3,300 km^{2}, the Nelson River DEM in Figure \@ref(fig:9-nelson-river-dem) only varies by 44 m. Compare that with the 1,328 m of difference from the white peak of Mount Assiniboine to the black valleys of the Rocky Mountains over about 5 km^{2} in Figure \@ref(fig:9-mount-assiniboine-dem). Throughout the remainder of this chapter, we will look at raster analysis applied to these two extreme examples of terrain.
 
 ## Digital Terrain Models (DTM)
 
-A **Digital Terrain Model (DTM)** represents elevation through points and lines and is often erroneously confused with a DEM. The vector-based data format allows elevation to be sampled at a higher density in areas where elevation changes quickly in space (e.g., Mount Assiniboine) and at lower density in areas where elevation changes gradually (e.g., Nelson River). Lines can be used to model mountain ridges, river banks, fault lines, and coast lines where elevation might be constant and it would be useful to represent the elevation as a line feature instead of a point of elevation. It is important to recognize that DTMs can be converted to DEMs through a process of interpolation (more on that in [Chapter 10](https://ubc-geomatics-textbook.github.io/geomatics-textbook/spatial-estimation.html)), but a DEM cannot be converted to a DTM because a DEM is a regular grid or equally-spaced elevation samples.
+A **Digital Terrain Model (DTM)** represents elevation through points and lines and is often erroneously confused with a DEM. The vector-based data format allows elevation to be sampled at a higher density in areas where elevation changes quickly in space (e.g., Mount Assiniboine) and at lower density in areas where elevation changes gradually (e.g., Nelson River). Lines can be used to model mountain ridges, river banks, fault lines, and coast lines where elevation might be constant and it would be useful to represent the elevation as a line feature instead of a point of elevation. It is important to recognize that DTMs can be converted to DEMs through a process of interpolation, but a DEM cannot be converted to a DTM because a DEM is a regular grid or equally-spaced elevation samples.
 
 ## Digital Surface Models (DSM)
 
-Up to this point, we have been looking digital vertical models of _bare Earth_, that is, just plain old elevation of terrain above a vertical datum. If you want to represent the height of features above the bare Earth, like houses and trees, then you would need to use a **Digital Surface Model (DSM)**. Whereas a DTM and DEM both represent elevation above a vertical datum, which is usually mean sea level represented by the geoid, a DSM represents height above a DTM or DEM. In this way, we can model features on the surface and their heights. We will look at more examples of working with DSMs in [Chapter 15](https://ubc-geomatics-textbook.github.io/geomatics-textbook/LiDAR-acquisition-and-analysis.html).
+Up to this point, we have been looking digital vertical models of _bare Earth_, that is, just plain old elevation of terrain above a vertical datum. If you want to represent the height of features above the bare Earth, like houses and trees, then you would need to use a **Digital Surface Model (DSM)**. Whereas a DTM and DEM both represent elevation above a vertical datum, which is usually mean sea level represented by the geoid, a DSM represents height above a DTM or DEM. In this way, we can model features on the surface and their heights.
 
 ## Raster Functions
 
@@ -358,7 +358,7 @@ More sophisticated flow direction algorithms have developed since then that are 
 
 ### Stream Delineation
 
-Streams and rivers represent paths of accumulated flow and can be modeled from a flow accumulation raster by applying a simple threshold: values above this threshold are considered rivers or streams. The threshold that is applied to a flow accumulation raster should be selected based on expert knowledge and visual interpretation of the landscape. The actual value of the flow accumulation threshold is directly related to the extent of the flow accumulation raster. That is, larger flow accumulation rasters have more cells and therefore the accumulative values will be larger compared with a smaller flow accumulation raster. This means that a flow accumulation threshold of 100 can represent the same river that might be represented by a flow accumulation value of 10,000 in a larger raster. Thus, some initial visualization of the flow accumulation raster like in Figure \@ref(fig:9-mount-assiniboine-flow-dir-acc) is needed to determine what threshold should be applied. Once a threshold is determined, the flow accumulation raster can be reclassified to a binary (1 or 0) raster where 1 represents the presence of a stream or river channel. Usually, streams and rivers are represented using a vector data model instead of a raster, so the final step is to convert the binary raster to a set of line features that can be used in other workflows like network analysis (see [Chapter 8](https://ubc-geomatics-textbook.github.io/geomatics-textbook/network-analysis.html)).
+Streams and rivers represent paths of accumulated flow and can be modeled from a flow accumulation raster by applying a simple threshold: values above this threshold are considered rivers or streams. The threshold that is applied to a flow accumulation raster should be selected based on expert knowledge and visual interpretation of the landscape. The actual value of the flow accumulation threshold is directly related to the extent of the flow accumulation raster. That is, larger flow accumulation rasters have more cells and therefore the accumulative values will be larger compared with a smaller flow accumulation raster. This means that a flow accumulation threshold of 100 can represent the same river that might be represented by a flow accumulation value of 10,000 in a larger raster. Thus, some initial visualization of the flow accumulation raster like in Figure \@ref(fig:9-mount-assiniboine-flow-dir-acc) is needed to determine what threshold should be applied. Once a threshold is determined, the flow accumulation raster can be reclassified to a binary (1 or 0) raster where 1 represents the presence of a stream or river channel. Usually, streams and rivers are represented using a vector data model instead of a raster, so the final step is to convert the binary raster to a set of line features that can be used in other workflows like network analysis.
 
 ###	Stream Order
 
@@ -374,7 +374,7 @@ In the GIS, stream order can be automatically calculated by using the binary str
 
 **Watersheds** represent a contributing area to a particular pour point and therefore the total upslope area that flows or drains through a particular cell of the DEM. **Pour points** represent the constrained location that upslope flow must pass through and is identified as a single cell in a raster. Thus, if a set of pour points are defined, then it is possible to simply look at the neighbours of any pour point and identify which of the neighbouring cells flow into the pour point cell. If a neighbouring cell flows into the pour point, then that neighbouring cell is labelled within the same watershed as the pour point. This iterative process continues until the edge of the watershed search boundary finds a ridge, in which case the flow direction of neighbouring cells would flow opposite to the watershed and the search would end in the iteration that adds no more cells to the watershed. This process is repeated for all pour points until all cells in the DEM are classified into their respective watersheds.
 
-You might be wondering how pour points are initialized for this process. A common way to initialize pour points is to manually identify them within the context of your research objectives. Practically, pour points should be located on cells with high flow accumulation (i.e., not a random slope), so that you can be sure your watersheds will reach from ridge-to-ridge. Pour points can also be programmatically identified in several ways. For one, you could select all nodes of your stream network where the stream order transitions from a specific lower order to the next highest order number. For example, setting pour points to the transitions from third order to fourth order streams would yield a set of watersheds that contribute to fourth order streams with the caveat that you do not identify any watersheds downstream of fourth order streams. You can adjust this approach as needed if you are looking at larger darinage areas by increasing the stream order that you are considering. Typically, the transition between your highest order stream and the next lowest order represents all of the drainage areas for your DEM. If you need regularly-sized watersheds, then the flow accumulation raster conveniently indicates how many upslope cells flow into each downslope cell, so you can identify pour points along your stream network that contribute exactly 10,000 upslope cells. If your DEM cell size is 10 m, then this would be equivalent to mapping 1 km^2^ watersheds. If your goal is regularly-distributed watersheds along a particular reach of your stream network, then you could export the target stream segment and create points that are spaced at regular intervals along that stream segment. More on network analysis of hydrological networks in [Chapter 8](https://ubc-geomatics-textbook.github.io/geomatics-textbook/network-analysis.html).
+You might be wondering how pour points are initialized for this process. A common way to initialize pour points is to manually identify them within the context of your research objectives. Practically, pour points should be located on cells with high flow accumulation (i.e., not a random slope), so that you can be sure your watersheds will reach from ridge-to-ridge. Pour points can also be programmatically identified in several ways. For one, you could select all nodes of your stream network where the stream order transitions from a specific lower order to the next highest order number. For example, setting pour points to the transitions from third order to fourth order streams would yield a set of watersheds that contribute to fourth order streams with the caveat that you do not identify any watersheds downstream of fourth order streams. You can adjust this approach as needed if you are looking at larger darinage areas by increasing the stream order that you are considering. Typically, the transition between your highest order stream and the next lowest order represents all of the drainage areas for your DEM. If you need regularly-sized watersheds, then the flow accumulation raster conveniently indicates how many upslope cells flow into each downslope cell, so you can identify pour points along your stream network that contribute exactly 10,000 upslope cells. If your DEM cell size is 10 m, then this would be equivalent to mapping 1 km^{2} watersheds. If your goal is regularly-distributed watersheds along a particular reach of your stream network, then you could export the target stream segment and create points that are spaced at regular intervals along that stream segment.
 
 ### Topographic Wetness Index
 
@@ -413,7 +413,7 @@ m = leaflet() %>%
   addLayersControl(overlayGroups = c("Fort St. John TSA"), position = c("bottomleft"), options = layersControlOptions(collapsed = TRUE))
 ```
 
-```{r 9-fort-st-john-study-area, echo=FALSE, fig.cap=fig_cap, ouwidth="75%"}
+```{r 9-fort-st-john-study-area, echo=FALSE, fig.cap=fig_cap, ouwidth="100%"}
 fig_cap <- paste0("The Fort St. John Timber Supply Area, British Columbia, Canada. Data from Government of British Columbia and licensed under the Open Government Licence - British Columbia. Mesler, CC-BY-SA-4.0.")
 if (knitr:::is_latex_output()) {
 knitr::include_graphics(here::here("images", "09-fort-st-john-study-area.png"))
@@ -529,8 +529,8 @@ m2 = leaflet() %>%
   addLayersControl(overlayGroups = c("Aspect", "MRVBF", "NDVI(Spectral)", "NDWI(Spectral)", "SAGA Wetness", "Slope", "Prediction Raster"), position = c("bottomleft"), options = layersControlOptions(collapsed = TRUE))
 ```
 
-```{r 9-leaflet-map-layers, echo=FALSE, out.width="75%", fig.cap=fig_cap}
-fig_cap <- paste0("Input layers and output prediction raster for the Chowade Watershed Management basin.<a href='",baseurl,"#fig:9-leaflet-map'> Animated figure can be viewed in the web browser version of the textbook</a>.Data from @city_of_vancouver_notitle_2009 and licensed under the  under the <a href='",covlicence,"'>Open Government License - Vancouver</a>. Lam, CC-BY-SA-4.0.")
+```{r 9-leaflet-map-layers, echo=FALSE, out.width="100%", fig.cap=fig_cap}
+fig_cap <- paste0("Input layers and output prediction raster for the Chowade Watershed Management basin.<a href='",baseurl,"#fig:9-leaflet-map'> Animated figure can be viewed in the web browser version of the textbook</a>. Data from @city_of_vancouver_notitle_2009 and licensed under the  under the <a href='",covlicence,"'>Open Government License - Vancouver</a>. Lam, CC-BY-SA-4.0.")
 if (knitr:::is_latex_output()) {
 knitr::include_graphics(here::here("images", "09-leaflet-map-layers.png"))
 } else {
@@ -579,9 +579,3 @@ Extrusion is also frequently used to visualize non-height attributes. For exampl
     fig_cap <- paste0("Elevation exaggeration of Mount Logan elevation, Yukon Territory, Canada. Digital Elevation Model by @natural_resources_canada_canadian_2015. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics("images/09-mount-logan-exaggeration.png")
 ```
-
-## Summary
-
-## Reflection Questions {-}
-
-## Practice Questions {-}

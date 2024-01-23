@@ -1,7 +1,7 @@
-```{r echo=FALSE, warning=FALSE}
+<!-- ```{r echo=FALSE, warning=FALSE}
 yml_content <- yaml::read_yaml("chapterauthors.yml")
-author <- yml_content[["topologyAndGeocoding"]][["author"]]
-coauthor <- yml_content[["topologyAndGeocoding"]][["coauthor"]]
+author <- yml_content[["overlayAndProximityAnalysis"]][["author"]]
+coauthor <- yml_content[["overlayAndProximityAnalysis"]][["coauthor"]]
 ```
 # Overlay and Proximity Analysis {#overlay-and-proximity-analysis}
 
@@ -240,8 +240,6 @@ Post-dissolve, we would have expected the number of rows in the attribute table 
 **Identity** is another form of overlay that is the spatial equivalent of a left or right outer join. In other words, we features in $A$ are first intersected with features in $B$, then only features that were also originally in $A$ are transferred to the output C. Identity supports attribute transfer such that the attributes in $B$ are joined with the attributes in $A$. However, there may be some features in $A$ that do not intersect with features in $B$, in which case, the values of the transferred attributes from $B$ will be $NULL$ or not defined.
 
 The area of street trees is more powerful when compared to the length of streets in each ward. Rather than working with the absolute area, we will be calculating the relative area. To do this, we will calculate an identity to assign a ward to each section of street in the Ottawa streets feature class Then, we will use summary statistics to calculate the length of street in each ward. With that value, we will divide the area of street trees by the length of street to get the relative area of street trees per street.
-
-<!--
 
 ### Erase
 

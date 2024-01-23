@@ -97,7 +97,7 @@ The same rules above apply when we measure elevation. In order for elevation mea
 
 A **geodetic vertical datum** is one that describes the Earth's shape in the simplest possible terms using standard geometry. Despite what a globe might lead you to believe, the Earth is not perfectly spherical, but it is close to being spherical. In fact, the radius of Earth varies by no more than 22 km or 0.35%, hardly anything you would ever notice if you were holding it in your hand. That small difference is, however, significant enough to lead to mapping inaccuracies at the local level if a spherical model of Earth was adopted (Figure \@ref(fig:2-geodetic-datum)). Instead, we frequently describe Earth's shape as an oblate ellipsoid, which is essentially a sphere that has been flattened, and we define this ellipsoid with a semimajor and semiminor axis. Sometimes you will see the term *spheroid* used, which just means "sphere-like" and is interchangeable with the term *ellipsoid*.
 
-```{r 2-geodetic-datum, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+```{r 2-geodetic-datum, fig.cap = fig_cap, out.width= "50%", echo = FALSE}
     fig_cap <- paste0("Spherical geodetic datum. Pickell, CC-BY-SA-4.0.")
     knitr::include_graphics("images/02-geodetic-datum.png")
 ```
@@ -134,7 +134,7 @@ The **geoid** is a physical approximation of the figure of Earth. The shape repr
 
 When you measure the height of something relative to a gravimetric vertical datum like the geoid, you must level your instrument. Levelling forms a vertical line that is orthogonal or perpendicular to the geoid, known as a **plumb line**. It is incredibly easy to visualize a plumb line. Simply tie a rock to the end of a string and hold the string with your outstretched arm. The length of the straightened string traces a plumb line to the center of mass of Earth, wherever you are. Because gravity changes with location on Earth and all plumb lines are converging on a singular point, plumb lines are never parallel. This phenomenon has important implications for comparing observations on the the ground with a geodetic model of Earth like an ellipsoid. In other words, the plumb line that you traced with your string is pointing to the center of mass of the geoid, but the center of the ellipsoid is often in a slightly different direction. This difference is known as the **deflection of the vertical** and is measured as the angular difference between the centre of the geoid and the centre of a reference ellipsoid. Like other measurements of geodetic location (i.e., latitude and longitude), the deflection of the vertical is comprised of two angles: $ξ$ (xi) representing the north-south angular difference and $η$ (eta) representing the east-west angular difference.
 
-It should be evident by now that the reference surface that you choose as a vertical datum will determine the measured elevation of Earth's terrain. Additionally, We frequently need to convert elevations between geodetic and gravimetric vertical datums. For example, when you use a Global Navigation Satellite System receiver, you are provided with an elevation that is relative to the WGS 1984 ellipsoid (more on that in [Chapter 4](https://ubc-geomatics-textbook.github.io/geomatics-textbook/collecting-and-editing-data.html)). The difference in height between an ellipsoid and the geoid is referred to as **geoid height (N)** while the difference in height between an ellipsoid and Earth's surface is referred to as **geodetic or ellipsoidal height (h)**. The difference in height between the geoid and the Earth's surface is called **orthometric height (H)** (Figure \@ref(fig:2-H-h-N)), and is given as:
+It should be evident by now that the reference surface that you choose as a vertical datum will determine the measured elevation of Earth's terrain. Additionally, We frequently need to convert elevations between geodetic and gravimetric vertical datums. For example, when you use a Global Navigation Satellite System receiver, you are provided with an elevation that is relative to the WGS 1984 ellipsoid. The difference in height between an ellipsoid and the geoid is referred to as **geoid height (N)** while the difference in height between an ellipsoid and Earth's surface is referred to as **geodetic or ellipsoidal height (h)**. The difference in height between the geoid and the Earth's surface is called **orthometric height (H)** (Figure \@ref(fig:2-H-h-N)), and is given as:
 
 $$
 H = h - N
@@ -159,7 +159,7 @@ The Canadian Geodetic Vertical Datum of 2013 (CGVD2013) is the current gravimetr
 
 For reference, CGVD2013 is 17 centimeters below mean sea level measured in Vancouver at the Pacific Ocean, 39 centimeters above mean sea level in Halifax at the Atlantic Ocean, and 36 centimeters above mean sea level in Tuktoyaktuk at the Arctic Ocean. The older CGDV28 did not have any survey benchmarks in the far north of Canada and, with the advent of more reliable satellite-based measurements, was modernized in 2015 to CGVD2013. The United States currently uses the North American Vertical Datum of 1988 (NAVD88), which was never adopted by Canada, but the United States will be modernizing their vertical datum by adopting a gravimetric model with the same gravity potential value as Canada as early as 2025.
 
-``` {r echo=F}
+``` {r echo=FALSE, warning=FALSE, message=FALSE}
 countries <- rgdal::readOGR("Data/02/canada.geojson", verbose=F)
 r <- raster("Data/02/CGG2013_minus_HT21997_meters.tif")
 p <- brewer.pal(11,"RdYlBu")
@@ -167,7 +167,7 @@ pal <- colorNumeric(p, values(r), na.color = "transparent")
 ```
 
 ``` {r echo=FALSE, warning=FALSE, message=FALSE}
-m = leaflet(countries) %>%
+m <- leaflet(countries) %>%
   addTiles() %>%
   addScaleBar(position = c("topleft")) %>%
   addRasterImage(r, colors = pal, group = "Difference", opacity = 1, maxBytes = "Inf") %>%
@@ -175,9 +175,9 @@ m = leaflet(countries) %>%
   addLegend(pal = pal, values = values(r), group = "Difference", opacity = 1, title = "CGVD2013 minus CGVD28 (meters)")
 ```
 
-``` {r 2-CGVD-leaflet, echo=FALSE, out.width="75%", fig.cap=fig_cap}
-  fig_cap <- paste0("The difference (in meters) between the Canadian Geodetic Vertical Datum of 2013 (CGVD2013) and the Canadian Geodetic Vertical Datum of 1928 (CGVD28).<a
-  href='",baseurl,"#fig:2-CGVD-leaflet'>Animated figure can be viewed in the web browser version of the textbook</a>. Data from Natural Resources Canada and licensed under the <a href='",nrcanlicense,">Open Government Licence - Canada </a>. Pickell, CC-BY-SA-4.0.")
+``` {r 2-CGVD-leaflet, echo=FALSE, out.width="100%", fig.cap=fig_cap}
+  fig_cap <- paste0("The difference (in meters) between the Canadian Geodetic Vertical Datum of 2013 (CGVD2013) and the Canadian Geodetic Vertical Datum of 1928 (CGVD28). <a
+  href='",baseurl,"#fig:2-CGVD-leaflet'>Animated figure can be viewed in the web browser version of the textbook</a>. Data from Natural Resources Canada and licensed under the <a href='",nrcanlicense,"'>Open Government Licence - Canada</a>. Pickell, CC-BY-SA-4.0.")
 if (knitr:::is_latex_output()) {
 knitr::include_graphics(here::here("images", "02-CGVD-leaflet.PNG"))
 } else {
@@ -220,14 +220,14 @@ If you mapped the Earth as an ellipsoid in a three dimensional Cartesian coordin
 Use our geodesy tool to visualize the differences between the sphere, ellipsoid, and geoid. You can modify the transparency of the sphere and ellipsoid to see how these geometries vary. Change the flattening of the ellipsoid to achieve different models of Earth. Search for locations with latitude and longitude values and calculate the geoid height. Compare geocentric and geodetic latitudes. The sphere and the ellipsoid models in the visualization represent Earth's equatorial diameter (semi-major axis) as 6,356,752.3 m (i.e., equivalent to WGS 1984) and the geoid elevations are exaggerated by a factor of 0.549 to enhance their appearance.
 
 ```{r 2-geodesy-visualization-static, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste0("Online geodesy tool for visualizing the differences between the sphere, ellipsoid, and geoid. <a href='http://oergeomatics-geodesy-viz.s3-website.ca-central-1.amazonaws.com/'>Click here to access the interactive tool.</a> Floria Gu, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Online geodesy tool for visualizing the differences between the sphere, ellipsoid, and geoid. <a href='https://ubcemergingmedialab.github.io/geomatics-textbook/viz/lidar-viz/'>Click here to access the interactive tool.</a> Floria Gu, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "02-geodesy-visualization-static.png"))
 ```
 <br/>
 
 ### Projected Coordinate Systems
 
-Despite everything covered so far in this chapter, we very rarely see or display geographic data in 3-dimensions. In fact, most geographic data you will likely encounter will be either 1- or 2-dimensional (more on that in [Chapter 3](https://ubc-geomatics-textbook.github.io/geomatics-textbook/types-of-data.html)). Geographic coordinate systems are incredibly important for understanding how geographic data are fundamentally "attached" to the Earth. However, geographic coordinate systems are not suitable for creating maps, those 2-dimensional spatial models that can be easily displayed on your computer screen or printed on a sheet of paper. Instead, cartographers rely on **projected coordinate systems** that flatten a 3-dimensional geographic coordinate system to a 2-dimensional map. Really, these projected coordinate systems involve transformations called **map projections** that convert 3-dimensional coordinate space into 2-dimensional coordinate space, which means the map units are linear such as meters. Whenever we move from a geographic to a projected coordinate system, we lose information, and distortion results.
+Despite everything covered so far in this chapter, we very rarely see or display geographic data in 3-dimensions. In fact, most geographic data you will likely encounter will be either 1- or 2-dimensional. Geographic coordinate systems are incredibly important for understanding how geographic data are fundamentally "attached" to the Earth. However, geographic coordinate systems are not suitable for creating maps, those 2-dimensional spatial models that can be easily displayed on your computer screen or printed on a sheet of paper. Instead, cartographers rely on **projected coordinate systems** that flatten a 3-dimensional geographic coordinate system to a 2-dimensional map. Really, these projected coordinate systems involve transformations called **map projections** that convert 3-dimensional coordinate space into 2-dimensional coordinate space, which means the map units are linear such as meters. Whenever we move from a geographic to a projected coordinate system, we lose information, and distortion results.
 
 Cartographers have wrestled with how to project Earth onto a printed page for millennia. The fundamental mathematics for map projections were first comprehensively described by Claudius Ptolemy around 150 C.E. Ptolemy's work *Geography* was one of the earliest treatises on cartography and map making that included an atlas of regional maps of Europe, Africa, and Asia. Ptolemy's work built on and came several centuries following Eratosthenes and earlier Greek geocentric observations by Plato and Aristotle. Ptolemy observed that a globe was the best way to represent the intervals and proportions of Earth's surface without distortion. However, globes are not very useful for looking at regions in detail and you can only see part of a globe at any given time. Thus, a mathematical language is needed to translate a geographic coordinate system to a planar or projected coordinate system. *Geography* was lost to antiquity before it was rediscovered, copied, and translated centuries later, first by Muslim cartographers in the 9th century C.E. and later by Italian cartographers in the 15th century C.E. during the Renaissance, which gave rise to the many types of map projections that we see today.
 
@@ -339,5 +339,3 @@ In this chapter, you learned about the science and technology of geodesy that go
 1. Describe the process of measuring the height of something on Earth.
 2. Explain the difference between a geographic coordinate system and a projected coordinate system.
 3. Name as many projected coordinate systems as you can.
-
-## Practice Questions {-}

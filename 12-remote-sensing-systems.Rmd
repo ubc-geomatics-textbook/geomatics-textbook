@@ -30,20 +30,6 @@ knitr::include_graphics("images/12-GOES_1_earth.png")
 
 Remote sensing systems range in size and complexity from a handheld camera to the Hubble telescope and capture images of areas ranging from a few meters to several kilometers in size. Though devices such as microscopes, X-ray machines, and handheld radios are technically remote sensing systems, the field of remote sensing typically refers to observing Earth on a small spatial scale (1:100 to 1:250,000).
 
-:::: {.box-content .call-out-content}
-
-::: {.box-title .call-out-top}
-### NOTE {-}
-:::
-
-<p id="box-text">
-Remember, in spatial scale, “small” means a big picture. If you want a refresher on how to read and understand map scales, check out section 2.5 in [Chapter 2](https://ubc-geomatics-textbook.github.io/geomatics-textbook/mapping-data.html).
-</p>
-
-::::
-
-<br>
-
 The range of uses for remote sensing platforms are dazzling in number, allowing us to monitor severe weather events, ocean currents, land cover change, natural disturbances, forest health, surface temperature, cloud cover, urban development, and so much more with high precision and accuracy. In this chapter, we will break down the how and where of remote sensing systems and discover a few different systems used for Earth observation today.
 
 :::: {.box-content .learning-objectives-content}
@@ -72,7 +58,7 @@ The property of transparent mediums to change the direction of light beams is ca
 The lens at the front of your eyeball changes refracts light beams from varying distances precisely onto your retina. The optical systems on remote sensing platforms are the same: they use a specially designed lens to focus light beams at the desired distance to onto their own recording medium. Below in figure \@ref(fig:12-focus-example-humaneye) is a simple visualization of how optical systems focus light onto a desired point to produce an in-focus image.
 
 ```{r 12-focus-example-humaneye, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Focusing lens [@vorenkamp_how_2015]. <a href='",baseurl,"#fig:12-focus-example-humaneye'>Animated figure can be viewed in the web browser version of the textbook</a>. Copyright Todd Vorenkamp. Used with permission.)")
+fig_cap <- paste0("Focusing lens [@vorenkamp_how_2015]. <a href='",baseurl,"#fig:12-focus-example-humaneye'>Animated figure can be viewed in the web browser version of the textbook</a>. Copyright Todd Vorenkamp. Used with permission.")
 knitr::include_graphics("images/12-focus_example_humaneye.gif")
 ```
 <br/>
@@ -84,28 +70,16 @@ Actually, yes, you are – by both your eyes *and* the camera your friend used. 
 Most, if not all, lenses on optical systems for remote sensing are **spherical lenses**, called that because each side of the lens is spherical in shape, similar to a bowl. A **convex** optical surface curves outward from the lens centre, whereas a **concave** optical surface curves inward toward the lens centre. Though not spherical, a planar or flat optical surface may be used as well. A spherical lens is formed by joining two optical surfaces – concave, convex, and/or planar – back-to-back. A **biconvex** or positive lens is two convex surfaces, and a **biconcave** or negative lens is - you guessed it - two concave surfaces. The **radius of curvature** is the measure of how much an optical surface “bulges” or “caves”. If you imagine tracing the edge of the surface in an arc and continuing the curve all the way around in a circle, the radius of this imagined circle would be the radius of curvature. Biconvex and biconcave lenses can be “equiconvex”, meaning they have the same spherical curvature on each side, but may also have uneven curvatures. The lens in the human eye is an example of a lens with uneven curvatures – our radius of curvature is higher at the front. Figures \@ref(fig:12-RoC-convex) and \@ref(fig:12-RoC-concave) demonstrate how the radius of curvature is measured for both concave and convex optical surfaces.
 
 ```{r 12-RoC-convex, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Measuring the radius of curvature for a convex optical surface. Claire Armour. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
+fig_cap <- paste0("Measuring the radius of curvature for a convex optical surface. Armour, CC-BY-SA-4.0")
 knitr::include_graphics("images/12-ROC_convex.png")
 ```
 <br/>
 
 ```{r 12-RoC-concave, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Measuring the radius of curvature for a concave optical surface. Claire Armour.[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
+fig_cap <- paste0("Measuring the radius of curvature for a concave optical surface. Armour, CC-BY-SA-4.0")
 knitr::include_graphics("images/12-ROC_concave.png")
 ```
 <br/>
-
-:::: {.box-content .your-turn-content}
-
-::: {.box-title .your-turn-top}
-### Your Turn! {-}
-:::
-
-<p id="box-text">
-  What is the radius of curvature for a perfectly flat lens? See answer at end of chapter.
-</p>
-
-::::
 
 ### Focal Length
 
@@ -118,13 +92,13 @@ Now that we know a little bit about what lenses look like, let us turn to consid
 The point where the light converges or appears to converge is called the *focal point*, and the distance between the focal point and the centre of the lens is called the *focal length*. For a converging lens, the focal length is positive; for a diverging lens, it is negative. Figures \@ref(fig:12-convex-focal-diagram) and \@ref(fig:12-concave-focal-diagram) illustrate the behaviour of light when travelling through a biconvex and biconcave lens. See the paragraph below the diagrams for variable labels.
 
 ```{r 12-convex-focal-diagram, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Measurements in a biconvex lens. [@drbob_positive_2006]. [CC BY 3.0 Unported](https://creativecommons.org/licenses/by/3.0/)")
+fig_cap <- paste0("Measurements in a biconvex lens. [@drbob_positive_2006], CC-BY-3.0 Unported.")
 knitr::include_graphics("images/12-convex_focal_diagram.png")
 ```
 <br/>
 
 ```{r 12-concave-focal-diagram, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Measurements in a biconcave lens. [@drbob_negative_2006]. [CC BY 3.0 Unported](https://creativecommons.org/licenses/by/3.0/)")
+fig_cap <- paste0("Measurements in a biconcave lens. [@drbob_negative_2006], CC-BY-3.0 Unported.")
 knitr::include_graphics("images/12-concave_focal_diagram.png")
 ```
 <br/>
@@ -136,14 +110,10 @@ Equation 1:     \[\frac{1}{f} = (n-1)[\frac{1}{R_1} - \frac{1}{R_2} + \frac{(n-1
 We know how lenses impact focal length, but how does focal length impact a photo? Let us return to our scenario in Banff National Park where we have two mismatched images of the same mountain. You’ve done some investigating and found that the camera your friend used is very large (and expensive). The lens at the front is quite far from the recording medium in the body of the camera – many times the distance between your own eye lens and recording medium, the retina. This difference in focal length is the cause of the differing images. A low optical power lens with a long focal length will have high magnification, causing distant objects to appear larger and narrowing the field of view (see section 12.something). A high optical power lens with a short focal length, such as your eye, will have low magnification and a larger field of view by comparison. Mystery solved!
 <br/>
 
-:::: {.box-content .your-turn-content}
-::: {.box-title .your-turn-top}
-### Your Turn! {-}
-:::
-<p id="box-text">
+
 When you return from your trip, your friend decides to test you on your new skills and shows you these additional photos they took of Mt Assiniboine in nearly identical spots on the same day. They ask you which photo was taken with a longer camera lens. How can you know?
+
 *Try this*: from the peak of Mt Assiniboine (the very big one), draw a line straight downwards or cover half of the photo with a piece of paper, and then do the same for the other photo. Does the line or paper edge intersect at the same points of the foreground in each photo? Can you see the same parts of the mountains in the foreground? Use the rock and snow patterns for reference. If the cameras were the same focal length, even with different cropping and lighting as seen here, the answers should both be yes. Can you tell which photo was taken with a 67mm lens and which was taken with a 105mm lens? See the answers at the end of the chapter.
-</p>
 
 ```{r 12-assiniboine-day, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 fig_cap <- paste0("Mt Assiniboine, image one [@maguire_mt_nodate]. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
@@ -156,11 +126,10 @@ fig_cap <- paste0("Mt Assiniboine, image two [@maguire_mt_nodate-1]. [CC BY 4.0]
 knitr::include_graphics("images/12-assiniboine_sunset.png")
 ```
 <br/>
-::::
 
 ### Sensors
 
-The **sensor** is the subsystem that is responsible for digitally recording the intensity of electromagnetic radiation. Sensors are  engineered in different ways to suit the type of electromagnetic radiation that needs to be recorded. However, most sensors will by comprised by three primary elements: a filter, an array of detectors, and an analog-to-digital converter. The **filter** is responsible for ensuring that only the desired wavelength of electromagnetic radiation enters the sensor. For example, in order to image only the near infrared part of the spectrum, a filter is needed to block out photons of all other wavelengths from entering the sensor. Once the desired wavelength of electromagnetic radiation is in the sensor, then the photons fall onto **detectors**, which are responsible for recording the electromagnetic radiation at a specific location in the array. Finally, the **analog-to-digital converter** is responsible for converting the photon energy into a measurable electrical charge that eventually becomes the digital number in the image for a given pixel. In summary, the photons enter the telescope or camera lens, are focused onto a plane through a lens, then filtered by wavelength, then they fall onto individual detectors before being converted to digital signals that represent numbers in a raster image. This whole process is illustrated in Figure \@ref(fig:12-lens-sensor-filter-detector-ADC) below.
+The **sensor** is the subsystem that is responsible for digitally recording the intensity of electromagnetic radiation. Sensors are  engineered in different ways to suit the type of electromagnetic radiation that needs to be recorded. However, most sensors will by comprised by three primary elements: a filter, an array of detectors, and an analog-to-digital converter (ADC). The **filter** is responsible for ensuring that only the desired wavelength of electromagnetic radiation enters the sensor. For example, in order to image only the near infrared part of the spectrum, a filter is needed to block out photons of all other wavelengths from entering the sensor. Once the desired wavelength of electromagnetic radiation is in the sensor, then the photons fall onto **detectors**, which are responsible for recording the electromagnetic radiation at a specific location in the array. Finally, the **analog-to-digital converter** is responsible for converting the photon energy into a measurable electrical charge that eventually becomes the digital number in the image for a given pixel. In summary, the photons enter the telescope or camera lens, are focused onto a plane through a lens, then filtered by wavelength, then they fall onto individual detectors before being converted to digital signals that represent numbers in a raster image. This whole process is illustrated in Figure \@ref(fig:12-lens-sensor-filter-detector-ADC) below.
 
 ```{r 12-lens-sensor-filter-detector-ADC, fig.cap = fig_cap, out.width="90%", echo = FALSE}
 fig_cap <- paste0("Electromagnetic radiation enters the lens, where it is refracted and focused onto a surface containing the digital sensor. An array of detectors are arranged on the digital sensor that represent different pixel locations in the output raster image. Filters are used to ensure only specific wavelengths are recorded by each detector. Energy from photons is converted to electrical charges and then converted to digital numbers by the analog-to-digital converter. Pickell, CC-BY-SA-4.0")
@@ -246,7 +215,7 @@ However, almost all remote sensing systems have monocular ("one-eyed") vision, w
 
 Finding the camera location is fairly straightforward. We can use a Global Positioning System (GPS) to record our exact coordinates. Depending on the platform - terrestrial, aerial, or spaceborne - we can use various tools to record the platform's height, altitude, and/or elevation.
 
-The camera perspective, including lens angle and direction, heavily influences how objects are perceived in imagery.  Similarly to how accidentally opening your phone camera on selfie mode is not ideal for a flattering photo of your face, there are favourable perspectives for observing different natural phenomena. It's therefore of high importance to carefully select the best perspective for the desired use of your imagery.
+The camera perspective, including lens angle and direction, heavily influences how objects are perceived in imagery.  Similarly to how accidentally opening your phone camera on selfie mode is not ideal for a flattering photo of your face, there are favourable perspectives for observing different natural phenomena. It is therefore of high importance to carefully select the best perspective for the desired use of your imagery.
 
 The precise angle of the camera is also crucial. Thinking back to map projections in [Chapter 2](https://ubc-geomatics-textbook.github.io/geomatics-textbook/mapping-data.html), you will recall that representing our three-dimensional planet in a two-dimensional space causes certain regions to be heavily distorted in shape and size. You will also recall from earlier in this chapter how a camera's optical power changes the way objects at varying distances are seen.
 
@@ -261,23 +230,17 @@ fig_cap <- paste0("Aerial photo of forest, road, and river near Kitimat, BC [@de
 knitr::include_graphics("images/12-aerial-plane.png")
 ```
 
-Aerial imagery can be taken from remotely piloted aircraft systems (RPAs), airplanes, or satellites and thus has a huge range of resolutions and area coverage. It's highly sensitive to adverse weather, cloud cover or poor air quality, and variable lighting, so it needs to be carefully timed or collected at frequent intervals to account for unusable data.
+Aerial imagery can be taken from remotely piloted aircraft systems (RPAs), airplanes, or satellites and thus has a huge range of resolutions and area coverage. It is highly sensitive to adverse weather, cloud cover or poor air quality, and variable lighting, so it needs to be carefully timed or collected at frequent intervals to account for unusable data.
 
-Common applications:
-  - *Mapping land cover and land use*
-  - *Assessing ecosystem disturbance frequency and severity*
-  - *Calculating indices such as Normalized Difference Vegetation Index (NDVI) and Normalized Difference Burn Ratio (NDBR)*
-  - *Collecting climate and weather data - think thermal maps, storm tracking, coastline changes, etc*
-
-_It's important to note that the "ground plane" refers to a plane tangent to the geoid and not the physical ground surface. In variable terrain such as mountains, much of the ground will be seen "at an angle", but the overall camera perspective is unchanged. See figures \@ref(fig:12-aerial-good) and \@ref(fig:12-aerial-bad) for a visualization of what this looks like with regards to aerial imagery._
+_It is important to note that the "ground plane" refers to a plane tangent to the geoid and not the physical ground surface. In variable terrain such as mountains, much of the ground will be seen "at an angle", but the overall camera perspective is unchanged. See figures \@ref(fig:12-aerial-good) and \@ref(fig:12-aerial-bad) for a visualization of what this looks like with regards to aerial imagery._
 
 ```{r 12-aerial-good, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("How aerial imagery should be taken. Claire Armour.<a href='",baseurl,"#fig:12-aerial-good'> Animated figure can be viewed in the web browser version of the textbook</a>. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
+fig_cap <- paste0("How aerial imagery should be taken. <a href='",baseurl,"#fig:12-aerial-good'> Animated figure can be viewed in the web browser version of the textbook.</a> Armour, CC-BY-SA-4.0.")
 knitr::include_graphics("images/12-aerial-good.gif")
 ```
 
 ```{r 12-aerial-bad, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("How aerial imagery should NOT be taken. Claire Armour.  <a href='",baseurl,"#fig:12-aerial-bad'>Animated figure can be viewed in the web browser version of the textbook</a> --> [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
+fig_cap <- paste0("How aerial imagery should NOT be taken.<a href='",baseurl,"#fig:12-aerial-bad'>Animated figure can be viewed in the web browser version of the textbook.</a> Armour, CC-BY-SA-4.0.")
 knitr::include_graphics("images/12-aerial-bad.gif")
 ```
 <br/>
@@ -291,12 +254,6 @@ fig_cap <- paste0("Zenith perspective taken from the ground looking up to the ca
 knitr::include_graphics(here::here("images", "12-zenith-image.png"))
 ```
 <br/>
-
-Common applications:
-- *Determining crown closure or canopy cover*
-- *Viewing branch networks*
-- *Measuring leaf area for the upper canopy*
-- *Astronomy and cosmological observation*
 
 ## Oblique Perspective
 
@@ -320,7 +277,7 @@ Common applications:
 A hemispherical perspective has less to do with camera positioning and more to do with field of view, but it is still a "perspective". It captures imagery in the half-sphere (hemisphere) directly in front of the lens. The radius of the hemisphere is dependent on the lens size and optical power of the hemispherical lens used in the camera. Figure X below visualizes a hemispherical perspective.
 
 ```{r 12-hemisphere-view, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Visualization of a hemispherical perspective. Claire Armour. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)")
+fig_cap <- paste0("Visualization of a hemispherical perspective. Armour, CC-BY-SA-4.0.")
 knitr::include_graphics("images/12-hemisphere-view.png")
 ```
 <br/>
@@ -328,13 +285,13 @@ knitr::include_graphics("images/12-hemisphere-view.png")
 Due to the unusual shape of the lens, it captures a much larger proportion of a scene than we could normally take in without swiveling our heads or stitching photos into a mosaic, such as a panorama. A hemispherical lens will produce a circular rather than rectilinear output. The lens curvature will cause objects in the image to be highly distorted and, unlike rectilinear photos, cannot be easily divided into pixels for analysis. However, hemispherical perspectives are uniquely suited to viewing large expanses of a scene all at once. For this reason, it is highly favourable for sports cameras, security cameras, and natural monitoring. Figures \@ref(fig:12-hemispherical-lens) and \@ref(fig:12-newfoundland-from-space) shows hemispherical perspectives from two very different angles.
 
 ```{r 12-hemispherical-lens, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Hemispherical photo taken in the Bavarian forest [@wegmann_hemispherical_2011]. [CC BY 3.0 Unported](https://creativecommons.org/licenses/by/3.0/)")
+fig_cap <- paste0("Hemispherical photo taken in the Bavarian forest. [@wegmann_hemispherical_2011], CC-BY-3.0.")
 knitr::include_graphics("images/12-hemispherical-lens.png")
 ```
 <br/>
 
 ```{r 12-newfoundland-from-space, fig.cap = fig_cap, out.width="90%", echo = FALSE}
-fig_cap <- paste0("Picture of Newfoundland, Canada, taken by David Saint-Jacques during his space mission [@canadian_space_agency_newfoundland_2019]. [CC BY 3.0 Unported.](https://creativecommons.org/licenses/by/3.0/)")
+fig_cap <- paste0("Picture of Newfoundland, Canada, taken by David Saint-Jacques during his space mission. [@canadian_space_agency_newfoundland_2019], CC-BY-3.0.")
 knitr::include_graphics("images/12-newfoundland_from_space.png")
 ```
 <br/>
@@ -348,7 +305,7 @@ Common applications
 
 Remote sensing **platforms** are simply whatever a camera system or sensor is attached or affixed to. The platform can be stationary like a camera on a tripod or it can be mobile in the atmosphere or orbiting in space (Figure \@ref(fig:12-platforms)). The choice of platform can impact everything from the type of imagery that can be collected to the scale and frequency of the imagery. As a general rule of thumb, the farther you are above Earth, the more expensive the platform becomes, but the cost per area imaged is reduced drastically. For example, a handheld camera is relatively cheap compared with a multi-million dollar satellite, but it would cost a lot of time and resources to image large areas with a handheld camera compared with a satellite. Scale or resolution of your imagery will also tend to decrease the farther that you get from Earth. This means that each pixel in an image is representing a larger area on the Earth's surface. In the following sections, we will look at some examples and applications of various platforms for remote sensing systems.
 
-```{r 12-platforms, fig.cap = fig_cap, out.width="90%", echo = FALSE}
+```{r 12-platforms, fig.cap = fig_cap, out.width="50%", echo = FALSE}
 fig_cap <- paste0("Different types of platforms for remote sensing systems. Image scale is represented on the y-axis in log scale. Pickell, CC-BY-SA-4.0.")
 knitr::include_graphics(here::here("images", "12-platforms.png"))
 ```
@@ -441,18 +398,6 @@ Relatively speaking, LEO is the most crowded region of near-Earth space due to d
 
 **Near-polar or sun-synchronous orbits** are a special type of LEO where the satellite follows a path that travels approximately from pole to pole. The special property for this orbit is that the orbital period of 96-100 minutes (the time needed to complete a full orbit around Earth) is approximately equivalent to the timing of Earth's rotation. This results in the satellite crossing the Equator (or any other parallel on Earth, depending on the inclination) twice at the same local time, once during the day and once during the night. This synchronization with the Sun is very important for many passive Earth observing satellites that require consistent illumination conditions from image to image. 
 
-:::: {.box-content .call-out-content}
-
-::: {.box-title .call-out-top}
-## Recall This {-}
-:::
-
-<p id="box-text">
-Earth is an oblate ellipsoid with a slightly shorter axis of rotation than the equatorial axis, so a polar orbiting satellite with a near perfect circular orbit can vary in "altitude" by as much as 30 km.
-</p>
-
-::::
-
 ### Medium Earth Orbit (MEO)
 
 **Medium Earth Orbit (MEO)** occurs at altitudes between 2,000-35,786 km or orbital periods more than 2 hours and less than 24 hours. This region of space is much less crowded compared with LEO and satellite activity is primarily characterized by navigation and communication services. Satellites in MEO are traveling at nearly half the speed (~4 $km·s^{-2}$) compared with LEO satellites (7.8 $km·s^{-2}$) and can therefore remain above the visible horizon of Earth for several hours, which is what makes satellite communication, TV broadcasts, and navigation possible. For example, Global Navigation Satellite Systems (GNSS) such as the Global Positioning Service (GPS) use a constellation of satellites in MEO that are oriented with different inclinations relative to Earth's Equator to ensure that several satellites are always in view for nearly any location on Earth (see [Chapter 4](https://ubc-geomatics-textbook.github.io/geomatics-textbook/collecting-and-editing-data.html) for more on GNSS).
@@ -465,8 +410,6 @@ Were you wondering why MEO extends to such an exact number at the extreme altitu
 fig_cap <- paste0("Comparing Sun-synchronous and geosynchronous orbits. The yellow area shows the portion of Earth's surface that is visible during a single orbit. Notice that Sun-synchronous orbit observes at a consistent local time while the geosynchronous orbit observes a constant location. href='",baseurl,"#12-sunsynchronous-geosynchronous-orbits'>Animated figure can be viewed in the web browser version of the textbook.</a> Credit: [NOAA/JPL-Caltech](https://scijinks.gov/about/).")
 knitr::include_graphics(here::here("images", "12-sunsynchronous-geosynchronous-orbits.gif"))
 ```
-
-## Summary
 
 ## Reflection Questions {-}
 

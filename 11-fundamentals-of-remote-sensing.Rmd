@@ -35,7 +35,7 @@ At some point in your life you may have wondered why the sky is blue. You may ha
 
 ## Key Terms {-}
 
-Electromagnetic Spectrum, Energy, Irradiance, Photons, Pixel, Radiation, Radiant Energy, Radiant Flux, Radiant Power, Resolution, Spectrum, Specular Reflector, Wavelength
+Absorption, Electromagnetic Spectrum, Colour Depth, Dark Reference, Energy, Field of View, Instantaneous Field of View, Irradiance, Lambertian Reflector, Photons, Pixel, Radiation, Radiant Energy, Radiant Flux, Radiant Power, Resolution, Spectrum, Specular Reflector, Reflection, Transmission, Wavelength, White Reference
 
 ## What is Remote Sensing?
 
@@ -172,7 +172,7 @@ The combination of these three scattering types leads to drastic differences bet
     knitr::include_graphics("images/11-solar-radiation.png")
 ```
 
-The process of scattering is also affected by the properties with which the scattering EMR interacts. The angle at which EMR interacts with a surface, as well as the surface material, determine the properties of reflection. A reflector is described based on the properties of EMR that are reflected from it and range from specular to diffuse (Figure \@ref(fig:11-reflectors)). Specular reflectance occurs when EMR is reflected in a single direction and can also be called anisotropic reflectance. A mirror is an example of a specular reflector. A diffuse, or Lambertian, reflector reflects EMR in all directions equally and can also be called an isotropic reflector. An example of a surface that reflects EMR isotropically is paper.
+The process of scattering is also affected by the properties with which the scattering EMR interacts. The angle at which EMR interacts with a surface, as well as the surface material, determine the properties of reflection. A reflector is described based on the properties of EMR that are reflected from it and range from specular to diffuse (Figure \@ref(fig:11-reflectors)). Specular reflectance occurs when EMR is reflected in a single direction and can also be called anisotropic reflectance. A mirror is an example of a specular reflector. A diffuse or **Lambertian reflector** reflects EMR in all directions equally and can also be called an isotropic reflector. An example of a surface that reflects EMR isotropically is paper.
 
 ```{r 11-reflectors, fig.cap = fig_cap, out.width="75%",out.height="75%", echo = FALSE}
     fig_cap <- paste0("Depictions of specular and diffuse reflectors [@beck_specular_2012]. CC BY-SA 3.0.")
@@ -186,7 +186,7 @@ This is not to say that diffuse reflectors are perfect, however, as some issues 
 Now that we have discussed radiant energy and the concepts underpinning its interactions with other objects, we can begin to explore the measurements that our sensors record. One of the most important concepts to understand is that of the spectral signature, or spectra. A spectral signature refers to the amount of electromagnetic energy recorded across a defined section of the EMS. Use our EMS visualization tool to examine spectral signatures for different land covers (Figure \@ref(fig:11-ems-visualization-static)).
 
 ```{r 11-ems-visualization-static, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
-    fig_cap <- paste0("Online tool for visualizing the spectral signatures for different land covers using hyperspectral Hyperion satellite imagery. Data from United States Geological Survey - Licensed by U.S. Public Domain. <a href='https://ubcemergingmedialab.github.io/geomatics-textbook/viz/emspectrum-viz/'>Click here to access the interactive tool.</a> Kenny Zhou, CC-BY-SA-4.0.")
+    fig_cap <- paste0("Online tool for visualizing the spectral signatures for different land covers using hyperspectral Hyperion satellite imagery. Data from United States Geological Survey - Licensed by U.S. Public Domain. <a href='https://opengeomatics.ca/viz/emspectrum-viz/'>Click here to access the interactive tool.</a> Kenny Zhou, CC-BY-SA-4.0.")
     knitr::include_graphics(here::here("images", "11-ems-visualization-static.png"))
 ```
 <br/>

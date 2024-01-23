@@ -91,15 +91,6 @@ d = rh/H
 
 where $d$ is relief displacement, $r$ is distance from the principal point to the image point of interest, $h$ is difference in height between the datum and the point of interest and $H$ is the height of the sensor above the datum.
 
-::: {.box-content .your-turn-content}
-::: {.box-title .your-turn-top}
-## Your turn! {.unnumbered}
-:::
-<p>
-What is the image displacement of a pixel that is 0.5 mm from the principal point, 57 m below the datum, and collected from a sensor that is 135 m above the datum?
-</p>
-:::
-
 ### Georeferencing
 
 The removal of inaccuracies in the spatial location of an image can be conducted using a technique called georeferencing. The basic concept of georeferencing is to alter the coordinates of an image through the association of highly precise coordinates collected on site using a GPS. Coordinates collected in the field are often called ground, or control points, and form the base of successful georeferencing. In general, increasing the amount and accuracy of ground points leads to increased spatial accuracy of the image.
@@ -227,30 +218,12 @@ Image stretching refers to the adjustment of radiometric values of the input met
 
 Image smoothing is a process used to reduce the noise in an image. Essentially, a filter of specific window size is passed over surrounding cells and an output value for the center cell is determined by a pre-defined algorithm. Similar to the windows used for resampling, smoothing window sizes can be user defined to generate images that are useful for specific applications. Despite its usefulness as a noise reduction technique, smoothing can also have negative effects on image quality through the loss of detail.
 
-::: {.box-content .call-out-content}
-::: {.box-title .call-out-top}
-## Call out {.unnumbered}
-:::
-<p>
 If you are interested in learning more about how sharpening can impact hyperspectral imagery you can check out [@inamdar_characterizing_2020]. Their research demonstrates that recorded pixel values contain information from areas beyond the traditional spatial boundary of a cell. These findings have interesting implications for a variety of applications. 
-</p>
-:::
 
-## Image Classification
-###	Land Cover Versus Land Use
-###	Supervised Classification
-###	Unsupervised Classification
-###	Classification Algorithms
+*Case Study Author: Natasha Sharma (CC-BY-SA-4.0 unless otherwise indicated), University of British Columbia, Bachelors of Environment and Sustainability, 2022*
 
-##	Time Series Analysis
-###	Change detection
-###	Detecting spectral trends
-###	Inferring surface activity
-## Case Study: Sea Ice Change Analysis in the Beaufort Sea
+Landsat 8-7 has regularly acquired images of Beaufort Sea and Mackenzie River Delta through true-color image to show abundance surface melt, fast ice break up, leaf fraction, ice motion, and changes in coastal features during early springtime. The Beaufort Sea has seen dramatic summer ice losses, particularly in 2009, with regions that were dominated by thick multi-year ice now completely melting out. For comparison, the timeline GIF from 1992 to 2021 depicts different stages of ice breakup in the month of June. Notice the extensive fracturing of Beaufort Sea ice occurring in 1996, but the 2009 and 2014 fracturing appears more widespread until nearly disappearing in 2017.
 
-*Case Study Author: Natasha Sharma (CC BY 4.0. unless otherwise indicated), University of British Columbia, Bachelors of Environment and Sustainability, 2022*
-
-Landsat 8-7 has regularly acquired images of Beaufort Sea and Mackenzie River Delta through true-color image to show abundance surface melt, fast ice break up, leaf fraction, ice motion, and changes in coastal features during early springtime. The Beaufort Sea has seen dramatic summer ice losses, particularly in 2009, with regions that were dominated by thick multi-year ice now completely melting out. For comparison, the timeline GIF from 1992 to 2021 depicts different stages of ice breakup in the month of June. Notice the extensive fracturing of Beaufort Sea ice occurring in 1996, but the 2009 and 2014 fracturing appears more widespread until nearly disappearing in 2017.        
 ```{r 14-Beaufort-Sea-Ice, echo=FALSE, fig.cap=fig_cap, message=FALSE, warning=FALSE}
     fig_cap <- paste0("True-color image of Beaufort Sea Ice Deterioration. Sharma, CC-BY-SA-4.0.")
     knitr::include_graphics("images/13-Beaufort-Sea-Ice.gif")
@@ -268,11 +241,7 @@ Similarly, in the high arctic polar desert of Ellesmere Island in Nunavut, Canad
 <script> slider.oninput = () => {document.getElementById("before-img").style.clipPath = "polygon(0 0," + document.getElementById("slider").value + "% 0," + document.getElementById("slider").value + "% 100%, 0 100%)";}</script>
 <!--End of Slider code -->
 
-##	Pattern Analysis
-###	Landscape Pattern Indices
-###	Class Pattern Indices
-###	Patch Pattern Indices
-### Case Study: Spatial Patterns of Wildfire in British Columbia
+## Case Study: Spatial Patterns of Wildfire in British Columbia
 
 *Case Study Author: Brent Murray (CC BY 4.0. unless otherwise indicated), University of British Columbia, Master of Geomatics for Environmental Management, 2022*
 
@@ -386,3 +355,4 @@ This chapter provided an overview of common image processing techniques and disc
 2. List three resampling techniques and describe the differences.
 3. What is the differences between cloud and smoke with regards to scattering?
 4. Why is the signal-to-noise ratio important for evaluating image quality?
+5. What is the image displacement of a pixel that is 0.5 mm from the principal point, 57 m below the datum, and collected from a sensor that is 135 m above the datum?

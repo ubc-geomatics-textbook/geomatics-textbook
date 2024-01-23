@@ -413,7 +413,7 @@ m = leaflet() %>%
   addLayersControl(overlayGroups = c("Fort St. John TSA"), position = c("bottomleft"), options = layersControlOptions(collapsed = TRUE))
 ```
 
-```{r 9-fort-st-john-study-area, echo=FALSE, fig.cap=fig_cap, ouwidth="75%"}
+```{r 9-fort-st-john-study-area, echo=FALSE, fig.cap=fig_cap, ouwidth="100%"}
 fig_cap <- paste0("The Fort St. John Timber Supply Area, British Columbia, Canada. Data from Government of British Columbia and licensed under the Open Government Licence - British Columbia. Mesler, CC-BY-SA-4.0.")
 if (knitr:::is_latex_output()) {
 knitr::include_graphics(here::here("images", "09-fort-st-john-study-area.png"))
@@ -529,7 +529,7 @@ m2 = leaflet() %>%
   addLayersControl(overlayGroups = c("Aspect", "MRVBF", "NDVI(Spectral)", "NDWI(Spectral)", "SAGA Wetness", "Slope", "Prediction Raster"), position = c("bottomleft"), options = layersControlOptions(collapsed = TRUE))
 ```
 
-```{r 9-leaflet-map-layers, echo=FALSE, out.width="75%", fig.cap=fig_cap}
+```{r 9-leaflet-map-layers, echo=FALSE, out.width="100%", fig.cap=fig_cap}
 fig_cap <- paste0("Input layers and output prediction raster for the Chowade Watershed Management basin.<a href='",baseurl,"#fig:9-leaflet-map'> Animated figure can be viewed in the web browser version of the textbook</a>. Data from @city_of_vancouver_notitle_2009 and licensed under the  under the <a href='",covlicence,"'>Open Government License - Vancouver</a>. Lam, CC-BY-SA-4.0.")
 if (knitr:::is_latex_output()) {
 knitr::include_graphics(here::here("images", "09-leaflet-map-layers.png"))

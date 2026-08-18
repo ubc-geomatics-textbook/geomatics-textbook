@@ -10,6 +10,8 @@ library(sp)
 library(htmlwidgets)
 library(leafem)
 library(geojsonio)
+library(rgl)
+library(lidR)
 ```
 
 ```{r echo=FALSE}
@@ -426,6 +428,72 @@ knitr::include_graphics(here::here("images", "15-map.PNG"))
 m
 }
 ```
+
+## Cases Study: Voxel-Based Representation of LiDAR Point Clouds
+
+Volumetric pixels (Voxels) represent a fundamental approach for visualizing and analyzing three-dimensional objects [@stoker2009visualization]. Unlike traditional 2D pixels, each voxel is a box-shaped element within a 3D grid, containing data about a fixed point in space. 
+
+(ref:15-voxel-sample-caption) Viusal representation of voxels in a 3D grid, generated using library(rgl) in R, CC-BY-SA-4.0.
+
+```{r 15-voxel-sample, echo=FALSE, out.width = '75%', fig.cap=fig_cap, webgl = TRUE}
+if (knitr:::is_latex_output()) { fig_cap = "(ref:15-voxel-sample)"
+knitr::include_graphics("images/15-voxel-sample.png")
+} else { fig_cap = "(ref:15-voxel-sample-caption)"
+
+
+open3d()
+grid_size <- 5  
+half_grid <- (grid_size - 1) / 2
+
+for(i in 0:(grid_size-1)){
+  for(j in 0:(grid_size-1)){
+     for(k in 0:(grid_size-1)){
+
+      if (!(i == half_grid && j == half_grid && k == half_grid)) {
+         shade3d(translate3d(scale3d(cube3d(), 0.95, 0.95, 0.95), i, j, k), alpha = 0.1, col = "grey")
+      }
+    }
+  }
+}
+
+shade3d(translate3d(scale3d(cube3d(), 0.95, 0.95, 0.95), half_grid, half_grid, half_grid), col = "green")
+
+rglwidget(width = 600, height = 600, reuse = FALSE, elementId = "15-voxel-sample")
+}
+
+```
+Voxels are particularly useful for deriving consistent metrics that describe the spatial occupancy and structure of objects, such as trees or buildings [@lecigne2018exploring]. Transforming LiDAR point cloud data into a simplified 3D volumetric model using voxels is a straightforward and computationally efficient method. This approach focuses only on the filled voxels, simplifying subsequent geometric and analytical processes. In forestry, voxels can effectively represent the volume of space occupied by a tree, offering insights into its complex crown structure. 
+
+Figures below shows comparison between a LAS point cloud (\@ref fig:15-plot-las) and a tree voxelized (\@ref(fig:15-vox-las) ) for a deciduous tree near the Forest Sciences Centre at the University of British Columbia.
+
+```{r 15-setup-las-n-vox, echo=F, cached=T, warning=F, include=F}
+las <- lidR::readLAS("Data/07/07-deciduous-tree.las")
+voxels <- voxelize_points(las, res = 0.2)
+```
+
+```{r 15-plot-las, echo=FALSE, out.width = '75%', fig.cap=fig_cap, webgl = TRUE}
+
+if (knitr:::is_latex_output()) { fig_cap = "(ref:15-plot-las-caption)"
+knitr::include_graphics("images/15-plot-las.png")
+} else { fig_cap = "(ref:15-plot-las-caption)"
+plot(las, quantile= 0.99, res=0.2,
+     pal = forest.colors(50))
+rglwidget(width = 600, height = 600, reuse=FALSE, elementId="15-plot-las")
+}
+```
+(ref:15-plot-las-caption) A 3D point cloud for a deciduous tree. The plot was generated using resolution = 0.2. Data collected by Spencer Dakin Kuiper with a GeoSlam terrestrial laser scanner in Vancouver, Canada. Pickell, CC-BY-SA-4.0. 
+
+```{r 15-vox-las, echo=FALSE, out.width = '75%', fig.cap=fig_cap, webgl = TRUE}
+
+if (knitr:::is_latex_output()) { fig_cap = "(ref:15-vox-las-caption)"
+knitr::include_graphics("images/15-vox-las.png")
+} else { fig_cap = "(ref:15-vox-las-caption)"
+plot(voxels, voxel = TRUE, pal = forest.colors(50))
+rglwidget(width = 600, height = 600, reuse=FALSE, elementId="15-vox-las")
+}
+```
+
+(ref:15-vox-las-caption) A voxelized point cloud for a deciduous tree. The plot was generated using resolution = 0.2. Data collected by Spencer Dakin Kuiper with a GeoSlam terrestrial laser scanner in Vancouver, Canada. Pickell, CC-BY-SA-4.0. 
 
 ## Summary
 

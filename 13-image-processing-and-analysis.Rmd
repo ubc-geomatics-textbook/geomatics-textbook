@@ -350,7 +350,63 @@ if (knitr:::is_latex_output()) {
 }
 ```
 <br/>
+## Case Study: Visualizing Wildfire Smoke Dispersion with Voxels
 
+*Case Study Author: Wendy Cheung (CC BY 4.0. unless otherwise indicated), University of British Columbia, Master of Geomatics for Environmental Management, 2024*
+Volumetric pixels (voxels) are one of the effective tools in GIS to visualize time changes in remote sensing data, such as smoke and pollution dispersion [@esri_voxel_2023]. By extending traditional two-dimensional grids into three-dimensional space, voxels incorporate a temporal dimension along with spatial coordinates (longitude and latitude), allowing us to analyze changes [@baumann2021general]. This approach is useful in environmental studies, where each voxel on the Z-axis signifies time, and the color of the voxel indicates varying data values or variables. 
+
+The following case study utilized a space-time voxel cube to monitor the dispersion of air pollutants from Kelowna to coastal regions. Voxelization was used to track aerosol distribution following a wildfire in Kelowna, using data from the Sentinel-5 satellite with a spatial resolution of 7.5km x 7.5km [@veefkind2012tropomi].
+
+(ref:13-kelowna-wildfire-smoke-caption) A 2D view of the Sentinel-5P aerosol index from August 15, 2023 to August 21, 2023. It tracks the fluctuation in aerosol concentrations over Kelowna and toward the coastal regions, highlighting the spatial and temporal spread of pollution following the wildfire. [@sentinel5p_image], CC-BY-SA-4.0. 
+
+```{r 13-kelowna-wildfire-smoke, fig.cap = fig_cap, out.width= "75%", echo = FALSE}
+if (knitr:::is_latex_output()) { 
+  fig_cap <- "(ref:13-kelowna-wildfire-smoke-caption)"
+knitr::include_graphics("images/13-kelowna-wildfire-smoke-static.png")
+} else { 
+  fig_cap <- "(ref:13-kelowna-wildfire-smoke-caption)"
+  knitr::include_graphics("images/13-kelowna-wildfire-smoke.gif")
+}
+```
+```{r 13-setup-3d-smoke-layer, echo=FALSE, cached=T, warning=F, include=F}
+path <- ("data/13_1")
+flist <- list.files(path,
+                    full.names = TRUE,
+                    pattern = ".tiff$")
+r <-  rast(flist)
+d <- c("2023-08-15","2023-08-16","2023-08-17","2023-08-18","2023-08-19","2023-08-20","2023-08-21")
+names(r) <- d
+df <- as.data.frame(r, xy = TRUE) %>%
+  gather(variable, value, -(x:y)) %>%
+  mutate(time = case_when(
+    variable == '2023-08-15' ~ 24,
+    variable == '2023-08-16' ~ 48,
+    variable == '2023-08-17' ~ 72,
+    variable == '2023-08-18' ~ 96,
+    variable == '2023-08-19' ~ 120,
+    variable == '2023-08-20' ~ 144,
+    variable == '2023-08-21' ~ 168,
+    TRUE ~ NA_real_ # Default case if none of the above conditions are met
+  ))
+```
+
+(ref:13-3d-smoke-layer-caption) 3D layered view of the Sentinel-5P aerosol index from August 15, 2023, to August 21, 2023. This visualization captures the temporal evolution of aerosol concentrations over Kelowna, illustrating the spread and intensity of air pollution during the selected period. [@sentinel5p_image], CC-BY-SA-4.0.
+
+```{r 13-setup-3d-smoke-layer_2, echo=FALSE, out.width = '75%', fig.cap=fig_cap, webgl = TRUE}
+if (knitr:::is_latex_output()) { fig_cap = "(ref:13-3d-smoke-layer-caption)"
+knitr::include_graphics("images/13-3d-smoke-layer.png")
+} else { fig_cap = "(ref:13-3d-smoke-layer-caption)"
+with(df, plot3d(x, y, hours, col = heat.colors(length(value))[rank(1/value)], size = 10))
+rglwidget(width = 600, height = 600, reuse=FALSE, elementId="13-3d-smoke-layer")
+}
+
+```
+Over an eight-day period, measurements were taken every 24 hours, with intermediate estimations made to enhance the temporal resolution. This analysis resulted in three-dimensional space-time cubes comprising 16 time slots for each point location, enabling a detailed visualization of the aerosol dynamics as they moved from Kelowna across to the coastal areas. This approach provided a detailed visualization of the pollution dynamics, helping in the assessment and management of air quality post-disaster.
+
+```{r 13-smoke-cubes, fig.cap = fig_cap, out.width = "100%", echo = FALSE}
+    fig_cap <- paste0("Spatial-time cube of each point location, illustrating the distribution of aerosol particles over time and space. Cheung, CC-BY-4.0.")
+    knitr::include_graphics("images/13-smoke-cubes.png")
+```
 ## Summary
 
 This chapter provided an overview of common image processing techniques and discussed the logic that supports their usage. Overall, each technique strives to create imagery that is consistent across time and space in order for individual pixel values to be evaluated and/or compared. Although necessary, these processes can take time and need to be applied in accordance with the desired application. Understanding the general workflow of image processing will allow you to determine what steps should be taken to create the highest quality imagery for your research.
